@@ -126,6 +126,62 @@ public sealed class SanitiserCharacterisationTests
     }
 
     /// <summary>
+    /// Every code unit in the plane is kept or dropped exactly as <see cref="XmlConvert.IsXmlChar(char)"/> says.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     65,536 cases, and it runs in milliseconds. This is the proof obligation for replacing the
+    ///     character-by-character scan with a precomputed set: the two must agree everywhere, not on
+    ///     the fourteen inputs that happened to have tests.
+    ///     </para>
+    ///     <para>
+    ///     Asserted through the public method rather than against the set itself. The set is private
+    ///     and <c>Argotic.Common</c> grants no <c>InternalsVisibleTo</c> to this project — but that
+    ///     constraint produces the better test anyway, because it pins the <i>behaviour</i> the
+    ///     equivalence is supposed to preserve rather than the data structure that happens to
+    ///     implement it today.
+    ///     </para>
+    ///     <para>
+    ///     Surrogates need no special case. Each one is unpaired in <c>a{c}b</c>, so the pair rule
+    ///     declines it and it is dropped — which is exactly what <c>IsXmlChar</c> says about it.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void EveryCodeUnitInThePlane_IsKeptOrDroppedExactlyAsXmlConvertSays()
+    {
+        for (int codeUnit = 0; codeUnit <= 0xFFFF; codeUnit++)
+        {
+            char character = (char)codeUnit;
+            string sanitised = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters($"a{character}b");
+
+            sanitised.ShouldBe(
+                XmlConvert.IsXmlChar(character) ? $"a{character}b" : "ab",
+                $"U+{codeUnit:X4}");
+        }
+    }
+
+    /// <summary>
+    /// A valid astral character early in a document does not stop the search being vectorised.
+    /// </summary>
+    /// <remarks>
+    ///     The precomputed set contains every surrogate, so an emoji is a candidate hit. If the scan
+    ///     responded by abandoning the vectorised search and walking the rest of the document one
+    ///     character at a time, a feed with an emoji in its first title would pay scalar cost for its
+    ///     whole body. This asserts the answer is unaffected; the cost is covered by the astral arm of
+    ///     <c>SanitiserShapeBenchmarks</c>.
+    /// </remarks>
+    [TestMethod]
+    public void AnAstralCharacterEarlyInADocument_DoesNotChangeTheAnswerForWhatFollows()
+    {
+        string clean = string.Concat("<r>\U0001F600", new string('a', 20_000), "</r>");
+        RootOf(SyndicationEncodingUtility.CreateSafeNavigator(clean)).ShouldBe(clean);
+
+        string dirtyAtTheEnd = string.Concat("<r>\U0001F600", new string('a', 20_000), "\u0001", "</r>");
+        string expected = string.Concat("<r>\U0001F600", new string('a', 20_000), "</r>");
+        RootOf(SyndicationEncodingUtility.CreateSafeNavigator(dirtyAtTheEnd)).ShouldBe(expected);
+    }
+
+    /// <summary>
     /// Row 22 — a numeric character reference to an invalid character is not the sanitiser's business.
     /// </summary>
     /// <remarks>

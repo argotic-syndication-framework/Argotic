@@ -29,6 +29,24 @@ public static partial class SyndicationEncodingUtility
     private static readonly SearchValues<char> s_invalidDirectoryChars = SearchValues.Create(@"\/:*?<>|");
 
     /// <summary>
+    /// Every code unit in the basic multilingual plane that is not a valid XML character.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     Built by asking <see cref="XmlConvert.IsXmlChar(char)"/> rather than by writing the ranges
+    ///     out, so the set cannot drift from the predicate it stands in for. It costs one pass over
+    ///     65,536 values, once, on first use.
+    ///     </para>
+    ///     <para>
+    ///     <b>This is a candidate finder, not a predicate.</b> It necessarily contains the whole of
+    ///     <c>[D800-DFFF]</c> — a surrogate is not a valid XML character on its own — so it fires on
+    ///     every astral character, including the perfectly valid ones. The pair rule is stateful and
+    ///     stays where it is; what the set buys is skipping the runs in between.
+    ///     </para>
+    /// </remarks>
+    private static readonly SearchValues<char> s_invalidXmlChars = SearchValues.Create(BuildInvalidXmlCharacters());
+
+    /// <summary>
     /// The number of leading characters of a document examined when looking for an XML declaration.
     /// </summary>
     /// <remarks>
@@ -587,23 +605,49 @@ public static partial class SyndicationEncodingUtility
     /// </remarks>
     private static int IndexOfInvalidXmlCharacter(string content)
     {
-        for (int i = 0; i < content.Length; i++)
+        int consumed = 0;
+
+        while (true)
         {
-            if (XmlConvert.IsXmlChar(content[i]))
+            int candidate = content.AsSpan(consumed).IndexOfAny(s_invalidXmlChars);
+            if (candidate < 0)
             {
+                return -1;
+            }
+
+            int index = consumed + candidate;
+
+            // The set is a candidate finder rather than an answer: it contains every surrogate, so a
+            // valid astral character lands here too. Resume the vectorised search past a genuine pair
+            // instead of falling into a scalar walk for the remainder - otherwise one emoji early in a
+            // document would cost the whole rest of it.
+            if (index + 1 < content.Length && XmlConvert.IsXmlSurrogatePair(content[index + 1], content[index]))
+            {
+                consumed = index + 2;
                 continue;
             }
 
-            if (i + 1 < content.Length && XmlConvert.IsXmlSurrogatePair(content[i + 1], content[i]))
-            {
-                i++;
-                continue;
-            }
+            return index;
+        }
+    }
 
-            return i;
+    /// <summary>
+    /// Enumerates every code unit that <see cref="XmlConvert.IsXmlChar(char)"/> rejects.
+    /// </summary>
+    /// <returns>The complement of the valid XML character set over the basic multilingual plane.</returns>
+    private static string BuildInvalidXmlCharacters()
+    {
+        StringBuilder builder = new(2_079);
+
+        for (int codeUnit = 0; codeUnit <= 0xFFFF; codeUnit++)
+        {
+            if (!XmlConvert.IsXmlChar((char)codeUnit))
+            {
+                builder.Append((char)codeUnit);
+            }
         }
 
-        return -1;
+        return builder.ToString();
     }
 
     /// <summary>

@@ -15,15 +15,21 @@ namespace Argotic.Extensions.Tests.Functionality.Common;
 /// </summary>
 /// <remarks>
 ///     <para>
-///     Four tests covered <c>ConditionalGetAsync</c> before today, and both of the ones about
-///     modification take the primary branch — the response carries a genuinely newer
-///     <c>Last-Modified</c>. The fallback underneath it, which is where the interesting behaviour is,
+///     Four tests covered <c>ConditionalGetAsync</c> before these, and both of the ones about
+///     modification took the primary branch — the response carrying a genuinely newer
+///     <c>Last-Modified</c>. The fallback underneath it, which is where the interesting behaviour was,
 ///     had never run. §2.19 records the method at 12 of 18 branches.
 ///     </para>
 ///     <para>
-///     Phase 7 replaces the whole decision with "304 means unmodified, any 2xx means modified". These
-///     rows are what that replacement has to be measured against, and two of them are worse than the
-///     plan describes.
+///     The whole decision is now "304 means unmodified, any 2xx means modified". These rows are what
+///     that replacement was measured against, and two of them were worse than the plan described:
+///     C3c and C3d are not confusion about what changed, they are a response body being downloaded,
+///     discarded, and reported to the caller as a cache hit.
+///     </para>
+///     <para>
+///     C3a and C3b did not invert and were never expected to. They arrived at the right answer
+///     through the wrong reasoning, and a test that passes before and after is what tells you the
+///     replacement did not change more than it meant to.
 ///     </para>
 /// </remarks>
 [TestClass]
@@ -39,9 +45,9 @@ public sealed class ConditionalGetCharacterisationTests
     /// <remarks>
     ///     The primary comparison cannot be true here: an absent header becomes
     ///     <see cref="DateTimeOffset.MinValue"/>, which is not newer than anything. The result comes
-    ///     entirely from the fallback, which asks whether the response has a body or a content type.
-    ///     Almost every response does. Inverted at Phase 7 — where the answer stays <c>true</c> but for
-    ///     a reason that is actually about the status code.
+    ///     entirely from the fallback, which asked whether the response had a body or a content type.
+    ///     Almost every response does. The answer is unchanged and the reasoning is not: it is now the
+    ///     status code, which is what the server was answering with all along.
     /// </remarks>
     [TestMethod]
     public async Task A200WithNoLastModified_IsReportedAsModified()
@@ -51,16 +57,16 @@ public sealed class ConditionalGetCharacterisationTests
         using ConditionalGetResult result = await SyndicationDiscoveryUtility.ConditionalGetAsync(
             Source, SentValidator, null, client, TestContext.CancellationTokenSource.Token);
 
-        result.WasModified.ShouldBeTrue("PINS TODAY: decided by the fallback, not by the comparison.");
+        result.WasModified.ShouldBeTrue("INVARIANT: right answer before and after, for different reasons.");
     }
 
     /// <summary>
     /// C3b — a 200 whose <c>Last-Modified</c> is <i>older</i> than the one we sent is still modified.
     /// </summary>
     /// <remarks>
-    ///     This is the row that shows the comparison is dead code. The server has said, in effect,
-    ///     "this representation is older than the one you already have", and the fallback overrides it
-    ///     because the response carries a content type.
+    ///     The row that showed the comparison was dead code. The server said, in effect, "this
+    ///     representation is older than the one you already have", and the fallback overrode it because
+    ///     the response carried a content type. Still modified, now because a 200 is a 200.
     /// </remarks>
     [TestMethod]
     public async Task A200WithAnOlderLastModified_IsStillReportedAsModified()
@@ -72,28 +78,26 @@ public sealed class ConditionalGetCharacterisationTests
             Source, SentValidator, null, client, TestContext.CancellationTokenSource.Token);
 
         result.WasModified.ShouldBeTrue(
-            "PINS TODAY: the Last-Modified comparison never decides anything, because the fallback "
-            + "fires on any response carrying a content type. Inverted at Phase 7.");
+            "INVARIANT: the Last-Modified comparison never decided anything, and is now gone.");
     }
 
     /// <summary>
-    /// C3c — a 200 carrying neither a content type nor a length is reported unmodified, and its body
-    /// is <b>discarded</b>.
+    /// C3c — a 200 carrying neither a content type nor a length is delivered, body intact.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     Not in the plan, and worse than what is. The plan describes the heuristic as "nonsense"
-    ///     because the comparison is dead; the malignant half is here. When both fallback conditions
-    ///     are false the response is disposed and the caller is told nothing changed — so a real 200
-    ///     with a real body is thrown away and reported as a cache hit.
+    ///     The worst of the defects this phase removes, and one the plan did not describe. The
+    ///     heuristic asked "does this look like it has content" via <c>ContentLength</c> and
+    ///     <c>ContentType</c>; when both answered no the response was disposed and the caller told
+    ///     nothing had changed. A real 200 with a real body, thrown away and reported as a cache hit.
     ///     </para>
     ///     <para>
-    ///     A chunked response with no <c>Content-Type</c> is exactly this shape. Phase 7 deletes the
-    ///     block, and this becomes a modified result with its body intact.
+    ///     A chunked response with no <c>Content-Type</c> is exactly this shape — which is to say a
+    ///     perfectly ordinary one.
     ///     </para>
     /// </remarks>
     [TestMethod]
-    public async Task A200WithNoContentTypeAndNoLength_IsReportedUnmodifiedAndItsBodyDiscarded()
+    public async Task A200WithNoContentTypeAndNoLength_IsDeliveredWithItsBodyIntact()
     {
         using HttpClient client = Responding(
             response =>
@@ -106,24 +110,25 @@ public sealed class ConditionalGetCharacterisationTests
         using ConditionalGetResult result = await SyndicationDiscoveryUtility.ConditionalGetAsync(
             Source, SentValidator, null, client, TestContext.CancellationTokenSource.Token);
 
-        result.WasModified.ShouldBeFalse(
-            "PINS TODAY: a real 200 with a real body is reported as unmodified and discarded. "
-            + "Inverted at Phase 7.");
-        (await result.GetResponseStreamAsync(TestContext.CancellationTokenSource.Token))
-            .ShouldBe(Stream.Null, "the body is gone");
+        result.WasModified.ShouldBeTrue(
+            "INVERTED: a 200 is a 200, whatever its headers do or do not say about its body");
+
+        using Stream body = await result.GetResponseStreamAsync(TestContext.CancellationTokenSource.Token);
+        using StreamReader reader = new(body);
+        string delivered = await reader.ReadToEndAsync(TestContext.CancellationTokenSource.Token);
+        delivered.ShouldNotBeEmpty("INVERTED: and the body reaches the caller rather than the GC");
     }
 
     /// <summary>
-    /// C3d — a 2xx that is not exactly 200 is reported unmodified, and its body is discarded too.
+    /// C3d — a 2xx that is not exactly 200 is delivered like any other success.
     /// </summary>
     /// <remarks>
-    ///     Also not in the plan. The success check earlier in the method lets 203 through, but the
-    ///     fallback is gated on <c>== HttpStatusCode.OK</c>, so a 203 or a 206 with no newer
-    ///     <c>Last-Modified</c> falls straight past it. <c>IsSuccessStatusCode</c> is the predicate
-    ///     that was meant.
+    ///     Also not in the plan. The success check admits every 2xx, but the fallback beneath it was
+    ///     gated on <c>== HttpStatusCode.OK</c>, so a 203 or a 206 with no newer <c>Last-Modified</c>
+    ///     fell straight past it and was discarded. Two predicates for one question, disagreeing.
     /// </remarks>
     [TestMethod]
-    public async Task A203_IsReportedUnmodifiedAndItsBodyDiscarded()
+    public async Task A203_IsDeliveredLikeAnyOtherSuccess()
     {
         using HttpClient client = Responding(
             response => response.StatusCode = HttpStatusCode.NonAuthoritativeInformation);
@@ -131,9 +136,9 @@ public sealed class ConditionalGetCharacterisationTests
         using ConditionalGetResult result = await SyndicationDiscoveryUtility.ConditionalGetAsync(
             Source, SentValidator, null, client, TestContext.CancellationTokenSource.Token);
 
-        result.WasModified.ShouldBeFalse(
-            "PINS TODAY: the fallback is gated on == OK, so every other 2xx is discarded. "
-            + "Inverted at Phase 7.");
+        result.WasModified.ShouldBeTrue(
+            "INVERTED: one predicate now decides, and it is the status code the server chose");
+        result.StatusCode.ShouldBe(HttpStatusCode.NonAuthoritativeInformation);
     }
 
     /// <summary>

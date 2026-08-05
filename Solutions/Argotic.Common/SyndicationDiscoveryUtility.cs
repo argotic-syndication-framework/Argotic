@@ -493,7 +493,9 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(httpClient);
 
-        // HTTP validator times are UTC; treat Unspecified-kind values as UTC so the sent header and the comparison below agree.
+        // HTTP validator times are UTC; treat Unspecified-kind values as UTC so a caller who read a
+        // Last-Modified out of a previous response sends back the instant they were given. There is no
+        // longer a comparison downstream for this to agree with - the sent header is now its only use.
         DateTimeOffset lastModifiedOffset = lastModified.Kind == DateTimeKind.Unspecified
             ? new DateTimeOffset(lastModified, TimeSpan.Zero)
             : new DateTimeOffset(lastModified);
@@ -530,22 +532,17 @@ public static class SyndicationDiscoveryUtility
             }
         }
 
-        // Check if actually modified by comparing Last-Modified header
-        DateTimeOffset responseLastModified = response.Content.Headers.LastModified ?? DateTimeOffset.MinValue;
-        bool isModified = responseLastModified > lastModifiedOffset;
-
-        if (!isModified && response.StatusCode == HttpStatusCode.OK)
-        {
-            // Server may not support conditional GET properly, consider it modified if we got content
-            isModified = response.Content.Headers.ContentLength > 0 ||
-                         response.Content.Headers.ContentType is not null;
-        }
-
-        if (!isModified)
-        {
-            response.Dispose();
-            return new ConditionalGetResult(null, wasModified: false);
-        }
+        // Anything still here is a success that is not a 304, and that is the whole decision. The
+        // server was asked with If-Modified-Since and If-None-Match; 304 is how it says "no", and a
+        // body is how it says "yes". Re-deciding from the headers second-guessed an answer we had.
+        //
+        // The heuristic that used to sit here compared the response's Last-Modified against the one
+        // we sent - a comparison that can only be true when the server already declined to send a
+        // 304 - and then fell back to "does this look like it has content", asking ContentLength and
+        // ContentType. A chunked 200 with no Content-Type answers no to both, so it was disposed and
+        // reported to the caller as unmodified: a real body, silently discarded, indistinguishable
+        // from a cache hit. The fallback was also gated on == HttpStatusCode.OK while the success
+        // check above admits every 2xx, so a 203 or a 206 was thrown away without even reaching it.
         return new ConditionalGetResult(response, wasModified: true);
     }
 

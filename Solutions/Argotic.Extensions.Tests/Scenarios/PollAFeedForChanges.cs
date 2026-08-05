@@ -247,6 +247,33 @@ public sealed class PollAFeedForChanges
         unchanged.WasModified.ShouldBeFalse("and a 304 constructs no resource, so it can raise nothing");
     }
 
+    /// <summary>
+    /// The shared-client overload observes the caller's cancellation before opening a socket.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     The convenience overload exists for symmetry with every other <c>LoadAsync(Uri, ...)</c>
+    ///     in the library, and it binds the process-wide client, which no test can replace. Its
+    ///     state machine sat at 0% — new public surface with nothing exercising it, which is worse
+    ///     than inheriting an old gap.
+    ///     </para>
+    ///     <para>
+    ///     An already-cancelled token reaches everything reachable offline: the linked source, the
+    ///     deadline selection, and the delegation. It fails deterministically, before a connection
+    ///     is attempted, so the suite stays socket-free.
+    ///     </para>
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    public async Task TheSharedClientOverload_ObservesTheCallersToken()
+    {
+        using CancellationTokenSource cancelled = new();
+        await cancelled.CancelAsync();
+
+        await Should.ThrowAsync<OperationCanceledException>(async () =>
+            await SyndicationResourceReader.LoadIfModifiedAsync<RssFeed>(
+                Source, null, null, cancelled.Token));
+    }
     private static HttpResponseMessage Respond(string body, string eTag)
     {
         HttpResponseMessage response = new(HttpStatusCode.OK)

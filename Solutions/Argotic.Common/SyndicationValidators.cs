@@ -40,12 +40,6 @@ public sealed record SyndicationValidators(DateTimeOffset? LastModified, string?
     public static SyndicationValidators None { get; } = new(null, null);
 
     /// <summary>
-    /// Gets a value indicating whether either validator is present.
-    /// </summary>
-    /// <value><b>true</b> if a conditional request can be made; otherwise, <b>false</b>.</value>
-    public bool CanRevalidate => this.LastModified is not null || !string.IsNullOrEmpty(this.ETag);
-
-    /// <summary>
     /// Applies the validators to a request as <c>If-Modified-Since</c> and <c>If-None-Match</c>.
     /// </summary>
     /// <param name="request">The request to make conditional.</param>

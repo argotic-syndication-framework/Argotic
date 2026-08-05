@@ -7,7 +7,7 @@ using Argotic.Net;
 
 using Shouldly;
 
-namespace Argotic.Extensions.Tests.Functionality.Core.Net.XmlRpc;
+namespace Argotic.Extensions.Tests.Scenarios;
 
 /// <summary>
 /// Exercises the XML-RPC protocol over the wire, one test per value type on the response path.
@@ -26,7 +26,7 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Net.XmlRpc;
 ///     </para>
 /// </remarks>
 [TestClass]
-public sealed class XmlRpcProtocolTests : IDisposable
+public sealed class CallAnXmlRpcMethod : IDisposable
 {
     private static readonly Uri Host = new("http://example.com/xmlrpc");
 

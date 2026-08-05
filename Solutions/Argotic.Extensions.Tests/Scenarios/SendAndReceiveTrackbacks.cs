@@ -9,7 +9,7 @@ using Argotic.Net;
 
 using Shouldly;
 
-namespace Argotic.Extensions.Tests.Functionality.Core.Net;
+namespace Argotic.Extensions.Tests.Scenarios;
 
 /// <summary>
 /// Exercises the Trackback protocol over the wire, in both directions.
@@ -22,7 +22,7 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Net;
 ///     already existed; it had simply never been pointed at this subsystem.
 /// </remarks>
 [TestClass]
-public sealed class TrackbackProtocolTests : IDisposable
+public sealed class SendAndReceiveTrackbacks : IDisposable
 {
     private static readonly Uri Host = new("http://example.com/trackback/ping");
 

@@ -487,13 +487,38 @@ public static partial class SyndicationEncodingUtility
     {
         ArgumentNullException.ThrowIfNull(response);
 
-        long? declaredLength = response.Content.Headers.ContentLength;
+        using Stream responseStream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+        return await ReadContentAsync(
+            responseStream, response.Content.Headers.ContentLength, maxBytes, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Reads a stream into a pooled buffer, refusing one longer than <paramref name="maxBytes"/>.
+    /// </summary>
+    /// <param name="stream">The stream to drain. The caller keeps ownership of it.</param>
+    /// <param name="declaredLength">The length the origin declared, or <b>null</b> if it declared none.</param>
+    /// <param name="maxBytes">The most to accept.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>The drained body. The caller owns it and must dispose it.</returns>
+    /// <remarks>
+    ///     Split out from the response-taking overload for the conditional load path, which holds a
+    ///     stream rather than a response — the body having been left unread on purpose, so that
+    ///     deciding not to want it costs nothing.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="SyndicationContentTooLargeException">The stream exceeds <paramref name="maxBytes"/>.</exception>
+    internal static async Task<PooledContentBuffer> ReadContentAsync(
+        Stream stream,
+        long? declaredLength,
+        long maxBytes,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(stream);
+
         if (declaredLength is { } declared && declared > maxBytes)
         {
             throw new SyndicationContentTooLargeException(maxBytes, declared);
         }
-
-        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 
         // Nulled once ownership passes to the caller, so the finally disposes it on every failure
         // path and on none of the success path.
@@ -510,7 +535,7 @@ public static partial class SyndicationEncodingUtility
                 if (total > maxBytes)
                 {
                     // Thrown before the write, so the sink never holds more than the cap. Unwinding
-                    // disposes the response stream, which aborts the connection rather than returning
+                    // disposes the caller's response, which aborts the connection rather than returning
                     // an undrained one to the pool - so nothing further is read from the socket.
                     throw new SyndicationContentTooLargeException(maxBytes, declaredLength);
                 }
@@ -746,7 +771,7 @@ public static partial class SyndicationEncodingUtility
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>The leading bytes of the body. The caller owns it and must dispose it.</returns>
     /// <remarks>
-    ///     Distinct from <see cref="ReadContentAsync"/> in what an overrun means. There, exceeding the
+    ///     Distinct from <c>ReadContentAsync</c> in what an overrun means. There, exceeding the
     ///     limit is an error and throws; here it is the expected case — the caller wants a head and does
     ///     not care that more exists. Detecting a document's format needs its first element, not its
     ///     contents.
@@ -810,7 +835,7 @@ public static partial class SyndicationEncodingUtility
     ///     <para>
     ///     <see cref="HttpCompletionOption.ResponseHeadersRead"/> hands back a live network stream, so
     ///     the caller becomes responsible for reading it — asynchronously, and under a bound. See
-    ///     <see cref="ReadContentAsync"/>.
+    ///     <c>ReadContentAsync</c>.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>

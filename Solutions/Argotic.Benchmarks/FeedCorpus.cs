@@ -9,9 +9,18 @@ namespace Argotic.Benchmarks;
 /// <remarks>
 /// <para>
 /// Two provenances, deliberately. Synthetic documents are the only way to get a scaling curve —
-/// the repository's real sample documents are all small (15 files, 76 KB total) and cannot show
+/// the repository's real sample documents are all small (15 files, 59.8 KiB total) and cannot show
 /// how cost grows with feed size. Real documents are the only way to know the synthetic ones are
 /// not a fiction.
+/// </para>
+/// <para>
+/// <b>Every generator above <see cref="GenerateRssWithDirtUtf8"/> emits pure 7-bit ASCII, free of
+/// invalid XML characters, over a seekable <see cref="MemoryStream"/>.</b> That is three separate
+/// blind spots, and each one guarantees a favourable measurement for a change whose whole purpose is
+/// to alter the path the corpus cannot reach: the sanitiser's rebuild loop never runs, the
+/// <c>SearchValues</c> fast path always fires, and <c>GetStreamBytes</c> always takes its
+/// <c>CanSeek</c> branch. The last three generators exist to remove those blind spots, and they were
+/// added <i>before</i> the change they measure — a benchmark authored afterwards has no "before".
 /// </para>
 /// <para>
 /// The synthetic generator therefore models its element mix on
@@ -207,6 +216,119 @@ internal static class FeedCorpus
     {
         string path = Path.Combine(AppContext.BaseDirectory, "SampleData", fileName);
         return File.ReadAllBytes(path);
+    }
+
+    /// <summary>
+    /// Generates the RSS document of <see cref="GenerateRssUtf8"/> with invalid XML characters
+    /// substituted into its element text at a controlled density.
+    /// </summary>
+    /// <param name="itemCount">The number of <c>item</c> elements to emit.</param>
+    /// <param name="dirtFraction">
+    ///     The fraction of <b>eligible text characters</b> — lowercase ASCII letters outside any tag —
+    ///     replaced by <c>U+0001</c>. Zero leaves the document clean.
+    /// </param>
+    /// <returns>The generated document as UTF-8 bytes.</returns>
+    /// <remarks>
+    /// <para>
+    /// <c>SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters</c> has two completely
+    /// different costs. On a clean document it scans and returns the original instance — 0 B
+    /// allocated. On a dirty one it rebuilds into a <see cref="StringBuilder"/>. <b>No generator in
+    /// this file emitted an invalid character, so only the first was ever measured</b>, and a rewrite
+    /// of the rebuild loop could be declared free on evidence that never touched it.
+    /// </para>
+    /// <para>
+    /// Substituting rather than inserting keeps the document byte-identical in length across the
+    /// sweep, so the arms differ in dirt density and nothing else. Only lowercase letters outside a
+    /// tag are eligible, which keeps markup, element names and attribute names intact — the document
+    /// must still parse once the sanitiser has run over it, or the benchmark measures an exception
+    /// rather than a rebuild.
+    /// </para>
+    /// </remarks>
+    public static byte[] GenerateRssWithDirtUtf8(int itemCount, double dirtFraction)
+    {
+        byte[] clean = GenerateRssUtf8(itemCount);
+        if (dirtFraction <= 0)
+        {
+            return clean;
+        }
+
+        char[] characters = Encoding.UTF8.GetString(clean).ToCharArray();
+        int stride = (int)Math.Round(1.0 / dirtFraction, MidpointRounding.AwayFromZero);
+        bool insideTag = false;
+        int eligible = 0;
+
+        for (int i = 0; i < characters.Length; i++)
+        {
+            switch (characters[i])
+            {
+                case '<':
+                    insideTag = true;
+                    continue;
+                case '>':
+                    insideTag = false;
+                    continue;
+            }
+
+            if (insideTag || characters[i] is < 'a' or > 'z')
+            {
+                continue;
+            }
+
+            if (++eligible % stride == 0)
+            {
+                characters[i] = '\u0001';
+            }
+        }
+
+        return Encoding.UTF8.GetBytes(characters);
+    }
+
+    /// <summary>
+    /// Generates the degenerate document whose content is entirely invalid but for one character.
+    /// </summary>
+    /// <param name="nulCount">The number of <c>U+0000</c> characters between the root tags.</param>
+    /// <returns>The generated document as UTF-8 bytes.</returns>
+    /// <remarks>
+    ///     This is the shape a streaming sanitiser can silently truncate. A chunk consisting entirely
+    ///     of dropped characters must make the reader loop and read again, never return zero, because
+    ///     <c>XmlTextReaderImpl.ReadData</c> treats a zero-length read as end of file — and
+    ///     <see cref="TextReader.Read(char[], int, int)"/> documents zero as meaning no characters are
+    ///     left. Corrupt feeds do contain long runs of NUL. The cost of that loop-again path has never
+    ///     been measured, because a 0–1% dirt sweep never produces a wholly-dropped chunk.
+    /// </remarks>
+    public static byte[] GenerateAllInvalidDocument(int nulCount)
+        => Encoding.UTF8.GetBytes(string.Concat("<r>", new string('\0', nulCount), "x</r>"));
+
+    /// <summary>
+    /// Generates an RSS document that is valid XML throughout but carries astral characters.
+    /// </summary>
+    /// <param name="itemCount">The number of <c>item</c> elements to emit.</param>
+    /// <returns>The generated document as UTF-8 bytes.</returns>
+    /// <remarks>
+    /// <para>
+    /// A <c>SearchValues&lt;char&gt;</c> built from the complement of <c>XmlConvert.IsXmlChar</c>
+    /// contains the whole of <c>[D800-DFFF]</c>, because a surrogate is not a valid XML character on
+    /// its own. So <c>IndexOfAny</c> fires on <b>every astral character</b> and the vectorised fast
+    /// path never completes over a document containing one — the char-by-char pair rule has to run.
+    /// </para>
+    /// <para>
+    /// A 7-bit "clean" baseline therefore measures the best case and calls it the normal one. Emoji
+    /// are ordinary in feed titles; this generator puts them where a real feed does, so the clean-path
+    /// claim is tested against an input that can refute it.
+    /// </para>
+    /// </remarks>
+    public static byte[] GenerateRssWithAstralUtf8(int itemCount)
+    {
+        byte[] clean = GenerateRssUtf8(itemCount);
+        string document = Encoding.UTF8.GetString(clean);
+
+        // One astral character per item title and one per description, which is the density of a
+        // podcast or newsletter feed rather than a pathological case.
+        document = document
+            .Replace("<title>Synthetic Article ", "<title>\U0001F4E1 Synthetic Article ", StringComparison.Ordinal)
+            .Replace("<description>Body text for synthetic article ", "<description>\U0001F4DD Body text for synthetic article ", StringComparison.Ordinal);
+
+        return Encoding.UTF8.GetBytes(document);
     }
 
     private static void AppendAtomEntry(StringBuilder builder, int index)

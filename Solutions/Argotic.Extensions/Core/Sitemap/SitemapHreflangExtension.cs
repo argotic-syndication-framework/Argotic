@@ -70,7 +70,7 @@ public class SitemapHreflangExtension : SyndicationExtension, IComparable<Sitema
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
 
-        XPathNodeIterator linkIterator = navigator.Select("xhtml:link", manager);
+        XPathNodeIterator linkIterator = navigator.SelectChildElements("xhtml", "link", manager);
 
         if (linkIterator is { Count: > 0 })
         {

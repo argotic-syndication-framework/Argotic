@@ -185,7 +185,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
 
         if (source.HasChildren)
         {
-            XPathNodeIterator relatedIterator = source.Select("sx:related", manager);
+            XPathNodeIterator relatedIterator = source.SelectChildElements("sx", "related", manager);
 
             if (relatedIterator is { Count: > 0 })
             {

@@ -70,8 +70,8 @@ public class SimpleListSyndicationExtensionContext
 
             if (listInformationNavigator is { HasChildren: true })
             {
-                XPathNodeIterator sortIterator = source.Select("cf:sort", manager);
-                XPathNodeIterator groupIterator = source.Select("cf:group", manager);
+                XPathNodeIterator sortIterator = source.SelectChildElements("cf", "sort", manager);
+                XPathNodeIterator groupIterator = source.SelectChildElements("cf", "group", manager);
 
                 if (sortIterator is { Count: > 0 })
                 {

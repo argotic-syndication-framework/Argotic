@@ -491,10 +491,10 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
-        XPathNodeIterator authorIterator = source.Select("atom:author", manager);
-        XPathNodeIterator contributorIterator = source.Select("atom:contributor", manager);
-        XPathNodeIterator categoryIterator = source.Select("atom:category", manager);
-        XPathNodeIterator linkIterator = source.Select("atom:link", manager);
+        XPathNodeIterator authorIterator = source.SelectChildElements("atom", "author", manager);
+        XPathNodeIterator contributorIterator = source.SelectChildElements("atom", "contributor", manager);
+        XPathNodeIterator categoryIterator = source.SelectChildElements("atom", "category", manager);
+        XPathNodeIterator linkIterator = source.SelectChildElements("atom", "link", manager);
 
         if (authorIterator is { Count: > 0 })
         {

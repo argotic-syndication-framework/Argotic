@@ -88,7 +88,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
 
         if (source.HasChildren)
         {
-            XPathNodeIterator categoryIterator = source.Select("itunes:category", manager);
+            XPathNodeIterator categoryIterator = source.SelectChildElements("itunes", "category", manager);
 
             if (categoryIterator is { Count: > 0 })
             {

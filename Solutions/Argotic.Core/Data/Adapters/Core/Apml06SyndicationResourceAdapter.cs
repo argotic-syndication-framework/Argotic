@@ -63,7 +63,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
             }
 
-            XPathNodeIterator profileIterator = bodyNavigator.Select("apml:Profile", manager);
+            XPathNodeIterator profileIterator = bodyNavigator.SelectChildElements("apml", "Profile", manager);
             if (profileIterator is { Count: > 0 })
             {
                 int counter = 0;

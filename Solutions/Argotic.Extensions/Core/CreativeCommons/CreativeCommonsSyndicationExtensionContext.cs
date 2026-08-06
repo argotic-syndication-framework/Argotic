@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -39,7 +40,7 @@ public class CreativeCommonsSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNodeIterator licenseIterator = source.Select("creativeCommons:license", manager);
+            XPathNodeIterator licenseIterator = source.SelectChildElements("creativeCommons", "license", manager);
             if (licenseIterator is { Count: > 0 })
             {
                 while (licenseIterator.MoveNext())

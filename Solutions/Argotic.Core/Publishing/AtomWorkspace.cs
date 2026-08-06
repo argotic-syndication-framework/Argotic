@@ -168,7 +168,7 @@ public class AtomWorkspace : IComparable<AtomWorkspace>, IEquatable<AtomWorkspac
         if (source.HasChildren)
         {
             XPathNavigator? titleNavigator = source.SelectChildElement("atom", "title", manager);
-            XPathNodeIterator collectionIterator = source.Select("app:collection", manager);
+            XPathNodeIterator collectionIterator = source.SelectChildElements("app", "collection", manager);
 
             if (titleNavigator is not null)
             {

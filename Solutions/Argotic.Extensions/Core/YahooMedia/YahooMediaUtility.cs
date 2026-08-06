@@ -509,10 +509,10 @@ internal static class YahooMediaUtility
 
         if (source.HasChildren)
         {
-            XPathNodeIterator categoryIterator = source.Select("media:category", manager);
-            XPathNodeIterator creditIterator = source.Select("media:credit", manager);
-            XPathNodeIterator ratingIterator = source.Select("media:rating", manager);
-            XPathNodeIterator thumbnailIterator = source.Select("media:thumbnail", manager);
+            XPathNodeIterator categoryIterator = source.SelectChildElements("media", "category", manager);
+            XPathNodeIterator creditIterator = source.SelectChildElements("media", "credit", manager);
+            XPathNodeIterator ratingIterator = source.SelectChildElements("media", "rating", manager);
+            XPathNodeIterator thumbnailIterator = source.SelectChildElements("media", "thumbnail", manager);
 
             if (categoryIterator is { Count: > 0 })
             {
@@ -613,9 +613,9 @@ internal static class YahooMediaUtility
 
         if (source.HasChildren)
         {
-            XPathNodeIterator hashIterator = source.Select("media:hash", manager);
-            XPathNodeIterator restrictionIterator = source.Select("media:restriction", manager);
-            XPathNodeIterator textIterator = source.Select("media:text", manager);
+            XPathNodeIterator hashIterator = source.SelectChildElements("media", "hash", manager);
+            XPathNodeIterator restrictionIterator = source.SelectChildElements("media", "restriction", manager);
+            XPathNodeIterator textIterator = source.SelectChildElements("media", "text", manager);
 
             if (hashIterator is { Count: > 0 })
             {

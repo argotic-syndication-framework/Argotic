@@ -182,10 +182,10 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
 
-        XPathNodeIterator authorIterator = source.Select("atom:author", manager);
-        XPathNodeIterator categoryIterator = source.Select("atom:category", manager);
-        XPathNodeIterator contributorIterator = source.Select("atom:contributor", manager);
-        XPathNodeIterator linkIterator = source.Select("atom:link", manager);
+        XPathNodeIterator authorIterator = source.SelectChildElements("atom", "author", manager);
+        XPathNodeIterator categoryIterator = source.SelectChildElements("atom", "category", manager);
+        XPathNodeIterator contributorIterator = source.SelectChildElements("atom", "contributor", manager);
+        XPathNodeIterator linkIterator = source.SelectChildElements("atom", "link", manager);
 
         if (authorIterator is { Count: > 0 })
         {
@@ -341,11 +341,11 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
 
-        XPathNodeIterator authorIterator = source.Select("atom:author", manager);
-        XPathNodeIterator categoryIterator = source.Select("atom:category", manager);
-        XPathNodeIterator contributorIterator = source.Select("atom:contributor", manager);
-        XPathNodeIterator linkIterator = source.Select("atom:link", manager);
-        XPathNodeIterator entryIterator = source.Select("atom:entry", manager);
+        XPathNodeIterator authorIterator = source.SelectChildElements("atom", "author", manager);
+        XPathNodeIterator categoryIterator = source.SelectChildElements("atom", "category", manager);
+        XPathNodeIterator contributorIterator = source.SelectChildElements("atom", "contributor", manager);
+        XPathNodeIterator linkIterator = source.SelectChildElements("atom", "link", manager);
+        XPathNodeIterator entryIterator = source.SelectChildElements("atom", "entry", manager);
 
         if (authorIterator is { Count: > 0 })
         {

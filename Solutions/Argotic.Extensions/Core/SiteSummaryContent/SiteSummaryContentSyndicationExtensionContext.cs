@@ -80,7 +80,7 @@ public class SiteSummaryContentSyndicationExtensionContext
 
             if (itemsNavigator is { HasChildren: true })
             {
-                XPathNodeIterator itemIterator = itemsNavigator.Select("content:item", manager);
+                XPathNodeIterator itemIterator = itemsNavigator.SelectChildElements("content", "item", manager);
                 if (itemIterator is { Count: > 0 })
                 {
                     while (itemIterator.MoveNext())

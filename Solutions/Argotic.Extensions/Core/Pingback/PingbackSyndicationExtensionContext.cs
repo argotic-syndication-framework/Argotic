@@ -76,7 +76,7 @@ public class PingbackSyndicationExtensionContext
         {
             XPathNavigator? serverNavigator = source.SelectChildElement("pingback", "server", manager);
             XPathNavigator? targetNavigator = source.SelectChildElement("pingback", "target", manager);
-            XPathNodeIterator aboutIterator = source.Select("pingback:about", manager);
+            XPathNodeIterator aboutIterator = source.SelectChildElements("pingback", "about", manager);
 
             if (serverNavigator is not null)
             {

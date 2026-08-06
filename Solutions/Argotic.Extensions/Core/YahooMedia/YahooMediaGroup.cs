@@ -277,7 +277,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasChildren)
         {
-            XPathNodeIterator contentIterator = source.Select("media:content", manager);
+            XPathNodeIterator contentIterator = source.SelectChildElements("media", "content", manager);
 
             if (contentIterator is { Count: > 0 })
             {

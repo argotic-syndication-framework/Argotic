@@ -286,7 +286,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
 
         if (source.HasChildren)
         {
-            XPathNodeIterator historyIterator = source.Select("sx:history", manager);
+            XPathNodeIterator historyIterator = source.SelectChildElements("sx", "history", manager);
             XPathNavigator? conflictsNavigator = source.SelectChildElement("sx", "conflicts", manager);
 
             if (historyIterator is { Count: > 0 })

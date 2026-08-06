@@ -419,7 +419,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         XPathNavigator? uploaderNavigator = source.SelectChildElement("video", "uploader", manager);
         XPathNavigator? platformNavigator = source.SelectChildElement("video", "platform", manager);
         XPathNavigator? restrictionNavigator = source.SelectChildElement("video", "restriction", manager);
-        XPathNodeIterator tagIterator = source.Select("video:tag", manager);
+        XPathNodeIterator tagIterator = source.SelectChildElements("video", "tag", manager);
 
         if (contentLocNavigator is not null && Uri.TryCreate(contentLocNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? contentUrl))
         {
@@ -515,7 +515,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             }
         }
 
-        XPathNodeIterator idIterator = source.Select("video:id", manager);
+        XPathNodeIterator idIterator = source.SelectChildElements("video", "id", manager);
         if (idIterator is { Count: > 0 })
         {
             while (idIterator.MoveNext())
@@ -535,7 +535,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             }
         }
 
-        XPathNodeIterator segmentIterator = source.Select("video:content_segment_loc", manager);
+        XPathNodeIterator segmentIterator = source.SelectChildElements("video", "content_segment_loc", manager);
         if (segmentIterator is { Count: > 0 })
         {
             while (segmentIterator.MoveNext())

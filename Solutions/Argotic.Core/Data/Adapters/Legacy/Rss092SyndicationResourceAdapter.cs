@@ -249,7 +249,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNodeIterator skipDaysIterator = navigator.Select("skipDays/day", manager);
         XPathNodeIterator skipHoursIterator = navigator.Select("skipHours/hour", manager);
-        XPathNodeIterator itemIterator = navigator.Select("item", manager);
+        XPathNodeIterator itemIterator = navigator.SelectChildElements("item");
 
         if (skipDaysIterator is { Count: > 0 })
         {
@@ -544,8 +544,8 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator? linkNavigator = navigator.SelectChildElement("link");
         XPathNavigator? descriptionNavigator = navigator.SelectChildElement("description");
         XPathNavigator? sourceNavigator = navigator.SelectChildElement("source");
-        XPathNodeIterator enclosureIterator = navigator.Select("enclosure", manager);
-        XPathNodeIterator categoryIterator = navigator.Select("category", manager);
+        XPathNodeIterator enclosureIterator = navigator.SelectChildElements("enclosure");
+        XPathNodeIterator categoryIterator = navigator.SelectChildElements("category");
 
         if (titleNavigator is not null)
         {

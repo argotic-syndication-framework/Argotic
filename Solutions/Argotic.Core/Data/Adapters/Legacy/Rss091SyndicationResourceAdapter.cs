@@ -150,7 +150,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNodeIterator skipDaysIterator = navigator.Select("skipDays/day", manager);
         XPathNodeIterator skipHoursIterator = navigator.Select("skipHours/hour", manager);
-        XPathNodeIterator itemIterator = navigator.Select("item", manager);
+        XPathNodeIterator itemIterator = navigator.SelectChildElements("item");
 
         if (skipDaysIterator is { Count: > 0 })
         {

@@ -263,7 +263,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
 
         if (source.HasChildren)
         {
-            XPathNodeIterator authorIterator = source.Select("apml:Author", manager);
+            XPathNodeIterator authorIterator = source.SelectChildElements("apml", "Author", manager);
 
             if (authorIterator is { Count: > 0 })
             {
@@ -362,7 +362,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
 
         if (source.HasChildren)
         {
-            XPathNodeIterator authorIterator = source.Select("apml:Author", manager);
+            XPathNodeIterator authorIterator = source.SelectChildElements("apml", "Author", manager);
 
             if (authorIterator is { Count: > 0 })
             {

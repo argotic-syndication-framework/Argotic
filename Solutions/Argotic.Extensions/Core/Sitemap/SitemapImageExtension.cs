@@ -69,7 +69,7 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
 
-        XPathNodeIterator imageIterator = navigator.Select("image:image", manager);
+        XPathNodeIterator imageIterator = navigator.SelectChildElements("image", "image", manager);
 
         if (imageIterator is { Count: > 0 })
         {

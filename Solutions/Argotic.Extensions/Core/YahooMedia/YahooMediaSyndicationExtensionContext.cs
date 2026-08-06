@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -172,8 +173,8 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNodeIterator contentIterator = source.Select("media:content", manager);
-            XPathNodeIterator groupIterator = source.Select("media:group", manager);
+            XPathNodeIterator contentIterator = source.SelectChildElements("media", "content", manager);
+            XPathNodeIterator groupIterator = source.SelectChildElements("media", "group", manager);
 
             if (contentIterator is { Count: > 0 })
             {

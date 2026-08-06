@@ -58,7 +58,7 @@ public class TrackbackSyndicationExtensionContext
         if (source.HasChildren)
         {
             XPathNavigator? pingNavigator = source.SelectChildElement("trackback", "ping", manager);
-            XPathNodeIterator aboutIterator = source.Select("trackback:about", manager);
+            XPathNodeIterator aboutIterator = source.SelectChildElements("trackback", "about", manager);
 
             if (pingNavigator is not null)
             {

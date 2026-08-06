@@ -200,8 +200,8 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         XPathNavigator? sourceNavigator = source.SelectChildElement("source");
         XPathNavigator? titleNavigator = source.SelectChildElement("title");
 
-        XPathNodeIterator categoryIterator = source.Select("category", manager);
-        XPathNodeIterator enclosureIterator = source.Select("enclosure", manager);
+        XPathNodeIterator categoryIterator = source.SelectChildElements("category");
+        XPathNodeIterator enclosureIterator = source.SelectChildElements("enclosure");
         if (titleNavigator is not null)
         {
             this.Title = titleNavigator.Value;
@@ -332,8 +332,8 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         XPathNavigator? sourceNavigator = source.SelectChildElement("source");
         XPathNavigator? titleNavigator = source.SelectChildElement("title");
 
-        XPathNodeIterator categoryIterator = source.Select("category", manager);
-        XPathNodeIterator enclosureIterator = source.Select("enclosure", manager);
+        XPathNodeIterator categoryIterator = source.SelectChildElements("category");
+        XPathNodeIterator enclosureIterator = source.SelectChildElements("enclosure");
         if (titleNavigator is not null)
         {
             this.Title = titleNavigator.Value;

@@ -237,7 +237,7 @@ public class ITunesSyndicationExtensionContext
             XPathNavigator? subtitleNavigator = source.SelectChildElement("itunes", "subtitle", manager);
             XPathNavigator? summaryNavigator = source.SelectChildElement("itunes", "summary", manager);
 
-            XPathNodeIterator categoryIterator = source.Select("itunes:category", manager);
+            XPathNodeIterator categoryIterator = source.SelectChildElements("itunes", "category", manager);
 
             if (authorNavigator is not null && !string.IsNullOrEmpty(authorNavigator.Value))
             {

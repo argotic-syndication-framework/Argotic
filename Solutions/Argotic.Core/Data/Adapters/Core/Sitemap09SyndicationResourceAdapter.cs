@@ -53,7 +53,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (urlsetNavigator is not null)
         {
-            XPathNodeIterator urlIterator = urlsetNavigator.Select("sm:url", manager);
+            XPathNodeIterator urlIterator = urlsetNavigator.SelectChildElements("sm", "url", manager);
 
             if (urlIterator is { Count: > 0 })
             {
@@ -101,7 +101,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (sitemapindexNavigator is not null)
         {
-            XPathNodeIterator sitemapIterator = sitemapindexNavigator.Select("sm:sitemap", manager);
+            XPathNodeIterator sitemapIterator = sitemapindexNavigator.SelectChildElements("sm", "sitemap", manager);
 
             if (sitemapIterator is { Count: > 0 })
             {

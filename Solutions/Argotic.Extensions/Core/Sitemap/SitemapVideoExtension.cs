@@ -82,7 +82,7 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
 
-        XPathNodeIterator videoIterator = navigator.Select("video:video", manager);
+        XPathNodeIterator videoIterator = navigator.SelectChildElements("video", "video", manager);
 
         if (videoIterator is { Count: > 0 })
         {

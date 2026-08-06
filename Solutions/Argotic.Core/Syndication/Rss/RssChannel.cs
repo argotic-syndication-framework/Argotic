@@ -515,10 +515,10 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
-        XPathNodeIterator categoryIterator = source.Select("category", manager);
+        XPathNodeIterator categoryIterator = source.SelectChildElements("category");
         XPathNodeIterator skipDaysIterator = source.Select("skipDays/day", manager);
         XPathNodeIterator skipHoursIterator = source.Select("skipHours/hour", manager);
-        XPathNodeIterator itemIterator = source.Select("item", manager);
+        XPathNodeIterator itemIterator = source.SelectChildElements("item");
 
         if (categoryIterator is { Count: > 0 })
         {
@@ -776,7 +776,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
-        XPathNodeIterator atomLinkIterator = source.Select("atom:link", manager);
+        XPathNodeIterator atomLinkIterator = source.SelectChildElements("atom", "link", manager);
 
         if (atomLinkIterator is { Count: > 0 })
         {

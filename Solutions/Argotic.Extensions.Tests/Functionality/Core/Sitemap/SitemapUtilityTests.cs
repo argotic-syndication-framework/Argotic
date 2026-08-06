@@ -496,4 +496,74 @@ public class SitemapUtilityTests
     }
 
     #endregion
+
+    #region Case folding
+
+    /// <summary>
+    /// The change frequency token is folded with invariant culture rules, not ordinal ones.
+    /// </summary>
+    /// <remarks>
+    ///     Pinned because it is the difference between the implementation this method has and the
+    ///     faster one it does not. Comparing spans under
+    ///     <see cref="StringComparison.OrdinalIgnoreCase"/> would remove the last allocation from this
+    ///     method — and would stop accepting this input, because ordinal comparison does not fold the
+    ///     KELVIN SIGN to <c>k</c> while <see cref="string.ToLowerInvariant"/> does.
+    ///     <para>
+    ///     No real sitemap spells it this way. The point is that the decision to keep invariant folding
+    ///     was deliberate and measured, so a later change that narrows what parses has to fail a test
+    ///     rather than pass unnoticed.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void TryParseChangeFrequency_FoldsWithInvariantCultureRulesNotOrdinal()
+    {
+        // Arrange - "weekly" with a KELVIN SIGN (U+212A) in place of the letter k.
+        const string KelvinSpelling = "weeKly";
+
+        // Act
+        bool result = SitemapUtility.TryParseChangeFrequency(KelvinSpelling, out SitemapChangeFrequency frequency);
+
+        // Assert
+        result.ShouldBeTrue("ToLowerInvariant folds U+212A to 'k'; an ordinal comparison would not");
+        frequency.ShouldBe(SitemapChangeFrequency.Weekly);
+    }
+
+    /// <summary>
+    /// Surrounding whitespace is trimmed, and casing is irrelevant.
+    /// </summary>
+    [TestMethod]
+    [DataRow("  daily  ", SitemapChangeFrequency.Daily)]
+    [DataRow("WEEKLY", SitemapChangeFrequency.Weekly)]
+    [DataRow("mOnThLy", SitemapChangeFrequency.Monthly)]
+    [DataRow("never\t", SitemapChangeFrequency.Never)]
+    public void TryParseChangeFrequency_IgnoresSurroundingWhitespaceAndCasing(string value, SitemapChangeFrequency expected)
+    {
+        // Act
+        bool result = SitemapUtility.TryParseChangeFrequency(value, out SitemapChangeFrequency frequency);
+
+        // Assert
+        result.ShouldBeTrue();
+        frequency.ShouldBe(expected);
+    }
+
+    /// <summary>
+    /// An unrecognised token reports failure while still yielding the documented default.
+    /// </summary>
+    /// <remarks>
+    ///     The pairing matters: <c>daily</c> is both a valid token and the fallback, so asserting the
+    ///     out parameter alone cannot distinguish "parsed as daily" from "gave up and said daily".
+    ///     The boolean is the only thing that can, which is what the rewritten switch had to preserve.
+    /// </remarks>
+    [TestMethod]
+    public void TryParseChangeFrequency_UnrecognisedToken_ReportsFailureAndDefaultsToDaily()
+    {
+        // Act
+        bool result = SitemapUtility.TryParseChangeFrequency("fortnightly", out SitemapChangeFrequency frequency);
+
+        // Assert
+        result.ShouldBeFalse();
+        frequency.ShouldBe(SitemapChangeFrequency.Daily);
+    }
+
+    #endregion
 }

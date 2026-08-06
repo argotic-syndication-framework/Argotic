@@ -87,7 +87,7 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     /// <summary>
     /// Gets or sets the size of the media object.
     /// </summary>
-    /// <value>The size, in bytes, of the media object. The default value is <see cref="Int64.MinValue"/>, which indicates that no size was specified.</value>
+    /// <value>The size, in bytes, of the media object, or <see langword="null"/> if the enclosure did not state one.</value>
     /// <remarks>
     ///     <para>
     ///         Though an enclosure <b>must</b> specify its size with the length attribute, the size of some media objects cannot be determined by an RSS publisher. 
@@ -100,15 +100,19 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <i>zero</i>.</exception>
-    public long Length
+    public long? Length
     {
         get;
         set
         {
-            ArgumentOutOfRangeException.ThrowIfLessThan(value, 0);
+            if (value.HasValue)
+            {
+                ArgumentOutOfRangeException.ThrowIfLessThan(value.Value, 0);
+            }
+
             field = value;
         }
-    } = long.MinValue;
+    }
 
     /// <summary>
     /// Gets or sets the URL of the media object.
@@ -238,7 +242,13 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("enclosure");
 
-        writer.WriteAttributeString("length", this.Length != long.MinValue ? this.Length.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty);
+        // Omitted rather than written empty. length="" is not a valid RSS 2.0 byte count, and an
+        // enclosure that never stated a size should come out of a round-trip the way it went in.
+        if (this.Length.HasValue)
+        {
+            writer.WriteAttributeString("length", this.Length.Value.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        }
+
         writer.WriteAttributeString("type", this.ContentType);
         writer.WriteAttributeString("url", this.Url?.ToString() ?? string.Empty);
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
@@ -268,7 +278,7 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
         }
 
         int result = string.Compare(this.ContentType, other.ContentType, StringComparison.OrdinalIgnoreCase);
-        if (result == 0) result = this.Length.CompareTo(other.Length);
+        if (result == 0) result = Nullable.Compare(this.Length, other.Length);
         if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;

@@ -179,7 +179,7 @@ public class FeedPipelineBenchmarks
 
             foreach (RssEnclosure enclosure in item.Enclosures)
             {
-                sink += enclosure.Length + (enclosure.Url?.OriginalString.Length ?? 0);
+                sink += (enclosure.Length ?? 0) + (enclosure.Url?.OriginalString.Length ?? 0);
             }
 
             foreach (ISyndicationExtension extension in item.Extensions)

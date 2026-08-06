@@ -136,7 +136,12 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
         XPathNavigator? uriNavigator = source.SelectChildElement("atom", "uri", manager);
         XPathNavigator? emailNavigator = source.SelectChildElement("atom", "email", manager);
 
-        if (nameNavigator is not null)
+        // Guarded like the term attribute in AtomCategory.Load and the version in AtomGenerator.Load:
+        // the setter stays strict for writers, and the read path tolerates what the wild emits. Jekyll
+        // produces <author><name></name></author> whenever a site has no author configured, and three
+        // of Azure Weekly's 478 production feeds were unloadable for it - failing with an
+        // ArgumentException about a parameter the caller never passed.
+        if (nameNavigator is not null && !string.IsNullOrEmpty(nameNavigator.Value))
         {
             this.Name = nameNavigator.Value;
             wasLoaded = true;

@@ -155,39 +155,43 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
 
         ArgumentNullException.ThrowIfNull(source);
 
-        if (source.HasChildren)
+        // MoveToChild(Element) rather than HasChildren plus MoveToFirstChild(), for the reason given on
+        // XmlRpcClient.TryParseValue: a text node is a child, so an untyped <value>text</value> took the
+        // typed path and landed on a node whose Name is the empty string, and the untyped branch below
+        // -- reachable only when there were no children at all, which implies an empty Value that its
+        // own guard then rejects -- could not run for any input. MoveToChild leaves the navigator where
+        // it was when it returns false, so source.Value below is still this element's own text.
+        if (source.MoveToChild(XPathNodeType.Element))
         {
-            if (source.MoveToFirstChild())
+            XmlRpcScalarValueType type;
+            if (string.Equals(source.Name, "i4", StringComparison.OrdinalIgnoreCase))
             {
-                XmlRpcScalarValueType type;
-                if (string.Equals(source.Name, "i4", StringComparison.OrdinalIgnoreCase))
-                {
-                    // Framework prefers the <int> designator for integers, so this handles when the <i4> designator is utilized.
-                    type = XmlRpcScalarValueType.Integer;
-                }
-                else
-                {
-                    type = XmlRpcClient.ScalarTypeByName(source.Name);
-                }
-
-                if (type != XmlRpcScalarValueType.None)
-                {
-                    this.ValueType = type;
-                    if (!string.IsNullOrEmpty(source.Value))
-                    {
-                        this.Value = XmlRpcScalarValue.StringAsValue(type, source.Value);
-                    }
-                    wasLoaded = true;
-                }
+                // Framework prefers the <int> designator for integers, so this handles when the <i4> designator is utilized.
+                type = XmlRpcScalarValueType.Integer;
             }
-        }
-        else
-        {
-            if (!string.IsNullOrEmpty(source.Value))
+            else
             {
-                this.Value = source.Value;
+                type = XmlRpcClient.ScalarTypeByName(source.Name);
+            }
+
+            if (type != XmlRpcScalarValueType.None)
+            {
+                this.ValueType = type;
+                if (!string.IsNullOrEmpty(source.Value))
+                {
+                    this.Value = XmlRpcScalarValue.StringAsValue(type, source.Value);
+                }
                 wasLoaded = true;
             }
+        }
+        else if (!string.IsNullOrEmpty(source.Value))
+        {
+            // XML-RPC 1.0, on <value>: "If no type is indicated, the type is string." ValueType is
+            // deliberately left at None rather than set to String, because WriteTo emits an untyped
+            // <value>text</value> for None and a typed <string> wrapper otherwise -- so leaving it is
+            // what makes an untyped value round-trip as the untyped value it was.
+            this.Value = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;

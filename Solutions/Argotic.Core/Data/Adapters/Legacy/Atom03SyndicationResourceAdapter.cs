@@ -505,7 +505,16 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(settings);
 
         XPathNavigator? contentNavigator = source.SelectChildElement("atom", "content", manager);
-        XPathNavigator? createdNavigator = source.SelectChildElement("atom", "created", manager);
+
+        // atom:issued first. Atom 0.3 requires issued and modified and makes created optional, and it
+        // is issued -- the time the entry was issued -- that RFC 4287 carried forward as atom:published.
+        // Reading only created meant an entry carrying the conformant minimum lost its publication date
+        // silently: 28 of the 70 Atom 0.3 entries in the real-world corpus, including every entry of
+        // Sam Ruby's feed and 23 of Brad Fitzpatrick's. created is still read when issued is absent, so
+        // nothing that produced a date before stops doing so.
+        XPathNavigator? issuedNavigator = source.SelectChildElement("atom", "issued", manager)
+            ?? source.SelectChildElement("atom", "created", manager);
+
         XPathNavigator? summaryNavigator = source.SelectChildElement("atom", "summary", manager);
 
         if (contentNavigator is not null)
@@ -513,9 +522,9 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             entry.Content = Atom03SyndicationResourceAdapter.CreateContent(contentNavigator, manager, settings);
         }
 
-        if (createdNavigator is not null)
+        if (issuedNavigator is not null)
         {
-            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(createdNavigator.Value, out DateTime publishedOn))
+            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(issuedNavigator.Value, out DateTime publishedOn))
             {
                 entry.PublishedOn = publishedOn;
             }

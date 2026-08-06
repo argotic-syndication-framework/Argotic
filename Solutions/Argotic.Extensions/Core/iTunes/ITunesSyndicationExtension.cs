@@ -10,8 +10,22 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="ITunesSyndicationExtension"/> extends syndicated content to specify iTunes podcasting information. This syndication extension conforms to the 
-///         <b>iTunes RSS Tags</b> 1.0 specification, which can be found at <a href="http://www.apple.com/itunes/store/podcaststechspecs.html#rss">http://www.apple.com/itunes/store/podcaststechspecs.html#rss</a>.
+///         The <see cref="ITunesSyndicationExtension"/> extends syndicated content to specify iTunes podcasting information. This syndication extension conforms to
+///         Apple's <b>Podcast RSS feed requirements</b>, which can be found at
+///         <a href="https://podcasters.apple.com/support/823-podcast-requirements">https://podcasters.apple.com/support/823-podcast-requirements</a>.
+///     </para>
+///     <para>
+///         Every element of that specification is modelled. The XML namespace remains
+///         <c>http://www.itunes.com/dtds/podcast-1.0.dtd</c> — Apple has never changed it, and it is the
+///         identifier on the wire rather than a document location. The <see cref="SyndicationExtension.Documentation"/>
+///         URI is a different thing, and it did change: the original
+///         <c>apple.com/itunes/store/podcaststechspecs.html</c> has not existed for years.
+///     </para>
+///     <para>
+///         Two elements of Apple's <em>earlier</em> specification are deliberately not modelled:
+///         <c>itunes:isClosedCaptioned</c> and <c>itunes:order</c>. Apple has dropped both, neither
+///         appears in the 136-document real-world corpus, and implementing a retired element would add
+///         public API that nothing writes and nothing reads.
 ///     </para>
 /// </remarks>
 /// <example>
@@ -28,7 +42,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
     /// Initializes a new instance of the <see cref="ITunesSyndicationExtension"/> class.
     /// </summary>
     public ITunesSyndicationExtension()
-        : base("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd", new Version("1.0"), new Uri("http://www.apple.com/itunes/store/podcaststechspecs.html#rss"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
+        : base("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd", new Version("1.0"), new Uri("https://podcasters.apple.com/support/823-podcast-requirements"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
     {
     }
 
@@ -221,6 +235,20 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
     /// </summary>
     /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     <b>Every member of <see cref="ITunesSyndicationExtensionContext"/> must appear below, in
+    ///     alphabetical order.</b> This is a hand-maintained list and it has already fallen behind once:
+    ///     the five members added for Apple's 2017 revision never reached it, so two extensions
+    ///     describing different episodes compared equal. <c>ITunesComparisonCoversEveryMemberTests</c>
+    ///     holds one row per member and fails on the row it is missing.
+    ///     </para>
+    ///     <para>
+    ///     <see cref="Nullable.Compare{T}"/> is used for the two nullable members because
+    ///     <see cref="Nullable{T}"/> exposes no <c>CompareTo</c> that accepts another
+    ///     <see cref="Nullable{T}"/>.
+    ///     </para>
+    /// </remarks>
     public int CompareTo(ITunesSyndicationExtension? other)
     {
         if (other is null)
@@ -231,14 +259,20 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         int result = string.Compare(this.Context.Author, other.Context.Author, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Categories, other.Context.Categories);
         if (result == 0) result = this.Context.Duration.CompareTo(other.Context.Duration);
+        if (result == 0) result = Nullable.Compare(this.Context.Episode, other.Context.Episode);
+        if (result == 0) result = this.Context.EpisodeType.CompareTo(other.Context.EpisodeType);
         if (result == 0) result = this.Context.ExplicitMaterial.CompareTo(other.Context.ExplicitMaterial);
         if (result == 0) result = Uri.Compare(this.Context.Image, other.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = this.Context.IsBlocked.CompareTo(other.Context.IsBlocked);
+        if (result == 0) result = this.Context.IsComplete.CompareTo(other.Context.IsComplete);
         if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Keywords, other.Context.Keywords, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = Uri.Compare(this.Context.NewFeedUrl, other.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = Comparer<ITunesOwner>.Default.Compare(this.Context.Owner, other.Context.Owner);
+        if (result == 0) result = this.Context.PodcastType.CompareTo(other.Context.PodcastType);
+        if (result == 0) result = Nullable.Compare(this.Context.Season, other.Context.Season);
         if (result == 0) result = string.Compare(this.Context.Subtitle, other.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Context.Summary, other.Context.Summary, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Title, other.Context.Title, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -275,14 +309,20 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         hash.Add(HashCodeUtility.Component(this.Context.Author));
         hash.Add(HashCodeUtility.Component(this.Context.Categories.Count));
         hash.Add(HashCodeUtility.Component(this.Context.Duration));
+        hash.Add(HashCodeUtility.Component(this.Context.Episode));
+        hash.Add(HashCodeUtility.Component(this.Context.EpisodeType));
         hash.Add(HashCodeUtility.Component(this.Context.ExplicitMaterial));
         hash.Add(HashCodeUtility.Component(this.Context.Image));
         hash.Add(HashCodeUtility.Component(this.Context.IsBlocked));
+        hash.Add(HashCodeUtility.Component(this.Context.IsComplete));
         hash.Add(HashCodeUtility.Component(this.Context.Keywords.Count));
         hash.Add(HashCodeUtility.Component(this.Context.NewFeedUrl));
         hash.Add(HashCodeUtility.Component(this.Context.Owner));
+        hash.Add(HashCodeUtility.Component(this.Context.PodcastType));
+        hash.Add(HashCodeUtility.Component(this.Context.Season));
         hash.Add(HashCodeUtility.Component(this.Context.Subtitle));
         hash.Add(HashCodeUtility.Component(this.Context.Summary));
+        hash.Add(HashCodeUtility.Component(this.Context.Title));
         return hash.ToHashCode();
     }
 

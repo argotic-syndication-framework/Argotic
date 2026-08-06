@@ -71,6 +71,7 @@ internal static class SitemapIndexExample
     /// <summary>
     /// Provides example code for the SitemapIndex.CreateAsync(Uri) method.
     /// </summary>
+    [RequiresNetwork]
     public static async Task LoadUriExampleAsync()
     {
         // Note: Loading endjin.com/sitemap.xml as a demonstration. In practice,

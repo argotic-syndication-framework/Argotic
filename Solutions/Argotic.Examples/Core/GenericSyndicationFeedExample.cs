@@ -15,6 +15,7 @@ internal static class GenericSyndicationFeedExample
     /// <summary>
     /// Provides example code for the GenericSyndicationFeed class.
     /// </summary>
+    [RequiresNetwork]
     public static async Task ClassExampleAsync()
     {
         GenericSyndicationFeed feed = await GenericSyndicationFeed.CreateAsync(new Uri("https://endjin.com/rss.xml")).ConfigureAwait(false);
@@ -58,6 +59,7 @@ internal static class GenericSyndicationFeedExample
     /// <summary>
     /// Provides example code for the GenericSyndicationFeed.CreateAsync(Uri) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task CreateExampleAsync()
     {
         GenericSyndicationFeed feed = await GenericSyndicationFeed.CreateAsync(new Uri("https://endjin.com/rss.xml")).ConfigureAwait(false);
@@ -84,6 +86,7 @@ internal static class GenericSyndicationFeedExample
     /// <summary>
     /// Provides example code for the LoadAsync(Uri, HttpClient) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task LoadUriExampleAsync()
     {
         GenericSyndicationFeed feed = new();

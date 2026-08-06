@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Text.Json;
 using Spectre.Console;
@@ -12,23 +11,6 @@ namespace Argotic.Examples.Commands;
 internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
 {
     private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
-
-    // ImmutableArray rather than HashSet: this is only ever iterated by IsNetworkExample, which does a
-    // substring Contains against each entry. No hash lookup happens, so the set's comparer was never
-    // consulted and its hashing was pure overhead. Fastest iteration, and it says "never modified".
-    private static readonly ImmutableArray<string> NetworkExampleKeywords =
-    [
-        "Load Uri",
-        "Load Async",
-        "Create",
-        "Conditional Get",
-        "Locate",
-        "Is Pingback",
-        "Is Trackback",
-        "Source References Target",
-        "Uri Exists",
-        "Syndication Content Format Get",
-    ];
 
     protected override async Task<int> ExecuteAsync(CommandContext context, RunAllSettings settings, CancellationToken cancellationToken)
     {
@@ -59,7 +41,11 @@ internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
             IReadOnlyList<ExampleInfo> examples = ExampleRegistry.GetExamples(category.Key);
             foreach (ExampleInfo example in examples)
             {
-                if (settings.SkipNetwork && IsNetworkExample(example.Name))
+                // Declared on the method by [RequiresNetwork], not inferred from the name. The keyword
+                // filter this replaces was wrong in both directions: twelve local-file examples named
+                // "Create" or "Load Uri" were excluded for nothing, and one live fetch whose name
+                // matched no keyword ran inside the offline gate at every commit.
+                if (settings.SkipNetwork && example.RequiresNetwork)
                 {
                     continue;
                 }
@@ -155,12 +141,6 @@ internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
         }
 
         return failed > 0 ? 1 : 0;
-    }
-
-    private static bool IsNetworkExample(string name)
-    {
-        return NetworkExampleKeywords.Any(keyword =>
-            name.Contains(keyword, StringComparison.OrdinalIgnoreCase));
     }
 
     private sealed class ExampleResult

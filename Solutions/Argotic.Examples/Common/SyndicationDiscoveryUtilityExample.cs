@@ -16,6 +16,7 @@ internal static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(Uri) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task SyndicationContentFormatGetExampleAsync()
     {
         Uri url = new("https://endjin.com/rss.xml");
@@ -34,6 +35,7 @@ internal static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.SourceReferencesTargetAsync(Uri, Uri) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task SourceReferencesTargetExampleAsync()
     {
         //  Certain syndication scenarios involve verifying that one web resource references or 'links' to another web resource.
@@ -55,6 +57,7 @@ internal static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.UriExistsAsync(Uri) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task UriExistsExampleAsync()
     {
         Uri source = new("https://devblogs.microsoft.com/dotnet/");
@@ -72,6 +75,7 @@ internal static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.ConditionalGet(Uri, DateTime, string) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task ConditionalGetExampleAsync()
     {
         Uri source = new("https://endjin.com/rss.xml");
@@ -106,6 +110,7 @@ internal static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(Uri) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task LocateDiscoverableSyndicationEndpointsExampleAsync()
     {
         Uri source = new("https://www.dotnetrocks.com/");
@@ -132,6 +137,7 @@ internal static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.IsPingbackEnabledAsync(Uri) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task IsPingbackEnabledExampleAsync()
     {
         Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
@@ -149,6 +155,7 @@ internal static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.LocatePingbackNotificationServerAsync(Uri) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task LocatePingbackNotificationServerExampleAsync()
     {
         Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
@@ -171,6 +178,7 @@ internal static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.IsTrackbackEnabledAsync(Uri) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task IsTrackbackEnabledExampleAsync()
     {
         Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
@@ -188,6 +196,7 @@ internal static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.LocateTrackbackNotificationServersAsync(Uri) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task LocateTrackbackNotificationServersExampleAsync()
     {
         Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");

@@ -89,6 +89,7 @@ internal static class RssFeedExample
     /// <summary>
     /// Provides example code for the RssFeed.CreateAsync(Uri) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task CreateExampleAsync()
     {
         RssFeed feed = await RssFeed.CreateAsync(new Uri("https://endjin.com/rss.xml")).ConfigureAwait(false);
@@ -105,6 +106,7 @@ internal static class RssFeedExample
     /// <summary>
     /// Provides example code for the LoadAsync(Uri) method with event notification
     /// </summary>
+    [RequiresNetwork]
     public static async Task LoadAsyncExampleAsync()
     {
         RssFeed feed = new();
@@ -198,6 +200,7 @@ internal static class RssFeedExample
     /// <summary>
     /// Provides example code for the LoadAsync(Uri, HttpClient) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task LoadUriExampleAsync()
     {
         RssFeed feed = new();

@@ -38,6 +38,7 @@ internal static class SitemapExample
     /// <summary>
     /// Provides example code for the Sitemap.CreateAsync(Uri) method.
     /// </summary>
+    [RequiresNetwork]
     public static async Task LoadUriExampleAsync()
     {
         Syndication.Sitemap sitemap = await Syndication.Sitemap.CreateAsync(

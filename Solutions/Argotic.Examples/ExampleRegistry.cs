@@ -10,8 +10,9 @@ namespace Argotic.Examples;
 /// <param name="Description">A description of what the example demonstrates.</param>
 /// <param name="MethodName">The method name for reference.</param>
 /// <param name="IsAsync">Whether the example method is asynchronous.</param>
+/// <param name="RequiresNetwork">Whether the example fetches from a live origin, declared by <see cref="RequiresNetworkAttribute"/>.</param>
 /// <param name="RunAsync">A function to execute the example.</param>
-internal sealed record ExampleInfo(string Name, string Description, string MethodName, bool IsAsync, Func<Task> RunAsync);
+internal sealed record ExampleInfo(string Name, string Description, string MethodName, bool IsAsync, bool RequiresNetwork, Func<Task> RunAsync);
 
 /// <summary>
 /// Represents a category of examples.
@@ -114,7 +115,8 @@ internal static class ExampleRegistry
 
             Task runAsync() => ExecuteMethodAsync(method);
 
-            examples.Add(new ExampleInfo(name, description, method.Name, isAsync, runAsync));
+            bool requiresNetwork = method.GetCustomAttribute<RequiresNetworkAttribute>() is not null;
+            examples.Add(new ExampleInfo(name, description, method.Name, isAsync, requiresNetwork, runAsync));
         }
 
         return [.. examples.OrderBy(e => e.Name)];
@@ -169,6 +171,7 @@ internal static class ExampleRegistry
                         GetMethodDescription(m.Type, m.Method),
                         m.Method.Name,
                         isAsync,
+                        m.Method.GetCustomAttribute<RequiresNetworkAttribute>() is not null,
                         () => ExecuteMethodAsync(m.Method));
                 }).OrderBy(e => e.Name)]);
 

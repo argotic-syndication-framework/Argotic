@@ -47,6 +47,7 @@ internal static class AtomFeedExample
     /// <summary>
     /// Provides example code for the AtomFeed.CreateAsync(Uri) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task CreateExampleAsync()
     {
         AtomFeed feed = await AtomFeed.CreateAsync(new Uri("https://endjin.com/atom.xml")).ConfigureAwait(false);
@@ -65,6 +66,7 @@ internal static class AtomFeedExample
     /// <summary>
     /// Provides example code for the LoadAsync(Uri) method with event notification
     /// </summary>
+    [RequiresNetwork]
     public static async Task LoadAsyncExampleAsync()
     {
         AtomFeed feed = new();
@@ -164,6 +166,7 @@ internal static class AtomFeedExample
     /// <summary>
     /// Provides example code for the LoadAsync(Uri, HttpClient) method
     /// </summary>
+    [RequiresNetwork]
     public static async Task LoadUriExampleAsync()
     {
         AtomFeed feed = new();

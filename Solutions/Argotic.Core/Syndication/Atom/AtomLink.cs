@@ -221,6 +221,18 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     } = string.Empty;
 
     /// <summary>
+    /// Gets the link relation with RFC 4287's default applied.
+    /// </summary>
+    /// <value><see cref="Relation"/> when one was specified; otherwise <c>alternate</c>.</value>
+    /// <remarks>
+    ///     §4.2.7.2: a link with no <c>rel</c> attribute "MUST be interpreted as if the link relation
+    ///     type is 'alternate'". <see cref="Relation"/> stays as written — empty when the attribute
+    ///     was absent, which is also what keeps the attribute off the wire on save — and this
+    ///     property is the interpretation, so each consumer does not re-implement the default.
+    /// </remarks>
+    public string EffectiveRelation => string.IsNullOrEmpty(this.Relation) ? "alternate" : this.Relation;
+
+    /// <summary>
     /// Gets or sets human-readable information about this Web resource.
     /// </summary>
     /// <value>Human-readable information about this Web resource.</value>
@@ -310,7 +322,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
                 }
                 catch (ArgumentException)
                 {
-                    System.Diagnostics.Trace.TraceWarning("AtomLink unable to determine CultureInfo with a name of {0}.", source.XmlLang);
+                    System.Diagnostics.Trace.TraceWarning("AtomLink unable to determine CultureInfo with a name of {0}.", hreflangAttribute);
                 }
             }
 

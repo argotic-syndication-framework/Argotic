@@ -194,17 +194,54 @@ public sealed class AtomSpecConformanceTests
     // ---- A4: inline XML media types ------------------------------------------------------------
 
     /// <summary>
-    /// A4 — rule-5 inline XML content is flattened to its text value.
+    /// A4 — rule-5 inline XML content keeps its element structure through a round trip.
     /// </summary>
-    /// <remarks>§4.1.3.3 rule 5: XML media types MAY carry child elements.</remarks>
+    /// <remarks>
+    ///     §4.1.3.3 rule 5: an XML media type MAY carry child elements. <c>Value</c> flattened them
+    ///     to concatenated text — <c>&lt;data&gt;&lt;value&gt;42&lt;/value&gt;&lt;/data&gt;</c>
+    ///     became <c>42</c>, unrecoverably. The read is now <c>InnerXml</c> and the save goes through
+    ///     the same parse-and-write-nodes mechanism as xhtml, so structure survives and escaping
+    ///     cannot happen.
+    /// </remarks>
     [TestMethod]
-    public void A4_InlineXmlContent_IsFlattenedToText()
+    public void A4_InlineXmlContent_KeepsItsStructureThroughARoundTrip()
     {
         AtomFeed feed = Load(
             """<content type="application/xml"><data xmlns=""><value>42</value></data></content>""");
 
-        feed.Entries.First().Content!.Content.ShouldBe(
-            "42", "PINS TODAY: the element structure is unrecoverable");
+        string content = feed.Entries.First().Content!.Content;
+        content.ShouldContain("<value>42</value>", Case.Sensitive, "INVERTED: the structure survives into the model");
+
+        string saved = SaveEntry(feed);
+        saved.ShouldContain("<value>42</value>", Case.Sensitive, "INVERTED: and back onto the wire as elements");
+        saved.ShouldNotContain("&lt;value", customMessage: "not as escaped text");
+
+        AtomFeed second = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(Save(feed)));
+        second.Load(stream);
+        SaveEntry(second).ShouldContain("<value>42</value>", Case.Sensitive, "and the second cycle is a fixed point");
+    }
+
+    /// <summary>
+    /// A8 — a link with no rel attribute answers alternate through the model.
+    /// </summary>
+    /// <remarks>
+    ///     §4.2.7.2: absent rel "MUST be interpreted as if the link relation type is 'alternate'".
+    ///     <c>Relation</c> stays raw — empty, which keeps the attribute off the wire on save — and
+    ///     <c>EffectiveRelation</c> is the interpretation, so consumers stop re-implementing the
+    ///     default.
+    /// </remarks>
+    [TestMethod]
+    public void A8_ALinkWithNoRel_AnswersAlternateThroughEffectiveRelation()
+    {
+        AtomFeed feed = Load("""<link href="https://conformance.invalid/page"/>""");
+        AtomLink link = feed.Entries.First().Links.First();
+
+        link.Relation.ShouldBe(string.Empty, "the raw attribute, as written");
+        link.EffectiveRelation.ShouldBe("alternate", "the spec's interpretation, applied once, here");
+
+        AtomLink explicitRel = new(new Uri("https://conformance.invalid/next"), "next");
+        explicitRel.EffectiveRelation.ShouldBe("next", "a stated relation passes through untouched");
     }
 
     // ---- A5: atom:id identity ------------------------------------------------------------------

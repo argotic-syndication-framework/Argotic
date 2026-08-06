@@ -300,6 +300,14 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
                 wasLoaded = true;
             }
         }
+        else if (AtomUtility.IsXmlMediaType(this.ContentType) && !string.IsNullOrEmpty(source.InnerXml))
+        {
+            // Rule 5 of RFC 4287 s4.1.3.3: an XML media type MAY carry child elements, and Value
+            // flattens them to their concatenated text - <data><value>42</value></data> became "42",
+            // with the structure unrecoverable.
+            this.Content = source.InnerXml;
+            wasLoaded = true;
+        }
         else if (!string.IsNullOrEmpty(source.Value))
         {
             this.Content = source.Value;
@@ -359,6 +367,10 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
             if (string.Equals(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase))
             {
                 AtomUtility.WriteXhtmlDiv(writer, this.Content);
+            }
+            else if (AtomUtility.IsXmlMediaType(this.ContentType))
+            {
+                AtomUtility.WriteXmlFragment(writer, this.Content);
             }
             else
             {

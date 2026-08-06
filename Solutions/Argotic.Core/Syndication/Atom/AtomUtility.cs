@@ -260,6 +260,72 @@ internal static class AtomUtility
     }
 
     /// <summary>
+    /// Determines whether a content type names an XML media type.
+    /// </summary>
+    /// <param name="contentType">The value of a <c>type</c> attribute.</param>
+    /// <returns><b>true</b> for an XML media type per RFC 4287 §4.1.3.3 rule 5; otherwise <b>false</b>.</returns>
+    /// <remarks>
+    ///     The rule-5 set: a subtype of <c>xml</c> or a subtype ending in <c>+xml</c>. The three
+    ///     keyword values <c>text</c>/<c>html</c>/<c>xhtml</c> are not media types and are handled by
+    ///     their own rules before this question is asked.
+    /// </remarks>
+    public static bool IsXmlMediaType(string contentType)
+    {
+        if (string.IsNullOrEmpty(contentType))
+        {
+            return false;
+        }
+
+        int slash = contentType.IndexOf('/', StringComparison.Ordinal);
+        if (slash < 0)
+        {
+            return false;
+        }
+
+        ReadOnlySpan<char> subtype = contentType.AsSpan(slash + 1);
+        int semicolon = subtype.IndexOf(';');
+        if (semicolon >= 0)
+        {
+            subtype = subtype[..semicolon];
+        }
+
+        subtype = subtype.Trim();
+        return subtype.Equals("xml", StringComparison.OrdinalIgnoreCase)
+            || subtype.EndsWith("+xml", StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    /// Writes a stored XML fragment as nodes.
+    /// </summary>
+    /// <param name="writer">The writer to emit to.</param>
+    /// <param name="content">The fragment — element, text, or mixed. May be empty.</param>
+    /// <remarks>
+    ///     The rule-5 counterpart of <see cref="WriteXhtmlDiv"/>: inline XML content is XML, and
+    ///     writing it with <c>WriteString</c> would escape it into text. The fragment is wrapped in a
+    ///     namespace-neutral root, parsed, and its children written node by node — so malformed
+    ///     caller-supplied content throws at save rather than producing an invalid document.
+    /// </remarks>
+    /// <exception cref="XmlException">The <paramref name="content"/> is not a well-formed XML fragment.</exception>
+    public static void WriteXmlFragment(XmlWriter writer, string content)
+    {
+        if (string.IsNullOrEmpty(content))
+        {
+            return;
+        }
+
+        using StringReader wrapped = new($"<x>{content}</x>");
+        using XmlReader reader = XmlReader.Create(wrapped, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit });
+
+        reader.MoveToContent();
+        reader.Read();
+
+        while (!reader.EOF && !(reader.NodeType == XmlNodeType.EndElement && reader.Depth == 0))
+        {
+            writer.WriteNode(reader, defattr: false);
+        }
+    }
+
+    /// <summary>
     /// Saves the current <see cref="IAtomCommonObjectAttributes"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="source">An object that implements the <see cref="IAtomCommonObjectAttributes"/> interface to extract Atom common attribute information from.</param>

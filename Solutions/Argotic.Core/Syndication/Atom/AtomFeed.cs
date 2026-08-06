@@ -624,6 +624,15 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// </summary>
     /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
+    /// <remarks>
+    ///     <b>Save writes the object graph as it stands; it does not enforce RFC 4287's document-level
+    ///     requirements.</b> A conformant feed document must carry exactly one <c>atom:id</c>,
+    ///     <c>atom:title</c> and <c>atom:updated</c> (§4.1.1); members that are unset are simply
+    ///     omitted, so a partially built feed produces well-formed XML that is not valid Atom. This is
+    ///     deliberate — a tolerant reader must be able to round-trip what it read, including documents
+    ///     that were invalid on arrival — but it means conformance of the output is the caller's to
+    ///     ensure, not this method's to guarantee.
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream, SyndicationResourceSaveSettings? settings)

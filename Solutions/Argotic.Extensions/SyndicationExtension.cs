@@ -206,7 +206,21 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// </summary>
     /// <param name="writer">The <b>XmlWriter</b> to which you want to write the prefixed XML namespace declaration to.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    public void WriteXmlNamespaceDeclaration(XmlWriter writer)
+    /// <remarks>
+    ///     <para>
+    ///     <b>Virtual because one prefix is not always enough.</b> Every extension here but one declares a
+    ///     single namespace, and the default below writes exactly that. GeoRSS is the exception: its GML
+    ///     serialisation nests elements from <c>http://www.opengis.net/gml</c> inside its own, so it
+    ///     declares two.
+    ///     </para>
+    ///     <para>
+    ///     <see cref="SyndicationExtensionAdapter.WriteXmlNamespaceDeclarations"/> reaches this through
+    ///     <see cref="ISyndicationExtension"/> on a freshly constructed instance, which is why an
+    ///     override cannot depend on any content — it is asked what namespaces the <i>type</i> may use,
+    ///     not what this document actually used.
+    ///     </para>
+    /// </remarks>
+    public virtual void WriteXmlNamespaceDeclaration(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteAttributeString("xmlns", this.XmlPrefix, null, this.XmlNamespace);

@@ -34,6 +34,7 @@ public sealed class GeoRssComparisonCoversEveryMemberTests
         extension.Context.RelationshipTag = "is-centered-at";
         extension.Context.FeatureName = "Podunk";
         extension.Context.GeometryIsWrappedInWhere = false;
+        extension.Context.Encoding = GeoRssEncoding.Simple;
         return extension;
     }
 
@@ -115,5 +116,6 @@ public sealed class GeoRssComparisonCoversEveryMemberTests
         ["RelationshipTag", (GeoRssSyndicationExtensionContext c) => { c.RelationshipTag = "is-near"; }],
         ["FeatureName", (GeoRssSyndicationExtensionContext c) => { c.FeatureName = "Nederland"; }],
         ["GeometryIsWrappedInWhere", (GeoRssSyndicationExtensionContext c) => { c.GeometryIsWrappedInWhere = true; }],
+        ["Encoding", (GeoRssSyndicationExtensionContext c) => { c.Encoding = GeoRssEncoding.Gml; }],
     ];
 }

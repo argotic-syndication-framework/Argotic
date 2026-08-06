@@ -132,6 +132,17 @@ public class GeoRssSyndicationExtensionContext
     public bool GeometryIsWrappedInWhere { get; set; }
 
     /// <summary>
+    /// Gets or sets which GeoRSS serialisation the geometry was written in.
+    /// </summary>
+    /// <value>A <see cref="GeoRssEncoding"/> value. The default is <see cref="GeoRssEncoding.Simple"/>.</value>
+    /// <remarks>
+    ///     Recorded so a document comes back out in the serialisation it arrived in. GML always sits
+    ///     inside <c>georss:where</c>, so reading it necessarily sets
+    ///     <see cref="GeometryIsWrappedInWhere"/> too.
+    /// </remarks>
+    public GeoRssEncoding Encoding { get; set; } = GeoRssEncoding.Simple;
+
+    /// <summary>
     /// Gets a value indicating whether any geometry was specified.
     /// </summary>
     /// <value><b>true</b> if a point, line, polygon or box is present; otherwise, <b>false</b>.</value>
@@ -180,10 +191,21 @@ public class GeoRssSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
 
-        if (this.HasGeometry && this.GeometryIsWrappedInWhere)
+        // GML has nowhere to live but inside georss:where, so it forces the wrapper regardless of how
+        // the geometry was originally written.
+        if (this.HasGeometry && (this.GeometryIsWrappedInWhere || this.Encoding == GeoRssEncoding.Gml))
         {
             writer.WriteStartElement("where", xmlNamespace);
-            this.WriteGeometry(writer, xmlNamespace);
+
+            if (this.Encoding == GeoRssEncoding.Gml)
+            {
+                this.WriteGmlGeometry(writer);
+            }
+            else
+            {
+                this.WriteGeometry(writer, xmlNamespace);
+            }
+
             writer.WriteEndElement();
         }
         else
@@ -244,6 +266,58 @@ public class GeoRssSyndicationExtensionContext
     }
 
     /// <summary>
+    /// Writes whichever geometries are present, as GML.
+    /// </summary>
+    /// <param name="writer">The writer to write to.</param>
+    /// <remarks>
+    ///     Each element is written with an explicit <c>gml</c> prefix. The prefix is already declared on
+    ///     the document root — <see cref="GeoRssSyndicationExtension.WriteXmlNamespaceDeclaration"/>
+    ///     declares it alongside <c>georss</c> — so naming it here reuses that declaration instead of
+    ///     letting the writer invent <c>p1</c>, <c>p2</c> and so on per element.
+    /// </remarks>
+    private void WriteGmlGeometry(XmlWriter writer)
+    {
+        const string Gml = GeoRssExtensionUtility.GmlNamespaceUri;
+
+        if (this.Point is { } point)
+        {
+            writer.WriteStartElement("gml", "Point", Gml);
+            writer.WriteElementString("gml", "pos", Gml, point.ToString());
+            writer.WriteEndElement();
+        }
+
+        if (this.Line is { Positions.Count: > 0 } line)
+        {
+            writer.WriteStartElement("gml", "LineString", Gml);
+            writer.WriteStartElement("gml", "posList", Gml);
+            GeoRssExtensionUtility.WritePositions(writer, line.Positions);
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+        }
+
+        if (this.Polygon is { Positions.Count: > 0 } polygon)
+        {
+            writer.WriteStartElement("gml", "Polygon", Gml);
+            writer.WriteStartElement("gml", "exterior", Gml);
+            writer.WriteStartElement("gml", "LinearRing", Gml);
+            writer.WriteStartElement("gml", "posList", Gml);
+            GeoRssExtensionUtility.WritePositions(writer, polygon.Positions);
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+        }
+
+        if (this.Box is { } box)
+        {
+            writer.WriteStartElement("gml", "Envelope", Gml);
+            writer.WriteElementString("gml", "lowerCorner", Gml, box.LowerLeft.ToString());
+            writer.WriteElementString("gml", "upperCorner", Gml, box.UpperRight.ToString());
+            writer.WriteEndElement();
+        }
+    }
+
+    /// <summary>
     /// Reads the geometry, looking first at the direct children and then inside <c>georss:where</c>.
     /// </summary>
     /// <param name="source">The navigator to read from.</param>
@@ -257,13 +331,98 @@ public class GeoRssSyndicationExtensionContext
         }
 
         XPathNavigator? whereNavigator = source.SelectChildElement("georss", "where", manager);
-        if (whereNavigator is not null && this.LoadGeometryFrom(whereNavigator, manager))
+        if (whereNavigator is null)
+        {
+            return false;
+        }
+
+        if (this.LoadGeometryFrom(whereNavigator, manager))
         {
             this.GeometryIsWrappedInWhere = true;
             return true;
         }
 
+        if (this.LoadGmlGeometryFrom(whereNavigator, manager))
+        {
+            this.GeometryIsWrappedInWhere = true;
+            this.Encoding = GeoRssEncoding.Gml;
+            return true;
+        }
+
         return false;
+    }
+
+    /// <summary>
+    /// Reads GML geometry from inside a <c>georss:where</c> element.
+    /// </summary>
+    /// <param name="source">The navigator positioned on the <c>georss:where</c> element.</param>
+    /// <param name="manager">The namespace manager, which must have the <c>gml</c> prefix registered.</param>
+    /// <returns><b>true</b> if any geometry was read; otherwise, <b>false</b>.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     GML nests further than GeoRSS Simple does — a polygon's coordinates are four elements deep —
+    ///     so each shape is walked explicitly rather than searched for. A <c>georss:where</c> holding
+    ///     something this method does not recognise yields nothing and does not throw, which is what
+    ///     lets an unknown future GML shape be ignored rather than half-read.
+    ///     </para>
+    ///     <para>
+    ///     <b>Coordinate ordering here is an assumption, not a measurement.</b> The GeoRSS GML profile
+    ///     is latitude-first like Simple, and that is what is implemented — but no GML geometry exists
+    ///     in either surveyed corpus to check it against, and secondary sources disagree.
+    ///     <c>GeoRssGmlTests</c> states the assumption explicitly so that if it is ever shown wrong,
+    ///     exactly one test changes.
+    ///     </para>
+    /// </remarks>
+    private bool LoadGmlGeometryFrom(XPathNavigator source, XmlNamespaceManager manager)
+    {
+        bool wasLoaded = false;
+
+        XPathNavigator? pointNavigator = source.SelectChildElement("gml", "Point", manager);
+        XPathNavigator? positionNavigator = pointNavigator?.SelectChildElement("gml", "pos", manager);
+        if (positionNavigator is not null
+            && GeoRssExtensionUtility.TryReadPosition(positionNavigator.Value, out GeoRssPosition point))
+        {
+            this.Point = point;
+            wasLoaded = true;
+        }
+
+        XPathNavigator? lineNavigator = source.SelectChildElement("gml", "LineString", manager);
+        XPathNavigator? linePositions = lineNavigator?.SelectChildElement("gml", "posList", manager);
+        if (linePositions is not null
+            && GeoRssExtensionUtility.TryReadPositions(linePositions.Value, out List<GeoRssPosition>? line))
+        {
+            this.Line = new GeoRssLine(line);
+            wasLoaded = true;
+        }
+
+        XPathNavigator? ringPositions = source.SelectChildElement("gml", "Polygon", manager)
+            ?.SelectChildElement("gml", "exterior", manager)
+            ?.SelectChildElement("gml", "LinearRing", manager)
+            ?.SelectChildElement("gml", "posList", manager);
+        if (ringPositions is not null
+            && GeoRssExtensionUtility.TryReadPositions(ringPositions.Value, out List<GeoRssPosition>? ring))
+        {
+            this.Polygon = new GeoRssPolygon(ring);
+            wasLoaded = true;
+        }
+
+        XPathNavigator? envelopeNavigator = source.SelectChildElement("gml", "Envelope", manager);
+        if (envelopeNavigator is not null)
+        {
+            XPathNavigator? lowerNavigator = envelopeNavigator.SelectChildElement("gml", "lowerCorner", manager);
+            XPathNavigator? upperNavigator = envelopeNavigator.SelectChildElement("gml", "upperCorner", manager);
+
+            if (lowerNavigator is not null
+                && upperNavigator is not null
+                && GeoRssExtensionUtility.TryReadPosition(lowerNavigator.Value, out GeoRssPosition lower)
+                && GeoRssExtensionUtility.TryReadPosition(upperNavigator.Value, out GeoRssPosition upper))
+            {
+                this.Box = new GeoRssBox(lower, upper);
+                wasLoaded = true;
+            }
+        }
+
+        return wasLoaded;
     }
 
     /// <summary>

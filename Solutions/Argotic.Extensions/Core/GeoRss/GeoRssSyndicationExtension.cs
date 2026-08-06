@@ -36,6 +36,11 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
     public const string NamespaceUri = GeoRssExtensionUtility.NamespaceUri;
 
     /// <summary>
+    /// The XML namespace the GML geometries inside <c>georss:where</c> are qualified with.
+    /// </summary>
+    public const string GmlNamespaceUri = GeoRssExtensionUtility.GmlNamespaceUri;
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="GeoRssSyndicationExtension"/> class.
     /// </summary>
     public GeoRssSyndicationExtension()
@@ -83,7 +88,7 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator()
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
-        bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        bool wasLoaded = this.Context.Load(navigator, this.CreateGeoRssNamespaceManager(navigator));
         SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
@@ -102,6 +107,52 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
         XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
+    }
+
+    /// <summary>
+    /// Writes the prefixed XML namespace declarations for this extension to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the declarations.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <remarks>
+    ///     <para>
+    ///     The only extension in this library that declares two namespaces. GeoRSS GML nests elements
+    ///     from <c>http://www.opengis.net/gml</c> inside <c>georss:where</c>, and they need a prefix
+    ///     bound before they can be written with one.
+    ///     </para>
+    ///     <para>
+    ///     Both are declared whether or not the document uses GML, because this method is called on a
+    ///     freshly constructed instance that has no context to consult. That costs one unused attribute
+    ///     on the root of a Simple-only feed, and buys not repeating the declaration on every geometry
+    ///     of a GML one.
+    ///     </para>
+    /// </remarks>
+    public override void WriteXmlNamespaceDeclaration(XmlWriter writer)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+        base.WriteXmlNamespaceDeclaration(writer);
+        writer.WriteAttributeString("xmlns", "gml", null, GmlNamespaceUri);
+    }
+
+    /// <summary>
+    /// Creates a namespace manager that resolves both the GeoRSS and the GML prefixes.
+    /// </summary>
+    /// <param name="navigator">The navigator whose name table and in-scope namespaces are used.</param>
+    /// <returns>A namespace manager able to resolve <c>georss</c> and <c>gml</c>.</returns>
+    /// <remarks>
+    ///     <see cref="SyndicationExtension.CreateNamespaceManager"/> binds one prefix — this extension's
+    ///     own — and <c>SelectChildElement</c> <b>throws</b> on a prefix it cannot resolve, so reading
+    ///     GML at all requires binding <c>gml</c> here first. The document's own binding is preferred
+    ///     where it has one; because selection matches on the resolved namespace <i>URI</i> rather than
+    ///     on the prefix, a feed that spells GML with some other prefix still matches.
+    /// </remarks>
+    private XmlNamespaceManager CreateGeoRssNamespaceManager(XPathNavigator navigator)
+    {
+        XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
+        string? declared = navigator.LookupNamespace("gml");
+        manager.AddNamespace("gml", !string.IsNullOrEmpty(declared) ? declared : GmlNamespaceUri);
+
+        return manager;
     }
 
     /// <summary>
@@ -142,6 +193,7 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
 
         int result = Nullable.Compare(this.Context.Box, other.Context.Box);
         if (result == 0) result = Nullable.Compare(this.Context.Elevation, other.Context.Elevation);
+        if (result == 0) result = this.Context.Encoding.CompareTo(other.Context.Encoding);
         if (result == 0) result = string.Compare(this.Context.FeatureName, other.Context.FeatureName, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Context.FeatureTypeTag, other.Context.FeatureTypeTag, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = Nullable.Compare(this.Context.Floor, other.Context.Floor);
@@ -178,6 +230,7 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
         HashCode hash = new();
         hash.Add(HashCodeUtility.Component(this.Context.Box));
         hash.Add(HashCodeUtility.Component(this.Context.Elevation));
+        hash.Add(HashCodeUtility.Component(this.Context.Encoding));
         hash.Add(HashCodeUtility.Component(this.Context.FeatureName));
         hash.Add(HashCodeUtility.Component(this.Context.FeatureTypeTag));
         hash.Add(HashCodeUtility.Component(this.Context.Floor));

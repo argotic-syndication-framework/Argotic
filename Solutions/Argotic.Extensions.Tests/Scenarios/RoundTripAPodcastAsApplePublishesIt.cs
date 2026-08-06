@@ -32,6 +32,13 @@ namespace Argotic.Extensions.Tests.Scenarios;
 ///     Apple defines it in the same breath as <c>episode</c> and an API with one and not the other
 ///     would be lopsided.
 ///     </para>
+///     <para>
+///     <c>itunes:complete</c> joined the fixture when Apple's current specification was reviewed
+///     element by element and it turned out to be the only one still unmodelled. Like <c>season</c> it
+///     has no corpus occurrences, because a podcast emits it once — when it ends.
+///     <see cref="Functionality.Core.iTunes.ITunesCompleteTests"/> covers its values; here it only has
+///     to survive the journey.
+///     </para>
 /// </remarks>
 [TestClass]
 public sealed class RoundTripAPodcastAsApplePublishesIt
@@ -44,6 +51,7 @@ public sealed class RoundTripAPodcastAsApplePublishesIt
             <link>https://example.com/</link>
             <description>A description.</description>
             <itunes:type>serial</itunes:type>
+            <itunes:complete>yes</itunes:complete>
             <itunes:new-feed-url>https://example.com/moved.xml</itunes:new-feed-url>
             <item>
               <title>Episode 42: The Long Headline A Publisher Writes In The Ordinary Title</title>
@@ -109,6 +117,7 @@ public sealed class RoundTripAPodcastAsApplePublishesIt
             .OfType<ITunesSyndicationExtension>().Single().Context;
 
         channel.PodcastType.ShouldBe(ITunesPodcastType.Serial);
+        channel.IsComplete.ShouldBeTrue("itunes:complete says this podcast has finished");
         channel.NewFeedUrl.ShouldBe(new Uri("https://example.com/moved.xml"), "already supported — the control");
     }
 
@@ -146,6 +155,7 @@ public sealed class RoundTripAPodcastAsApplePublishesIt
             .OfType<ITunesSyndicationExtension>().Single().Context;
 
         channel.PodcastType.ShouldBe(ITunesPodcastType.Serial);
+        channel.IsComplete.ShouldBeTrue();
         channel.NewFeedUrl.ShouldBe(new Uri("https://example.com/moved.xml"));
     }
 

@@ -145,6 +145,26 @@ public class ITunesSyndicationExtensionContext
     public bool IsBlocked { get; set; }
 
     /// <summary>
+    /// Gets or sets a value indicating whether this podcast has finished and will publish no further episodes.
+    /// </summary>
+    /// <value><b>true</b> if no episode will ever be added to this podcast again; otherwise, <b>false</b>. The default value is <b>false</b>.</value>
+    /// <remarks>
+    ///     <para>
+    ///     Apple's <c>itunes:complete</c>. Setting it tells Apple Podcasts to stop polling the feed,
+    ///     and Apple documents the effect as potentially <b>irreversible</b> — a feed marked complete
+    ///     may never be able to publish another episode at that URL. It is written only when
+    ///     <see langword="true"/> for that reason: the element has no "no" spelling, and emitting one
+    ///     unasked would be a change of meaning rather than a round-trip.
+    ///     </para>
+    ///     <para>
+    ///     Channel level, and situational — it appears in none of the 136 documents of the real-world
+    ///     corpus, which is what being situational looks like. It is implemented because it is the one
+    ///     element of Apple's current specification this library did not model.
+    ///     </para>
+    /// </remarks>
+    public bool IsComplete { get; set; }
+
+    /// <summary>
     /// Gets the search keywords for this podcast.
     /// </summary>
     /// <value>A <see cref="IList{T}"/> collection of strings that allows users to search on a maximum of 12 text keywords.</value>
@@ -281,6 +301,11 @@ public class ITunesSyndicationExtensionContext
         if (this.IsBlocked)
         {
             writer.WriteElementString("block", xmlNamespace, "yes");
+        }
+
+        if (this.IsComplete)
+        {
+            writer.WriteElementString("complete", xmlNamespace, "yes");
         }
 
         if (!string.IsNullOrEmpty(this.Title))
@@ -435,6 +460,7 @@ public class ITunesSyndicationExtensionContext
         if (source.HasChildren)
         {
             XPathNavigator? blockNavigator = source.SelectChildElement("itunes", "block", manager);
+            XPathNavigator? completeNavigator = source.SelectChildElement("itunes", "complete", manager);
             XPathNavigator? imageNavigator = source.SelectChildElement("itunes", "image", manager);
             XPathNavigator? durationNavigator = source.SelectChildElement("itunes", "duration", manager);
             XPathNavigator? explicitNavigator = source.SelectChildElement("itunes", "explicit", manager);
@@ -451,6 +477,16 @@ public class ITunesSyndicationExtensionContext
                     this.IsBlocked = false;
                     wasLoaded = true;
                 }
+            }
+
+            // Apple defines one value for this element: "yes". Unlike itunes:block, which documents both
+            // spellings, "no" has no meaning here -- the absence of the element is how a podcast says it
+            // is still running. So only "yes" is recognised, and only "yes" is ever written back.
+            if (completeNavigator is not null
+                && string.Equals(completeNavigator.Value.Trim(), "yes", StringComparison.OrdinalIgnoreCase))
+            {
+                this.IsComplete = true;
+                wasLoaded = true;
             }
 
             if (imageNavigator is { HasAttributes: true })

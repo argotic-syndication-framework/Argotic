@@ -523,4 +523,122 @@ public class DiscoverableSyndicationEndpointTests
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(() => endpoint.CreateNavigatorAsync(null!));
     }
+
+    /// <summary>
+    /// <c>application/xml</c> resolves to <see cref="SyndicationContentFormat.Sitemap"/>, never to
+    /// <see cref="SyndicationContentFormat.SitemapIndex"/>.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     Two enumeration fields carry the same <c>[MimeMediaType]</c>, so one of them cannot be
+    ///     reached through this property at all. That is not a defect in the lookup — a sitemap and a
+    ///     sitemap index really are both served as <c>application/xml</c>, and the content type carries
+    ///     nothing that could tell them apart. Distinguishing them needs the document's root element,
+    ///     which is what <c>SyndicationDiscoveryUtility</c> sniffs.
+    ///     </para>
+    ///     <para>
+    ///     What <b>is</b> worth pinning is <i>which</i> of the two wins. The mapping is built by
+    ///     iterating <see cref="System.Type.GetFields()"/> and calling <c>TryAdd</c>, and the BCL does
+    ///     not guarantee field order — so before the tie-break was made explicit, the answer here was a
+    ///     property of the running runtime rather than of this library. This test fails if that ever
+    ///     changes, which is the only reason the silent drop is safe to leave in place.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void ContentFormat_ApplicationXml_ResolvesToSitemapAndNeverToSitemapIndex()
+    {
+        // Arrange
+        DiscoverableSyndicationEndpoint endpoint = new(
+            new Uri("http://example.com/sitemap.xml"),
+            "application/xml");
+
+        // Act
+        SyndicationContentFormat format = endpoint.ContentFormat;
+
+        // Assert
+        format.ShouldBe(SyndicationContentFormat.Sitemap);
+        format.ShouldNotBe(SyndicationContentFormat.SitemapIndex);
+    }
+
+    /// <summary>
+    /// <c>application/atom+xml</c> resolves to <see cref="SyndicationContentFormat.Atom"/>, never to
+    /// <see cref="SyndicationContentFormat.AtomEntryDocument"/>.
+    /// </summary>
+    /// <remarks>
+    ///     The second of the two colliding content types, and the same reasoning. RFC 4287 gives an Atom
+    ///     feed document and a stand-alone entry document the same media type, so the collision is in the
+    ///     specification rather than in this mapping. The feed document wins because it is the
+    ///     overwhelmingly more common one, and because that is what the property already returned.
+    /// </remarks>
+    [TestMethod]
+    public void ContentFormat_ApplicationAtomXml_ResolvesToAtomAndNeverToAtomEntryDocument()
+    {
+        // Arrange
+        DiscoverableSyndicationEndpoint endpoint = new(
+            new Uri("http://example.com/feed.atom"),
+            "application/atom+xml");
+
+        // Act
+        SyndicationContentFormat format = endpoint.ContentFormat;
+
+        // Assert
+        format.ShouldBe(SyndicationContentFormat.Atom);
+        format.ShouldNotBe(SyndicationContentFormat.AtomEntryDocument);
+    }
+
+    /// <summary>
+    /// Every non-colliding content type still resolves to its own format.
+    /// </summary>
+    /// <remarks>
+    ///     The guard on the tie-break. Making one of two colliding entries win deliberately is only
+    ///     correct if it leaves the other thirteen mappings alone, and a change to how the table is built
+    ///     could plausibly drop or reorder them all rather than just the two in question.
+    /// </remarks>
+    [TestMethod]
+    [DataRow("text/x-apml", SyndicationContentFormat.Apml)]
+    [DataRow("application/blog+xml", SyndicationContentFormat.BlogML)]
+    [DataRow("application/x.microsummary+xml", SyndicationContentFormat.MicroSummaryGenerator)]
+    [DataRow("text/vnd.IPTC.NewsML", SyndicationContentFormat.NewsML)]
+    [DataRow("application/opensearchdescription+xml", SyndicationContentFormat.OpenSearchDescription)]
+    [DataRow("text/x-opml", SyndicationContentFormat.Opml)]
+    [DataRow("application/rsd+xml", SyndicationContentFormat.Rsd)]
+    [DataRow("application/rss+xml", SyndicationContentFormat.Rss)]
+    [DataRow("application/rdf+xml", SyndicationContentFormat.Rdf)]
+    [DataRow("application/atomcat+xml", SyndicationContentFormat.AtomCategoryDocument)]
+    [DataRow("application/atomsvc+xml", SyndicationContentFormat.AtomServiceDocument)]
+    public void ContentFormat_UncollidedContentType_ResolvesToItsOwnFormat(string contentType, SyndicationContentFormat expected)
+    {
+        // Arrange
+        DiscoverableSyndicationEndpoint endpoint = new(new Uri("http://example.com/resource"), contentType);
+
+        // Act
+        SyndicationContentFormat format = endpoint.ContentFormat;
+
+        // Assert
+        format.ShouldBe(expected);
+    }
+
+    /// <summary>
+    /// The content type is matched without regard to case.
+    /// </summary>
+    /// <remarks>
+    ///     The table is built with <see cref="StringComparer.OrdinalIgnoreCase"/> and frozen with the same
+    ///     comparer. Both have to be right: freezing with the default comparer while building with an
+    ///     ordinal-ignore-case one is a silent way to lose case insensitivity, because the dictionary
+    ///     still populates correctly and only lookups change.
+    /// </remarks>
+    [TestMethod]
+    public void ContentFormat_ContentTypeInDifferentCase_StillResolves()
+    {
+        // Arrange
+        DiscoverableSyndicationEndpoint endpoint = new(
+            new Uri("http://example.com/feed.rss"),
+            "APPLICATION/RSS+XML");
+
+        // Act
+        SyndicationContentFormat format = endpoint.ContentFormat;
+
+        // Assert
+        format.ShouldBe(SyndicationContentFormat.Rss);
+    }
 }

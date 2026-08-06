@@ -67,23 +67,49 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <summary>
     /// Builds a cached mapping from MIME content type strings to SyndicationContentFormat enum values.
     /// </summary>
+    /// <returns>The content type to format mapping, keyed without regard to case.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     <b>Two content types are claimed by two formats each, so two formats are unreachable here.</b>
+    ///     <see cref="SyndicationContentFormat.Sitemap"/> and
+    ///     <see cref="SyndicationContentFormat.SitemapIndex"/> are both <c>application/xml</c>;
+    ///     <see cref="SyndicationContentFormat.Atom"/> and
+    ///     <see cref="SyndicationContentFormat.AtomEntryDocument"/> are both
+    ///     <c>application/atom+xml</c>. That is not something this mapping can fix — the collisions are in
+    ///     the registered media types, and a content type genuinely does not say which of the pair a
+    ///     document is. Telling them apart needs the root element, which is what
+    ///     <c>SyndicationDiscoveryUtility</c> sniffs.
+    ///     </para>
+    ///     <para>
+    ///     <b>What this does fix is that the winner used to be an accident.</b> The loop was written
+    ///     over <see cref="Type.GetFields()"/> with <c>TryAdd</c>, so whichever field reflection happened
+    ///     to yield first won. On this runtime that is declaration order, which is why
+    ///     <c>Sitemap</c> and <c>Atom</c> win — but nothing in the code said they should, and nothing
+    ///     would have noticed had the answer changed. Ordering by the enumeration's own value makes the
+    ///     rule explicit and independent of how reflection enumerates: the numerically lower member wins,
+    ///     which preserves exactly the pairings callers already had.
+    ///     </para>
+    /// </remarks>
     private static FrozenDictionary<string, SyndicationContentFormat> BuildContentTypeMapping()
     {
         var mappings = new Dictionary<string, SyndicationContentFormat>(StringComparer.OrdinalIgnoreCase);
 
-        foreach (FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
-            {
-                SyndicationContentFormat format = Enum.Parse<SyndicationContentFormat>(fieldInfo.Name);
+        IEnumerable<FieldInfo> fields = typeof(SyndicationContentFormat)
+            .GetFields()
+            .Where(static field => field.FieldType == typeof(SyndicationContentFormat))
+            .OrderBy(static field => (int)Enum.Parse<SyndicationContentFormat>(field.Name));
 
-                if (fieldInfo.GetCustomAttribute<MimeMediaTypeAttribute>(inherit: false) is { } mediaType)
-                {
-                    string contentType = $"{mediaType.Name}/{mediaType.SubName}";
-                    // Note: Some formats may share the same content type (e.g., Sitemap and SitemapIndex both use application/xml).
-                    // The first one encountered will be used; later ones are skipped.
-                    mappings.TryAdd(contentType, format);
-                }
+        foreach (FieldInfo fieldInfo in fields)
+        {
+            SyndicationContentFormat format = Enum.Parse<SyndicationContentFormat>(fieldInfo.Name);
+
+            if (fieldInfo.GetCustomAttribute<MimeMediaTypeAttribute>(inherit: false) is { } mediaType)
+            {
+                string contentType = $"{mediaType.Name}/{mediaType.SubName}";
+
+                // A collision leaves the lower-valued format in place. Ordered above, so this is a
+                // stated rule rather than whatever reflection returned first.
+                mappings.TryAdd(contentType, format);
             }
         }
 

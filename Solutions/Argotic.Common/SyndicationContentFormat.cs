@@ -109,5 +109,33 @@ public enum SyndicationContentFormat
     /// </summary>
     [EnumerationMetadata(DisplayName = "Sitemap Index 0.9", AlternateValue = "sitemapindex")]
     [MimeMediaType(Name = "application", SubName = "xml", Documentation = "https://www.sitemaps.org/protocol.html")]
-    SitemapIndex = 14
+    SitemapIndex = 14,
+
+    /// <summary>
+    /// Indicates that the syndication resource is a stand-alone Atom 1.0 entry document.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     RFC 4287 §2 defines two Atom document types: a feed document, whose document element is
+    ///     <c>&lt;feed&gt;</c>, and a stand-alone entry document, whose document element is
+    ///     <c>&lt;entry&gt;</c>. They are read by <c>AtomFeed</c> and <c>AtomEntry</c> respectively.
+    ///     </para>
+    ///     <para>
+    ///     <b>Both used to report <see cref="Atom"/>.</b> The detector distinguished them — it tests the
+    ///     two roots in separate arms — and then discarded the answer by assigning one value to both. So
+    ///     the format check that rejects every other mismatched pairing compared <c>Atom</c> against
+    ///     <c>Atom</c> and passed, and a feed handed to an <c>AtomEntry</c> produced a
+    ///     default-constructed entry in silence. Callers of
+    ///     <c>SyndicationDiscoveryUtility.SyndicationContentFormatGet</c> had the same problem from the
+    ///     other side: the value they were given could not tell them which type to construct.
+    ///     </para>
+    ///     <para>
+    ///     The Atom Publishing Protocol's two document types already had their own values —
+    ///     <see cref="AtomCategoryDocument"/> and <see cref="AtomServiceDocument"/>. This is the third,
+    ///     and the one that was missing.
+    ///     </para>
+    /// </remarks>
+    [EnumerationMetadata(DisplayName = "Atom Entry Document 1.0", AlternateValue = "entry")]
+    [MimeMediaType(Name = "application", SubName = "atom+xml", Documentation = "https://www.rfc-editor.org/rfc/rfc4287#section-2")]
+    AtomEntryDocument = 15
 }

@@ -43,7 +43,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private const SyndicationContentFormat feedFormat = SyndicationContentFormat.Atom;
+    private const SyndicationContentFormat feedFormat = SyndicationContentFormat.AtomEntryDocument;
 
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
@@ -532,7 +532,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
             source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, cancellationToken).ConfigureAwait(false);
 
         SyndicationResourceAdapter adapter = new(navigator, settings);
-        adapter.Fill(this, SyndicationContentFormat.Atom);
+        adapter.Fill(this, SyndicationContentFormat.AtomEntryDocument);
 
         this.OnEntryLoaded(new SyndicationResourceLoadedEventArgs(navigator, source));
     }
@@ -698,7 +698,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
         ArgumentNullException.ThrowIfNull(eventData);
 
         SyndicationResourceAdapter adapter = new(navigator, settings);
-        adapter.Fill(this, SyndicationContentFormat.Atom);
+        adapter.Fill(this, SyndicationContentFormat.AtomEntryDocument);
 
         this.OnEntryLoaded(eventData);
     }

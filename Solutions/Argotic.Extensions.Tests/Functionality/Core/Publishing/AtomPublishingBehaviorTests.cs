@@ -701,7 +701,7 @@ public class AtomPublishingBehaviorTests
     }
 
     [TestMethod]
-    public void AtomEntryResource_Format_ReturnsAtom()
+    public void AtomEntryResource_Format_ReturnsAtomEntryDocument()
     {
         // Arrange
         var resource = new AtomEntryResource();
@@ -710,7 +710,9 @@ public class AtomPublishingBehaviorTests
         var format = resource.Format;
 
         // Assert
-        format.ShouldBe(SyndicationContentFormat.Atom);
+        // Was Atom. An AtomEntryResource is an Atom Publishing member resource -- a stand-alone entry
+        // document -- and reporting the same format as a feed is what let the two be confused.
+        format.ShouldBe(SyndicationContentFormat.AtomEntryDocument);
     }
 
     #endregion

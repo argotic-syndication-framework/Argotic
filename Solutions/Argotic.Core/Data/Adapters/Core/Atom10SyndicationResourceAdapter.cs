@@ -49,10 +49,12 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNavigator? entryNavigator = this.Navigator.SelectChildElement("atom", "entry", manager);
 
-        if (entryNavigator is not null)
+        if (entryNavigator is null)
         {
-            Atom10SyndicationResourceAdapter.FillEntry(resource, entryNavigator, manager, this.Settings);
+            throw new FormatException(AtomUtility.WrongDocumentShape("entry", "feed"));
         }
+
+        Atom10SyndicationResourceAdapter.FillEntry(resource, entryNavigator, manager, this.Settings);
     }
 
     /// <summary>
@@ -68,40 +70,42 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNavigator? feedNavigator = this.Navigator.SelectChildElement("atom", "feed", manager);
 
-        if (feedNavigator is not null)
+        if (feedNavigator is null)
         {
-            AtomUtility.FillCommonObjectAttributes(resource, feedNavigator);
-
-            XPathNavigator? idNavigator = feedNavigator.SelectChildElement("atom", "id", manager);
-            XPathNavigator? titleNavigator = feedNavigator.SelectChildElement("atom", "title", manager);
-            XPathNavigator? updatedNavigator = feedNavigator.SelectChildElement("atom", "updated", manager);
-
-            if (idNavigator is not null)
-            {
-                resource.Id = new AtomId();
-                resource.Id.Load(idNavigator, this.Settings);
-            }
-
-            if (titleNavigator is not null)
-            {
-                resource.Title = new AtomTextConstruct();
-                resource.Title.Load(titleNavigator, this.Settings);
-            }
-
-            if (updatedNavigator is not null)
-            {
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out DateTime updatedOn))
-                {
-                    resource.UpdatedOn = updatedOn;
-                }
-            }
-
-            Atom10SyndicationResourceAdapter.FillFeedOptionals(resource, feedNavigator, manager, this.Settings);
-            Atom10SyndicationResourceAdapter.FillFeedCollections(resource, feedNavigator, manager, this.Settings);
-
-            SyndicationExtensionAdapter adapter = new(feedNavigator, this.Settings);
-            adapter.Fill(resource, manager);
+            throw new FormatException(AtomUtility.WrongDocumentShape("feed", "entry"));
         }
+
+        AtomUtility.FillCommonObjectAttributes(resource, feedNavigator);
+
+        XPathNavigator? idNavigator = feedNavigator.SelectChildElement("atom", "id", manager);
+        XPathNavigator? titleNavigator = feedNavigator.SelectChildElement("atom", "title", manager);
+        XPathNavigator? updatedNavigator = feedNavigator.SelectChildElement("atom", "updated", manager);
+
+        if (idNavigator is not null)
+        {
+            resource.Id = new AtomId();
+            resource.Id.Load(idNavigator, this.Settings);
+        }
+
+        if (titleNavigator is not null)
+        {
+            resource.Title = new AtomTextConstruct();
+            resource.Title.Load(titleNavigator, this.Settings);
+        }
+
+        if (updatedNavigator is not null)
+        {
+            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out DateTime updatedOn))
+            {
+                resource.UpdatedOn = updatedOn;
+            }
+        }
+
+        Atom10SyndicationResourceAdapter.FillFeedOptionals(resource, feedNavigator, manager, this.Settings);
+        Atom10SyndicationResourceAdapter.FillFeedCollections(resource, feedNavigator, manager, this.Settings);
+
+        SyndicationExtensionAdapter adapter = new(feedNavigator, this.Settings);
+        adapter.Fill(resource, manager);
     }
 
     /// <summary>

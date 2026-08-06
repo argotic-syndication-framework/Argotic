@@ -61,7 +61,15 @@ public class SyndicationResourceAdapter
 
         if (format != resourceMetadata.Format)
         {
-            throw new FormatException($"The supplied syndication resource has a content format of {resourceMetadata.Format}, which does not match the expected content format of {format}.");
+            // Atom's two document shapes are the pairing most often confused, because both are "an
+            // Atom document" and only one of them is common on the open web. Naming the root elements
+            // says what the format names alone do not.
+            string detail = IsAtomShapeMismatch(format, resourceMetadata.Format)
+                ? " An Atom feed document has a <feed> root and is read by AtomFeed; a stand-alone Atom entry document has an <entry> root and is read by AtomEntry."
+                : string.Empty;
+
+            throw new FormatException(
+                $"The supplied syndication resource has a content format of {resourceMetadata.Format}, which does not match the expected content format of {format}.{detail}");
         }
 
         switch (format)
@@ -72,6 +80,11 @@ public class SyndicationResourceAdapter
                 break;
 
             case SyndicationContentFormat.Atom:
+
+            // A stand-alone entry document is filled by the same adapters; what the distinct format
+            // value buys is the check above, which now refuses a feed handed to an AtomEntry and an
+            // entry document handed to an AtomFeed. Both used to pass it and yield an empty object.
+            case SyndicationContentFormat.AtomEntryDocument:
 
                 this.FillAtomResource(resource, resourceMetadata);
                 break;
@@ -177,6 +190,16 @@ public class SyndicationResourceAdapter
             }
         }
     }
+
+    /// <summary>
+    /// Determines whether a format mismatch is an Atom feed document confused for an entry document, or the reverse.
+    /// </summary>
+    /// <param name="expected">The format the resource type reads.</param>
+    /// <param name="detected">The format the supplied document actually is.</param>
+    /// <returns><b>true</b> if the two are Atom's two document shapes; otherwise, <b>false</b>.</returns>
+    private static bool IsAtomShapeMismatch(SyndicationContentFormat expected, SyndicationContentFormat detected) =>
+        (expected == SyndicationContentFormat.Atom && detected == SyndicationContentFormat.AtomEntryDocument)
+        || (expected == SyndicationContentFormat.AtomEntryDocument && detected == SyndicationContentFormat.Atom);
 
     /// <summary>
     /// Modifies the <see cref="ISyndicationResource"/> to match the data source.

@@ -50,11 +50,35 @@ internal static class AtomUtility
     public static string XhtmlNamespace => XHTML_NAMESPACE;
 
     /// <summary>
+    /// Builds the message for an Atom document of the wrong shape.
+    /// </summary>
+    /// <param name="expected">The root element the resource type reads.</param>
+    /// <param name="other">The root element it was most likely given instead.</param>
+    /// <returns>A message naming both document types.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     RFC 4287 defines two document types — a feed document rooted at <c>&lt;feed&gt;</c> and a
+    ///     stand-alone entry document rooted at <c>&lt;entry&gt;</c> — and
+    ///     <see cref="Argotic.Common.SyndicationContentFormat"/> has one value covering both. So the
+    ///     format check in <c>SyndicationResourceAdapter</c>, which rejects every other mismatched
+    ///     pairing, compares <c>Atom</c> against <c>Atom</c> and passes. The distinction has to be made
+    ///     here instead, at the point the root element is actually looked for.
+    ///     </para>
+    ///     <para>
+    ///     The message names the other document type because that is almost always what the caller has:
+    ///     stand-alone entry documents are rare, so an Atom URL is usually a feed.
+    ///     </para>
+    /// </remarks>
+    public static string WrongDocumentShape(string expected, string other) =>
+        $"The supplied document has no <{expected}> root element, so it is not an Atom {expected} document. "
+        + $"A document rooted at <{other}> is an Atom {other} document and is read by a different type.";
+    /// <summary>
     /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
     /// </summary>
     /// <param name="nameTable">The table of atomized string objects.</param>
     /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
+
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);

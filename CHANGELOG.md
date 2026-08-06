@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
+- **An Atom document of the wrong shape is refused rather than silently ignored.** RFC 4287 §2
+  defines two document types: a feed document rooted at `<feed>`, read by `AtomFeed`, and a
+  stand-alone entry document rooted at `<entry>`, read by `AtomEntry`. Handing either type the other
+  document produced a default-constructed object — empty title, empty id, `DateTime.MinValue` — and
+  reported success. `SyndicationContentFormat.Atom` covered both shapes, so the format check that
+  rejects every other mismatched pairing compared `Atom` against `Atom` and passed
+- **`SyndicationContentFormat.AtomEntryDocument` is new, and a stand-alone entry document now reports
+  it** where it previously reported `Atom`. The detector always distinguished the two roots and threw
+  the answer away; keeping it is what lets the format check do its job, and lets a caller of
+  `SyndicationDiscoveryUtility.SyndicationContentFormatGet` know which type to construct. Existing
+  enum values are unchanged. `AtomEntry.Format` and `AtomEntryResource.Format` return the new value
+- **`GenericSyndicationFeed` refuses a format it cannot represent.** `Load` was three `else if` arms
+  with no final `else`, so APML, BlogML, RSD, a sitemap, an Atom Publishing document or a stand-alone
+  entry document fell through to the `Loaded` event — leaving a default-constructed instance and
+  announcing that a load had succeeded. It now raises `FormatException`; it abstracts over Atom feed,
+  RSS and OPML documents only
 - **`SyndicationResourceLoadSettings.CharacterEncoding` is now `Encoding?` and defaults to `null`.**
   It defaulted to `Encoding.UTF8` and rejected `null`, so one value had to mean both "decode as UTF-8"
   and "work it out" — and the two load paths read it in opposite directions. `Load(Stream, settings)`

@@ -38,7 +38,15 @@ internal static class AtomEntryExample
     /// </summary>
     public static async Task CreateExampleAsync()
     {
-        AtomEntry entry = await AtomEntry.CreateAsync(new Uri("https://endjin.com/atom.xml")).ConfigureAwait(false);
+        //  The Uri overloads take an RFC 4287 §2 stand-alone entry document: <entry> as the document
+        //  element. That is not a feed -- endjin.com/atom.xml is a <feed>, and pointing this at it
+        //  used to return an entry with an empty title and a DateTime.MinValue timestamp, reporting
+        //  success. It now raises FormatException. Stand-alone entry documents are Atom Publishing
+        //  Protocol member resources and are not served on the open web, so this one is served from
+        //  SampleData over loopback -- HttpClient has no file scheme, and the Uri overload is the point.
+        using SampleHost host = SampleHost.Serving(SampleDataPath.AtomEntryDocument, "application/atom+xml");
+
+        AtomEntry entry = await AtomEntry.CreateAsync(host.Uri).ConfigureAwait(false);
 
         if (entry.PublishedOn >= DateTime.Today)
         {
@@ -53,11 +61,19 @@ internal static class AtomEntryExample
     /// </summary>
     public static async Task LoadAsyncExampleAsync()
     {
+        //  The Uri overloads take an RFC 4287 §2 stand-alone entry document: <entry> as the document
+        //  element. That is not a feed -- endjin.com/atom.xml is a <feed>, and pointing this at it
+        //  used to return an entry with an empty title and a DateTime.MinValue timestamp, reporting
+        //  success. It now raises FormatException. Stand-alone entry documents are Atom Publishing
+        //  Protocol member resources and are not served on the open web, so this one is served from
+        //  SampleData over loopback -- HttpClient has no file scheme, and the Uri overload is the point.
+        using SampleHost host = SampleHost.Serving(SampleDataPath.AtomEntryDocument, "application/atom+xml");
+
         AtomEntry entry = new();
 
         entry.Loaded += EntryLoadedCallback;
 
-        await entry.LoadAsync(new Uri("https://endjin.com/atom.xml")).ConfigureAwait(false);
+        await entry.LoadAsync(host.Uri).ConfigureAwait(false);
 
         ExampleOutput.ShowAtomEntry(entry);
     }
@@ -144,7 +160,15 @@ internal static class AtomEntryExample
     public static async Task LoadUriExampleAsync()
     {
         AtomEntry entry = new();
-        Uri source = new("https://endjin.com/atom.xml");
+        //  The Uri overloads take an RFC 4287 §2 stand-alone entry document: <entry> as the document
+        //  element. That is not a feed -- endjin.com/atom.xml is a <feed>, and pointing this at it
+        //  used to return an entry with an empty title and a DateTime.MinValue timestamp, reporting
+        //  success. It now raises FormatException. Stand-alone entry documents are Atom Publishing
+        //  Protocol member resources and are not served on the open web, so this one is served from
+        //  SampleData over loopback -- HttpClient has no file scheme, and the Uri overload is the point.
+        using SampleHost host = SampleHost.Serving(SampleDataPath.AtomEntryDocument, "application/atom+xml");
+
+        Uri source = host.Uri;
 
         // For simple case (no credentials):
         await entry.LoadAsync(source).ConfigureAwait(false);

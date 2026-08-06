@@ -411,6 +411,18 @@ public class GenericSyndicationFeed
 
             this.Parse(opmlDoc);
         }
+        else
+        {
+            // There was no final arm. Every other format -- APML, BlogML, RSD, a sitemap, an Atom
+            // Publishing document, a stand-alone Atom entry document -- fell straight through to the
+            // Loaded event below, leaving a default-constructed instance and raising an event that
+            // said a load had succeeded. This type wraps the three formats it can Parse, and the other
+            // nine are not among them.
+            throw new FormatException(
+                $"The supplied syndication resource has a content format of {metadata.Format}, which {nameof(GenericSyndicationFeed)} does not represent. "
+                + "It abstracts over Atom feed, RSS and OPML documents; load any other format through its own type.");
+        }
+
         this.OnFeedLoaded(eventData);
     }
 }

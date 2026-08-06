@@ -105,9 +105,10 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <param name="isEntryDocument">When this method returns, <b>true</b> if the document element is <c>&lt;entry&gt;</c> rather than <c>&lt;feed&gt;</c>. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    protected static bool TryParseAtomResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    protected static bool TryParseAtomResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version, out bool isEntryDocument)
     {
         bool resourceConformsToFormat = false;
         ArgumentNullException.ThrowIfNull(resource);
@@ -117,6 +118,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
 
         version = null;
+        isEntryDocument = false;
         if ((navigator = resource.SelectChildElement("feed")) is not null || (navigator = resource.SelectChildElement("atom", "feed", manager)) is not null || (navigator = resource.SelectChildElement("atom03", "feed", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
@@ -135,6 +137,10 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         }
         else if ((navigator = resource.SelectChildElement("entry")) is not null || (navigator = resource.SelectChildElement("atom", "entry", manager)) is not null || (navigator = resource.SelectChildElement("atom03", "entry", manager)) is not null)
         {
+            // The arm already existed and its answer was already discarded: both roots assigned
+            // SyndicationContentFormat.Atom, so nothing downstream could tell a feed document from a
+            // stand-alone entry document.
+            isEntryDocument = true;
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -545,9 +551,9 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             Resource = navigator;
             Version = version;
         }
-        else if (SyndicationResourceMetadata.TryParseAtomResource(resource, out navigator, out version))
+        else if (SyndicationResourceMetadata.TryParseAtomResource(resource, out navigator, out version, out bool isEntryDocument))
         {
-            Format = SyndicationContentFormat.Atom;
+            Format = isEntryDocument ? SyndicationContentFormat.AtomEntryDocument : SyndicationContentFormat.Atom;
             Resource = navigator;
             Version = version;
         }

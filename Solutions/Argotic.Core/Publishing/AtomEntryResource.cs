@@ -240,7 +240,7 @@ public class AtomEntryResource : AtomEntry
             source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, cancellationToken).ConfigureAwait(false);
 
         SyndicationResourceAdapter adapter = new(navigator, settings);
-        adapter.Fill(this, SyndicationContentFormat.Atom);
+        adapter.Fill(this, SyndicationContentFormat.AtomEntryDocument);
 
         this.LoadAtomPublishingExtensions();
 

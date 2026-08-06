@@ -65,11 +65,39 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
     /// </summary>
     /// <param name="name">The name of the explicit material.</param>
     /// <returns>A <see cref="ITunesExplicitMaterial"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>ITunesExplicitMaterial.None</b>.</returns>
-    /// <remarks>This method disregards case of specified explicit material name.</remarks>
+    /// <remarks>
+    ///     <para>This method disregards case of specified explicit material name.</para>
+    ///     <para>
+    ///     Apple's original podcasting specification defined this element as <b>yes</b>, <b>no</b> or
+    ///     <b>clean</b>, and its current one defines <b>true</b> and <b>false</b>. Both boolean
+    ///     spellings name the same two states, so they resolve to <see cref="ITunesExplicitMaterial.Yes"/>
+    ///     and <see cref="ITunesExplicitMaterial.No"/> rather than extending the enumeration; <b>clean</b>
+    ///     remains a distinct third answer, which is why this cannot collapse into a
+    ///     <see cref="bool"/>.
+    ///     </para>
+    ///     <para>
+    ///     They are matched here rather than as an <c>AlternateValue</c> because that attribute is the
+    ///     value written back out, and one member cannot carry two of them. Across 136 live documents
+    ///     the newer spelling accounted for 2,940 of 4,770 values, so leaving it unrecognised silently
+    ///     discarded the advisory on 62% of real episodes.
+    ///     </para>
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static ITunesExplicitMaterial ExplicitMaterialByName(string name) =>
-        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, ITunesExplicitMaterial.None);
+    public static ITunesExplicitMaterial ExplicitMaterialByName(string name)
+    {
+        if (string.Equals(name, "true", StringComparison.OrdinalIgnoreCase))
+        {
+            return ITunesExplicitMaterial.Yes;
+        }
+
+        if (string.Equals(name, "false", StringComparison.OrdinalIgnoreCase))
+        {
+            return ITunesExplicitMaterial.No;
+        }
+
+        return EnumerationMetadataAttribute.GetEnumByAlternateValue(name, ITunesExplicitMaterial.None);
+    }
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 

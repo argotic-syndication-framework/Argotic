@@ -163,7 +163,11 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
             XPathNavigator? xhtmlDivNavigator = source.SelectChildElement("xhtml", "div", manager);
             if (xhtmlDivNavigator is not null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
             {
-                this.Content = xhtmlDivNavigator.Value;
+                // InnerXml, not Value: RFC 4287 s3.1.1.3 makes the div's content the construct's
+                // content, markup included, and Value flattens child elements to their text. This is
+                // the model AtomContent always had; the two classes used to give two different wrong
+                // answers for the same clause.
+                this.Content = xhtmlDivNavigator.InnerXml;
                 wasLoaded = true;
             }
         }
@@ -224,11 +228,6 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
         writer.WriteStartElement(elementName, AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if (this.TextType == AtomTextConstructType.Xhtml && string.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
-        {
-            writer.WriteAttributeString("xmlns", "xhtml", null, AtomUtility.XhtmlNamespace);
-        }
-
         if (this.TextType != AtomTextConstructType.None)
         {
             writer.WriteAttributeString("type", AtomTextConstruct.ConstructTypeAsString(this.TextType));
@@ -236,9 +235,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
 
         if (this.TextType == AtomTextConstructType.Xhtml)
         {
-            writer.WriteStartElement("div", AtomUtility.XhtmlNamespace);
-            writer.WriteString(this.Content);
-            writer.WriteEndElement();
+            AtomUtility.WriteXhtmlDiv(writer, this.Content);
         }
         else
         {

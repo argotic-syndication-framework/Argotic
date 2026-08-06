@@ -73,6 +73,40 @@ internal static class AtomUtility
         $"The supplied document has no <{expected}> root element, so it is not an Atom {expected} document. "
         + $"A document rooted at <{other}> is an Atom {other} document and is read by a different type.";
     /// <summary>
+    /// Writes an XHTML <c>div</c> whose inner markup is the supplied fragment.
+    /// </summary>
+    /// <param name="writer">The writer to emit to.</param>
+    /// <param name="content">The inner XHTML markup of the div. May be empty.</param>
+    /// <remarks>
+    ///     <para>
+    ///     The write side of the xhtml model both <c>AtomTextConstruct</c> and <c>AtomContent</c>
+    ///     share: <c>Content</c> holds the div's inner markup, and saving parses that markup back
+    ///     into nodes rather than escaping it into text. Writing with <c>WriteString</c> was the
+    ///     review's A3 — markup read faithfully and then betrayed into literal angle brackets on
+    ///     save, which a browser renders as visible tags.
+    ///     </para>
+    ///     <para>
+    ///     Going through a real <see cref="XmlReader"/> also makes malformed caller-supplied content
+    ///     a loud <see cref="XmlException"/> at save time rather than a silently invalid document,
+    ///     and leaves namespace bookkeeping to the writer.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="XmlException">The <paramref name="content"/> is not a well-formed XML fragment.</exception>
+    public static void WriteXhtmlDiv(XmlWriter writer, string content)
+    {
+        if (string.IsNullOrEmpty(content))
+        {
+            writer.WriteStartElement("div", XHTML_NAMESPACE);
+            writer.WriteEndElement();
+            return;
+        }
+
+        using StringReader wrapped = new($"<div xmlns=\"{XHTML_NAMESPACE}\">{content}</div>");
+        using XmlReader reader = XmlReader.Create(wrapped, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit });
+        writer.WriteNode(reader, defattr: false);
+    }
+
+    /// <summary>
     /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
     /// </summary>
     /// <param name="nameTable">The table of atomized string objects.</param>

@@ -123,43 +123,72 @@ public sealed class AtomSpecConformanceTests
     // ---- A2/A3: type="xhtml" -------------------------------------------------------------------
 
     /// <summary>
-    /// A2 — an xhtml title silently strips the div's markup.
+    /// A2 — an xhtml title keeps the div's markup, and round-trips it as markup.
     /// </summary>
     /// <remarks>
     ///     §3.1.1.3: the content of the single XHTML div is the construct's content — markup
-    ///     included. <c>AtomTextConstruct</c> takes <c>.Value</c>, the flattened text.
+    ///     included. <c>Content</c> now holds the div's inner markup; the child's re-declared
+    ///     default namespace is the price of a string model and is a same-scope no-op on the wire.
+    ///     Cycled twice, because a fixed point is the claim.
     /// </remarks>
     [TestMethod]
-    public void A2_AnXhtmlTitle_StripsTheMarkup()
+    public void A2_AnXhtmlTitle_KeepsTheMarkupAndRoundTripsIt()
     {
         AtomFeed feed = Load(
             """<title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">bold: <b>yes</b> plain</div></title>""");
 
         feed.Entries.First().Title!.Content.ShouldBe(
-            "bold: yes plain", "PINS TODAY: the <b> element is silently destroyed");
+            """bold: <b xmlns="http://www.w3.org/1999/xhtml">yes</b> plain""",
+            "INVERTED: the <b> element survives into the model");
+
+        string once = SaveEntry(feed);
+        once.ShouldContain(">yes</b> plain</div>", customMessage: "INVERTED: emitted as markup, not escaped text");
+
+        AtomFeed second = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(Save(feed)));
+        second.Load(stream);
+        SaveEntry(second).ShouldContain(">yes</b> plain</div>", customMessage: "and the second cycle is a fixed point");
     }
 
     /// <summary>
-    /// A3 — xhtml content keeps the markup on read and escapes it into text on save.
+    /// A3 — xhtml content keeps the markup on read and now writes it as markup too.
     /// </summary>
     /// <remarks>
-    ///     The two classes give the two different wrong answers: the text construct flattens, the
-    ///     content element preserves-then-betrays. A browser renders the round-tripped tags
-    ///     literally.
+    ///     The read half was always faithful and is the invariant; the save half inverted. Both
+    ///     classes now share <c>AtomUtility.WriteXhtmlDiv</c>, which parses the fragment back into
+    ///     nodes — so escaping cannot happen, and malformed content fails loudly instead of
+    ///     producing an invalid document (pinned separately below).
     /// </remarks>
     [TestMethod]
-    public void A3_XhtmlContent_KeepsMarkupOnReadThenEscapesItOnSave()
+    public void A3_XhtmlContent_KeepsMarkupOnReadAndWritesItAsMarkup()
     {
         AtomFeed feed = Load(
             """<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">bold: <b>yes</b> plain</div></content>""");
 
         feed.Entries.First().Content!.Content.ShouldBe(
             """bold: <b xmlns="http://www.w3.org/1999/xhtml">yes</b> plain""",
-            "PINS TODAY: read faithfully, xmlns noise included");
+            "INVARIANT: read faithfully");
 
-        SaveEntry(feed).ShouldContain(
-            "&lt;b xmlns=",
-            customMessage: "PINS TODAY: the faithfully-read markup is escaped into literal text on save");
+        string saved = SaveEntry(feed);
+        saved.ShouldContain(">yes</b> plain</div>", customMessage: "INVERTED: markup emitted as markup");
+        saved.ShouldNotContain("&lt;b", customMessage: "and nothing is escaped into literal text");
+    }
+
+    /// <summary>
+    /// A3 — malformed caller-supplied xhtml fails loudly at save, not silently on the wire.
+    /// </summary>
+    /// <remarks>
+    ///     The cost of writing real nodes is that the fragment must parse, and that is a feature:
+    ///     the alternative to the exception is an invalid document handed to every subscriber.
+    /// </remarks>
+    [TestMethod]
+    public void A3_MalformedXhtmlContent_ThrowsAtSaveRatherThanEmittingIt()
+    {
+        AtomFeed feed = Load("""<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">fine</div></content>""");
+        feed.Entries.First().Content!.Content = "an <unclosed fragment";
+
+        using MemoryStream sink = new();
+        Should.Throw<System.Xml.XmlException>(() => feed.Save(sink));
     }
 
     // ---- A4: inline XML media types ------------------------------------------------------------

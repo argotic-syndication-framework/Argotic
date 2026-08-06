@@ -354,18 +354,11 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
             writer.WriteAttributeString("src", this.Source.ToString());
         }
 
-        if (string.Equals(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase) && string.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
-        {
-            writer.WriteAttributeString("xmlns", "xhtml", null, AtomUtility.XhtmlNamespace);
-        }
-
         if (!string.IsNullOrEmpty(this.Content))
         {
             if (string.Equals(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase))
             {
-                writer.WriteStartElement("div", AtomUtility.XhtmlNamespace);
-                writer.WriteString(this.Content);
-                writer.WriteEndElement();
+                AtomUtility.WriteXhtmlDiv(writer, this.Content);
             }
             else
             {

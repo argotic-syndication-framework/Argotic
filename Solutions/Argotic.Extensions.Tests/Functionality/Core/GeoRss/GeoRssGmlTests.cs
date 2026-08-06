@@ -19,11 +19,20 @@ namespace Argotic.Extensions.Tests.Functionality.Core.GeoRss;
 ///     from data.
 ///     </para>
 ///     <para>
-///     <b>Coordinate ordering here is an assumption and is deliberately marked as one.</b> The GeoRSS
-///     GML profile is latitude-first, matching Simple, and that is what is implemented; but there is no
-///     real GML geometry anywhere to check it against, and secondary sources contradict each other.
-///     Stating it in a test makes it a decision that can be revisited in one place, rather than a belief
-///     spread through the parser.
+///     <b>Coordinate ordering is latitude-first, and the standard says so outright.</b> OGC 17-002r1
+///     §6 states that values "be specified in decimal degrees with axis order Latitude/Longitude" and
+///     prints the defining WKT — <c>AXIS["latitude",north,ORDER[1]]</c>,
+///     <c>AXIS["longitude",east,ORDER[2]]</c> — with the worked example
+///     <c>&lt;gml:pos&gt;45.256 -71.92&lt;/gml:pos&gt;</c>. This is a citation, not an inference.
+///     </para>
+///     <para>
+///     <b>Real GML feeds disagree with the standard, and the disagreement is recorded rather than
+///     accommodated.</b> NASA's EONET publishes 7,030 <c>georss:where</c> elements containing
+///     <c>gml:Point</c>, and of 1,470 entries whose titles name a US state, <b>1,468 are consistent with
+///     longitude first and 0 with latitude first</b>. EONET also uses the GML 3.2 namespace
+///     (<c>http://www.opengis.net/gml/3.2</c>) rather than the <c>http://www.opengis.net/gml</c> that
+///     GeoRSS specifies — so its elements do not match this parser at all, and nothing is silently read
+///     backwards. §5.1 carries that as an open decision with the numbers attached.
 ///     </para>
 /// </remarks>
 [TestClass]
@@ -57,10 +66,10 @@ public sealed class GeoRssGmlTests
     /// A GML point is read, and reports that it arrived as GML.
     /// </summary>
     /// <remarks>
-    ///     <b>This is the row that states the ordering assumption.</b> <c>45.256 -71.92</c> is read as
-    ///     latitude 45.256 and longitude −71.92, the same as GeoRSS Simple would. If the GML profile
-    ///     turns out to be longitude-first, this is the assertion that should change and the place the
-    ///     reasoning should be corrected.
+    ///     <b>This is the row that pins the ordering.</b> The fixture is the standard's own worked
+    ///     example, and <c>45.256 -71.92</c> is read as latitude 45.256 and longitude −71.92 — the same
+    ///     as GeoRSS Simple. Feeds exist that write GML the other way round; see this class's remarks
+    ///     for why they do not reach this code path.
     /// </remarks>
     [TestMethod]
     public void AGmlPoint_IsReadAndReportsItsEncoding()

@@ -250,17 +250,83 @@ public class SyndicationEncodingUtilityTest
         result.WebName.ShouldBe("us-ascii");
     }
 
+    /// <summary>
+    /// A single-quoted declaration naming an encoding that is NOT the fallback.
+    /// </summary>
+    /// <remarks>
+    ///     This test used to declare <c>utf-8</c> and assert <see cref="Encoding.UTF8"/>. UTF-8 is also
+    ///     what this method returns when it cannot determine an encoding at all — so the assertion held
+    ///     whether single quotes were supported or not, and they were not. A test named for a capability
+    ///     is not a test of it; the declared encoding has to differ from the fallback or the two
+    ///     outcomes are indistinguishable.
+    ///     <para>
+    ///     XML permits either quote character around a declaration's value, and real publishers use
+    ///     both: ten of the 136 documents in the real-world corpus are single-quoted, among them arXiv,
+    ///     Blogger, LiveJournal and Tim Bray's <i>ongoing</i>.
+    ///     </para>
+    /// </remarks>
     [TestMethod]
-    public void GetXmlEncoding_HandlesEncodingWithSingleQuotes()
+    [DataRow("iso-8859-1")]
+    [DataRow("utf-16")]
+    [DataRow("us-ascii")]
+    public void GetXmlEncoding_HandlesEncodingWithSingleQuotes(string declared)
     {
         // Arrange
-        string xml = "<?xml version='1.0' encoding='utf-8'?><root>content</root>";
+        string xml = $"<?xml version='1.0' encoding='{declared}'?><root>content</root>";
 
         // Act
         Encoding result = SyndicationEncodingUtility.GetXmlEncoding(xml);
 
         // Assert
-        result.ShouldBe(Encoding.UTF8);
+        result.WebName.ShouldBe(declared, "XML allows either quote character around a declaration value");
+    }
+
+    /// <summary>
+    /// Both quote spellings of the same declaration name the same encoding.
+    /// </summary>
+    /// <remarks>
+    ///     The pairing is what makes this hard to satisfy accidentally: any answer that differs between
+    ///     the two spellings is wrong, whichever one is wrong.
+    /// </remarks>
+    [TestMethod]
+    [DataRow("iso-8859-1")]
+    [DataRow("utf-16")]
+    [DataRow("utf-8")]
+    public void GetXmlEncoding_AgreesAcrossBothQuoteSpellings(string declared)
+    {
+        // Arrange
+        string single = $"<?xml version='1.0' encoding='{declared}'?><root>content</root>";
+        string @double = $"""<?xml version="1.0" encoding="{declared}"?><root>content</root>""";
+
+        // Act
+        Encoding fromSingle = SyndicationEncodingUtility.GetXmlEncoding(single);
+        Encoding fromDouble = SyndicationEncodingUtility.GetXmlEncoding(@double);
+
+        // Assert
+        fromSingle.WebName.ShouldBe(fromDouble.WebName);
+    }
+
+    /// <summary>
+    /// A single-quoted non-UTF-8 document decodes to the characters it actually contains.
+    /// </summary>
+    /// <remarks>
+    ///     The consequence, stated end to end rather than as an encoding name. Falling back to UTF-8 for
+    ///     a document that declared ISO-8859-1 does not throw and does not look wrong from inside the
+    ///     parser — it silently yields replacement characters where the accented letters were.
+    /// </remarks>
+    [TestMethod]
+    public void ASingleQuotedLatin1Document_DecodesItsAccentedCharacters()
+    {
+        // Arrange
+        byte[] document = Encoding.Latin1.GetBytes(
+            "<?xml version='1.0' encoding='iso-8859-1'?><root><title>café naïve</title></root>");
+
+        // Act
+        using MemoryStream stream = new(document, false);
+        System.Xml.XPath.XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream);
+
+        // Assert
+        navigator.SelectSingleNode("//title")!.Value.ShouldBe("café naïve");
     }
 
     [TestMethod]

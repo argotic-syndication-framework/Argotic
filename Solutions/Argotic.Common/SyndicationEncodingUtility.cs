@@ -88,10 +88,28 @@ public static partial class SyndicationEncodingUtility
     /// </summary>
     /// <returns>The compiled regular expression.</returns>
     /// <remarks>
+    ///     <para>
     ///     Source-generated rather than interpreted: the pattern is a compile-time constant, so the
     ///     generator emits a matcher directly instead of the engine parsing the pattern at run time.
+    ///     </para>
+    ///     <para>
+    ///     <b>Three alternations, because XML permits either quote character.</b> The single-quoted arm
+    ///     was missing, so <c>encoding='iso-8859-1'</c> fell through to the bare-value arm, which
+    ///     captured <c>'iso-8859-1'</c> <i>including the quotes</i>. <see cref="Encoding.GetEncoding(string)"/>
+    ///     then threw <see cref="ArgumentException"/>, the caller swallowed it, and the document was
+    ///     decoded as UTF-8 — silently, since the exception never surfaced and UTF-8 is also the
+    ///     legitimate answer when no encoding is declared. A Latin-1 feed came out as replacement
+    ///     characters where its accented letters had been.
+    ///     </para>
+    ///     <para>
+    ///     Ten of the 136 documents in the real-world corpus declare their encoding this way — arXiv,
+    ///     Blogger, LiveJournal and Tim Bray's <i>ongoing</i> among them. All ten happen to be UTF-8,
+    ///     which is why the fallback returned the right answer for the wrong reason and nothing looked
+    ///     broken. The bare-value arm is kept last: it is the lenient one, and it must not shadow either
+    ///     quoted form.
+    ///     </para>
     /// </remarks>
-    [GeneratedRegex("""^<\?xml.+?encoding\s*=\s*(?:"(?<webName>[^"]*)"|(?<webName>\S+)).*?\?>""", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
+    [GeneratedRegex("""^<\?xml.+?encoding\s*=\s*(?:"(?<webName>[^"]*)"|'(?<webName>[^']*)'|(?<webName>\S+)).*?\?>""", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
     private static partial Regex XmlDeclarationEncodingRegex();
 
     /// <summary>

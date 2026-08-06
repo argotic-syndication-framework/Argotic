@@ -37,7 +37,7 @@ public static class SyndicationDateTimeUtility
     /// The RFC 822 date-time patterns <see cref="TryParseRfc822DateTime"/> accepts.
     /// </summary>
     /// <remarks>
-    ///     <b>Seventy-two of them, and the array was allocated on every call</b> — once per
+    ///     <b>Thirty-six of them, and the array was allocated on every call</b> — once per
     ///     <c>pubDate</c>, which is once per item of every RSS feed the library reads. Roughly 600
     ///     bytes of pure ceremony per date parsed, measured at 6% of the allocation of loading a
     ///     ten-item feed.
@@ -324,26 +324,46 @@ public static class SyndicationDateTimeUtility
     ///     This parameter is passed uninitialized.
     /// </param>
     /// <returns><b>true</b> if the <paramref name="value"/> parameter was converted successfully; otherwise, <b>false</b>.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     Both attempts parse under the invariant culture and <see cref="DateTimeStyles.AdjustToUniversal"/>,
+    ///     so a value carrying an explicit zone yields the same instant, and the same
+    ///     <see cref="DateTimeKind.Utc"/>, on every machine.
+    ///     </para>
+    ///     <para>
+    ///     <b>The fallback used to do neither.</b> It called
+    ///     <c>DateTime.TryParse(value, out result)</c> — no format provider, so the <i>current
+    ///     culture</i>, and no styles, so an offset-bearing value was rebased onto the machine's local
+    ///     time and returned as <see cref="DateTimeKind.Local"/>. <see cref="ToRfc822DateTime"/> then
+    ///     wrote it back through the RFC 1123 pattern, which ends in a literal <c>GMT</c> and converts
+    ///     nothing — so the local reading was republished as though it were UTC. Under
+    ///     <c>TZ=America/New_York</c>, <c>01 Jan 2024 10:00:00 GMT</c> came back out as
+    ///     <c>05:00:00 GMT</c>.
+    ///     </para>
+    ///     <para>
+    ///     The shapes that reach the fallback are not exotic: RFC 822 §5.1 makes both the day-of-week
+    ///     and the seconds optional, and the format table has a pattern for neither. The defect was
+    ///     invisible to the suite because this container, like most CI, runs UTC — where
+    ///     <see cref="DateTimeKind.Local"/> and <see cref="DateTimeKind.Utc"/> coincide — and because
+    ///     <see cref="DateTime.Equals(DateTime)"/> compares ticks without regard to Kind. It is pinned
+    ///     now by asserting the Kind, which is wrong on every machine when this regresses.
+    ///     </para>
+    /// </remarks>
     public static bool TryParseRfc822DateTime(string value, out DateTime result)
     {
         // patterns from http://stackoverflow.com/questions/284775/how-do-i-parse-and-convert-datetimes-to-the-rfc-822-date-time-format
-        DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
-
         if (string.IsNullOrEmpty(value))
         {
             result = DateTime.MinValue;
             return false;
         }
 
-        if (DateTime.TryParseExact(SyndicationDateTimeUtility.ReplaceRfc822TimeZoneWithOffset(value), Rfc822Formats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AdjustToUniversal, out result))
-        {
-            return true;
-        }
-        if (DateTime.TryParse(SyndicationDateTimeUtility.ReplaceRfc822TimeZoneWithOffset(value), out result))
-        {
-            return true;
-        }
+        // Once, not once per attempt. The zone rewrite allocates a new string for every named zone,
+        // and calling it again for the fallback doubled that on exactly the inputs that were already
+        // walking all 36 patterns: 288 B against 160 B for a date reaching the fallback.
+        string normalisedZone = SyndicationDateTimeUtility.ReplaceRfc822TimeZoneWithOffset(value);
 
-        return false;
+        return DateTime.TryParseExact(normalisedZone, Rfc822Formats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AdjustToUniversal, out result)
+            || DateTime.TryParse(normalisedZone, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AdjustToUniversal, out result);
     }
 }

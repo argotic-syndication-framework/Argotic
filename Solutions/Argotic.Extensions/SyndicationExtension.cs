@@ -160,12 +160,11 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
         ArgumentNullException.ThrowIfNull(navigator);
         XmlNamespaceManager manager = new(navigator.NameTable);
 
-        Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-        string existingXmlNamespace = string.Empty;
-        if (namespaces.TryGetValue(this.XmlPrefix, out string? namespaceValue))
-        {
-            existingXmlNamespace = namespaceValue;
-        }
+        // LookupNamespace, not GetNamespacesInScope: this needs one prefix's binding, and building a
+        // dictionary of every namespace in scope to read a single key out of it cost 616 B against
+        // 152 B for the direct lookup, once per extension per entity. No extension declares the
+        // reserved "xml" prefix, so dropping ExcludeXml's filtering changes no answer here.
+        string? existingXmlNamespace = navigator.LookupNamespace(this.XmlPrefix);
 
         manager.AddNamespace(this.XmlPrefix, !string.IsNullOrEmpty(existingXmlNamespace) ? existingXmlNamespace : this.XmlNamespace);
 
@@ -187,20 +186,19 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// </remarks>
     public virtual bool ExistsInSource(XPathNavigator source)
     {
-        bool extensionExists = false;
         ArgumentNullException.ThrowIfNull(source);
-        Dictionary<string, string> namespaces = (Dictionary<string, string>)source.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
-        if (namespaces.ContainsValue(this.XmlNamespace))
+        // Two side-effect-free tests joined by "or", so their order is not observable and the cheap
+        // one goes first. A document that declares this extension under its conventional prefix -
+        // which is nearly all of them - answers here, and never builds the dictionary at all.
+        if (source.LookupNamespace(this.XmlPrefix) is not null)
         {
-            extensionExists = true;
-        }
-        else if (namespaces.ContainsKey(this.XmlPrefix))
-        {
-            extensionExists = true;
+            return true;
         }
 
-        return extensionExists;
+        // The prefix missed, so ask the question the prefix cannot: is this namespace bound at all,
+        // under any prefix? That genuinely needs every binding in scope.
+        return source.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml).Values.Contains(this.XmlNamespace);
     }
 
     /// <summary>

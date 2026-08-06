@@ -169,9 +169,29 @@ internal static class AtomUtility
         {
             if (Uri.TryCreate(xmlBaseAttribute, UriKind.RelativeOrAbsolute, out Uri? baseUri))
             {
-                target.BaseUri = baseUri;
+                // A relative xml:base resolves against the nearest ancestor's - W3C XML Base s4.3 -
+                // so the stored value is the EFFECTIVE base, the only one a consumer can resolve an
+                // href against.
+                Uri? inherited = ResolveInheritedXmlBase(source);
+                target.BaseUri = inherited is not null && !baseUri.IsAbsoluteUri
+                    ? new Uri(inherited, baseUri)
+                    : baseUri;
                 wasLoaded = true;
             }
+        }
+        else
+        {
+            // RFC 4287 s2 requires processors to handle xml:base per W3C XML Base, and inheritance
+            // is most of what that means: an element with no xml:base of its own is governed by the
+            // nearest ancestor's. Without this, the one object a consumer holds - an AtomLink, say -
+            // had neither an absolute href nor the base needed to make one, and the ancestor that
+            // knew it was gone by the time Load returned.
+            //
+            // Deliberately NOT counted toward wasLoaded: presence is what wasLoaded reports, and an
+            // inherited base is context, not content. Counting it would re-attach constructs the
+            // adapters rightly drop as empty - a nameless author inside a feed that happens to set
+            // xml:base would come back as an empty husk.
+            target.BaseUri = ResolveInheritedXmlBase(source);
         }
         string xmlLangAttribute = source.GetAttribute("lang", manager.LookupNamespace("xml") ?? string.Empty);
         if (!string.IsNullOrEmpty(xmlLangAttribute))
@@ -189,6 +209,54 @@ internal static class AtomUtility
         }
 
         return wasLoaded;
+    }
+
+    /// <summary>
+    /// Resolves the effective xml:base governing an element from its ancestors.
+    /// </summary>
+    /// <param name="source">The element whose context to resolve. The supplied navigator is not moved.</param>
+    /// <returns>The nearest ancestor's effective base, or <b>null</b> when no ancestor declares one.</returns>
+    /// <remarks>
+    ///     Walks ancestors nearest-first collecting <c>xml:base</c> attributes, stopping at the first
+    ///     absolute one; relative bases then stack outermost-first per W3C XML Base §4.3. A relative
+    ///     base with no absolute ancestor above it resolves to nothing rather than to an invented
+    ///     root.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    public static Uri? ResolveInheritedXmlBase(XPathNavigator source)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+
+        List<string> bases = [];
+        XPathNavigator ancestor = source.CreateNavigator();
+
+        while (ancestor.MoveToParent() && ancestor.NodeType == XPathNodeType.Element)
+        {
+            string value = ancestor.GetAttribute("base", "http://www.w3.org/XML/1998/namespace");
+            if (!string.IsNullOrEmpty(value))
+            {
+                bases.Add(value);
+                if (Uri.TryCreate(value, UriKind.Absolute, out _))
+                {
+                    break;
+                }
+            }
+        }
+
+        Uri? effective = null;
+        for (int i = bases.Count - 1; i >= 0; i--)
+        {
+            if (effective is null)
+            {
+                Uri.TryCreate(bases[i], UriKind.Absolute, out effective);
+            }
+            else if (Uri.TryCreate(bases[i], UriKind.RelativeOrAbsolute, out Uri? next))
+            {
+                effective = next.IsAbsoluteUri ? next : new Uri(effective, next);
+            }
+        }
+
+        return effective;
     }
 
     /// <summary>

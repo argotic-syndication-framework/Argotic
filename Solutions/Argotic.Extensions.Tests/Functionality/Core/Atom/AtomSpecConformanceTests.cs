@@ -54,7 +54,7 @@ public sealed class AtomSpecConformanceTests
     private static string SaveEntry(AtomFeed feed)
     {
         string document = Save(feed);
-        int start = document.IndexOf("<entry>", StringComparison.Ordinal);
+        int start = document.IndexOf("<entry", StringComparison.Ordinal);
         int end = document.IndexOf("</entry>", StringComparison.Ordinal);
         return document[start..end];
     }
@@ -330,14 +330,23 @@ public sealed class AtomSpecConformanceTests
     // ---- A9: xml:base --------------------------------------------------------------------------
 
     /// <summary>
-    /// A9 — xml:base is captured where it appeared and not inherited downward.
+    /// A9 — xml:base is inherited downward, so the link a consumer holds can resolve its own href.
     /// </summary>
     /// <remarks>
-    ///     §2 requires processors to handle xml:base per W3C XML Base. The one object a consumer
-    ///     holds — the link — has neither an absolute href nor the base needed to make one.
+    ///     <para>
+    ///     §2 requires processors to handle xml:base per W3C XML Base, and inheritance is most of
+    ///     what that means. The link used to come back with a relative href and a null base — the
+    ///     ancestor that knew the base was gone by the time <c>Load</c> returned.
+    ///     </para>
+    ///     <para>
+    ///     The visible cost is on the write side, pinned here deliberately: every descendant now
+    ///     re-states its effective base as its own <c>xml:base</c>. Verbose, semantically identical,
+    ///     conformant — and a fixed point, because on the second cycle each element's own attribute
+    ///     equals its inherited context.
+    ///     </para>
     /// </remarks>
     [TestMethod]
-    public void A9_XmlBase_IsNotInheritedDownToTheLink()
+    public void A9_XmlBase_IsInheritedDownToTheLink()
     {
         AtomFeed feed = new();
         string xml = """
@@ -356,10 +365,51 @@ public sealed class AtomSpecConformanceTests
         using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
         feed.Load(stream);
 
-        feed.BaseUri.ShouldBe(new Uri("https://conformance.invalid/base/"), "INVARIANT: captured where it appeared");
-
         AtomLink link = feed.Entries.First().Links.First();
-        link.BaseUri.ShouldBeNull("PINS TODAY: nothing is inherited downward");
+        link.BaseUri.ShouldBe(
+            new Uri("https://conformance.invalid/base/"), "INVERTED: the effective base travels with the link");
         link.Uri.ShouldBe(new Uri("relative/page", UriKind.Relative), "INVARIANT: the href itself stays as written");
+
+        new Uri(link.BaseUri!, link.Uri!).ShouldBe(
+            new Uri("https://conformance.invalid/base/relative/page"),
+            "which is the resolution a consumer could not previously perform");
+
+        SaveEntry(feed).ShouldContain(
+            """<link xml:base="https://conformance.invalid/base/" href="relative/page" />""",
+            Case.Sensitive,
+            "the pinned cost: descendants re-state their effective base on save");
+    }
+
+    /// <summary>
+    /// A9 — a relative xml:base stacks against its ancestors, outermost first.
+    /// </summary>
+    /// <remarks>W3C XML Base §4.3: each relative base resolves against the one above it.</remarks>
+    [TestMethod]
+    public void A9_ARelativeXmlBase_StacksAgainstItsAncestors()
+    {
+        AtomFeed feed = new();
+        string xml = """
+            <?xml version="1.0" encoding="utf-8"?>
+            <feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://conformance.invalid/base/">
+                <id>https://conformance.invalid/feed</id>
+                <title>Shell</title>
+                <updated>2026-01-02T03:04:05Z</updated>
+                <entry xml:base="deeper/">
+                    <id>https://conformance.invalid/1</id>
+                    <updated>2026-01-02T03:04:05Z</updated>
+                    <link href="relative/page"/>
+                </entry>
+            </feed>
+            """;
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
+        feed.Load(stream);
+
+        AtomEntry entry = feed.Entries.First();
+        entry.BaseUri.ShouldBe(
+            new Uri("https://conformance.invalid/base/deeper/"),
+            "the entry's own relative base resolves against the feed's");
+        entry.Links.First().BaseUri.ShouldBe(
+            new Uri("https://conformance.invalid/base/deeper/"),
+            "and the link inherits the stacked result");
     }
 }

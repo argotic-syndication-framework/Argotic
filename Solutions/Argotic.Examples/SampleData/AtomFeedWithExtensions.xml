@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:georss="http://www.georss.org/georss"
       xmlns:app="http://www.w3.org/2007/app"
       xmlns:dc="http://purl.org/dc/elements/1.1/"
       xmlns:dcterms="http://purl.org/dc/terms/"
@@ -68,6 +69,9 @@
     <link href="https://example.com/entry1/edit" rel="edit" type="application/atom+xml"/>
     <link href="https://example.com/entry1/media" rel="edit-media" type="image/jpeg"/>
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+    <georss:point>36.981334686279 -121.45983123779</georss:point>
+    <georss:elev>-5280.0002098083</georss:elev>
+    <georss:featurename>Gilroy, California</georss:featurename>
     <published>2024-01-01T09:00:00Z</published>
     <updated>2024-01-01T10:00:00Z</updated>
     <summary type="text">This entry demonstrates Atom Publishing Protocol extensions.</summary>

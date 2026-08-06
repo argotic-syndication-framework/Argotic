@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0"
+      xmlns:georss="http://www.georss.org/georss"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:dcterms="http://purl.org/dc/terms/"
      xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -90,6 +91,9 @@
       <link>https://example.com/article1</link>
       <description>This article demonstrates all available syndication extensions.</description>
       <pubDate>Mon, 01 Jan 2024 10:00:00 GMT</pubDate>
+      <georss:point>52.132633 5.291266</georss:point>
+      <georss:box>23.822399 -29.864984 80.442867 40.447516</georss:box>
+      <georss:featurename>Nederland</georss:featurename>
       <guid>https://example.com/article1</guid>
 
       <!-- Dublin Core Elements -->

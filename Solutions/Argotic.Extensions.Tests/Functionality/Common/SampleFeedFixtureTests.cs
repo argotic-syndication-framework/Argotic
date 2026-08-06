@@ -71,7 +71,7 @@ public class SampleFeedFixtureTests
             (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
         // The inline corpus in FeedTestData declares none of these.
-        foreach (string prefix in (string[])["itunes", "media", "dc", "dcterms", "content", "slash", "sy", "wfw", "geo", "lj"])
+        foreach (string prefix in (string[])["itunes", "media", "dc", "dcterms", "content", "slash", "sy", "wfw", "geo", "georss", "lj"])
         {
             namespaces.ShouldContainKey(prefix, $"RssFeedWithExtensions.xml no longer declares xmlns:{prefix}");
         }

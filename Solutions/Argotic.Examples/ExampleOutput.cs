@@ -674,6 +674,62 @@ internal static class ExampleOutput
     }
 
     /// <summary>
+    /// Displays information about a GeoRSS extension.
+    /// </summary>
+    /// <remarks>
+    ///     The free-text members go through <see cref="Markup.Escape(string)"/>; the numeric ones do
+    ///     not need to. <see cref="ShowBasicGeocodingExtension"/> above escapes nothing and is safe only
+    ///     because a <see cref="decimal"/> cannot contain a square bracket — a publisher's feature name
+    ///     certainly can, and Spectre throws on unbalanced markup.
+    /// </remarks>
+    public static void ShowGeoRssExtension(GeoRssSyndicationExtension ext)
+    {
+        ArgumentNullException.ThrowIfNull(ext);
+
+        AnsiConsole.MarkupLine("  [blue]GeoRSS Extension:[/]");
+
+        if (ext.Context.Point is { } point)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Point:[/] {point.Latitude}, {point.Longitude}");
+        }
+
+        if (ext.Context.Box is { } box)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Box:[/] {box.LowerLeft} to {box.UpperRight}");
+        }
+
+        if (ext.Context.Line is { } line)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Line:[/] {line.Positions.Count} positions");
+        }
+
+        if (ext.Context.Polygon is { } polygon)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Polygon:[/] {polygon.Positions.Count} positions, closed: {polygon.IsClosed}");
+        }
+
+        if (ext.Context.Elevation is { } elevation)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Elevation:[/] {elevation} m");
+        }
+
+        if (!string.IsNullOrEmpty(ext.Context.FeatureName))
+        {
+            AnsiConsole.MarkupLine($"    [dim]Feature name:[/] {Markup.Escape(ext.Context.FeatureName)}");
+        }
+
+        if (!string.IsNullOrEmpty(ext.Context.FeatureTypeTag))
+        {
+            AnsiConsole.MarkupLine($"    [dim]Feature type:[/] {Markup.Escape(ext.Context.FeatureTypeTag)}");
+        }
+
+        if (!string.IsNullOrEmpty(ext.Context.RelationshipTag))
+        {
+            AnsiConsole.MarkupLine($"    [dim]Relationship:[/] {Markup.Escape(ext.Context.RelationshipTag)}");
+        }
+    }
+
+    /// <summary>
     /// Displays information about a Blog Channel extension.
     /// </summary>
     public static void ShowBlogChannelExtension(BlogChannelSyndicationExtension ext)

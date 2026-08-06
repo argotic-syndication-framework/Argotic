@@ -315,9 +315,12 @@ public class SyndicationExtensionAdapter
     public void Fill(IExtensibleSyndicationObject entity)
     {
         ArgumentNullException.ThrowIfNull(entity);
-        XmlNamespaceManager manager = new(this.Navigator.NameTable);
 
-        this.Fill(entity, manager);
+        // Straight to the implementation. This used to construct an XmlNamespaceManager purely to
+        // satisfy the overload below, which validates that parameter and then never reads it - a
+        // whole manager allocated and discarded per call. On an OPML subscription list that is one
+        // per outline, and OpmlOutline.Load takes this overload for every one of them.
+        this.FillCore(entity);
     }
 
     /// <summary>
@@ -330,7 +333,22 @@ public class SyndicationExtensionAdapter
     public void Fill(IExtensibleSyndicationObject entity, XmlNamespaceManager manager)
     {
         ArgumentNullException.ThrowIfNull(entity);
+
+        // The manager is not used, and has not been for as long as this method has existed: extension
+        // probing resolves namespaces from the navigator itself. It stays in the signature because
+        // this is public API and twenty-five call sites pass one, and its null check stays because
+        // rejecting null is observable behaviour a caller may depend on.
         ArgumentNullException.ThrowIfNull(manager);
+
+        this.FillCore(entity);
+    }
+
+    /// <summary>
+    /// Adds every extension that the data source declares and this entity does not already carry.
+    /// </summary>
+    /// <param name="entity">The <see cref="IExtensibleSyndicationObject"/> to be filled.</param>
+    private void FillCore(IExtensibleSyndicationObject entity)
+    {
         IList<ISyndicationExtension> extensions = this.Settings.AutoDetectExtensions
             ? SyndicationExtensionAdapter.GetExtensionProbes(this.Settings.SupportedExtensions, this.Navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml))
             : SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions);

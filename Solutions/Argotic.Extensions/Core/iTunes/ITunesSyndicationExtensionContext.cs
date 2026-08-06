@@ -51,6 +51,83 @@ public class ITunesSyndicationExtensionContext
     public ITunesExplicitMaterial ExplicitMaterial { get; set; } = ITunesExplicitMaterial.None;
 
     /// <summary>
+    /// Gets or sets the title Apple Podcasts shows for this item, in place of its ordinary title.
+    /// </summary>
+    /// <value>The iTunes-specific title, or an <i>empty</i> string if none was specified.</value>
+    /// <remarks>
+    ///     Distinct from the item's own <c>title</c>, and usually shorter: a publisher writes the full
+    ///     headline in <c>title</c> and a clean episode name here. <b>4,544</b> occurrences in the
+    ///     real-world corpus, which makes it one of the most common extension elements there is.
+    /// </remarks>
+    public string Title
+    {
+        get;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the episode number within its season.
+    /// </summary>
+    /// <value>The episode number, or <see langword="null"/> if none was specified.</value>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <i>one</i>.</exception>
+    public int? Episode
+    {
+        get;
+        set
+        {
+            if (value.HasValue)
+            {
+                ArgumentOutOfRangeException.ThrowIfLessThan(value.Value, 1);
+            }
+
+            field = value;
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the season this episode belongs to.
+    /// </summary>
+    /// <value>The season number, or <see langword="null"/> if none was specified.</value>
+    /// <remarks>
+    ///     Defined by the same paragraph of Apple's specification as <see cref="Episode"/> and included
+    ///     for that reason. Unlike every other member added alongside it, this one has <b>no</b>
+    ///     occurrences in the real-world corpus — a fact recorded rather than hidden, because an
+    ///     <see cref="Episode"/> without a <see cref="Season"/> would be a lopsided API.
+    /// </remarks>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <i>one</i>.</exception>
+    public int? Season
+    {
+        get;
+        set
+        {
+            if (value.HasValue)
+            {
+                ArgumentOutOfRangeException.ThrowIfLessThan(value.Value, 1);
+            }
+
+            field = value;
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the kind of episode this item is.
+    /// </summary>
+    /// <value>
+    ///     An <see cref="ITunesEpisodeType"/> enumeration value that indicates the kind of episode.
+    ///     The default value is <see cref="ITunesEpisodeType.None"/>.
+    /// </value>
+    public ITunesEpisodeType EpisodeType { get; set; } = ITunesEpisodeType.None;
+
+    /// <summary>
+    /// Gets or sets how this podcast's episodes are meant to be consumed.
+    /// </summary>
+    /// <value>
+    ///     An <see cref="ITunesPodcastType"/> enumeration value that indicates the presentation order.
+    ///     The default value is <see cref="ITunesPodcastType.None"/>.
+    /// </value>
+    public ITunesPodcastType PodcastType { get; set; } = ITunesPodcastType.None;
+
+    /// <summary>
     /// Gets or sets a URL that points to the album artwork for this podcast.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents a URL that points to the album artwork for this podcast.</value>
@@ -204,6 +281,31 @@ public class ITunesSyndicationExtensionContext
         if (this.IsBlocked)
         {
             writer.WriteElementString("block", xmlNamespace, "yes");
+        }
+
+        if (!string.IsNullOrEmpty(this.Title))
+        {
+            writer.WriteElementString("title", xmlNamespace, this.Title);
+        }
+
+        if (this.Episode.HasValue)
+        {
+            writer.WriteElementString("episode", xmlNamespace, this.Episode.Value.ToString(NumberFormatInfo.InvariantInfo));
+        }
+
+        if (this.Season.HasValue)
+        {
+            writer.WriteElementString("season", xmlNamespace, this.Season.Value.ToString(NumberFormatInfo.InvariantInfo));
+        }
+
+        if (this.EpisodeType != ITunesEpisodeType.None)
+        {
+            writer.WriteElementString("episodeType", xmlNamespace, ITunesSyndicationExtension.EpisodeTypeAsString(this.EpisodeType));
+        }
+
+        if (this.PodcastType != ITunesPodcastType.None)
+        {
+            writer.WriteElementString("type", xmlNamespace, ITunesSyndicationExtension.PodcastTypeAsString(this.PodcastType));
         }
 
         if (this.Categories.Count > 0)
@@ -382,6 +484,81 @@ public class ITunesSyndicationExtensionContext
                     this.ExplicitMaterial = explicitMaterial;
                     wasLoaded = true;
                 }
+            }
+
+            wasLoaded |= this.LoadEpisodeMetadata(source, manager);
+        }
+
+        return wasLoaded;
+    }
+
+    /// <summary>
+    /// Initializes the episode metadata Apple added in 2017 using the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="ITunesSyndicationExtensionContext"/>.</param>
+    /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
+    /// <returns><b>true</b> if any of the elements were present; otherwise, <b>false</b>.</returns>
+    /// <remarks>
+    ///     Separated from <c>LoadOptionals</c> only to keep either method a readable length. These are
+    ///     the four elements a real podcast feed emits in quantity and this library previously dropped:
+    ///     across the 136-document corpus, <c>episodeType</c> appears 4,695 times, <c>title</c> 4,544,
+    ///     <c>episode</c> 1,003 and <c>type</c> 6 — <b>10,248 occurrences</b> in all. Because nothing
+    ///     read them, a load followed by a save discarded every one. <c>season</c> joins them because
+    ///     Apple defines it in the same breath as <c>episode</c>, though it appears in the corpus zero
+    ///     times.
+    /// </remarks>
+    private bool LoadEpisodeMetadata(XPathNavigator source, XmlNamespaceManager manager)
+    {
+        bool wasLoaded = false;
+
+        XPathNavigator? titleNavigator = source.SelectChildElement("itunes", "title", manager);
+        XPathNavigator? episodeNavigator = source.SelectChildElement("itunes", "episode", manager);
+        XPathNavigator? seasonNavigator = source.SelectChildElement("itunes", "season", manager);
+        XPathNavigator? episodeTypeNavigator = source.SelectChildElement("itunes", "episodeType", manager);
+        XPathNavigator? podcastTypeNavigator = source.SelectChildElement("itunes", "type", manager);
+
+        if (titleNavigator is not null && !string.IsNullOrEmpty(titleNavigator.Value))
+        {
+            this.Title = titleNavigator.Value;
+            wasLoaded = true;
+        }
+
+        // Apple defines both as positive integers. A zero or negative value is refused rather than
+        // stored, because the property's own setter would refuse it and a loader must not be able to
+        // produce a value a caller cannot write back -- the defect §2.45 records in RssEnclosure.
+        if (episodeNavigator is not null
+            && int.TryParse(episodeNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int episode)
+            && episode >= 1)
+        {
+            this.Episode = episode;
+            wasLoaded = true;
+        }
+
+        if (seasonNavigator is not null
+            && int.TryParse(seasonNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int season)
+            && season >= 1)
+        {
+            this.Season = season;
+            wasLoaded = true;
+        }
+
+        if (episodeTypeNavigator is not null && !string.IsNullOrEmpty(episodeTypeNavigator.Value))
+        {
+            ITunesEpisodeType episodeType = ITunesSyndicationExtension.EpisodeTypeByName(episodeTypeNavigator.Value.Trim());
+            if (episodeType != ITunesEpisodeType.None)
+            {
+                this.EpisodeType = episodeType;
+                wasLoaded = true;
+            }
+        }
+
+        if (podcastTypeNavigator is not null && !string.IsNullOrEmpty(podcastTypeNavigator.Value))
+        {
+            ITunesPodcastType podcastType = ITunesSyndicationExtension.PodcastTypeByName(podcastTypeNavigator.Value.Trim());
+            if (podcastType != ITunesPodcastType.None)
+            {
+                this.PodcastType = podcastType;
+                wasLoaded = true;
             }
         }
 

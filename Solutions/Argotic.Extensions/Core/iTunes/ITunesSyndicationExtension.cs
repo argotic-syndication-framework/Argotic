@@ -100,6 +100,44 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
     }
 
     /// <summary>
+    /// Returns the alternate value for the supplied <see cref="ITunesEpisodeType"/>.
+    /// </summary>
+    /// <param name="episodeType">The <see cref="ITunesEpisodeType"/> to get the alternate value for.</param>
+    /// <returns>The alternate value for the supplied <paramref name="episodeType"/>, otherwise returns an empty string.</returns>
+    public static string EpisodeTypeAsString(ITunesEpisodeType episodeType) =>
+        EnumerationMetadataAttribute.GetAlternateValue(episodeType);
+
+    /// <summary>
+    /// Returns the <see cref="ITunesEpisodeType"/> enumeration value that corresponds to the specified episode type name.
+    /// </summary>
+    /// <param name="name">The name of the episode type.</param>
+    /// <returns>A <see cref="ITunesEpisodeType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>ITunesEpisodeType.None</b>.</returns>
+    /// <remarks>This method disregards case of specified episode type name.</remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    public static ITunesEpisodeType EpisodeTypeByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, ITunesEpisodeType.None);
+
+    /// <summary>
+    /// Returns the alternate value for the supplied <see cref="ITunesPodcastType"/>.
+    /// </summary>
+    /// <param name="podcastType">The <see cref="ITunesPodcastType"/> to get the alternate value for.</param>
+    /// <returns>The alternate value for the supplied <paramref name="podcastType"/>, otherwise returns an empty string.</returns>
+    public static string PodcastTypeAsString(ITunesPodcastType podcastType) =>
+        EnumerationMetadataAttribute.GetAlternateValue(podcastType);
+
+    /// <summary>
+    /// Returns the <see cref="ITunesPodcastType"/> enumeration value that corresponds to the specified podcast type name.
+    /// </summary>
+    /// <param name="name">The name of the podcast type.</param>
+    /// <returns>A <see cref="ITunesPodcastType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>ITunesPodcastType.None</b>.</returns>
+    /// <remarks>This method disregards case of specified podcast type name.</remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    public static ITunesPodcastType PodcastTypeByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, ITunesPodcastType.None);
+
+    /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
     /// </summary>

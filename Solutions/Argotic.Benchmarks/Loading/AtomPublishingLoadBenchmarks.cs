@@ -39,16 +39,14 @@ namespace Argotic.Benchmarks.Loading;
 ///   <c>app:</c> elements at all, which is precisely why the synthetic variant exists.</description></item>
 /// </list>
 /// <para>
-/// <b>No service-document arm carries categories, and that is not an oversight.</b>
-/// <c>AtomServiceDocument.Load</c> throws <see cref="FormatException"/> on <em>any</em> service
-/// document whose collection declares an <c>app:categories</c> element, inline or out-of-line —
-/// including the example service document in RFC 5023 §8.3.3. <c>AtomMemberResources.Load</c> hands
-/// a navigator positioned <em>on</em> the <c>app:categories</c> element to
-/// <c>AtomCategoryDocument.Load</c>, which builds a <c>SyndicationResourceMetadata</c> that looks for
-/// a <em>child</em> named <c>categories</c>, finds none, reports <c>None</c>, and is then rejected by
-/// the adapter's format check. Measured against the shipped code, not inferred. The four corpus
-/// documents load only because OData emits no categories; a synthetic arm exercising that shape would
-/// measure a throw. It is a defect to report and fix, and once fixed it is worth an arm here.
+/// <b>The categories arm exists because writing this class is what found the defect that blocked it.</b>
+/// Until §2.42, <c>AtomServiceDocument.Load</c> threw <see cref="FormatException"/> on <em>any</em>
+/// service document whose collection declared an <c>app:categories</c> element, inline or out-of-line —
+/// including the example service document in RFC 5023 §8.3.3 — so this arm could only have measured a
+/// throw. The four real corpus documents load because OData emits no categories, which is why nothing
+/// had ever noticed. <see cref="LoadServiceDocumentWithCategories"/> is the arm that was owed once the
+/// three defects behind it were fixed, and it is the only one here that exercises
+/// <c>AtomCategoryDocument.Load</c> through a service document rather than directly.
 /// </para>
 /// <para>
 /// <b>The load-bearing pair is the entry one.</b> <see cref="AtomEntryResource"/> differs from
@@ -64,7 +62,7 @@ namespace Argotic.Benchmarks.Loading;
 /// <para>
 /// <b>No <c>[Params]</c>.</b> Every arm here is a document of fixed size — three of them real files
 /// that cannot be resized without ceasing to be real — so a class-scoped axis would reproduce all
-/// seven rows unchanged at every value. Scaling belongs where the corpus is generated, which for this
+/// eight rows unchanged at every value. Scaling belongs where the corpus is generated, which for this
 /// area it is not.
 /// </para>
 /// </remarks>
@@ -92,10 +90,12 @@ public class AtomPublishingLoadBenchmarks
     ///     term-plus-own-scheme, because <c>AtomCategory.Load</c> branches on each.
     ///     </para>
     ///     <para>
-    ///     One quirk it does <em>not</em> exercise, recorded here so the omission is deliberate: the
-    ///     adapter reads those three attributes inside an <c>if (documentNavigator.HasChildren)</c>,
-    ///     so an out-of-line categories document — legal, and by definition childless — loses its
-    ///     <c>href</c>. That is a correctness defect to report, not something to benchmark.
+    ///     One shape it deliberately does <em>not</em> cover: the childless out-of-line document. That
+    ///     used to lose all three attributes, because the adapter read them inside an
+    ///     <c>if (documentNavigator.HasChildren)</c> — fixed in §2.42 and pinned by
+    ///     <c>AtomPublishingCategoriesTests</c>. It is a correctness question rather than a timing one,
+    ///     and it is cheaper than this document by construction, so it stays in the suite and out of
+    ///     here.
     ///     </para>
     /// </remarks>
     private const string SyntheticCategoryDocument = """
@@ -155,10 +155,59 @@ public class AtomPublishingLoadBenchmarks
         </entry>
         """;
 
+    /// <summary>
+    /// The service document RFC 5023 prints in §8.3.3, verbatim.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     <b>Not a real-world document, but not invented either.</b> It is the specification's own
+    ///     example, reproduced unchanged, which makes it the fairest available stand-in for the shape
+    ///     the four OData documents cannot express: collections that declare categories.
+    ///     </para>
+    ///     <para>
+    ///     It carries both spellings — an out-of-line <c>categories</c> with an <c>href</c> and no
+    ///     children, and an inline <c>categories</c> with <c>fixed="yes"</c> and two child categories —
+    ///     because those take different paths through the adapter and cost differently. Read against
+    ///     <see cref="LoadSmallestServiceDocument"/>, which has three collections and no categories, the
+    ///     delta is what a category-bearing collection costs.
+    ///     </para>
+    /// </remarks>
+    private const string Rfc5023ServiceDocument = """
+        <?xml version="1.0" encoding='utf-8'?>
+        <service xmlns="http://www.w3.org/2007/app"
+                 xmlns:atom="http://www.w3.org/2005/Atom">
+          <workspace>
+            <atom:title>Main Site</atom:title>
+            <collection href="http://example.org/blog/main" >
+              <atom:title>My Blog Entries</atom:title>
+              <categories href="http://example.com/cats/forMain.cats" />
+            </collection>
+            <collection href="http://example.org/blog/pic" >
+              <atom:title>Pictures</atom:title>
+              <accept>image/png</accept>
+              <accept>image/jpeg</accept>
+              <accept>image/gif</accept>
+            </collection>
+          </workspace>
+          <workspace>
+            <atom:title>Sidebar Blog</atom:title>
+            <collection href="http://example.org/sidebar/list" >
+              <atom:title>Remaindered Links</atom:title>
+              <accept>application/atom+xml;type=entry</accept>
+              <categories fixed="yes">
+                <atom:category scheme="http://example.org/extra-cats/" term="joke" />
+                <atom:category scheme="http://example.org/extra-cats/" term="serious" />
+              </categories>
+            </collection>
+          </workspace>
+        </service>
+        """;
+
     private byte[] smallestServiceDocument = [];
     private byte[] largestServiceDocument = [];
     private byte[][] everyServiceDocument = [];
     private byte[] categoryDocument = [];
+    private byte[] serviceDocumentWithCategories = [];
     private byte[] entryDocument = [];
     private byte[] entryWithPublishingControl = [];
 
@@ -172,6 +221,7 @@ public class AtomPublishingLoadBenchmarks
         this.largestServiceDocument = RealWorldCorpus.Read("atompub/odata-northwind-v2-service.xml");
         this.everyServiceDocument = RealWorldCorpus.ReadAll("atompub");
         this.categoryDocument = Encoding.UTF8.GetBytes(SyntheticCategoryDocument);
+        this.serviceDocumentWithCategories = Encoding.UTF8.GetBytes(Rfc5023ServiceDocument);
         this.entryDocument = FeedCorpus.ReadRealSample("AtomEntryDocument.xml");
         this.entryWithPublishingControl = Encoding.UTF8.GetBytes(SyntheticEntryWithPublishingControl);
     }
@@ -224,6 +274,46 @@ public class AtomPublishingLoadBenchmarks
     }
 
     /// <summary>
+    /// The RFC 5023 §8.3.3 service document: three collections, two of which declare categories.
+    /// </summary>
+    /// <returns>The total number of category documents parsed, which must be 2.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     <b>The arm §2.42 unblocked.</b> Before that, every input of this shape threw
+    ///     <see cref="FormatException"/>, so what this would have measured is a stack unwind. The return
+    ///     value is the count of parsed category documents rather than of collections, because that is
+    ///     the number that was structurally zero for every document ever loaded — the loaded
+    ///     <see cref="AtomCategoryDocument"/> was built, filled, and then dropped on the floor.
+    ///     </para>
+    ///     <para>
+    ///     Read against <see cref="LoadSmallestServiceDocument"/>: both are small service documents with
+    ///     three collections, and this one additionally pays two nested category loads, each of which
+    ///     constructs its own <c>SyndicationResourceMetadata</c> and its own
+    ///     <c>SyndicationExtensionAdapter</c>. If nested categories are expensive out of proportion to
+    ///     their size, that is where it shows.
+    ///     </para>
+    /// </remarks>
+    [Benchmark(Description = "d. AtomServiceDocument.Load, 2 collections with categories (RFC 5023 §8.3.3)")]
+    public int LoadServiceDocumentWithCategories()
+    {
+        using MemoryStream stream = new(this.serviceDocumentWithCategories, writable: false);
+        AtomServiceDocument document = new();
+        document.Load(stream);
+
+        int categories = 0;
+
+        foreach (AtomWorkspace workspace in document.Workspaces)
+        {
+            foreach (AtomMemberResources collection in workspace.Collections)
+            {
+                categories += collection.Categories.Count;
+            }
+        }
+
+        return categories;
+    }
+
+    /// <summary>
     /// The SYNTHETIC category document: six categories, all three document attributes present.
     /// </summary>
     /// <returns>The number of categories parsed.</returns>
@@ -234,7 +324,7 @@ public class AtomPublishingLoadBenchmarks
     ///     implementing the uniform resource contract and the only one whose <c>Load</c> had never run
     ///     under measurement.
     /// </remarks>
-    [Benchmark(Description = "d. AtomCategoryDocument.Load, 6 categories (SYNTHETIC)")]
+    [Benchmark(Description = "e. AtomCategoryDocument.Load, 6 categories (SYNTHETIC)")]
     public int LoadCategoryDocument()
     {
         using MemoryStream stream = new(this.categoryDocument, writable: false);
@@ -253,7 +343,7 @@ public class AtomPublishingLoadBenchmarks
     ///     that the next one has something to be subtracted from; on its own it measures Atom entry
     ///     parsing, which <c>FormatBreadthLoadBenchmarks</c> already covers.
     /// </remarks>
-    [Benchmark(Description = "e. AtomEntry.Load, sample entry (control for f)")]
+    [Benchmark(Description = "f. AtomEntry.Load, sample entry (control for g)")]
     public int LoadEntryAsPlainEntry()
     {
         using MemoryStream stream = new(this.entryDocument, writable: false);
@@ -276,7 +366,7 @@ public class AtomPublishingLoadBenchmarks
     ///     collection should be very close to free; if this arm is measurably above the control, the
     ///     copies are not free and <c>FindExtension</c> is worth changing.
     /// </remarks>
-    [Benchmark(Description = "f. AtomEntryResource.Load, same bytes (finds nothing)")]
+    [Benchmark(Description = "g. AtomEntryResource.Load, same bytes (finds nothing)")]
     public int LoadEntryAsResource()
     {
         using MemoryStream stream = new(this.entryDocument, writable: false);
@@ -307,7 +397,7 @@ public class AtomPublishingLoadBenchmarks
     ///     worthless.
     ///     </para>
     /// </remarks>
-    [Benchmark(Description = "g. AtomEntryResource.Load, entry WITH app:control (SYNTHETIC)")]
+    [Benchmark(Description = "h. AtomEntryResource.Load, entry WITH app:control (SYNTHETIC)")]
     public bool LoadEntryWithPublishingControl()
     {
         using MemoryStream stream = new(this.entryWithPublishingControl, writable: false);

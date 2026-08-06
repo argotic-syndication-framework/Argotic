@@ -36,17 +36,17 @@ namespace Argotic.Benchmarks.Protocols;
 /// suspect if the arms can show where in the table each input matched.
 /// </para>
 /// <para>
-/// <b>Two of the eleven arms measure a failure, and one of those failures is a defect this class
-/// found.</b> A spec-legal untyped <c>&lt;value&gt;text&lt;/value&gt;</c> — which XML-RPC 1.0 defines
-/// as a string, and which real ping servers emit — is <em>not parsed by this library at all</em>: it
-/// walks the whole chain and returns <see langword="false"/>. The branch written to handle it is
-/// unreachable for every possible input. That was established by running the shipped code, and the
-/// reasoning is on <see cref="ParseUntyped"/>.
+/// <b>Building this class is what found the defect §2.42 fixed.</b> A spec-legal untyped
+/// <c>&lt;value&gt;text&lt;/value&gt;</c> — which XML-RPC 1.0 defines as a string, and which real ping
+/// servers emit — was <em>not parsed by this library at all</em>, and the branch written to handle it
+/// was unreachable for every possible input. Choosing an input for an arm is what surfaced it; no
+/// measurement was involved. The reasoning is on <see cref="ParseUntyped"/>, which now measures the
+/// success path it always should have.
 /// </para>
 /// <para>
-/// <b>There is no <c>[Params]</c> axis here on purpose.</b> Eight of these eleven arms are a single
+/// <b>There is no <c>[Params]</c> axis here on purpose.</b> Nine of these twelve arms are a single
 /// element with fixed content and do not vary with any size parameter, so a class-scoped axis would
-/// reproduce eight identical rows per value and bury the two that moved. That is the defect
+/// reproduce nine identical rows per value and bury the two that moved. That is the defect
 /// <c>docs/build-warnings.md</c> §D0 records in <c>UtilityBenchmarks</c>. Size-varying payloads live
 /// in <see cref="XmlRpcCompositeParsingBenchmarks"/>, where every arm varies along the axis.
 /// </para>
@@ -64,6 +64,7 @@ public class XmlRpcValueParsingBenchmarks
     private XPathNavigator stringValue = null!;
     private XPathNavigator doubleValue = null!;
     private XPathNavigator dateTimeValue = null!;
+    private XPathNavigator specSpelledDateTimeValue = null!;
     private XPathNavigator base64Value = null!;
     private XPathNavigator structValue = null!;
     private XPathNavigator arrayValue = null!;
@@ -82,6 +83,7 @@ public class XmlRpcValueParsingBenchmarks
         this.stringValue = XmlRpcCorpus.ValueNavigator(XmlRpcCorpus.TypedScalar("string", "The quick brown fox jumps over the lazy dog."));
         this.doubleValue = XmlRpcCorpus.ValueNavigator(XmlRpcCorpus.TypedScalar("double", "-12.53"));
         this.dateTimeValue = XmlRpcCorpus.ValueNavigator(XmlRpcCorpus.TypedScalar("dateTime.iso8601", "2024-01-01T10:00:00Z"));
+        this.specSpelledDateTimeValue = XmlRpcCorpus.ValueNavigator(XmlRpcCorpus.TypedScalar("dateTime.iso8601", "20240101T10:00:00"));
 
         // 1 KiB decoded. Small enough to be an ordinary ping payload, large enough that the decode is
         // not lost inside the dispatch it is being compared against.
@@ -187,16 +189,43 @@ public class XmlRpcValueParsingBenchmarks
     ///     Worth stating plainly, because it bears on how this number should be read: the element is
     ///     named <c>dateTime.iso8601</c> and XML-RPC's own examples spell it <c>19980717T14:08:55</c>
     ///     — <b>no hyphens, no colons in the date, no offset</b> — which is not RFC 3339 and which the
-    ///     RFC 3339 table cannot match. The value used here is spelled the way the parser can accept,
-    ///     which measures the success path. The specification-conformant spelling would fail every
-    ///     pattern and return <see langword="false"/>, and that is a correctness defect to report, not
-    ///     a timing question.
+    ///     RFC 3339 table cannot match. That spelling did not parse at all until §2.42. This arm keeps
+    ///     the RFC 3339 spelling, which is what most live servers emit and what already worked;
+    ///     <see cref="ParseSpecSpelledDateTime"/> is the one that measures the fallback, and it is
+    ///     strictly the more expensive of the two because RFC 3339 is still tried first.
     ///     </para>
     /// </remarks>
-    [Benchmark(Description = "6. dateTime.iso8601 (reaches the RFC 3339 table)")]
+    [Benchmark(Description = "6. dateTime.iso8601, RFC 3339 spelling (matches the first table)")]
     public IXmlRpcValue? ParseDateTime()
     {
         _ = XmlRpcClient.TryParseValue(this.dateTimeValue, out IXmlRpcValue? value);
+        return value;
+    }
+
+    /// <summary>
+    /// Dispatch position 6, in XML-RPC's own spelling: the worst case of the date branch.
+    /// </summary>
+    /// <returns>The parsed value.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     <c>20240101T10:00:00</c> — the spelling XML-RPC 1.0 uses in its own examples, and the one
+    ///     that did not parse at all before §2.42. It is <b>strictly the more expensive of the two date
+    ///     arms by construction</b>: RFC 3339 is still attempted first and must fail its whole
+    ///     nine-pattern table before the two XML-RPC formats are tried, so this pays the other arm's
+    ///     work plus its own.
+    ///     </para>
+    ///     <para>
+    ///     That is the point of measuring it rather than assuming it. The fix was written as a fallback
+    ///     precisely so nothing that parsed before parses differently, and the price of that choice is
+    ///     paid by whichever spelling comes second. This arm says what that price is, and whether the
+    ///     ordering should be reconsidered if the XML-RPC spelling turns out to be the common one on the
+    ///     wire — which nothing in this repository currently knows.
+    ///     </para>
+    /// </remarks>
+    [Benchmark(Description = "6b. dateTime.iso8601, XML-RPC spelling (RFC 3339 table must fail first)")]
+    public IXmlRpcValue? ParseSpecSpelledDateTime()
+    {
+        _ = XmlRpcClient.TryParseValue(this.specSpelledDateTimeValue, out IXmlRpcValue? value);
         return value;
     }
 
@@ -262,23 +291,24 @@ public class XmlRpcValueParsingBenchmarks
     ///     has changed and this remark is stale.
     ///     </para>
     ///     <para>
-    ///     Why it fails, and why the code written to handle it is unreachable: text is a child node in
-    ///     the XPath data model, so <c>HasChildren</c> is <see langword="true"/> here. Control enters
-    ///     the chain, <c>MoveToFirstChild</c> lands on the text node whose <c>Name</c> is empty, all
-    ///     nine comparisons fail, and the method falls through to <c>return false</c>. The
-    ///     <c>else if (!string.IsNullOrEmpty(source.Value))</c> tail meant for this shape is reached
-    ///     only when the element has no children — and such an element has an empty <c>Value</c>, so
-    ///     its own guard fails as well. No input can execute it.
+    ///     Why it used to fail, and why the code written to handle it was unreachable: text is a child
+    ///     node in the XPath data model, so <c>HasChildren</c> is <see langword="true"/> here. Control
+    ///     entered the chain, <c>MoveToFirstChild</c> landed on the text node whose <c>Name</c> is
+    ///     empty, all nine comparisons failed, and the method fell through to <c>return false</c>. The
+    ///     <c>else if (!string.IsNullOrEmpty(source.Value))</c> tail meant for this shape was reached
+    ///     only when the element had no children — and such an element has an empty <c>Value</c>, so
+    ///     its own guard failed as well. No input could execute it.
     ///     </para>
     ///     <para>
-    ///     As a measurement it is still the arm worth having: it is the <b>worst path through the
-    ///     chain</b> — nine comparisons and no dispatch — and it brackets <see cref="ParseUnparseable"/>,
-    ///     which fails after one. Together they price failure at both ends of the table, which is what
-    ///     makes the dispatch-position hypothesis testable in the failure direction as well as the
-    ///     success one.
+    ///     §2.42 replaced <c>MoveToFirstChild</c> with <c>MoveToChild(XPathNodeType.Element)</c>, which
+    ///     changes what this arm measures rather than merely whether it succeeds. It is now the
+    ///     <b>shortest</b> path rather than the longest: the element test fails immediately and the
+    ///     untyped tail runs, so it skips the comparison chain entirely instead of walking all of it.
+    ///     Read against <see cref="ParseString"/> — the same string, reached through the full dispatch —
+    ///     the delta is what the chain itself costs.
     ///     </para>
     /// </remarks>
-    [Benchmark(Description = "10. untyped value (spec-legal; walks all 9 and fails)")]
+    [Benchmark(Description = "10. untyped value (spec-legal; skips the chain entirely)")]
     public bool ParseUntyped() => XmlRpcClient.TryParseValue(this.untypedValue, out _);
 
     /// <summary>

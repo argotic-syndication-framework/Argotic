@@ -46,67 +46,72 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator? documentNavigator = this.Navigator.SelectChildElement("app", "categories", manager);
+        // The second arm is the nested case: AtomMemberResources hands AtomCategoryDocument.Load a
+        // navigator positioned ON the app:categories element, where there is no child of that name.
+        XPathNavigator? documentNavigator = this.Navigator.SelectChildElement("app", "categories", manager)
+            ?? AtomPublishing10SyndicationResourceAdapter.SelfIfCategories(this.Navigator);
+
         if (documentNavigator is not null)
         {
             AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);
 
-            if (documentNavigator.HasChildren)
+            // Deliberately NOT inside a HasChildren guard. An out-of-line categories element is by
+            // definition childless -- its whole purpose is the href saying where the real list lives --
+            // so guarding the attribute read on children dropped fixed, scheme and href from precisely
+            // the document whose attributes are the only thing it carries.
+            if (documentNavigator.HasAttributes)
             {
-                if (documentNavigator.HasAttributes)
+                string fixedAttribute = documentNavigator.GetAttribute("fixed", string.Empty);
+                string schemeAttribute = documentNavigator.GetAttribute("scheme", string.Empty);
+                string hrefAttribute = documentNavigator.GetAttribute("href", string.Empty);
+
+                if (!string.IsNullOrEmpty(fixedAttribute))
                 {
-                    string fixedAttribute = documentNavigator.GetAttribute("fixed", string.Empty);
-                    string schemeAttribute = documentNavigator.GetAttribute("scheme", string.Empty);
-                    string hrefAttribute = documentNavigator.GetAttribute("href", string.Empty);
-
-                    if (!string.IsNullOrEmpty(fixedAttribute))
+                    if (string.Equals(fixedAttribute, "yes", StringComparison.OrdinalIgnoreCase))
                     {
-                        if (string.Equals(fixedAttribute, "yes", StringComparison.OrdinalIgnoreCase))
-                        {
-                            resource.IsFixed = true;
-                        }
-                        else if (string.Equals(fixedAttribute, "no", StringComparison.OrdinalIgnoreCase))
-                        {
-                            resource.IsFixed = false;
-                        }
+                        resource.IsFixed = true;
                     }
-
-                    if (!string.IsNullOrEmpty(schemeAttribute))
+                    else if (string.Equals(fixedAttribute, "no", StringComparison.OrdinalIgnoreCase))
                     {
-                        if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri? scheme))
-                        {
-                            resource.Scheme = scheme;
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(hrefAttribute))
-                    {
-                        if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri? href))
-                        {
-                            resource.Uri = href;
-                        }
+                        resource.IsFixed = false;
                     }
                 }
 
-                if (documentNavigator.HasChildren)
+                if (!string.IsNullOrEmpty(schemeAttribute))
                 {
-                    XPathNodeIterator categoryIterator = documentNavigator.SelectChildElements("atom", "category", manager);
-
-                    if (categoryIterator is { Count: > 0 })
+                    if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri? scheme))
                     {
-                        while (categoryIterator.MoveNext())
-                        {
-                            XPathNavigator? categoryNode = categoryIterator.Current;
-                            if (categoryNode is null)
-                            {
-                                continue;
-                            }
+                        resource.Scheme = scheme;
+                    }
+                }
 
-                            AtomCategory category = new();
-                            if (category.Load(categoryNode, this.Settings))
-                            {
-                                resource.Categories.Add(category);
-                            }
+                if (!string.IsNullOrEmpty(hrefAttribute))
+                {
+                    if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri? href))
+                    {
+                        resource.Uri = href;
+                    }
+                }
+            }
+
+            if (documentNavigator.HasChildren)
+            {
+                XPathNodeIterator categoryIterator = documentNavigator.SelectChildElements("atom", "category", manager);
+
+                if (categoryIterator is { Count: > 0 })
+                {
+                    while (categoryIterator.MoveNext())
+                    {
+                        XPathNavigator? categoryNode = categoryIterator.Current;
+                        if (categoryNode is null)
+                        {
+                            continue;
+                        }
+
+                        AtomCategory category = new();
+                        if (category.Load(categoryNode, this.Settings))
+                        {
+                            resource.Categories.Add(category);
                         }
                     }
                 }
@@ -116,6 +121,23 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
             adapter.Fill(resource, manager);
         }
     }
+
+    /// <summary>
+    /// Returns the supplied navigator when it is itself positioned on an <c>app:categories</c> element.
+    /// </summary>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> to test.</param>
+    /// <returns>The <paramref name="navigator"/> if it is an <c>app:categories</c> element; otherwise <see langword="null"/>.</returns>
+    /// <remarks>
+    ///     Restricted to <see cref="XPathNodeType.Element"/>, so a stand-alone category document — which
+    ///     arrives here as a <see cref="XPathNodeType.Root"/> and is found by the child selector — takes
+    ///     the same path it always did.
+    /// </remarks>
+    private static XPathNavigator? SelfIfCategories(XPathNavigator navigator) =>
+        navigator.NodeType == XPathNodeType.Element
+        && string.Equals(navigator.LocalName, "categories", StringComparison.Ordinal)
+        && string.Equals(navigator.NamespaceURI, "http://www.w3.org/2007/app", StringComparison.Ordinal)
+            ? navigator
+            : null;
 
     /// <summary>
     /// Modifies the <see cref="AtomServiceDocument"/> to match the data source.

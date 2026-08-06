@@ -178,7 +178,15 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("app", "http://www.w3.org/2007/app");
 
         version = null;
-        if ((navigator = resource.SelectChildElement("categories")) is not null || (navigator = resource.SelectChildElement("app", "categories", manager)) is not null)
+
+        // The third arm is the nested case. A stand-alone category document is sniffed from the
+        // document root, whose child is the categories element -- but AtomMemberResources hands this a
+        // navigator positioned ON an app:categories element inside a service document, where there is
+        // no child of that name. Without it, every service document declaring categories -- including
+        // the example RFC 5023 prints in section 8.3.3 -- was reported as None and rejected.
+        if ((navigator = resource.SelectChildElement("categories")) is not null
+            || (navigator = resource.SelectChildElement("app", "categories", manager)) is not null
+            || (navigator = SyndicationResourceMetadata.SelfIfAtomPublishingCategories(resource)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -192,6 +200,24 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
 
         return resourceConformsToFormat;
     }
+
+    /// <summary>
+    /// Returns the supplied navigator when it is itself positioned on an Atom Publishing Protocol <c>categories</c> element.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> to test.</param>
+    /// <returns>The <paramref name="resource"/> if it is an <c>app:categories</c> element; otherwise <see langword="null"/>.</returns>
+    /// <remarks>
+    ///     Deliberately restricted to <see cref="XPathNodeType.Element"/>. A document being sniffed from
+    ///     its root is a <see cref="XPathNodeType.Root"/>, so this cannot change how any stand-alone
+    ///     document is classified — it only answers the case where a caller has already navigated onto
+    ///     the element.
+    /// </remarks>
+    private static XPathNavigator? SelfIfAtomPublishingCategories(XPathNavigator resource) =>
+        resource.NodeType == XPathNodeType.Element
+        && string.Equals(resource.LocalName, "categories", StringComparison.Ordinal)
+        && string.Equals(resource.NamespaceURI, "http://www.w3.org/2007/app", StringComparison.Ordinal)
+            ? resource
+            : null;
 
     /// <summary>
     /// Determines if the specified <see cref="XPathNavigator"/> represents a Atom Publishing Protocol service document formatted syndication resource.

@@ -274,10 +274,15 @@ public class XmlRpcClient
             return false;
         }
 
+        // MoveToChild(Element) rather than MoveToFirstChild(). A text node is a child, so an untyped
+        // <value>text</value> satisfies HasChildren and lands MoveToFirstChild on a node whose Name is
+        // the empty string; nothing matched it and the method returned false. That made the untyped
+        // branch below unreachable for every possible input, because it sat in the else of
+        // HasChildren -- reachable only for an empty element, which its own guard then rejects.
         if (source.HasChildren)
         {
             XPathNavigator navigator = source.CreateNavigator();
-            if (navigator.MoveToFirstChild())
+            if (navigator.MoveToChild(XPathNodeType.Element))
             {
                 if (string.Equals(navigator.Name, "i4", StringComparison.OrdinalIgnoreCase))
                 {
@@ -318,7 +323,7 @@ public class XmlRpcClient
                 }
                 else if (string.Equals(navigator.Name, "dateTime.iso8601", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(navigator.Value, out DateTime scalar))
+                    if (XmlRpcClient.TryParseIso8601DateTime(navigator.Value, out DateTime scalar))
                     {
                         value = new XmlRpcScalarValue(scalar);
                         return true;
@@ -359,9 +364,17 @@ public class XmlRpcClient
                         return true;
                     }
                 }
+
+                // A typed element that would not parse is a failure, not an untyped string. Falling
+                // through to the branch below would turn <value><i4>abc</i4></value> into the string
+                // "abc", because that is what source.Value reports for it.
+                value = null;
+                return false;
             }
         }
-        else if (!string.IsNullOrEmpty(source.Value))
+
+        // XML-RPC 1.0, on <value>: "If no type is indicated, the type is string."
+        if (!string.IsNullOrEmpty(source.Value))
         {
             value = new XmlRpcScalarValue(source.Value);
             return true;
@@ -369,6 +382,63 @@ public class XmlRpcClient
 
         value = null;
         return false;
+    }
+
+    /// <summary>
+    /// The zoneless spellings of an XML-RPC <c>dateTime.iso8601</c> value.
+    /// </summary>
+    /// <remarks>
+    ///     XML-RPC 1.0 spells its own example <c>19980717T14:08:55</c> — a basic-format date, an
+    ///     extended-format time, and no offset. The second entry is the fully basic form, which the
+    ///     same paragraph of ISO 8601 permits and which servers do emit.
+    /// </remarks>
+    private static readonly string[] Iso8601ZonelessFormats =
+    [
+        "yyyyMMdd'T'HH:mm:ss",
+        "yyyyMMdd'T'HHmmss",
+    ];
+
+    /// <summary>
+    /// The offset-bearing spellings of an XML-RPC <c>dateTime.iso8601</c> value.
+    /// </summary>
+    /// <remarks>
+    ///     Tried only after <see cref="Iso8601ZonelessFormats"/> has failed, and that order is
+    ///     load-bearing: <c>K</c> matches the empty string, so a zoneless value offered to these
+    ///     patterns under <see cref="DateTimeStyles.AdjustToUniversal"/> would be read as machine-local
+    ///     and rebased. That is the defect §2.37 records in <c>TryParseRfc822DateTime</c>.
+    /// </remarks>
+    private static readonly string[] Iso8601OffsetFormats =
+    [
+        "yyyyMMdd'T'HH:mm:ssK",
+        "yyyyMMdd'T'HHmmssK",
+    ];
+
+    /// <summary>
+    /// Converts the string representation of an XML-RPC <c>dateTime.iso8601</c> value to its <see cref="DateTime"/> equivalent. A return value indicates whether the conversion succeeded or failed.
+    /// </summary>
+    /// <param name="value">A string containing the value to convert.</param>
+    /// <param name="result">When this method returns, contains the converted value if the conversion succeeded, or <see cref="DateTime.MinValue"/> if it failed. This parameter is passed uninitialized.</param>
+    /// <returns><b>true</b> if <paramref name="value"/> was converted successfully; otherwise, <b>false</b>.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     RFC 3339 is tried first, unchanged, because that is what this element accepted before and
+    ///     because most live servers emit it despite the element's name. The XML-RPC spellings are a
+    ///     fallback, so nothing that parsed before parses differently now.
+    ///     </para>
+    ///     <para>
+    ///     A zoneless value comes back <see cref="DateTimeKind.Unspecified"/>. It carries no offset, so
+    ///     that is the only honest answer; calling it <see cref="DateTimeKind.Utc"/> would invent one.
+    ///     </para>
+    /// </remarks>
+    private static bool TryParseIso8601DateTime(string value, out DateTime result)
+    {
+        if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(value, out result))
+        {
+            return true;
+        }
+
+        return DateTime.TryParseExact(value, XmlRpcClient.Iso8601ZonelessFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out result)
+            || DateTime.TryParseExact(value, XmlRpcClient.Iso8601OffsetFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AdjustToUniversal, out result);
     }
 
     /// <summary>

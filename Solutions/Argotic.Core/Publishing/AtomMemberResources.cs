@@ -428,8 +428,12 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
                         continue;
                     }
 
+                    // The Add was missing, so this list was empty for every document ever loaded. It
+                    // was invisible because the Load above threw on every categories element, so
+                    // nothing reached the line that discarded the result.
                     AtomCategoryDocument categories = new();
                     categories.Load(categoriesNode);
+                    this.Categories.Add(categories);
                     wasLoaded = true;
                 }
             }

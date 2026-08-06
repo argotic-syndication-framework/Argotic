@@ -65,6 +65,11 @@ public class ComparisonOperatorContractTests
         Row<LiveJournalMood>(() => new() { Content = "happy", Id = 2 }, () => new() { Content = "calm", Id = 1 }, () => new() { Content = "joyful", Id = 3 }),
         Row<LiveJournalSecurity>(() => new(LiveJournalSecurityType.Friends, 2), () => new(LiveJournalSecurityType.Friends, 1), () => new(LiveJournalSecurityType.Friends, 3)),
         Row<LiveJournalUserPicture>(() => new() { Keyword = "pic-b", Url = new Uri("http://example.com/b.png") }, () => new() { Keyword = "pic-a", Url = new Uri("http://example.com/a.png") }, () => new() { Keyword = "pic-c", Url = new Uri("http://example.com/c.png") }),
+        // GeoRssPosition and GeoRssBox are deliberately absent: they are record structs, and both this
+        // helper and the ComparisonOperatorExtensions block it verifies are declared `where T : class`.
+        // They declare their own relational operators and are covered by GeoRssValueTypeTests instead.
+        Row<GeoRssLine>(() => new([new(2m, 2m)]), () => new([new(1m, 1m)]), () => new([new(3m, 3m)])),
+        Row<GeoRssPolygon>(() => new([new(2m, 2m)]), () => new([new(1m, 1m)]), () => new([new(3m, 3m)])),
         Row<PodcastChapters>(() => new() { Url = new Uri("http://example.com/b.json") }, () => new() { Url = new Uri("http://example.com/a.json") }, () => new() { Url = new Uri("http://example.com/c.json") }),
         Row<PodcastFunding>(() => new() { Url = new Uri("http://example.com/b") }, () => new() { Url = new Uri("http://example.com/a") }, () => new() { Url = new Uri("http://example.com/c") }),
         Row<PodcastLicense>(() => new() { Identifier = "cc-by-4.0" }, () => new() { Identifier = "cc-by-3.0" }, () => new() { Identifier = "cc-by-sa-4.0" }),

@@ -304,15 +304,24 @@ public sealed class AtomSpecConformanceTests
     // ---- A6: date constructs -------------------------------------------------------------------
 
     /// <summary>
-    /// A6 — the parsed Kind depends on how the offset was spelled.
+    /// A6 — both offset spellings parse to the same instant with the same Kind.
     /// </summary>
     /// <remarks>
-    ///     A numeric offset is genuinely adjusted to UTC; a <c>Z</c> is matched as a format
-    ///     literal, yielding <see cref="DateTimeKind.Unspecified"/> with a UTC wall-clock. The
-    ///     round trip holds only because the writer stamps <c>Z</c> on every non-Local Kind.
+    ///     <para>
+    ///     The <c>'Z'</c> in the parse formats was a quoted literal: the timestamp parsed, but with
+    ///     no offset information, so it surfaced as <see cref="DateTimeKind.Unspecified"/> while a
+    ///     numeric offset surfaced as <see cref="DateTimeKind.Utc"/> — one instant, two Kinds,
+    ///     depending on how the origin spelled it. The formats now use <c>K</c>, which matches both
+    ///     spellings and feeds <c>AdjustToUniversal</c>.
+    ///     </para>
+    ///     <para>
+    ///     What Unspecified means on <i>write</i> is a documented decision, not an accident: it is
+    ///     treated as UTC, because inventing the machine's offset would be a different guess, not a
+    ///     safer one.
+    ///     </para>
     /// </remarks>
     [TestMethod]
-    public void A6_TheParsedKind_DependsOnTheOffsetSpelling()
+    public void A6_BothOffsetSpellings_ParseToTheSameInstantAndKind()
     {
         AtomFeed feed = Load("""<published>2026-01-02T08:49:05+05:45</published>""");
         AtomEntry entry = feed.Entries.First();
@@ -323,8 +332,28 @@ public sealed class AtomSpecConformanceTests
         entry.PublishedOn.Kind.ShouldBe(DateTimeKind.Utc);
 
         entry.UpdatedOn.Kind.ShouldBe(
-            DateTimeKind.Unspecified,
-            "PINS TODAY: the same instant written with Z parses to a different Kind");
+            DateTimeKind.Utc,
+            "INVERTED: Z now parses as an offset, not a literal, so the Kinds agree");
+        entry.UpdatedOn.ShouldBe(new DateTime(2026, 1, 2, 3, 4, 5, DateTimeKind.Utc));
+    }
+
+    /// <summary>
+    /// A6 — a single-digit fraction with a numeric offset parses.
+    /// </summary>
+    /// <remarks>
+    ///     Conformant RFC 3339 — <c>time-secfrac</c> is one or more digits — that the old table had
+    ///     no row for: it covered fraction depths one through six for <c>Z</c> but skipped depth one
+    ///     for numeric offsets, so <c>...05.1+05:00</c> failed to parse entirely and the date was
+    ///     silently absent from the model.
+    /// </remarks>
+    [TestMethod]
+    public void A6_ASingleDigitFractionWithAnOffset_Parses()
+    {
+        AtomFeed feed = Load("""<published>2026-01-02T08:49:05.1+05:45</published>""");
+
+        feed.Entries.First().PublishedOn.ShouldBe(
+            new DateTime(2026, 1, 2, 3, 4, 5, 100, DateTimeKind.Utc),
+            "the old format table had no .f-with-offset row, so this conformant date vanished");
     }
 
     // ---- A9: xml:base --------------------------------------------------------------------------

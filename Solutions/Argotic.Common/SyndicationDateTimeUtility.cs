@@ -37,8 +37,17 @@ public static class SyndicationDateTimeUtility
     /// <summary>
     /// Converts the value of the supplied <see cref="DateTime"/> object to its equivalent RFC-3339 date string representation.
     /// </summary>
-    /// <param name="utcDateTime">The UTC <see cref="DateTime"/> object to convert.</param>
+    /// <param name="utcDateTime">The <see cref="DateTime"/> object to convert.</param>
     /// <returns>A string that contains the RFC-3339 date string representation of the supplied <see cref="DateTime"/> object.</returns>
+    /// <remarks>
+    ///     A <see cref="DateTimeKind.Local"/> value is written with its numeric offset; anything else
+    ///     is written with <c>Z</c>. That makes <see cref="DateTimeKind.Unspecified"/> a claim of UTC:
+    ///     the writer cannot know what wall clock an Unspecified value meant, and inventing the
+    ///     machine's offset would be a different guess, not a safer one. Callers who mean local time
+    ///     should say so with <see cref="DateTimeKind.Local"/>. Values parsed by
+    ///     <see cref="TryParseRfc3339DateTime"/> are always <see cref="DateTimeKind.Utc"/>, so parsed
+    ///     values round-trip exactly.
+    /// </remarks>
     public static string ToRfc3339DateTime(DateTime utcDateTime)
     {
         DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
@@ -66,23 +75,24 @@ public static class SyndicationDateTimeUtility
     public static bool TryParseRfc3339DateTime(string value, out DateTime result)
     {
         DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
+        // K, not a 'Z' literal and not zzz. K matches "Z" and a numeric offset alike, and - unlike a
+        // quoted literal - it feeds AdjustToUniversal, so "...05Z" and "...05+00:00" both come out
+        // Kind=Utc at the same instant. The old table matched Z as a LITERAL: the timestamp parsed,
+        // but with no offset information, so it surfaced as Kind=Unspecified while the numeric-offset
+        // forms surfaced as Utc - the same instant, two Kinds, depending on how the origin spelled
+        // it. The old table also had no single-digit-fraction-with-offset row, so a conformant
+        // "...05.1+05:00" failed to parse at all.
         string[] formats =
         [
             dateTimeFormat.SortableDateTimePattern,
             dateTimeFormat.UniversalSortableDateTimePattern,
-            "yyyy'-'MM'-'dd'T'HH:mm:ss'Z'",
-            "yyyy'-'MM'-'dd'T'HH:mm:ss.f'Z'",
-            "yyyy'-'MM'-'dd'T'HH:mm:ss.ff'Z'",
-            "yyyy'-'MM'-'dd'T'HH:mm:ss.fff'Z'",
-            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffff'Z'",
-            "yyyy'-'MM'-'dd'T'HH:mm:ss.fffff'Z'",
-            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffff'Z'",
-            "yyyy'-'MM'-'dd'T'HH:mm:sszzz",
-            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffzzz",
-            "yyyy'-'MM'-'dd'T'HH:mm:ss.fffzzz",
-            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffzzz",
-            "yyyy'-'MM'-'dd'T'HH:mm:ss.fffffzzz",
-            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffffzzz",
+            "yyyy'-'MM'-'dd'T'HH:mm:ssK",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.fK",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffK",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.fffK",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffK",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.fffffK",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffffK",
         ];
 
         if (string.IsNullOrEmpty(value))

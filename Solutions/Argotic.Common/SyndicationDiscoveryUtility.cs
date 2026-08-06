@@ -8,7 +8,7 @@ namespace Argotic.Common;
 /// <summary>
 /// Provides methods for extracting peer-to-peer auto-discovery and resource information from syndicated content. This class cannot be inherited.
 /// </summary>
-public static class SyndicationDiscoveryUtility
+public static partial class SyndicationDiscoveryUtility
 {
     /// <summary>
     /// How much of a response is read when detecting its syndication format.
@@ -208,12 +208,10 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     private static Dictionary<string, string> ExtractHtmlAttributes(string content)
     {
-        Dictionary<string, string> attributes = new(StringComparer.OrdinalIgnoreCase);
-        Regex attributePattern = new("""([a-zA-Z]+)=["']([^"']+)["']|([a-zA-Z]+)=([^"'>\r\n\t ]+)""", RegexOptions.IgnoreCase);
-
         ArgumentException.ThrowIfNullOrEmpty(content);
 
-        MatchCollection matches = attributePattern.Matches(content);
+        Dictionary<string, string> attributes = new(StringComparer.OrdinalIgnoreCase);
+        MatchCollection matches = AttributeRegex().Matches(content);
 
         foreach (Match match in matches)
         {
@@ -250,13 +248,10 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static IList<Uri> ExtractUrls(string content)
     {
-        List<Uri> results = [];
-        Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
-        Regex anchorPattern = new("<a[^>]+", RegexOptions.IgnoreCase);
-
         ArgumentException.ThrowIfNullOrEmpty(content);
 
-        MatchCollection links = linkPattern.Matches(content);
+        List<Uri> results = [];
+        MatchCollection links = LinkRegex().Matches(content);
 
         foreach (Match link in links)
         {
@@ -271,7 +266,7 @@ public static class SyndicationDiscoveryUtility
             }
         }
 
-        MatchCollection anchors = anchorPattern.Matches(content);
+        MatchCollection anchors = AnchorRegex().Matches(content);
 
         foreach (Match anchor in anchors)
         {
@@ -632,11 +627,9 @@ public static class SyndicationDiscoveryUtility
     public static IList<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content, Uri? baseUri)
     {
         List<DiscoverableSyndicationEndpoint> results = [];
-        Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
-
         ArgumentException.ThrowIfNullOrEmpty(content);
 
-        MatchCollection links = linkPattern.Matches(content);
+        MatchCollection links = LinkRegex().Matches(content);
 
         foreach (Match link in links)
         {
@@ -801,11 +794,9 @@ public static class SyndicationDiscoveryUtility
     public static HtmlAnchor? ExtractPingbackNotificationServer(string content)
     {
         HtmlAnchor? pingbackAnchor = null;
-        Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
-
         ArgumentException.ThrowIfNullOrEmpty(content);
 
-        MatchCollection links = linkPattern.Matches(content);
+        MatchCollection links = LinkRegex().Matches(content);
 
         foreach (Match link in links)
         {
@@ -1051,16 +1042,15 @@ public static class SyndicationDiscoveryUtility
     public static IList<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
     {
         List<TrackbackDiscoveryMetadata> results = [];
-        Regex rdfPattern = new(@"<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        XmlNamespaceManager manager = new(new NameTable());
-
         ArgumentException.ThrowIfNullOrEmpty(content);
+
+        XmlNamespaceManager manager = new(new NameTable());
 
         manager.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
         manager.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
         manager.AddNamespace("trackback", "http://madskills.com/public/xml/rss/module/trackback/");
 
-        MatchCollection embeddedRdfs = rdfPattern.Matches(content);
+        MatchCollection embeddedRdfs = RdfRegex().Matches(content);
 
         foreach (Match embeddedRdf in embeddedRdfs)
         {
@@ -1236,4 +1226,43 @@ public static class SyndicationDiscoveryUtility
         using Stream stream = body.AsStream();
         return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(stream);
     }
+    /// <summary>
+    /// Matches an HTML attribute, quoted or bare.
+    /// </summary>
+    /// <returns>The generated matcher.</returns>
+    /// <remarks>
+    ///     Source-generated rather than constructed per call. This one mattered most of the six:
+    ///     <see cref="ExtractHtmlAttributes"/> built it on every invocation and <see cref="ExtractUrls"/>
+    ///     invokes that once per matched <c>&lt;link&gt;</c> and once per matched <c>&lt;a&gt;</c>, so a
+    ///     page with 50 links and 200 anchors parsed this pattern 250 times to answer one question.
+    /// </remarks>
+    [GeneratedRegex("""([a-zA-Z]+)=["']([^"']+)["']|([a-zA-Z]+)=([^"'>\r\n\t ]+)""", RegexOptions.IgnoreCase)]
+    private static partial Regex AttributeRegex();
+
+    /// <summary>
+    /// Matches the opening of an HTML <c>link</c> element.
+    /// </summary>
+    /// <returns>The generated matcher.</returns>
+    /// <remarks>
+    ///     One matcher for what were three identical per-call constructions, in
+    ///     <see cref="ExtractUrls"/>, <see cref="ExtractDiscoverableSyndicationEndpoints(string, Uri?)"/>
+    ///     and <see cref="ExtractPingbackNotificationServer"/>.
+    /// </remarks>
+    [GeneratedRegex("<link[^>]+", RegexOptions.IgnoreCase)]
+    private static partial Regex LinkRegex();
+
+    /// <summary>
+    /// Matches the opening of an HTML anchor element.
+    /// </summary>
+    /// <returns>The generated matcher.</returns>
+    [GeneratedRegex("<a[^>]+", RegexOptions.IgnoreCase)]
+    private static partial Regex AnchorRegex();
+
+    /// <summary>
+    /// Matches an RDF document embedded in HTML markup.
+    /// </summary>
+    /// <returns>The generated matcher.</returns>
+    [GeneratedRegex(@"<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
+    private static partial Regex RdfRegex();
+
 }

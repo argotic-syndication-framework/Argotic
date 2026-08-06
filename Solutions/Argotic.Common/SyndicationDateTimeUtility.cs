@@ -120,7 +120,22 @@ public static class SyndicationDateTimeUtility
         }
 
         string zoneRepresentedAsLocalDifferential;
-        if (value.EndsWith(" UT", StringComparison.OrdinalIgnoreCase))
+
+        // UTC is not an RFC 822 zone -- 5.1 defines UT -- but it is what a great deal of the wild
+        // writes, Microsoft's own Q# blog among them, and it names exactly the zone UT names. It has
+        // to be tested BEFORE the arms below would otherwise reach the default, and the near-miss is
+        // why it went unnoticed: EndsWith(" UT") is false for a string ending " UTC", so such a date
+        // fell past every arm to "no conversion needed" and then failed to parse, silently, into
+        // DateTime.MinValue.
+        //
+        // The line this draws: tolerate an unambiguous spelling of a zone the specification already
+        // names, because that invents nothing. Do not tolerate a date with no time of day, because
+        // supplying one would invent data the document never carried.
+        if (value.EndsWith(" UTC", StringComparison.OrdinalIgnoreCase))
+        {
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" UTC", StringComparison.OrdinalIgnoreCase) + 1)], "+00:00");
+        }
+        else if (value.EndsWith(" UT", StringComparison.OrdinalIgnoreCase))
         {
             zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" UT", StringComparison.OrdinalIgnoreCase) + 1)], "+00:00");
         }

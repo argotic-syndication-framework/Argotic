@@ -147,12 +147,18 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        if (!string.IsNullOrEmpty(source.Value))
+
+        // The assignment is guarded against whitespace because the setter trims: the two used to
+        // disagree about what "empty" means, and one pass through the model deleted an element the
+        // previous pass had kept. <category><![CDATA[  ]]></category> - the idiom several publishing
+        // engines emit for a field the author left blank - passed the IsNullOrEmpty guard, and the
+        // trimming setter reduced it to "". Saving wrote <category></category>, and reloading THAT
+        // failed the same guard, so the category vanished on the second cycle. Found by auditing the
+        // round trip of 456 live feeds for a fixed point; two failed on exactly this.
+        if (!string.IsNullOrWhiteSpace(source.Value))
         {
             this.Value = source.Value;
-            wasLoaded = true;
         }
 
         if (source.HasAttributes)
@@ -161,11 +167,14 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
             if (!string.IsNullOrEmpty(domain))
             {
                 this.Domain = domain;
-                wasLoaded = true;
             }
         }
 
-        return wasLoaded;
+        // The navigator is positioned on a <category> element, so the element exists - and its
+        // existence is the whole of what this method has to report. Deriving the answer from whether
+        // a value or a domain happened to be assigned made an information-free category
+        // indistinguishable from an absent one, which is how a document lost an element it had.
+        return true;
     }
 
     /// <summary>

@@ -109,6 +109,35 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     }
 
     /// <summary>
+    /// Gets or sets the permanent, universally unique identifier exactly as its characters appear.
+    /// </summary>
+    /// <value>The IRI character string. The default value is an empty string.</value>
+    /// <remarks>
+    ///     <para>
+    ///     This is the identity the specification means. RFC 4287 §4.2.6 requires processors to
+    ///     compare atom:id values "on a character-by-character basis (in a case-sensitive fashion)",
+    ///     §2 forbids mapping an IRI serving as an atom:id to a URI, and §4.2.6.1 says the value
+    ///     "MUST NOT change". <see cref="System.Uri"/> honours none of that — it lowercases the
+    ///     scheme and host and rewrites percent-encoding — so identity, loading and writing all run
+    ///     through this property, and <see cref="Uri"/> is a parsed convenience derived from it.
+    ///     </para>
+    ///     <para>
+    ///     Setting <see cref="Uri"/> stores <see cref="System.Uri.OriginalString"/> here: the
+    ///     characters the caller actually supplied, before the class had opinions about them.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    public string Value
+    {
+        get;
+        set
+        {
+            ArgumentNullException.ThrowIfNull(value);
+            field = value;
+        }
+    } = string.Empty;
+
+    /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
@@ -159,6 +188,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
         {
             ArgumentNullException.ThrowIfNull(value);
             field = value;
+            this.Value = value.OriginalString;
         }
     }
 
@@ -181,11 +211,19 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
         }
         if (!string.IsNullOrEmpty(source.Value))
         {
+            // The characters are the identity, so they are kept verbatim; the parsed Uri is a
+            // convenience whose normalisations must not leak back into Value. Value is assigned
+            // AFTER the Uri property, whose setter would otherwise overwrite it with OriginalString -
+            // the same characters here, but the order states the rule. An id System.Uri cannot parse
+            // (a relative reference, say) is invalid Atom but still loads: dropping it silently lost
+            // the one value the spec says must never change.
             if (Uri.TryCreate(source.Value, UriKind.Absolute, out Uri? uri))
             {
                 this.Uri = uri;
-                wasLoaded = true;
             }
+
+            this.Value = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -224,7 +262,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
         writer.WriteStartElement("id", AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        writer.WriteString(this.Uri?.ToString() ?? string.Empty);
+        writer.WriteString(this.Value);
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
         writer.WriteEndElement();
@@ -251,7 +289,9 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
             return 1;
         }
 
-        int result = Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.Ordinal);
+        // Ordinal over the character string, per §4.2.6 - Uri.Compare unified ids the spec's own
+        // §4.2.6.2 examples list as distinct (case-differing hosts and schemes, percent-encodings).
+        int result = string.CompareOrdinal(this.Value, other.Value);
         if (result != 0) return result;
 
         result = AtomUtility.CompareCommonObjectAttributes(this, other);
@@ -286,7 +326,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Uri));
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Value));
 
     /// <summary>
     /// Determines if operands are equal.

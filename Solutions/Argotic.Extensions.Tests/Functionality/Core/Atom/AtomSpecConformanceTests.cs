@@ -210,21 +210,29 @@ public sealed class AtomSpecConformanceTests
     // ---- A5: atom:id identity ------------------------------------------------------------------
 
     /// <summary>
-    /// A5 — three of the spec's own six distinct ids are normalised into each other.
+    /// A5 — every one of the spec's six distinct ids round-trips character-for-character.
     /// </summary>
     /// <remarks>
-    ///     §4.2.6.2 lists six IRIs that are "all different"; §4.2.6 requires character-by-character
-    ///     case-sensitive comparison; §4.2.6.1 says an id "MUST NOT change". <c>System.Uri</c>
-    ///     lowercases the scheme and host and decodes <c>%74</c>, in the model and in the
-    ///     round-tripped document.
+    ///     <para>
+    ///     §4.2.6.2 lists six IRIs that are "all different"; §4.2.6.1 says an id "MUST NOT change".
+    ///     <c>System.Uri</c> lowercased the scheme and host and decoded <c>%74</c> — in the model and
+    ///     in the round-tripped document — so three of the six came back altered. Identity now lives
+    ///     on <c>AtomId.Value</c>, the raw character string, and the document gets its exact
+    ///     characters back.
+    ///     </para>
+    ///     <para>
+    ///     <c>Case.Sensitive</c> throughout, learned the hard way: Shouldly's default string
+    ///     <c>ShouldContain</c> is case-insensitive, which silently passed the first version of this
+    ///     row for the case-normalisation defects it existed to catch.
+    ///     </para>
     /// </remarks>
     [TestMethod]
-    [DataRow("http://www.example.org/thing", "http://www.example.org/thing", DisplayName = "lowercase survives")]
-    [DataRow("http://www.example.org/Thing", "http://www.example.org/Thing", DisplayName = "path case survives")]
-    [DataRow("http://www.EXAMPLE.org/thing", "http://www.example.org/thing", DisplayName = "PINS TODAY: host lowercased")]
-    [DataRow("HTTP://www.example.org/thing", "http://www.example.org/thing", DisplayName = "PINS TODAY: scheme lowercased")]
-    [DataRow("http://www.example.org/%74hing", "http://www.example.org/thing", DisplayName = "PINS TODAY: percent-encoding decoded")]
-    public void A5_AnEntryId_RoundTripsAs(string written, string roundTripped)
+    [DataRow("http://www.example.org/thing", DisplayName = "plain")]
+    [DataRow("http://www.example.org/Thing", DisplayName = "path case")]
+    [DataRow("http://www.EXAMPLE.org/thing", DisplayName = "INVERTED: host case survives")]
+    [DataRow("HTTP://www.example.org/thing", DisplayName = "INVERTED: scheme case survives")]
+    [DataRow("http://www.example.org/%74hing", DisplayName = "INVERTED: percent-encoding survives")]
+    public void A5_AnEntryId_RoundTripsCharacterForCharacter(string written)
     {
         AtomFeed idFeed = new();
         string xml = $"""
@@ -242,19 +250,55 @@ public sealed class AtomSpecConformanceTests
         using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
         idFeed.Load(stream);
 
-        SaveEntry(idFeed).ShouldContain($"<id>{roundTripped}</id>");
+        idFeed.Entries.First().Id!.Value.ShouldBe(written, "the model holds the exact characters");
+        SaveEntry(idFeed).ShouldContain($"<id>{written}</id>", Case.Sensitive);
     }
 
     /// <summary>
-    /// A5 — ids the spec lists as distinct compare equal.
+    /// A5 — ids the spec lists as distinct now compare distinct.
     /// </summary>
     [TestMethod]
-    public void A5_CaseDifferingIds_CompareEqual()
+    public void A5_CaseDifferingIds_CompareDistinct()
     {
         AtomId a = new(new Uri("http://www.example.org/thing"));
         AtomId b = new(new Uri("HTTP://www.EXAMPLE.org/thing"));
 
-        a.Equals(b).ShouldBeTrue("PINS TODAY: Uri equality unifies ids the spec says are different");
+        a.Equals(b).ShouldBeFalse("INVERTED: §4.2.6 comparison is character-by-character, case-sensitive");
+        a.Value.ShouldBe("http://www.example.org/thing");
+        b.Value.ShouldBe("HTTP://www.EXAMPLE.org/thing", "OriginalString, before System.Uri had opinions");
+    }
+
+    /// <summary>
+    /// A5 — an id System.Uri cannot parse still loads, because the characters are the identity.
+    /// </summary>
+    /// <remarks>
+    ///     A relative id is invalid Atom (§4.2.6: the content must be an IRI), but dropping it
+    ///     silently lost the one value the spec says must never change. It loads with
+    ///     <see cref="AtomId.Uri"/> null and the characters intact — the same tolerance-asymmetry
+    ///     rule as the person construct: read what the wild wrote, refuse to invent.
+    /// </remarks>
+    [TestMethod]
+    public void A5_AnUnparseableId_KeepsItsCharacters()
+    {
+        AtomFeed relFeed = new();
+        string xml = """
+            <?xml version="1.0" encoding="utf-8"?>
+            <feed xmlns="http://www.w3.org/2005/Atom">
+                <id>https://conformance.invalid/feed</id>
+                <title>Shell</title>
+                <updated>2026-01-02T03:04:05Z</updated>
+                <entry>
+                    <id>relative/identifier</id>
+                    <updated>2026-01-02T03:04:05Z</updated>
+                </entry>
+            </feed>
+            """;
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
+        relFeed.Load(stream);
+
+        AtomId id = relFeed.Entries.First().Id.ShouldNotBeNull();
+        id.Value.ShouldBe("relative/identifier");
+        id.Uri.ShouldBeNull("System.Uri cannot represent it; the characters still can");
     }
 
     // ---- A6: date constructs -------------------------------------------------------------------

@@ -208,6 +208,65 @@ internal static class FeedCorpus
     }
 
     /// <summary>
+    /// Generates a Sitemap 0.9 <c>sitemapindex</c> with <paramref name="sitemapCount"/> entries.
+    /// </summary>
+    /// <param name="sitemapCount">The number of <c>sitemap</c> elements to emit.</param>
+    /// <param name="lastModified">Which of the three legal <c>lastmod</c> shapes to emit.</param>
+    /// <returns>The generated document as UTF-8 bytes.</returns>
+    /// <remarks>
+    /// <para>
+    /// The <c>lastmod</c> parameter is not decoration, and it is why this generator exists rather than
+    /// a one-liner. <c>SitemapIndexEntry.Load</c> parses that element in two stages: it tries
+    /// <c>SyndicationDateTimeUtility.TryParseRfc3339DateTime</c>, whose table holds nine patterns that
+    /// all require a full date <i>and</i> time, and only if every one of them fails does it fall
+    /// through to <see cref="DateTime.TryParse(string, IFormatProvider, System.Globalization.DateTimeStyles, out DateTime)"/>.
+    /// </para>
+    /// <para>
+    /// The sitemap protocol permits both spellings — it defers to the W3C Datetime profile, which
+    /// makes the time part optional — so a date-only <c>lastmod</c> is not malformed input. It is
+    /// ordinary input that takes the long path, nine failed pattern matches per entry, and at the
+    /// protocol's own 50,000-entry ceiling that is 450,000 failed matches for one document. Omitting
+    /// the element entirely is equally legal and costs neither. Three shapes, three costs, all three
+    /// legal: that is the axis this generator exists to sweep.
+    /// </para>
+    /// </remarks>
+    public static byte[] GenerateSitemapIndexUtf8(int sitemapCount, SitemapIndexLastModified lastModified)
+    {
+        StringBuilder builder = new(capacity: 256 + (sitemapCount * 160));
+
+        builder.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        builder.Append("<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
+
+        for (int i = 0; i < sitemapCount; i++)
+        {
+            string ordinal = i.ToString(CultureInfo.InvariantCulture);
+            builder.Append("  <sitemap>\n");
+            builder.Append("    <loc>https://www.example.com/sitemaps/sitemap").Append(ordinal).Append(".xml</loc>\n");
+
+            switch (lastModified)
+            {
+                case SitemapIndexLastModified.Rfc3339:
+                    builder.Append("    <lastmod>2024-01-15T09:30:00+00:00</lastmod>\n");
+                    break;
+
+                case SitemapIndexLastModified.DateOnly:
+                    builder.Append("    <lastmod>2024-01-15</lastmod>\n");
+                    break;
+
+                case SitemapIndexLastModified.None:
+                default:
+                    break;
+            }
+
+            builder.Append("  </sitemap>\n");
+        }
+
+        builder.Append("</sitemapindex>\n");
+
+        return Encoding.UTF8.GetBytes(builder.ToString());
+    }
+
+    /// <summary>
     /// Reads one of the repository's real sample documents, linked into the benchmark output.
     /// </summary>
     /// <param name="fileName">The sample file name, e.g. <c>RssFeed.xml</c>.</param>

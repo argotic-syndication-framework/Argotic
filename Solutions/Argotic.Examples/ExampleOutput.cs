@@ -713,6 +713,16 @@ internal static class ExampleOutput
             AnsiConsole.MarkupLine($"    [dim]Elevation:[/] {elevation} m");
         }
 
+        if (ext.Context.Floor is { } floor)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Floor:[/] {floor}");
+        }
+
+        if (ext.Context.Radius is { } radius)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Radius:[/] {radius} m");
+        }
+
         if (!string.IsNullOrEmpty(ext.Context.FeatureName))
         {
             AnsiConsole.MarkupLine($"    [dim]Feature name:[/] {Markup.Escape(ext.Context.FeatureName)}");

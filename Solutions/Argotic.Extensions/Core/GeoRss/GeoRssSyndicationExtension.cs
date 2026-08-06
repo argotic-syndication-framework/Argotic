@@ -110,47 +110,34 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
     }
 
     /// <summary>
-    /// Writes the prefixed XML namespace declarations for this extension to the specified <see cref="XmlWriter"/>.
-    /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the declarations.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <remarks>
-    ///     <para>
-    ///     The only extension in this library that declares two namespaces. GeoRSS GML nests elements
-    ///     from <c>http://www.opengis.net/gml</c> inside <c>georss:where</c>, and they need a prefix
-    ///     bound before they can be written with one.
-    ///     </para>
-    ///     <para>
-    ///     Both are declared whether or not the document uses GML, because this method is called on a
-    ///     freshly constructed instance that has no context to consult. That costs one unused attribute
-    ///     on the root of a Simple-only feed, and buys not repeating the declaration on every geometry
-    ///     of a GML one.
-    ///     </para>
-    /// </remarks>
-    public override void WriteXmlNamespaceDeclaration(XmlWriter writer)
-    {
-        ArgumentNullException.ThrowIfNull(writer);
-        base.WriteXmlNamespaceDeclaration(writer);
-        writer.WriteAttributeString("xmlns", "gml", null, GmlNamespaceUri);
-    }
-
-    /// <summary>
     /// Creates a namespace manager that resolves both the GeoRSS and the GML prefixes.
     /// </summary>
     /// <param name="navigator">The navigator whose name table and in-scope namespaces are used.</param>
     /// <returns>A namespace manager able to resolve <c>georss</c> and <c>gml</c>.</returns>
     /// <remarks>
+    ///     <para>
     ///     <see cref="SyndicationExtension.CreateNamespaceManager"/> binds one prefix — this extension's
     ///     own — and <c>SelectChildElement</c> <b>throws</b> on a prefix it cannot resolve, so reading
-    ///     GML at all requires binding <c>gml</c> here first. The document's own binding is preferred
-    ///     where it has one; because selection matches on the resolved namespace <i>URI</i> rather than
-    ///     on the prefix, a feed that spells GML with some other prefix still matches.
+    ///     GML at all requires binding <c>gml</c> here first.
+    ///     </para>
+    ///     <para>
+    ///     <b>It is bound to the namespace GeoRSS specifies, never to whatever the document happens to
+    ///     declare.</b> Selection matches on the resolved namespace <i>URI</i>, so a feed spelling this
+    ///     namespace with some other prefix still matches — but a feed using a different GML
+    ///     <i>namespace</i> is a different format and must not be read as though it were this one.
+    ///     </para>
+    ///     <para>
+    ///     That distinction is load bearing. Preferring the document's binding made
+    ///     <c>http://www.opengis.net/gml/3.2</c> resolve through this parser, and real GML 3.2 feeds —
+    ///     NASA's EONET among them — write longitude before latitude. Every one of its 7,030 geometries
+    ///     was read transposed, and 3,762 of them produced a latitude outside ±90. Binding the constant
+    ///     is what makes "a different namespace does not match" true rather than merely intended.
+    ///     </para>
     /// </remarks>
     private XmlNamespaceManager CreateGeoRssNamespaceManager(XPathNavigator navigator)
     {
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
-        string? declared = navigator.LookupNamespace("gml");
-        manager.AddNamespace("gml", !string.IsNullOrEmpty(declared) ? declared : GmlNamespaceUri);
+        manager.AddNamespace("gml", GmlNamespaceUri);
 
         return manager;
     }

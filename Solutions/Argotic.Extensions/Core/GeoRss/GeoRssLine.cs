@@ -78,10 +78,24 @@ public class GeoRssLine : IComparable<GeoRssLine>, IEquatable<GeoRssLine>, IComp
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    public void WriteTo(XmlWriter writer)
+    public void WriteTo(XmlWriter writer) => this.WriteTo(writer, GeoRssExtensionUtility.NamespaceUri);
+
+    /// <summary>
+    /// Saves the current <see cref="GeoRssLine"/> to the specified <see cref="XmlWriter"/>, in the supplied namespace.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+    /// <param name="xmlNamespace">The XML namespace to qualify the element with.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is a null reference or an empty string.</exception>
+    /// <remarks>
+    ///     The context passes the namespace its own caller supplied, so that every geometry it writes
+    ///     lands in one namespace rather than two.
+    /// </remarks>
+    public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        GeoRssExtensionUtility.WritePositionElement(writer, "line", GeoRssExtensionUtility.NamespaceUri, (IReadOnlyCollection<GeoRssPosition>)this.Positions);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
+        GeoRssExtensionUtility.WritePositionElement(writer, "line", xmlNamespace, (IReadOnlyCollection<GeoRssPosition>)this.Positions);
     }
 
     /// <summary>

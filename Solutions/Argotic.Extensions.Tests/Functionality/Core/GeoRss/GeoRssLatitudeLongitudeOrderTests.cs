@@ -186,4 +186,36 @@ public sealed class GeoRssLatitudeLongitudeOrderTests
 
         ContextOf(reloaded).Point.ShouldBe(new GeoRssPosition(36.981334686279m, -121.45983123779m));
     }
+
+    /// <summary>
+    /// A trailing zero is part of the coordinate and survives a round trip.
+    /// </summary>
+    /// <remarks>
+    ///     <b>Comparing positions cannot detect this, which is why it is asserted on the text.</b>
+    ///     <see cref="GeoRssPosition"/> is a record struct, so its equality delegates to
+    ///     <see cref="decimal.Equals(decimal)"/> — and <c>45.256m.Equals(45.2560m)</c> is
+    ///     <see langword="true"/>, because that comparison ignores scale. Every other round-trip
+    ///     assertion in this family would therefore pass unchanged if the writer silently normalised
+    ///     <c>-71.920</c> to <c>-71.92</c>.
+    ///     <para>
+    ///     Preserving scale is the stated first reason for choosing <see cref="decimal"/> over
+    ///     <see cref="double"/>, so it needs an assertion that can actually fail. This is it.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void ATrailingZero_IsPartOfTheCoordinateAndSurvives()
+    {
+        RssFeed loaded = FeedCarrying("<georss:point>45.2560 -71.920</georss:point>");
+
+        using MemoryStream stream = new();
+        loaded.Save(stream);
+        string xml = Encoding.UTF8.GetString(stream.ToArray());
+
+        xml.Contains(">45.2560 -71.920<", StringComparison.Ordinal).ShouldBeTrue(
+            "the emitted text keeps the scale the publisher wrote");
+
+        // And the guard on the guard: the comparison this file's other tests rely on genuinely cannot
+        // tell these apart, so nobody should mistake those assertions for scale coverage.
+        new GeoRssPosition(45.2560m, -71.920m).ShouldBe(new GeoRssPosition(45.256m, -71.92m));
+    }
 }

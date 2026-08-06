@@ -1,4 +1,5 @@
 using System.Text;
+using System.Xml.XPath;
 
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
@@ -31,8 +32,14 @@ namespace Argotic.Extensions.Tests.Functionality.Core.GeoRss;
 ///     <c>gml:Point</c>, and of 1,470 entries whose titles name a US state, <b>1,468 are consistent with
 ///     longitude first and 0 with latitude first</b>. EONET also uses the GML 3.2 namespace
 ///     (<c>http://www.opengis.net/gml/3.2</c>) rather than the <c>http://www.opengis.net/gml</c> that
-///     GeoRSS specifies — so its elements do not match this parser at all, and nothing is silently read
-///     backwards. §5.1 carries that as an open decision with the numbers attached.
+///     GeoRSS specifies. §5.1 carries that as an open decision with the numbers attached.
+///     </para>
+///     <para>
+///     <b>That those feeds do not match is enforced, not assumed.</b> It first shipped as an assumption
+///     and was false: the namespace manager preferred whatever URI the document bound to <c>gml</c>, so
+///     GML 3.2 resolved through this parser and its coordinates were read transposed. The manager now
+///     binds the constant, and
+///     <see cref="AFeedUsingADifferentGmlNamespace_IsNotRead"/> is what keeps it that way.
 ///     </para>
 /// </remarks>
 [TestClass]
@@ -52,6 +59,20 @@ public sealed class GeoRssGmlTests
           </channel>
         </rss>
         """;
+
+    /// <summary>
+    /// Returns a navigator positioned on the feed's single item, for loading an extension directly.
+    /// </summary>
+    /// <param name="document">The feed document.</param>
+    /// <returns>A navigator on the <c>item</c> element.</returns>
+    private static XPathNavigator ItemNavigator(string document)
+    {
+        using StringReader reader = new(document);
+        XPathNavigator navigator = new XPathDocument(reader).CreateNavigator();
+        navigator.MoveToFollowing("item", string.Empty).ShouldBeTrue();
+
+        return navigator;
+    }
 
     private static GeoRssSyndicationExtensionContext? Context(string itemElements)
     {
@@ -142,9 +163,17 @@ public sealed class GeoRssGmlTests
     /// A GML document comes back out as GML.
     /// </summary>
     /// <remarks>
+    ///     <para>
     ///     Rewriting a publisher's GML as Simple would be a transformation nobody asked for, and one
-    ///     their own consumers might not accept. The <c>gml</c> prefix is declared once on the document
-    ///     root rather than repeated on every geometry.
+    ///     their own consumers might not accept.
+    /// </para>
+    ///     <para>
+    ///     The <c>gml</c> prefix is declared on the outermost GML element rather than on the document
+    ///     root, and the nested elements reuse it. Declaring it at the root would mean every GeoRSS
+    ///     document carried it whether or not it used GML, and would put a second declaration outside
+    ///     the adapter's duplicate-prefix guard — where a second extension claiming <c>gml</c> would
+    ///     abort the save with a duplicate-attribute error part way through the document.
+    ///     </para>
     /// </remarks>
     [TestMethod]
     public void AGmlDocument_ComesBackOutAsGml()
@@ -159,7 +188,7 @@ public sealed class GeoRssGmlTests
         feed.Save(saved);
         string xml = Encoding.UTF8.GetString(saved.ToArray());
 
-        xml.Contains("<gml:Point>", StringComparison.Ordinal).ShouldBeTrue("GML is written back as GML");
+        xml.Contains("<gml:Point", StringComparison.Ordinal).ShouldBeTrue("GML is written back as GML");
         xml.Contains(">45.256 -71.92<", StringComparison.Ordinal).ShouldBeTrue("latitude still first");
         xml.Contains("xmlns:gml=\"http://www.opengis.net/gml\"", StringComparison.Ordinal).ShouldBeTrue();
 
@@ -227,6 +256,100 @@ public sealed class GeoRssGmlTests
 
         feed.Channel.Items.Single().Extensions.OfType<GeoRssSyndicationExtension>().Single()
             .Context.Point.ShouldBe(new GeoRssPosition(45.256m, -71.92m));
+    }
+
+    /// <summary>
+    /// A feed using a different GML namespace is not read.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     <b>The regression test for a defect that shipped.</b> The namespace manager originally
+    ///     preferred whatever URI the document bound to the <c>gml</c> prefix, so a GML 3.2 feed resolved
+    ///     through this parser after all — and GML 3.2 feeds in the wild write longitude first. NASA's
+    ///     EONET has 7,030 such geometries; every one was read transposed, and 3,762 produced a latitude
+    ///     outside ±90.
+    ///     </para>
+    ///     <para>
+    ///     The manager now binds the constant, so the prefix a document chooses is irrelevant and the
+    ///     <em>namespace</em> decides. That is what makes "a different GML namespace does not match"
+    ///     true rather than merely intended, and this is the assertion that holds it true.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void AFeedUsingADifferentGmlNamespace_IsNotRead()
+    {
+        string document = """
+            <?xml version="1.0" encoding="UTF-8"?>
+            <rss version="2.0" xmlns:georss="http://www.georss.org/georss" xmlns:gml="http://www.opengis.net/gml/3.2">
+              <channel>
+                <title>A Feed</title>
+                <link>https://example.com/</link>
+                <description>A description.</description>
+                <item>
+                  <title>Wildfire, Colorado</title>
+                  <georss:where><gml:Point><gml:pos>-105.5 39.5</gml:pos></gml:Point></georss:where>
+                </item>
+              </channel>
+            </rss>
+            """;
+
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(document), writable: false);
+        RssFeed feed = new();
+        feed.Load(stream);
+
+        GeoRssSyndicationExtensionContext? context = feed.Channel.Items.Single()
+            .Extensions.OfType<GeoRssSyndicationExtension>().SingleOrDefault()?.Context;
+
+        (context?.Point).ShouldBeNull(
+            "a latitude of -105.5 is not a latitude; reading this feed would place a Colorado fire in Turkey");
+    }
+
+    /// <summary>
+    /// A geometry beside a where element is not hidden by it, in either direction.
+    /// </summary>
+    /// <remarks>
+    ///     The geometry kinds are independent, so an entry may carry a direct-child box and a wrapped
+    ///     point at once. Returning after the first match discarded whichever came second and then
+    ///     reported the wrong <see cref="GeoRssEncoding"/> for the survivor — which meant the save wrote
+    ///     the document back in a serialisation the publisher had not used.
+    /// </remarks>
+    [TestMethod]
+    public void AGeometryBesideAWhereElement_IsNotHiddenByIt()
+    {
+        GeoRssSyndicationExtensionContext? context = Context("""
+            <georss:box>1 2 3 4</georss:box>
+            <georss:where><gml:Point><gml:pos>45.256 -71.92</gml:pos></gml:Point></georss:where>
+            """);
+
+        context.ShouldNotBeNull();
+        context.Box.ShouldBe(new GeoRssBox(new GeoRssPosition(1m, 2m), new GeoRssPosition(3m, 4m)));
+        context.Point.ShouldBe(new GeoRssPosition(45.256m, -71.92m), "the wrapped point is not discarded");
+        context.Encoding.ShouldBe(GeoRssEncoding.Gml);
+    }
+
+    /// <summary>
+    /// Loading a second document does not leave the first document's geometry behind.
+    /// </summary>
+    /// <remarks>
+    ///     <see cref="GeoRssSyndicationExtensionContext.Encoding"/> and
+    ///     <see cref="GeoRssSyndicationExtensionContext.GeometryIsWrappedInWhere"/> only ever move
+    ///     towards GML and <see langword="true"/>, so without a reset a reused extension instance would
+    ///     publish coordinates the second document never contained.
+    /// </remarks>
+    [TestMethod]
+    public void LoadingASecondDocument_DoesNotLeaveTheFirstBehind()
+    {
+        GeoRssSyndicationExtension extension = new();
+
+        extension.Load(ItemNavigator(Feed("<georss:where><gml:Point><gml:pos>45.256 -71.92</gml:pos></gml:Point></georss:where>")));
+        extension.Context.Point.ShouldNotBeNull("the first document did carry a point");
+
+        extension.Load(ItemNavigator(Feed("<georss:elev>313</georss:elev>")));
+
+        extension.Context.Point.ShouldBeNull("the second document carried none");
+        extension.Context.Encoding.ShouldBe(GeoRssEncoding.Simple);
+        extension.Context.GeometryIsWrappedInWhere.ShouldBeFalse();
+        extension.Context.Elevation.ShouldBe(313m);
     }
 
     /// <summary>

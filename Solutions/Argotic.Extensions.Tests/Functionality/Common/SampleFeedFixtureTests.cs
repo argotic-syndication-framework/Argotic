@@ -77,8 +77,8 @@ public class SampleFeedFixtureTests
         }
 
         namespaces.Count.ShouldBeGreaterThanOrEqualTo(
-            19,
-            "RssFeedWithExtensions.xml is the suite's only richly-extended document; it declared 20 namespaces when linked in");
+            20,
+            "RssFeedWithExtensions.xml is the suite's only richly-extended document; it declared 21 namespaces once georss was added");
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ public class SampleFeedFixtureTests
             (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
         namespaces.Count.ShouldBeGreaterThanOrEqualTo(
-            8,
-            "AtomFeedWithExtensions.xml declared 9 namespaces when linked in");
+            9,
+            "AtomFeedWithExtensions.xml declared 10 namespaces once georss was added");
     }
 }

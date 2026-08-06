@@ -24,18 +24,25 @@ namespace Argotic.Extensions.Core;
 public readonly record struct GeoRssBox(GeoRssPosition LowerLeft, GeoRssPosition UpperRight) : IComparable<GeoRssBox>
 {
     /// <summary>
-    /// Gets a value indicating whether the corners are the right way round.
+    /// Gets a value indicating whether the corners are the right way round in latitude.
     /// </summary>
-    /// <value><b>true</b> if <see cref="LowerLeft"/> is south-west of <see cref="UpperRight"/>; otherwise, <b>false</b>.</value>
+    /// <value><b>true</b> if <see cref="LowerLeft"/> is no further north than <see cref="UpperRight"/>; otherwise, <b>false</b>.</value>
     /// <remarks>
+    ///     <para>
     ///     Reported rather than enforced, and reported rather than repaired. A publisher who writes the
     ///     corners the wrong way round has still described a box, and swapping them here would report a
     ///     geometry the feed does not contain — while refusing to read it would lose the only location
     ///     that entry has. Consumers that care can ask.
+    ///     </para>
+    ///     <para>
+    ///     <b>Latitude only, deliberately.</b> The obvious companion check — that the lower-left
+    ///     longitude is no greater than the upper-right — is wrong at the antimeridian, where a box
+    ///     spanning the Pacific is correctly encoded as lower-left 170 to upper-right −170. Longitude
+    ///     wraps and latitude does not, so testing longitude the same way would report every
+    ///     correctly-encoded Pacific-spanning box as malformed.
+    ///     </para>
     /// </remarks>
-    public bool IsWellOriented =>
-        this.LowerLeft.Latitude <= this.UpperRight.Latitude
-        && this.LowerLeft.Longitude <= this.UpperRight.Longitude;
+    public bool IsWellOriented => this.LowerLeft.Latitude <= this.UpperRight.Latitude;
 
     /// <summary>
     /// Compares the current instance with another box.

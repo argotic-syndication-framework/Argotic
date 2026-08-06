@@ -51,6 +51,7 @@ public sealed class ITunesComparisonCoversEveryMemberTests
         extension.Context.Season = 3;
         extension.Context.EpisodeType = ITunesEpisodeType.Full;
         extension.Context.PodcastType = ITunesPodcastType.Episodic;
+        extension.Context.VerificationToken = "657bc6db-cc95-4ae2-b257-e32553e76cdd";
         return extension;
     }
 
@@ -149,5 +150,6 @@ public sealed class ITunesComparisonCoversEveryMemberTests
         ["Season", (ITunesSyndicationExtensionContext c) => { c.Season = 4; }],
         ["EpisodeType", (ITunesSyndicationExtensionContext c) => { c.EpisodeType = ITunesEpisodeType.Bonus; }],
         ["PodcastType", (ITunesSyndicationExtensionContext c) => { c.PodcastType = ITunesPodcastType.Serial; }],
+        ["VerificationToken", (ITunesSyndicationExtensionContext c) => { c.VerificationToken = "668b25d0-3e5a-11f1-a5f6-473c059f121e"; }],
     ];
 }

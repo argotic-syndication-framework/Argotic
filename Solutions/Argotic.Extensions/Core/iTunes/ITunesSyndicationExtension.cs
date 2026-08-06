@@ -273,6 +273,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         if (result == 0) result = string.Compare(this.Context.Subtitle, other.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Context.Summary, other.Context.Summary, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Context.Title, other.Context.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.VerificationToken, other.Context.VerificationToken, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -323,6 +324,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         hash.Add(HashCodeUtility.Component(this.Context.Subtitle));
         hash.Add(HashCodeUtility.Component(this.Context.Summary));
         hash.Add(HashCodeUtility.Component(this.Context.Title));
+        hash.Add(HashCodeUtility.Component(this.Context.VerificationToken));
         return hash.ToHashCode();
     }
 

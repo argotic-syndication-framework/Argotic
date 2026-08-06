@@ -62,35 +62,48 @@ public sealed class AtomSpecConformanceTests
     // ---- A1: type="html" text constructs -------------------------------------------------------
 
     /// <summary>
-    /// A1 — an html title exposes the escaped transport form instead of the HTML.
+    /// A1 — an html title exposes the HTML itself.
     /// </summary>
     /// <remarks>
     ///     §3.1.1.2: the markup is escaped for XML transport; the logical content after XML
-    ///     processing is the HTML itself, which is what <c>AtomContent</c> already exposes for the
-    ///     same input shape. <c>AtomTextConstruct</c> reads <c>InnerXml</c> — the transport form.
+    ///     processing is the HTML itself. <c>Load</c> used to read <c>InnerXml</c> — the transport
+    ///     form — and now reads <c>Value</c>, converging on the model <c>AtomContent</c> always had.
     /// </remarks>
     [TestMethod]
-    public void A1_AnHtmlTitle_ExposesTheEscapedFormNotTheHtml()
+    public void A1_AnHtmlTitle_ExposesTheHtmlItself()
     {
         AtomFeed feed = Load("""<title type="html">bold: &lt;b&gt;yes&lt;/b&gt; plain</title>""");
 
         feed.Entries.First().Title!.Content.ShouldBe(
-            "bold: &lt;b&gt;yes&lt;/b&gt; plain",
-            "PINS TODAY: the escaped transport form, where AtomContent exposes the HTML itself");
+            "bold: <b>yes</b> plain",
+            "INVERTED: the logical HTML, exactly as AtomContent exposes the same input");
     }
 
     /// <summary>
-    /// A1 — an html title double-escapes on a round trip, and compounds on the next.
+    /// A1 — an html title round-trips byte-identically, however many times it cycles.
     /// </summary>
+    /// <remarks>
+    ///     Cycled twice deliberately: the defect this inverts compounded, so a single round trip is
+    ///     not proof of a fixed point.
+    /// </remarks>
     [TestMethod]
-    public void A1_AnHtmlTitle_DoubleEscapesOnEveryRoundTrip()
+    public void A1_AnHtmlTitle_RoundTripsIdenticallyEveryCycle()
     {
         AtomFeed first = Load("""<title type="html">bold: &lt;b&gt;yes&lt;/b&gt; plain</title>""");
         string once = SaveEntry(first);
 
         once.ShouldContain(
-            "bold: &amp;lt;b&amp;gt;yes&amp;lt;/b&amp;gt; plain",
-            customMessage: "PINS TODAY: escaped a second time on save");
+            "bold: &lt;b&gt;yes&lt;/b&gt; plain",
+            customMessage: "INVERTED: escaped exactly once, as written");
+
+        AtomFeed second = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(Save(first)));
+        second.Load(stream);
+        string twice = SaveEntry(second);
+
+        twice.ShouldContain(
+            "bold: &lt;b&gt;yes&lt;/b&gt; plain",
+            customMessage: "and the second cycle is a fixed point, which is what the defect was not");
     }
 
     /// <summary>

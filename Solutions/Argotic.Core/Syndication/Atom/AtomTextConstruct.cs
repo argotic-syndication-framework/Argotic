@@ -167,9 +167,15 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
                 wasLoaded = true;
             }
         }
-        else if (this.TextType == AtomTextConstructType.Html && !string.IsNullOrEmpty(source.InnerXml))
+        else if (this.TextType == AtomTextConstructType.Html && !string.IsNullOrEmpty(source.Value))
         {
-            this.Content = source.InnerXml;
+            // Value, not InnerXml. RFC 4287 s3.1.1.2's escaping is XML transport; the logical content
+            // after XML processing is the HTML itself, and Value is that -- the parser has already
+            // unescaped it. InnerXml re-serialises the text node, handing back the escaped form, which
+            // WriteTo then escaped again: every load-save cycle multiplied the escaping, so a feed
+            // republished through this library corrupted a little more each pass. AtomContent has
+            // always read html with Value; this was the one class of the two that did not.
+            this.Content = source.Value;
             wasLoaded = true;
         }
         else if (!string.IsNullOrEmpty(source.Value))

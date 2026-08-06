@@ -136,14 +136,25 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
         XPathNavigator? uriNavigator = source.SelectChildElement("atom", "uri", manager);
         XPathNavigator? emailNavigator = source.SelectChildElement("atom", "email", manager);
 
-        // Guarded like the term attribute in AtomCategory.Load and the version in AtomGenerator.Load:
-        // the setter stays strict for writers, and the read path tolerates what the wild emits. Jekyll
-        // produces <author><name></name></author> whenever a site has no author configured, and three
-        // of Azure Weekly's 478 production feeds were unloadable for it - failing with an
-        // ArgumentException about a parameter the caller never passed.
-        if (nameNavigator is not null && !string.IsNullOrEmpty(nameNavigator.Value))
+        // <name></name> is conformant Atom: RFC 4287's grammar is `element atom:name { text }`, and
+        // RELAX NG text admits the empty string. Jekyll emits exactly that whenever a site has no
+        // author configured, and three of Azure Weekly's 478 production feeds were unloadable for it -
+        // failing with an ArgumentException about a parameter the caller never passed. So the setter
+        // stays strict for writers, the assignment is guarded like AtomCategory.Load's term already
+        // is, and the empty name simply leaves the property at its default.
+        //
+        // wasLoaded is set by the element's PRESENCE, not by the assignment. A person construct's one
+        // required child was found, so this construct genuinely loaded - and the caller keeps it. That
+        // matters for conformance: a feed with no feed-level author satisfies RFC 4287 section 4.1.1
+        // through its entries' author elements, so a reader that dropped the degenerate ones would
+        // round-trip a conformant document into one that violates two MUSTs.
+        if (nameNavigator is not null)
         {
-            this.Name = nameNavigator.Value;
+            if (!string.IsNullOrEmpty(nameNavigator.Value))
+            {
+                this.Name = nameNavigator.Value;
+            }
+
             wasLoaded = true;
         }
 

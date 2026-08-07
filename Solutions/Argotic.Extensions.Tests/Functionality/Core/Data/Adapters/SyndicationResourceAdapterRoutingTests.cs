@@ -3,6 +3,7 @@ using System.Xml.XPath;
 
 using Argotic.Common;
 using Argotic.Data.Adapters;
+using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Publishing;
 using Argotic.Syndication;
 
@@ -510,5 +511,210 @@ public class SyndicationResourceAdapterRoutingTests
         feed.Channel.Title.ShouldBe(string.Empty);
         feed.Channel.Items.ShouldBeEmpty();
         loadedCount.ShouldBe(1);
+    }
+
+    /// <summary>
+    /// An RSS 0.92 document fills through the dispatcher's 0.92 arm.
+    /// </summary>
+    /// <remarks>
+    ///     A reach guard: the 0.92 adapter has direct tests, but nothing else executes this dispatcher arm
+    ///     through a public <c>Load</c>. Branch coverage found the arm unexecuted after the switch rewrite.
+    /// </remarks>
+    [TestMethod]
+    public void AnRss092Document_LoadedThroughRssFeed_FillsTheChannel()
+    {
+        // Arrange
+        RssFeed feed = new();
+        using MemoryStream stream = StreamFor(FeedTestData.Rss092Minimal);
+
+        // Act
+        feed.Load(stream);
+
+        // Assert
+        feed.Channel.Title.ShouldBe("Test RSS 0.92 Feed");
+    }
+
+    /// <summary>
+    /// An RSS 0.90 document — RDF-rooted, detected from the Netscape namespace — fills through the
+    /// dispatcher's 0.9 arm.
+    /// </summary>
+    /// <remarks>
+    ///     A reach guard, for the same reason as the 0.92 test.
+    /// </remarks>
+    [TestMethod]
+    public void AnRss090Document_LoadedThroughRssFeed_FillsTheChannel()
+    {
+        // Arrange
+        RssFeed feed = new();
+        using MemoryStream stream = StreamFor(FeedTestData.Rss090Minimal);
+
+        // Act
+        feed.Load(stream);
+
+        // Assert
+        feed.Channel.Title.ShouldBe("Test RSS 0.90 Feed");
+    }
+
+    /// <summary>
+    /// An OPML 1.1 document fills through its own case label on the shared 2.0 arm.
+    /// </summary>
+    /// <remarks>
+    ///     A reach guard: the whole test corpus declared <c>version="2.0"</c>, so the 1.1 and 1.0 labels
+    ///     had never executed through a public <c>Load</c>.
+    /// </remarks>
+    [TestMethod]
+    public void AnOpml11Document_LoadedThroughOpmlDocument_FillsTheBody()
+    {
+        // Arrange
+        OpmlDocument document = new();
+        using MemoryStream stream = StreamFor("""
+            <?xml version="1.0" encoding="UTF-8"?>
+            <opml version="1.1">
+                <head><title>An Outline</title></head>
+                <body><outline text="Outline 1"/></body>
+            </opml>
+            """);
+
+        // Act
+        document.Load(stream);
+
+        // Assert
+        document.Outlines.Count.ShouldBe(1);
+    }
+
+    /// <summary>
+    /// An OPML 1.0 document fills through its own case label on the shared 2.0 arm.
+    /// </summary>
+    [TestMethod]
+    public void AnOpml10Document_LoadedThroughOpmlDocument_FillsTheBody()
+    {
+        // Arrange
+        OpmlDocument document = new();
+        using MemoryStream stream = StreamFor("""
+            <?xml version="1.0" encoding="UTF-8"?>
+            <opml version="1.0">
+                <head><title>An Outline</title></head>
+                <body><outline text="Outline 1"/></body>
+            </opml>
+            """);
+
+        // Act
+        document.Load(stream);
+
+        // Assert
+        document.Outlines.Count.ShouldBe(1);
+    }
+
+    /// <summary>
+    /// An RSD 0.6 document fills through the dispatcher's 0.6 arm.
+    /// </summary>
+    /// <remarks>
+    ///     A reach guard: the 0.6 adapter has direct tests, but nothing else executes this dispatcher arm
+    ///     through a public <c>Load</c>.
+    /// </remarks>
+    [TestMethod]
+    public void AnRsd06Document_LoadedThroughRsdDocument_FillsTheDocument()
+    {
+        // Arrange
+        RsdDocument document = new();
+        using MemoryStream stream = StreamFor(FeedTestData.Rsd06Minimal);
+
+        // Act
+        document.Load(stream);
+
+        // Assert
+        document.EngineName.ShouldBe("Test Blog Engine");
+    }
+
+    /// <summary>
+    /// A feed in the Atom 0.3 namespace carrying an unrecognised <c>version</c> fills as Atom 0.3 — the
+    /// namespace fallback's other leg.
+    /// </summary>
+    /// <remarks>
+    ///     The 2005-namespace leg of the fallback is pinned above; this executes the branch that chooses
+    ///     <c>Atom03SyndicationResourceAdapter</c> when the 2005 namespace is not in scope.
+    /// </remarks>
+    [TestMethod]
+    public void AnAtomFeedInThePurlNamespaceClaimingAnUnknownVersion_FillsAsAtom03()
+    {
+        // Arrange
+        AtomFeed feed = new();
+        using MemoryStream stream = StreamFor("""
+            <?xml version="1.0" encoding="UTF-8"?>
+            <feed version="0.5" xmlns="http://purl.org/atom/ns#">
+                <title>A Purl Feed</title>
+                <id>urn:uuid:12345678-1234-1234-1234-123456789012</id>
+                <modified>2025-01-20T12:00:00Z</modified>
+                <link rel="alternate" type="text/html" href="http://example.com"/>
+            </feed>
+            """);
+
+        // Act
+        feed.Load(stream);
+
+        // Assert
+        feed.Title.ShouldNotBeNull();
+        feed.Title.Content.ShouldBe("A Purl Feed");
+    }
+
+    /// <summary>
+    /// A stand-alone Atom 0.3 entry document fills through the dispatcher's entry overload.
+    /// </summary>
+    /// <remarks>
+    ///     A reach guard: the 0.3 entry adapter has direct tests, but the dispatcher's Atom 0.3 branch had
+    ///     only ever dispatched feeds through a public <c>Load</c>.
+    /// </remarks>
+    [TestMethod]
+    public void AnAtom03EntryDocument_LoadedThroughAtomEntry_FillsTheEntry()
+    {
+        // Arrange
+        AtomEntry entry = new();
+        using MemoryStream stream = StreamFor(FeedTestData.Atom03Entry);
+
+        // Act
+        entry.Load(stream);
+
+        // Assert
+        entry.Title.ShouldNotBeNull();
+        entry.Title.Content.ShouldBe("Test Entry");
+    }
+
+    /// <summary>
+    /// The Atom 0.3 branch refuses a resource that is neither a feed nor an entry, exactly as the 1.0
+    /// branch does.
+    /// </summary>
+    [TestMethod]
+    public void AnAtom03Format_WithAResourceThatIsNeitherFeedNorEntry_IsRefusedWithArgumentException()
+    {
+        // Arrange
+        SyndicationResourceAdapter adapter = new(NavigatorFor(FeedTestData.Atom03Feed), new SyndicationResourceLoadSettings());
+
+        // Act
+        ArgumentException exception = Should.Throw<ArgumentException>(() => adapter.Fill(new RssFeed(), SyndicationContentFormat.Atom));
+
+        // Assert
+        exception.ParamName.ShouldBe("resource");
+        exception.Message.ShouldContain("RssFeed");
+        exception.Message.ShouldContain("AtomFeed");
+    }
+
+    /// <summary>
+    /// A format of <see cref="SyndicationContentFormat.None"/> is refused before the document is sniffed.
+    /// </summary>
+    /// <remarks>
+    ///     A reach guard: the guard predates this rewrite, and nothing had ever executed its throw.
+    /// </remarks>
+    [TestMethod]
+    public void AFormatOfNone_HandedToTheDispatcher_IsRefused()
+    {
+        // Arrange
+        SyndicationResourceAdapter adapter = new(NavigatorFor(Rss20WithATitledChannel), new SyndicationResourceLoadSettings());
+
+        // Act
+        ArgumentException exception = Should.Throw<ArgumentException>(() => adapter.Fill(new RssFeed(), SyndicationContentFormat.None));
+
+        // Assert
+        exception.ParamName.ShouldBe("format");
+        exception.Message.ShouldContain("invalid");
     }
 }

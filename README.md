@@ -2,111 +2,347 @@
 [![GitHub license](https://img.shields.io/badge/License-Apache%202-blue.svg)](https://raw.githubusercontent.com/argotic-syndication-framework/argotic/master/LICENSE)
 [![IMM](https://endimmfuncdev.azurewebsites.net/api/imm/github/argotic-syndication-framework/argotic/total?cache=false)](https://endimmfuncdev.azurewebsites.net/api/imm/github/argotic-syndication-framework/argotic/total?cache=false)
 
+# Argotic Syndication Framework
 
-The Argotic Syndication Framework was originally created by Brian Kuhn in 2007. Argotic is one of the most powerful and extensible web content syndication frameworks available to .NET developers, supporting [RSS](http://www.rssboard.org/rss-specification), [Atom](http://www.atomenabled.org/developers/syndication/atom-format-spec.php), [OPML](http://www.opml.org/spec2), [APML](http://apml.pbwiki.com), [BlogML](http://blogml.org), [RSD](http://cyber.law.harvard.edu/blogs/gems/tech/rsd.html), and [Sitemap](https://www.sitemaps.org/protocol.html). 
+Argotic reads and writes web content syndication formats on .NET. It covers
+[RSS 2.0](https://www.rssboard.org/rss-specification),
+[Atom 1.0](https://www.rfc-editor.org/rfc/rfc4287),
+[OPML 2.0](http://opml.org/spec2.opml),
+[APML](https://en.wikipedia.org/wiki/Attention_Profiling_Mark-up_Language),
+[BlogML](https://github.com/BlogML/BlogML),
+[RSD](https://cyber.harvard.edu/blogs/gems/tech/rsd.html) and the
+[Sitemap protocol](https://www.sitemaps.org/protocol.html), plus the
+[Atom Publishing Protocol](https://www.rfc-editor.org/rfc/rfc5023), Trackback and XML-RPC. On top of
+those it ships **27 syndication extensions across 22 families** — GeoRSS, Podcasting 2.0, iTunes,
+Dublin Core, Yahoo Media, Creative Commons, and Google's Sitemap News/Image/Video/Hreflang among
+them.
 
-The project had become dormant, but has been brought back to life by [endjin](https://endjin.com), as Argotic is used to produce the [Azure Weekly Newsletter](https://azureweekly.info), [Microsoft Fabric Weekly Newsletter](https://fabricweekly.info) and [Power BI Weekly Newsletter](https://powerbiweekly.info).
+Originally created by **Brian William Kuhn in 2007**, the project became dormant and has been brought
+back to life by [endjin](https://endjin.com). It is used in production to produce the
+[Azure Weekly](https://azureweekly.info), [Microsoft Fabric Weekly](https://fabricweekly.info) and
+[Power BI Weekly](https://powerbiweekly.info) newsletters.
 
-The project has been updated to .NET 10 with comprehensive C# modernization, including collection expressions, pattern matching, file-scoped namespaces, and nullable reference types. The codebase has been refactored to follow modern .NET idioms and best practices. There are *many* breaking changes.
+> **This release is a rewrite for .NET 10, and there are many breaking changes.** The .NET Framework
+> v1 idioms are gone: loads over the network are `async` and take a `CancellationToken`, `HttpClient`
+> replaces `HttpWebRequest` (and can be supplied by you or by `IHttpClientFactory`),
+> `WebRequestOptions` is now `SyndicationRequestOptions`, and the whole public surface is annotated
+> for nullable reference types. See the [CHANGELOG](CHANGELOG.md).
+
+*ar·got·ic* (_ahr-got-ik_) — a specialized idiomatic vocabulary peculiar to a particular class or
+group of people.
 
 ## Requirements
 
-- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) or later
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) — the packages target `net10.0`
+  and nothing else.
+- C# 14 if you are building from source. `LangVersion` is pinned to `14.0`, and features such as
+  `extension` blocks and the `field` keyword are load-bearing in the implementation.
 
-> **Note:** This release drops support for .NET Standard 2.0/2.1, .NET 8, and .NET 9. If you need to target earlier frameworks, please use a previous version of the packages.
+> Support for .NET Standard 2.0/2.1, .NET 8 and .NET 9 has been dropped. Use a previous package
+> version if you need to target those.
 
 ## Installation
 
-Install the NuGet packages:
+Three packages, in a straight dependency chain:
+
+```
+Argotic.Common          core interfaces and utilities, no dependencies
+    ↑
+Argotic.Extensions      the 27 syndication extensions
+    ↑
+Argotic.Core            RSS, Atom, OPML, APML, BlogML, RSD, Sitemap, AtomPub, Trackback, XML-RPC
+```
+
+**Most consumers want `Argotic.Core`** — it pulls in the other two transitively.
 
 ```bash
-# Core syndication library
 dotnet add package Argotic.Core
-
-# Common utilities and interfaces
-dotnet add package Argotic.Common
-
-# Syndication extensions (iTunes, Dublin Core, Yahoo Media, etc.)
-dotnet add package Argotic.Extensions
 ```
 
-Or via the Package Manager Console:
+Reference `Argotic.Extensions` on its own only if you are building your own `SyndicationExtension`
+without needing the format implementations, and `Argotic.Common` on its own only if you want the
+utilities (`SyndicationDiscoveryUtility`, `SyndicationEncodingUtility`, `SyndicationDateTimeUtility`)
+without either.
 
-```powershell
-Install-Package Argotic.Core
-Install-Package Argotic.Common
-Install-Package Argotic.Extensions
-```
+## Getting started
 
-See the [wiki](https://argotic-syndication-framework.github.io/Argotic) for detailed documentation and the [CHANGELOG](CHANGELOG.md) for a complete list of changes in this release.
+Every resource type — `RssFeed`, `AtomFeed`, `AtomEntry`, `OpmlDocument`, `ApmlDocument`,
+`BlogMLDocument`, `RsdDocument`, `Sitemap`, `SitemapIndex`, `AtomServiceDocument` — exposes the same
+shape, so a snippet written for one reads across to the others unchanged:
 
-## Quick Start Examples
+| Member                                                          | Purpose                                                                  |
+|-----------------------------------------------------------------|--------------------------------------------------------------------------|
+| `static Task<T> CreateAsync(Uri, …, CancellationToken)`         | Fetch and parse in one call.                                             |
+| `Task LoadAsync(Uri, …, CancellationToken)`                     | Fetch into an existing instance, so you can subscribe to `Loaded` first. |
+| `void Load(Stream \| XmlReader \| IXPathNavigable[, settings])` | Parse from something you already have.                                   |
+| `void Save(Stream \| XmlWriter[, settings])`                    | Write it back out.                                                       |
 
-### Reading an RSS Feed
+### Read a feed from a URL
 
 ```csharp
 using Argotic.Syndication;
 
-// Load feed from a URL
-RssFeed feed = await RssFeed.CreateAsync(new Uri("https://endjin.com/rss.xml"));
+RssFeed feed = await RssFeed.CreateAsync(
+    new Uri("https://endjin.com/rss.xml"),
+    cancellationToken: cancellationToken);
 
-// Access feed metadata
-Console.WriteLine($"Feed: {feed.Channel.Title}");
-Console.WriteLine($"Description: {feed.Channel.Description}");
+Console.WriteLine(feed.Channel.Title);
+Console.WriteLine(feed.Channel.Description);
 
-// Iterate through items
 foreach (RssItem item in feed.Channel.Items)
 {
-    Console.WriteLine($"- {item.Title}");
-    Console.WriteLine($"  Link: {item.Link}");
-    Console.WriteLine($"  Published: {item.PublicationDate}");
+    Console.WriteLine($"{item.PublicationDate:yyyy-MM-dd}  {item.Title}");
+    Console.WriteLine($"  {item.Link}");
 }
 ```
 
-### Creating an RSS Feed
+`Link`, `Guid`, `Source` and friends are nullable — `Uri? Link`, `RssGuid? Guid` — because RSS makes
+almost every element optional and a feed in the wild will omit them.
+
+### Read a feed from a `Stream`
 
 ```csharp
 using Argotic.Syndication;
 
-// Create a new feed
+RssFeed feed = new();
+
+using FileStream stream = File.OpenRead("feed.xml");
+feed.Load(stream);
+```
+
+### Read a feed from an `XmlReader`
+
+```csharp
+using System.Xml;
+
+using Argotic.Common;
+using Argotic.Syndication;
+
+AtomFeed feed = new();
+
+using XmlReader reader = XmlReader.Create(
+    "feed.xml",
+    SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+
+feed.Load(reader);
+
+foreach (AtomEntry entry in feed.Entries)
+{
+    Console.WriteLine(entry.Title?.Content);
+}
+```
+
+`CreateSafeXmlReaderSettings()` is what Argotic uses internally: DTD processing off, no external
+entity resolution. Use it for any reader you hand to `Load`.
+
+### When you don't know whether it's RSS or Atom
+
+`GenericSyndicationFeed` exposes only what the two formats agree on — title, description, language,
+categories, items — and hands you the concrete resource through `Resource` when you need the rest.
+
+```csharp
+using Argotic.Common;
+using Argotic.Syndication;
+
+GenericSyndicationFeed feed = await GenericSyndicationFeed.CreateAsync(
+    new Uri("https://endjin.com/rss.xml"),
+    cancellationToken: cancellationToken);
+
+Console.WriteLine($"{feed.Title} ({feed.Format})");
+
+foreach (GenericSyndicationItem item in feed.Items)
+{
+    Console.WriteLine($"{item.PublishedOn:yyyy-MM-dd}  {item.Title}");
+
+    foreach (GenericSyndicationCategory category in item.Categories)
+    {
+        Console.WriteLine($"  #{category.Term}");
+    }
+}
+
+// Drop down to the format-specific object model when you need it.
+if (feed.Resource is RssFeed rss)
+{
+    Console.WriteLine(rss.Channel.Generator);
+}
+```
+
+`GenericSyndicationFeed` reads RSS, Atom and OPML. It takes `Load(Stream)` and `Load(string)` but not
+`Load(XmlReader)`.
+
+### Find a site's feeds
+
+```csharp
+using Argotic.Common;
+
+IList<DiscoverableSyndicationEndpoint> endpoints =
+    await SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(
+        new Uri("https://endjin.com/"),
+        cancellationToken);
+
+foreach (DiscoverableSyndicationEndpoint endpoint in endpoints)
+{
+    Console.WriteLine($"{endpoint.ContentFormat,-8} {endpoint.Title}  →  {endpoint.Source}");
+}
+```
+
+### Create a feed and save it
+
+```csharp
+using Argotic.Syndication;
+
 RssFeed feed = new()
 {
     Channel =
     {
         Title = "endjin blog",
         Link = new Uri("https://endjin.com/blog"),
-        Description = "Latest posts from the endjin blog"
-    }
+        Description = "Latest posts from the endjin blog",
+        SelfLink = new Uri("https://endjin.com/rss.xml"),
+    },
 };
 
-// Add items
 feed.Channel.Items.Add(new RssItem
 {
     Title = "Polars Workloads on Microsoft Fabric",
     Link = new Uri("https://endjin.com/blog/2026/01/polars-workloads-on-microsoft-fabric"),
-    Description = "A technical guide demonstrating how to leverage Polars within Microsoft Fabric for efficient data transformation.",
-    PublicationDate = DateTime.UtcNow
+    Description = "Leveraging Polars within Microsoft Fabric for efficient data transformation.",
+    PublicationDate = DateTime.UtcNow,
+    Guid = new RssGuid("https://endjin.com/blog/2026/01/polars-workloads-on-microsoft-fabric"),
 });
 
-feed.Channel.Items.Add(new RssItem
-{
-    Title = "Practical Polars: Code Examples for Everyday Data Tasks",
-    Link = new Uri("https://endjin.com/blog/2026/01/practical-polars-code-examples-everyday-data-tasks"),
-    Description = "A hands-on guide featuring concrete code examples for common data workflows using Python Polars.",
-    PublicationDate = DateTime.UtcNow.AddDays(-1)
-});
-
-// Save to a stream or file
 using FileStream stream = File.Create("feed.xml");
 feed.Save(stream);
 ```
 
-### Creating a Sitemap
+`RssChannel.Title` and `RssChannel.Description` are required by the specification, and their setters
+throw on `null` or an empty string rather than letting you save a non-conforming document.
+
+The Atom equivalent:
 
 ```csharp
 using Argotic.Syndication;
 
-// Create a new sitemap
+AtomFeed feed = new()
+{
+    Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+    Title = new AtomTextConstruct("endjin blog"),
+    UpdatedOn = DateTime.UtcNow,
+};
+
+feed.Links.Add(new AtomLink(new Uri("https://endjin.com/blog")));
+feed.Links.Add(new AtomLink(new Uri("https://endjin.com/atom.xml"), "self"));
+feed.Authors.Add(new AtomPersonConstruct("endjin"));
+
+feed.Entries.Add(new AtomEntry
+{
+    Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+    Title = new AtomTextConstruct("Practical Polars"),
+    UpdatedOn = DateTime.UtcNow,
+    Summary = new AtomTextConstruct("Concrete code examples for common data workflows."),
+});
+
+using FileStream stream = File.Create("atom.xml");
+feed.Save(stream);
+```
+
+### Syndication extensions
+
+Extensions are discovered by reflection over `Argotic.Extensions`; there is no registration step. A
+load looks at the XML namespaces the document declares, instantiates the matching extensions, and
+attaches each one to the entity that actually carried its elements. To read one, call `FindExtension`
+with the extension's static `MatchByType` predicate.
+
+**Reading iTunes podcast metadata:**
+
+```csharp
+using Argotic.Extensions;
+using Argotic.Extensions.Core;
+using Argotic.Syndication;
+
+RssFeed feed = await RssFeed.CreateAsync(
+    new Uri("https://example.com/podcast.xml"),
+    cancellationToken: cancellationToken);
+
+if (feed.Channel.FindExtension(ITunesSyndicationExtension.MatchByType)
+    is ITunesSyndicationExtension show)
+{
+    Console.WriteLine($"{show.Context.Author} — {show.Context.Summary}");
+    Console.WriteLine($"Artwork: {show.Context.Image}");
+}
+
+foreach (RssItem item in feed.Channel.Items)
+{
+    if (item.FindExtension(ITunesSyndicationExtension.MatchByType)
+        is ITunesSyndicationExtension episode)
+    {
+        Console.WriteLine(
+            $"S{episode.Context.Season}E{episode.Context.Episode} " +
+            $"({episode.Context.Duration}) {episode.Context.Title}");
+    }
+}
+```
+
+`FindExtension` is a linear scan of `Extensions`, so hold the result rather than calling it once per
+property.
+
+**Writing them:** add a populated extension to any extensible entity and save. The `xmlns:` prefixes
+on the root element are derived from the extensions actually present, so there is nothing to declare
+by hand.
+
+```csharp
+using Argotic.Extensions.Core;
+using Argotic.Syndication;
+
+RssFeed feed = new()
+{
+    Channel =
+    {
+        Title = "A Podcast",
+        Link = new Uri("https://example.com/"),
+        Description = "A podcast about things.",
+    },
+};
+
+ITunesSyndicationExtension show = new();
+show.Context.Author = "endjin";
+show.Context.Summary = "A podcast about things.";
+show.Context.ExplicitMaterial = ITunesExplicitMaterial.No;
+show.Context.Image = new Uri("https://example.com/artwork.png");
+show.Context.Owner = new ITunesOwner("podcast@example.com", "endjin");
+show.Context.Categories.Add(new ITunesCategory("Technology"));
+feed.Channel.Extensions.Add(show);
+
+RssItem item = new()
+{
+    Title = "Episode 7",
+    Link = new Uri("https://example.com/episodes/7"),
+    PublicationDate = DateTime.UtcNow,
+};
+
+ITunesSyndicationExtension episode = new();
+episode.Context.Duration = TimeSpan.FromMinutes(42);
+episode.Context.Season = 3;
+episode.Context.Episode = 7;
+episode.Context.EpisodeType = ITunesEpisodeType.Full;
+item.Extensions.Add(episode);
+
+feed.Channel.Items.Add(item);
+
+using FileStream stream = File.Create("podcast.xml");
+feed.Save(stream);   // xmlns:itunes is written for you
+```
+
+Everything above works identically for the other 26 extensions —
+`PodcastSyndicationExtension` (Podcasting 2.0: transcripts, chapters, funding, people, locked),
+`DublinCoreElementSetSyndicationExtension`, `GeoRssSyndicationExtension`,
+`YahooMediaSyndicationExtension`, `SitemapNewsExtension`, and the rest.
+
+### Sitemaps
+
+```csharp
+using Argotic.Syndication;
+
 Sitemap sitemap = new();
 
 sitemap.Urls.Add(new SitemapUrl
@@ -114,163 +350,427 @@ sitemap.Urls.Add(new SitemapUrl
     Location = new Uri("https://endjin.com/"),
     LastModified = DateTime.UtcNow,
     ChangeFrequency = SitemapChangeFrequency.Daily,
-    Priority = 1.0m
+    Priority = 1.0m,
 });
 
 sitemap.Urls.Add(new SitemapUrl
 {
     Location = new Uri("https://endjin.com/what-we-do"),
     ChangeFrequency = SitemapChangeFrequency.Monthly,
-    Priority = 0.8m
+    Priority = 0.8m,
 });
 
-sitemap.Urls.Add(new SitemapUrl
-{
-    Location = new Uri("https://endjin.com/who-we-are"),
-    ChangeFrequency = SitemapChangeFrequency.Monthly,
-    Priority = 0.8m
-});
-
-// Save the sitemap
 using FileStream stream = File.Create("sitemap.xml");
 sitemap.Save(stream);
 ```
 
-## Building
+The protocol caps a single sitemap at 50,000 URLs, so larger sites publish a `SitemapIndex` pointing
+at several files:
 
-This project uses [ZeroFailed](https://github.com/zerofailed/ZeroFailed), a PowerShell-based build orchestration framework built on [InvokeBuild](https://github.com/nightroman/Invoke-Build).
+```csharp
+using Argotic.Syndication;
 
-### Prerequisites
+SitemapIndex index = new();
 
-- PowerShell 7.0 or later
-- .NET 10 SDK
+index.Sitemaps.Add(new SitemapIndexEntry
+{
+    Location = new Uri("https://endjin.com/sitemap-pages.xml"),
+    LastModified = DateTime.UtcNow,
+});
 
-### Build Commands
+index.Sitemaps.Add(new SitemapIndexEntry
+{
+    Location = new Uri("https://endjin.com/sitemap-blog.xml"),
+    LastModified = DateTime.UtcNow.AddDays(-1),
+});
 
-```powershell
-# Full build (compile, test, package)
-./build.ps1
-
-# Clean build (removes bin/obj folders first)
-./build.ps1 -Clean
-
-# Run specific tasks
-./build.ps1 -Tasks Build      # Compile only
-./build.ps1 -Tasks Test       # Run tests with code coverage
-./build.ps1 -Tasks Package    # Create NuGet packages
-
-# Release build
-./build.ps1 -Configuration Release
-
-# Verbose output
-./build.ps1 -LogLevel detailed
+using FileStream stream = File.Create("sitemap-index.xml");
+index.Save(stream);
 ```
 
-### Build Output
+Google's sitemap extensions attach to a `SitemapUrl` the same way any other extension attaches to a
+feed item:
 
-- **NuGet packages**: `_packages/`
-- **Code coverage reports**: `_codeCoverage/`
-- **Test results**: `Solutions/Argotic.Extensions.Tests/TestResults/`
+```csharp
+using Argotic.Extensions.Core;
+using Argotic.Syndication;
 
-### Direct .NET Commands
+Sitemap sitemap = new();
 
-You can also use standard .NET CLI commands:
+SitemapUrl url = new()
+{
+    Location = new Uri("https://news.example.com/breaking-story"),
+    LastModified = DateTime.UtcNow,
+};
 
-```bash
-# Build the solution
-dotnet build Solutions/Argotic.slnx
+url.Extensions.Add(new SitemapNewsExtension
+{
+    Publication = new SitemapNewsPublication("Example News", "en"),
+    PublicationDate = DateTime.UtcNow,
+    Title = "Breaking: Major Technology Announcement",
+});
 
-# Run tests
-dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj
-
-# Run tests with coverage
-dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj --coverage --coverage-output-format cobertura
+sitemap.Urls.Add(url);
 ```
+
+### Supplying your own `HttpClient`
+
+By default every network call uses `SyndicationEncodingUtility.SharedHttpClient` — a process-wide
+`Lazy<HttpClient>` over a `SocketsHttpHandler`. Every `LoadAsync` and `CreateAsync` also has an
+overload taking a client you own, which is what you want for credentials, a proxy, a client
+certificate, or a delegating handler for retries:
+
+```csharp
+using System.Net;
+
+using Argotic.Syndication;
+
+SocketsHttpHandler handler = new()
+{
+    Credentials = CredentialCache.DefaultNetworkCredentials,
+};
+
+using HttpClient httpClient = new(handler);
+
+RssFeed feed = await RssFeed.CreateAsync(
+    new Uri("https://intranet.example.com/rss.xml"),
+    httpClient,
+    cancellationToken: cancellationToken);
+```
+
+### Dependency injection
+
+```csharp
+using Argotic.Configuration;
+using Argotic.Syndication;
+
+using Microsoft.Extensions.DependencyInjection;
+
+services.AddArgoticSyndicationClient();   // named HttpClient, Argotic's handler defaults
+services.AddTrackbackClient();            // typed TrackbackClient
+services.AddXmlRpcClient();               // typed XmlRpcClient
+```
+
+A syndication resource is constructed, not resolved — you write `new RssFeed()`, you do not ask the
+container for one — so the client is registered by *name* and you hand it to `LoadAsync`:
+
+```csharp
+IHttpClientFactory factory = provider.GetRequiredService<IHttpClientFactory>();
+
+// Always the constant, never the string. A named client is looked up by name, so a typo is not a
+// compile error — the factory silently hands back a brand-new, entirely default HttpClient.
+HttpClient httpClient = factory.CreateClient(ArgoticHttpClients.Syndication);
+
+RssFeed feed = new();
+await feed.LoadAsync(new Uri("https://endjin.com/rss.xml"), httpClient, cancellationToken: cancellationToken);
+```
+
+`TrackbackClient` and `XmlRpcClient` *are* services, so those are registered as typed clients and
+resolved directly. Both `AddTrackbackClient` and `AddXmlRpcClient` also take an
+`Action<TOptions>` or an `IConfiguration` plus a section name (`Argotic:Trackback`, `Argotic:XmlRpc`
+by default).
+
+Every client registered this way is given `Timeout.InfiniteTimeSpan`. That is not an absence of a
+deadline: every deadline in Argotic is imposed by `CancellationTokenSource.CancelAfter` on a token
+linked to yours, and a client-level timeout could only truncate a longer one you asked for.
+
+### Polling: conditional GET
+
+The workload Argotic exists for is polling many feeds repeatedly, most of which have not changed.
+`SyndicationResourceReader.LoadIfModifiedAsync<T>` sends the validators you are holding, and comes
+back either with a freshly parsed resource or with the fact that the origin answered `304`. Both are
+successes — a `304` arrives as a result, not as an exception.
+
+```csharp
+using Argotic.Common;
+using Argotic.Syndication;
+
+// Nothing held yet, so the first request is unconditional.
+SyndicationValidators validators = SyndicationValidators.None;
+
+while (!cancellationToken.IsCancellationRequested)
+{
+    ConditionalLoadResult<RssFeed> result =
+        await SyndicationResourceReader.LoadIfModifiedAsync<RssFeed>(
+            new Uri("https://endjin.com/rss.xml"),
+            validators,
+            httpClient,
+            cancellationToken: cancellationToken);
+
+    if (result.WasModified)
+    {
+        // No null check and no `!`: WasModified is annotated [MemberNotNullWhen(true, nameof(Resource))].
+        Console.WriteLine($"{result.Resource.Channel.Items.Count} items");
+    }
+
+    // Always store what came back rather than re-sending what you had. An origin is entitled to
+    // rotate an ETag on a 304, and a caller who keeps sending their original revalidates against a
+    // value the origin has stopped recognising.
+    validators = result.Validators;
+
+    await Task.Delay(TimeSpan.FromMinutes(15), cancellationToken);
+}
+```
+
+There is a shared-client overload too — `LoadIfModifiedAsync<RssFeed>(source, validators,
+cancellationToken: cancellationToken)` — but a polling caller is exactly the caller who benefits from
+a handler `IHttpClientFactory` rotates.
+
+For finer control, `SyndicationDiscoveryUtility.ConditionalGetAsync` returns a raw
+`ConditionalGetResult` and hands you the live response stream to read as you see fit. Note that the
+response-size limits do **not** apply on that path, by design; `LoadIfModifiedAsync` applies them.
+
+### Load settings and request options
+
+```csharp
+using Argotic.Common;
+using Argotic.Syndication;
+
+SyndicationResourceLoadSettings settings = new()
+{
+    RetrievalLimit = 20,                                // build only the first 20 items
+    Timeout = TimeSpan.FromSeconds(15),                 // null means no deadline at all
+    MaxResponseContentLength = 4L * 1024 * 1024,        // decompressed bytes; null means the format default
+    CharacterEncoding = null,                           // null means detect from BOM / XML declaration
+    AutoDetectExtensions = true,
+};
+
+SyndicationRequestOptions requestOptions = new()
+{
+    Accept = "application/rss+xml, application/xml;q=0.9",
+    UserAgent = "AzureWeekly/1.0 (+https://azureweekly.info)",
+    CustomHeaders = new Dictionary<string, string> { ["X-Correlation-Id"] = correlationId },
+};
+
+RssFeed feed = await RssFeed.CreateAsync(
+    new Uri("https://endjin.com/rss.xml"),
+    httpClient,
+    settings,
+    requestOptions,
+    cancellationToken);
+```
+
+Three details worth knowing, because each of them used to be a silent trap:
+
+- **`CharacterEncoding = null` means "detect"**, and is the default. Setting it *overrides* the
+  document's own declaration, which is right for a server known to lie about its encoding and wrong
+  otherwise.
+- **`Timeout = null` means no deadline**, not "use the default". The shared client is
+  `Timeout.InfiniteTimeSpan`, so nothing but your own `CancellationToken` would bound the load.
+  `TimeSpan.Zero` is not a way to spell it — it cancels immediately.
+- **`MaxResponseContentLength` counts decompressed bytes.** `null` means the format's default
+  (`SyndicationContentLengthLimits.Feed` is 8 MiB, `Sitemap` and `Archive` are 64 MiB); use
+  `SyndicationResourceLoadSettings.Unbounded` to ask for no limit at all.
+
+`SyndicationRequestOptions` is a `record` with `init`-only members. A value it cannot send — a
+malformed `Accept`, a relative `Referer`, a content header in `CustomHeaders` — throws a
+`FormatException` rather than being quietly dropped.
+
+## What's in the box
+
+### Formats
+
+| Type                                                                                                       | Namespace                         | Format                              |
+|------------------------------------------------------------------------------------------------------------|-----------------------------------|-------------------------------------|
+| `RssFeed`, `RssChannel`, `RssItem`                                                                         | `Argotic.Syndication`             | RSS 2.0                             |
+| `AtomFeed`, `AtomEntry`                                                                                    | `Argotic.Syndication`             | Atom 1.0 (RFC 4287)                 |
+| `OpmlDocument`                                                                                             | `Argotic.Syndication`             | OPML 2.0                            |
+| `Sitemap`, `SitemapIndex`                                                                                  | `Argotic.Syndication`             | Sitemap 0.9                         |
+| `GenericSyndicationFeed`                                                                                   | `Argotic.Syndication`             | Format-agnostic wrapper             |
+| `ApmlDocument`                                                                                             | `Argotic.Syndication.Specialized` | APML 0.6                            |
+| `BlogMLDocument`                                                                                           | `Argotic.Syndication.Specialized` | BlogML 2.0                          |
+| `RsdDocument`                                                                                              | `Argotic.Syndication.Specialized` | RSD 1.0                             |
+| `AtomServiceDocument`, `AtomCategoryDocument`, `AtomEntryResource`, `AtomWorkspace`, `AtomMemberResources` | `Argotic.Publishing`              | Atom Publishing Protocol (RFC 5023) |
+| `TrackbackClient`, `XmlRpcClient`                                                                          | `Argotic.Net`                     | Trackback, XML-RPC                  |
+
+### Extensions
+
+All 27 live in `Argotic.Extensions.Core`.
+
+| Family                 | What it adds                                                                                         |
+|------------------------|------------------------------------------------------------------------------------------------------|
+| AtomPublishing         | `AtomPublishingControlSyndicationExtension`, `AtomPublishingEditedSyndicationExtension`              |
+| BasicGeocoding         | W3C `geo` latitude/longitude                                                                         |
+| BlogChannel            | Blog channel metadata                                                                                |
+| CreativeCommons        | Creative Commons licensing                                                                           |
+| DublinCore             | `DublinCoreElementSetSyndicationExtension`, `DublinCoreMetadataTermsSyndicationExtension`            |
+| FeedHistory            | Feed paging and archiving (RFC 5005)                                                                 |
+| FeedRank               | Feed ranking                                                                                         |
+| FeedSync               | Feed synchronization                                                                                 |
+| **GeoRSS**             | Geographic location, Simple and GML (OGC 17-002r1)                                                   |
+| iTunes                 | Apple Podcasts metadata                                                                              |
+| LiveJournal            | LiveJournal-specific elements                                                                        |
+| Pheed                  | Pheed media                                                                                          |
+| Pingback               | Pingback protocol                                                                                    |
+| **Podcast**            | Podcasting 2.0 (`podcastindex.org/namespace/1.0`)                                                    |
+| SimpleList             | Microsoft Simple List Extensions                                                                     |
+| **Sitemap**            | `SitemapNewsExtension`, `SitemapImageExtension`, `SitemapVideoExtension`, `SitemapHreflangExtension` |
+| SiteSummaryContent     | RSS content module                                                                                   |
+| SiteSummarySlash       | Slashdot comment counts                                                                              |
+| SiteSummarySyndication | RSS syndication module                                                                               |
+| Trackback              | Trackback protocol                                                                                   |
+| WellFormedWebComments  | Comment threading                                                                                    |
+| YahooMedia             | Yahoo Media RSS                                                                                      |
+
+Nineteen families contribute one extension each; AtomPublishing, DublinCore and Sitemap contribute
+the other eight.
 
 ## Examples
 
-The `Argotic.Examples` project is an interactive CLI that demonstrates all features of the Argotic framework with 66 runnable examples.
+`Solutions/Argotic.Examples` is an interactive [Spectre.Console](https://spectreconsole.net/) CLI
+holding 68 example classes and 174 runnable examples, mirroring the Core and Extensions structure.
+It is the best place to look for idiomatic present-day usage — every example compiles against the
+current API and runs end-to-end in CI.
 
-### Quick Start
+```bash
+# List everything
+dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- list
 
-Use the PowerShell script to build and run all examples:
+# List one category (Common, Atom, Rss, Opml, Apml, BlogML, Rsd, Net, Generic, Sitemap, Extensions)
+dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- list --category Rss
+
+# Run one
+dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- run "Rss Feed - Class"
+
+# Run them all; --skip-network omits the ones that fetch from a live origin
+dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- run-all --skip-network
+
+# Interactive browser
+dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj
+```
+
+A PowerShell wrapper is available too:
 
 ```powershell
-# Run all examples
-./run-all-examples.ps1
-
-# Run examples in a specific category
-./run-all-examples.ps1 -Category Rss
-
-# Skip examples requiring network access
 ./run-all-examples.ps1 -SkipNetwork
-
-# Output results as JSON (for CI/CD)
+./run-all-examples.ps1 -Category Rss
 ./run-all-examples.ps1 -JsonOutput
 ```
 
-### Running Examples with .NET CLI
+## Building and testing from source
 
-```bash
-# Interactive mode (default) - browse and run examples via menu
-dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj
+The solution file is `Solutions/Argotic.slnx`. The build is orchestrated by
+[ZeroFailed](https://github.com/zerofailed/ZeroFailed), a PowerShell framework built on
+[InvokeBuild](https://github.com/nightroman/Invoke-Build), and needs PowerShell 7.0 or later.
 
-# List all available examples
-dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- list
-
-# List examples in a specific category
-dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- list --category Rss
-
-# Run a specific example
-dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- run "Rss Feed - Class"
-
-# Run all examples (batch mode)
-dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- run-all
+```powershell
+./build.ps1                          # compile, test, package
+./build.ps1 -Clean                   # remove bin/obj first
+./build.ps1 -Tasks Build             # compile only
+./build.ps1 -Tasks Test              # tests with code coverage
+./build.ps1 -Tasks Package           # NuGet packages
+./build.ps1 -Configuration Release
 ```
 
-### Example Categories
+Or straight from the .NET CLI:
 
-| Category       | Description                                                         |
-|----------------|---------------------------------------------------------------------|
-| **Atom**       | Atom 1.0 feed and entry creation, loading, and serialization        |
-| **RSS**        | RSS 2.0 feed creation, loading, and serialization                   |
-| **OPML**       | Outline Processor Markup Language documents                         |
-| **APML**       | Attention Profiling Markup Language                                 |
-| **BlogML**     | Blog content import/export format                                   |
-| **RSD**        | Really Simple Discovery                                             |
-| **Sitemap**    | Sitemap 0.9 with video, image, and news extensions                  |
-| **Extensions** | 20+ syndication extensions (iTunes, Dublin Core, Yahoo Media, etc.) |
-| **Network**    | Trackback and XML-RPC client usage                                  |
-| **Generic**    | Format-agnostic syndication feed handling                           |
+```bash
+# Build. Do this in both configurations -- Argotic.Benchmarks compiles only in Release.
+dotnet build Solutions/Argotic.slnx -c Debug
+dotnet build Solutions/Argotic.slnx -c Release
 
-*ar·got·ic* (_ahr-got-ik_)
-A specialized idiomatic vocabulary peculiar to a particular class or group of people.
+# Test. The suite uses MSTest on Microsoft Testing Platform, which requires --project.
+dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj
 
-## Licenses
+# One test
+dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj \
+  --filter "FullyQualifiedName~PollAFeedForChanges"
+
+# Coverage
+dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj \
+  --coverage --coverage-output-format cobertura
+
+# Formatting gates
+dotnet format whitespace Solutions/Argotic.slnx --verify-no-changes --no-restore
+dotnet format style      Solutions/Argotic.slnx --verify-no-changes --no-restore
+
+# Benchmarks
+dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --list flat
+dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --filter '*ParsePipeline*' --job Short
+```
+
+The test suite is offline-safe: HTTP is mocked, and the two seams a mock handler cannot reach are
+served over an `HttpListener` bound to 127.0.0.1 on an OS-assigned port. Nothing is read from disk
+and nothing leaves the machine.
+
+Build output lands in `_packages/` (NuGet packages), `_codeCoverage/` (coverage reports) and
+`Solutions/Argotic.Extensions.Tests/TestResults/`.
+
+### Solution layout
+
+```
+Solutions/
+├── Argotic.slnx                # solution (XML-based .slnx format)
+├── Argotic.Common/             # core interfaces and utilities
+├── Argotic.Extensions/         # 27 extensions across 22 families
+├── Argotic.Core/               # syndication format implementations
+├── Argotic.Extensions.Tests/   # MSTest suite covering all three product assemblies
+├── Argotic.Examples/           # runnable examples (Spectre.Console CLI)
+└── Argotic.Benchmarks/         # BenchmarkDotNet harness
+```
+
+Package versions are managed centrally in `Solutions/Directory.Packages.props`
+([Central Package Management](https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management)),
+so `PackageReference` items carry no `Version` attribute. `MSTest.Sdk` is pinned in `global.json`
+instead.
+
+## Documentation
+
+- **Wiki:** <https://argotic-syndication-framework.github.io/Argotic>
+- **Changelog:** [CHANGELOG.md](CHANGELOG.md) — the full list of breaking changes in this release
+- **Repository:** <https://github.com/argotic-syndication-framework/Argotic>
+
+## Contributing
+
+Issues and pull requests are welcome on
+[GitHub](https://github.com/argotic-syndication-framework/Argotic). Before opening a PR, please make
+sure the following all pass, in both `Debug` and `Release`:
+
+1. `dotnet build Solutions/Argotic.slnx` — zero warnings, zero errors. Nullable warnings are errors.
+2. `dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj`
+3. `dotnet format whitespace Solutions/Argotic.slnx --verify-no-changes --no-restore`
+4. `dotnet format style Solutions/Argotic.slnx --verify-no-changes --no-restore`
+5. `dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- run-all --skip-network`
+
+Tests use [Shouldly](https://docs.shouldly.org/) exclusively — there are zero `Assert.` calls in the
+suite — and hold their sample documents as C# raw string literals rather than as files on disk.
+
+## Licence
 
 [![GitHub license](https://img.shields.io/badge/License-Apache%202-blue.svg)](https://raw.githubusercontent.com/argotic-syndication-framework/argotic/master/LICENSE)
 
-Argotic Syndication Framework is available under the Apache 2.0 open source license.
+Argotic Syndication Framework is available under the Apache 2.0 open source licence.
 
 For any licensing questions, please email [&#108;&#105;&#99;&#101;&#110;&#115;&#105;&#110;&#103;&#64;&#101;&#110;&#100;&#106;&#105;&#110;&#46;&#99;&#111;&#109;](&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#108;&#105;&#99;&#101;&#110;&#115;&#105;&#110;&#103;&#64;&#101;&#110;&#100;&#106;&#105;&#110;&#46;&#99;&#111;&#109;)
 
-## Project Sponsor
+## Code of conduct
 
-This project is sponsored by [endjin](https://endjin.com), a UK based, fully-remote, Consultancy which specializes in Data & Analytics, AI, and Cloud Native App Dev.
+This project has adopted a code of conduct adapted from the
+[Contributor Covenant](http://contributor-covenant.org/) to clarify expected behaviour in our
+community. This code of conduct has been [adopted by many other projects](http://contributor-covenant.org/adopters/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
+or contact [&#104;&#101;&#108;&#108;&#111;&#064;&#101;&#110;&#100;&#106;&#105;&#110;&#046;&#099;&#111;&#109;](&#109;&#097;&#105;&#108;&#116;&#111;:&#104;&#101;&#108;&#108;&#111;&#064;&#101;&#110;&#100;&#106;&#105;&#110;&#046;&#099;&#111;&#109;)
+with any additional questions or comments.
+
+## Project sponsor
+
+This project is sponsored by [endjin](https://endjin.com), a UK based, fully-remote consultancy which
+specializes in Data & Analytics, AI, and Cloud Native App Dev.
 
 We help small teams achieve big things.
 
-For more information about our products and services, or for commercial support of this project, please [contact us](https://endjin.com/contact-us). 
+For more information about our products and services, or for commercial support of this project,
+please [contact us](https://endjin.com/contact-us).
 
-We produce three free weekly newsletters; [Azure Weekly](https://azureweekly.info) for all things about the Microsoft Azure Platform,  [Fabric Weekly](https://fabricweekly.info) for all things about the Microsoft Fabric and [Power BI Weekly](https://powerbiweekly.info).
+We produce three free weekly newsletters; [Azure Weekly](https://azureweekly.info) for all things
+about the Microsoft Azure Platform, [Fabric Weekly](https://fabricweekly.info) for all things about
+Microsoft Fabric, and [Power BI Weekly](https://powerbiweekly.info).
 
-Keep up with everything that's going on at endjin via our [blog](https://blogs.endjin.com/), watch our talks and tutorials on our [YouTube Channel](https://www.youtube.com/endjin), follow us on [Bluesky](https://bsky.app/profile/endjin.com), or [LinkedIn](https://www.linkedin.com/company/1671851/).
+Keep up with everything that's going on at endjin via our [blog](https://blogs.endjin.com/), watch
+our talks and tutorials on our [YouTube Channel](https://www.youtube.com/endjin), follow us on
+[Bluesky](https://bsky.app/profile/endjin.com), or [LinkedIn](https://www.linkedin.com/company/1671851/).
 
 Our other Open Source projects can be found on [our website](https://endjin.com/open-source).
-
-## Code of conduct
-
-This project has adopted a code of conduct adapted from the [Contributor Covenant](http://contributor-covenant.org/) to clarify expected behaviour in our community. This code of conduct has been [adopted by many other projects](http://contributor-covenant.org/adopters/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [&#104;&#101;&#108;&#108;&#111;&#064;&#101;&#110;&#100;&#106;&#105;&#110;&#046;&#099;&#111;&#109;](&#109;&#097;&#105;&#108;&#116;&#111;:&#104;&#101;&#108;&#108;&#111;&#064;&#101;&#110;&#100;&#106;&#105;&#110;&#046;&#099;&#111;&#109;) with any additional questions or comments.
 
 ## IP Maturity Model (IMM)
 
@@ -278,7 +778,7 @@ The [IP Maturity Model](https://github.com/endjin/Endjin.Ip.Maturity.Matrix) is 
 
 This approach is based on our 15+ years experience of delivering complex, high performance, bleeding-edge projects, and due diligence assessments of 3rd party systems. For detailed information about the ruleset see the [IP Maturity Model repo](https://github.com/endjin/Endjin.Ip.Maturity.Matrix).
 
-## IMM for Argotic
+### IMM for Argotic
 
 [![Shared Engineering Standards](https://endimmfuncdev.azurewebsites.net/api/imm/github/endjin/Stacker/rule/74e29f9b-6dca-4161-8fdd-b468a1eb185d?nocache=true)](https://endimmfuncdev.azurewebsites.net/api/imm/github/endjin/Stacker/rule/74e29f9b-6dca-4161-8fdd-b468a1eb185d?cache=false)
 

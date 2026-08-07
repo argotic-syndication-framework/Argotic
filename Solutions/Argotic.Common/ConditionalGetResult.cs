@@ -49,7 +49,7 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
         {
             StatusCode = response.StatusCode;
             LastModified = response.Content.Headers.LastModified;
-            ETag = response.Headers.ETag?.Tag;
+            ETag = response.Headers.ETag?.ToString();
             ContentLength = response.Content.Headers.ContentLength ?? -1;
             ContentType = response.Content.Headers.ContentType?.MediaType;
         }
@@ -81,7 +81,7 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
         WasModified = false;
         StatusCode = notModified.StatusCode;
         LastModified = notModified.Content.Headers.LastModified;
-        ETag = notModified.Headers.ETag?.Tag;
+        ETag = notModified.Headers.ETag?.ToString();
         ContentLength = -1;
     }
 
@@ -107,15 +107,20 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
     /// Gets the entity tag of the resource.
     /// </summary>
     /// <value>
-    ///     The opaque quoted string of the entity tag — quotes included — or <see langword="null"/> if
-    ///     the origin sent none. Store it with its quotes: a tag stripped of them is not a well-formed
-    ///     entity tag, and <see cref="SyndicationValidators.ApplyTo(HttpRequestMessage)"/> refuses it.
+    ///     The entity tag exactly as the origin sent it — quotes included, and prefixed <c>W/</c> when
+    ///     the origin marked it weak — or <see langword="null"/> if it sent none. Store it whole: a tag
+    ///     stripped of its quotes is not a well-formed entity tag, and
+    ///     <see cref="SyndicationValidators.ApplyTo(HttpRequestMessage)"/> refuses it.
     /// </value>
     /// <remarks>
-    ///     This is <see cref="System.Net.Http.Headers.EntityTagHeaderValue.Tag"/>, which does not carry
-    ///     the <c>W/</c> weakness indicator — that lives on
-    ///     <see cref="System.Net.Http.Headers.EntityTagHeaderValue.IsWeak"/>. A weak tag therefore
-    ///     round-trips as a strong one.
+    ///     This is <see cref="System.Net.Http.Headers.EntityTagHeaderValue.ToString"/> rather than its
+    ///     <see cref="System.Net.Http.Headers.EntityTagHeaderValue.Tag"/>, which is only the opaque
+    ///     quoted string: weakness lives on the separate
+    ///     <see cref="System.Net.Http.Headers.EntityTagHeaderValue.IsWeak"/>, so reading <c>Tag</c>
+    ///     round-tripped <c>W/"v1"</c> as a strong <c>"v1"</c>. <c>If-None-Match</c> uses the weak
+    ///     comparison function, under which those two match, so revalidation still succeeded; what was
+    ///     lost was the honesty of this property and the correctness of an <c>If-Match</c> or
+    ///     <c>If-Range</c> built from it, both of which compare strictly.
     /// </remarks>
     public string? ETag { get; }
 

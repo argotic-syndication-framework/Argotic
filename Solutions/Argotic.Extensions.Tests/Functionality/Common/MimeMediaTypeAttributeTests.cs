@@ -261,6 +261,32 @@ public class MimeMediaTypeAttributeTests
     }
 
     /// <summary>
+    /// <c>ToString</c> writes an empty <c>Documentation</c> value when none was set.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     A guard, green on both sides of the change it protects, and deliberately so.
+    ///     <c>ToString</c> interpolated <c>Documentation ?? string.Empty</c>, but <c>Documentation</c>
+    ///     is a non-nullable <see cref="string"/> whose getter already ends <c>?? string.Empty</c>, so
+    ///     the right-hand operand was unreachable and deleting it is <b>observationally inert</b>. No
+    ///     input distinguishes before from after, which is why there is no red-first test here — only
+    ///     evidence that the empty case is written the way it always was.
+    ///     </para>
+    ///     <para>
+    ///     CA1508 is on solution-wide and does not flag it: its null analysis does not track values
+    ///     returned from property getters. This one had to be found by reading.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void ToString_WithNoDocumentation_WritesAnEmptyValue()
+    {
+        MimeMediaTypeAttribute attribute = new() { Name = "application", SubName = "rss+xml" };
+
+        attribute.Documentation.ShouldBe(string.Empty);
+        attribute.ToString().ShouldContain("Documentation = \"\"", Case.Sensitive);
+    }
+
+    /// <summary>
     /// Two separately constructed attributes carrying the same name and subtype compare equal.
     /// </summary>
     [TestMethod]

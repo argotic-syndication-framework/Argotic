@@ -1,4 +1,6 @@
 using System.Text;
+using System.Xml.XPath;
+
 using Argotic.Net;
 using Shouldly;
 
@@ -149,6 +151,14 @@ public class TrackbackResponseTests
     public TestContext? TestContext { get; set; }
 
     /// <summary>
+    /// Reads a <c>response</c> element out of the supplied markup.
+    /// </summary>
+    /// <param name="xml">A Trackback <c>response</c> document.</param>
+    /// <returns>A navigator positioned on the <c>response</c> element.</returns>
+    private static XPathNavigator Response(string xml) =>
+        new XPathDocument(new StringReader(xml)).CreateNavigator()!.SelectSingleNode("//response")!;
+
+    /// <summary>
     /// A default-constructed response reports no error and carries no error message.
     /// </summary>
     [TestMethod]
@@ -172,23 +182,100 @@ public class TrackbackResponseTests
     }
 
     /// <summary>
-    /// Constructing a response with an error message populates <c>ErrorMessage</c>.
+    /// Constructing a response with an error message makes it report the error.
     /// </summary>
     /// <remarks>
-    ///     The method name overstates what is asserted. As the comment in the body records, <c>HasError</c> is
-    ///     driven by an internal field that this constructor does not set, so the assertion is on
-    ///     <c>ErrorMessage</c> alone.
+    ///     The method name always asserted the right thing; the body did not. The constructor set
+    ///     <c>ErrorMessage</c> and left <c>HasError</c> at <see langword="false"/>, so an object built
+    ///     to represent a rejection reported success, and a comment in the body explained the surrender
+    ///     rather than the behaviour.
     /// </remarks>
     [TestMethod]
     public void HasError_WhenErrorMessageSet_ReturnsTrue()
     {
         TrackbackResponse response = new("Error occurred");
 
-        // Note: HasError is controlled by the internal responseHasError field,
-        // not derived from ErrorMessage. The constructor with error message
-        // doesn't automatically set HasError. This tests the actual behavior.
         response.ErrorMessage.ShouldNotBeNullOrEmpty();
+        response.HasError.ShouldBeTrue("INVERTED: an instance carrying an error message has an error");
     }
+
+    /// <summary>
+    /// A rejection with no explanatory message round-trips as a rejection.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     <c>WriteTo</c> derived the <c>error</c> element from <c>ErrorMessage</c> rather than from
+    ///     <c>HasError</c>, so a response that had read <c>&lt;error&gt;1&lt;/error&gt;</c> correctly
+    ///     was written back saying it had succeeded. The <c>message</c> element is optional in the
+    ///     protocol, and a server that rejects a ping without explaining itself is entirely ordinary.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void ARejectionWithNoMessage_RoundTripsAsARejection()
+    {
+        TrackbackResponse response = new();
+        response.Load(Response("<response><error>1</error></response>")).ShouldBeTrue();
+        response.HasError.ShouldBeTrue("the object reads the wire form correctly");
+
+        string written = response.ToString();
+        written.ShouldContain("<error>1</error>", Case.Sensitive, "INVERTED: a rejection stays a rejection");
+        written.ShouldNotContain("<message", Case.Sensitive, "and no message is invented for one that had none");
+    }
+
+    /// <summary>
+    /// A rejection carrying a message writes both elements.
+    /// </summary>
+    /// <remarks>
+    ///     The control on the row above: the path that always worked, and the one every existing test
+    ///     took. Without it, "branch on <c>HasError</c>" is indistinguishable from "stop writing
+    ///     messages".
+    /// </remarks>
+    [TestMethod]
+    public void ARejectionWithAMessage_WritesBothElements()
+    {
+        TrackbackResponse response = new();
+        response.Load(Response("<response><error>1</error><message>Spam</message></response>")).ShouldBeTrue();
+
+        string written = response.ToString();
+        written.ShouldContain("<error>1</error>", Case.Sensitive);
+        written.ShouldContain("<message>Spam</message>", Case.Sensitive);
+    }
+
+    /// <summary>
+    /// An acceptance writes <c>error</c> <c>0</c> and no message.
+    /// </summary>
+    /// <remarks>
+    ///     The other control. A fix that branched on <c>HasError</c> but forgot the <c>message</c>
+    ///     guard would emit an empty <c>message</c> element on every successful ping.
+    /// </remarks>
+    [TestMethod]
+    public void AnAcceptance_WritesErrorZeroAndNoMessage()
+    {
+        TrackbackResponse response = new();
+
+        string written = response.ToString();
+        written.ShouldContain("<error>0</error>", Case.Sensitive);
+        written.ShouldNotContain("<message", Case.Sensitive);
+    }
+
+    /// <summary>
+    /// A response constructed from an error message serialises as a rejection carrying it.
+    /// </summary>
+    /// <remarks>
+    ///     The mirror of <see cref="ARejectionWithNoMessage_RoundTripsAsARejection"/>. Object state and
+    ///     wire form disagreed in opposite directions on the two construction paths, so a fix to either
+    ///     one alone would leave the other inconsistent.
+    /// </remarks>
+    [TestMethod]
+    public void AConstructedRejection_SerialisesAsOne()
+    {
+        TrackbackResponse response = new("Ping refused");
+
+        string written = response.ToString();
+        written.ShouldContain("<error>1</error>", Case.Sensitive);
+        written.ShouldContain("<message>Ping refused</message>", Case.Sensitive);
+    }
+
 
     /// <summary>
     /// Neither <see langword="null"/> nor an empty string is accepted as an error message; both are refused with an <c>ArgumentException</c>.

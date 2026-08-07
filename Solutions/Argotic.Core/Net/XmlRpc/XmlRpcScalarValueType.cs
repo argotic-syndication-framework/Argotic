@@ -59,7 +59,7 @@ public enum XmlRpcScalarValueType
     /// <remarks>
     ///     Written as RFC 3339 rather than as the basic ISO 8601 form the element's name implies, because
     ///     that is what live servers emit. A value read through
-    ///     <see cref="XmlRpcClient.TryParseValue"/> accepts both spellings, and a zoneless one comes back
+    ///     <see cref="XmlRpcClient.TryParseValue(System.Xml.XPath.XPathNavigator, out IXmlRpcValue?)"/> accepts both spellings, and a zoneless one comes back
     ///     <see cref="System.DateTimeKind.Unspecified"/> — it names no offset to honour.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "DateTime", AlternateValue = "dateTime.iso8601")]

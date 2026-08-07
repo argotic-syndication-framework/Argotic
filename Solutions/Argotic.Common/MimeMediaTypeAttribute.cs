@@ -61,7 +61,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// Returns a <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.
     /// </summary>
     /// <returns>The attribute written out as it would appear in source.</returns>
-    public override string ToString() => $"""[MimeMediaType(Name = "{this.Name}", SubName = "{this.SubName}", Documentation = "{this.Documentation ?? string.Empty}")]""";
+    public override string ToString() => $"""[MimeMediaType(Name = "{this.Name}", SubName = "{this.SubName}", Documentation = "{this.Documentation}")]""";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.

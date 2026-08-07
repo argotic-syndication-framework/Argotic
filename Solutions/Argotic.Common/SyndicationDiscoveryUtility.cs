@@ -820,15 +820,33 @@ public static partial class SyndicationDiscoveryUtility
     /// </summary>
     /// <param name="content">The HTML markup to parse.</param>
     /// <returns>
-    ///     The pingback auto-discovery link, or <see langword="null"/> if the markup carried none.
-    ///     Where the markup carries several, the last one wins.
+    ///     The first pingback auto-discovery link the markup declares, or <see langword="null"/> if it
+    ///     declares none the caller could contact.
     /// </returns>
     /// <remarks>
     ///     <para>
     ///         Pingback enabled resources that utilize the link mechanism will contain a
     ///         &lt;link rel="pingback" href="{Absolute URI of the pingback XML-RPC server}" /&gt; element.
-    ///         The <c>href</c> must be absolute: a relative one is skipped rather than resolved, because
-    ///         a pingback server address is one the publisher states outright.
+    ///         The <c>href</c> must be an absolute <c>http</c> or <c>https</c> URI: a relative one is
+    ///         skipped rather than resolved, because a pingback server address is one the publisher
+    ///         states outright, and any other scheme is skipped because the ping is an XML-RPC
+    ///         <c>POST</c> and nothing else can carry it.
+    ///     </para>
+    ///     <para>
+    ///         The scheme test is not fussiness. <see cref="Uri.TryCreate(string, UriKind, out Uri)"/>
+    ///         with <see cref="UriKind.Absolute"/> succeeds on Unix for a leading slash, so
+    ///         <c>href="/xmlrpc.php"</c> resolved to <c>file:///xmlrpc.php</c> and was returned as a
+    ///         discovered remote endpoint, while the same markup was refused on Windows — discovery
+    ///         accepting a different set of documents depending on the operating system. A
+    ///         protocol-relative <c>//example.com/rpc</c>, which is ordinary in real HTML, became
+    ///         <c>file://example.com/rpc</c>.
+    ///     </para>
+    ///     <para>
+    ///         Where the markup declares several, the <b>first</b> wins. The specification says
+    ///         "Pages MUST NOT include more than one such element" and defines no client behaviour for a
+    ///         page that does, so this is a choice among undefined behaviours: first-wins is how HTML
+    ///         <c>&lt;link&gt;</c> relations are conventionally resolved, and it bounds the work a
+    ///         hostile page can extract from the scan.
     ///     </para>
     ///     <para>
     ///         The <see cref="HtmlAnchor"/> that is returned will have an <see cref="HtmlAnchor.HRef"/> that points to the
@@ -844,7 +862,6 @@ public static partial class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
     public static HtmlAnchor? ExtractPingbackNotificationServer(string content)
     {
-        HtmlAnchor? pingbackAnchor = null;
         ArgumentException.ThrowIfNullOrEmpty(content);
 
         MatchCollection links = LinkRegex().Matches(content);
@@ -854,32 +871,33 @@ public static partial class SyndicationDiscoveryUtility
             var linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
             if (linkAttributes.TryGetValue("HREF", out string? href) &&
-                linkAttributes.TryGetValue("REL", out string? rel))
+                linkAttributes.TryGetValue("REL", out string? rel) &&
+                string.Equals(rel, "pingback", StringComparison.OrdinalIgnoreCase) &&
+                Uri.TryCreate(href, UriKind.Absolute, out Uri? uri) &&
+                (string.Equals(uri.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(uri.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)))
             {
-                if (string.Equals(rel, "pingback", StringComparison.OrdinalIgnoreCase))
+                HtmlAnchor pingbackAnchor = new()
                 {
-                    if (Uri.TryCreate(href, UriKind.Absolute, out Uri? uri))
-                    {
-                        pingbackAnchor = new HtmlAnchor
-                        {
-                            HRef = href
-                        };
-                        pingbackAnchor.Attributes.Add("rel", rel);
+                    HRef = href,
+                };
+                pingbackAnchor.Attributes.Add("rel", rel);
 
-                        if (linkAttributes.TryGetValue("TYPE", out string? type) && !string.IsNullOrEmpty(type))
-                        {
-                            pingbackAnchor.Attributes.Add("type", type);
-                        }
-                        if (linkAttributes.TryGetValue("TITLE", out string? title) && !string.IsNullOrEmpty(title))
-                        {
-                            pingbackAnchor.Title = title;
-                        }
-                    }
+                if (linkAttributes.TryGetValue("TYPE", out string? type) && !string.IsNullOrEmpty(type))
+                {
+                    pingbackAnchor.Attributes.Add("type", type);
                 }
+
+                if (linkAttributes.TryGetValue("TITLE", out string? title) && !string.IsNullOrEmpty(title))
+                {
+                    pingbackAnchor.Title = title;
+                }
+
+                return pingbackAnchor;
             }
         }
 
-        return pingbackAnchor;
+        return null;
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ namespace Argotic.Benchmarks.Protocols;
 /// zero coverage. <c>XmlRpcStructureValue</c> alone carries cyclomatic complexity 48 that has never
 /// executed. They are also the only branches whose cost is not bounded by the element itself: a
 /// <c>metaWeblog.getRecentPosts</c> response is a struct of arrays of structs, and nothing in the
-/// library caps how large or how deep one may be.
+/// library caps how large one may be — only, since the depth bound, how deep.
 /// </para>
 /// <para>
 /// Every arm varies along the <see cref="LeafCount"/> axis, and that is the constraint the class
@@ -33,18 +33,24 @@ namespace Argotic.Benchmarks.Protocols;
 ///   <item><description>Struct of arrays — N leaves spread over ten array-valued members. Two
 ///   levels. Its delta against the flat arms is the price of one level of recursion at constant leaf
 ///   count, which is the number that says whether nesting is free.</description></item>
-///   <item><description>Array chain — N leaves spread ten per level down an N/10-deep chain of
-///   nested arrays. Depth grows with the axis while the leaf count does not, so this is the arm that
-///   separates depth from width. At the top of the sweep it is a hundred levels deep.</description></item>
+///   <item><description>Array chain — N leaves spread down a chain of nested arrays as deep as the
+///   library will descend. Depth grows with the axis while the leaf count does not, so this is the arm
+///   that separates depth from width. At the top of the sweep it is
+///   <c>XmlRpcClient.MaxValueNestingDepth</c> levels deep.</description></item>
 /// </list>
 /// <para>
-/// The unbounded-recursion defect this class stops short of. The chain arm is capped at ten
-/// leaves per level so that the deepest payload measured is a hundred levels. Nothing in
-/// <c>TryParseValue</c>, <c>XmlRpcArrayValue.Load</c> or <c>XmlRpcStructureValue.Load</c> bounds
-/// depth, and the recursion is not tail-recursive, so a server can send a payload that overflows the
-/// stack of the process reading it — an unrecoverable failure, not an exception. That is a defect to
-/// report and fix; deliberately overflowing the stack would tell the harness nothing it does not
-/// already know from reading the three methods.
+/// The chain arm's depth is bounded by the library, not by this class. <c>MaxValueNestingDepth</c>
+/// is where the recursion stops descending, and a payload nested past it is simply not followed —
+/// so a corpus that ignored the cap would quietly measure a shallower parse than the one it names.
+/// <c>XmlRpcCorpus.ArrayChain</c> clamps to the cap and redistributes the leaves, which is what keeps
+/// the leaf count identical across all four arms at every point of the sweep.
+/// </para>
+/// <para>
+/// Before that cap existed nothing bounded depth at all: the recursion is not tail-recursive, so a
+/// server could send a payload that overflowed the stack of the process reading it — an unrecoverable
+/// failure, not an exception. Deliberately overflowing the stack would still tell this harness nothing
+/// it does not already know from reading the three methods, which is why the arm measures the bound
+/// rather than the failure.
 /// </para>
 /// </remarks>
 [BenchmarkCategory("protocols", "xmlrpc", "parse", "scale")]
@@ -60,8 +66,13 @@ public class XmlRpcCompositeParsingBenchmarks
     private const int GroupCount = 10;
 
     /// <summary>
-    /// The number of scalar leaves each level of the chain arm holds, which caps its depth.
+    /// The number of scalar leaves the chain arm aims to hold at each level, which sets its depth.
     /// </summary>
+    /// <remarks>
+    ///     A target rather than a guarantee: <c>XmlRpcCorpus.ArrayChain</c> raises it where the depth
+    ///     this implies would exceed <see cref="XmlRpcClient.MaxValueNestingDepth"/>, so that the total
+    ///     leaf count stays exactly equal to the other three arms'.
+    /// </remarks>
     private const int LeavesPerLevel = 10;
 
     private XPathNavigator flatStruct = null!;
@@ -144,23 +155,24 @@ public class XmlRpcCompositeParsingBenchmarks
     }
 
     /// <summary>
-    /// N leaves down an N/10-deep chain of nested arrays: depth varies, leaf count does not.
+    /// N leaves down a chain of nested arrays: depth varies, leaf count does not.
     /// </summary>
     /// <returns>The parsed value.</returns>
     /// <remarks>
     ///     <para>
-    ///     The only arm in the harness where recursion depth is the variable. Ten leaves at each of
-    ///     N/10 levels, so at the top of the sweep this is a hundred nested <c>array</c> elements
-    ///     holding a thousand integers — the same thousand integers the flat array arm parses in one
-    ///     level.
+    ///     The only arm in the harness where recursion depth is the variable. Roughly ten leaves at
+    ///     each of N/10 levels until the depth bound is reached, after which the same leaves are spread
+    ///     over the deepest chain the library will follow — so at the top of the sweep this is
+    ///     <c>MaxValueNestingDepth</c> nested <c>array</c> elements holding a thousand integers, the
+    ///     same thousand the flat array arm parses in one level.
     ///     </para>
     ///     <para>
     ///     What would refute the hypothesis that depth costs anything: this arm tracking the flat
     ///     array arm across the whole sweep. What would confirm it: a widening gap, which would also
-    ///     put a number on how far a hostile payload has to nest before it hurts.
+    ///     put a number on how much of the per-level cost the depth bound is now saving.
     ///     </para>
     /// </remarks>
-    [Benchmark(Description = "array chain, N/10 levels deep, N leaves")]
+    [Benchmark(Description = "array chain, bounded depth, N leaves")]
     public IXmlRpcValue? ParseArrayChain()
     {
         _ = XmlRpcClient.TryParseValue(this.arrayChain, out IXmlRpcValue? value);

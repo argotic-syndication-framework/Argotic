@@ -47,6 +47,35 @@ namespace Argotic.Net;
 public class XmlRpcClient
 {
     /// <summary>
+    /// The deepest a <c>&lt;struct&gt;</c> or <c>&lt;array&gt;</c> may nest before the parser stops descending.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     A bound, not a preference. Parsing a composite re-enters
+    ///     <see cref="TryParseValue(XPathNavigator, out IXmlRpcValue?)"/> — two stack frames per level
+    ///     for an array, three for a structure — and the recursion is not tail-recursive, so without a
+    ///     limit a sufficiently nested reply overflows the reading process's stack. That is a process
+    ///     kill, not a catchable exception, and it is cheap to provoke: a nesting level costs 43 bytes
+    ///     of document for an array and 49 for a structure, against the 2 MiB body
+    ///     <see cref="XmlRpcResponse.CreateAsync"/> already allows. Roughly 176 KB is enough against the
+    ///     1 MiB stack a thread-pool thread gets, and the response is read on one.
+    ///     </para>
+    ///     <para>
+    ///     Sixty-four is generous by three orders of magnitude against real traffic: XML-RPC's own
+    ///     vocabulary nests two or three levels, and a <c>metaWeblog.getRecentPosts</c> reply — an array
+    ///     of structures of arrays of scalars — is three.
+    ///     </para>
+    ///     <para>
+    ///     A constant rather than a setting because neither <c>SyndicationResourceLoadSettings</c> nor
+    ///     <see cref="SyndicationRequestOptions"/> is reachable from these methods:
+    ///     <see cref="TryParseValue(XPathNavigator, out IXmlRpcValue?)"/> is <see langword="static"/>
+    ///     with no instance state, and nothing under the XML-RPC or Trackback implementations mentions
+    ///     either type.
+    ///     </para>
+    /// </remarks>
+    public const int MaxValueNestingDepth = 64;
+
+    /// <summary>
     /// Private member to hold the HttpClient used for sending requests.
     /// </summary>
     private readonly HttpClient httpClient;
@@ -285,8 +314,30 @@ public class XmlRpcClient
     ///     to a string, which is what the specification says: "If no type is indicated, the type is
     ///     string."
     ///     </para>
+    ///     <para>
+    ///     A <c>&lt;struct&gt;</c> or <c>&lt;array&gt;</c> nested deeper than
+    ///     <see cref="MaxValueNestingDepth"/> is a failure as well, for the reasons given there.
+    ///     </para>
     /// </remarks>
-    public static bool TryParseValue(XPathNavigator source, [NotNullWhen(true)] out IXmlRpcValue? value)
+    public static bool TryParseValue(XPathNavigator source, [NotNullWhen(true)] out IXmlRpcValue? value) =>
+        TryParseValue(source, 0, out value);
+
+    /// <summary>
+    /// Constructs a new <see cref="IXmlRpcValue"/> object from the specified <see cref="XPathNavigator"/>, at a known nesting depth.
+    /// </summary>
+    /// <param name="source">A <see cref="XPathNavigator"/> that represents the XML data source to be parsed.</param>
+    /// <param name="depth">How many composite values enclose <paramref name="source"/>. Zero at the outermost <c>value</c>.</param>
+    /// <param name="value">
+    ///     When this method returns, contains an object that represents the <see cref="IXmlRpcValue"/> specified by the <paramref name="source"/>, or <see langword="null"/> if the conversion failed.
+    ///     This parameter is passed uninitialized.
+    /// </param>
+    /// <returns><see langword="true"/> if <paramref name="source"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     Only the two composite branches consult <paramref name="depth"/>, and they consult it before
+    ///     recursing. A scalar leaf never re-enters this method, so refusing one at the boundary would
+    ///     buy no stack and would lose the innermost element of a document nested exactly to the limit.
+    /// </remarks>
+    internal static bool TryParseValue(XPathNavigator source, int depth, [NotNullWhen(true)] out IXmlRpcValue? value)
     {
         if (source is null || !string.Equals(source.Name, "value", StringComparison.OrdinalIgnoreCase))
         {
@@ -368,20 +419,26 @@ public class XmlRpcClient
                 }
                 else if (string.Equals(navigator.Name, "struct", StringComparison.OrdinalIgnoreCase))
                 {
-                    XmlRpcStructureValue structure = new();
-                    if (structure.Load(source))
+                    if (depth < XmlRpcClient.MaxValueNestingDepth)
                     {
-                        value = structure;
-                        return true;
+                        XmlRpcStructureValue structure = new();
+                        if (structure.Load(source, depth))
+                        {
+                            value = structure;
+                            return true;
+                        }
                     }
                 }
                 else if (string.Equals(navigator.Name, "array", StringComparison.OrdinalIgnoreCase))
                 {
-                    XmlRpcArrayValue array = new();
-                    if (array.Load(source))
+                    if (depth < XmlRpcClient.MaxValueNestingDepth)
                     {
-                        value = array;
-                        return true;
+                        XmlRpcArrayValue array = new();
+                        if (array.Load(source, depth))
+                        {
+                            value = array;
+                            return true;
+                        }
                     }
                 }
 

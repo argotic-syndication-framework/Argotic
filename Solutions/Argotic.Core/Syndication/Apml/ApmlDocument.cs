@@ -5,74 +5,80 @@ using Argotic.Common;
 using Argotic.Data.Adapters;
 using Argotic.Extensions;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
-/// Represents a Really Simple Discovery (RSD) syndication resource.
+/// Represents an Attention Profiling Markup Language (APML) syndication resource.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         RSD was how a desktop blogging client found out where to post. A blog advertised one small XML
-///         document — linked from its home page with <c>rel="EditURI"</c> — naming the editing endpoints it
-///         offered, so that a user could type their blog's address and nothing more. It is of historical
-///         interest: mainstream platforms no longer publish it, and the client applications that consumed it
-///         are gone.
+///         Attention Profiling was a 2007 attempt at a portable record of what a person is interested in: a
+///         set of ranked concepts and sources that a user could carry between services instead of retraining
+///         each one. It never left draft — version 0.6 is the last — and it is of historical interest only;
+///         no mainstream service publishes or consumes it.
 ///     </para>
 ///     <para>
-///         This implementation conforms to the Really Simple Discovery (RSD) 1.0 specification,
-///         which can be found at <a href="https://cyber.harvard.edu/blogs/gems/tech/rsd.html">https://cyber.harvard.edu/blogs/gems/tech/rsd.html</a>.
+///         This implementation conforms to the Attention Profiling Markup Language (APML) 0.6 specification,
+///         which can be found at <a href="https://web.archive.org/web/20081216093723/http://apml.pbwiki.com/">https://web.archive.org/web/20081216093723/http://apml.pbwiki.com/</a>.
+///     </para>
+///     <para>
+///         The whole format turns on one distinction. <i>Explicit</i> data is what the user stated; <i>implicit</i>
+///         data is what a machine inferred, and carries <see cref="ApmlSource.From"/> and
+///         <see cref="ApmlSource.UpdatedOn"/> so that a consumer can tell who guessed it and how stale the
+///         guess is. Each <see cref="ApmlProfile"/> keeps the two apart in separate collections.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code source="..\..\Argotic.Examples\Core\Rsd\RsdDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the RsdDocument class." />
+///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the ApmlDocument class." />
 /// </example>
-public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
+public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 {
 
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private const SyndicationContentFormat documentFormat = SyndicationContentFormat.Rsd;
+    private const SyndicationContentFormat documentFormat = SyndicationContentFormat.Apml;
 
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static readonly Version documentVersion = new(1, 0);
+    private static readonly Version documentVersion = new(0, 6);
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="RsdDocument"/> class.
+    /// Initializes a new instance of the <see cref="ApmlDocument"/> class.
     /// </summary>
-    public RsdDocument()
+    public ApmlDocument()
     {
+
     }
 
     /// <summary>
-    /// Gets or sets the <see cref="RsdApplicationInterface"/> at the specified index.
+    /// Gets or sets the <see cref="ApmlProfile"/> at the specified index.
     /// </summary>
-    /// <param name="index">The zero-based index of the application interface to get or set.</param>
-    /// <returns>The <see cref="RsdApplicationInterface"/> at the specified index.</returns>
+    /// <param name="index">The zero-based index of the profile to get or set.</param>
+    /// <returns>The <see cref="ApmlProfile"/> at the specified index.</returns>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="index"/> is less than zero.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="index"/> is equal to or greater than the count for <see cref="RsdDocument.Interfaces"/>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="index"/> is equal to or greater than the count for <see cref="ApmlDocument.Profiles"/>.</exception>
     /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
-    public RsdApplicationInterface this[int index]
+    public ApmlProfile this[int index]
     {
-        get => this.Interfaces[index];
+        get => this.Profiles[index];
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            this.Interfaces[index] = value;
+            this.Profiles[index] = value;
         }
     }
 
     /// <summary>
     /// Occurs when the syndication resource state has been changed by a load operation.
     /// </summary>
-    /// <seealso cref="RsdDocument.Load(IXPathNavigable)"/>
-    /// <seealso cref="RsdDocument.Load(XmlReader)"/>
+    /// <seealso cref="ApmlDocument.Load(IXPathNavigable)"/>
+    /// <seealso cref="ApmlDocument.Load(XmlReader)"/>
     public event EventHandler<SyndicationResourceLoadedEventArgs>? Loaded;
 
     /// <summary>
-    /// Raises the <see cref="RsdDocument.Loaded"/> event.
+    /// Raises the <see cref="ApmlDocument.Loaded"/> event.
     /// </summary>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
     protected virtual void OnDocumentLoaded(SyndicationResourceLoadedEventArgs e) => this.Loaded?.Invoke(this, e);
@@ -89,19 +95,33 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
-    /// Gets or sets the homepage of the engine that is providing these discovery services.
+    /// Gets the applications for this document.
     /// </summary>
-    /// <value>The <c>engineLink</c> element — the blogging software's own site, not the blog's — or <see langword="null"/> if none was specified.</value>
-    public Uri? EngineLink { get; set; }
+    /// <remarks>
+    ///     Scratch space each consuming application may use to stash its own state in the profile, keyed by
+    ///     <see cref="ApmlApplication.Name"/>. The content is opaque to APML and to this library.
+    /// </remarks>
+    public IList<ApmlApplication> Applications { get; } = [];
 
     /// <summary>
-    /// Gets or sets the name of the engine that is providing these discovery services.
+    /// Gets or sets the name of the default profile for this document.
     /// </summary>
-    /// <value>The <c>engineName</c> element, such as <c>WordPress</c>, or an <i>empty</i> string if none was specified.</value>
-    public string EngineName
+    /// <value>The <c>defaultprofile</c> attribute — which of the <see cref="Profiles"/> to use when the user makes no choice. The default value is an <i>empty</i> string.</value>
+    /// <remarks>
+    ///     This is matched against <see cref="ApmlProfile.Name"/> by the consumer; nothing here checks that a
+    ///     profile of that name is present, and <see cref="Save(XmlWriter)"/> writes the attribute even when
+    ///     it is empty.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
+    public string DefaultProfileName
     {
         get;
-        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+        set
+        {
+            ArgumentException.ThrowIfNullOrEmpty(value);
+            field = value.Trim();
+        }
     } = string.Empty;
 
     /// <summary>
@@ -110,98 +130,115 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     public SyndicationContentFormat Format => documentFormat;
 
     /// <summary>
-    /// Gets or sets the homepage of the website that is hosting these discovery services.
+    /// Gets or sets the basic administrative information for this document.
     /// </summary>
-    /// <value>The <c>homePageLink</c> element — the blog this document describes — or <see langword="null"/> if none was specified.</value>
-    public Uri? Homepage { get; set; }
+    /// <value>The document's <c>Head</c>. Never <see langword="null"/> — a new document starts with an empty one, and the setter rejects null.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    public ApmlHead Head
+    {
+        get;
+        set
+        {
+            ArgumentNullException.ThrowIfNull(value);
+            field = value;
+        }
+    } = new();
 
     /// <summary>
-    /// Gets the application interfaces that comprise the discoverable services for this document.
+    /// Gets the attention profiles for this document.
     /// </summary>
     /// <remarks>
-    ///     A blog usually advertises several, one per protocol it accepts, and marks one
-    ///     <see cref="RsdApplicationInterface.IsPreferred">preferred</see>. Nothing enforces that exactly one
-    ///     is preferred, or that any is.
+    ///     A person may keep several — work and home, say — so that one interest graph does not bleed into
+    ///     another. <see cref="DefaultProfileName"/> names the one to use absent a choice.
     /// </remarks>
-    public IList<RsdApplicationInterface> Interfaces { get; } = [];
+    public IList<ApmlProfile> Profiles { get; } = [];
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
-    /// <value>Always <c>1.0</c>. This is what <see cref="Save(XmlWriter)"/> writes, not what a loaded document declared.</value>
+    /// <value>Always <c>0.6</c>. This is what <see cref="Save(XmlWriter)"/> writes, not what a loaded document declared.</value>
     public Version Version => documentVersion;
 
     /// <summary>
-    /// Creates a new <see cref="RsdDocument"/> instance asynchronously using the specified <see cref="Uri"/>.
+    /// Creates a new <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="RsdDocument"/> instance. This value can be <see langword="null"/>.</param>
-    /// <param name="cancellationToken">A token that may be used to cancel the asynchronous operation.</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="RsdDocument"/> object loaded using the <paramref name="source"/> data.</returns>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="ApmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
-    ///     This method uses the shared <see cref="HttpClient"/> from <see cref="SyndicationEncodingUtility.SharedHttpClient"/>.
-    ///     For scenarios requiring custom credentials, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
+    ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
+    ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    public static async Task<RsdDocument> CreateAsync(Uri source, SyndicationResourceLoadSettings? settings = null, CancellationToken cancellationToken = default)
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    /// <example>
+    ///     <code language="cs" title="The following code example demonstrates the usage of the CreateAsync method.">
+    ///         var document = await ApmlDocument.CreateAsync(new Uri("https://example.com/apml.xml"));
+    ///     </code>
+    /// </example>
+    public static async Task<ApmlDocument> CreateAsync(Uri source, SyndicationResourceLoadSettings? settings = null, CancellationToken cancellationToken = default)
     {
-        RsdDocument syndicationResource = new();
+        ApmlDocument syndicationResource = new();
         await syndicationResource.LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, settings, null, cancellationToken).ConfigureAwait(false);
         return syndicationResource;
     }
 
     /// <summary>
-    /// Creates a new <see cref="RsdDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
+    /// Creates a new <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="RsdDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
-    /// <param name="cancellationToken">A token that may be used to cancel the asynchronous operation.</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="RsdDocument"/> object loaded using the <paramref name="source"/> data.</returns>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="ApmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
-    ///     This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
-    ///     This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    ///     <para>
+    ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
+    ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    public static async Task<RsdDocument> CreateAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<ApmlDocument> CreateAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
-        RsdDocument syndicationResource = new();
+        ApmlDocument syndicationResource = new();
         await syndicationResource.LoadAsync(source, httpClient, settings, requestOptions, cancellationToken).ConfigureAwait(false);
         return syndicationResource;
     }
 
     /// <summary>
-    /// Loads this <see cref="RsdDocument"/> instance asynchronously using the specified <see cref="Uri"/>.
+    /// Loads this <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="cancellationToken">A token that may be used to cancel the asynchronous operation.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous load operation.</returns>
     /// <remarks>
-    ///     <para>The <see cref="RsdDocument"/> is loaded using the default <see cref="SyndicationResourceLoadSettings"/>.</para>
-    ///     <para>
-    ///         This method uses the shared <see cref="HttpClient"/> from <see cref="SyndicationEncodingUtility.SharedHttpClient"/>.
-    ///         For scenarios requiring custom credentials, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
-    ///     </para>
-    ///     <para>
-    ///         After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.
-    ///     </para>
+    ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
+    ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
+    ///     <para>After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
 
     /// <summary>
-    /// Loads this <see cref="RsdDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
+    /// Loads this <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="RsdDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
-    /// <param name="cancellationToken">A token that may be used to cancel the asynchronous operation.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous load operation.</returns>
     /// <remarks>
     ///     <para>
@@ -209,17 +246,15 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     ///     <para>
-    ///         If <paramref name="settings"/> names no <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> — which is
-    ///         the default — the encoding of the <paramref name="source"/> is determined from its byte-order mark or XML declaration, falling
-    ///         back to <see cref="System.Text.Encoding.UTF8"/> if it declares neither. Naming one overrides what the document declares.
+    ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
+    ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
-    ///     <para>
-    ///         After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.
-    ///     </para>
+    ///     <para>After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public async Task LoadAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -230,18 +265,18 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
             source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, cancellationToken).ConfigureAwait(false);
 
         SyndicationResourceAdapter adapter = new(navigator, settings);
-        adapter.Fill(this, SyndicationContentFormat.Rsd);
+        adapter.Fill(this, SyndicationContentFormat.Apml);
 
         this.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source));
     }
 
     /// <summary>
-    /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="RsdDocument"/>.
+    /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="ApmlDocument"/>.
     /// </summary>
     /// <returns>A read-only <see cref="XPathNavigator"/> object.</returns>
     /// <remarks>
-    ///     The <see cref="XPathNavigator"/> is positioned on the root element of the <see cref="RsdDocument"/>. 
-    ///     If there is no root element, the <see cref="XPathNavigator"/> is positioned on the first element in the XML representation of the <see cref="RsdDocument"/>.
+    ///     The <see cref="XPathNavigator"/> is positioned on the root element of the <see cref="ApmlDocument"/>.
+    ///     If there is no root element, the <see cref="XPathNavigator"/> is positioned on the first element in the XML representation of the <see cref="ApmlDocument"/>.
     /// </remarks>
     public XPathNavigator CreateNavigator()
     {
@@ -266,13 +301,13 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="RsdDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     /// <example>
-    ///     <code source="..\..\Argotic.Examples\Core\Rsd\RsdDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
+    ///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(IXPathNavigable source) => this.Load(source, null);
 
@@ -280,9 +315,9 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
     /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="RsdDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="RsdDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
@@ -301,13 +336,13 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="RsdDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     /// <example>
-    ///     <code source="..\..\Argotic.Examples\Core\Rsd\RsdDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
+    ///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(Stream stream) => this.Load(stream, null);
 
@@ -315,9 +350,9 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
     /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="RsdDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="RsdDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
@@ -333,13 +368,13 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="RsdDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     /// <example>
-    ///     <code source="..\..\Argotic.Examples\Core\Rsd\RsdDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
+    ///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(XmlReader reader) => this.Load(reader, null);
 
@@ -347,9 +382,9 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="RsdDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="RsdDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
@@ -369,7 +404,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     /// <example>
-    ///     <code source="..\..\Argotic.Examples\Core\Rsd\RsdDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
+    ///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
     /// </example>
     public void Save(Stream stream) => this.Save(stream, null);
 
@@ -377,7 +412,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
     /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="RsdDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream, SyndicationResourceSaveSettings? settings)
@@ -403,7 +438,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     /// <example>
-    ///     <code source="..\..\Argotic.Examples\Core\Rsd\RsdDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
+    ///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
     /// </example>
     public void Save(XmlWriter writer)
     {
@@ -415,7 +450,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="RsdDocument"/> instance.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ApmlDocument"/> instance.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
@@ -423,43 +458,76 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(settings);
-        writer.WriteStartElement("rsd", RsdUtility.RsdNamespace);
+        writer.WriteStartElement("APML", ApmlUtility.ApmlNamespace);
         writer.WriteAttributeString("version", this.Version.ToString());
 
         if (settings.AutoDetectExtensions)
         {
             SyndicationExtensionAdapter.FillExtensionTypes(this, settings.SupportedExtensions);
 
-            foreach (RsdApplicationInterface api in this.Interfaces)
+            SyndicationExtensionAdapter.FillExtensionTypes(this.Head, settings.SupportedExtensions);
+
+            foreach (ApmlApplication application in this.Applications)
             {
-                SyndicationExtensionAdapter.FillExtensionTypes(api, settings.SupportedExtensions);
+                SyndicationExtensionAdapter.FillExtensionTypes(application, settings.SupportedExtensions);
+            }
+
+            foreach (ApmlProfile profile in this.Profiles)
+            {
+                SyndicationExtensionAdapter.FillExtensionTypes(profile, settings.SupportedExtensions);
+
+                foreach (ApmlConcept explicitConcept in profile.ExplicitConcepts)
+                {
+                    SyndicationExtensionAdapter.FillExtensionTypes(explicitConcept, settings.SupportedExtensions);
+                }
+
+                foreach (ApmlSource explicitSource in profile.ExplicitSources)
+                {
+                    SyndicationExtensionAdapter.FillExtensionTypes(explicitSource, settings.SupportedExtensions);
+
+                    foreach (ApmlAuthor explicitAuthor in explicitSource.Authors)
+                    {
+                        SyndicationExtensionAdapter.FillExtensionTypes(explicitAuthor, settings.SupportedExtensions);
+                    }
+                }
+
+                foreach (ApmlConcept implicitConcept in profile.ImplicitConcepts)
+                {
+                    SyndicationExtensionAdapter.FillExtensionTypes(implicitConcept, settings.SupportedExtensions);
+                }
+
+                foreach (ApmlSource implicitSource in profile.ImplicitSources)
+                {
+                    SyndicationExtensionAdapter.FillExtensionTypes(implicitSource, settings.SupportedExtensions);
+
+                    foreach (ApmlAuthor implicitAuthor in implicitSource.Authors)
+                    {
+                        SyndicationExtensionAdapter.FillExtensionTypes(implicitAuthor, settings.SupportedExtensions);
+                    }
+                }
             }
         }
         SyndicationExtensionAdapter.WriteXmlNamespaceDeclarations(settings.SupportedExtensions, writer);
 
-        writer.WriteStartElement("service", RsdUtility.RsdNamespace);
+        this.Head.WriteTo(writer);
 
-        if (!string.IsNullOrEmpty(this.EngineName))
+        writer.WriteStartElement("Body", ApmlUtility.ApmlNamespace);
+        writer.WriteAttributeString("defaultprofile", this.DefaultProfileName);
+
+        foreach (ApmlProfile profile in this.Profiles)
         {
-            writer.WriteElementString("engineName", RsdUtility.RsdNamespace, this.EngineName);
+            profile.WriteTo(writer);
         }
 
-        if (this.EngineLink is not null)
+        if (this.Applications.Count > 0)
         {
-            writer.WriteElementString("engineLink", RsdUtility.RsdNamespace, this.EngineLink.ToString());
+            writer.WriteStartElement("Applications", ApmlUtility.ApmlNamespace);
+            foreach (ApmlApplication application in this.Applications)
+            {
+                application.WriteTo(writer);
+            }
+            writer.WriteEndElement();
         }
-
-        if (this.Homepage is not null)
-        {
-            writer.WriteElementString("homePageLink", RsdUtility.RsdNamespace, this.Homepage.ToString());
-        }
-
-        writer.WriteStartElement("apis", RsdUtility.RsdNamespace);
-        foreach (RsdApplicationInterface api in this.Interfaces)
-        {
-            api.WriteTo(writer);
-        }
-        writer.WriteEndElement();
 
         writer.WriteEndElement();
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
@@ -471,10 +539,10 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Loads the syndication resource using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
     /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the syndication resource information.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="RsdDocument"/>.</param>
-    /// <param name="eventData">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data used when raising the <see cref="RsdDocument.Loaded"/> event.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="ApmlDocument"/>.</param>
+    /// <param name="eventData">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data used when raising the <see cref="ApmlDocument.Loaded"/> event.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="RsdDocument.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
+    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
@@ -486,7 +554,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(eventData);
         SyndicationResourceAdapter adapter = new(navigator, settings);
-        adapter.Fill(this, SyndicationContentFormat.Rsd);
+        adapter.Fill(this, SyndicationContentFormat.Apml);
         this.OnDocumentLoaded(eventData);
     }
 }

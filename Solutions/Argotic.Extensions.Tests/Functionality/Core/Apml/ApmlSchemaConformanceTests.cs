@@ -1,7 +1,7 @@
 using System.Xml;
 using System.Xml.Schema;
 
-using Argotic.Syndication.Specialized;
+using Argotic.Syndication;
 
 using Shouldly;
 

@@ -4,24 +4,24 @@ using System.Xml.XPath;
 using Argotic.Common;
 using Argotic.Extensions;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
-/// Represents an author of published content.
+/// Represents an categorization taxonomy for published content.
 /// </summary>
 /// <remarks>
-///     One entry in the blog's author table — a display name in <see cref="Title"/> and
-///     an address, no more. Posts reference authors by <see cref="Id"/> rather than
-///     embedding them, so an author is defined once however many posts they wrote.
+///     One entry in the blog's category table. Posts reference categories by
+///     <see cref="Id"/> rather than embedding them, and a category names its parent the
+///     same way, so the whole taxonomy is stored flat and reassembled by the reader.
 /// </remarks>
-/// <seealso cref="BlogMLDocument.Authors"/>
-public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEquatable<BlogMLAuthor>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
+/// <seealso cref="BlogMLDocument.Categories"/>
+public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, IEquatable<BlogMLCategory>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="BlogMLAuthor"/> class.
+    /// Initializes a new instance of the <see cref="BlogMLCategory"/> class.
     /// </summary>
-    public BlogMLAuthor()
+    public BlogMLCategory()
     {
 
     }
@@ -102,10 +102,10 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
-    /// Gets or sets the email address of this author.
+    /// Gets or sets the description of this category.
     /// </summary>
-    /// <value>The <c>email</c> attribute, or an <i>empty</i> string if none was specified. It is not validated as an address.</value>
-    public string EmailAddress
+    /// <value>The <c>description</c> attribute, or an <i>empty</i> string if none was specified.</value>
+    public string Description
     {
         get;
 
@@ -113,12 +113,28 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     } = string.Empty;
 
     /// <summary>
-    /// Loads this <see cref="BlogMLAuthor"/> using the supplied <see cref="XPathNavigator"/>.
+    /// Gets or sets a reference to the parent of this category.
+    /// </summary>
+    /// <value>The <c>parentref</c> attribute — the <see cref="Id"/> of another category in the same document — or an <i>empty</i> string for a top-level category.</value>
+    /// <remarks>
+    ///     This is how the category tree is expressed: <see cref="BlogMLDocument.Categories"/> is flat, and
+    ///     the hierarchy exists only in these references. Nothing checks that the parent exists or that the
+    ///     references do not form a cycle.
+    /// </remarks>
+    public string ParentId
+    {
+        get;
+
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
+
+    /// <summary>
+    /// Loads this <see cref="BlogMLCategory"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><see langword="true"/> if the <see cref="BlogMLAuthor"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="BlogMLCategory"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLAuthor"/>.
+    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLCategory"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
@@ -131,11 +147,18 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
         }
         if (source.HasAttributes)
         {
-            string emailAttribute = source.GetAttribute("email", string.Empty);
+            string parentRefAttribute = source.GetAttribute("parentref", string.Empty);
+            string descriptionAttribute = source.GetAttribute("description", string.Empty);
 
-            if (!string.IsNullOrEmpty(emailAttribute))
+            if (!string.IsNullOrEmpty(parentRefAttribute))
             {
-                this.EmailAddress = emailAttribute;
+                this.ParentId = parentRefAttribute;
+                wasLoaded = true;
+            }
+
+            if (!string.IsNullOrEmpty(descriptionAttribute))
+            {
+                this.Description = descriptionAttribute;
                 wasLoaded = true;
             }
         }
@@ -144,13 +167,13 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     }
 
     /// <summary>
-    /// Loads this <see cref="BlogMLAuthor"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
+    /// Loads this <see cref="ApmlApplication"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><see langword="true"/> if the <see cref="BlogMLAuthor"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="ApmlApplication"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLAuthor"/>.
+    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ApmlApplication"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
@@ -165,11 +188,18 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
         }
         if (source.HasAttributes)
         {
-            string emailAttribute = source.GetAttribute("email", string.Empty);
+            string parentRefAttribute = source.GetAttribute("parentref", string.Empty);
+            string descriptionAttribute = source.GetAttribute("description", string.Empty);
 
-            if (!string.IsNullOrEmpty(emailAttribute))
+            if (!string.IsNullOrEmpty(parentRefAttribute))
             {
-                this.EmailAddress = emailAttribute;
+                this.ParentId = parentRefAttribute;
+                wasLoaded = true;
+            }
+
+            if (!string.IsNullOrEmpty(descriptionAttribute))
+            {
+                this.Description = descriptionAttribute;
                 wasLoaded = true;
             }
         }
@@ -180,19 +210,24 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     }
 
     /// <summary>
-    /// Saves the current <see cref="BlogMLAuthor"/> to the specified <see cref="XmlWriter"/>.
+    /// Saves the current <see cref="BlogMLCategory"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        writer.WriteStartElement("author", BlogMLUtility.BlogMLNamespace);
+        writer.WriteStartElement("category", BlogMLUtility.BlogMLNamespace);
         BlogMLUtility.WriteCommonObjectAttributes(this, writer);
 
-        if (!string.IsNullOrEmpty(this.EmailAddress))
+        if (!string.IsNullOrEmpty(this.ParentId))
         {
-            writer.WriteAttributeString("email", this.EmailAddress);
+            writer.WriteAttributeString("parentref", this.ParentId);
+        }
+
+        if (!string.IsNullOrEmpty(this.Description))
+        {
+            writer.WriteAttributeString("description", this.Description);
         }
 
         BlogMLUtility.WriteCommonObjectElements(this, writer);
@@ -202,9 +237,9 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLAuthor"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLCategory"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLAuthor"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLCategory"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
@@ -215,14 +250,15 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     /// </summary>
     /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    public int CompareTo(BlogMLAuthor? other)
+    public int CompareTo(BlogMLCategory? other)
     {
         if (other is null)
         {
             return 1;
         }
 
-        int result = string.Compare(this.EmailAddress, other.EmailAddress, StringComparison.OrdinalIgnoreCase);
+        int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.ParentId, other.ParentId, StringComparison.OrdinalIgnoreCase);
 
         if (result == 0) result = BlogMLUtility.CompareCommonObjects(this, other);
 
@@ -230,11 +266,11 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="BlogMLAuthor"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="BlogMLCategory"/> is equal to the current instance.
     /// </summary>
-    /// <param name="other">The <see cref="BlogMLAuthor"/> to compare with the current instance.</param>
-    /// <returns><see langword="true"/> if the specified <see cref="BlogMLAuthor"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
-    public bool Equals(BlogMLAuthor? other)
+    /// <param name="other">The <see cref="BlogMLCategory"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="BlogMLCategory"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public bool Equals(BlogMLCategory? other)
     {
         if (other is null)
         {
@@ -249,13 +285,13 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
-    public override bool Equals(object? obj) => obj is BlogMLAuthor other && this.Equals(other);
+    public override bool Equals(object? obj) => obj is BlogMLCategory other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.EmailAddress), HashCodeUtility.Component(this.ApprovalStatus), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.LastModifiedOn), HashCodeUtility.Component(this.Title));
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.ParentId), HashCodeUtility.Component(this.ApprovalStatus), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.LastModifiedOn), HashCodeUtility.Component(this.Title));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -263,7 +299,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
-    public static bool operator ==(BlogMLAuthor? first, BlogMLAuthor? second)
+    public static bool operator ==(BlogMLCategory? first, BlogMLCategory? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -275,6 +311,6 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
-    public static bool operator !=(BlogMLAuthor? first, BlogMLAuthor? second) => !(first == second);
+    public static bool operator !=(BlogMLCategory? first, BlogMLCategory? second) => !(first == second);
 
 }

@@ -1,4 +1,4 @@
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
 /// Allows an object to implement common Web Log Markup Language (BlogML) entity information by representing a set of properties, methods, indexers and events common to BlogML syndication resources.
@@ -10,7 +10,7 @@ namespace Argotic.Syndication.Specialized;
 ///     <see cref="BlogMLAuthor"/> and <see cref="BlogMLCategory"/>, which is what lets one pair of read and
 ///     write helpers serve all five.
 /// </remarks>
-/// <seealso cref="Argotic.Syndication.Specialized.BlogMLAuthor"/>
+/// <seealso cref="Argotic.Syndication.BlogMLAuthor"/>
 interface IBlogMLCommonObject
 {
     /// <summary>

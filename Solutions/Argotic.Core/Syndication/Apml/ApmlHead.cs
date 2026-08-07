@@ -4,7 +4,7 @@ using System.Xml.XPath;
 using Argotic.Common;
 using Argotic.Extensions;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
 /// Represents the basic administrative information of an <see cref="ApmlDocument"/>.

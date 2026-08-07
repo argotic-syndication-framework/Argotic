@@ -4,7 +4,6 @@ using System.Xml.XPath;
 using Argotic.Common;
 using Argotic.Data.Adapters;
 using Argotic.Syndication;
-using Argotic.Syndication.Specialized;
 
 using Shouldly;
 

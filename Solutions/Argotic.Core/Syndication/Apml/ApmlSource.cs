@@ -4,7 +4,7 @@ using System.Xml.XPath;
 using Argotic.Common;
 using Argotic.Extensions;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
 /// Represents a specific source of information that an entity is interested in.

@@ -1,6 +1,6 @@
 using System.Xml;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
 /// Provides methods that comprise common utility features shared across the Attention Profiling Markup Language (APML) syndication entities. This class cannot be inherited.

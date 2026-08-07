@@ -1,6 +1,6 @@
 using Argotic.Common;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
 /// Represents the approval status of a web log entity.

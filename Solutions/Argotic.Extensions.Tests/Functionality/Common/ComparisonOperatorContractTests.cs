@@ -6,7 +6,6 @@ using Argotic.Extensions.Core;
 using Argotic.Net;
 using Argotic.Publishing;
 using Argotic.Syndication;
-using Argotic.Syndication.Specialized;
 
 using Shouldly;
 

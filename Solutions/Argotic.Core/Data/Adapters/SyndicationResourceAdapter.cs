@@ -3,7 +3,6 @@ using System.Xml.XPath;
 using Argotic.Common;
 using Argotic.Publishing;
 using Argotic.Syndication;
-using Argotic.Syndication.Specialized;
 
 namespace Argotic.Data.Adapters;
 

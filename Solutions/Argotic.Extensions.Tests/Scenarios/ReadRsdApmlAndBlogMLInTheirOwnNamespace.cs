@@ -1,6 +1,6 @@
 using System.Xml;
 
-using Argotic.Syndication.Specialized;
+using Argotic.Syndication;
 
 using Shouldly;
 
@@ -11,7 +11,7 @@ namespace Argotic.Extensions.Tests.Scenarios;
 /// </summary>
 /// <remarks>
 ///     <para>
-///     Each of the three Specialized formats resolves its prefixed XPath through a
+///     Each of RSD, APML and BlogML resolves its prefixed XPath through a
 ///     <see cref="XmlNamespaceManager"/> built by its own utility class, and each of those built the binding
 ///     with <c>AddNamespace(prefix, !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace
 ///     : CONSTANT)</c> two lines after constructing a fresh manager.
@@ -33,7 +33,7 @@ namespace Argotic.Extensions.Tests.Scenarios;
 ///     </para>
 /// </remarks>
 [TestClass]
-public class ReadSpecializedFormatsInTheirOwnNamespace
+public class ReadRsdApmlAndBlogMLInTheirOwnNamespace
 {
     /// <summary>
     /// An RSD document declaring <c>http://archipelago.phrasewise.com/rsd</c> is read as RSD.

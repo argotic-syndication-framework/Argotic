@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 
 using Argotic.Common;
 using Argotic.Syndication;
-using Argotic.Syndication.Specialized;
 
 using BenchmarkDotNet.Attributes;
 

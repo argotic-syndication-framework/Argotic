@@ -6,7 +6,7 @@ using System.Xml.XPath;
 
 using Argotic.Common;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
 /// Provides methods that comprise common utility features shared across the Web Log Markup Language (BlogML) syndication entities. This class cannot be inherited.

@@ -1,6 +1,6 @@
 using System.Xml.XPath;
 
-using Argotic.Syndication.Specialized;
+using Argotic.Syndication;
 
 using Shouldly;
 

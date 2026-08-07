@@ -1,6 +1,6 @@
 using Argotic.Common;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
 /// Represents the permissible types of a web log post.

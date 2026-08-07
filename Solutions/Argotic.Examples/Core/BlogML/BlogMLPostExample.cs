@@ -1,4 +1,4 @@
-using Argotic.Syndication.Specialized;
+using Argotic.Syndication;
 
 namespace Argotic.Examples.Core.BlogML;
 

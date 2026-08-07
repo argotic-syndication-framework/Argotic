@@ -4,7 +4,7 @@ using System.Xml.XPath;
 using Argotic.Common;
 using Argotic.Extensions;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
 /// Represents an attention profile that can be associated to an <see cref="ApmlDocument"/>.

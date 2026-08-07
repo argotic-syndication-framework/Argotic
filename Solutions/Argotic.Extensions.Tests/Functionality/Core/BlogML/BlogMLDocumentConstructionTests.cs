@@ -1,4 +1,4 @@
-using Argotic.Syndication.Specialized;
+using Argotic.Syndication;
 using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.BlogML;

@@ -570,18 +570,18 @@ malformed `Accept`, a relative `Referer`, a content header in `CustomHeaders` â€
 
 ### Formats
 
-| Type                                                                                                       | Namespace                         | Format                              |
-|------------------------------------------------------------------------------------------------------------|-----------------------------------|-------------------------------------|
-| `RssFeed`, `RssChannel`, `RssItem`                                                                         | `Argotic.Syndication`             | RSS 2.0                             |
-| `AtomFeed`, `AtomEntry`                                                                                    | `Argotic.Syndication`             | Atom 1.0 (RFC 4287)                 |
-| `OpmlDocument`                                                                                             | `Argotic.Syndication`             | OPML 2.0                            |
-| `Sitemap`, `SitemapIndex`                                                                                  | `Argotic.Syndication`             | Sitemap 0.9                         |
-| `GenericSyndicationFeed`                                                                                   | `Argotic.Syndication`             | Format-agnostic wrapper             |
-| `ApmlDocument`                                                                                             | `Argotic.Syndication.Specialized` | APML 0.6                            |
-| `BlogMLDocument`                                                                                           | `Argotic.Syndication.Specialized` | BlogML 2.0                          |
-| `RsdDocument`                                                                                              | `Argotic.Syndication.Specialized` | RSD 1.0                             |
-| `AtomServiceDocument`, `AtomCategoryDocument`, `AtomEntryResource`, `AtomWorkspace`, `AtomMemberResources` | `Argotic.Publishing`              | Atom Publishing Protocol (RFC 5023) |
-| `TrackbackClient`, `XmlRpcClient`                                                                          | `Argotic.Net`                     | Trackback, XML-RPC                  |
+| Type                                                                                                       | Namespace             | Format                              |
+|------------------------------------------------------------------------------------------------------------|-----------------------|-------------------------------------|
+| `RssFeed`, `RssChannel`, `RssItem`                                                                         | `Argotic.Syndication` | RSS 2.0                             |
+| `AtomFeed`, `AtomEntry`                                                                                    | `Argotic.Syndication` | Atom 1.0 (RFC 4287)                 |
+| `OpmlDocument`                                                                                             | `Argotic.Syndication` | OPML 2.0                            |
+| `Sitemap`, `SitemapIndex`                                                                                  | `Argotic.Syndication` | Sitemap 0.9                         |
+| `GenericSyndicationFeed`                                                                                   | `Argotic.Syndication` | Format-agnostic wrapper             |
+| `ApmlDocument`                                                                                             | `Argotic.Syndication` | APML 0.6                            |
+| `BlogMLDocument`                                                                                           | `Argotic.Syndication` | BlogML 2.0                          |
+| `RsdDocument`                                                                                              | `Argotic.Syndication` | RSD 1.0                             |
+| `AtomServiceDocument`, `AtomCategoryDocument`, `AtomEntryResource`, `AtomWorkspace`, `AtomMemberResources` | `Argotic.Publishing`  | Atom Publishing Protocol (RFC 5023) |
+| `TrackbackClient`, `XmlRpcClient`                                                                          | `Argotic.Net`         | Trackback, XML-RPC                  |
 
 ### Extensions
 

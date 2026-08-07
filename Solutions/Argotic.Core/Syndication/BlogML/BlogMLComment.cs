@@ -4,24 +4,24 @@ using System.Xml.XPath;
 using Argotic.Common;
 using Argotic.Extensions;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
-/// Represents a trackback to a post.
+/// Represents a post comment.
 /// </summary>
 /// <remarks>
-///     A record that another page linked here, announced over the trackback protocol. Like a comment it
-///     carries its own <see cref="BlogMLTrackback.ApprovalStatus"/>, because trackback spam was the reason
-///     the protocol fell out of use.
+///     An export carries the moderation state as well as the text: a comment has its own
+///     <see cref="BlogMLComment.ApprovalStatus"/>, so unapproved and spam comments travel alongside published
+///     ones. An importer that ignores it republishes the lot.
 /// </remarks>
-/// <seealso cref="BlogMLPost.Trackbacks"/>
-public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>, IEquatable<BlogMLTrackback>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
+/// <seealso cref="BlogMLPost.Comments"/>
+public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IEquatable<BlogMLComment>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="BlogMLTrackback"/> class.
+    /// Initializes a new instance of the <see cref="BlogMLComment"/> class.
     /// </summary>
-    public BlogMLTrackback()
+    public BlogMLComment()
     {
     }
 
@@ -101,11 +101,11 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
-    /// Gets or sets the URL of this trackback.
+    /// Gets or sets the content of this comment.
     /// </summary>
-    /// <value>The <c>url</c> attribute — the page that linked here. <see langword="null"/> until set; the setter rejects null.</value>
+    /// <value>The <c>content</c> element — the comment body. Never <see langword="null"/> — a new comment starts with an empty text construct, and the setter rejects null.</value>
     /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
-    public Uri? Url
+    public BlogMLTextConstruct Content
     {
         get;
 
@@ -114,34 +114,101 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
             ArgumentNullException.ThrowIfNull(value);
             field = value;
         }
-    }
+    } = new();
 
     /// <summary>
-    /// Loads this <see cref="BlogMLTrackback"/> using the supplied <see cref="XPathNavigator"/>.
+    /// Gets or sets the author's email address for this comment.
+    /// </summary>
+    /// <value>The <c>user-email</c> attribute, or an <i>empty</i> string if none was specified. It is not validated as an address.</value>
+    /// <remarks>
+    ///     A commenter is identified by these three free-text fields, not by a reference into
+    ///     <see cref="BlogMLDocument.Authors"/> — a comment author is not a blog author.
+    /// </remarks>
+    public string UserEmailAddress
+    {
+        get;
+
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the author's name for this comment.
+    /// </summary>
+    /// <value>The <c>user-name</c> attribute, as the commenter typed it. The value is trimmed on assignment.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
+    public string UserName
+    {
+        get;
+
+        set
+        {
+            ArgumentException.ThrowIfNullOrEmpty(value);
+            field = value.Trim();
+        }
+    } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the author's homepage or web log for this comment.
+    /// </summary>
+    /// <value>The <c>user-url</c> attribute — the site the commenter gave — or <see langword="null"/> if none was specified.</value>
+    public Uri? UserUrl { get; set; }
+
+    /// <summary>
+    /// Loads this <see cref="BlogMLComment"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><see langword="true"/> if the <see cref="BlogMLTrackback"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="BlogMLComment"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLTrackback"/>.
+    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLComment"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
+        XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
         if (BlogMLUtility.FillCommonObject(this, source))
         {
             wasLoaded = true;
         }
         if (source.HasAttributes)
         {
-            string urlAttribute = source.GetAttribute("url", string.Empty);
+            string userNameAttribute = source.GetAttribute("user-name", string.Empty);
+            string userEmailAttribute = source.GetAttribute("user-email", string.Empty);
+            string userUrlAttribute = source.GetAttribute("user-url", string.Empty);
 
-            if (!string.IsNullOrEmpty(urlAttribute))
+            if (!string.IsNullOrEmpty(userNameAttribute))
             {
-                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri? url))
+                this.UserName = userNameAttribute;
+                wasLoaded = true;
+            }
+
+            if (!string.IsNullOrEmpty(userEmailAttribute))
+            {
+                this.UserEmailAddress = userEmailAttribute;
+                wasLoaded = true;
+            }
+
+            if (!string.IsNullOrEmpty(userUrlAttribute))
+            {
+                if (Uri.TryCreate(userUrlAttribute, UriKind.RelativeOrAbsolute, out Uri? url))
                 {
-                    this.Url = url;
+                    this.UserUrl = url;
+                    wasLoaded = true;
+                }
+            }
+        }
+
+        if (source.HasChildren)
+        {
+            XPathNavigator? contentNavigator = source.SelectChildElement("blog", "content", manager);
+            if (contentNavigator is not null)
+            {
+                BlogMLTextConstruct content = new();
+                if (content.Load(contentNavigator))
+                {
+                    this.Content = content;
                     wasLoaded = true;
                 }
             }
@@ -166,23 +233,55 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
+        XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
+
         if (BlogMLUtility.FillCommonObject(this, source, settings))
         {
             wasLoaded = true;
         }
+
         if (source.HasAttributes)
         {
-            string urlAttribute = source.GetAttribute("url", string.Empty);
+            string userNameAttribute = source.GetAttribute("user-name", string.Empty);
+            string userEmailAttribute = source.GetAttribute("user-email", string.Empty);
+            string userUrlAttribute = source.GetAttribute("user-url", string.Empty);
 
-            if (!string.IsNullOrEmpty(urlAttribute))
+            if (!string.IsNullOrEmpty(userNameAttribute))
             {
-                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri? url))
+                this.UserName = userNameAttribute;
+                wasLoaded = true;
+            }
+
+            if (!string.IsNullOrEmpty(userEmailAttribute))
+            {
+                this.UserEmailAddress = userEmailAttribute;
+                wasLoaded = true;
+            }
+
+            if (!string.IsNullOrEmpty(userUrlAttribute))
+            {
+                if (Uri.TryCreate(userUrlAttribute, UriKind.RelativeOrAbsolute, out Uri? url))
                 {
-                    this.Url = url;
+                    this.UserUrl = url;
                     wasLoaded = true;
                 }
             }
         }
+
+        if (source.HasChildren)
+        {
+            XPathNavigator? contentNavigator = source.SelectChildElement("blog", "content", manager);
+            if (contentNavigator is not null)
+            {
+                BlogMLTextConstruct content = new();
+                if (content.Load(contentNavigator))
+                {
+                    this.Content = content;
+                    wasLoaded = true;
+                }
+            }
+        }
+
         SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
@@ -190,28 +289,39 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     }
 
     /// <summary>
-    /// Saves the current <see cref="BlogMLTrackback"/> to the specified <see cref="XmlWriter"/>.
+    /// Saves the current <see cref="BlogMLComment"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        writer.WriteStartElement("trackback", BlogMLUtility.BlogMLNamespace);
+        writer.WriteStartElement("comment", BlogMLUtility.BlogMLNamespace);
         BlogMLUtility.WriteCommonObjectAttributes(this, writer);
 
-        writer.WriteAttributeString("url", this.Url?.ToString() ?? string.Empty);
+        writer.WriteAttributeString("user-name", this.UserName);
+
+        if (!string.IsNullOrEmpty(this.UserEmailAddress))
+        {
+            writer.WriteAttributeString("user-email", this.UserEmailAddress);
+        }
+
+        if (this.UserUrl is not null)
+        {
+            writer.WriteAttributeString("user-url", this.UserUrl.ToString());
+        }
 
         BlogMLUtility.WriteCommonObjectElements(this, writer);
+        this.Content.WriteTo(writer, "content");
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
         writer.WriteEndElement();
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLTrackback"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLComment"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLTrackback"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLComment"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
@@ -222,14 +332,17 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// </summary>
     /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    public int CompareTo(BlogMLTrackback? other)
+    public int CompareTo(BlogMLComment? other)
     {
         if (other is null)
         {
             return 1;
         }
 
-        int result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        int result = this.Content.CompareTo(other.Content);
+        if (result == 0) result = string.Compare(this.UserEmailAddress, other.UserEmailAddress, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.UserName, other.UserName, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.UserUrl, other.UserUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         if (result == 0) result = BlogMLUtility.CompareCommonObjects(this, other);
 
@@ -237,11 +350,11 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="BlogMLTrackback"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="BlogMLComment"/> is equal to the current instance.
     /// </summary>
-    /// <param name="other">The <see cref="BlogMLTrackback"/> to compare with the current instance.</param>
-    /// <returns><see langword="true"/> if the specified <see cref="BlogMLTrackback"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
-    public bool Equals(BlogMLTrackback? other)
+    /// <param name="other">The <see cref="BlogMLComment"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="BlogMLComment"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public bool Equals(BlogMLComment? other)
     {
         if (other is null)
         {
@@ -256,13 +369,13 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
-    public override bool Equals(object? obj) => obj is BlogMLTrackback other && this.Equals(other);
+    public override bool Equals(object? obj) => obj is BlogMLComment other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Url), HashCodeUtility.Component(this.ApprovalStatus), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.LastModifiedOn), HashCodeUtility.Component(this.Title));
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.UserEmailAddress), HashCodeUtility.Component(this.UserName), HashCodeUtility.Component(this.UserUrl), HashCodeUtility.Component(this.ApprovalStatus), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.LastModifiedOn));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -270,7 +383,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
-    public static bool operator ==(BlogMLTrackback? first, BlogMLTrackback? second)
+    public static bool operator ==(BlogMLComment? first, BlogMLComment? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -282,6 +395,6 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
-    public static bool operator !=(BlogMLTrackback? first, BlogMLTrackback? second) => !(first == second);
+    public static bool operator !=(BlogMLComment? first, BlogMLComment? second) => !(first == second);
 
 }

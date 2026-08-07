@@ -1,7 +1,7 @@
 using System.Xml;
 using System.Xml.XPath;
 using Argotic.Common;
-using Argotic.Syndication.Specialized;
+using Argotic.Syndication;
 
 namespace Argotic.Examples.Core.Apml;
 

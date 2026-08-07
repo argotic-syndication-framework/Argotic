@@ -38,19 +38,19 @@ foreach (RssItem item in feed.Channel.Items)
 
 ## What is in the package
 
-| Type                                                                                                       | Namespace                         | Format                                                                             |
-|------------------------------------------------------------------------------------------------------------|-----------------------------------|------------------------------------------------------------------------------------|
-| `RssFeed`, `RssChannel`, `RssItem`                                                                         | `Argotic.Syndication`             | [RSS 2.0](https://www.rssboard.org/rss-specification)                              |
-| `AtomFeed`, `AtomEntry`                                                                                    | `Argotic.Syndication`             | [Atom 1.0](https://www.rfc-editor.org/rfc/rfc4287.html)                            |
-| `OpmlDocument`, `OpmlOutline`                                                                              | `Argotic.Syndication`             | [OPML 2.0](https://www.opml.org/spec2)                                             |
-| `Sitemap`, `SitemapUrl`, `SitemapIndex`, `SitemapIndexEntry`                                               | `Argotic.Syndication`             | [Sitemaps 0.9](https://www.sitemaps.org/protocol.html)                             |
-| `GenericSyndicationFeed`, `GenericSyndicationItem`, `GenericSyndicationCategory`                           | `Argotic.Syndication`             | RSS **or** Atom, format-agnostic                                                   |
-| `ApmlDocument`                                                                                             | `Argotic.Syndication.Specialized` | APML 1.0                                                                           |
-| `BlogMLDocument`                                                                                           | `Argotic.Syndication.Specialized` | BlogML 2.0                                                                         |
-| `RsdDocument`                                                                                              | `Argotic.Syndication.Specialized` | RSD 1.0                                                                            |
-| `AtomServiceDocument`, `AtomCategoryDocument`, `AtomEntryResource`, `AtomWorkspace`, `AtomMemberResources` | `Argotic.Publishing`              | [Atom Publishing Protocol (RFC 5023)](https://www.rfc-editor.org/rfc/rfc5023.html) |
-| `TrackbackClient`, `TrackbackMessage`, `XmlRpcClient`, `XmlRpcMessage`                                     | `Argotic.Net`                     | Trackback, XML-RPC                                                                 |
-| `ServiceCollectionExtensions`, `ArgoticHttpClients`                                                        | `Argotic.Configuration`           | Dependency injection                                                               |
+| Type                                                                                                       | Namespace               | Format                                                                             |
+|------------------------------------------------------------------------------------------------------------|-------------------------|------------------------------------------------------------------------------------|
+| `RssFeed`, `RssChannel`, `RssItem`                                                                         | `Argotic.Syndication`   | [RSS 2.0](https://www.rssboard.org/rss-specification)                              |
+| `AtomFeed`, `AtomEntry`                                                                                    | `Argotic.Syndication`   | [Atom 1.0](https://www.rfc-editor.org/rfc/rfc4287.html)                            |
+| `OpmlDocument`, `OpmlOutline`                                                                              | `Argotic.Syndication`   | [OPML 2.0](https://www.opml.org/spec2)                                             |
+| `Sitemap`, `SitemapUrl`, `SitemapIndex`, `SitemapIndexEntry`                                               | `Argotic.Syndication`   | [Sitemaps 0.9](https://www.sitemaps.org/protocol.html)                             |
+| `GenericSyndicationFeed`, `GenericSyndicationItem`, `GenericSyndicationCategory`                           | `Argotic.Syndication`   | RSS **or** Atom, format-agnostic                                                   |
+| `ApmlDocument`                                                                                             | `Argotic.Syndication`   | APML 1.0                                                                           |
+| `BlogMLDocument`                                                                                           | `Argotic.Syndication`   | BlogML 2.0                                                                         |
+| `RsdDocument`                                                                                              | `Argotic.Syndication`   | RSD 1.0                                                                            |
+| `AtomServiceDocument`, `AtomCategoryDocument`, `AtomEntryResource`, `AtomWorkspace`, `AtomMemberResources` | `Argotic.Publishing`    | [Atom Publishing Protocol (RFC 5023)](https://www.rfc-editor.org/rfc/rfc5023.html) |
+| `TrackbackClient`, `TrackbackMessage`, `XmlRpcClient`, `XmlRpcMessage`                                     | `Argotic.Net`           | Trackback, XML-RPC                                                                 |
+| `ServiceCollectionExtensions`, `ArgoticHttpClients`                                                        | `Argotic.Configuration` | Dependency injection                                                               |
 
 ## One shape, every format
 

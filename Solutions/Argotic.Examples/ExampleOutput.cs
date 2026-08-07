@@ -1,6 +1,5 @@
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
-using Argotic.Syndication.Specialized;
 using Spectre.Console;
 
 namespace Argotic.Examples;

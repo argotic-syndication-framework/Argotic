@@ -5,7 +5,6 @@ using Argotic.Common;
 using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Publishing;
 using Argotic.Syndication;
-using Argotic.Syndication.Specialized;
 
 using Shouldly;
 

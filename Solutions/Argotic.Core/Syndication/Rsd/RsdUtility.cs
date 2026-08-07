@@ -1,7 +1,7 @@
 using System.Xml;
 using System.Xml.XPath;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
 /// Provides methods that comprise common utility features shared across the Really Simple Discoverability (RSD) syndication entities. This class cannot be inherited.

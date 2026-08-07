@@ -5,80 +5,61 @@ using Argotic.Common;
 using Argotic.Data.Adapters;
 using Argotic.Extensions;
 
-namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication;
 
 /// <summary>
-/// Represents an Attention Profiling Markup Language (APML) syndication resource.
+/// Represents a Web Log Markup Language (BlogML) syndication resource.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Attention Profiling was a 2007 attempt at a portable record of what a person is interested in: a
-///         set of ranked concepts and sources that a user could carry between services instead of retraining
-///         each one. It never left draft — version 0.6 is the last — and it is of historical interest only;
-///         no mainstream service publishes or consumes it.
+///         BlogML 2.0 is a blog-migration format: one document holds an entire blog — every post with its
+///         comments, trackbacks and attachments, plus the author and category tables they refer to — so that a
+///         site can be lifted from one engine and dropped into another. It is not a syndication format, and
+///         nothing subscribes to it. It is also effectively dead: the format has not changed since 2006, and
+///         current platforms export their own shapes instead.
 ///     </para>
 ///     <para>
-///         This implementation conforms to the Attention Profiling Markup Language (APML) 0.6 specification,
-///         which can be found at <a href="https://web.archive.org/web/20081216093723/http://apml.pbwiki.com/">https://web.archive.org/web/20081216093723/http://apml.pbwiki.com/</a>.
+///         This implementation conforms to the BlogML 2.0 specification,
+///         which can be found at <a href="https://web.archive.org/web/20210506123858/http://blogml.org/">https://web.archive.org/web/20210506123858/http://blogml.org/</a>.
 ///     </para>
 ///     <para>
-///         The whole format turns on one distinction. <i>Explicit</i> data is what the user stated; <i>implicit</i>
-///         data is what a machine inferred, and carries <see cref="ApmlSource.From"/> and
-///         <see cref="ApmlSource.UpdatedOn"/> so that a consumer can tell who guessed it and how stale the
-///         guess is. Each <see cref="ApmlProfile"/> keeps the two apart in separate collections.
+///         Because a document is a whole blog rather than a window onto one, these are the largest resources
+///         the library handles, and the asynchronous loads read them under the archive size limit rather than
+///         the feed one.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the ApmlDocument class." />
+///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the BlogMLDocument class." />
 /// </example>
-public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
+public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
 {
 
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private const SyndicationContentFormat documentFormat = SyndicationContentFormat.Apml;
+    private const SyndicationContentFormat documentFormat = SyndicationContentFormat.BlogML;
 
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static readonly Version documentVersion = new(0, 6);
+    private static readonly Version documentVersion = new(2, 0);
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ApmlDocument"/> class.
+    /// Initializes a new instance of the <see cref="BlogMLDocument"/> class.
     /// </summary>
-    public ApmlDocument()
+    public BlogMLDocument()
     {
-
-    }
-
-    /// <summary>
-    /// Gets or sets the <see cref="ApmlProfile"/> at the specified index.
-    /// </summary>
-    /// <param name="index">The zero-based index of the profile to get or set.</param>
-    /// <returns>The <see cref="ApmlProfile"/> at the specified index.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="index"/> is less than zero.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="index"/> is equal to or greater than the count for <see cref="ApmlDocument.Profiles"/>.</exception>
-    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
-    public ApmlProfile this[int index]
-    {
-        get => this.Profiles[index];
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            this.Profiles[index] = value;
-        }
     }
 
     /// <summary>
     /// Occurs when the syndication resource state has been changed by a load operation.
     /// </summary>
-    /// <seealso cref="ApmlDocument.Load(IXPathNavigable)"/>
-    /// <seealso cref="ApmlDocument.Load(XmlReader)"/>
+    /// <seealso cref="BlogMLDocument.Load(IXPathNavigable)"/>
+    /// <seealso cref="BlogMLDocument.Load(XmlReader)"/>
     public event EventHandler<SyndicationResourceLoadedEventArgs>? Loaded;
 
     /// <summary>
-    /// Raises the <see cref="ApmlDocument.Loaded"/> event.
+    /// Raises the <see cref="BlogMLDocument.Loaded"/> event.
     /// </summary>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
     protected virtual void OnDocumentLoaded(SyndicationResourceLoadedEventArgs e) => this.Loaded?.Invoke(this, e);
@@ -95,34 +76,34 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
-    /// Gets the applications for this document.
+    /// Gets the authors of this web log.
     /// </summary>
     /// <remarks>
-    ///     Scratch space each consuming application may use to stash its own state in the profile, keyed by
-    ///     <see cref="ApmlApplication.Name"/>. The content is opaque to APML and to this library.
+    ///     The document's author table. A post does not embed its authors; <see cref="BlogMLPost.Authors"/>
+    ///     holds <see cref="BlogMLAuthor.Id"/> strings that are resolved against this collection. Nothing here
+    ///     enforces that a referenced identifier exists, so a document can be structurally valid and still have
+    ///     posts pointing at authors it does not define.
     /// </remarks>
-    public IList<ApmlApplication> Applications { get; } = [];
+    public IList<BlogMLAuthor> Authors { get; } = [];
 
     /// <summary>
-    /// Gets or sets the name of the default profile for this document.
+    /// Gets the categories for this web log.
     /// </summary>
-    /// <value>The <c>defaultprofile</c> attribute — which of the <see cref="Profiles"/> to use when the user makes no choice. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     This is matched against <see cref="ApmlProfile.Name"/> by the consumer; nothing here checks that a
-    ///     profile of that name is present, and <see cref="Save(XmlWriter)"/> writes the attribute even when
-    ///     it is empty.
+    ///     The document's category table, referenced by identifier from <see cref="BlogMLPost.Categories"/>
+    ///     under the same rules — and by <see cref="BlogMLCategory.ParentId"/>, which is how the category tree
+    ///     is expressed, since the categories themselves are stored flat.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
-    public string DefaultProfileName
-    {
-        get;
-        set
-        {
-            ArgumentException.ThrowIfNullOrEmpty(value);
-            field = value.Trim();
-        }
-    } = string.Empty;
+    public IList<BlogMLCategory> Categories { get; } = [];
+
+    /// <summary>
+    /// Gets the extended properties of this web log.
+    /// </summary>
+    /// <remarks>
+    ///     Blog-wide settings the format does not model, written as <c>property</c> elements with <c>name</c>
+    ///     and <c>value</c> attributes. The vocabulary is whatever the exporting engine chose.
+    /// </remarks>
+    public Dictionary<string, string> ExtendedProperties { get; } = [];
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
@@ -130,13 +111,47 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public SyndicationContentFormat Format => documentFormat;
 
     /// <summary>
-    /// Gets or sets the basic administrative information for this document.
+    /// Gets or sets a date-time indicating when this BlogML document was created.
     /// </summary>
-    /// <value>The document's <c>Head</c>. Never <see langword="null"/> — a new document starts with an empty one, and the setter rejects null.</value>
+    /// <value>
+    ///     The <c>date-created</c> attribute of the document — when this export was taken, not when the blog began.
+    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided, and suppresses the attribute on save.
+    /// </value>
+    /// <remarks>
+    ///     Supply this in Coordinated Universal Time. BlogML dates are written as RFC 3339.
+    /// </remarks>
+    public DateTime GeneratedOn { get; set; } = DateTime.MinValue;
+
+    /// <summary>
+    /// Gets the posts for this web log.
+    /// </summary>
+    /// <remarks>
+    ///     Every post in the blog, each carrying its own comments, trackbacks and attachments. This is where
+    ///     the bulk of a document lives.
+    /// </remarks>
+    public IList<BlogMLPost> Posts { get; } = [];
+
+    /// <summary>
+    /// Gets or sets the root URL of this web log.
+    /// </summary>
+    /// <value>The <c>root-url</c> attribute — the blog's base address, against which relative post URLs are resolved — or <see langword="null"/> if none was specified.</value>
+    public Uri? RootUrl { get; set; }
+
+    /// <summary>
+    /// Gets or sets the sub-title of this web log.
+    /// </summary>
+    /// <value>The <c>sub-title</c> element, or <see langword="null"/> if the blog has none. Unlike <see cref="Title"/>, this is optional and is omitted from the output when null.</value>
+    public BlogMLTextConstruct? Subtitle { get; set; }
+
+    /// <summary>
+    /// Gets or sets the title of this web log.
+    /// </summary>
+    /// <value>The <c>title</c> element. Never <see langword="null"/> — a new document starts with an empty text construct, and the setter rejects null.</value>
     /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
-    public ApmlHead Head
+    public BlogMLTextConstruct Title
     {
         get;
+
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -145,55 +160,45 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     } = new();
 
     /// <summary>
-    /// Gets the attention profiles for this document.
-    /// </summary>
-    /// <remarks>
-    ///     A person may keep several — work and home, say — so that one interest graph does not bleed into
-    ///     another. <see cref="DefaultProfileName"/> names the one to use absent a choice.
-    /// </remarks>
-    public IList<ApmlProfile> Profiles { get; } = [];
-
-    /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
-    /// <value>Always <c>0.6</c>. This is what <see cref="Save(XmlWriter)"/> writes, not what a loaded document declared.</value>
+    /// <value>Always <c>2.0</c>. It is reported only: <see cref="Save(XmlWriter)"/> writes no <c>version</c> attribute, so a saved document does not declare which version it is.</value>
     public Version Version => documentVersion;
 
     /// <summary>
-    /// Creates a new <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
+    /// Creates a new <see cref="BlogMLDocument"/> instance asynchronously using the specified <see cref="Uri"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="ApmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="BlogMLDocument"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
     ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
     ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     /// <example>
     ///     <code language="cs" title="The following code example demonstrates the usage of the CreateAsync method.">
-    ///         var document = await ApmlDocument.CreateAsync(new Uri("https://example.com/apml.xml"));
+    ///         var document = await BlogMLDocument.CreateAsync(new Uri("https://example.com/blog.xml"));
     ///     </code>
     /// </example>
-    public static async Task<ApmlDocument> CreateAsync(Uri source, SyndicationResourceLoadSettings? settings = null, CancellationToken cancellationToken = default)
+    public static async Task<BlogMLDocument> CreateAsync(Uri source, SyndicationResourceLoadSettings? settings = null, CancellationToken cancellationToken = default)
     {
-        ApmlDocument syndicationResource = new();
+        BlogMLDocument syndicationResource = new();
         await syndicationResource.LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, settings, null, cancellationToken).ConfigureAwait(false);
         return syndicationResource;
     }
 
     /// <summary>
-    /// Creates a new <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
+    /// Creates a new <see cref="BlogMLDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="ApmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="BlogMLDocument"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
     ///     <para>
     ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
@@ -207,38 +212,38 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public static async Task<ApmlDocument> CreateAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
+    public static async Task<BlogMLDocument> CreateAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
-        ApmlDocument syndicationResource = new();
+        BlogMLDocument syndicationResource = new();
         await syndicationResource.LoadAsync(source, httpClient, settings, requestOptions, cancellationToken).ConfigureAwait(false);
         return syndicationResource;
     }
 
     /// <summary>
-    /// Loads this <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
+    /// Loads this <see cref="BlogMLDocument"/> instance asynchronously using the specified <see cref="Uri"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <param name="cancellationToken">A token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous load operation.</returns>
     /// <remarks>
+    ///     <para>The <see cref="BlogMLDocument"/> is loaded using the default <see cref="SyndicationResourceLoadSettings"/>.</para>
     ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
-    ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
-    ///     <para>After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.</para>
+    ///     <para>
+    ///         After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
 
     /// <summary>
-    /// Loads this <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
+    /// Loads this <see cref="BlogMLDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
-    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <param name="cancellationToken">A token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous load operation.</returns>
     /// <remarks>
     ///     <para>
@@ -249,12 +254,13 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
     ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
-    ///     <para>After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.</para>
+    ///     <para>
+    ///         After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public async Task LoadAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -262,21 +268,21 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         settings ??= new SyndicationResourceLoadSettings();
 
         XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(
-            source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, cancellationToken).ConfigureAwait(false);
+            source, httpClient, settings, SyndicationContentLengthLimits.Archive, requestOptions, cancellationToken).ConfigureAwait(false);
 
         SyndicationResourceAdapter adapter = new(navigator, settings);
-        adapter.Fill(this, SyndicationContentFormat.Apml);
+        adapter.Fill(this, SyndicationContentFormat.BlogML);
 
         this.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source));
     }
 
     /// <summary>
-    /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="ApmlDocument"/>.
+    /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="BlogMLDocument"/>.
     /// </summary>
     /// <returns>A read-only <see cref="XPathNavigator"/> object.</returns>
     /// <remarks>
-    ///     The <see cref="XPathNavigator"/> is positioned on the root element of the <see cref="ApmlDocument"/>.
-    ///     If there is no root element, the <see cref="XPathNavigator"/> is positioned on the first element in the XML representation of the <see cref="ApmlDocument"/>.
+    ///     The <see cref="XPathNavigator"/> is positioned on the root element of the <see cref="BlogMLDocument"/>. 
+    ///     If there is no root element, the <see cref="XPathNavigator"/> is positioned on the first element in the XML representation of the <see cref="BlogMLDocument"/>.
     /// </remarks>
     public XPathNavigator CreateNavigator()
     {
@@ -301,13 +307,13 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     /// <example>
-    ///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(IXPathNavigable source) => this.Load(source, null);
 
@@ -315,9 +321,9 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
     /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
@@ -336,13 +342,13 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     /// <example>
-    ///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(Stream stream) => this.Load(stream, null);
 
@@ -350,9 +356,9 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
     /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
@@ -368,13 +374,13 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     /// <example>
-    ///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(XmlReader reader) => this.Load(reader, null);
 
@@ -382,9 +388,9 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
     /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event will be raised.
+    ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
@@ -404,7 +410,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     /// <example>
-    ///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
     /// </example>
     public void Save(Stream stream) => this.Save(stream, null);
 
@@ -412,7 +418,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
     /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ApmlDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream, SyndicationResourceSaveSettings? settings)
@@ -438,7 +444,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     /// <example>
-    ///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
     /// </example>
     public void Save(XmlWriter writer)
     {
@@ -450,7 +456,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ApmlDocument"/> instance.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="BlogMLDocument"/> instance.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
@@ -458,91 +464,173 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(settings);
-        writer.WriteStartElement("APML", ApmlUtility.ApmlNamespace);
-        writer.WriteAttributeString("version", this.Version.ToString());
+        // No version attribute: the BlogML 2.0 schema declares blogType with date-created and root-url and
+        // nothing else, and admits no attribute wildcard, so writing one would make the output invalid
+        // against the very schema it claims to conform to. Version is a property of the object model only.
+        writer.WriteStartElement("blog", BlogMLUtility.BlogMLNamespace);
 
         if (settings.AutoDetectExtensions)
         {
-            SyndicationExtensionAdapter.FillExtensionTypes(this, settings.SupportedExtensions);
-
-            SyndicationExtensionAdapter.FillExtensionTypes(this.Head, settings.SupportedExtensions);
-
-            foreach (ApmlApplication application in this.Applications)
-            {
-                SyndicationExtensionAdapter.FillExtensionTypes(application, settings.SupportedExtensions);
-            }
-
-            foreach (ApmlProfile profile in this.Profiles)
-            {
-                SyndicationExtensionAdapter.FillExtensionTypes(profile, settings.SupportedExtensions);
-
-                foreach (ApmlConcept explicitConcept in profile.ExplicitConcepts)
-                {
-                    SyndicationExtensionAdapter.FillExtensionTypes(explicitConcept, settings.SupportedExtensions);
-                }
-
-                foreach (ApmlSource explicitSource in profile.ExplicitSources)
-                {
-                    SyndicationExtensionAdapter.FillExtensionTypes(explicitSource, settings.SupportedExtensions);
-
-                    foreach (ApmlAuthor explicitAuthor in explicitSource.Authors)
-                    {
-                        SyndicationExtensionAdapter.FillExtensionTypes(explicitAuthor, settings.SupportedExtensions);
-                    }
-                }
-
-                foreach (ApmlConcept implicitConcept in profile.ImplicitConcepts)
-                {
-                    SyndicationExtensionAdapter.FillExtensionTypes(implicitConcept, settings.SupportedExtensions);
-                }
-
-                foreach (ApmlSource implicitSource in profile.ImplicitSources)
-                {
-                    SyndicationExtensionAdapter.FillExtensionTypes(implicitSource, settings.SupportedExtensions);
-
-                    foreach (ApmlAuthor implicitAuthor in implicitSource.Authors)
-                    {
-                        SyndicationExtensionAdapter.FillExtensionTypes(implicitAuthor, settings.SupportedExtensions);
-                    }
-                }
-            }
+            this.FillExtensionTypes(settings);
         }
         SyndicationExtensionAdapter.WriteXmlNamespaceDeclarations(settings.SupportedExtensions, writer);
 
-        this.Head.WriteTo(writer);
-
-        writer.WriteStartElement("Body", ApmlUtility.ApmlNamespace);
-        writer.WriteAttributeString("defaultprofile", this.DefaultProfileName);
-
-        foreach (ApmlProfile profile in this.Profiles)
+        if (this.GeneratedOn != DateTime.MinValue)
         {
-            profile.WriteTo(writer);
+            writer.WriteAttributeString("date-created", SyndicationDateTimeUtility.ToRfc3339DateTime(this.GeneratedOn));
         }
 
-        if (this.Applications.Count > 0)
+        if (this.RootUrl is not null)
         {
-            writer.WriteStartElement("Applications", ApmlUtility.ApmlNamespace);
-            foreach (ApmlApplication application in this.Applications)
+            writer.WriteAttributeString("root-url", this.RootUrl.ToString());
+        }
+
+        this.Title?.WriteTo(writer, "title");
+
+        this.Subtitle?.WriteTo(writer, "sub-title");
+
+        if (this.Authors.Count > 0)
+        {
+            writer.WriteStartElement("authors", BlogMLUtility.BlogMLNamespace);
+            foreach (BlogMLAuthor author in this.Authors)
             {
-                application.WriteTo(writer);
+                author.WriteTo(writer);
             }
             writer.WriteEndElement();
         }
 
-        writer.WriteEndElement();
+        if (this.ExtendedProperties.Count > 0)
+        {
+            writer.WriteStartElement("extended-properties", BlogMLUtility.BlogMLNamespace);
+            foreach (string property in this.ExtendedProperties.Keys)
+            {
+                writer.WriteStartElement("property", BlogMLUtility.BlogMLNamespace);
+                writer.WriteAttributeString("name", property);
+                writer.WriteAttributeString("value", this.ExtendedProperties[property]);
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+
+        if (this.Categories.Count > 0)
+        {
+            writer.WriteStartElement("categories", BlogMLUtility.BlogMLNamespace);
+            foreach (BlogMLCategory category in this.Categories)
+            {
+                category.WriteTo(writer);
+            }
+            writer.WriteEndElement();
+        }
+
+        if (this.Posts.Count > 0)
+        {
+            writer.WriteStartElement("posts", BlogMLUtility.BlogMLNamespace);
+            foreach (BlogMLPost post in this.Posts)
+            {
+                post.WriteTo(writer);
+            }
+            writer.WriteEndElement();
+        }
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
         writer.WriteEndElement();
     }
 
     /// <summary>
+    /// Fills the supported extensions collection of the supplied <see cref="SyndicationResourceSaveSettings"/> object based on syndication extensions present in the current instance hierarchy.
+    /// </summary>
+    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object whose <see cref="SyndicationResourceSaveSettings.SupportedExtensions"/> collection is to be filled.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
+    private void FillExtensionTypes(SyndicationResourceSaveSettings? settings)
+    {
+        ArgumentNullException.ThrowIfNull(settings);
+
+        SyndicationExtensionAdapter.FillExtensionTypes(this, settings.SupportedExtensions);
+
+        if (this.Subtitle is not null)
+        {
+            SyndicationExtensionAdapter.FillExtensionTypes(this.Subtitle, settings.SupportedExtensions);
+        }
+        if (this.Title is not null)
+        {
+            SyndicationExtensionAdapter.FillExtensionTypes(this.Title, settings.SupportedExtensions);
+        }
+
+        foreach (BlogMLAuthor author in this.Authors)
+        {
+            SyndicationExtensionAdapter.FillExtensionTypes(author, settings.SupportedExtensions);
+
+            if (author.Title is not null)
+            {
+                SyndicationExtensionAdapter.FillExtensionTypes(author.Title, settings.SupportedExtensions);
+            }
+        }
+
+        foreach (BlogMLCategory category in this.Categories)
+        {
+            SyndicationExtensionAdapter.FillExtensionTypes(category, settings.SupportedExtensions);
+
+            if (category.Title is not null)
+            {
+                SyndicationExtensionAdapter.FillExtensionTypes(category.Title, settings.SupportedExtensions);
+            }
+        }
+
+        foreach (BlogMLPost post in this.Posts)
+        {
+            SyndicationExtensionAdapter.FillExtensionTypes(post, settings.SupportedExtensions);
+
+            if (post.Content is not null)
+            {
+                SyndicationExtensionAdapter.FillExtensionTypes(post.Content, settings.SupportedExtensions);
+            }
+            if (post.Excerpt is not null)
+            {
+                SyndicationExtensionAdapter.FillExtensionTypes(post.Excerpt, settings.SupportedExtensions);
+            }
+            if (post.Name is not null)
+            {
+                SyndicationExtensionAdapter.FillExtensionTypes(post.Name, settings.SupportedExtensions);
+            }
+            if (post.Title is not null)
+            {
+                SyndicationExtensionAdapter.FillExtensionTypes(post.Title, settings.SupportedExtensions);
+            }
+
+            foreach (BlogMLAttachment attachment in post.Attachments)
+            {
+                SyndicationExtensionAdapter.FillExtensionTypes(attachment, settings.SupportedExtensions);
+            }
+
+            foreach (BlogMLComment comment in post.Comments)
+            {
+                SyndicationExtensionAdapter.FillExtensionTypes(comment, settings.SupportedExtensions);
+
+                if (comment.Content is not null)
+                {
+                    SyndicationExtensionAdapter.FillExtensionTypes(comment.Content, settings.SupportedExtensions);
+                }
+                if (comment.Title is not null)
+                {
+                    SyndicationExtensionAdapter.FillExtensionTypes(comment.Title, settings.SupportedExtensions);
+                }
+            }
+
+            foreach (BlogMLTrackback trackback in post.Trackbacks)
+            {
+                SyndicationExtensionAdapter.FillExtensionTypes(trackback, settings.SupportedExtensions);
+            }
+        }
+    }
+
+    /// <summary>
     /// Loads the syndication resource using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
     /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the syndication resource information.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="ApmlDocument"/>.</param>
-    /// <param name="eventData">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data used when raising the <see cref="ApmlDocument.Loaded"/> event.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="BlogMLDocument"/>.</param>
+    /// <param name="eventData">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data used when raising the <see cref="BlogMLDocument.Loaded"/> event.</param>
     /// <remarks>
-    ///     After the load operation has successfully completed, the <see cref="ApmlDocument.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
+    ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
@@ -554,7 +642,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(eventData);
         SyndicationResourceAdapter adapter = new(navigator, settings);
-        adapter.Fill(this, SyndicationContentFormat.Apml);
+        adapter.Fill(this, SyndicationContentFormat.BlogML);
         this.OnDocumentLoaded(eventData);
     }
 }

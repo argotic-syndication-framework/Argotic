@@ -2,7 +2,7 @@ using System.Xml;
 using System.Xml.XPath;
 using Argotic.Common;
 using Argotic.Extensions.Tests.TestDoubles;
-using Argotic.Syndication.Specialized;
+using Argotic.Syndication;
 using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Rsd;

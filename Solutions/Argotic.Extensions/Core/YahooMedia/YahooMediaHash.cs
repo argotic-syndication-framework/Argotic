@@ -15,11 +15,12 @@ namespace Argotic.Extensions.Core;
 ///         A media object may carry several hashes so long as each uses a different <see cref="Algorithm"/>.
 ///     </para>
 ///     <para>
-///         <b>The specification never says how the digest is encoded</b>, and its own example is a
-///         32-character hexadecimal MD5, whereas <see cref="GenerateHash"/> returns base64.
-///         <see cref="Value"/> is an opaque string and nothing converts between the two, so comparing a digest
-///         produced here against one read from a feed compares two spellings of the same bytes and reports them
-///         different.
+///         <b>The specification never says how the digest is encoded</b>, so nothing here can be called
+///         non-conformant — but its only example is a 32-character lowercase hexadecimal MD5, and that is what
+///         feeds carry. <see cref="Value"/> is an opaque string that nothing converts, and
+///         <see cref="CompareTo(YahooMediaHash)"/> is an ordinal comparison, so a digest in the wrong spelling
+///         can never equal the same bytes read from a feed. <see cref="GenerateHash"/> therefore returns
+///         lowercase hexadecimal; it returned base64 until that was corrected.
 ///     </para>
 /// </remarks>
 public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMediaHash>, IComparisonOperators
@@ -85,12 +86,16 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// </summary>
     /// <param name="stream">The input to compute the hash code for. It is read to the end from its current position.</param>
     /// <param name="algorithm">The algorithm to use. <see cref="YahooMediaHashAlgorithm.None"/> is rejected rather than defaulted.</param>
-    /// <returns>The digest, base64 encoded — not the hexadecimal form the specification's example shows.</returns>
+    /// <returns>
+    ///     The digest as lowercase hexadecimal — 32 characters for <see cref="YahooMediaHashAlgorithm.MD5"/>,
+    ///     40 for <see cref="YahooMediaHashAlgorithm.Sha1"/> — which is the spelling the specification's own
+    ///     example uses and the one a digest read from a feed will be in.
+    /// </returns>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="algorithm"/> is equal to <see cref="YahooMediaHashAlgorithm.None"/>.</exception>
     public static string GenerateHash(Stream stream, YahooMediaHashAlgorithm algorithm)
     {
-        string base64EncodedHash = string.Empty;
+        string hexadecimalEncodedHash = string.Empty;
         ArgumentNullException.ThrowIfNull(stream);
         if (algorithm == YahooMediaHashAlgorithm.None)
         {
@@ -103,7 +108,7 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
             using MD5 md5 = MD5.Create();
 #pragma warning restore CA5351
             byte[] hash = md5.ComputeHash(stream);
-            base64EncodedHash = Convert.ToBase64String(hash);
+            hexadecimalEncodedHash = Convert.ToHexStringLower(hash);
         }
         else if (algorithm == YahooMediaHashAlgorithm.Sha1)
         {
@@ -111,10 +116,10 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
             using SHA1 sha1 = SHA1.Create();
 #pragma warning restore CA5350
             byte[] hash = sha1.ComputeHash(stream);
-            base64EncodedHash = Convert.ToBase64String(hash);
+            hexadecimalEncodedHash = Convert.ToHexStringLower(hash);
         }
 
-        return base64EncodedHash;
+        return hexadecimalEncodedHash;
     }
 
     /// <summary>

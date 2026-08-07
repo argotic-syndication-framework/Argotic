@@ -232,4 +232,92 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
 
         YahooMediaUtility.WriteCommonObjectEntities(this, writer);
     }
+
+    /// <summary>
+    /// Returns a hash code for the current instance.
+    /// </summary>
+    /// <returns>A 32-bit signed integer hash code.</returns>
+    /// <remarks>
+    ///     <para>
+    ///         Folds the same members <see cref="YahooMediaSyndicationExtension.CompareTo(YahooMediaSyndicationExtension)"/>
+    ///         walks — <see cref="Contents"/>, <see cref="Groups"/> and the shared metadata of
+    ///         <see cref="IYahooMediaCommonObjectEntities"/> — with every collection taken element by
+    ///         element. Passing a collection itself to <see cref="HashCodeUtility.Component{T}(T)"/> would
+    ///         hash the list reference, so two instances carrying equal data would hash differently.
+    ///     </para>
+    ///     <para>
+    ///         This exists because the extension used to hash <i>this whole object</i> through that same
+    ///         identity overload, and this class overrode nothing: two extensions built from identical data
+    ///         were <see cref="object.Equals(object)"/> and hashed by reference identity, which made the type
+    ///         unusable as a dictionary key. It is the tenth instance of the family recorded in
+    ///         <c>docs/build-warnings.md</c> §4.3, and the sweep there missed it because it looked for
+    ///         collections passed to the identity overload rather than for a whole context object.
+    ///     </para>
+    ///     <para>
+    ///         This class declares no <see cref="object.Equals(object)"/> of its own, so its own equality is
+    ///         still reference equality — a hash coarser than that is legal, and this one is used as a
+    ///         component of the extension's.
+    ///     </para>
+    /// </remarks>
+    public override int GetHashCode()
+    {
+        HashCode hash = new();
+
+        foreach (YahooMediaContent content in this.Contents)
+        {
+            hash.Add(HashCodeUtility.Component(content));
+        }
+
+        foreach (YahooMediaGroup group in this.Groups)
+        {
+            hash.Add(HashCodeUtility.Component(group));
+        }
+
+        hash.Add(HashCodeUtility.Component(this.Copyright));
+        hash.Add(HashCodeUtility.Component(this.Description));
+        hash.Add(HashCodeUtility.Component(this.Player));
+        hash.Add(HashCodeUtility.Component(this.Title));
+
+        foreach (YahooMediaCategory category in this.Categories)
+        {
+            hash.Add(HashCodeUtility.Component(category));
+        }
+
+        foreach (YahooMediaCredit credit in this.Credits)
+        {
+            hash.Add(HashCodeUtility.Component(credit));
+        }
+
+        foreach (YahooMediaHash mediaHash in this.Hashes)
+        {
+            hash.Add(HashCodeUtility.Component(mediaHash));
+        }
+
+        foreach (string keyword in this.Keywords)
+        {
+            hash.Add(HashCodeUtility.Component(keyword));
+        }
+
+        foreach (YahooMediaRating rating in this.Ratings)
+        {
+            hash.Add(HashCodeUtility.Component(rating));
+        }
+
+        foreach (YahooMediaRestriction restriction in this.Restrictions)
+        {
+            hash.Add(HashCodeUtility.Component(restriction));
+        }
+
+        foreach (YahooMediaText text in this.TextSeries)
+        {
+            hash.Add(HashCodeUtility.Component(text));
+        }
+
+        foreach (YahooMediaThumbnail thumbnail in this.Thumbnails)
+        {
+            hash.Add(HashCodeUtility.Component(thumbnail));
+        }
+
+        return hash.ToHashCode();
+    }
 }

@@ -384,9 +384,20 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
     /// <remarks>
-    ///     The collection members are folded in element by element. Passing the collection itself to
-    ///     <see cref="HashCodeUtility.Component{T}(T)"/> would hash the list reference, so two instances
-    ///     that <see cref="CompareTo"/> reports as equal hashed differently.
+    ///     <para>
+    ///         <see cref="Contents"/> is folded in element by element. Passing the collection itself to
+    ///         <see cref="HashCodeUtility.Component{T}(T)"/> would hash the list reference, so two instances
+    ///         that <see cref="CompareTo"/> reports as equal hashed differently.
+    ///     </para>
+    ///     <para>
+    ///         <b>The twelve shared metadata members that <see cref="CompareTo"/> also walks are deliberately
+    ///         omitted.</b> The contract runs one way only — equal objects must hash equally — so a hash
+    ///         coarser than the comparison is legal: two groups differing only in, say, <c>Title</c> collide,
+    ///         which costs a probe and never yields a wrong answer. Widening it is an optimisation, not a fix,
+    ///         and the sibling <see cref="YahooMediaContent"/> omits the same twelve.
+    ///         <c>YahooMediaHashCodeContractTests</c> pins the omission so that widening it becomes a
+    ///         deliberate act rather than an accident.
+    ///     </para>
     /// </remarks>
     public override int GetHashCode()
     {

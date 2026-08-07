@@ -38,8 +38,9 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <remarks>
     ///     <para>
     ///         Under <see cref="YahooMediaRestrictionType.Country"/> these are ISO 3166 country codes;
-    ///         under <see cref="YahooMediaRestrictionType.Uri"/>, distributor URIs. Nothing here
-    ///         validates either.
+    ///         under <see cref="YahooMediaRestrictionType.Uri"/>, distributor URIs; under
+    ///         <see cref="YahooMediaRestrictionType.Sharing"/>, one of the two reserved names below.
+    ///         Nothing here validates any of them.
     ///     </para>
     ///     <para>
     ///         Two names are reserved and stand alone: <c>all</c> and <c>none</c>, each usable once and with no
@@ -93,7 +94,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// </summary>
     /// <param name="type">The <see cref="YahooMediaRestrictionType"/> to get the restriction type identifier for.</param>
     /// <returns>
-    ///     The <c>type</c> attribute value, <c>country</c> or <c>uri</c>.
+    ///     The <c>type</c> attribute value: <c>country</c>, <c>uri</c> or <c>sharing</c>.
     ///     <see cref="YahooMediaRestrictionType.None"/> maps to an empty string, which is what keeps it out of
     ///     the written feed. The specification permits omitting <c>type</c> only when the entity is one of the
     ///     reserved literals <c>all</c> or <c>none</c>.
@@ -107,13 +108,14 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <param name="name">The name of the restriction type. Matched without regard to case.</param>
     /// <returns>
     ///     The matching <see cref="YahooMediaRestrictionType"/>, or <see cref="YahooMediaRestrictionType.None"/>
-    ///     when <paramref name="name"/> is empty, <see langword="null"/>, or neither <c>country</c> nor
-    ///     <c>uri</c>. This method throws nothing.
+    ///     when <paramref name="name"/> is empty, <see langword="null"/>, or none of <c>country</c>,
+    ///     <c>uri</c> and <c>sharing</c>. This method throws nothing.
     /// </returns>
     /// <remarks>
-    ///     The maintained specification also defines <c>sharing</c>, which this enumeration does not model, so a
-    ///     sharing restriction reads as <see cref="YahooMediaRestrictionType.None"/> and its type is lost on
-    ///     save. The entity list itself survives.
+    ///     <c>sharing</c> was absent from the enumeration until it was added, and its absence was not merely a
+    ///     lost label: the load guard skipped the assignment, the writer then omitted <c>type</c> altogether,
+    ///     and an omitted <c>type</c> means the entity list is one of the reserved <c>all</c>/<c>none</c>
+    ///     values — so a sharing ban round-tripped as a blanket ban.
     /// </remarks>
     public static YahooMediaRestrictionType RestrictionTypeByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, YahooMediaRestrictionType.None);

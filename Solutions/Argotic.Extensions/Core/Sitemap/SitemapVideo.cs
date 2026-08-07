@@ -75,8 +75,9 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// The shortest duration Google accepts, in seconds.
     /// </summary>
     /// <remarks>
-    ///     Advisory. <see cref="Duration"/> is an unvalidated property — this constant is published so a
-    ///     caller can range-check before assigning, but nothing in this class consults it.
+    ///     The <c>minInclusive</c> facet the 1.1 XSD puts on the duration, and it is enforced: the
+    ///     <see cref="Duration"/> setter throws below it, while <see cref="Load"/> skips a source value below
+    ///     it rather than rejecting the document.
     /// </remarks>
     public const int MinDuration = 1;
 
@@ -84,23 +85,26 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// The longest duration Google accepts, in seconds — eight hours.
     /// </summary>
     /// <remarks>
-    ///     Advisory, as <see cref="MinDuration"/> is. Google: "Value must be from <c>1</c> to <c>28800</c>
-    ///     (8 hours)."
+    ///     The matching <c>maxInclusive</c> facet, enforced the same way as <see cref="MinDuration"/>.
+    ///     Google: "Value must be from <c>1</c> to <c>28800</c> (8 hours)."
     /// </remarks>
     public const int MaxDuration = 28_800;
 
     /// <summary>
     /// The lowest rating Google accepts.
     /// </summary>
-    /// <remarks>Advisory; <see cref="Rating"/> is not validated against it.</remarks>
+    /// <remarks>
+    ///     Enforced: the <see cref="Rating"/> setter throws below it and <see cref="Load"/> skips a source
+    ///     value below it.
+    /// </remarks>
     public const decimal MinRating = 0.0m;
 
     /// <summary>
     /// The highest rating Google accepts.
     /// </summary>
     /// <remarks>
-    ///     Advisory; <see cref="Rating"/> is not validated against it. Google: "Supported values are float
-    ///     numbers in the range <c>0.0</c> (low) to <c>5.0</c> (high)."
+    ///     Enforced as <see cref="MinRating"/> is. Google: "Supported values are float numbers in the range
+    ///     <c>0.0</c> (low) to <c>5.0</c> (high)."
     /// </remarks>
     public const decimal MaxRating = 5.0m;
 
@@ -272,14 +276,30 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// Gets or sets the duration of the video in seconds.
     /// </summary>
     /// <value>
-    ///     Seconds, which Google requires to fall between <see cref="MinDuration"/> and
-    ///     <see cref="MaxDuration"/>, or <see langword="null"/> if none was specified.
+    ///     Seconds, between <see cref="MinDuration"/> and <see cref="MaxDuration"/> inclusive, or
+    ///     <see langword="null"/> if none was specified.
     /// </value>
     /// <remarks>
-    ///     The range is not enforced. Any <see cref="int"/> assigned here is written out verbatim, including
-    ///     a negative one.
+    ///     The range is enforced here but not in <see cref="Load"/>: assigning an out-of-range value is a
+    ///     programming error and throws, whereas a feed carrying one is untrusted input and has its duration
+    ///     skipped rather than costing the whole document.
     /// </remarks>
-    public int? Duration { get; set; }
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is outside <see cref="MinDuration"/>..<see cref="MaxDuration"/>.</exception>
+    public int? Duration
+    {
+        get;
+
+        set
+        {
+            if (value is int duration)
+            {
+                ArgumentOutOfRangeException.ThrowIfLessThan(duration, MinDuration, nameof(value));
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(duration, MaxDuration, nameof(value));
+            }
+
+            field = value;
+        }
+    }
 
     /// <summary>
     /// Gets or sets the date after which the video is no longer available.
@@ -296,11 +316,26 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// Gets or sets the rating of the video.
     /// </summary>
     /// <value>
-    ///     A rating between <see cref="MinRating"/> and <see cref="MaxRating"/>, or <see langword="null"/>
-    ///     if none was specified. Written to one decimal place.
+    ///     A rating between <see cref="MinRating"/> and <see cref="MaxRating"/> inclusive, or
+    ///     <see langword="null"/> if none was specified. Written to one decimal place.
     /// </value>
-    /// <remarks>The range is not enforced.</remarks>
-    public decimal? Rating { get; set; }
+    /// <remarks>Enforced here and skipped on load, exactly as <see cref="Duration"/> is.</remarks>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is outside <see cref="MinRating"/>..<see cref="MaxRating"/>.</exception>
+    public decimal? Rating
+    {
+        get;
+
+        set
+        {
+            if (value is decimal rating)
+            {
+                ArgumentOutOfRangeException.ThrowIfLessThan(rating, MinRating, nameof(value));
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(rating, MaxRating, nameof(value));
+            }
+
+            field = value;
+        }
+    }
 
     /// <summary>
     /// Gets or sets the number of times the video has been viewed.
@@ -577,7 +612,11 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             wasLoaded = true;
         }
 
-        if (durationNavigator is not null && int.TryParse(durationNavigator.Value, out int duration))
+        // A duration outside the schema's facets is skipped rather than rejected: a feed is untrusted input
+        // and one bad element must not cost the document.
+        if (durationNavigator is not null
+            && int.TryParse(durationNavigator.Value, out int duration)
+            && duration is >= MinDuration and <= MaxDuration)
         {
             this.Duration = duration;
             wasLoaded = true;
@@ -589,7 +628,9 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             wasLoaded = true;
         }
 
-        if (ratingNavigator is not null && decimal.TryParse(ratingNavigator.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal rating))
+        if (ratingNavigator is not null
+            && decimal.TryParse(ratingNavigator.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal rating)
+            && rating is >= MinRating and <= MaxRating)
         {
             this.Rating = rating;
             wasLoaded = true;
@@ -978,12 +1019,18 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
     /// <remarks>
-    ///     <b>Only <see cref="Title"/>, <see cref="ThumbnailLocation"/> and <see cref="Description"/>
-    ///     participate.</b> Two videos that agree on those three and differ in every other member —
-    ///     a different <see cref="ContentLocation"/>, a different <see cref="Duration"/>, a different set of
-    ///     <see cref="Tags"/> — compare equal here, and therefore report <see cref="Equals(SitemapVideo)"/>
-    ///     as <see langword="true"/> and hash alike. Treat this as an ordering over the required fields
-    ///     rather than as an identity test.
+    ///     <para>
+    ///     <b>Every member participates.</b> <see cref="Title"/> dominates, then
+    ///     <see cref="ThumbnailLocation"/> and <see cref="Description"/> — the three Google requires — and
+    ///     then the optional members in declaration order, ending with <see cref="Tags"/>,
+    ///     <see cref="Identifiers"/> and <see cref="ContentSegments"/> compared element by element.
+    ///     </para>
+    ///     <para>
+    ///     It used to fold only the first three, which made two videos differing in content location,
+    ///     duration or tags report themselves equal — so a <see cref="HashSet{T}"/> or a
+    ///     <c>Distinct()</c> silently discarded one of them. <see cref="GetHashCode"/> was widened in the
+    ///     same change and must stay in step: a comparison finer than the hash is a lookup miss.
+    ///     </para>
     /// </remarks>
     public int CompareTo(SitemapVideo? other)
     {
@@ -993,10 +1040,44 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         }
 
         int result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
-        if (result == 0) result = Uri.Compare(this.ThumbnailLocation, other.ThumbnailLocation, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = CompareLocation(this.ThumbnailLocation, other.ThumbnailLocation);
         if (result == 0) result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = CompareLocation(this.ContentLocation, other.ContentLocation);
+        if (result == 0) result = CompareLocation(this.PlayerLocation, other.PlayerLocation);
+        if (result == 0) result = Nullable.Compare(this.Duration, other.Duration);
+        if (result == 0) result = Nullable.Compare(this.ExpirationDate, other.ExpirationDate);
+        if (result == 0) result = Nullable.Compare(this.Rating, other.Rating);
+        if (result == 0) result = Nullable.Compare(this.ViewCount, other.ViewCount);
+        if (result == 0) result = Nullable.Compare(this.PublicationDate, other.PublicationDate);
+        if (result == 0) result = this.FamilyFriendly.CompareTo(other.FamilyFriendly);
+        if (result == 0) result = this.RequiresSubscription.CompareTo(other.RequiresSubscription);
+        if (result == 0) result = this.Live.CompareTo(other.Live);
+        if (result == 0) result = string.Compare(this.Uploader, other.Uploader, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = CompareLocation(this.UploaderInfo, other.UploaderInfo);
+        if (result == 0) result = Nullable.Compare((int?)this.Platform, (int?)other.Platform);
+        if (result == 0) result = Nullable.Compare((int?)this.PlatformRelationship, (int?)other.PlatformRelationship);
+        if (result == 0) result = string.Compare(this.Restriction, other.Restriction, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Nullable.Compare((int?)this.RestrictionRelationship, (int?)other.RestrictionRelationship);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Tags, other.Tags, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Identifiers, other.Identifiers);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.ContentSegments, other.ContentSegments);
+
         return result;
     }
+
+    /// <summary>
+    /// Orders two optional locations, disregarding case and treating an absent one as the lesser.
+    /// </summary>
+    /// <param name="first">The first location, which may be <see langword="null"/>.</param>
+    /// <param name="second">The second location, which may be <see langword="null"/>.</param>
+    /// <returns>A 32-bit signed integer that indicates the relative order of the two locations.</returns>
+    /// <remarks>
+    ///     Disregarding case is what keeps this in step with <see cref="HashCodeUtility.Component(Uri)"/>,
+    ///     which hashes the URI's text under <see cref="StringComparison.OrdinalIgnoreCase"/>. A relative
+    ///     URI — which <see cref="Load"/> accepts — is compared rather than rejected.
+    /// </remarks>
+    private static int CompareLocation(Uri? first, Uri? second) =>
+        Uri.Compare(first, second, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
     /// Determines whether the specified <see cref="SitemapVideo"/> is equal to the current instance.
@@ -1025,16 +1106,58 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
     /// <remarks>
-    ///     Combines the same three members <see cref="CompareTo(SitemapVideo)"/> uses, which is what keeps
-    ///     the two consistent. Widening one without widening the other would break the hash contract.
+    ///     Folds the same members <see cref="CompareTo(SitemapVideo)"/> walks, with the three collections
+    ///     taken element by element. Passing a collection itself to
+    ///     <see cref="HashCodeUtility.Component{T}(T)"/> would hash the list reference, so two videos that
+    ///     <see cref="CompareTo(SitemapVideo)"/> reports as equal would hash differently — which is the
+    ///     defect that widening the comparison alone would have reintroduced.
     /// </remarks>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.ThumbnailLocation), HashCodeUtility.Component(this.Description));
+    public override int GetHashCode()
+    {
+        HashCode hash = new();
+        hash.Add(HashCodeUtility.Component(this.Title));
+        hash.Add(HashCodeUtility.Component(this.ThumbnailLocation));
+        hash.Add(HashCodeUtility.Component(this.Description));
+        hash.Add(HashCodeUtility.Component(this.ContentLocation));
+        hash.Add(HashCodeUtility.Component(this.PlayerLocation));
+        hash.Add(HashCodeUtility.Component(this.Duration));
+        hash.Add(HashCodeUtility.Component(this.ExpirationDate));
+        hash.Add(HashCodeUtility.Component(this.Rating));
+        hash.Add(HashCodeUtility.Component(this.ViewCount));
+        hash.Add(HashCodeUtility.Component(this.PublicationDate));
+        hash.Add(HashCodeUtility.Component(this.FamilyFriendly));
+        hash.Add(HashCodeUtility.Component(this.RequiresSubscription));
+        hash.Add(HashCodeUtility.Component(this.Live));
+        hash.Add(HashCodeUtility.Component(this.Uploader));
+        hash.Add(HashCodeUtility.Component(this.UploaderInfo));
+        hash.Add(HashCodeUtility.Component(this.Platform));
+        hash.Add(HashCodeUtility.Component(this.PlatformRelationship));
+        hash.Add(HashCodeUtility.Component(this.Restriction));
+        hash.Add(HashCodeUtility.Component(this.RestrictionRelationship));
+
+        foreach (string tag in this.Tags)
+        {
+            hash.Add(HashCodeUtility.Component(tag));
+        }
+
+        foreach (SitemapVideoId identifier in this.Identifiers)
+        {
+            hash.Add(HashCodeUtility.Component(identifier));
+        }
+
+        foreach (SitemapVideoSegment segment in this.ContentSegments)
+        {
+            hash.Add(HashCodeUtility.Component(segment));
+        }
+
+        return hash.ToHashCode();
+    }
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SitemapVideo"/>.
     /// </summary>
-    /// <returns>The <see cref="Title"/>, or an <i>empty</i> string if none was set.</returns>
-    public override string ToString() => this.Title ?? string.Empty;
+    /// <returns>The <see cref="Title"/>, which is an <i>empty</i> string until one is set.</returns>
+    public override string ToString() => this.Title;
 
     /// <summary>
     /// Determines if operands are equal.

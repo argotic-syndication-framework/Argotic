@@ -26,11 +26,28 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Apml;
 ///     </para>
 ///     <para>
 ///     <c>Value</c> is now <see cref="decimal"/>?, defaulting to <see langword="null"/>, and the attribute
-///     is omitted when it is null. Omission is the only serialisation that says "unknown" honestly: in an
-///     attention-profiling format the score <i>is</i> the payload, and writing <c>0.00</c> would invent a
-///     neutral-interest assertion the profile never made. Whether <c>value</c> is normatively REQUIRED is
-///     unverified — the APML 0.6 specification is archive-only — so this takes the conservative reading and
-///     states the deviation rather than guessing a number.
+///     is omitted when it is null.
+///     </para>
+///     <para>
+///     <b>The APML 0.6 schema is reachable and says <c>value</c> is required.</b> It is published at
+///     <c>github.com/apml/spec-0.6</c> as <c>apml.xsd</c>, target namespace <c>http://www.apml.org/apml-0.6</c>
+///     — the same one this library writes — and it declares <c>key</c> and <c>value</c> as
+///     <c>use="required"</c> on <c>ExplicitNodeType</c>, plus <c>name</c> and <c>type</c> as
+///     <c>use="required"</c> on both source types. Validating candidate documents against it settles each
+///     attribute separately, and the answers do not agree with one another:
+///     </para>
+///     <list type="bullet">
+///         <item><description><c>key=""</c> and <c>name=""</c> are <b>valid</b>; omitting either is <b>invalid</b>. Empty is the conformant spelling of "unset", so both are written unconditionally.</description></item>
+///         <item><description><c>type=""</c> is <b>invalid</b> (the <c>apml:MimeType</c> pattern <c>[^/]+/[^/]+</c> fails) and omitting <c>type</c> is <b>invalid</b> too. Neither spelling conforms.</description></item>
+///         <item><description>The old <c>value</c> sentinel is <b>invalid</b> (it fails <c>NodeValueType</c>'s <c>minInclusive</c>) and omitting <c>value</c> is <b>invalid</b>. <c>0.00</c> is the only valid spelling, and it is a lie.</description></item>
+///     </list>
+///     <para>
+///     So omission is a <i>known</i> deviation, not a conservative reading of an unknown: a score that was
+///     never established is not representable in conformant APML, and the choice is only which
+///     non-conformance to prefer. Omission wins because it is the one a consumer can recognise as missing —
+///     the sentinel asserts a score twenty-nine orders of magnitude out of range, and <c>0.00</c> fabricates
+///     a neutral-interest claim the profile never made. In an attention-profiling format the score is the
+///     entire payload, so fabricating it is the one option that corrupts data rather than merely omitting it.
 ///     </para>
 /// </remarks>
 [TestClass]
@@ -38,10 +55,20 @@ public class ApmlScoreSerializationTests
 {
     /// <summary>
     /// A concept that was never given a score omits the <c>value</c> attribute rather than emitting a
-    /// sentinel, and omits <c>key</c> rather than emitting an empty one.
+    /// sentinel, but still writes <c>key</c> — empty — because the schema requires the attribute to be
+    /// present and permits it to be empty.
     /// </summary>
+    /// <remarks>
+    ///     <c>key</c> and <c>value</c> pull in opposite directions and it is the schema, not symmetry, that
+    ///     decides each. Both are <c>use="required"</c> on <c>ExplicitNodeType</c>, but <c>key</c> is a plain
+    ///     <c>xs:string</c>, for which the empty string is a legal value, whereas <c>value</c> is
+    ///     <c>NodeValueType</c> — <c>xs:decimal</c> restricted to <c>[-1, 1]</c> — for which no "absent"
+    ///     spelling exists at all. So <c>key=""</c> is valid and omitting <c>key</c> is not, while every
+    ///     available spelling of an unknown <c>value</c> is invalid and the choice is only which invalidity
+    ///     to prefer.
+    /// </remarks>
     [TestMethod]
-    public void ApmlConcept_WithNoScoreAssigned_OmitsTheValueAndKeyAttributes()
+    public void ApmlConcept_WithNoScoreAssigned_OmitsTheValueButStillWritesTheRequiredKey()
     {
         ApmlConcept concept = new();
 
@@ -50,8 +77,43 @@ public class ApmlScoreSerializationTests
         string xml = concept.ToString();
 
         xml.ShouldNotContain("value=", Case.Sensitive);
-        xml.ShouldNotContain("key=", Case.Sensitive);
+        xml.ShouldContain("key=\"\"", Case.Sensitive);
         xml.ShouldNotContain("79228162514264337593543950335", Case.Sensitive);
+    }
+
+    /// <summary>
+    /// A source that was never populated still writes <c>key</c>, <c>name</c> and <c>type</c>, all three of
+    /// which the schema declares required.
+    /// </summary>
+    /// <remarks>
+    ///     <c>type</c> is the one attribute in this family that has no conformant spelling when unset:
+    ///     <c>apml:MimeType</c> restricts it to the pattern <c>[^/]+/[^/]+</c>, which the empty string fails,
+    ///     and omitting a required attribute fails too. A source with no MIME type is simply not
+    ///     representable in conformant APML, so the write stays unconditional and consistent with its two
+    ///     neighbours rather than inventing a third behaviour for a case that cannot be made valid either
+    ///     way.
+    /// </remarks>
+    [TestMethod]
+    public void ApmlSource_WithNothingPopulated_StillWritesTheThreeRequiredAttributes()
+    {
+        ApmlSource source = new();
+
+        string xml = source.ToString();
+
+        xml.ShouldContain("key=\"\"", Case.Sensitive);
+        xml.ShouldContain("name=\"\"", Case.Sensitive);
+        xml.ShouldContain("type=\"\"", Case.Sensitive);
+    }
+
+    /// <summary>
+    /// An author that was never populated still writes its required <c>key</c>.
+    /// </summary>
+    [TestMethod]
+    public void ApmlAuthor_WithNothingPopulated_StillWritesTheRequiredKey()
+    {
+        ApmlAuthor author = new();
+
+        author.ToString().ShouldContain("key=\"\"", Case.Sensitive);
     }
 
     /// <summary>
@@ -96,6 +158,20 @@ public class ApmlScoreSerializationTests
         xml.ShouldContain("key=\"tech\"", Case.Sensitive);
         xml.ShouldNotContain("value=", Case.Sensitive);
         xml.ShouldNotContain("79228162514264337593543950335", Case.Sensitive);
+    }
+
+    /// <summary>
+    /// Assigning <see langword="null"/> does not erase the key: the two attributes are independent, and
+    /// only <c>value</c> has an "unknown" spelling.
+    /// </summary>
+    [TestMethod]
+    public void ApmlConcept_WithAKeyButNoScore_KeepsTheKeyAndDropsOnlyTheScore()
+    {
+        ApmlConcept concept = new("tech", 0.5m) { Value = null };
+
+        string xml = concept.ToString();
+        xml.ShouldContain("key=\"tech\"", Case.Sensitive);
+        xml.ShouldNotContain("value=", Case.Sensitive);
     }
 
     /// <summary>

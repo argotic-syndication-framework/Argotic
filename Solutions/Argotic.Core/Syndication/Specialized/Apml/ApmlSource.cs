@@ -186,7 +186,8 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     ///     no score is known, which suppresses the attribute on save.
     /// </value>
     /// <remarks>
-    ///     <see langword="null"/> and <c>0</c> are different answers and are serialised differently; the
+    ///     <see langword="null"/> and <c>0</c> are different answers and are serialised differently, and
+    ///     omitting the attribute is a known deviation from a schema that declares it required. The
     ///     reasoning, and the sentinel this replaced, are set out on <see cref="ApmlConcept.Value"/>.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than -1.</exception>
@@ -413,6 +414,11 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("Source", ApmlUtility.ApmlNamespace);
 
+        // key, name and type are all use="required" on the source types, so all three are written even when
+        // empty: for key and name the empty string is a legal xs:string and omitting them is not legal.
+        // type is the exception that cannot be made conformant either way -- apml:MimeType restricts it to
+        // the pattern [^/]+/[^/]+, which "" fails -- so a source with no MIME type is unrepresentable, and
+        // the write stays consistent with its neighbours rather than inventing a third behaviour for it.
         writer.WriteAttributeString("key", this.Key);
         writer.WriteAttributeString("name", this.Name);
         if (this.Value.HasValue)

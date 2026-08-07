@@ -137,11 +137,20 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
     ///         be read as a claim the profile never made.
     ///     </para>
     ///     <para>
-    ///         Whether APML 0.6 makes <c>value</c> normatively REQUIRED is unverified — the specification is
-    ///         archive-only — so omission is a deliberate, documented deviation taken as the conservative
-    ///         reading. It replaces a worse one: the property used to default to <see cref="decimal.MinValue"/>,
-    ///         a value this setter would itself reject, and write it unconditionally as
-    ///         <c>-79228162514264337593543950335.00</c>.
+    ///         <b>Omitting the attribute is a known, deliberate deviation from the schema.</b> APML 0.6
+    ///         declares <c>value</c> as <c>use="required"</c> on <c>ExplicitNodeType</c>, typed
+    ///         <c>NodeValueType</c> — an <c>xs:decimal</c> restricted to <c>[-1, 1]</c>. That type has no
+    ///         spelling for "unknown", so a node whose score was never established cannot be serialised
+    ///         conformantly at all, and the only question is which non-conformance to prefer.
+    ///     </para>
+    ///     <para>
+    ///         Omission is preferred over the two alternatives. The previous behaviour — defaulting to
+    ///         <see cref="decimal.MinValue"/>, a value this setter would itself reject, and writing it
+    ///         unconditionally as <c>-79228162514264337593543950335.00</c> — is non-conformant <i>and</i>
+    ///         asserts a score twenty-nine orders of magnitude outside the declared range. Writing
+    ///         <c>0.00</c> would be schema-valid but would fabricate a neutral-interest claim the profile
+    ///         never made, and in an attention-profiling format the score is the entire payload. A missing
+    ///         attribute is the only one of the three a consumer can recognise as missing.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than -1.</exception>
@@ -250,10 +259,9 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("Concept", ApmlUtility.ApmlNamespace);
 
-        if (!string.IsNullOrEmpty(this.Key))
-        {
-            writer.WriteAttributeString("key", this.Key);
-        }
+        // key is use="required" and typed xs:string, for which the empty string is a legal value, so an
+        // empty key must still be written: omitting it is invalid, emitting it empty is not.
+        writer.WriteAttributeString("key", this.Key);
 
         if (this.Value.HasValue)
         {

@@ -128,7 +128,8 @@ public class ApmlAuthor : IComparable<ApmlAuthor>, IEquatable<ApmlAuthor>, IExte
     ///     no score is known, which suppresses the attribute on save.
     /// </value>
     /// <remarks>
-    ///     <see langword="null"/> and <c>0</c> are different answers and are serialised differently; the
+    ///     <see langword="null"/> and <c>0</c> are different answers and are serialised differently, and
+    ///     omitting the attribute is a known deviation from a schema that declares it required. The
     ///     reasoning, and the sentinel this replaced, are set out on <see cref="ApmlConcept.Value"/>.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than -1.</exception>
@@ -237,6 +238,8 @@ public class ApmlAuthor : IComparable<ApmlAuthor>, IEquatable<ApmlAuthor>, IExte
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("Author", ApmlUtility.ApmlNamespace);
 
+        // key is use="required" and typed xs:string, for which the empty string is a legal value, so an
+        // empty key must still be written: omitting it is invalid, emitting it empty is not.
         writer.WriteAttributeString("key", this.Key);
         if (this.Value.HasValue)
         {

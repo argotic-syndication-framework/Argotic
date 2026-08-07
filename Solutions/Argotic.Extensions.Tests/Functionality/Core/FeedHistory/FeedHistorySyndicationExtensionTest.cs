@@ -25,19 +25,6 @@ public class FeedHistorySyndicationExtensionTest
     public TestContext? TestContext { get; set; }
 
     #region Constructor Tests
-
-    /// <summary>The parameterless constructor yields a usable instance of the Feed History extension.</summary>
-    [TestMethod]
-    public void FeedHistorySyndicationExtension_DefaultConstructor_CreatesValidInstance()
-    {
-        // Arrange & Act
-        FeedHistorySyndicationExtension target = new();
-
-        // Assert
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<FeedHistorySyndicationExtension>();
-    }
-
     /// <summary>A newly constructed extension declares the <c>fh</c> XML prefix.</summary>
     [TestMethod]
     public void FeedHistorySyndicationExtension_DefaultConstructor_SetsCorrectXmlPrefix()

@@ -83,21 +83,5 @@ public class CreateSafeNavigatorAsyncTests
         navigator.MoveToChild("rss", "").ShouldBeTrue();
     }
 
-    /// <summary>
-    /// A well-formed document yields a navigator.
-    /// </summary>
-    [TestMethod]
-    public void CreateSafeNavigator_WithValidXml_ReturnsValidNavigator()
-    {
-        // Arrange
-        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
-
-        // Act
-        XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream);
-
-        // Assert
-        navigator.ShouldNotBeNull();
-    }
-
     public TestContext TestContext { get; set; }
 }

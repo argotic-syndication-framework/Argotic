@@ -22,18 +22,6 @@ public class PingbackSyndicationExtensionTest
                                      + "<pingback:target>http://www.example.com/post/1</pingback:target>";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor produces a non-null <c>PingbackSyndicationExtension</c>.
-    /// </summary>
-    [TestMethod]
-    public void PingbackSyndicationExtensionConstructorTest()
-    {
-        PingbackSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<PingbackSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions built from the same server and target compare equal, so <c>CompareTo</c> returns
     /// <c>0</c>.

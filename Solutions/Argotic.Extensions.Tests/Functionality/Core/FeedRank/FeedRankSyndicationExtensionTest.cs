@@ -19,18 +19,6 @@ public class FeedRankSyndicationExtensionTest
     private const string strExtXml = """<re:rank scheme="http://example.com/scheme.txt" domain="http://example.com/" label="Title">1.0</re:rank>""";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor produces a non-null <c>FeedRankSyndicationExtension</c>.
-    /// </summary>
-    [TestMethod]
-    public void FeedRankSyndicationExtensionConstructorTest()
-    {
-        FeedRankSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<FeedRankSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions built from the same scheme, domain, label and value compare equal, so
     /// <c>CompareTo</c> returns <c>0</c>.

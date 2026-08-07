@@ -43,18 +43,6 @@ public class ITunesSyndicationExtensionTest
                                      + "<itunes:category text=\"Rock\" /><itunes:category text=\"Folk\" />";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor produces a non-null <c>ITunesSyndicationExtension</c>.
-    /// </summary>
-    [TestMethod]
-    public void ITunesSyndicationExtensionConstructorTest()
-    {
-        ITunesSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<ITunesSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions built from the same podcast metadata compare equal, so <c>CompareTo</c> returns
     /// <c>0</c> — the category and keyword lists are compared by their contents.

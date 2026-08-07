@@ -133,21 +133,6 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     public TestContext? TestContext { get; set; }
 
     #region Constructor Tests
-
-    /// <summary>
-    /// The parameterless constructor yields an instance of the Dublin Core metadata terms extension type.
-    /// </summary>
-    [TestMethod]
-    public void DublinCoreMetadataTermsSyndicationExtensionConstructorTest()
-    {
-        // Arrange & Act
-        DublinCoreMetadataTermsSyndicationExtension target = new();
-
-        // Assert
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<DublinCoreMetadataTermsSyndicationExtension>();
-    }
-
     /// <summary>
     /// A new extension declares the terms namespace <c>http://purl.org/dc/terms/</c> under the prefix <c>dcterms</c>, not the older element-set namespace.
     /// </summary>

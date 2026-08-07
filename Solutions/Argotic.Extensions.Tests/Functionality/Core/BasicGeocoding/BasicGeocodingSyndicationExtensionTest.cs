@@ -21,18 +21,6 @@ public class BasicGeocodingSyndicationExtensionTest
     private const string strExtXml = "<geo:lat>41.0000000</geo:lat><geo:long>-74.1200000</geo:long>";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor produces a non-null <c>BasicGeocodingSyndicationExtension</c>.
-    /// </summary>
-    [TestMethod]
-    public void BasicGeocodingSyndicationExtensionConstructorTest()
-    {
-        BasicGeocodingSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<BasicGeocodingSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions built from the same latitude and longitude compare equal, so <c>CompareTo</c>
     /// returns <c>0</c>.

@@ -26,18 +26,6 @@ public class BlogChannelSyndicationExtensionTest
                                      + "<blogChannel:changes>http://www.example.com/changes.xml</blogChannel:changes>";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor produces a non-null <c>BlogChannelSyndicationExtension</c>.
-    /// </summary>
-    [TestMethod]
-    public void BlogChannelSyndicationExtensionConstructorTest()
-    {
-        BlogChannelSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<BlogChannelSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions built from the same four URIs compare equal, so <c>CompareTo</c> returns <c>0</c>.
     /// </summary>

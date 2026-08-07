@@ -22,18 +22,6 @@ public class CreativeCommonsSyndicationExtensionTest
                                      + "<creativeCommons:license>http://www.example.com/license2.html</creativeCommons:license>";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor produces a non-null <c>CreativeCommonsSyndicationExtension</c>.
-    /// </summary>
-    [TestMethod]
-    public void CreativeCommonsSyndicationExtensionConstructorTest()
-    {
-        CreativeCommonsSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<CreativeCommonsSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions carrying the same two licences compare equal, so <c>CompareTo</c> returns
     /// <c>0</c> — the licence list is compared by its contents, not by reference.

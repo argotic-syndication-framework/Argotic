@@ -22,19 +22,6 @@ public class WellFormedWebCommentsSyndicationExtensionTest
                                      + "<wfw:commentRss>http://www.example.com/comments/feed/1</wfw:commentRss>";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor produces a non-null
-    /// <c>WellFormedWebCommentsSyndicationExtension</c>.
-    /// </summary>
-    [TestMethod]
-    public void WellFormedWebCommentsSyndicationExtensionConstructorTest()
-    {
-        WellFormedWebCommentsSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<WellFormedWebCommentsSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions built from the same comment and comment-feed URLs compare equal, so
     /// <c>CompareTo</c> returns <c>0</c>.

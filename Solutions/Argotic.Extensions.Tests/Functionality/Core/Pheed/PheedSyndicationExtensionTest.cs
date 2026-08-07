@@ -21,18 +21,6 @@ public class PheedSyndicationExtensionTest
     private const string strExtXml = "<photo:thumbnail>http://www.example.com/thumbnail.jpg</photo:thumbnail><photo:imgsrc>http://www.example.com/</photo:imgsrc>";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor produces a non-null <c>PheedSyndicationExtension</c>.
-    /// </summary>
-    [TestMethod]
-    public void PheedSyndicationExtensionConstructorTest()
-    {
-        PheedSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<PheedSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions built from the same source and thumbnail compare equal, so <c>CompareTo</c>
     /// returns <c>0</c>.

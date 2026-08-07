@@ -20,18 +20,6 @@ public class AtomPublishingControlSyndicationExtensionTest
     private readonly string strExtXml = """<app:control xml:base="http://www.example.com/control.html" xml:lang="en-US"><app:draft>yes</app:draft></app:control>""";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor yields an instance of the control extension type.
-    /// </summary>
-    [TestMethod]
-    public void AtomPublishingControlSyndicationExtensionConstructorTest()
-    {
-        AtomPublishingControlSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<AtomPublishingControlSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions holding identical context compare equal.
     /// </summary>

@@ -20,18 +20,6 @@ public class TrackbackSyndicationExtensionTest
     private const string StrExtXml = "<trackback:ping>http://www.example.com/trackback/1</trackback:ping>";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor produces a non-null <c>TrackbackSyndicationExtension</c>.
-    /// </summary>
-    [TestMethod]
-    public void TrackbackSyndicationExtensionConstructorTest()
-    {
-        TrackbackSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<TrackbackSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions built from the same ping URL compare equal, so <c>CompareTo</c> returns <c>0</c>.
     /// </summary>

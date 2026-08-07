@@ -50,18 +50,6 @@ public class DublinCoreElementSetSyndicationExtensionTest
                                      + "<dc:type>PhysicalObject</dc:type>";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor yields an instance of the Dublin Core element set extension type.
-    /// </summary>
-    [TestMethod]
-    public void DublinCoreElementSetSyndicationExtensionConstructorTest()
-    {
-        DublinCoreElementSetSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<DublinCoreElementSetSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions holding identical context compare equal.
     /// </summary>

@@ -1,4 +1,6 @@
 using System.Text;
+
+using Argotic.Common;
 using Argotic.Syndication;
 
 using Shouldly;
@@ -482,5 +484,73 @@ public sealed class AtomSpecConformanceTests
         entry.Links.First().BaseUri.ShouldBe(
             new Uri("https://conformance.invalid/base/deeper/"),
             "and the link inherits the stacked result");
+    }
+
+    // ---- A10: the trimming setters -------------------------------------------------------------
+
+    /// <summary>
+    /// A10 — text/plain content loses its surrounding whitespace, and that is a decision.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     The trimming setters stay: removing the trim would leak every source document's
+    ///     pretty-printed indentation into every <c>Title</c> of every feed, and §3.1.1.1 permits the
+    ///     collapse for the text constructs where that matters. That was settled on evidence in
+    ///     <c>docs/build-warnings.md</c> §2.32.
+    ///     </para>
+    ///     <para>
+    ///     <b>This row is the one the permission does not cover.</b> §4.1.3.3 rule 5 — a
+    ///     <c>type</c> beginning <c>text/</c> — is plain text of the named media type, and RFC 4287
+    ///     grants no collapse permission for it, so trimming here is a real, if small, loss of
+    ///     fidelity. It is a knowing and documented trade rather than an oversight, and the test
+    ///     exists so that a future change to it is visible rather than silent.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void A10_ATextPlainContent_LosesItsSurroundingWhitespace()
+    {
+        AtomFeed feed = Load("<content type=\"text/plain\">\n  x  \n</content>");
+
+        feed.Entries.First().Content!.Content.ShouldBe(
+            "x",
+            "the setter trims; rule 5 grants no collapse permission, so this is a knowing trade, not conformance");
+    }
+
+    // ---- A12: rule-6 base64 content ------------------------------------------------------------
+
+    /// <summary>
+    /// A12 — rule-6 content is kept verbatim, and decoding is the caller's call through the common helper.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     §4.1.3.3 rule 6 makes content of any other media type Base64. This class stores and writes
+    ///     it verbatim and never decodes it, which is the right default — decoding on load would throw
+    ///     on every non-conformant body and lose the characters the document actually carried.
+    ///     </para>
+    ///     <para>
+    ///     The decoder is already public and always was:
+    ///     <see cref="SyndicationEncodingUtility.DecodeBase64String(string)"/>. A consumer could
+    ///     always decode; what they could not do was discover that they should, which is why
+    ///     <see cref="AtomContent.Content"/> now names it. Both halves are pinned together here, so a
+    ///     future change that starts decoding on load fails loudly instead of quietly changing what
+    ///     the property means.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void A12_Rule6Content_IsKeptVerbatimAndDecodesThroughTheCommonHelper()
+    {
+        const string Encoded = "iVBORw0KGgo=";
+
+        AtomFeed feed = Load($"""<content type="image/png">{Encoded}</content>""");
+
+        string content = feed.Entries.First().Content!.Content;
+        content.ShouldBe(Encoded, "verbatim: the exact characters, case included — base64 is case-significant");
+        content.ShouldContain("iVBORw0KGgo", Case.Sensitive, "and nothing case-folded them on the way through");
+
+        using Stream decoded = SyndicationEncodingUtility.DecodeBase64String(content);
+        using MemoryStream buffer = new();
+        decoded.CopyTo(buffer);
+
+        buffer.ToArray().ShouldBe([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A], "the PNG signature, which the model never decoded for itself");
     }
 }

@@ -159,6 +159,11 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
     /// <value>Always <c>1.0</c>. The Atom Publishing Protocol has only ever had one version.</value>
+    /// <remarks>
+    ///     Reported, never written. RFC 5023 §8.3.1 gives <c>app:service</c> the common <c>xml:base</c>/<c>xml:lang</c> attributes and foreign-namespace
+    ///     attributes, and nothing else — there is no <c>version</c> attribute to carry this, and the protocol version is already stated by the
+    ///     <c>http://www.w3.org/2007/app</c> namespace URI. <c>BlogMLDocument</c> writing a version attribute is not a precedent: its schema declares one.
+    /// </remarks>
     public Version Version => documentVersion;
 
     /// <summary>
@@ -451,7 +456,6 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
         ArgumentNullException.ThrowIfNull(settings);
 
         writer.WriteStartElement("service", AtomUtility.AtomPublishingNamespace);
-        // writer.WriteAttributeString("version", this.Version.ToString());
 
         if (settings.AutoDetectExtensions)
         {

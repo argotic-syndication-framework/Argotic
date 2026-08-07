@@ -36,12 +36,19 @@ internal static class AtomPublishingUtility
     /// </summary>
     /// <param name="nameTable">The table of atomized string objects.</param>
     /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
+    /// <remarks>
+    ///     <b>The prefixes are bound to constants, deliberately.</b> <paramref name="nameTable"/> is an atomised <i>string</i> table and carries no prefix
+    ///     bindings, so a manager built from one has no default namespace of its own — <see cref="XmlNamespaceManager.DefaultNamespace"/> returns an empty
+    ///     string until <c>AddNamespace(string.Empty, …)</c> gives it one, which nothing here does. Binding <c>atom</c> to whatever default namespace a
+    ///     document happened to declare would make every document parse as though it were Atom, so the source document gets no say in what these prefixes
+    ///     mean.
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is <see langword="null"/>.</exception>
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);
         XmlNamespaceManager manager = new(nameTable);
-        manager.AddNamespace("atom", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : ATOM_NAMESPACE);
+        manager.AddNamespace("atom", ATOM_NAMESPACE);
         manager.AddNamespace("app", ATOMPUB_NAMESPACE);
         manager.AddNamespace("xhtml", XHTML_NAMESPACE);
 

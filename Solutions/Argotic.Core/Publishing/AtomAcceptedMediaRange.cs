@@ -141,7 +141,13 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// Loads this <see cref="AtomAcceptedMediaRange"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><see langword="true"/> if the <see cref="AtomAcceptedMediaRange"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <returns>
+    ///     Always <see langword="true"/>. <b>An empty <c>app:accept</c> is a statement, not a parse failure.</b> RFC 5023 §8.3.4 makes an <i>absent</i>
+    ///     <c>app:accept</c> mean the collection accepts Atom entry documents, and one whose value is empty mean the opposite — that the collection accepts
+    ///     nothing and does not support member creation at all. Returning <see langword="false"/> here would stop <see cref="AtomMemberResources"/> adding
+    ///     the range, leaving an empty <see cref="AtomMemberResources.Accepts"/> that a consumer must read as the entry default: the exact inverse of what
+    ///     the server published. This is pinned by <c>AnEmptyAcceptElement_LoadsAndMeansTheCollectionAcceptsNothing</c>.
+    /// </returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomAcceptedMediaRange"/>.
     /// </remarks>
@@ -150,13 +156,11 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        if (AtomUtility.FillCommonObjectAttributes(this, source))
-        {
-        }
+        AtomUtility.FillCommonObjectAttributes(this, source);
 
         this.MediaRange = !string.IsNullOrEmpty(source.Value) ? source.Value.Trim() : string.Empty;
-        bool wasLoaded = true;
-        return wasLoaded;
+
+        return true;
     }
 
     /// <summary>

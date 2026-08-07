@@ -169,9 +169,25 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     ///     Empty when <see cref="Source"/> names the content instead. The default value is an <i>empty</i> string.
     /// </value>
     /// <remarks>
-    ///     Language-sensitive: the natural language of the value is whatever <see cref="Language"/> reports. What this string means depends entirely on
-    ///     <see cref="ContentType"/> — see the ordered rules on <see cref="AtomContent"/>.
+    ///     <para>
+    ///         Language-sensitive: the natural language of the value is whatever <see cref="Language"/> reports. What this string means depends entirely on
+    ///         <see cref="ContentType"/> — see the ordered rules on <see cref="AtomContent"/>.
+    ///     </para>
+    ///     <para>
+    ///         The setter trims, so leading and trailing whitespace does not survive a round trip. For rules 1 and 2 that is sanctioned — §3.1.1.1 lets a
+    ///         processor collapse white space in text. <b>For rule 5 it is not:</b> a <see cref="ContentType"/> beginning <c>text/</c> is plain text of the
+    ///         named media type, and RFC 4287 grants no collapse permission there, so a <c>text/plain</c> body whose leading indentation is significant
+    ///         comes back without it. That is a knowing trade — the alternative leaks every pretty-printer's indentation into every value — and it is
+    ///         pinned by <c>A10_ATextPlainContent_LosesItsSurroundingWhitespace</c>.
+    ///     </para>
+    ///     <para>
+    ///         Rule 6 content — any other media type — is <b>Base64 that this class never decodes</b>. It is stored and written back verbatim, so what you
+    ///         read here is the encoded text, not the bytes. To get the bytes, pass this value to
+    ///         <see cref="SyndicationEncodingUtility.DecodeBase64String(string)"/>, which returns a seekable stream over them. Nothing validates the
+    ///         encoding on load, so that call is also where a malformed body first announces itself, as a <see cref="FormatException"/>.
+    ///     </para>
     /// </remarks>
+    /// <seealso cref="SyndicationEncodingUtility.DecodeBase64String(string)"/>
     public string Content
     {
         get;

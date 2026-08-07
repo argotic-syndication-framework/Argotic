@@ -262,13 +262,20 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// <summary>
     /// Gets or sets an IRI that identifies the location of this Web resource.
     /// </summary>
-    /// <value>The <c>href</c> attribute. The default value is <see langword="null"/>, and an empty <c>href</c> is written if the link is saved that way.</value>
+    /// <value>The <c>href</c> attribute. The default value is <see langword="null"/>, and no <c>href</c> is written when it is.</value>
     /// <remarks>
     ///     <para>
     ///         RFC 4287 §4.2.7.1 requires the attribute and makes its value an IRI <i>reference</i>
     ///         (<a href="https://www.rfc-editor.org/rfc/rfc3987.html">RFC 3987</a>) — so, unlike <see cref="AtomId"/>, a relative value is legal and is
     ///         resolved against <see cref="BaseUri"/>. Loading accepts relative and absolute alike; a caller that assumes
     ///         <see cref="System.Uri.IsAbsoluteUri"/> will be surprised by real feeds.
+    ///     </para>
+    ///     <para>
+    ///         <see langword="null"/> means "no target", and saving omits the attribute rather than writing <c>href=""</c>. The empty string is a
+    ///         well-formed IRI reference — a <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986</a> §4.4 <i>same-document reference</i> — so
+    ///         writing it would pass a validator while telling every consumer the link points at the containing feed. A missing REQUIRED attribute is a
+    ///         detectable fault; a false statement is not. <see cref="Load(XPathNavigator)"/> is the other half: it refuses a link with no usable href, so
+    ///         this state is only reachable from a caller who never supplied one.
     ///     </para>
     ///     <para>See <see cref="Uri"/> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
@@ -287,19 +294,31 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// Loads this <see cref="AtomLink"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><see langword="true"/> if the <see cref="AtomLink"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <returns>
+    ///     <see langword="true"/> if the <paramref name="source"/> yielded a usable <c>href</c>; otherwise, <see langword="false"/>.
+    /// </returns>
     /// <remarks>
-    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomLink"/>.
+    ///     <para>
+    ///         This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomLink"/>.
+    ///     </para>
+    ///     <para>
+    ///         <b>The href alone decides the answer.</b> RFC 4287 §4.2.7.1 makes <c>href</c> REQUIRED, so an element that carries only a <c>rel</c>,
+    ///         a <c>title</c> or an <c>xml:base</c> is not a link this class can honestly represent, and every other attribute present is loaded but
+    ///         cannot make the result <see langword="true"/>. Reporting success without a target is what previously let
+    ///         <c>&lt;link rel="self"/&gt;</c> into the model and back out as <c>href=""</c> — a well-formed
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986</a> §4.4 same-document reference asserting that the link points at the
+    ///         containing feed.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        if (AtomUtility.FillCommonObjectAttributes(this, source))
-        {
-            wasLoaded = true;
-        }
+
+        AtomUtility.FillCommonObjectAttributes(this, source);
+
+        bool wasLoaded = false;
+
         if (source.HasAttributes)
         {
             string hrefAttribute = source.GetAttribute("href", string.Empty);
@@ -321,13 +340,11 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
             if (!string.IsNullOrEmpty(relAttribute))
             {
                 this.Relation = relAttribute;
-                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(typeAttribute))
             {
                 this.ContentType = typeAttribute;
-                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(hreflangAttribute))
@@ -336,7 +353,6 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
                 {
                     CultureInfo language = new(hreflangAttribute);
                     this.ContentLanguage = language;
-                    wasLoaded = true;
                 }
                 catch (ArgumentException)
                 {
@@ -347,7 +363,6 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
             if (!string.IsNullOrEmpty(titleAttribute))
             {
                 this.Title = titleAttribute;
-                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(lengthAttribute))
@@ -355,7 +370,6 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
                 if (long.TryParse(lengthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long length))
                 {
                     this.Length = length;
-                    wasLoaded = true;
                 }
             }
         }
@@ -396,7 +410,10 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
         writer.WriteStartElement("link", AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        writer.WriteAttributeString("href", this.Uri?.ToString() ?? string.Empty);
+        if (this.Uri is not null)
+        {
+            writer.WriteAttributeString("href", this.Uri.ToString());
+        }
 
         if (!string.IsNullOrEmpty(this.Relation))
         {

@@ -156,6 +156,8 @@ public class LiveJournalSyndicationExtensionContext
 
         this.Security?.WriteTo(writer);
 
+        this.UserPicture?.WriteTo(writer);
+
         if (this.IsPreformatted)
         {
             writer.WriteElementString("preformatted", xmlNamespace, string.Empty);

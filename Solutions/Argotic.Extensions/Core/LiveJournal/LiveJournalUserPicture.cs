@@ -118,7 +118,16 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <returns><see langword="true"/> if the <see cref="LiveJournalUserPicture"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
+    ///     <para>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="LiveJournalUserPicture"/>.
+    ///     </para>
+    ///     <para>
+    ///     Each of the four children is looked for unprefixed first and then in the extension namespace.
+    ///     Reading only the unprefixed spelling meant this type could not read what
+    ///     <see cref="WriteTo"/> writes — <c>WriteTo</c> qualifies all four — so a picture survived a
+    ///     save only to vanish on the next load. The namespace manager built here was already the
+    ///     evidence: it was constructed on every call and never consulted.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
@@ -131,10 +140,10 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
 
         if (source.HasChildren)
         {
-            XPathNavigator? urlNavigator = source.SelectChildElement("url");
-            XPathNavigator? keywordNavigator = source.SelectChildElement("keyword");
-            XPathNavigator? widthNavigator = source.SelectChildElement("width");
-            XPathNavigator? heightNavigator = source.SelectChildElement("height");
+            XPathNavigator? urlNavigator = source.SelectChildElement("url") ?? source.SelectChildElement(extension.XmlPrefix, "url", manager);
+            XPathNavigator? keywordNavigator = source.SelectChildElement("keyword") ?? source.SelectChildElement(extension.XmlPrefix, "keyword", manager);
+            XPathNavigator? widthNavigator = source.SelectChildElement("width") ?? source.SelectChildElement(extension.XmlPrefix, "width", manager);
+            XPathNavigator? heightNavigator = source.SelectChildElement("height") ?? source.SelectChildElement(extension.XmlPrefix, "height", manager);
 
             if (urlNavigator is not null)
             {

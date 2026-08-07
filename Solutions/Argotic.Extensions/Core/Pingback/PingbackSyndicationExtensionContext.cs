@@ -36,9 +36,9 @@ public class PingbackSyndicationExtensionContext
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the XML-RPC endpoint to call, or <see langword="null"/> if none was specified.</value>
     /// <remarks>
-    ///     The address a linking site posts its <c>pingback.ping</c> call to. Written unconditionally
-    ///     as <c>pingback:server</c>: saving a context that never had one emits an empty element rather
-    ///     than omitting it.
+    ///     The address a linking site posts its <c>pingback.ping</c> call to. Written as
+    ///     <c>pingback:server</c>, and only when it has one: an empty element would name an endpoint of
+    ///     the empty string.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Server
@@ -59,8 +59,8 @@ public class PingbackSyndicationExtensionContext
     /// <remarks>
     ///     The second argument of <c>pingback.ping</c>, and the reason this module exists: it is the
     ///     canonical address of the item being linked to, which need not be the item's <c>link</c> and
-    ///     which a caller would otherwise have to derive by fetching the page. Written unconditionally,
-    ///     the same as <see cref="Server"/>.
+    ///     which a caller would otherwise have to derive by fetching the page. Written only when it has
+    ///     one, the same as <see cref="Server"/> and as the <see cref="Abouts"/> loop below them.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Target
@@ -146,8 +146,15 @@ public class PingbackSyndicationExtensionContext
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
-        writer.WriteElementString("server", xmlNamespace, this.Server?.ToString() ?? string.Empty);
-        writer.WriteElementString("target", xmlNamespace, this.Target?.ToString() ?? string.Empty);
+        if (this.Server is not null)
+        {
+            writer.WriteElementString("server", xmlNamespace, this.Server.ToString());
+        }
+
+        if (this.Target is not null)
+        {
+            writer.WriteElementString("target", xmlNamespace, this.Target.ToString());
+        }
 
         foreach (Uri about in this.Abouts)
         {

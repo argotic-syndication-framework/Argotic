@@ -73,6 +73,113 @@ public class BasicGeocodingSyndicationExtensionTest
     }
 
     /// <summary>
+    /// A negative coordinate carries its sign on the degrees alone, so the minutes and seconds count
+    /// away from the equator rather than back towards it: <c>-36°30'0.00"</c> is <c>-36.5</c>.
+    /// </summary>
+    [TestMethod]
+    public void ConvertDegreesMinutesSecondsToDecimal_SubtractsMinutesFromANegativeDegree()
+    {
+        decimal actual = BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal("-36°30'0.00\"");
+
+        actual.ShouldBe(-36.5m);
+    }
+
+    /// <summary>
+    /// The minus sign is a property of the text, not of the parsed degrees: <c>-0°30'0.00"</c> is half a
+    /// degree south of the equator, not half a degree north of it.
+    /// </summary>
+    /// <remarks>
+    ///     This is the case that rules out the obvious repair. <c>-0</c> parses to a decimal whose
+    ///     <c>ToString</c> is <c>0</c>, whose <see cref="Math.Sign(decimal)"/> is <c>0</c> and for which
+    ///     <c>&lt; 0</c> is <see langword="false"/> — verified, not assumed — so neither test recovers
+    ///     the hemisphere from the parsed value. The sign has to be read off the string first.
+    /// </remarks>
+    [TestMethod]
+    public void ConvertDegreesMinutesSecondsToDecimal_KeepsTheHemisphereOfNegativeZeroDegrees()
+    {
+        decimal actual = BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal("-0°30'0.00\"");
+
+        actual.ShouldBe(-0.5m);
+    }
+
+    /// <summary>
+    /// A trailing <c>S</c> or <c>W</c> puts the coordinate south or west of the origin; <c>N</c> and
+    /// <c>E</c> leave it north or east of it.
+    /// </summary>
+    [TestMethod]
+    public void ConvertDegreesMinutesSecondsToDecimal_TakesTheSignFromTheHemisphereLetter()
+    {
+        BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal("12°34'56.78\"S").ShouldBeLessThan(0m);
+        BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal("12°34'56.78\"W").ShouldBeLessThan(0m);
+        BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal("12°34'56.78\"N").ShouldBeGreaterThan(0m);
+        BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal("12°34'56.78\"E").ShouldBeGreaterThan(0m);
+    }
+
+    /// <summary>
+    /// A hemisphere letter written inside the seconds field, ahead of the closing delimiter, is honoured
+    /// the same way.
+    /// </summary>
+    [TestMethod]
+    public void ConvertDegreesMinutesSecondsToDecimal_TakesTheSignFromAHemisphereLetterInsideTheSecondsField()
+    {
+        BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal("12°34'56.78S\"").ShouldBeLessThan(0m);
+    }
+
+    /// <summary>
+    /// A minutes field carrying its own sign is rejected rather than silently subtracted.
+    /// </summary>
+    [TestMethod]
+    public void ConvertDegreesMinutesSecondsToDecimal_RejectsASignedMinutesField()
+    {
+        Should.Throw<FormatException>(() => BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal("12°-30'0.00\""));
+        Should.Throw<FormatException>(() => BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal("12°30'-1.00\""));
+    }
+
+    /// <summary>
+    /// A <see cref="decimal"/> whose scale is zero — which is what every <c>int</c> conversion produces,
+    /// including the <c>Latitude = 40</c> this file's own fixtures use — converts to a whole number of
+    /// degrees rather than to bare delimiters.
+    /// </summary>
+    [TestMethod]
+    public void ConvertDecimalToDegreesMinutesSeconds_ConvertsAScaleZeroDecimal()
+    {
+        BasicGeocodingSyndicationExtension.ConvertDecimalToDegreesMinutesSeconds(40m).ShouldBe("40°0'0.00\"");
+        BasicGeocodingSyndicationExtension.ConvertDecimalToDegreesMinutesSeconds(0m).ShouldBe("0°0'0.00\"");
+    }
+
+    /// <summary>
+    /// Arcseconds that round up to <c>60</c> carry into the minutes, and a full sixty minutes carries
+    /// into the degrees, so neither field is ever emitted at <c>60</c>.
+    /// </summary>
+    [TestMethod]
+    public void ConvertDecimalToDegreesMinutesSeconds_CarriesTheRoundedArcseconds()
+    {
+        BasicGeocodingSyndicationExtension.ConvertDecimalToDegreesMinutesSeconds(0.9999999999m).ShouldBe("1°0'0.00\"");
+        BasicGeocodingSyndicationExtension.ConvertDecimalToDegreesMinutesSeconds(59.999999999999m).ShouldBe("60°0'0.00\"");
+    }
+
+    /// <summary>
+    /// The arcseconds always carry two decimal places, whatever the scale of the value they came from.
+    /// </summary>
+    [TestMethod]
+    public void ConvertDecimalToDegreesMinutesSeconds_AlwaysEmitsTwoDecimalPlacesOfArcseconds()
+    {
+        BasicGeocodingSyndicationExtension.ConvertDecimalToDegreesMinutesSeconds(1.5m).ShouldBe("1°30'0.00\"");
+    }
+
+    /// <summary>
+    /// A southern coordinate survives the trip out to degrees-minutes-seconds and back.
+    /// </summary>
+    [TestMethod]
+    public void ASouthernCoordinate_SurvivesTheTripThroughDegreesMinutesSeconds()
+    {
+        string degreesMinutesSeconds = BasicGeocodingSyndicationExtension.ConvertDecimalToDegreesMinutesSeconds(-36.5m);
+
+        degreesMinutesSeconds.ShouldBe("-36°30'0.00\"");
+        BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal(degreesMinutesSeconds).ShouldBe(-36.5m);
+    }
+
+    /// <summary>
     /// Two separately built extensions carrying the same coordinates are equal through the <c>object</c>
     /// overload of <c>Equals</c>.
     /// </summary>

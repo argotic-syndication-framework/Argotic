@@ -250,6 +250,68 @@ public class PingbackSyndicationExtensionTest
     }
 
     /// <summary>
+    /// An item that never named a server does not save with an empty <c>pingback:server</c> — which
+    /// would name an XML-RPC endpoint of the empty string.
+    /// </summary>
+    [TestMethod]
+    public void PingbackWriteToOmitsAServerThatWasNeverThere()
+    {
+        // Arrange
+        PingbackSyndicationExtension target = new()
+        {
+            Context = { Target = new Uri("http://www.example.com/post/1") }
+        };
+
+        // Act
+        string actual = target.ToString();
+
+        // Assert
+        actual.ShouldContain("target", Case.Sensitive);
+        actual.ShouldNotContain("server", Case.Sensitive);
+    }
+
+    /// <summary>
+    /// The same in the other direction — a server alone saves without an empty <c>pingback:target</c>.
+    /// </summary>
+    [TestMethod]
+    public void PingbackWriteToOmitsATargetThatWasNeverThere()
+    {
+        // Arrange
+        PingbackSyndicationExtension target = new()
+        {
+            Context = { Server = new Uri("http://www.example.com/xmlrpc.php") }
+        };
+
+        // Act
+        string actual = target.ToString();
+
+        // Assert
+        actual.ShouldContain("server", Case.Sensitive);
+        actual.ShouldNotContain("target", Case.Sensitive);
+    }
+
+    /// <summary>
+    /// The <c>pingback:about</c> loop three lines below writes only what exists — the shape the two
+    /// elements above are measured against.
+    /// </summary>
+    /// <remarks>
+    ///     A guard, not a characterisation: it passes both before and after. It is here because it is
+    ///     the counter-example that makes the unconditional writes above a defect rather than a choice.
+    /// </remarks>
+    [TestMethod]
+    public void PingbackWriteToOmitsAboutsWhenThereAreNone()
+    {
+        // Arrange
+        PingbackSyndicationExtension target = CreateExtension1();
+
+        // Act
+        string actual = target.ToString();
+
+        // Assert
+        actual.ShouldNotContain("about", Case.Sensitive);
+    }
+
+    /// <summary>
     /// Builds the extension the comparison tests treat as the greater, whose server is
     /// <c>http://www.example.com/xmlrpc.php</c>.
     /// </summary>

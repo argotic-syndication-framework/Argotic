@@ -518,6 +518,134 @@ public class LiveJournalSyndicationExtensionTest
     }
 
     /// <summary>
+    /// A public entry and a private one are distinguished, in both the comparison and the hash.
+    /// </summary>
+    /// <remarks>
+    ///     <see cref="LiveJournalSecurity.Accessibility"/> decides who may read the entry and
+    ///     <see cref="LiveJournalSecurity.Mask"/> only narrows a <c>friends</c> entry further, so
+    ///     comparing the mask alone made every accessibility equal to every other on the default mask
+    ///     neither instance set.
+    /// </remarks>
+    [TestMethod]
+    public void LiveJournalSecurityDistinguishesAccessibility()
+    {
+        // Arrange
+        LiveJournalSecurity publicEntry = new(LiveJournalSecurityType.Public);
+        LiveJournalSecurity privateEntry = new(LiveJournalSecurityType.Private);
+
+        // Act & Assert
+        publicEntry.CompareTo(privateEntry).ShouldNotBe(0);
+        publicEntry.Equals(privateEntry).ShouldBeFalse();
+        publicEntry.GetHashCode().ShouldNotBe(privateEntry.GetHashCode());
+    }
+
+    /// <summary>
+    /// The mask still decides the order between two securities of the same accessibility.
+    /// </summary>
+    [TestMethod]
+    public void LiveJournalSecurityOrdersByMaskWithinAnAccessibility()
+    {
+        // Arrange
+        LiveJournalSecurity lesser = new(LiveJournalSecurityType.Friends, 1);
+        LiveJournalSecurity greater = new(LiveJournalSecurityType.Friends, 2);
+
+        // Act & Assert
+        lesser.CompareTo(greater).ShouldBeLessThan(0);
+        greater.CompareTo(lesser).ShouldBeGreaterThan(0);
+    }
+
+    /// <summary>
+    /// The extension folds its security into its own comparison, so two entries differing only in who
+    /// may read them are unequal at the extension level too.
+    /// </summary>
+    [TestMethod]
+    public void LiveJournalExtensionDistinguishesSecurityAccessibility()
+    {
+        // Arrange
+        LiveJournalSyndicationExtension publicEntry = new() { Context = { Security = new LiveJournalSecurity(LiveJournalSecurityType.Public) } };
+        LiveJournalSyndicationExtension privateEntry = new() { Context = { Security = new LiveJournalSecurity(LiveJournalSecurityType.Private) } };
+
+        // Act & Assert
+        publicEntry.Equals(privateEntry).ShouldBeFalse();
+    }
+
+    /// <summary>
+    /// A <c>lj:userpic</c> whose four children carry the extension prefix — the form
+    /// <c>LiveJournalUserPicture.WriteTo</c> emits — is read.
+    /// </summary>
+    /// <remarks>
+    ///     The unprefixed spelling is still accepted, so no document that used to load stops loading;
+    ///     see <see cref="LiveJournalUnprefixedUserPictureChildrenAreStillRead"/>.
+    /// </remarks>
+    [TestMethod]
+    public void LiveJournalPrefixedUserPictureChildrenAreRead()
+    {
+        // Arrange
+        string strXml = ExtensionTestUtil.GetWrappedXml(
+            Namespc,
+            "<lj:music>Around the World</lj:music>"
+            + "<lj:userpic><lj:url>http://example.com/pic.jpg</lj:url><lj:keyword>coding</lj:keyword><lj:width>100</lj:width><lj:height>100</lj:height></lj:userpic>");
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        LiveJournalSyndicationExtension? itemExtension = feed.Channel.Items.Single().FindExtension<LiveJournalSyndicationExtension>();
+        itemExtension.ShouldNotBeNull();
+        itemExtension.Context.Music.ShouldBe("Around the World");
+        itemExtension.Context.UserPicture.ShouldNotBeNull();
+        itemExtension.Context.UserPicture.Url.ShouldBe(new Uri("http://example.com/pic.jpg"));
+        itemExtension.Context.UserPicture.Keyword.ShouldBe("coding");
+        itemExtension.Context.UserPicture.Width.ShouldBe(100);
+        itemExtension.Context.UserPicture.Height.ShouldBe(100);
+    }
+
+    /// <summary>
+    /// A <c>lj:userpic</c> whose four children are unprefixed is still read, which is what the loader
+    /// accepted before it learned the prefixed spelling.
+    /// </summary>
+    [TestMethod]
+    public void LiveJournalUnprefixedUserPictureChildrenAreStillRead()
+    {
+        // Arrange
+        string strXml = ExtensionTestUtil.GetWrappedXml(
+            Namespc,
+            "<lj:userpic><url>http://example.com/pic.jpg</url><keyword>coding</keyword><width>100</width><height>100</height></lj:userpic>");
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        LiveJournalSyndicationExtension? itemExtension = feed.Channel.Items.Single().FindExtension<LiveJournalSyndicationExtension>();
+        itemExtension.ShouldNotBeNull();
+        itemExtension.Context.UserPicture.ShouldNotBeNull();
+        itemExtension.Context.UserPicture.Keyword.ShouldBe("coding");
+    }
+
+    /// <summary>
+    /// <c>WriteTo</c> emits the user picture alongside the music, mood, security and preformatted flag.
+    /// </summary>
+    [TestMethod]
+    public void LiveJournalWriteToKeepsTheUserPicture()
+    {
+        // Arrange
+        LiveJournalSyndicationExtension target = CreateExtension1();
+        target.Context.UserPicture = new LiveJournalUserPicture(new Uri("http://example.com/pic.jpg"), "coding", 100, 100);
+
+        // Act
+        string actual = target.ToString();
+
+        // Assert
+        actual.ShouldContain("userpic", Case.Sensitive);
+        actual.ShouldContain("http://example.com/pic.jpg", Case.Sensitive);
+        actual.ShouldContain("coding", Case.Sensitive);
+    }
+
+    /// <summary>
     /// Two user pictures with the same URL, keyword and dimensions compare equal.
     /// </summary>
     [TestMethod]

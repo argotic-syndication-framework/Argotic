@@ -147,6 +147,13 @@ public class FeedRankSyndicationExtensionContext
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
+    /// <remarks>
+    ///     The element is qualified and its attributes are not. An unprefixed attribute is in no
+    ///     namespace whatever namespace its element is in — attributes do not inherit a default
+    ///     declaration — so the extension namespace is the one partition <c>scheme</c> and
+    ///     <c>domain</c> cannot be written into and still be found by <see cref="Load"/>, which reads
+    ///     them, and every other attribute in this assembly, out of the no-namespace partition.
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
@@ -156,11 +163,11 @@ public class FeedRankSyndicationExtensionContext
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         writer.WriteStartElement("rank", xmlNamespace);
 
-        writer.WriteAttributeString("scheme", xmlNamespace, this.Scheme?.ToString() ?? string.Empty);
+        writer.WriteAttributeString("scheme", this.Scheme?.ToString() ?? string.Empty);
 
         if (this.Domain is not null)
         {
-            writer.WriteAttributeString("domain", xmlNamespace, this.Domain.ToString());
+            writer.WriteAttributeString("domain", this.Domain.ToString());
         }
 
         if (!string.IsNullOrEmpty(this.Label))

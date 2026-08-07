@@ -235,6 +235,47 @@ public class PheedSyndicationExtensionTest
     }
 
     /// <summary>
+    /// An item carrying only a <c>photo:imgsrc</c> saves with only a <c>photo:imgsrc</c>: the thumbnail
+    /// that was never in the source is not invented on the way out.
+    /// </summary>
+    [TestMethod]
+    public void PheedWriteToOmitsAThumbnailThatWasNeverThere()
+    {
+        // Arrange
+        PheedSyndicationExtension target = new()
+        {
+            Context = { Source = new Uri("http://www.example.com/photo.jpg") }
+        };
+
+        // Act
+        string actual = target.ToString();
+
+        // Assert
+        actual.ShouldContain("imgsrc", Case.Sensitive);
+        actual.ShouldNotContain("thumbnail", Case.Sensitive);
+    }
+
+    /// <summary>
+    /// The same in the other direction — a thumbnail alone saves without an empty <c>photo:imgsrc</c>.
+    /// </summary>
+    [TestMethod]
+    public void PheedWriteToOmitsASourceThatWasNeverThere()
+    {
+        // Arrange
+        PheedSyndicationExtension target = new()
+        {
+            Context = { Thumbnail = new Uri("http://www.example.com/thumb.jpg") }
+        };
+
+        // Act
+        string actual = target.ToString();
+
+        // Assert
+        actual.ShouldContain("thumbnail", Case.Sensitive);
+        actual.ShouldNotContain("imgsrc", Case.Sensitive);
+    }
+
+    /// <summary>
     /// Builds the extension the comparison tests treat as the lesser, sourced from <c>example.com</c>.
     /// </summary>
     /// <returns>An extension carrying a source and a thumbnail.</returns>

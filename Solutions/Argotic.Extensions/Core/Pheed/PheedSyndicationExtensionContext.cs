@@ -34,8 +34,8 @@ public class PheedSyndicationExtensionContext
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the location of the full-size photograph, or <see langword="null"/> if none was specified.</value>
     /// <remarks>
-    ///     Written as <c>photo:imgsrc</c>, and written <i>unconditionally</i>: saving a context that
-    ///     never had a source emits an empty <c>photo:imgsrc</c> rather than omitting it.
+    ///     Written as <c>photo:imgsrc</c>, and only when it has one: saving a context that never had a
+    ///     source omits the element rather than emitting an empty one.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Source
@@ -56,7 +56,7 @@ public class PheedSyndicationExtensionContext
     /// <remarks>
     ///     The module requires the longest dimension to be at most <c>120</c> pixels. Nothing here
     ///     checks that, and nothing can: the constraint is on the image the URL points at, not on the
-    ///     URL.
+    ///     URL. Written as <c>photo:thumbnail</c>, and only when it has one.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Thumbnail
@@ -123,7 +123,14 @@ public class PheedSyndicationExtensionContext
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
-        writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail?.ToString() ?? string.Empty);
-        writer.WriteElementString("imgsrc", xmlNamespace, this.Source?.ToString() ?? string.Empty);
+        if (this.Thumbnail is not null)
+        {
+            writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail.ToString());
+        }
+
+        if (this.Source is not null)
+        {
+            writer.WriteElementString("imgsrc", xmlNamespace, this.Source.ToString());
+        }
     }
 }

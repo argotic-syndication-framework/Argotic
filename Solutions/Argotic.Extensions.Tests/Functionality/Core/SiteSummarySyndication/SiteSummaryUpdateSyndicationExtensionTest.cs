@@ -422,6 +422,111 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         Should.Throw<ArgumentOutOfRangeException>(() => ext.Context.Frequency = 0);
     }
 
+    /// <summary>
+    /// An item carrying <c>sy:updateFrequency</c> of <c>0</c> is read, with the unusable frequency
+    /// skipped and the rest of the feed intact.
+    /// </summary>
+    /// <remarks>
+    ///     A feed is untrusted remote input and an aggregator hint is optional metadata, so losing the
+    ///     whole document to one out-of-range integer is a catastrophic response to a trivial fault. The
+    ///     house rule this settles on is that a guard throws for programmatic assignment — see
+    ///     <see cref="SiteSummaryUpdateFrequencyThrowsOnInvalidValue"/>, which still holds — while a
+    ///     loader skips an unusable value, as the two neighbouring branches of this method already did.
+    /// </remarks>
+    [TestMethod]
+    public void AZeroUpdateFrequencyIsSkippedAndTheFeedSurvives()
+    {
+        // Arrange
+        string strXml = ExtensionTestUtil.GetWrappedXml(
+            Namespc,
+            "<sy:updatePeriod>hourly</sy:updatePeriod><sy:updateFrequency>0</sy:updateFrequency>");
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        SiteSummaryUpdateSyndicationExtension? itemExtension = feed.Channel.Items.Single().FindExtension<SiteSummaryUpdateSyndicationExtension>();
+        itemExtension.ShouldNotBeNull();
+        itemExtension.Context.Period.ShouldBe(SiteSummaryUpdatePeriod.Hourly);
+        itemExtension.Context.Frequency.ShouldBe(int.MinValue);
+    }
+
+    /// <summary>
+    /// A negative <c>sy:updateFrequency</c> is skipped the same way.
+    /// </summary>
+    [TestMethod]
+    public void ANegativeUpdateFrequencyIsSkippedAndTheFeedSurvives()
+    {
+        // Arrange
+        string strXml = ExtensionTestUtil.GetWrappedXml(
+            Namespc,
+            "<sy:updatePeriod>hourly</sy:updatePeriod><sy:updateFrequency>-4</sy:updateFrequency>");
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        SiteSummaryUpdateSyndicationExtension? itemExtension = feed.Channel.Items.Single().FindExtension<SiteSummaryUpdateSyndicationExtension>();
+        itemExtension.ShouldNotBeNull();
+        itemExtension.Context.Frequency.ShouldBe(int.MinValue);
+    }
+
+    /// <summary>
+    /// A frequency of <c>1</c> is the smallest the module admits, and it is read rather than skipped.
+    /// </summary>
+    [TestMethod]
+    public void AnUpdateFrequencyOfOneIsRead()
+    {
+        // Arrange
+        string strXml = ExtensionTestUtil.GetWrappedXml(
+            Namespc,
+            "<sy:updatePeriod>hourly</sy:updatePeriod><sy:updateFrequency>1</sy:updateFrequency>");
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        SiteSummaryUpdateSyndicationExtension? itemExtension = feed.Channel.Items.Single().FindExtension<SiteSummaryUpdateSyndicationExtension>();
+        itemExtension.ShouldNotBeNull();
+        itemExtension.Context.Frequency.ShouldBe(1);
+    }
+
+    /// <summary>
+    /// An unparseable <c>sy:updateFrequency</c> is skipped and the feed loads — the behaviour the
+    /// out-of-range case is measured against.
+    /// </summary>
+    /// <remarks>
+    ///     A guard, not a characterisation: this passes both before and after. It is here because it is
+    ///     the argument for the fix. The two neighbouring branches of the same method already skip an
+    ///     unusable value rather than rejecting the document, and so does this one — the out-of-range
+    ///     integer was the only input on the path that behaved differently.
+    /// </remarks>
+    [TestMethod]
+    public void AnUnparseableUpdateFrequencyIsSkippedAndTheFeedSurvives()
+    {
+        // Arrange
+        string strXml = ExtensionTestUtil.GetWrappedXml(
+            Namespc,
+            "<sy:updatePeriod>hourly</sy:updatePeriod><sy:updateFrequency>often</sy:updateFrequency>");
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        SiteSummaryUpdateSyndicationExtension? itemExtension = feed.Channel.Items.Single().FindExtension<SiteSummaryUpdateSyndicationExtension>();
+        itemExtension.ShouldNotBeNull();
+        itemExtension.Context.Period.ShouldBe(SiteSummaryUpdatePeriod.Hourly);
+        itemExtension.Context.Frequency.ShouldBe(int.MinValue);
+    }
+
     private static SiteSummaryUpdateSyndicationExtension CreateExtension1()
     {
         SiteSummaryUpdateSyndicationExtension ext = new()

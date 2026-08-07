@@ -180,6 +180,37 @@ public class PublishSitemap
         read.Urls[0].LastModified.ShouldBe(new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc));
     }
 
+    /// <summary>
+    /// An extension attached to the sitemap itself — not to a url — is written but not read back.
+    /// </summary>
+    /// <remarks>
+    ///     <c>Sitemap.Save</c> writes document-level extensions on the <c>urlset</c> element, but the load
+    ///     walk probes for extensions from the document node, where no namespace is in scope, so what was
+    ///     written is never found again. The four Google extensions all attach to <see cref="SitemapUrl"/>
+    ///     objects and never see this; the asymmetry is the load's, not the save's, which is why the saved
+    ///     bytes are asserted too.
+    /// </remarks>
+    [TestMethod]
+    public void ADocumentLevelExtension_IsWrittenButNotReadBack()
+    {
+        Sitemap written = new();
+        written.Urls.Add(new SitemapUrl(new Uri("https://example.com/")));
+        DublinCoreElementSetSyndicationExtension extension = new() { Context = { Title = "A document-level title" } };
+        written.Extensions.Add(extension);
+
+        using MemoryStream stream = new();
+        written.Save(stream);
+        stream.Seek(0, SeekOrigin.Begin);
+        using StreamReader reader = new(stream, leaveOpen: true);
+        reader.ReadToEnd().ShouldContain("A document-level title");
+
+        stream.Seek(0, SeekOrigin.Begin);
+        Sitemap read = new();
+        read.Load(stream);
+
+        read.Extensions.OfType<DublinCoreElementSetSyndicationExtension>().ShouldBeEmpty();
+    }
+
     private static Sitemap BuildSitemap()
     {
         SitemapNewsExtension news = new()

@@ -75,14 +75,14 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
     /// <returns><see langword="true"/> if the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    ///     Unrecognised values are skipped rather than rejected, with one exception:
-    ///     <c>sy:updateFrequency</c> is assigned through <see cref="Frequency"/>, whose guard rejects
-    ///     anything below <c>1</c>. A feed carrying <c>0</c> or a negative frequency therefore aborts the
-    ///     load with <see cref="ArgumentOutOfRangeException"/> instead of ignoring the element.
+    ///     Every unusable value is skipped rather than rejected, and that includes a
+    ///     <c>sy:updateFrequency</c> below <c>1</c>. A feed is untrusted remote input and an aggregator
+    ///     hint is optional metadata, so losing the whole document to one out-of-range integer would be
+    ///     a catastrophic response to a trivial fault. <see cref="Frequency"/>'s own guard still throws,
+    ///     because a programmatic assignment of <c>0</c> is a caller error rather than a bad feed.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="source"/> carries a <c>sy:updateFrequency</c> that parses to less than <c>1</c>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -106,7 +106,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
 
             if (updateFrequencyNavigator is not null)
             {
-                if (int.TryParse(updateFrequencyNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int frequency))
+                if (int.TryParse(updateFrequencyNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int frequency) && frequency >= 1)
                 {
                     this.Frequency = frequency;
                     wasLoaded = true;

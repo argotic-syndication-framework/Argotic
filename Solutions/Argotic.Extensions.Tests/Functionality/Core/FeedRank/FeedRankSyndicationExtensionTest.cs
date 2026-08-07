@@ -14,9 +14,9 @@ namespace Argotic.Extensions.Tests.Functionality.Core.FeedRank;
 public class FeedRankSyndicationExtensionTest
 {
     private const string namespc = @"xmlns:re=""http://purl.org/atompub/rank/1.0""";
-    private const string nycText = """<rank p1:scheme="http://example.com/scheme.txt" p1:domain="http://example.com/" label="Title" xmlns:p1="http://purl.org/atompub/rank/1.0" xmlns="http://purl.org/atompub/rank/1.0">1.0</rank>""";
-    private const string writeToText = """<rank p1:scheme="http://example.com/scheme.txt" p1:domain="http://example.com/" label="Title" xmlns:p1="http://purl.org/atompub/rank/1.0" xmlns="http://purl.org/atompub/rank/1.0">1.0</rank>""";
-    private const string strExtXml = """<re:rank re:scheme="http://example.com/scheme.txt" re:domain="http://example.com/" label="Title">1.0</re:rank>""";
+    private const string nycText = """<rank scheme="http://example.com/scheme.txt" domain="http://example.com/" label="Title" xmlns="http://purl.org/atompub/rank/1.0">1.0</rank>""";
+    private const string writeToText = """<rank scheme="http://example.com/scheme.txt" domain="http://example.com/" label="Title" xmlns="http://purl.org/atompub/rank/1.0">1.0</rank>""";
+    private const string strExtXml = """<re:rank scheme="http://example.com/scheme.txt" domain="http://example.com/" label="Title">1.0</re:rank>""";
 
     public TestContext? TestContext { get; set; }
 
@@ -74,8 +74,8 @@ public class FeedRankSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Saving a feed with the extension attached writes a single <c>re:rank</c> element whose
-    /// <c>scheme</c> and <c>domain</c> attributes are prefixed and whose <c>label</c> is not.
+    /// Saving a feed with the extension attached writes a single <c>re:rank</c> element carrying
+    /// <c>scheme</c>, <c>domain</c> and <c>label</c>, none of them prefixed.
     /// </summary>
     [TestMethod]
     public void FeedRankCreateXmlTest()
@@ -107,6 +107,62 @@ public class FeedRankSyndicationExtensionTest
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension)
             .ShouldBeOfType<FeedRankSyndicationExtension>();
+
+        itemExtension.Context.Value.ShouldBe(1.0m);
+        itemExtension.Context.Label.ShouldBe("Title");
+        itemExtension.Context.Scheme.ShouldBe(new Uri("http://example.com/scheme.txt"));
+        itemExtension.Context.Domain.ShouldBe(new Uri("http://example.com/"));
+    }
+
+    /// <summary>
+    /// A <c>re:rank</c> whose <c>scheme</c> and <c>domain</c> are unprefixed — the conformant spelling,
+    /// and the one <c>SampleData/RssFeedWithExtensions.xml</c> uses — is read in full.
+    /// </summary>
+    /// <remarks>
+    ///     A guard, not a characterisation: an unprefixed attribute lives in the no-namespace partition
+    ///     whatever the element's own namespace is, so this passes both before and after the write path
+    ///     is corrected. It is here to record that the read side was never the broken half.
+    /// </remarks>
+    [TestMethod]
+    public void FeedRankUnprefixedAttributesAreRead()
+    {
+        string strXml = ExtensionTestUtil.GetWrappedXml(
+            namespc,
+            """<re:rank scheme="http://example.com/scheme.txt" domain="http://example.com/" label="Title">1.0</re:rank>""");
+
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        FeedRankSyndicationExtension? itemExtension = feed.Channel.Items.Single().FindExtension<FeedRankSyndicationExtension>();
+        itemExtension.ShouldNotBeNull();
+        itemExtension.Context.Scheme.ShouldBe(new Uri("http://example.com/scheme.txt"));
+        itemExtension.Context.Domain.ShouldBe(new Uri("http://example.com/"));
+        itemExtension.Context.Label.ShouldBe("Title");
+        itemExtension.Context.Value.ShouldBe(1.0m);
+    }
+
+    /// <summary>
+    /// All three attributes are written unqualified, which is the only partition an unprefixed attribute
+    /// can occupy and the one the loader reads from.
+    /// </summary>
+    /// <remarks>
+    ///     The asymmetry this replaces was the whole proof. <c>scheme</c> and <c>domain</c> were written
+    ///     into the extension namespace and came back with a generated <c>p1</c> prefix; <c>label</c>,
+    ///     written unqualified three lines later, did not — and <c>label</c> was the only one of the
+    ///     three that round-tripped.
+    /// </remarks>
+    [TestMethod]
+    public void FeedRankWritesEveryAttributeUnqualified()
+    {
+        FeedRankSyndicationExtension target = CreateExtension1();
+
+        string actual = target.ToString();
+
+        actual.ShouldContain("scheme=", Case.Sensitive);
+        actual.ShouldContain("domain=", Case.Sensitive);
+        actual.ShouldContain("label=", Case.Sensitive);
+        actual.ShouldNotContain("p1:", Case.Sensitive);
     }
 
     /// <summary>
@@ -122,9 +178,8 @@ public class FeedRankSyndicationExtensionTest
     }
 
     /// <summary>
-    /// <c>ToString</c> renders the rank as a single element carrying the value <c>1.0</c>, its two
-    /// qualified attributes bound to a generated <c>p1</c> prefix and the ranking namespace as its
-    /// default.
+    /// <c>ToString</c> renders the rank as a single element carrying the value <c>1.0</c>, its three
+    /// unprefixed attributes, and the ranking namespace as its default.
     /// </summary>
     [TestMethod]
     public void FeedRankToStringTest()

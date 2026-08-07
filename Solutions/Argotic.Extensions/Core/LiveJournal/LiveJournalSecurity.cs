@@ -162,6 +162,13 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// </summary>
     /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+    /// <remarks>
+    ///     <see cref="Accessibility"/> is primary and <see cref="Mask"/> secondary, which is the order
+    ///     they matter in: the accessibility decides who may read the entry, and the mask only narrows a
+    ///     <see cref="LiveJournalSecurityType.Friends">friends</see> entry further. Comparing the mask
+    ///     alone made <c>new LiveJournalSecurity(Public)</c> and <c>new LiveJournalSecurity(Private)</c>
+    ///     equal, because neither sets a mask.
+    /// </remarks>
     public int CompareTo(LiveJournalSecurity? other)
     {
         if (other is null)
@@ -169,7 +176,8 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
             return 1;
         }
 
-        int result = this.Mask.CompareTo(other.Mask);
+        int result = this.Accessibility.CompareTo(other.Accessibility);
+        if (result == 0) result = this.Mask.CompareTo(other.Mask);
 
         return result;
     }
@@ -200,7 +208,8 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Mask));
+    /// <remarks>Folds the same two members <see cref="CompareTo"/> compares, in the same order.</remarks>
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Accessibility), HashCodeUtility.Component(this.Mask));
 
     /// <summary>
     /// Determines if operands are equal.

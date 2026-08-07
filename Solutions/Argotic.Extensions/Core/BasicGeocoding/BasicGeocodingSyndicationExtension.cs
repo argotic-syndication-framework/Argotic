@@ -69,68 +69,65 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <summary>
     /// Converts the supplied decimal value to an equivalent degrees, minutes, seconds string representation.
     /// </summary>
-    /// <param name="value">A coordinate in decimal degrees. It must carry a fractional part — see the remarks.</param>
-    /// <returns>A string in the format <c>###°##'##.##"</c>.</returns>
+    /// <param name="value">A coordinate in decimal degrees.</param>
+    /// <returns>
+    ///     The coordinate as <c>D°M'S.SS"</c> — degrees and whole minutes unpadded, arcseconds always to
+    ///     two decimal places, and a leading <c>-</c> for a southern or western coordinate. The sign is
+    ///     carried by the degrees, which is the spelling
+    ///     <see cref="ConvertDegreesMinutesSecondsToDecimal(string)"/> reads back.
+    /// </returns>
     /// <remarks>
     ///     A convenience for display. Nothing in the extension calls it: the wire format is decimal
     ///     degrees, and <see cref="BasicGeocodingSyndicationExtensionContext"/> reads and writes that.
-    ///     The whole conversion is driven off the fractional digits of
-    ///     <paramref name="value"/>, so a <see cref="Decimal"/> with a scale of zero — <c>36m</c> rather
-    ///     than <c>36.0m</c> — produces <c>°'"</c> with the degrees dropped.
+    ///     Arcseconds are rounded to two places and the rounding carries, so neither the minutes nor the
+    ///     seconds are ever emitted at <c>60</c>: <c>0.9999999999m</c> is <c>1°0'0.00"</c>, not
+    ///     <c>0°59'60.00"</c>.
     /// </remarks>
     /// <seealso cref="ConvertDegreesMinutesSecondsToDecimal(string)"/>
     public static string ConvertDecimalToDegreesMinutesSeconds(decimal value)
     {
-        string degreesPart = string.Empty;
-        string minutesPart = string.Empty;
-        string secondsPart = string.Empty;
-        decimal multiplier = (decimal)60;
+        decimal magnitude = Math.Abs(value);
 
-        string degreesAsString = value.ToString(NumberFormatInfo.InvariantInfo);
+        decimal degrees = decimal.Truncate(magnitude);
+        decimal totalMinutes = (magnitude - degrees) * 60;
+        decimal minutes = decimal.Truncate(totalMinutes);
+        decimal seconds = decimal.Round((totalMinutes - minutes) * 60, 2);
 
-        if (degreesAsString.Contains('.', StringComparison.Ordinal))
+        if (seconds >= 60)
         {
-            string[] degreesParts = degreesAsString.Split('.', StringSplitOptions.RemoveEmptyEntries);
-            if (degreesParts is [string wholeDegrees, string fractionalDegrees])
-            {
-                degreesPart = wholeDegrees;
-
-                if (decimal.TryParse("." + fractionalDegrees, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal fractionalValue))
-                {
-                    decimal minutes = decimal.Multiply(fractionalValue, multiplier);
-
-                    string minutesAsString = minutes.ToString(NumberFormatInfo.InvariantInfo);
-                    if (minutesAsString.Contains('.', StringComparison.Ordinal))
-                    {
-                        string[] minutesParts = minutesAsString.Split('.', StringSplitOptions.RemoveEmptyEntries);
-                        if (minutesParts is [string wholeMinutes, string fractionalMinutes])
-                        {
-                            minutesPart = wholeMinutes;
-
-                            if (decimal.TryParse("." + fractionalMinutes, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out fractionalValue))
-                            {
-                                decimal seconds = decimal.Multiply(fractionalValue, multiplier);
-                                secondsPart = decimal.Round(seconds, 2).ToString(NumberFormatInfo.InvariantInfo);
-                            }
-                        }
-                    }
-                }
-            }
+            seconds -= 60;
+            minutes += 1;
         }
 
-        return $"{degreesPart}°{minutesPart}'{secondsPart}\"";
+        if (minutes >= 60)
+        {
+            minutes -= 60;
+            degrees += 1;
+        }
+
+        string sign = value < 0 ? "-" : string.Empty;
+
+        return $"{sign}{degrees.ToString(NumberFormatInfo.InvariantInfo)}°{minutes.ToString(NumberFormatInfo.InvariantInfo)}'{seconds.ToString("0.00", NumberFormatInfo.InvariantInfo)}\"";
     }
 
     /// <summary>
     /// Converts the supplied degrees, minutes, and seconds spatial coordinate string to its equivalent decimal value.
     /// </summary>
-    /// <param name="degreesMinutesSeconds">A coordinate in the format <c>###°##'##.##"</c>. All three delimiters must be present, in that order. A trailing <c>N</c>, <c>S</c>, <c>E</c> or <c>W</c> is tolerated on the seconds and discarded, so it does not set the sign.</param>
-    /// <returns>The equivalent value in decimal degrees.</returns>
+    /// <param name="degreesMinutesSeconds">A coordinate in the format <c>D°M'S.SS"</c>. All three delimiters must be present, in that order. An <c>N</c>, <c>S</c>, <c>E</c> or <c>W</c> may follow the seconds, either side of the closing delimiter.</param>
+    /// <returns>The equivalent value in decimal degrees, negative for a southern or western coordinate.</returns>
     /// <remarks>
-    ///     The three parts are summed, which means a negative coordinate is only correct when its
-    ///     minutes and seconds are zero: <c>-36°30'0.00"</c> reads as <c>-35.5</c>, not <c>-36.5</c>,
-    ///     because the sign is carried by the degrees alone and the minutes are added rather than
-    ///     subtracted. Southern and western coordinates written in this form do not round-trip.
+    ///     <para>
+    ///     The sign may be written either way round — as a <c>-</c> on the degrees or as a trailing
+    ///     <c>S</c> or <c>W</c> — and either one puts the result below zero. Only the degrees field may
+    ///     carry a sign of its own: <c>12°-30'0.00"</c> is rejected rather than quietly subtracted,
+    ///     because a signed minute in a coordinate that already has a hemisphere means nothing.
+    ///     </para>
+    ///     <para>
+    ///     The hemisphere is read off the <i>text</i>, before anything is parsed, and it has to be:
+    ///     <c>-0</c> parses to a decimal for which <see cref="Math.Sign(decimal)"/> is <c>0</c> and
+    ///     <c>&lt; 0</c> is <see langword="false"/>, so by the time there is a number to test, the
+    ///     hemisphere of <c>-0°30'0.00"</c> has already been lost.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="degreesMinutesSeconds"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="degreesMinutesSeconds"/> is an empty string.</exception>
@@ -139,41 +136,63 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     public static decimal ConvertDegreesMinutesSecondsToDecimal(string degreesMinutesSeconds)
     {
         ArgumentException.ThrowIfNullOrEmpty(degreesMinutesSeconds);
-        if (!degreesMinutesSeconds.Contains('°', StringComparison.Ordinal))
+        int degreesDelimiter = degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal);
+        int minutesDelimiter = degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal);
+        int secondsDelimiter = degreesMinutesSeconds.IndexOf('"', StringComparison.Ordinal);
+        if (degreesDelimiter < 0)
         {
             throw new FormatException($"The supplied degrees, minutes, seconds of {degreesMinutesSeconds} does not contain a ° degrees delimiter.");
         }
-        else if (!degreesMinutesSeconds.Contains('\'', StringComparison.Ordinal))
+        else if (minutesDelimiter < 0)
         {
             throw new FormatException($"The supplied degrees, minutes, seconds of {degreesMinutesSeconds} does not contain a ' minutes delimiter.");
         }
-        else if (!degreesMinutesSeconds.Contains('"', StringComparison.Ordinal))
+        else if (secondsDelimiter < 0)
         {
             throw new FormatException($"The supplied degrees, minutes, seconds of {degreesMinutesSeconds} does not contain a \\\" seconds delimiter.");
         }
-        string degreesValue = degreesMinutesSeconds[..degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal)];
-        string minutesValue = degreesMinutesSeconds[(degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal) + 1)..degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal)];
-        string secondsValue = degreesMinutesSeconds[(degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal) + 1)..degreesMinutesSeconds.IndexOf('"', StringComparison.Ordinal)];
+        string degreesValue = degreesMinutesSeconds[..degreesDelimiter].Trim();
+        string minutesValue = degreesMinutesSeconds[(degreesDelimiter + 1)..minutesDelimiter].Trim();
+        string secondsValue = degreesMinutesSeconds[(minutesDelimiter + 1)..secondsDelimiter].Trim();
+        string hemisphere = degreesMinutesSeconds[(secondsDelimiter + 1)..].Trim();
 
-        degreesValue = degreesValue.Trim();
-        minutesValue = minutesValue.Trim();
-        secondsValue = secondsValue.Replace("N", string.Empty, StringComparison.Ordinal).Replace("S", string.Empty, StringComparison.Ordinal).Replace("E", string.Empty, StringComparison.Ordinal).Replace("W", string.Empty, StringComparison.Ordinal);
-        secondsValue = secondsValue.Trim();
+        // The letter belongs after the closing delimiter, but writers put it inside the seconds field
+        // often enough that the previous implementation tried to strip it from there.
+        if (hemisphere.Length == 0 && secondsValue.Length > 0 && IsHemisphere(secondsValue[^1]))
+        {
+            hemisphere = secondsValue[^1..];
+            secondsValue = secondsValue[..^1].Trim();
+        }
+
+        bool isSouthOrWest = degreesValue.StartsWith('-')
+            || hemisphere.Equals("S", StringComparison.OrdinalIgnoreCase)
+            || hemisphere.Equals("W", StringComparison.OrdinalIgnoreCase);
 
         if (!decimal.TryParse(degreesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal degrees))
         {
             throw new FormatException($"The supplied degrees of {degreesValue} does not represent an integer.");
         }
-        if (!decimal.TryParse(minutesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal minutes))
+        if (!decimal.TryParse(minutesValue, NumberStyles.None, NumberFormatInfo.InvariantInfo, out decimal minutes))
         {
-            throw new FormatException($"The supplied minutes of {minutesValue} does not represent an integer.");
+            throw new FormatException($"The supplied minutes of {minutesValue} does not represent an unsigned integer.");
         }
-        if (!decimal.TryParse(secondsValue, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal seconds))
+        if (!decimal.TryParse(secondsValue, NumberStyles.AllowDecimalPoint, NumberFormatInfo.InvariantInfo, out decimal seconds))
         {
-            throw new FormatException($"The supplied seconds of {secondsValue} does not represent a floating point number.");
+            throw new FormatException($"The supplied seconds of {secondsValue} does not represent an unsigned floating point number.");
         }
-        return degrees + minutes / 60 + seconds / 3600;
+
+        decimal magnitude = Math.Abs(degrees) + (minutes / 60) + (seconds / 3600);
+
+        return isSouthOrWest ? -magnitude : magnitude;
     }
+
+    /// <summary>
+    /// Determines whether a character names one of the four hemispheres.
+    /// </summary>
+    /// <param name="value">The character to test.</param>
+    /// <returns><see langword="true"/> if the character is <c>N</c>, <c>S</c>, <c>E</c> or <c>W</c> in either case; otherwise, <see langword="false"/>.</returns>
+    private static bool IsHemisphere(char value) =>
+        value is 'N' or 'S' or 'E' or 'W' or 'n' or 's' or 'e' or 'w';
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 

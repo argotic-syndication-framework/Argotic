@@ -124,11 +124,21 @@ public class ReviseAndRepublishAFeed
         original.HasExtensions.ShouldBeTrue("the sample is meant to carry extensions");
         int originalExtensionCount = original.Extensions.Count;
 
+        // The expectation used to be originalExtensionCount alone, which is read from the same loader
+        // under test: a load that recovered one extension of many, followed by a save that preserved
+        // that one, passed. The literal pins what the sample actually carries.
+        originalExtensionCount.ShouldBe(14, "the sample item declares fourteen recognised extensions");
+
         RssItem republished = SaveAndReload(feed).Channel.Items[0];
 
         republished.Extensions.Count.ShouldBe(
             originalExtensionCount,
             "republishing lost extension data that the load had recovered");
+
+        // A count alone cannot tell a preserved extension from an emptied one, so one value is followed
+        // through the republication as well.
+        republished.Extensions.OfType<SiteSummarySlashSyndicationExtension>().Single().Context.Comments
+            .ShouldBe(original.Extensions.OfType<SiteSummarySlashSyndicationExtension>().Single().Context.Comments);
     }
 
     /// <summary>

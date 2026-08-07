@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Common;
@@ -14,11 +15,20 @@ namespace Argotic.Extensions.Tests.Functionality.Common;
 ///         not, so the substitution itself is proved here rather than relying on incidental coverage.
 ///     </para>
 ///     <para>
-///         Each case asserts that <c>SelectSingleNode(xpath, manager)</c> and
-///         <c>SelectChildren(localName, namespaceUri)</c> agree - both on which node is returned and
-///         on returning nothing at all - across the cases that distinguish them: an absent element,
-///         several matching siblings, a namespaced element addressed by prefix, an element in the
-///         wrong namespace, and a document carrying a default namespace.
+///         The <c>*_Agrees</c> / <c>*_BothSelectNothing</c> cases are an <i>oracle</i>: they assert that
+///         <c>SelectSingleNode(xpath, manager)</c> and the child axis agree - both on which node is
+///         returned and on returning nothing at all - across the cases that distinguish them. They
+///         exercise <c>System.Xml.XPath</c> and no Argotic code, because
+///         <c>XPathNavigatorExtensions</c> is <see langword="internal"/> by design and this project
+///         deliberately has no <c>InternalsVisibleTo</c>. They record <i>why</i> the substitution is
+///         sound; they cannot detect a regression in it.
+///     </para>
+///     <para>
+///         The <c>TheParsePath_*</c> cases below are the ones that can. They drive the same
+///         distinguishing document shapes through <see cref="SyndicationResourceMetadata"/>, a public
+///         type whose format detection is built from those very
+///         <c>SelectChildElement</c> calls - so a substitution that started matching where the
+///         expression did not turns them red.
 ///     </para>
 /// </remarks>
 [TestClass]
@@ -154,4 +164,66 @@ public class XPathChildSelectionEquivalenceTests
     public void PrefixedName_ElementBoundByDifferentPrefixSameNamespace_Agrees() =>
         // The namespace, not the prefix, is what matches - both forms must ignore the spelling.
         AssertAgree($"""<r xmlns:q="{Ns}"><q:title>a</q:title></r>""", "p:title", "title", Ns);
+
+    /// <summary>
+    /// Builds the metadata for a document, which is what drives the parse path's child selection.
+    /// </summary>
+    /// <param name="xml">The document to inspect.</param>
+    /// <returns>The metadata the library derives from it.</returns>
+    private static SyndicationResourceMetadata MetadataFor(string xml) =>
+        new(new XPathDocument(new StringReader(xml)).CreateNavigator());
+
+    /// <summary>
+    /// The base case through product code: an unprefixed <c>rss</c> in no namespace is recognised.
+    /// </summary>
+    [TestMethod]
+    public void TheParsePath_UnprefixedNameInNoNamespace_IsRecognised() =>
+        MetadataFor("""<rss version="2.0"><channel /></rss>""")
+            .Format.ShouldBe(SyndicationContentFormat.Rss);
+
+    /// <summary>
+    /// A document whose root carries a <i>default namespace</i> is not recognised by the unprefixed
+    /// lookup — the case where a naive substitution diverges from the expression it replaced.
+    /// </summary>
+    /// <remarks>
+    ///     XPath 1.0 does not apply a default namespace to an unprefixed name, so
+    ///     <c>SelectSingleNode("rss", manager)</c> never matched this document either. A replacement
+    ///     that consulted the resolver, or that matched on local name alone, would start recognising it
+    ///     — silently changing which format every such document is parsed as.
+    /// </remarks>
+    [TestMethod]
+    public void TheParsePath_UnprefixedNameAgainstADefaultNamespace_IsNotRecognised() =>
+        MetadataFor($"""<rss xmlns="{Ns}" version="2.0"><channel /></rss>""")
+            .Format.ShouldBe(SyndicationContentFormat.None);
+
+    /// <summary>
+    /// The same element bound to a prefix in a foreign namespace is not recognised either.
+    /// </summary>
+    [TestMethod]
+    public void TheParsePath_UnprefixedNameAgainstANamespacedElement_IsNotRecognised() =>
+        MetadataFor($"""<x:rss xmlns:x="{Ns}" version="2.0"><x:channel /></x:rss>""")
+            .Format.ShouldBe(SyndicationContentFormat.None);
+
+    /// <summary>
+    /// A prefixed lookup matches on the namespace the prefix resolves to, not on how the document spells
+    /// it: an RSS 1.0 document writing <c>q:RDF</c> is recognised though the resolver binds <c>rdf</c>.
+    /// </summary>
+    [TestMethod]
+    public void TheParsePath_PrefixedNameSpeltWithADifferentPrefix_IsStillRecognised() =>
+        MetadataFor(
+            """
+            <q:RDF xmlns:q="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/">
+              <channel />
+            </q:RDF>
+            """)
+            .Format.ShouldBe(SyndicationContentFormat.Rss);
+
+    /// <summary>
+    /// The right local name in no namespace at all is not reached by the prefixed lookup, which is the
+    /// inverse of the case above.
+    /// </summary>
+    [TestMethod]
+    public void TheParsePath_PrefixedNameAgainstAnElementInNoNamespace_IsNotRecognised() =>
+        MetadataFor("<RDF><channel /></RDF>")
+            .Format.ShouldBe(SyndicationContentFormat.None);
 }

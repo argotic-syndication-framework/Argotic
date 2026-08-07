@@ -44,10 +44,21 @@ public sealed class LoadSettingsContentLengthTests
     /// <summary>
     /// <c>Unbounded</c> is accepted, and is how a caller asks for the old behaviour back.
     /// </summary>
+    /// <remarks>
+    ///     The <c>Unbounded</c> row on its own restated the constant's own definition —
+    ///     <c>Unbounded</c> <i>is</i> <see cref="long.MaxValue"/> — so it could not distinguish a working
+    ///     setter from a broken one. The row that carries the test is <c>1</c>: it is the smallest legal
+    ///     cap, so it fails against a guard written as <c>&lt;= 1024</c> or any other floor above zero,
+    ///     which <c>AZeroOrNegativeCap_IsRejected</c> above cannot detect.
+    /// </remarks>
+    /// <param name="cap">A cap the setter must accept.</param>
     [TestMethod]
-    public void TheUnboundedValue_IsAccepted()
-        => new SyndicationResourceLoadSettings { MaxResponseContentLength = SyndicationResourceLoadSettings.Unbounded }
-            .MaxResponseContentLength.ShouldBe(long.MaxValue);
+    [DataRow(1L)]
+    [DataRow(1024L)]
+    [DataRow(long.MaxValue)]
+    public void TheUnboundedValue_IsAccepted(long cap)
+        => new SyndicationResourceLoadSettings { MaxResponseContentLength = cap }
+            .MaxResponseContentLength.ShouldBe(cap);
 
     /// <summary>
     /// Two settings differing only in their cap are not equal.

@@ -1405,8 +1405,14 @@ public class SyndicationEncodingUtilityTest
     }
 
     /// <summary>
-    /// The reader requires a whole document, not a fragment.
+    /// The reader requires a whole document, not a fragment: two sibling roots are rejected.
     /// </summary>
+    /// <remarks>
+    ///     The assertion used to be <c>settings.ConformanceLevel.ShouldBe(ConformanceLevel.Document)</c>,
+    ///     read straight back off the object the factory returned. <c>Document</c> is also
+    ///     <see cref="XmlReaderSettings"/>'s own default, so that passed against a factory whose whole
+    ///     body was <c>return new XmlReaderSettings();</c>. What the setting buys is asserted instead.
+    /// </remarks>
     [TestMethod]
     public void CreateSafeXmlReaderSettings_SetsDocumentConformanceLevel()
     {
@@ -1415,6 +1421,14 @@ public class SyndicationEncodingUtilityTest
 
         // Assert
         settings.ConformanceLevel.ShouldBe(System.Xml.ConformanceLevel.Document);
+
+        using XmlReader reader = XmlReader.Create(new StringReader("<a/><b/>"), settings);
+        Should.Throw<XmlException>(() =>
+        {
+            while (reader.Read())
+            {
+            }
+        });
     }
 
     #endregion

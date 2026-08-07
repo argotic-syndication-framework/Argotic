@@ -279,8 +279,13 @@ public class ConditionalGetResultTests
 
         result.Dispose();
 
-        // Calling Dispose again should not throw (idempotent)
-        result.Dispose();
+        // The method had no Should* call on any path, so the only failure it could express was an
+        // unhandled throw — a ConditionalGetResult that leaked the response entirely passed it. The
+        // response is observed instead: disposal must have reached the content it owns.
+        Should.Throw<ObjectDisposedException>(() => response.Content.ReadAsStringAsync(TestContext.CancellationToken));
+
+        // And a second call is a no-op rather than a throw.
+        Should.NotThrow(result.Dispose);
     }
 
     /// <summary>

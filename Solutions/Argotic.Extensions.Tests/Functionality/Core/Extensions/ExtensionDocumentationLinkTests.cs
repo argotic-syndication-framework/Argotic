@@ -92,6 +92,20 @@ public sealed class ExtensionDocumentationLinkTests
             .Select(type => (SyndicationExtension)Activator.CreateInstance(type)!);
 
     /// <summary>
+    /// Gets how many extensions the two sweeps below must actually visit.
+    /// </summary>
+    /// <remarks>
+    ///     Read off the pinned table's own <see cref="DataRowAttribute"/> list rather than written as a
+    ///     literal, so adding an extension updates it in the same edit that adds its row — while a
+    ///     reflection scan that returned nothing still fails, because the table cannot be empty.
+    /// </remarks>
+    private static int ExpectedExtensionCount =>
+        typeof(ExtensionDocumentationLinkTests)
+            .GetMethod(nameof(EveryFrameworkExtension_PinsItsXmlNamespaceAndItsDocumentationLink))!
+            .GetCustomAttributes<DataRowAttribute>()
+            .Count();
+
+    /// <summary>
     /// Every shipped extension declares exactly this prefix, this namespace and this documentation link.
     /// </summary>
     /// <remarks>
@@ -181,9 +195,15 @@ public sealed class ExtensionDocumentationLinkTests
     public void EveryFrameworkExtensionDocumentation_IsAnAbsoluteHttpsUrl()
     {
         // Arrange & Act
-        IEnumerable<SyndicationExtension> extensions = FrameworkExtensions;
+        IReadOnlyList<SyndicationExtension> extensions = [.. FrameworkExtensions];
 
         // Assert
+        // The floor is what stops the sweep self-reporting success over nothing. FrameworkExtensions is
+        // a reflection scan; make the extensions internal, give the base class a required constructor
+        // parameter, or have trimming drop them, and it yields an empty sequence that satisfies every
+        // assertion in the loop below without executing one of them.
+        extensions.Count.ShouldBe(ExpectedExtensionCount, "the reflection scan found nothing to sweep");
+
         foreach (SyndicationExtension extension in extensions)
         {
             extension.Documentation.ShouldNotBeNull($"{extension.GetType().Name} has no documentation link.");
@@ -205,9 +225,11 @@ public sealed class ExtensionDocumentationLinkTests
     public void NoFrameworkExtensionDocumentation_PointsAtAHostThatStoppedServingIt()
     {
         // Arrange & Act
-        IEnumerable<SyndicationExtension> extensions = FrameworkExtensions;
+        IReadOnlyList<SyndicationExtension> extensions = [.. FrameworkExtensions];
 
         // Assert
+        extensions.Count.ShouldBe(ExpectedExtensionCount, "the reflection scan found nothing to sweep");
+
         foreach (SyndicationExtension extension in extensions)
         {
             extension.Documentation.ShouldNotBeNull();
@@ -259,5 +281,63 @@ public sealed class ExtensionDocumentationLinkTests
 
         // Assert
         recognised.ShouldBeTrue($"{extension.GetType().Name} no longer matches the namespace real feeds declare.");
+    }
+
+    /// <summary>
+    /// Extensions that emit an element even when nothing has been set on them.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     Every other shipped extension guards each write, so attaching a default-constructed one to an
+    ///     item adds nothing to the document. These four do not: they emit an empty element carrying only
+    ///     the namespace declaration. That is characterised rather than asserted-away because it is
+    ///     observable in published output — an <c>&lt;trackback:ping/&gt;</c> with no URL, or an
+    ///     <c>&lt;re:rank/&gt;</c> with no value, is what a consumer receives.
+    ///     </para>
+    ///     <para>
+    ///     <c>AtomMemberResources</c> is a deliberate member of the list: an Atom Publishing collection is
+    ///     required to carry a title, so it writes an empty one rather than an absent one.
+    ///     </para>
+    /// </remarks>
+    private static readonly string[] ExtensionsThatWriteWhenEmpty =
+    [
+        nameof(AtomMemberResources),
+        nameof(FeedRankSyndicationExtension),
+        nameof(SitemapNewsExtension),
+        nameof(TrackbackSyndicationExtension),
+    ];
+
+    /// <summary>
+    /// A default-constructed extension writes no elements, except for the four that are pinned as writing
+    /// one anyway.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     This replaces the assertion that twenty-one per-family <c>*ConstructorTest</c> methods were
+    ///     making, which was <c>new X().ShouldNotBeNull()</c> followed by
+    ///     <c>ShouldBeOfType&lt;X&gt;()</c> on a variable already statically typed <c>X</c> — two
+    ///     compiler guarantees, neither able to fail for any implementation.
+    ///     </para>
+    ///     <para>
+    ///     What a parameterless extension constructor actually determines is whether the context it
+    ///     allocates is empty enough that writing it contributes nothing, and that is a property a
+    ///     regression can break in both directions: a new unguarded write moves a type into the
+    ///     offending list, and a guard added to one of the four moves it out.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void ADefaultConstructedExtension_WritesNothingUnlessItIsOneOfTheFourThatDo()
+    {
+        // Arrange & Act
+        IReadOnlyList<SyndicationExtension> extensions = [.. FrameworkExtensions];
+        extensions.Count.ShouldBe(ExpectedExtensionCount, "the reflection scan found nothing to sweep");
+
+        List<string> wrote = [.. extensions
+            .Where(extension => !string.IsNullOrWhiteSpace(extension.ToString()))
+            .Select(extension => extension.GetType().Name)
+            .OrderBy(name => name, StringComparer.Ordinal)];
+
+        // Assert
+        wrote.ShouldBe(ExtensionsThatWriteWhenEmpty.OrderBy(name => name, StringComparer.Ordinal));
     }
 }

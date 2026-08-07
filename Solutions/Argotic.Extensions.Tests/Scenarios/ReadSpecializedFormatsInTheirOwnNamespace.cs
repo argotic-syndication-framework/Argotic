@@ -134,11 +134,11 @@ public class ReadSpecializedFormatsInTheirOwnNamespace
         using XmlReader reader = XmlReader.Create(new StringReader(Xml));
         document.Load(reader);
 
-        document.Title?.Content.ShouldBe("Namespaced Blog");
+        document.Title.ShouldNotBeNull().Content.ShouldBe("Namespaced Blog");
         document.RootUrl.ShouldBe(new Uri("http://example.com/blog"));
         document.Authors.Count.ShouldBe(1);
         document.Categories.Count.ShouldBe(1);
         document.Posts.Count.ShouldBe(1);
-        document.Posts[0].Title?.Content.ShouldBe("First post");
+        document.Posts[0].Title.ShouldNotBeNull().Content.ShouldBe("First post");
     }
 }

@@ -126,8 +126,11 @@ public class ReadExtensionsFromBothFormats
         DublinCoreElementSetSyndicationExtension rssDc =
             item.Extensions.OfType<DublinCoreElementSetSyndicationExtension>().Single();
 
+        // Each cross-format comparison is anchored to the literal the fixture declares. Without the
+        // anchor, two adapters that both dropped the element agree on null and the assertion passes.
         atomDc.Context.Creator.ShouldBe("A Creator");
         atomDc.Context.Creator.ShouldBe(rssDc.Context.Creator);
+        atomDc.Context.Subject.ShouldBe("A Subject");
         atomDc.Context.Subject.ShouldBe(rssDc.Context.Subject);
 
         BasicGeocodingSyndicationExtension atomGeo =
@@ -137,6 +140,7 @@ public class ReadExtensionsFromBothFormats
 
         atomGeo.Context.Latitude.ShouldBe(51.5074m);
         atomGeo.Context.Latitude.ShouldBe(rssGeo.Context.Latitude);
+        atomGeo.Context.Longitude.ShouldBe(-0.1278m);
         atomGeo.Context.Longitude.ShouldBe(rssGeo.Context.Longitude);
     }
 

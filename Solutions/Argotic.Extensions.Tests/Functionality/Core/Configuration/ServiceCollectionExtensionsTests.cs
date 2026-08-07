@@ -31,8 +31,12 @@ public class ServiceCollectionExtensionsTests
         ServiceProvider provider = services.BuildServiceProvider();
 
         // Assert
+        // GetRequiredService is contractually non-null and throws when unregistered, so
+        // client.ShouldNotBeNull() could not fail. What registration is actually supposed to have done
+        // is bind the default options onto the client, so that is what is asserted.
         XmlRpcClient client = provider.GetRequiredService<XmlRpcClient>();
-        client.ShouldNotBeNull();
+        client.Timeout.ShouldBe(TimeSpan.FromSeconds(15));
+        provider.GetRequiredService<IOptions<XmlRpcClientOptions>>().Value.Timeout.ShouldBe(TimeSpan.FromSeconds(15));
     }
 
     /// <summary>
@@ -49,8 +53,12 @@ public class ServiceCollectionExtensionsTests
         ServiceProvider provider = services.BuildServiceProvider();
 
         // Assert
+        // GetRequiredService is contractually non-null and throws when unregistered, so
+        // client.ShouldNotBeNull() could not fail. What registration is actually supposed to have done
+        // is bind the default options onto the client, so that is what is asserted.
         XmlRpcClient client = provider.GetRequiredService<XmlRpcClient>();
-        client.ShouldNotBeNull();
+        client.Timeout.ShouldBe(TimeSpan.FromSeconds(15));
+        provider.GetRequiredService<IOptions<XmlRpcClientOptions>>().Value.Timeout.ShouldBe(TimeSpan.FromSeconds(15));
     }
 
     /// <summary>
@@ -167,8 +175,12 @@ public class ServiceCollectionExtensionsTests
         ServiceProvider provider = services.BuildServiceProvider();
 
         // Assert
+        // GetRequiredService is contractually non-null and throws when unregistered, so
+        // client.ShouldNotBeNull() could not fail. What registration is actually supposed to have done
+        // is bind the default options onto the client, so that is what is asserted.
         TrackbackClient client = provider.GetRequiredService<TrackbackClient>();
-        client.ShouldNotBeNull();
+        client.Timeout.ShouldBe(TimeSpan.FromSeconds(15));
+        provider.GetRequiredService<IOptions<TrackbackClientOptions>>().Value.Timeout.ShouldBe(TimeSpan.FromSeconds(15));
     }
 
     /// <summary>
@@ -185,8 +197,12 @@ public class ServiceCollectionExtensionsTests
         ServiceProvider provider = services.BuildServiceProvider();
 
         // Assert
+        // GetRequiredService is contractually non-null and throws when unregistered, so
+        // client.ShouldNotBeNull() could not fail. What registration is actually supposed to have done
+        // is bind the default options onto the client, so that is what is asserted.
         TrackbackClient client = provider.GetRequiredService<TrackbackClient>();
-        client.ShouldNotBeNull();
+        client.Timeout.ShouldBe(TimeSpan.FromSeconds(15));
+        provider.GetRequiredService<IOptions<TrackbackClientOptions>>().Value.Timeout.ShouldBe(TimeSpan.FromSeconds(15));
     }
 
     /// <summary>

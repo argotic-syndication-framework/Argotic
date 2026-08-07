@@ -20,19 +20,22 @@ public class SiteSummaryUpdateSyndicationExtensionTest
                                      + "<sy:updateFrequency>2</sy:updateFrequency>"
                                      + "<sy:updateBase>2010-08-01T00:00:00Z</sy:updateBase>";
 
-    public TestContext? TestContext { get; set; }
-
     /// <summary>
-    /// The parameterless constructor yields an instance of the syndication-module extension type.
+    /// The three elements as the library writes them. This is not <see cref="StrExtXml"/>:
+    /// <c>SyndicationDateTimeUtility.ToRfc3339DateTime</c> formats with <c>.ff</c>, so the write path
+    /// emits <c>2010-08-01T00:00:00.00Z</c> where the load fixture declares <c>2010-08-01T00:00:00Z</c>.
+    /// Both are RFC 3339 and denote the same instant.
     /// </summary>
-    [TestMethod]
-    public void SiteSummaryUpdateSyndicationExtensionConstructorTest()
-    {
-        SiteSummaryUpdateSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<SiteSummaryUpdateSyndicationExtension>();
-    }
+    private const string StrExtXmlWritten = "<sy:updatePeriod>hourly</sy:updatePeriod>"
+                                            + "<sy:updateFrequency>2</sy:updateFrequency>"
+                                            + "<sy:updateBase>2010-08-01T00:00:00.00Z</sy:updateBase>";
 
+    private readonly string toStringText =
+        "<updatePeriod xmlns=\"http://purl.org/rss/1.0/modules/syndication/\">hourly</updatePeriod>" + Environment.NewLine +
+        "<updateFrequency xmlns=\"http://purl.org/rss/1.0/modules/syndication/\">2</updateFrequency>" + Environment.NewLine +
+        "<updateBase xmlns=\"http://purl.org/rss/1.0/modules/syndication/\">2010-08-01T00:00:00.00Z</updateBase>";
+
+    public TestContext? TestContext { get; set; }
     /// <summary>
     /// Two extensions holding identical context compare equal.
     /// </summary>
@@ -103,15 +106,20 @@ public class SiteSummaryUpdateSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Attaching the extension to an item and saving the feed produces non-empty XML.
+    /// Attaching the extension to an item and saving the feed emits <c>sy:updatePeriod</c>,
+    /// <c>sy:updateFrequency</c> and <c>sy:updateBase</c> inside the item, in that order.
     /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>ShouldNotBeNullOrEmpty</c>, which the surrounding RSS feed
+    ///     satisfies on its own: an extension that wrote nothing at all still passed it.
+    /// </remarks>
     [TestMethod]
     public void SiteSummaryUpdateCreateXmlTest()
     {
         SiteSummaryUpdateSyndicationExtension ext = CreateExtension1();
 
         string actual = ExtensionTestUtil.AddExtensionToXml(ext);
-        actual.ShouldNotBeNullOrEmpty();
+        actual.ShouldBe(ExtensionTestUtil.GetWrappedXml(Namespc, StrExtXmlWritten));
     }
 
     /// <summary>
@@ -157,18 +165,20 @@ public class SiteSummaryUpdateSyndicationExtensionTest
     }
 
     /// <summary>
-    /// <c>ToString</c> returns a non-empty rendering of a populated extension.
+    /// <c>ToString</c> renders the period, frequency and base, each bound to the syndication-module
+    /// namespace, with the base in the <c>.ff</c>-precision RFC 3339 spelling the library writes.
     /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateToStringTest()
     {
         SiteSummaryUpdateSyndicationExtension target = CreateExtension1();
         string actual = target.ToString();
-        actual.ShouldNotBeNullOrEmpty();
+        actual.ShouldBe(this.toStringText);
     }
 
     /// <summary>
-    /// <c>WriteTo</c> produces non-empty XML for a populated extension; the text itself is not asserted.
+    /// Writing to a non-indenting fragment <c>XmlWriter</c> emits the same three elements as
+    /// <c>ToString</c>, without the line breaks between them.
     /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateWriteToTest()
@@ -179,7 +189,7 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
-        output.ShouldNotBeNullOrEmpty();
+        output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(this.toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
     /// <summary>

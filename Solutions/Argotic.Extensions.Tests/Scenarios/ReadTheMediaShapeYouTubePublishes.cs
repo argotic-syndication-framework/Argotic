@@ -94,7 +94,7 @@ public sealed class ReadTheMediaShapeYouTubePublishes
 
         YahooMediaGroup group = context.Groups.ShouldHaveSingleItem();
 
-        group.Title?.Content.ShouldBe("A Video");
+        group.Title.ShouldNotBeNull().Content.ShouldBe("A Video");
         group.Contents.Count.ShouldBe(1);
 
         YahooMediaThumbnail thumbnail = group.Thumbnails.ShouldHaveSingleItem();

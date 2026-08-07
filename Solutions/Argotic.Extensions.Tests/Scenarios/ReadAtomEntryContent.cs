@@ -96,7 +96,7 @@ public class ReadAtomEntryContent
 
         entry.Content.ShouldNotBeNull();
         entry.Content.BaseUri.ShouldBe(new Uri("http://example.com/"));
-        entry.Content.Language?.Name.ShouldBe("en-GB");
+        entry.Content.Language.ShouldNotBeNull().Name.ShouldBe("en-GB");
     }
 
     /// <summary>

@@ -24,19 +24,6 @@ public class FeedSynchronizationSyndicationExtensionTest
     public TestContext? TestContext { get; set; }
 
     #region Constructor Tests
-
-    /// <summary>The parameterless constructor yields a usable instance of the FeedSync extension.</summary>
-    [TestMethod]
-    public void FeedSynchronizationSyndicationExtensionConstructorTest()
-    {
-        // Arrange & Act
-        FeedSynchronizationSyndicationExtension target = new();
-
-        // Assert
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<FeedSynchronizationSyndicationExtension>();
-    }
-
     /// <summary>A newly constructed extension declares the <c>sx</c> XML prefix.</summary>
     [TestMethod]
     public void FeedSynchronizationSyndicationExtension_Constructor_SetsCorrectXmlPrefix()
@@ -621,7 +608,16 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldContain("by=\"endpoint-1\"", Case.Sensitive);
     }
 
-    /// <summary>Writing an extension carrying sharing information to a fragment <see cref="XmlWriter"/> completes without throwing.</summary>
+    /// <summary>
+    /// Writing an extension carrying sharing information to a fragment <see cref="XmlWriter"/> emits one
+    /// <c>sharing</c> element in the FeedSync namespace, carrying <c>since</c>, <c>until</c> and an
+    /// <c>expires</c> in the <c>.ff</c>-precision RFC 3339 spelling the library writes.
+    /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>output.ShouldNotBeNull()</c> on the result of
+    ///     <c>StringWriter.ToString()</c>, which is non-null for every possible implementation of
+    ///     <c>WriteTo</c> — including one that writes nothing.
+    /// </remarks>
     [TestMethod]
     public void FeedSynchronizationWriteToTest()
     {
@@ -636,7 +632,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         string output = sw.ToString();
 
         // Assert
-        output.ShouldNotBeNull();
+        output.ShouldBe("""<sharing since="2010-01-01" until="2010-12-31" expires="2011-01-01T00:00:00.00Z" xmlns="http://feedsync.org/2007/feedsync" />""");
     }
 
     /// <summary>Writing to a <see langword="null"/> writer throws <see cref="ArgumentNullException"/>.</summary>

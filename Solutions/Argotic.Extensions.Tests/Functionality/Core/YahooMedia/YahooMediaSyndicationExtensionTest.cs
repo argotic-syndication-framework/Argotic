@@ -21,21 +21,6 @@ public class YahooMediaSyndicationExtensionTest
     public TestContext? TestContext { get; set; }
 
     #region Basic Extension Tests
-
-    /// <summary>
-    /// The parameterless constructor yields a usable Yahoo Media extension instance.
-    /// </summary>
-    [TestMethod]
-    public void YahooMediaSyndicationExtensionConstructorTest()
-    {
-        // Arrange & Act
-        YahooMediaSyndicationExtension target = new();
-
-        // Assert
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<YahooMediaSyndicationExtension>();
-    }
-
     /// <summary>
     /// The <c>MatchByType</c> predicate accepts a Yahoo Media extension seen through <c>ISyndicationExtension</c>.
     /// </summary>
@@ -1511,11 +1496,15 @@ public class YahooMediaSyndicationExtensionTest
         RssItem item = feed.Channel.Items.Single();
 
         // Act
-        YahooMediaSyndicationExtension? extension = item.FindExtension(YahooMediaSyndicationExtension.MatchByType) as YahooMediaSyndicationExtension;
+        ISyndicationExtension? found = item.FindExtension(YahooMediaSyndicationExtension.MatchByType);
 
         // Assert
-        extension.ShouldNotBeNull();
-        extension.ShouldBeOfType<YahooMediaSyndicationExtension>();
+        // The `as` cast this line replaces made the type assertion below unreachable: a non-matching
+        // extension arrived as null and tripped ShouldNotBeNull instead, so the type was never checked.
+        YahooMediaSyndicationExtension extension = found.ShouldBeOfType<YahooMediaSyndicationExtension>();
+        YahooMediaContent content = extension.Context.Contents.ShouldHaveSingleItem();
+        content.Url.ShouldBe(new Uri("http://example.com/video.mp4"));
+        content.ContentType.ShouldBe("video/mp4");
     }
 
     /// <summary>
@@ -2023,38 +2012,6 @@ public class YahooMediaSyndicationExtensionTest
 
         // Assert
         result.ShouldBe(YahooMediaHashAlgorithm.MD5);
-    }
-
-    /// <summary>
-    /// Hashing a stream under <c>MD5</c> produces a non-empty digest.
-    /// </summary>
-    [TestMethod]
-    public void YahooMediaHash_GenerateHash_ComputesMD5Hash()
-    {
-        // Arrange
-        using var stream = new MemoryStream("test content"u8.ToArray());
-
-        // Act
-        string result = YahooMediaHash.GenerateHash(stream, YahooMediaHashAlgorithm.MD5);
-
-        // Assert
-        result.ShouldNotBeNullOrEmpty();
-    }
-
-    /// <summary>
-    /// Hashing a stream under <c>Sha1</c> produces a non-empty digest.
-    /// </summary>
-    [TestMethod]
-    public void YahooMediaHash_GenerateHash_ComputesSha1Hash()
-    {
-        // Arrange
-        using var stream = new MemoryStream("test content"u8.ToArray());
-
-        // Act
-        string result = YahooMediaHash.GenerateHash(stream, YahooMediaHashAlgorithm.Sha1);
-
-        // Assert
-        result.ShouldNotBeNullOrEmpty();
     }
 
     /// <summary>

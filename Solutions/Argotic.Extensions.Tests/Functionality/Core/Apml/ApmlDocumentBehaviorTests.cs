@@ -845,7 +845,7 @@ public class ApmlDocumentBehaviorTests
         XDocument xml = XDocument.Load(stream);
         xml.Root.ShouldNotBeNull();
         xml.Root.Name.LocalName.ShouldBe("APML");
-        xml.Root.Attribute("version")?.Value.ShouldBe("0.6");
+        xml.Root.Attribute("version").ShouldNotBeNull().Value.ShouldBe("0.6");
     }
 
     /// <summary>

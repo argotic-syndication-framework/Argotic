@@ -20,6 +20,12 @@ public class SitemapImageTests
     /// <summary>
     /// An image can be constructed with no location, ready to be filled in by a load or by the setter.
     /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>image.ShouldNotBeNull()</c>, which a <c>new</c> expression on a
+    ///     class satisfies for every possible implementation. What distinguishes this constructor from the
+    ///     guarded one below it is that it leaves <c>Location</c> unset, and that the setter will then
+    ///     take a value the constructor would have rejected.
+    /// </remarks>
     [TestMethod]
     public void SitemapImage_DefaultConstructor_CreatesInstance()
     {
@@ -27,7 +33,11 @@ public class SitemapImageTests
         SitemapImage image = new();
 
         // Assert
-        image.ShouldNotBeNull();
+        image.Location.ShouldBeNull();
+
+        Uri location = new("https://example.com/image.jpg");
+        image.Location = location;
+        image.Location.ShouldBe(location);
     }
 
     /// <summary>

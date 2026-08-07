@@ -120,7 +120,13 @@ public sealed class ReadTheEarthquakeShapeUsgsPublishes
     [TestMethod]
     public void TheEarthquakes_AreOffTheWestCoastOfNorthAmerica()
     {
-        foreach (AtomEntry entry in LoadAtom(UsgsAtom).Entries)
+        AtomFeed feed = LoadAtom(UsgsAtom);
+
+        // Without the count, an empty Entries - which is the symptom of the parse regression this test
+        // exists to catch - executes the loop zero times and reports success.
+        feed.Entries.Count.ShouldBe(2);
+
+        foreach (AtomEntry entry in feed.Entries)
         {
             GeoRssPosition point = GeographyOf(entry).Point!.Value;
 
@@ -140,9 +146,11 @@ public sealed class ReadTheEarthquakeShapeUsgsPublishes
     [TestMethod]
     public void DepthBelowTheSurface_IsANegativeElevationAndNotAnError()
     {
-        LoadAtom(UsgsAtom).Entries
-            .Select(e => GeographyOf(e).Elevation)
-            .ShouldAllBe(elevation => elevation < 0m);
+        decimal?[] elevations = [.. LoadAtom(UsgsAtom).Entries.Select(e => GeographyOf(e).Elevation)];
+
+        // ShouldAllBe passes vacuously over an empty sequence, so the count carries the test.
+        elevations.Length.ShouldBe(2);
+        elevations.ShouldAllBe(elevation => elevation < 0m);
     }
 
     /// <summary>

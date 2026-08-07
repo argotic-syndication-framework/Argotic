@@ -90,7 +90,8 @@ public sealed class LoadAResourceOverHttp : IDisposable
         OpmlDocument document = await OpmlDocument.CreateAsync(
             Source, this.Client(FeedTestData.MinimalOpml), cancellationToken: TestContext.CancellationTokenSource.Token);
 
-        document.Head.ShouldNotBeNull();
+        document.Head.Title.ShouldBe("Test OPML");
+        document.Outlines.ShouldHaveSingleItem().Text.ShouldBe("Test Outline");
     }
 
     /// <summary>
@@ -129,7 +130,8 @@ public sealed class LoadAResourceOverHttp : IDisposable
         ApmlDocument document = await ApmlDocument.CreateAsync(
             Source, this.Client(SampleFeeds.ReadAllText(SampleFeeds.ApmlDocument)), cancellationToken: TestContext.CancellationTokenSource.Token);
 
-        document.Head.ShouldNotBeNull();
+        document.Head.Title.ShouldNotBeNullOrEmpty();
+        document.Profiles.ShouldNotBeEmpty();
     }
 
     /// <summary>

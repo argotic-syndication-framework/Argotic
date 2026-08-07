@@ -368,7 +368,7 @@ public class ExtensionDiscoveryBehaviorTests
 
         // Assert
         extension.ShouldNotBeNull();
-        extension.ShouldBeOfType<ITunesSyndicationExtension>();
+        extension.Context.Author.ShouldBe("Test Author");
     }
 
     /// <summary>
@@ -414,8 +414,7 @@ public class ExtensionDiscoveryBehaviorTests
         ISyndicationExtension? extension = item.FindExtension(ITunesSyndicationExtension.MatchByType);
 
         // Assert
-        extension.ShouldNotBeNull();
-        extension.ShouldBeOfType<ITunesSyndicationExtension>();
+        extension.ShouldBeOfType<ITunesSyndicationExtension>().Context.Author.ShouldBe("Test Author");
     }
 
     /// <summary>
@@ -439,8 +438,7 @@ public class ExtensionDiscoveryBehaviorTests
             ext.XmlNamespace == "http://purl.org/dc/elements/1.1/");
 
         // Assert
-        extension.ShouldNotBeNull();
-        extension.ShouldBeOfType<DublinCoreElementSetSyndicationExtension>();
+        extension.ShouldBeOfType<DublinCoreElementSetSyndicationExtension>().Context.Creator.ShouldBe("Test Creator");
     }
 
     /// <summary>

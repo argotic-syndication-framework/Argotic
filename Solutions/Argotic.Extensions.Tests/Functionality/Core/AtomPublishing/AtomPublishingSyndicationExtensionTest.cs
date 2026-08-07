@@ -36,21 +36,6 @@ public class AtomPublishingSyndicationExtensionTest
     public TestContext? TestContext { get; set; }
 
     #region Constructor Tests
-
-    /// <summary>
-    /// The parameterless constructor yields an instance of the edited extension type.
-    /// </summary>
-    [TestMethod]
-    public void Constructor_Default_ShouldCreateValidInstance()
-    {
-        // Arrange & Act
-        AtomPublishingEditedSyndicationExtension target = new();
-
-        // Assert
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<AtomPublishingEditedSyndicationExtension>();
-    }
-
     /// <summary>
     /// A new extension declares the Atom Publishing namespace <c>http://www.w3.org/2007/app</c>.
     /// </summary>
@@ -364,8 +349,8 @@ public class AtomPublishingSyndicationExtensionTest
         ISyndicationExtension? foundExtension = item.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType);
 
         // Assert
-        foundExtension.ShouldNotBeNull();
-        foundExtension.ShouldBeOfType<AtomPublishingEditedSyndicationExtension>();
+        foundExtension.ShouldBeOfType<AtomPublishingEditedSyndicationExtension>()
+            .Context.EditedOn.ShouldBe(testEditedDate);
     }
 
     /// <summary>

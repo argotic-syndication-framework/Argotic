@@ -22,19 +22,23 @@ public class SiteSummarySlashSyndicationExtensionTest
                                      + "<slash:department><![CDATA[Software]]></slash:department>"
                                      + "<slash:hit_parade>100,200,300</slash:hit_parade>";
 
-    public TestContext? TestContext { get; set; }
-
     /// <summary>
-    /// The parameterless constructor yields an instance of the slash-module extension type.
+    /// The same four elements in the order <c>WriteTo</c> emits them, which is not the order
+    /// <see cref="StrExtXml"/> declares: the context writes <c>section</c> and <c>department</c> before
+    /// <c>comments</c>, and <c>hit_parade</c> last.
     /// </summary>
-    [TestMethod]
-    public void SiteSummarySlashSyndicationExtensionConstructorTest()
-    {
-        SiteSummarySlashSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<SiteSummarySlashSyndicationExtension>();
-    }
+    private const string StrExtXmlWritten = "<slash:section><![CDATA[Technology]]></slash:section>"
+                                            + "<slash:department><![CDATA[Software]]></slash:department>"
+                                            + "<slash:comments>42</slash:comments>"
+                                            + "<slash:hit_parade>100,200,300</slash:hit_parade>";
 
+    private readonly string toStringText =
+        "<section xmlns=\"http://purl.org/rss/1.0/modules/slash/\"><![CDATA[Technology]]></section>" + Environment.NewLine +
+        "<department xmlns=\"http://purl.org/rss/1.0/modules/slash/\"><![CDATA[Software]]></department>" + Environment.NewLine +
+        "<comments xmlns=\"http://purl.org/rss/1.0/modules/slash/\">42</comments>" + Environment.NewLine +
+        "<hit_parade xmlns=\"http://purl.org/rss/1.0/modules/slash/\">100,200,300</hit_parade>";
+
+    public TestContext? TestContext { get; set; }
     /// <summary>
     /// Two extensions holding identical context compare equal.
     /// </summary>
@@ -106,14 +110,19 @@ public class SiteSummarySlashSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Attaching the extension to an item and saving the feed produces non-empty XML.
+    /// Attaching the extension to an item and saving the feed emits all four slash elements inside the
+    /// item, in the order the context writes them, against the <c>slash</c> prefix the feed declares.
     /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>ShouldNotBeNullOrEmpty</c>, which the surrounding RSS feed
+    ///     satisfies on its own: an extension that wrote nothing at all still passed it.
+    /// </remarks>
     [TestMethod]
     public void SiteSummarySlashCreateXmlTest()
     {
         SiteSummarySlashSyndicationExtension ext = CreateExtension1();
         string actual = ExtensionTestUtil.AddExtensionToXml(ext);
-        actual.ShouldNotBeNullOrEmpty();
+        actual.ShouldBe(ExtensionTestUtil.GetWrappedXml(Namespc, StrExtXmlWritten));
     }
 
     /// <summary>
@@ -159,18 +168,20 @@ public class SiteSummarySlashSyndicationExtensionTest
     }
 
     /// <summary>
-    /// <c>ToString</c> returns a non-empty rendering of a populated extension.
+    /// <c>ToString</c> renders the four elements the context carries, each bound to the slash namespace,
+    /// with the two CDATA-wrapped ones written as CDATA rather than entity-escaped.
     /// </summary>
     [TestMethod]
     public void SiteSummarySlashToStringTest()
     {
         SiteSummarySlashSyndicationExtension target = CreateExtension1();
         string actual = target.ToString();
-        actual.ShouldNotBeNullOrEmpty();
+        actual.ShouldBe(this.toStringText);
     }
 
     /// <summary>
-    /// <c>WriteTo</c> produces non-empty XML for a populated extension; the text itself is not asserted.
+    /// Writing to a non-indenting fragment <c>XmlWriter</c> emits the same four elements as
+    /// <c>ToString</c>, without the line breaks between them.
     /// </summary>
     [TestMethod]
     public void SiteSummarySlashWriteToTest()
@@ -181,7 +192,7 @@ public class SiteSummarySlashSyndicationExtensionTest
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
-        output.ShouldNotBeNullOrEmpty();
+        output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(this.toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
     /// <summary>

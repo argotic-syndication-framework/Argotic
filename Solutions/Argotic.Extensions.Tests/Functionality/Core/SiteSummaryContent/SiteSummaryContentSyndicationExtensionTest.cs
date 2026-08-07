@@ -22,18 +22,6 @@ public class SiteSummaryContentSyndicationExtensionTest
     private const string StrExtXml = "<content:encoded><![CDATA[<p>Test encoded content</p>]]></content:encoded>";
 
     public TestContext? TestContext { get; set; }
-
-    /// <summary>
-    /// The parameterless constructor yields an instance of the content-module extension type.
-    /// </summary>
-    [TestMethod]
-    public void SiteSummaryContentSyndicationExtensionConstructorTest()
-    {
-        SiteSummaryContentSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<SiteSummaryContentSyndicationExtension>();
-    }
-
     /// <summary>
     /// Two extensions holding identical context compare equal.
     /// </summary>
@@ -98,14 +86,19 @@ public class SiteSummaryContentSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Attaching the extension to an item and saving the feed produces non-empty XML.
+    /// Attaching the extension to an item and saving the feed emits exactly one <c>content:encoded</c>
+    /// element inside the item, its markup wrapped in CDATA rather than entity-escaped.
     /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>ShouldNotBeNullOrEmpty</c>, which the surrounding RSS feed
+    ///     satisfies on its own: an extension that wrote nothing at all still passed it.
+    /// </remarks>
     [TestMethod]
     public void SiteSummaryContentCreateXmlTest()
     {
         SiteSummaryContentSyndicationExtension ext = CreateExtension1();
         string actual = ExtensionTestUtil.AddExtensionToXml(ext);
-        actual.ShouldNotBeNullOrEmpty();
+        actual.ShouldBe(ExtensionTestUtil.GetWrappedXml(Namespc, StrExtXml));
     }
 
     /// <summary>
@@ -150,14 +143,15 @@ public class SiteSummaryContentSyndicationExtensionTest
     }
 
     /// <summary>
-    /// <c>ToString</c> returns a non-empty rendering of a populated extension.
+    /// <c>ToString</c> renders the single <c>encoded</c> element bound to the content-module namespace,
+    /// with the markup in CDATA — the same text <c>WriteTo</c> produces.
     /// </summary>
     [TestMethod]
     public void SiteSummaryContentToStringTest()
     {
         SiteSummaryContentSyndicationExtension target = CreateExtension1();
         string actual = target.ToString();
-        actual.ShouldNotBeNullOrEmpty();
+        actual.ShouldBe(this.toStringText);
     }
 
     /// <summary>

@@ -382,6 +382,10 @@ public class SitemapIndexTests
         {
             locs.Current!.Value.ShouldBe(sitemapUrls[index++]);
         }
+
+        // The count above is over //sm:sitemap, not over the loc elements the loop walks, so it does
+        // not stop this loop being vacuous.
+        index.ShouldBe(3);
     }
 
     #endregion
@@ -456,6 +460,9 @@ public class SitemapIndexTests
         }
 
         // Assert
+        // Relative guard: two empty lists pass it and the loop runs zero times. FullSitemapIndex
+        // declares exactly three <sitemap> entries.
+        originalSitemaps.Count.ShouldBe(3);
         newSitemaps.Count.ShouldBe(originalSitemaps.Count);
         for (int i = 0; i < originalSitemaps.Count; i++)
         {
@@ -521,6 +528,11 @@ public class SitemapIndexTests
         XPathNodeIterator locs = navigator.Select("//sm:sitemap/sm:loc", manager);
 
         // Assert
+        // Every assertion in this test lives inside the loop and there was no count anywhere, so a
+        // regression in CreateNamespaceManager's prefix binding — the one Argotic call the test makes —
+        // empties the iterator and turns the test green.
+        locs.Count.ShouldBe(3);
+
         while (locs.MoveNext())
         {
             string url = locs.Current!.Value;

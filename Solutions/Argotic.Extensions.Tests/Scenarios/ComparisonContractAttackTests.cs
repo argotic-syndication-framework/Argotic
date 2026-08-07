@@ -119,6 +119,14 @@ public class ComparisonContractAttackTests
         Report("member-misses", misses);
         Report("member-collisions", collisions);
 
+        // Without this floor the sweep reports success having probed nothing: every member reaching
+        // `if (!probed) continue;` leaves `misses` empty, and ShouldBeEmpty is satisfied. The measured
+        // figure is 490 probed members; 300 leaves room for the object model to move without letting a
+        // collapse of the mutation generator pass.
+        matrix.Count.ShouldBeGreaterThanOrEqualTo(
+            300,
+            $"only {matrix.Count} members were probed, so an empty `misses` says nothing");
+
         misses.ShouldBeEmpty($"{misses.Count} members are hashed but not compared:\n{string.Join("\n", misses.Take(40))}");
     }
 
@@ -421,6 +429,13 @@ public class ComparisonContractAttackTests
         findings.Add($"randomised sweep: 2000 sorts, {throwCount} threw. {firstThrow ?? string.Empty}");
         Report("xmlrpc", findings);
 
+        // Roughly eighty lines above this point — six hand-built sorts and a 2,000-iteration randomised
+        // sweep — routed every result through SortOutcome, which catches InvalidOperationException and
+        // returns a string. That string was appended to the report and never asserted, so none of it
+        // could fail. An IComparer inconsistency surfacing as a throw is the shipping crash this file is
+        // named for, so it is the verdict, not a note.
+        throwCount.ShouldBe(0, $"a sort threw during the randomised sweep: {firstThrow}");
+
         // The verdict. Each pair is disjoint and equal-length — the exact shape the membership loop
         // could only answer "-1" to, in both directions.
         Math.Sign(leftArray.CompareTo(rightArray)).ShouldBe(-Math.Sign(rightArray.CompareTo(leftArray)));
@@ -613,5 +628,21 @@ public class ComparisonContractAttackTests
 
         Report("documentation", findings);
         extensionTypes.Count.ShouldBeGreaterThan(20);
+
+        // The property the method name claims, and the attack it is actually mounting. Documentation is
+        // folded into every extension's hash and comparison, and these two extensions deliberately cite
+        // the same specification — so if Documentation were the discriminator, they would collide.
+        control.Documentation.ShouldBe(edited.Documentation, "both halves of Atom Publishing cite RFC 5023");
+        control.Equals(edited).ShouldBeFalse("sharing a documentation link must not make two extension types equal");
+        control.GetHashCode().ShouldNotBe(edited.GetHashCode());
+
+        // And every shipped extension arrives carrying one, so no member of the family is compared or
+        // hashed against a null.
+        foreach (Type type in extensionTypes)
+        {
+            SyndicationExtension extension = (SyndicationExtension)Activator.CreateInstance(type)!;
+            extension.Documentation.ShouldNotBeNull($"{type.Name} carries no documentation link");
+            extension.Documentation!.IsAbsoluteUri.ShouldBeTrue($"{type.Name} carries a relative documentation link");
+        }
     }
 }

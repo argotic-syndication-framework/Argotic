@@ -749,6 +749,10 @@ public class SitemapTests
         }
 
         // Assert
+        // The guard below is relative, so two empty lists satisfy it and the loop then runs zero times:
+        // a select that matched nothing round-tripped nothing and reported success. FullSitemap
+        // declares exactly three <url> elements.
+        originalUrls.Count.ShouldBe(3);
         newUrls.Count.ShouldBe(originalUrls.Count);
         for (int i = 0; i < originalUrls.Count; i++)
         {

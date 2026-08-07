@@ -100,18 +100,26 @@ public class Rfc822TimeZoneTests
     ///     it must not silently produce a wrong instant.
     /// </remarks>
     /// <param name="zone">A zone name the table does not translate.</param>
+    /// <param name="expectedToParse">Whether the fall-through is expected to accept this spelling.</param>
     [TestMethod]
-    [DataRow("UTC")]
-    [DataRow("BST")]
-    [DataRow("NZDT")]
-    public void ADateInAnUnnamedZone_DoesNotProduceAMistranslatedInstant(string zone)
+    [DataRow("UTC", true)]
+    [DataRow("BST", false)]
+    [DataRow("NZDT", false)]
+    public void ADateInAnUnnamedZone_DoesNotProduceAMistranslatedInstant(string zone, bool expectedToParse)
     {
         string value = $"Sun, 01 Aug 2010 12:00:00 {zone}";
 
-        if (SyndicationDateTimeUtility.TryParseRfc822DateTime(value, out DateTime parsed))
+        bool parsedOk = SyndicationDateTimeUtility.TryParseRfc822DateTime(value, out DateTime parsed);
+
+        // The outcome used to be accepted either way, so the test could not detect a change in which
+        // branch was taken. That mattered concretely: the product was fixed so that a " UTC" suffix
+        // parses, and reverting that fix would have moved this row silently into the else arm.
+        parsedOk.ShouldBe(expectedToParse, $"'{value}'");
+
+        if (expectedToParse)
         {
-            // If it parses at all, it must land on the stated wall-clock time; the table must not have
-            // applied an offset belonging to some other zone.
+            // It must land on the stated wall-clock time; the table must not have applied an offset
+            // belonging to some other zone.
             parsed.ToUniversalTime().Hour.ShouldBe(12, $"'{value}' parsed to a shifted instant");
         }
         else

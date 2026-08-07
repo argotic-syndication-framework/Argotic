@@ -27,19 +27,17 @@ public class LiveJournalSyndicationExtensionTest
                                      + "<lj:security type=\"public\" />"
                                      + "<lj:preformatted />";
 
-    public TestContext? TestContext { get; set; }
-
     /// <summary>
-    /// The parameterless constructor yields an instance of the LiveJournal extension type.
+    /// The same four elements as the library writes them. This is not <see cref="StrExtXml"/>, which the
+    /// load test parses: the write path wraps the music and mood text in CDATA, so the two literals
+    /// differ in how the text is escaped, not in what it is.
     /// </summary>
-    [TestMethod]
-    public void LiveJournalSyndicationExtensionConstructorTest()
-    {
-        LiveJournalSyndicationExtension target = new();
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<LiveJournalSyndicationExtension>();
-    }
+    private const string StrExtXmlWritten = "<lj:music><![CDATA[Test Music Track]]></lj:music>"
+                                            + "<lj:mood id=\"1\"><![CDATA[Happy]]></lj:mood>"
+                                            + "<lj:security type=\"public\" />"
+                                            + "<lj:preformatted />";
 
+    public TestContext? TestContext { get; set; }
     /// <summary>
     /// Two extensions holding identical context compare equal.
     /// </summary>
@@ -111,14 +109,20 @@ public class LiveJournalSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Attaching the extension to an item and saving the feed produces non-empty XML.
+    /// Attaching the extension to an item and saving the feed emits <c>lj:music</c>, <c>lj:mood</c> with
+    /// its <c>id</c>, <c>lj:security</c> with its <c>type</c>, and an empty <c>lj:preformatted</c>,
+    /// inside the item.
     /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>ShouldNotBeNullOrEmpty</c>, which the surrounding RSS feed
+    ///     satisfies on its own: an extension that wrote nothing at all still passed it.
+    /// </remarks>
     [TestMethod]
     public void LiveJournalCreateXmlTest()
     {
         LiveJournalSyndicationExtension ext = CreateExtension1();
         string actual = ExtensionTestUtil.AddExtensionToXml(ext);
-        actual.ShouldNotBeNullOrEmpty();
+        actual.ShouldBe(ExtensionTestUtil.GetWrappedXml(Namespc, StrExtXmlWritten));
     }
 
     /// <summary>
@@ -165,14 +169,14 @@ public class LiveJournalSyndicationExtensionTest
     }
 
     /// <summary>
-    /// <c>ToString</c> returns a non-empty rendering of a populated extension.
+    /// <c>ToString</c> renders the same four namespaced elements <c>WriteTo</c> emits, one per line.
     /// </summary>
     [TestMethod]
     public void LiveJournalToStringTest()
     {
         LiveJournalSyndicationExtension target = CreateExtension1();
         string actual = target.ToString();
-        actual.ShouldNotBeNullOrEmpty();
+        actual.ShouldBe(this.toStringText);
     }
 
     /// <summary>

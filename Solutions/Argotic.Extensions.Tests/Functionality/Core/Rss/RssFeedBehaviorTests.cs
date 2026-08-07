@@ -3,6 +3,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Argotic.Common;
+using Argotic.Extensions.Core;
 using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Syndication;
 using Shouldly;
@@ -44,7 +45,7 @@ public class RssFeedBehaviorTests
         XDocument xml = XDocument.Load(stream);
         xml.Root.ShouldNotBeNull();
         xml.Root.Name.LocalName.ShouldBe("rss");
-        xml.Root.Attribute("version")?.Value.ShouldBe("2.0");
+        xml.Root.Attribute("version").ShouldNotBeNull().Value.ShouldBe("2.0");
     }
 
     /// <summary>
@@ -848,7 +849,8 @@ public class RssFeedBehaviorTests
             ext.XmlNamespace == "http://purl.org/dc/elements/1.1/");
 
         // Assert
-        dublinCoreExtension.ShouldNotBeNull();
+        dublinCoreExtension.ShouldBeOfType<DublinCoreElementSetSyndicationExtension>()
+            .Context.Creator.ShouldBe("Test Author");
     }
 
     /// <summary>

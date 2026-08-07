@@ -174,7 +174,10 @@ public class PublishSitemap
         read.Urls[0].Location.ShouldBe(new Uri("https://example.com/"));
         read.Urls[0].ChangeFrequency.ShouldBe(SitemapChangeFrequency.Monthly);
         read.Urls[0].Priority.ShouldBe(1.0m);
-        read.Urls[0].LastModified.ShouldNotBeNull();
+
+        // ShouldNotBeNull passed for a writer that emitted DateTime.Now, which is the regression a
+        // lastmod round trip exists to catch.
+        read.Urls[0].LastModified.ShouldBe(new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc));
     }
 
     private static Sitemap BuildSitemap()

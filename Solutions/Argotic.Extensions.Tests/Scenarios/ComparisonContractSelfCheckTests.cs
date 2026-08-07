@@ -145,6 +145,12 @@ public class ComparisonContractSelfCheckTests
                 $"List<BothOperandsAreLesser>(60).Sort() on a known both-lesser comparer: {lesserOutcome}",
             ]);
 
-        outcome.ShouldNotBeNullOrEmpty();
+        // The premise ComparisonContractAttackTests reads its own sort results against: on this runtime
+        // List<T>.Sort does NOT detect an inconsistent comparer, so "the sort did not throw" is not
+        // evidence that the comparer is consistent. Asserting the recorded outcome is what makes that
+        // premise able to fail; the previous ShouldNotBeNullOrEmpty was true on both branches of both
+        // try/catch blocks above, so it could not.
+        outcome.ShouldBe("no throw");
+        lesserOutcome.ShouldBe("no throw");
     }
 }

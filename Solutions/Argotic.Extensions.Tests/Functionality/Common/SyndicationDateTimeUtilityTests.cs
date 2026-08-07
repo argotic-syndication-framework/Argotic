@@ -624,10 +624,14 @@ public class SyndicationDateTimeUtilityTests
 
         // Assert
         result.ShouldContain("2024-01-15T10:30:00");
-        // Local time should have a timezone offset (e.g., +05:00 or -08:00)
         result.ShouldNotEndWith("Z");
-        // Should contain either + or - for timezone offset
-        (result.Contains('+', StringComparison.Ordinal) || result.Contains('-', StringComparison.Ordinal)).ShouldBeTrue();
+
+        // The previous assertion was that the result contains a '+' or a '-'. The date written on the
+        // line above already contains two '-', so that disjunction was true for every possible output
+        // including one carrying no offset at all. The offset is asserted where it has to be, and in
+        // the shape RFC 3339 requires.
+        System.Text.RegularExpressions.Regex.IsMatch(result, @"[+-][0-9]{2}:[0-9]{2}$")
+            .ShouldBeTrue($"'{result}' does not end in a numeric UTC offset");
     }
 
     /// <summary>
@@ -1078,8 +1082,10 @@ public class SyndicationDateTimeUtilityTests
     /// on the previous day.
     /// </summary>
     /// <remarks>
-    ///     The assertion is guarded by the parse having succeeded, so this test records the behaviour
-    ///     rather than requiring it: it passes whether or not the offset is supported.
+    ///     The assertions used to sit inside <c>if (result)</c>, so the test passed whether or not the
+    ///     offset was supported — including against a parser that rejected every offset, which is the
+    ///     regression its name claims to guard. <c>+14:00</c> is a real civil offset (Kiribati's Line
+    ///     Islands) and RFC 3339 §4.2 permits it, so the outcome is required rather than recorded.
     /// </remarks>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithMaxTimezoneOffset_ParsesCorrectly()
@@ -1091,13 +1097,11 @@ public class SyndicationDateTimeUtilityTests
         bool result = SyndicationDateTimeUtility.TryParseRfc3339DateTime(input, out DateTime parsed);
 
         // Assert
-        // The implementation may or may not support +14:00, document actual behavior
-        if (result)
-        {
-            // 10:30 +14:00 = previous day 20:30 UTC
-            parsed.Day.ShouldBe(14);
-            parsed.Hour.ShouldBe(20);
-        }
+        result.ShouldBeTrue("+14:00 is the largest offset in civil use and RFC 3339 permits it");
+
+        // 10:30 +14:00 = previous day 20:30 UTC
+        parsed.ShouldBe(new DateTime(2024, 1, 14, 20, 30, 0, DateTimeKind.Utc));
+        parsed.Kind.ShouldBe(DateTimeKind.Utc);
     }
 
     #endregion

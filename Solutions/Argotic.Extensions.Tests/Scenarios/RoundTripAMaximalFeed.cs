@@ -42,7 +42,7 @@ public class RoundTripAMaximalFeed
         channel.Generator.ShouldBe("Argotic");
         channel.ManagingEditor.ShouldBe("editor@example.com");
         channel.Webmaster.ShouldBe("webmaster@example.com");
-        channel.Language?.Name.ShouldBe("en-GB");
+        channel.Language.ShouldNotBeNull().Name.ShouldBe("en-GB");
         channel.TimeToLive.ShouldBe(60);
         channel.SelfLink.ShouldBe(new Uri("http://example.com/feed.xml"));
 
@@ -108,15 +108,15 @@ public class RoundTripAMaximalFeed
     {
         AtomEntry entry = SaveAndReload(BuildMaximalAtomFeed()).Entries.Single();
 
-        entry.Title?.Content.ShouldBe("An entry");
-        entry.Summary?.Content.ShouldBe("An entry summary");
-        entry.Content?.Content.ShouldBe("An entry body");
+        entry.Title.ShouldNotBeNull().Content.ShouldBe("An entry");
+        entry.Summary.ShouldNotBeNull().Content.ShouldBe("An entry summary");
+        entry.Content.ShouldNotBeNull().Content.ShouldBe("An entry body");
 
         entry.Rights.ShouldNotBeNull();
         entry.Rights.Content.ShouldBe("Copyright 2024");
 
         entry.Source.ShouldNotBeNull();
-        entry.Source.Title?.Content.ShouldBe("The origin feed");
+        entry.Source.Title.ShouldNotBeNull().Content.ShouldBe("The origin feed");
 
         entry.Authors.Count.ShouldBe(1);
         entry.Authors[0].Name.ShouldBe("An Author");

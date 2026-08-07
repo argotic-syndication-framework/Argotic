@@ -150,8 +150,12 @@ public class ComparisonOperatorContractTests
     {
         ArgumentNullException.ThrowIfNull(verify);
 
-        typeName.ShouldNotBeNullOrEmpty();
-        verify();
+        // The assertion that used to stand here was `typeName.ShouldNotBeNullOrEmpty()`. `typeName` is
+        // typeof(T).Name from the registration table, so it is never null or empty and that assertion
+        // could not fail for any implementation. The name is worth carrying, but as the label on the
+        // failure rather than as its own assertion — a bare `verify()` reports which row failed only
+        // through the display name, which is absent from some runners' output.
+        Should.NotThrow(verify, $"{typeName} violates the comparison-operator contract");
     }
 
     /// <summary>

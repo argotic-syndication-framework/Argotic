@@ -62,7 +62,7 @@ public sealed class SendAndReceiveTrackbacks : IDisposable
 
         record.Method.ShouldBe(HttpMethod.Post);
         record.RequestUri.ShouldBe(Host);
-        record.ContentType?.MediaType.ShouldBe("application/x-www-form-urlencoded");
+        record.ContentType.ShouldNotBeNull().MediaType.ShouldBe("application/x-www-form-urlencoded");
         record.UserAgent.ShouldNotBeNullOrEmpty();
         record.UserAgent.ShouldStartWith("Argotic-Syndication-Framework/");
 

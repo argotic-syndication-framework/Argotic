@@ -21,6 +21,44 @@ public class ComparisonContractTests
     private static readonly string ReportDirectory =
         Environment.GetEnvironmentVariable("ARGOTIC_CONTRACT_REPORT_DIR") ?? Path.GetTempPath();
 
+    /// <summary>
+    /// The fewest types that must arrive with a population big enough to express a violation before a
+    /// clean sweep counts as evidence of anything.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         Every contract below ends in <c>violations.ShouldBeEmpty()</c>. That assertion is satisfied
+    ///         just as well by a sweep that compared nothing at all, and the sweep can silently arrive
+    ///         there: <c>ComparisonContractHarness.Population</c> returns an empty list whenever
+    ///         <c>TryCreateDefault</c> cannot find a constructor overload it can satisfy, and each loop
+    ///         then <c>continue</c>s. A change to the constructor signatures across the product — exactly
+    ///         the kind of change this modernisation makes — would empty every population at once and turn
+    ///         all five contracts green.
+    ///     </para>
+    ///     <para>
+    ///         The measured figures are 125 to 129 types per contract, of which 120 to 122 reach a
+    ///         population of three or more. The floor is set at 100 so that adding or retiring a handful
+    ///         of types does not trip it, while a collapse of the generator cannot pass.
+    ///     </para>
+    /// </remarks>
+    private const int MinimumTypesWithAUsablePopulation = 100;
+
+    /// <summary>
+    /// Asserts the sweep actually visited enough types, each with enough instances to express a violation.
+    /// </summary>
+    /// <param name="contract">The contract being swept, for the failure message.</param>
+    /// <param name="covered">The <c>type\tcount</c> lines the sweep recorded.</param>
+    private static void AssertTheSweepWasNotVacuous(string contract, List<string> covered)
+    {
+        int usable = covered.Count(line =>
+            int.TryParse(line.Split('\t')[1], out int size) && size >= 3);
+
+        usable.ShouldBeGreaterThanOrEqualTo(
+            MinimumTypesWithAUsablePopulation,
+            $"the {contract} sweep reached only {usable} types with a population of three or more, out of " +
+            $"{covered.Count} examined — an empty sweep satisfies ShouldBeEmpty without comparing anything");
+    }
+
     /// <summary>Records the population sizes so the report can state what was actually covered.</summary>
     private static void Report(string name, IEnumerable<string> lines)
     {
@@ -122,6 +160,7 @@ public class ComparisonContractTests
 
         Report("hash-population", covered);
         Report("hash-violations", violations);
+        AssertTheSweepWasNotVacuous("equal-hash", covered);
         violations.ShouldBeEmpty(
             $"{violations.Count} equal-but-unequal-hash violations over {covered.Count} types:\n" +
             string.Join("\n", violations.Take(40)));
@@ -174,6 +213,7 @@ public class ComparisonContractTests
 
         Report("antisymmetry-population", covered);
         Report("antisymmetry-violations", violations);
+        AssertTheSweepWasNotVacuous("antisymmetry", covered);
         violations.ShouldBeEmpty(
             $"{violations.Count} antisymmetry violations over {covered.Count} types:\n" +
             string.Join("\n", violations.Take(40)));
@@ -231,6 +271,7 @@ public class ComparisonContractTests
 
         Report("transitivity-population", covered);
         Report("transitivity-violations", violations);
+        AssertTheSweepWasNotVacuous("transitivity", covered);
         violations.ShouldBeEmpty(
             $"{violations.Count} transitivity violations over {covered.Count} types:\n" +
             string.Join("\n", violations.Take(20)));
@@ -290,6 +331,7 @@ public class ComparisonContractTests
 
         Report("reflexivity-population", covered);
         Report("reflexivity-violations", violations);
+        AssertTheSweepWasNotVacuous("reflexivity", covered);
         violations.ShouldBeEmpty(
             $"{violations.Count} reflexivity/null violations over {covered.Count} types:\n" +
             string.Join("\n", violations.Take(40)));
@@ -337,6 +379,7 @@ public class ComparisonContractTests
 
         Report("sort-population", covered);
         Report("sort-violations", violations);
+        AssertTheSweepWasNotVacuous("sort", covered);
         violations.ShouldBeEmpty(
             $"{violations.Count} sort failures over {covered.Count} types:\n" +
             string.Join("\n", violations.Take(40)));

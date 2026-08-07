@@ -33,21 +33,6 @@ public class SimpleListSyndicationExtensionTest
     public TestContext? TestContext { get; set; }
 
     #region Constructor Tests
-
-    /// <summary>
-    /// The parameterless constructor yields a usable Simple List extension instance.
-    /// </summary>
-    [TestMethod]
-    public void SimpleListSyndicationExtensionConstructorTest()
-    {
-        // Arrange & Act
-        SimpleListSyndicationExtension target = new();
-
-        // Assert
-        target.ShouldNotBeNull();
-        target.ShouldBeOfType<SimpleListSyndicationExtension>();
-    }
-
     /// <summary>
     /// The extension declares the XML prefix <c>cf</c>.
     /// </summary>
@@ -885,8 +870,15 @@ public class SimpleListSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Writing an extension to an XML fragment writer produces output; only its non-emptiness is asserted.
+    /// An extension whose context sets only <c>TreatAsList</c> writes exactly one <c>treatAs</c> element
+    /// holding the literal <c>list</c>, and no <c>listinfo</c> — the context suppresses that element when
+    /// both its collections are empty.
     /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>ShouldNotBeNullOrEmpty</c>. That is not reachable-by-regression:
+    ///     a writer emitting the wrong element name, the wrong namespace, or a spurious empty
+    ///     <c>listinfo</c> passed it unchanged.
+    /// </remarks>
     [TestMethod]
     public void SimpleListWriteToTest()
     {
@@ -901,7 +893,40 @@ public class SimpleListSyndicationExtensionTest
         string output = sw.ToString();
 
         // Assert
-        output.ShouldNotBeNullOrEmpty();
+        output.ShouldBe("<treatAs xmlns=\"http://www.microsoft.com/schemas/rss/core/2005\">list</treatAs>");
+    }
+
+    /// <summary>
+    /// An extension carrying a sort and a group writes the <c>treatAs</c> element followed by a
+    /// <c>listinfo</c> holding the sort before the group, each with its namespace, element, label and —
+    /// for the sort — its data type and default flag.
+    /// </summary>
+    /// <remarks>
+    ///     <see cref="SimpleListWriteToTest"/> exercises the branch where both collections are empty, so
+    ///     nothing in the suite reached the <c>listinfo</c> branch of <c>WriteTo</c> with an exact
+    ///     expectation: <c>SimpleListCreateXml_WithSortAndGroup_ContainsListInfo</c> asserts only that
+    ///     the three substrings appear somewhere in the whole feed.
+    /// </remarks>
+    [TestMethod]
+    public void SimpleListWriteTo_WithSortAndGroup_WritesListInfoHoldingBoth()
+    {
+        // Arrange
+        SimpleListSyndicationExtension target = CreateExtensionWithSortAndGroup();
+        using StringWriter sw = new();
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+
+        // Act
+        target.WriteTo(writer);
+        writer.Flush();
+        string output = sw.ToString();
+
+        // Assert
+        output.ShouldBe(
+            "<treatAs xmlns=\"http://www.microsoft.com/schemas/rss/core/2005\">list</treatAs>"
+            + "<listinfo xmlns=\"http://www.microsoft.com/schemas/rss/core/2005\">"
+            + "<sort ns=\"http://www.example.com/ns\" element=\"price\" label=\"Price\" data-type=\"number\" default=\"true\" />"
+            + "<group ns=\"http://www.example.com/ns\" element=\"category\" label=\"Category\" />"
+            + "</listinfo>");
     }
 
     /// <summary>

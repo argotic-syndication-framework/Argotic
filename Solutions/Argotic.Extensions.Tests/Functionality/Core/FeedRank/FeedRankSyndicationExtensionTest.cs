@@ -173,6 +173,28 @@ public class FeedRankSyndicationExtensionTest
     }
 
     /// <summary>
+    /// A rank that names no scheme and no domain writes neither attribute, rather than asserting an
+    /// empty one.
+    /// </summary>
+    /// <remarks>
+    ///     <c>scheme</c> used to be written unconditionally, so an unset one shipped as
+    ///     <c>scheme=""</c> — well-formed, and a same-document reference when read as a URI, which is
+    ///     an assertion the publisher never made. <c>Load</c> rejects an empty value, so it could not
+    ///     survive a round trip either. <c>domain</c> was already guarded and is pinned here beside it.
+    /// </remarks>
+    [TestMethod]
+    public void FeedRankOmitsTheSchemeAndDomainAttributesWhenNeitherWasSet()
+    {
+        FeedRankSyndicationExtension target = CreateExtensionWithoutSchemeOrDomain();
+
+        string actual = target.ToString();
+
+        actual.ShouldNotContain("scheme=", Case.Sensitive);
+        actual.ShouldNotContain("domain=", Case.Sensitive);
+        actual.ShouldContain(@"label=""Title""", Case.Sensitive);
+    }
+
+    /// <summary>
     /// <c>MatchByType</c> accepts an <c>ISyndicationExtension</c> that is a
     /// <c>FeedRankSyndicationExtension</c>.
     /// </summary>
@@ -306,6 +328,25 @@ public class FeedRankSyndicationExtensionTest
                 Domain = new Uri("http://example.com"),
                 Label = "Title",
                 Scheme = new Uri("http://example.com/scheme.txt"),
+                Value = 1.0m
+            }
+        };
+        return re;
+    }
+
+    /// <summary>
+    /// Builds a rank that names neither a scheme nor a domain — the shape a consumer gets by setting
+    /// only what it has, both properties being nullable and neither being written by the constructor
+    /// this uses.
+    /// </summary>
+    /// <returns>An extension carrying a label and a value and nothing else.</returns>
+    private static FeedRankSyndicationExtension CreateExtensionWithoutSchemeOrDomain()
+    {
+        FeedRankSyndicationExtension re = new()
+        {
+            Context =
+            {
+                Label = "Title",
                 Value = 1.0m
             }
         };

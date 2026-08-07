@@ -9,6 +9,11 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 public class FeedHistorySyndicationExtensionContext
 {
+    /// <summary>
+    /// The Atom 1.0 namespace, which is both where the <c>link</c> elements this type reads live and
+    /// the test for whether the host document already owns them.
+    /// </summary>
+    private const string AtomNamespace = "http://www.w3.org/2005/Atom";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedHistorySyndicationExtensionContext"/> class.
@@ -34,6 +39,29 @@ public class FeedHistorySyndicationExtensionContext
     /// Gets a collection of <see cref="FeedHistoryLinkRelation"/> objects that represent the relationships between feed documents.
     /// </summary>
     /// <value>The relations. The default value is an <i>empty</i> collection.</value>
+    /// <remarks>
+    ///     <para>
+    ///         <b>Populated on load only where the host document has no home of its own for an
+    ///         <c>atom:link</c>.</b> RFC 5005 defines no element for these links: §1 assigns meanings to
+    ///         relations on Atom's own <c>atom:link</c>, and Appendix B borrows <c>atom:link</c> into
+    ///         RSS 2.0 because RSS has nothing that can carry a relation at all. So which layer owns the
+    ///         element depends on the host, and the host decides it, not this type.
+    ///     </para>
+    ///     <para>
+    ///         In an <b>Atom</b> document the core model owns it. <see cref="System.Xml.XPath.XPathNavigator"/>-driven
+    ///         parsing fills <c>AtomFeed.Links</c> and <c>AtomEntry.Links</c> from every <c>atom:link</c>
+    ///         the document carries — with the <c>type</c>, <c>title</c>, <c>hreflang</c> and
+    ///         <c>length</c> that <see cref="FeedHistoryLinkRelation"/> does not model — and writes them
+    ///         back. <see cref="Load(System.Xml.XPath.XPathNavigator, System.Xml.XmlNamespaceManager)"/>
+    ///         therefore leaves them alone and this collection stays empty; read the paging links off
+    ///         <c>Links</c> instead. Harvesting them here as well gave the same element two writers, and
+    ///         the set doubled on every load-save cycle.
+    ///     </para>
+    ///     <para>
+    ///         Everywhere else — RSS above all — there is no core home, this extension is the only
+    ///         reader and the only writer, and the collection is filled as before.
+    ///     </para>
+    /// </remarks>
     public IList<FeedHistoryLinkRelation> Relations { get; } = [];
 
     /// <summary>
@@ -52,13 +80,12 @@ public class FeedHistorySyndicationExtensionContext
 
         if (string.IsNullOrEmpty(manager.LookupNamespace("atom")))
         {
-            manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
+            manager.AddNamespace("atom", AtomNamespace);
         }
         if (source.HasChildren)
         {
             XPathNavigator? archiveNavigator = source.SelectChildElement("fh", "archive", manager);
             XPathNavigator? completeNavigator = source.SelectChildElement("fh", "complete", manager);
-            XPathNodeIterator linkIterator = source.SelectChildElements("atom", "link", manager);
 
             if (archiveNavigator is not null)
             {
@@ -72,8 +99,15 @@ public class FeedHistorySyndicationExtensionContext
                 wasLoaded = true;
             }
 
-            if (linkIterator is { Count: > 0 })
+            // An Atom host already owns its atom:link elements: the core model parses every one of them
+            // into AtomFeed.Links or AtomEntry.Links, keeping the attributes FeedHistoryLinkRelation
+            // cannot model, and writes them back. Reading them here as well gave one element two
+            // writers and doubled the set on every load-save cycle. Outside Atom -- RSS above all, per
+            // RFC 5005 Appendix B -- nothing else reads or writes them, so this extension must.
+            if (!string.Equals(source.NamespaceURI, AtomNamespace, StringComparison.Ordinal))
             {
+                XPathNodeIterator linkIterator = source.SelectChildElements("atom", "link", manager);
+
                 while (linkIterator.MoveNext())
                 {
                     XPathNavigator? linkNode = linkIterator.Current;

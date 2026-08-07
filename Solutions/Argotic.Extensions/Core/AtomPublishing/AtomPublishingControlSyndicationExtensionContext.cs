@@ -164,10 +164,26 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <remarks>
+    ///     Writes nothing at all when nothing was set. RFC 5023 §13.1: "If the app:draft element is not
+    ///     present, then servers that support the extension MUST behave as though an app:draft element
+    ///     containing 'no' was sent" — so an <c>app:control</c> carrying no draft, no common attribute
+    ///     and no extension of its own asserts precisely what its absence asserts, and the RFC gives the
+    ///     empty element no meaning to preserve. It was also unrecoverable: the element was written
+    ///     unconditionally while <c>app:draft</c> was written only for a draft, and the empty result
+    ///     failed to load back, so a published entry emitted an <c>app:control</c> at the first save and
+    ///     lost it at the second.
+    /// </remarks>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
+
+        if (!this.IsDraft && this.BaseUri is null && this.Language is null && !this.HasExtensions)
+        {
+            return;
+        }
+
         writer.WriteStartElement("control", xmlNamespace);
         AtomPublishingUtility.WriteCommonObjectAttributes(this, writer);
 

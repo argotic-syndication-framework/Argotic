@@ -476,6 +476,97 @@ public class FeedHistorySyndicationExtensionTest
 
     #endregion
 
+    #region Link Ownership Tests
+
+    /// <summary>
+    /// In an Atom document the paging links land on <c>AtomFeed.Links</c> and nowhere else; the
+    /// extension carries the <c>fh:complete</c> flag and an empty relation collection.
+    /// </summary>
+    /// <remarks>
+    ///     RFC 5005 defines no element of its own for these links — §1 assigns meanings to relations on
+    ///     Atom's own <c>atom:link</c> — so in an Atom document the core model is the owner, and it is
+    ///     the richer one: <c>AtomLink</c> keeps the <c>type</c> asserted here, which
+    ///     <c>FeedHistoryLinkRelation</c> cannot model at all. Reading the same elements into both
+    ///     layers gave them two writers and doubled the set on every load-save cycle.
+    /// </remarks>
+    [TestMethod]
+    public void Load_AtomFeedWithPagingLinks_LeavesTheLinksToTheCoreModel()
+    {
+        // Arrange
+        string strXml = """
+            <?xml version="1.0" encoding="utf-8"?>
+            <feed xmlns="http://www.w3.org/2005/Atom" xmlns:fh="http://purl.org/syndication/history/1.0">
+              <title type="text">A paged feed</title>
+              <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+              <updated>2024-01-01T12:00:00Z</updated>
+              <fh:complete />
+              <link href="https://example.com/feed.atom?page=2" rel="next" type="application/atom+xml" />
+            </feed>
+            """;
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        AtomFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        AtomLink link = feed.Links.ShouldHaveSingleItem();
+        link.Relation.ShouldBe("next");
+        link.ContentType.ShouldBe("application/atom+xml");
+        link.Uri.ShouldBe(new Uri("https://example.com/feed.atom?page=2"));
+
+        FeedHistorySyndicationExtension extension = feed
+            .FindExtension(FeedHistorySyndicationExtension.MatchByType)
+            .ShouldBeOfType<FeedHistorySyndicationExtension>();
+        extension.Context.IsComplete.ShouldBeTrue();
+        extension.Context.Relations.ShouldBeEmpty();
+    }
+
+    /// <summary>
+    /// In an RSS 2.0 document the extension is the owner, because nothing in RSS can carry a relation
+    /// and nothing else reads or writes the borrowed <c>atom:link</c>.
+    /// </summary>
+    /// <remarks>
+    ///     This is the half that decides where the doubling fix belongs. RFC 5005 Appendix B carries the
+    ///     paging information in RSS as <c>atom:link</c> precisely because RSS has no equivalent, so a
+    ///     fix that stopped this extension writing links would make Atom settle by making RSS silently
+    ///     stop publishing its paging at all.
+    /// </remarks>
+    [TestMethod]
+    public void Load_RssChannelWithPagingLinks_KeepsTheLinksOnTheExtension()
+    {
+        // Arrange
+        string strXml = """
+            <?xml version="1.0" encoding="utf-8"?>
+            <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:fh="http://purl.org/syndication/history/1.0">
+              <channel>
+                <title>A paged channel</title>
+                <link>https://example.com/</link>
+                <description>Paged across several documents</description>
+                <fh:archive />
+                <atom:link href="https://example.com/feed.rss?page=1" rel="prev-archive" type="application/rss+xml" />
+              </channel>
+            </rss>
+            """;
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        FeedHistorySyndicationExtension extension = feed.Channel
+            .FindExtension(FeedHistorySyndicationExtension.MatchByType)
+            .ShouldBeOfType<FeedHistorySyndicationExtension>();
+        extension.Context.IsArchive.ShouldBeTrue();
+
+        FeedHistoryLinkRelation relation = extension.Context.Relations.ShouldHaveSingleItem();
+        relation.RelationType.ShouldBe(FeedHistoryLinkRelationType.PreviousArchive);
+        relation.Uri.ShouldBe(new Uri("https://example.com/feed.rss?page=1"));
+    }
+
+    #endregion
+
     #region MatchByType Tests
 
     /// <summary>The type predicate accepts a Feed History extension reached through <see cref="ISyndicationExtension"/>.</summary>

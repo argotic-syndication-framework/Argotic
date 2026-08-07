@@ -163,7 +163,15 @@ public class FeedRankSyndicationExtensionContext
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         writer.WriteStartElement("rank", xmlNamespace);
 
-        writer.WriteAttributeString("scheme", this.Scheme?.ToString() ?? string.Empty);
+        // An absent scheme is written as an absent attribute, not as scheme="". The empty string is a
+        // valid attribute value and a same-document reference as a URI, so it validates while asserting
+        // something the publisher never said -- and Load rejects it, so it could not survive a round
+        // trip either. This is the shape the AtomLink href="" fix established; domain below already had
+        // it.
+        if (this.Scheme is not null)
+        {
+            writer.WriteAttributeString("scheme", this.Scheme.ToString());
+        }
 
         if (this.Domain is not null)
         {

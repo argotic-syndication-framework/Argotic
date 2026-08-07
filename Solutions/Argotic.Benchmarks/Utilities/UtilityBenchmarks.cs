@@ -34,18 +34,9 @@ namespace Argotic.Benchmarks.Utilities;
     Justification = "BenchmarkDotNet discovers benchmark types by reflection over the assembly's public types and generates a separate runner assembly that calls into them; an internal benchmark class is silently not discovered. The rule's premise - that an application's types are not referenced from outside the assembly - does not hold here.")]
 public class UtilityBenchmarks
 {
-    private const string SampleUriText = "https://example.com/some/reasonably-long/article-path?query=1";
-
     private List<string> identical = [];
     private List<string> differsFirst = [];
     private List<string> reference = [];
-
-    // Held as instance fields rather than read from the const directly: a literal handed straight
-    // to the measured call can be folded or cached by the JIT, which would measure the optimiser
-    // instead of the hash. The Uri is likewise built once in setup so its construction cost does
-    // not land inside a benchmark that claims to measure hashing.
-    private string sampleUriText = string.Empty;
-    private Uri sampleUri = new(SampleUriText);
 
     /// <summary>
     /// Gets or sets the sequence length for the comparison benchmarks.
@@ -66,9 +57,6 @@ public class UtilityBenchmarks
         {
             this.differsFirst[0] = "zzz-differs-immediately";
         }
-
-        this.sampleUriText = new string(SampleUriText.AsSpan());
-        this.sampleUri = new Uri(SampleUriText);
     }
 
     /// <summary>
@@ -103,6 +91,14 @@ public class UtilityBenchmarks
     Justification = "BenchmarkDotNet discovers benchmark types by reflection over the assembly's public types and generates a separate runner assembly that calls into them; an internal benchmark class is silently not discovered.")]
 public class HashComponentBenchmarks
 {
+    // Held as instance fields rather than handed to the measured call as literals: a literal can be
+    // constant-folded or its hash cached, which would measure the optimiser instead of the hash. The
+    // Uri is built once at construction so that parsing it does not land inside a benchmark claiming
+    // to measure hashing.
+    //
+    // This reasoning arrived here with the fields it describes. It used to sit above two fields of
+    // UtilityBenchmarks that nothing ever read - the comment explained a technique the code below it
+    // did not perform, while the fields it actually applied to were in this type and undocumented.
     private readonly Uri sampleUri = new("http://www.example.com/feeds/all.atom.xml");
     private readonly string sampleUriText = "http://www.example.com/feeds/all.atom.xml";
 

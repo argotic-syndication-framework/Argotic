@@ -28,27 +28,18 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// Initializes a new instance of the <see cref="XmlRpcArrayValue"/> class using the supplied <see cref="XPathNodeIterator"/>.
     /// </summary>
     /// <param name="iterator">An iterator over the <c>&lt;value&gt;</c> nodes for the array. Nodes that will not parse are skipped silently, so a shorter <see cref="Values"/> than the iterator's <c>Count</c> is possible.</param>
+    /// <remarks>
+    ///     The array is taken to be at nesting depth zero, exactly as <see cref="Load(XPathNavigator)"/>
+    ///     takes its argument to be — an iterator arrives with no record of what enclosed it, so there is
+    ///     nothing else to assume. Its elements are therefore bounded by
+    ///     <see cref="XmlRpcClient.MaxValueNestingDepth"/> in the same way.
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="iterator"/> is <see langword="null"/>.</exception>
     public XmlRpcArrayValue(XPathNodeIterator iterator)
     {
         ArgumentNullException.ThrowIfNull(iterator);
 
-        if (iterator.Count > 0)
-        {
-            while (iterator.MoveNext())
-            {
-                XPathNavigator? iteratorNode = iterator.Current;
-                if (iteratorNode is null)
-                {
-                    continue;
-                }
-
-                if (XmlRpcClient.TryParseValue(iteratorNode, out IXmlRpcValue? value))
-                {
-                    this.Values.Add(value);
-                }
-            }
-        }
+        this.AddValues(iterator, 0);
     }
 
     /// <summary>
@@ -69,7 +60,20 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="XmlRpcArrayValue"/>.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
-    public bool Load(XPathNavigator source)
+    public bool Load(XPathNavigator source) => this.Load(source, 0);
+
+    /// <summary>
+    /// Loads this <see cref="XmlRpcArrayValue"/> using the supplied <see cref="XPathNavigator"/>, at a known nesting depth.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+    /// <param name="depth">How many composite values enclose this one. Zero at the outermost <c>value</c>.</param>
+    /// <returns><see langword="true"/> if the <see cref="XmlRpcArrayValue"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     The elements sit one level deeper than this array, which is what bounds the cycle back
+    ///     through <see cref="XmlRpcClient.MaxValueNestingDepth"/>.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    internal bool Load(XPathNavigator source, int depth)
     {
         bool wasLoaded = false;
 
@@ -83,21 +87,42 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
                 XPathNodeIterator valueIterator = dataNavigator.Select("value");
                 if (valueIterator is { Count: > 0 })
                 {
-                    while (valueIterator.MoveNext())
-                    {
-                        XPathNavigator? valueNode = valueIterator.Current;
-                        if (valueNode is null)
-                        {
-                            continue;
-                        }
-
-                        if (XmlRpcClient.TryParseValue(valueNode, out IXmlRpcValue? value))
-                        {
-                            this.Values.Add(value);
-                            wasLoaded = true;
-                        }
-                    }
+                    wasLoaded = this.AddValues(valueIterator, depth);
                 }
+            }
+        }
+
+        return wasLoaded;
+    }
+
+    /// <summary>
+    /// Adds every value the supplied iterator yields that parses, and reports whether any did.
+    /// </summary>
+    /// <param name="iterator">An iterator over the <c>value</c> elements of this array's <c>data</c>.</param>
+    /// <param name="depth">How many composite values enclose this array.</param>
+    /// <returns><see langword="true"/> if at least one element was added; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     Shared by <see cref="Load(XPathNavigator, int)"/> and the
+    ///     <see cref="XmlRpcArrayValue(XPathNodeIterator)"/> constructor so that the depth bound cannot
+    ///     be applied to one and forgotten on the other — which is exactly how the constructor came to
+    ///     be a second, unguarded door into the same recursion.
+    /// </remarks>
+    private bool AddValues(XPathNodeIterator iterator, int depth)
+    {
+        bool wasLoaded = false;
+
+        while (iterator.MoveNext())
+        {
+            XPathNavigator? valueNode = iterator.Current;
+            if (valueNode is null)
+            {
+                continue;
+            }
+
+            if (XmlRpcClient.TryParseValue(valueNode, depth + 1, out IXmlRpcValue? value))
+            {
+                this.Values.Add(value);
+                wasLoaded = true;
             }
         }
 

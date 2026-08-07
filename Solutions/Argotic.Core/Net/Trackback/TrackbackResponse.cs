@@ -36,11 +36,11 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// </summary>
     /// <param name="errorMessage">Information about the cause of the Trackback ping request failure.</param>
     /// <remarks>
-    ///     This constructor sets <see cref="ErrorMessage"/> but leaves <see cref="HasError"/> at
-    ///     <see langword="false"/>. That mismatch is invisible on the wire — <see cref="WriteTo"/>
-    ///     decides the <c>error</c> element from the message, not from the flag — but it is visible to a
-    ///     caller who inspects the object, so treat a non-empty <see cref="ErrorMessage"/> as the failure
-    ///     signal on an instance you constructed yourself.
+    ///     Sets <see cref="HasError"/> as well as <see cref="ErrorMessage"/>. It used to set only the
+    ///     message and leave the flag <see langword="false"/>, so an instance built to represent a
+    ///     rejection reported success to anyone who inspected it while <see cref="WriteTo"/> serialised
+    ///     it as a rejection — the object and its wire form disagreeing, and disagreeing in the
+    ///     <i>opposite</i> direction from the loaded path.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="errorMessage"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="errorMessage"/> is an empty string.</exception>
@@ -49,6 +49,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
         ArgumentException.ThrowIfNullOrEmpty(errorMessage);
 
         ErrorMessage = errorMessage;
+        HasError = true;
     }
 
     /// <summary>
@@ -122,12 +123,21 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// <summary>
     /// Gets a value indicating whether the Trackback ping request failed.
     /// </summary>
-    /// <value><see langword="true"/> if the response's <c>error</c> element held <c>1</c>; otherwise, <see langword="false"/>. The default value is <see langword="false"/>.</value>
+    /// <value><see langword="true"/> if the response's <c>error</c> element held <c>1</c>, or if the instance was constructed from an error message; otherwise, <see langword="false"/>. The default value is <see langword="false"/>.</value>
     /// <remarks>
+    ///     <para>
     ///     A response carrying neither <c>0</c> nor <c>1</c> — or no <c>error</c> element at all — leaves
     ///     this <see langword="false"/>, so an unparseable response is indistinguishable from success
     ///     here. <see cref="Load(XPathNavigator)"/> returning <see langword="false"/> is what separates
     ///     them.
+    ///     </para>
+    ///     <para>
+    ///     This is the failure signal, and <see cref="WriteTo(XmlWriter)"/> writes what it says. The
+    ///     legal state "rejected, with no explanation" is reachable only by loading one, because that is
+    ///     the only way it arises: a server sends it, and it now round-trips. There is deliberately no
+    ///     constructor for it — inventing one is an API decision that wants arguing on its own, not a
+    ///     side effect of making the two paths agree.
+    ///     </para>
     /// </remarks>
     public bool HasError { get; private set; }
 
@@ -180,10 +190,11 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
     /// <remarks>
-    ///     The <c>error</c> element is derived from <see cref="ErrorMessage"/>, not from
-    ///     <see cref="HasError"/>: a non-empty message writes <c>1</c> and the message, anything else
-    ///     writes <c>0</c> alone. A response loaded with <c>error</c> <c>1</c> and no <c>message</c>
-    ///     therefore writes back as a success.
+    ///     The <c>error</c> element states <see cref="HasError"/>, and <c>message</c> is written only
+    ///     when <see cref="ErrorMessage"/> is non-empty. It used to derive <c>error</c> from the
+    ///     message instead, so a response that had read <c>&lt;error&gt;1&lt;/error&gt;</c> from a
+    ///     server that did not explain itself — which the protocol permits and servers do — was written
+    ///     back as <c>&lt;error&gt;0&lt;/error&gt;</c>. A rejection round-tripped as an acceptance.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
@@ -192,14 +203,11 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
 
         writer.WriteStartElement("response");
 
+        writer.WriteElementString("error", this.HasError ? "1" : "0");
+
         if (!string.IsNullOrEmpty(this.ErrorMessage))
         {
-            writer.WriteElementString("error", "1");
             writer.WriteElementString("message", this.ErrorMessage);
-        }
-        else
-        {
-            writer.WriteElementString("error", "0");
         }
 
         writer.WriteEndElement();

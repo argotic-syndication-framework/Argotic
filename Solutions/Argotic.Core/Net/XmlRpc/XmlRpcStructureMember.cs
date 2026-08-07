@@ -79,7 +79,22 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="XmlRpcStructureMember"/>.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
-    public bool Load(XPathNavigator source)
+    public bool Load(XPathNavigator source) => this.Load(source, 0);
+
+    /// <summary>
+    /// Loads this <see cref="XmlRpcStructureMember"/> using the supplied <see cref="XPathNavigator"/>, at a known nesting depth.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+    /// <param name="depth">How many composite values enclose the structure this member belongs to.</param>
+    /// <returns><see langword="true"/> if the <see cref="XmlRpcStructureMember"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     The member's <c>value</c> sits one level deeper than the enclosing structure, which is what
+    ///     bounds the three-frame cycle back through <see cref="XmlRpcClient.MaxValueNestingDepth"/>.
+    ///     A member with a readable <c>name</c> still reports success when its value is refused, so a
+    ///     structure that reaches the bound keeps everything above it rather than being lost whole.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    internal bool Load(XPathNavigator source, int depth)
     {
         bool wasLoaded = false;
 
@@ -98,7 +113,7 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
 
             if (valueNavigator is not null)
             {
-                if (XmlRpcClient.TryParseValue(valueNavigator, out IXmlRpcValue? value))
+                if (XmlRpcClient.TryParseValue(valueNavigator, depth + 1, out IXmlRpcValue? value))
                 {
                     this.Value = value;
                     wasLoaded = true;

@@ -138,6 +138,98 @@ public sealed class XmlRpcScalarValueLoadTests
     }
 
     /// <summary>
+    /// A typed value whose text will not parse fails the load rather than throwing out of a <c>bool</c>.
+    /// </summary>
+    /// <param name="xml">A <c>value</c> element whose declared type and text disagree.</param>
+    /// <remarks>
+    ///     <para>
+    ///     This method's contract is a <see cref="bool"/>, and four of its arms reached it through
+    ///     <c>int.Parse</c>, <c>double.Parse</c>, <c>Convert.FromBase64String</c> and
+    ///     <c>ParseRfc3339DateTime</c> — every one of which throws. A caller reading a
+    ///     <c>&lt;bool&gt;Load</c> as a total function got a <see cref="FormatException"/> from an
+    ///     ordinary malformed document.
+    ///     </para>
+    ///     <para>
+    ///     The boolean row is the same defect wearing different clothes: it did not throw, it stored the
+    ///     empty string under <c>ValueType.Boolean</c> and reported success.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    [DataRow("<value><i4>abc</i4></value>")]
+    [DataRow("<value><int>abc</int></value>")]
+    [DataRow("<value><double>abc</double></value>")]
+    [DataRow("<value><base64>not*valid*base64</base64></value>")]
+    [DataRow("<value><dateTime.iso8601>the day before yesterday</dateTime.iso8601></value>")]
+    [DataRow("<value><boolean>maybe</boolean></value>")]
+    public void ATypedValueWhoseTextWillNotParse_DoesNotLoad(string xml)
+    {
+        XmlRpcScalarValue scalar = new();
+
+        scalar.Load(Value(xml)).ShouldBeFalse("INVERTED: a bool-returning parse reports failure by returning false");
+    }
+
+    /// <summary>
+    /// The date spelling XML-RPC 1.0 uses in its own example loads.
+    /// </summary>
+    /// <remarks>
+    ///     <c>19980717T14:08:55</c> is the specification's own example: a basic-format date, an
+    ///     extended-format time, no offset. It cannot match a hyphenated RFC 3339 pattern, so the
+    ///     parser this method used could only throw on it. <c>XmlRpcClient</c> has carried the two
+    ///     zoneless XML-RPC spellings all along; the fix is to stop having a second answer.
+    /// </remarks>
+    [TestMethod]
+    public void TheSpecificationsOwnDateSpelling_Loads()
+    {
+        XmlRpcScalarValue scalar = new();
+
+        scalar.Load(Value("<value><dateTime.iso8601>19980717T14:08:55</dateTime.iso8601></value>"))
+            .ShouldBeTrue("INVERTED: the spelling the specification prints is the one it could not read");
+
+        scalar.ValueType.ShouldBe(XmlRpcScalarValueType.DateTime);
+        scalar.Value.ShouldBe(new DateTime(1998, 7, 17, 14, 8, 55, DateTimeKind.Unspecified));
+    }
+
+    /// <summary>
+    /// An RFC 3339 date still loads, which is what most live servers send.
+    /// </summary>
+    /// <remarks>
+    ///     The control on the row above. RFC 3339 is tried first and is unchanged, so nothing that
+    ///     parsed before parses differently now.
+    /// </remarks>
+    [TestMethod]
+    public void AnRfc3339Date_StillLoads()
+    {
+        XmlRpcScalarValue scalar = new();
+
+        scalar.Load(Value("<value><dateTime.iso8601>1998-07-17T14:08:55Z</dateTime.iso8601></value>"))
+            .ShouldBeTrue();
+
+        scalar.ValueType.ShouldBe(XmlRpcScalarValueType.DateTime);
+        ((DateTime)scalar.Value!).Kind.ShouldBe(DateTimeKind.Utc);
+    }
+
+    /// <summary>
+    /// A string value keeps the whitespace the document gave it, and is trimmed when written.
+    /// </summary>
+    /// <remarks>
+    ///     A consequence of routing both parse paths through one parser rather than two: this method
+    ///     used to trim on the way in and <c>XmlRpcClient.TryParseValue</c> did not, so the same
+    ///     document produced two different <c>Value</c> strings depending on which entry point read it.
+    ///     Trimming still happens, on the way out, where <c>ValueAsString</c> has always done it — so
+    ///     the wire form is unchanged and only the in-memory value differs.
+    /// </remarks>
+    [TestMethod]
+    public void AStringValue_KeepsItsWhitespaceAndIsTrimmedOnTheWayOut()
+    {
+        XmlRpcScalarValue scalar = new();
+
+        scalar.Load(Value("<value><string>  padded  </string></value>")).ShouldBeTrue();
+
+        scalar.Value.ShouldBe("  padded  ", "INVERTED: one parser, one answer");
+        scalar.ToString().ShouldContain("<string>padded</string>", Case.Sensitive);
+    }
+
+    /// <summary>
     /// A value carrying an unrecognised type element does not load.
     /// </summary>
     /// <remarks>

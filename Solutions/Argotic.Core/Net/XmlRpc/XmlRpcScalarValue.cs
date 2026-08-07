@@ -163,58 +163,59 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <summary>
     /// Loads this <see cref="XmlRpcScalarValue"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> to extract information from, positioned on a <c>value</c> element.</param>
     /// <returns><see langword="true"/> if the <see cref="XmlRpcScalarValue"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="XmlRpcScalarValue"/>.</para>
+    ///     <para>
+    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML
+    ///     element that represents a <see cref="XmlRpcScalarValue"/> — that is, on a <c>value</c>. A
+    ///     navigator positioned anywhere else fails rather than guessing.
+    ///     </para>
+    ///     <para>
+    ///     The parsing is <see cref="XmlRpcClient.TryParseValue(XPathNavigator, out IXmlRpcValue?)"/>'s,
+    ///     deliberately. This method used to carry a second implementation, and the two disagreed on six
+    ///     of the seven scalar types: four of this one's arms reached <c>int.Parse</c>,
+    ///     <c>double.Parse</c>, <c>Convert.FromBase64String</c> and RFC 3339 date parsing, all of which
+    ///     <i>throw</i> — out of a method whose contract is a <see cref="bool"/> — while the other
+    ///     stored the empty string for an unparseable boolean and reported success. The date table was
+    ///     the plainest symptom: it could not read <c>19980717T14:08:55</c>, the spelling XML-RPC 1.0
+    ///     prints in its own example.
+    ///     </para>
+    ///     <para>
+    ///     One consequence of the delegation is worth stating, because it is visible: this method no
+    ///     longer trims a <c>string</c> value on the way in, matching the parser everything else uses.
+    ///     <see cref="WriteTo(XmlWriter)"/> has always trimmed on the way out, so the wire form is
+    ///     unchanged.
+    ///     </para>
+    ///     <para>
+    ///     A <c>struct</c> or <c>array</c> is not a scalar and fails here, as it always did.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded = false;
-
         ArgumentNullException.ThrowIfNull(source);
 
-        // MoveToChild(Element) rather than HasChildren plus MoveToFirstChild(), for the reason given on
-        // XmlRpcClient.TryParseValue: a text node is a child, so an untyped <value>text</value> took the
-        // typed path and landed on a node whose Name is the empty string, and the untyped branch below
-        // -- reachable only when there were no children at all, which implies an empty Value that its
-        // own guard then rejects -- could not run for any input. MoveToChild leaves the navigator where
-        // it was when it returns false, so source.Value below is still this element's own text.
-        if (source.MoveToChild(XPathNodeType.Element))
+        if (!XmlRpcClient.TryParseValue(source, out IXmlRpcValue? parsed) || parsed is not XmlRpcScalarValue scalar)
         {
-            XmlRpcScalarValueType type;
-            if (string.Equals(source.Name, "i4", StringComparison.OrdinalIgnoreCase))
-            {
-                // Framework prefers the <int> designator for integers, so this handles when the <i4> designator is utilized.
-                type = XmlRpcScalarValueType.Integer;
-            }
-            else
-            {
-                type = XmlRpcClient.ScalarTypeByName(source.Name);
-            }
-
-            if (type != XmlRpcScalarValueType.None)
-            {
-                this.ValueType = type;
-                if (!string.IsNullOrEmpty(source.Value))
-                {
-                    this.Value = XmlRpcScalarValue.StringAsValue(type, source.Value);
-                }
-                wasLoaded = true;
-            }
-        }
-        else if (!string.IsNullOrEmpty(source.Value))
-        {
-            // XML-RPC 1.0, on <value>: "If no type is indicated, the type is string." ValueType is
-            // deliberately left at None rather than set to String, because WriteTo emits an untyped
-            // <value>text</value> for None and a typed <string> wrapper otherwise -- so leaving it is
-            // what makes an untyped value round-trip as the untyped value it was.
-            this.Value = source.Value;
-            wasLoaded = true;
+            return false;
         }
 
-        return wasLoaded;
+        // The one place the two paths must still differ. TryParseValue types an untyped
+        // <value>text</value> as String; this type keeps None for it, because WriteTo emits a bare
+        // <value>text</value> for None and a <string> wrapper otherwise -- so keeping None is what
+        // lets an untyped value round-trip as the untyped value it arrived as. MoveToChild(Element)
+        // on a private navigator is how "was there a type designator" is asked without disturbing
+        // the caller's position.
+        bool wasTyped = source.CreateNavigator().MoveToChild(XPathNodeType.Element);
+
+        this.ValueType = wasTyped ? scalar.ValueType : XmlRpcScalarValueType.None;
+        if (scalar.Value is not null)
+        {
+            this.Value = scalar.Value;
+        }
+
+        return true;
     }
 
     /// <summary>
@@ -330,35 +331,6 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <param name="second">Operand to compare to.</param>
     /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(XmlRpcScalarValue? first, XmlRpcScalarValue? second) => !(first == second);
-
-    /// <summary>
-    /// Returns an <see cref="object"/> that represents the converted value for the specified <see cref="XmlRpcScalarValueType"/>.
-    /// </summary>
-    /// <param name="type">The <see cref="XmlRpcScalarValueType"/> that indicates the expected data type for the scalar value.</param>
-    /// <param name="scalar">The string representation of the scalar value.</param>
-    /// <returns>An <see cref="object"/> that represents the converted value for the specified <paramref name="type"/> and <paramref name="scalar"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">The <paramref name="scalar"/> is an empty string.</exception>
-    private static object StringAsValue(XmlRpcScalarValueType type, string scalar)
-    {
-        ArgumentException.ThrowIfNullOrEmpty(scalar);
-
-        // The discard arm and the Boolean arm's fallback both preserve the original behaviour:
-        // an unrecognised type, or a boolean that fails to parse, yielded the empty string that
-        // `result` was initialised to rather than throwing.
-        return type switch
-        {
-            XmlRpcScalarValueType.Base64 => Convert.FromBase64String(scalar),
-            XmlRpcScalarValueType.Boolean => XmlRpcClient.TryParseBoolean(scalar, out bool boolean)
-                ? boolean
-                : string.Empty,
-            XmlRpcScalarValueType.DateTime => SyndicationDateTimeUtility.ParseRfc3339DateTime(scalar),
-            XmlRpcScalarValueType.Double => double.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo),
-            XmlRpcScalarValueType.Integer => int.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo),
-            XmlRpcScalarValueType.String => scalar.Trim(),
-            _ => string.Empty,
-        };
-    }
 
     /// <summary>
     /// Returns the string representation of the supplied scalar value using the specified <see cref="XmlRpcScalarValueType"/>.

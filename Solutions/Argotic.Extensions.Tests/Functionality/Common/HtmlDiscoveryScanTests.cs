@@ -97,73 +97,62 @@ public sealed class HtmlDiscoveryScanTests
     }
 
     /// <summary>
-    /// A root-relative endpoint is accepted on this platform, and a document-relative one is not.
+    /// A root-relative endpoint is refused on every platform.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     <b>Characterisation of a defect, not an endorsement.</b> The guard is
-    ///     <c>Uri.TryCreate(href, UriKind.Absolute, out _)</c>, and on Unix that succeeds for a leading
-    ///     slash — <c>/xmlrpc.php</c> becomes <c>file:///xmlrpc.php</c>. On Windows, where an absolute
-    ///     path looks like <c>C:\…</c>, the same markup is refused. So <b>discovery accepts a different
-    ///     set of documents depending on the operating system</b>, and the anchor it hands back carries
-    ///     the raw relative string for the caller to try to use.
+    ///     The guard was <c>Uri.TryCreate(href, UriKind.Absolute, out _)</c>, and on Unix that succeeds
+    ///     for a leading slash — <c>/xmlrpc.php</c> became <c>file:///xmlrpc.php</c> and was returned as
+    ///     a discovered pingback endpoint, with the raw relative string handed back for the caller to
+    ///     try to use. On Windows, where an absolute path looks like <c>C:\…</c>, the same markup was
+    ///     refused. <b>Discovery accepted a different set of documents depending on the operating
+    ///     system</b>, which is what makes this an unambiguous wrong answer rather than a question
+    ///     about what the library should accept.
     ///     </para>
     ///     <para>
-    ///     The more damaging instance is <see cref="AProtocolRelativeEndpoint_IsReadAsAFileUri"/>:
-    ///     protocol-relative URLs are ordinary in real HTML, and this reads them as file URIs on a
-    ///     remote host.
-    ///     </para>
-    ///     <para>
-    ///     Left as-is deliberately. Tightening the guard to require <c>http</c>/<c>https</c> is a
-    ///     change to what discovery accepts, which is a decision rather than a bug fix, and it is not
-    ///     what the regular-expression work touching this method was for. Pinned so the behaviour is
-    ///     visible and any change to it is deliberate.
+    ///     The decision recorded here: require <c>http</c> or <c>https</c>. A pingback endpoint is one
+    ///     an XML-RPC <c>POST</c> is sent to, so a local filesystem path is never a usable answer, and
+    ///     an OS-dependent result is not testable in any honest sense. Resolving the relative reference
+    ///     against a base was not on the table — this method is given markup, not the address it came
+    ///     from.
     ///     </para>
     /// </remarks>
     [TestMethod]
-    public void ARootRelativePingbackEndpoint_IsAcceptedOnThisPlatform()
+    public void ARootRelativePingbackEndpoint_IsRefused()
     {
         const string Markup = """<link rel="pingback" href="/xmlrpc.php">""";
 
-        HtmlAnchor? anchor = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(Markup);
-
-        if (OperatingSystem.IsWindows())
-        {
-            anchor.ShouldBeNull("a leading slash is not an absolute URI on Windows");
-        }
-        else
-        {
-            anchor.ShouldNotBeNull("on Unix a leading slash parses as an absolute file URI");
-            anchor.HRef.ShouldBe("/xmlrpc.php", "and the unusable relative string is handed back verbatim");
-        }
+        SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(Markup)
+            .ShouldBeNull("INVERTED: and refused identically on Windows and on Unix");
     }
 
     /// <summary>
-    /// A protocol-relative endpoint is read as a file URI rather than as a web address.
+    /// A protocol-relative endpoint is refused rather than read as a file URI.
     /// </summary>
     /// <remarks>
-    ///     <c>//example.com/xmlrpc.php</c> is a perfectly ordinary way to write a URL in HTML, and
-    ///     <see cref="Uri.TryCreate(string, UriKind, out Uri)"/> resolves it to
-    ///     <c>file://example.com/xmlrpc.php</c>. The scan therefore reports a pingback server that no
-    ///     caller can usefully contact. Pinned as characterisation for the same reason as above.
+    ///     The more damaging half of the same defect, because <c>//example.com/xmlrpc.php</c> is a
+    ///     perfectly ordinary way to write a URL in HTML.
+    ///     <see cref="Uri.TryCreate(string, UriKind, out Uri)"/> resolved it to
+    ///     <c>file://example.com/xmlrpc.php</c>, so the scan reported a pingback server on a remote
+    ///     <i>file share</i>. Refused now, for the same reason: the scheme is not one a pingback call
+    ///     can be made on.
     /// </remarks>
     [TestMethod]
-    public void AProtocolRelativeEndpoint_IsReadAsAFileUri()
+    public void AProtocolRelativeEndpoint_IsRefused()
     {
         const string Markup = """<link rel="pingback" href="//example.com/xmlrpc.php">""";
 
-        HtmlAnchor? anchor = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(Markup);
-
-        anchor.ShouldNotBeNull();
-        new Uri(anchor.HRef).Scheme.ShouldBe("file", "a protocol-relative URL is not recognised as one");
+        SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(Markup)
+            .ShouldBeNull("INVERTED: a protocol-relative URL is not a file URI on a remote host");
     }
 
     /// <summary>
     /// A document-relative endpoint, with no leading slash, is refused everywhere.
     /// </summary>
     /// <remarks>
-    ///     The control. Without it the two cases above are equally consistent with "the guard does
-    ///     nothing at all", which would be a different and larger claim.
+    ///     The control that predates the scheme guard, and the one case the old guard already got
+    ///     right. Without it the two rows above are equally consistent with "the guard refuses
+    ///     everything", which would be a different and larger claim.
     /// </remarks>
     [TestMethod]
     public void ADocumentRelativePingbackEndpoint_IsRefused()
@@ -174,15 +163,24 @@ public sealed class HtmlDiscoveryScanTests
     }
 
     /// <summary>
-    /// When a page declares more than one pingback link, the last one wins.
+    /// When a page declares more than one pingback link, the first one wins.
     /// </summary>
     /// <remarks>
-    ///     Characterisation, not endorsement: the loop does not stop at the first match, so the final
-    ///     declaration overwrites the earlier ones. Pinned so that a rewrite which starts returning the
-    ///     first has to say so rather than change behaviour quietly.
+    ///     <para>
+    ///     A decision among undefined behaviours, not a specification fix. The Pingback specification
+    ///     (<a href="https://www.hixie.ch/specs/pingback/pingback">§2</a>) says <i>"Pages MUST NOT
+    ///     include more than one such element"</i> and defines no client behaviour for a page that
+    ///     does, so neither answer is non-conformant.
+    ///     </para>
+    ///     <para>
+    ///     First wins, for two reasons: it is how HTML <c>&lt;link&gt;</c> relations are conventionally
+    ///     resolved, and it bounds the work a hostile page can extract from the scan. The loop used to
+    ///     run to the end of the document reassigning on every match, so the last declaration won and
+    ///     every declaration was paid for.
+    ///     </para>
     /// </remarks>
     [TestMethod]
-    public void WhenAPageDeclaresSeveralPingbackLinks_TheLastOneWins()
+    public void WhenAPageDeclaresSeveralPingbackLinks_TheFirstOneWins()
     {
         const string Markup = """
             <link rel="pingback" href="https://example.com/first">
@@ -190,7 +188,45 @@ public sealed class HtmlDiscoveryScanTests
             """;
 
         SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(Markup)!.HRef
-            .ShouldBe("https://example.com/second");
+            .ShouldBe("https://example.com/first", "INVERTED: the scan stops at the first match");
+    }
+
+    /// <summary>
+    /// A pingback endpoint on a scheme other than HTTP is refused.
+    /// </summary>
+    /// <param name="href">An absolute URI whose scheme is not one a pingback server can be reached on.</param>
+    /// <remarks>
+    ///     The generalisation of the two rows above. Pingback is an XML-RPC <c>POST</c>; a
+    ///     <c>mailto:</c>, <c>file:</c> or <c>javascript:</c> endpoint is not one the caller can
+    ///     contact, and handing one back as a discovered server is an answer that can only mislead.
+    /// </remarks>
+    [TestMethod]
+    [DataRow("mailto:webmaster@example.com")]
+    [DataRow("file:///var/www/xmlrpc.php")]
+    [DataRow("ftp://example.com/xmlrpc.php")]
+    public void AnEndpointOnANonHttpScheme_IsRefused(string href)
+    {
+        string markup = $"""<link rel="pingback" href="{href}">""";
+
+        SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(markup)
+            .ShouldBeNull($"INVERTED: {href} is not an endpoint a pingback call can reach");
+    }
+
+    /// <summary>
+    /// An <c>https</c> endpoint is accepted, as an <c>http</c> one is.
+    /// </summary>
+    /// <remarks>
+    ///     The control on the scheme guard. Without it, "requires HTTP" is indistinguishable from
+    ///     "requires <c>http</c> exactly", and every endpoint on the modern web would be refused.
+    /// </remarks>
+    [TestMethod]
+    [DataRow("http://example.com/xmlrpc.php")]
+    [DataRow("https://example.com/xmlrpc.php")]
+    public void AnHttpOrHttpsEndpoint_IsAccepted(string href)
+    {
+        string markup = $"""<link rel="pingback" href="{href}">""";
+
+        SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(markup)!.HRef.ShouldBe(href);
     }
 
     /// <summary>

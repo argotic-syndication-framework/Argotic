@@ -200,36 +200,46 @@ internal static class XmlRpcCorpus
     }
 
     /// <summary>
-    /// Builds a chain of arrays nested <c>leafCount / leavesPerLevel</c> levels deep.
+    /// Builds a chain of nested arrays holding <paramref name="leafCount"/> scalars in total.
     /// </summary>
     /// <param name="leafCount">The total number of scalar leaves, spread evenly down the chain.</param>
-    /// <param name="leavesPerLevel">The number of scalars held at each level of the chain.</param>
+    /// <param name="leavesPerLevel">The number of scalars to hold at each level, before the depth bound is applied.</param>
     /// <returns>The <c>value</c> element.</returns>
     /// <remarks>
     ///     <para>
-    ///     Nesting depth grows linearly with <paramref name="leafCount"/> while the leaf count stays
+    ///     Nesting depth grows with <paramref name="leafCount"/> while the leaf count stays exactly
     ///     equal to the flat generators', which is what separates recursion depth from element count.
+    ///     Both properties are load-bearing for the comparison the benchmark class makes, so the leaves
+    ///     are redistributed rather than dropped when the depth has to be reduced.
     ///     </para>
     ///     <para>
-    ///     Depth is deliberately bounded here and is not bounded in the library.
-    ///     <c>TryParseValue</c> recurses into <c>XmlRpcArrayValue.Load</c>, which calls
-    ///     <c>TryParseValue</c> again, with no depth limit anywhere on the path. A hostile or broken
-    ///     server can therefore send a payload that overflows the stack, and the process cannot catch
-    ///     it. Keeping <paramref name="leavesPerLevel"/> at ten caps this corpus at a depth of a
-    ///     hundred, which is safe to measure; the unbounded case is a defect to report, not to
-    ///     benchmark.
+    ///     Depth is clamped below <see cref="XmlRpcClient.MaxValueNestingDepth"/>, the bound the library
+    ///     now enforces. Exceeding it would not fail loudly — the levels past the cap are simply not
+    ///     descended into — so a corpus that ignored the cap would quietly measure a shallower parse
+    ///     than the one it names, which is the worst kind of benchmark defect. Before that cap existed,
+    ///     this generator's own comment explained that depth was bounded here <i>because</i> it was
+    ///     bounded nowhere else, and a sufficiently nested payload killed the reading process.
     ///     </para>
     /// </remarks>
     public static string ArrayChain(int leafCount, int leavesPerLevel)
     {
-        int depth = Math.Max(1, leafCount / Math.Max(1, leavesPerLevel));
+        int requested = Math.Max(1, leafCount / Math.Max(1, leavesPerLevel));
+        int depth = Math.Min(requested, XmlRpcClient.MaxValueNestingDepth);
+        int perLevel = leafCount / depth;
+        int remainder = leafCount % depth;
+
         StringBuilder builder = new(capacity: 128 + (leafCount * 32) + (depth * 64));
 
         for (int level = 0; level < depth; level++)
         {
             builder.Append("<value><array><data>");
 
-            for (int i = 0; i < leavesPerLevel; i++)
+            // The remainder goes one leaf at a time onto the topmost levels, so the total is exactly
+            // leafCount however awkwardly the depth divides it. Losing a few leaves to integer
+            // division would break the one invariant this class is built on - identical leaf counts
+            // across all four arms - and would do it silently.
+            int leaves = perLevel + (level < remainder ? 1 : 0);
+            for (int i = 0; i < leaves; i++)
             {
                 builder.Append("<value><i4>").Append(i.ToString(CultureInfo.InvariantCulture)).Append("</i4></value>");
             }

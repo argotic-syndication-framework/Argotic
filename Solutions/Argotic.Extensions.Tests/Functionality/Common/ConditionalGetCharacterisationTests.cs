@@ -178,6 +178,98 @@ public sealed class ConditionalGetCharacterisationTests
     }
 
     /// <summary>
+    /// <see cref="EntityTagHeaderValue.ToString"/> emits the <c>W/</c> prefix for a weak tag.
+    /// </summary>
+    /// <remarks>
+    ///     The framework claim the <c>ETag</c> projection rests on, pinned rather than assumed. The
+    ///     reference documentation for <c>ToString</c> says only "a string that represents the current
+    ///     object" — it does not promise the weakness indicator — so reading <c>ToString()</c> instead
+    ///     of <c>Tag</c> is a fix only if this holds. Green on both sides of that change by
+    ///     construction: it asserts about the BCL, not about this library.
+    /// </remarks>
+    [TestMethod]
+    public void EntityTagHeaderValueToString_EmitsTheWeaknessPrefix()
+    {
+        new EntityTagHeaderValue("\"abc123\"", isWeak: true).ToString().ShouldBe("W/\"abc123\"");
+        new EntityTagHeaderValue("\"abc123\"", isWeak: false).ToString().ShouldBe("\"abc123\"");
+    }
+
+    /// <summary>
+    /// A weak entity tag on a <c>200</c> keeps its <c>W/</c> prefix.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     <c>SyndicationValidators</c> states the invariant this restores: a validator "must be sent
+    ///     exactly as received, quotes and any <c>W/</c> prefix included". The projection read
+    ///     <c>EntityTagHeaderValue.Tag</c>, which is only the opaque quoted string — weakness lives on
+    ///     the separate <c>IsWeak</c> — so <c>W/"v1"</c> arrived and <c>"v1"</c> came out.
+    ///     </para>
+    ///     <para>
+    ///     The consequence is narrower than it looks and is worth stating so it is not overclaimed.
+    ///     <c>If-None-Match</c> uses the weak comparison function, under which <c>"v1"</c> and
+    ///     <c>W/"v1"</c> match, so revalidation returned <c>304</c> either way. What was actually
+    ///     broken is information loss on a public property, a wrong value for <c>If-Match</c> and
+    ///     <c>If-Range</c>, which compare strictly, and the library contradicting its own documented
+    ///     invariant.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public async Task AWeakEntityTagOnA200_KeepsItsWeaknessPrefix()
+    {
+        using HttpClient client = Responding(
+            response => response.Headers.ETag = new EntityTagHeaderValue("\"v1\"", isWeak: true));
+
+        using ConditionalGetResult result = await SyndicationDiscoveryUtility.ConditionalGetAsync(
+            Source, SentValidator, null, client, TestContext.CancellationTokenSource.Token);
+
+        result.ETag.ShouldBe("W/\"v1\"", "INVERTED: the weakness indicator is part of the validator");
+    }
+
+    /// <summary>
+    /// A weak entity tag on a <c>304</c> keeps its <c>W/</c> prefix too.
+    /// </summary>
+    /// <remarks>
+    ///     The second projection site. <c>ConditionalGetResult</c> has two constructors and both read
+    ///     the header, so a fix applied to one of them would leave the polling path — the one this API
+    ///     exists for — still lossy, and the 200 test above would not notice.
+    /// </remarks>
+    [TestMethod]
+    public async Task AWeakEntityTagOnA304_KeepsItsWeaknessPrefix()
+    {
+        using MockHttpMessageHandler handler = new((_, _) =>
+        {
+            HttpResponseMessage response = new(HttpStatusCode.NotModified);
+            response.Headers.ETag = new EntityTagHeaderValue("\"rotated-v2\"", isWeak: true);
+            return Task.FromResult(response);
+        });
+        using HttpClient client = new(handler, disposeHandler: false);
+
+        using ConditionalGetResult result = await SyndicationDiscoveryUtility.ConditionalGetAsync(
+            Source, SentValidator, "W/\"v1\"", client, TestContext.CancellationTokenSource.Token);
+
+        result.ETag.ShouldBe("W/\"rotated-v2\"", "INVERTED: the next poll re-sends what the origin sent");
+    }
+
+    /// <summary>
+    /// A strong entity tag is unchanged by the weak-tag fix.
+    /// </summary>
+    /// <remarks>
+    ///     The control. Every entity tag elsewhere in this suite is strong, so without this row the two
+    ///     tests above are equally consistent with "the projection now prefixes everything".
+    /// </remarks>
+    [TestMethod]
+    public async Task AStrongEntityTag_IsCarriedThroughUnchanged()
+    {
+        using HttpClient client = Responding(
+            response => response.Headers.ETag = new EntityTagHeaderValue("\"v1\""));
+
+        using ConditionalGetResult result = await SyndicationDiscoveryUtility.ConditionalGetAsync(
+            Source, SentValidator, null, client, TestContext.CancellationTokenSource.Token);
+
+        result.ETag.ShouldBe("\"v1\"", "INVARIANT: a strong tag has no prefix to keep");
+    }
+
+    /// <summary>
     /// C10 — an unquoted entity tag is refused rather than dropped.
     /// </summary>
     /// <remarks>

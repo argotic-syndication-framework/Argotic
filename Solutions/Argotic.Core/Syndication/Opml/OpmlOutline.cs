@@ -31,6 +31,29 @@ namespace Argotic.Syndication;
 /// </example>
 public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
+    /// <summary>
+    /// The greatest number of nested <c>outline</c> levels a load will descend through.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         OPML documents no limit on nesting depth, but reading one costs a stack frame per level, so
+    ///         "no limit" in the format cannot mean "no limit" in a parser. <c>Load</c> is self-recursive and
+    ///         not tail-recursive — the call sits inside the child iterator's loop with work after it — and
+    ///         it is reachable from <see cref="OpmlDocument.Load(Stream)"/>, whose content allowance is
+    ///         8 MiB. An <c>&lt;outline&gt;</c> start tag costs nine bytes, so that allowance pays for
+    ///         hundreds of thousands of levels: far more than any stack absorbs, and the resulting overflow
+    ///         terminates the process rather than raising something a caller could catch.
+    ///     </para>
+    ///     <para>
+    ///         256 is chosen to sit far above any real subscription list or outline document — a hand-built
+    ///         outline nests single digits deep, and a generated one rarely reaches double — while keeping
+    ///         the worst-case recursion to a few tens of kilobytes of stack. Exceeding it skips the outline
+    ///         rather than raising, which is how every other unusable value on this path is handled: an
+    ///         attribute that fails to parse is skipped too, and a malformed depth should not draw a louder
+    ///         failure than a malformed integer.
+    ///     </para>
+    /// </remarks>
+    public const int MaxOutlineNestingDepth = 256;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlOutline"/> class.
@@ -222,10 +245,25 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="OpmlOutline"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
-    public bool Load(XPathNavigator source)
+    public bool Load(XPathNavigator source) => this.Load(source, 0);
+
+    /// <summary>
+    /// Loads this <see cref="OpmlOutline"/> using the supplied <see cref="XPathNavigator"/>, refusing to
+    /// descend past <see cref="MaxOutlineNestingDepth"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+    /// <param name="depth">The nesting depth of this outline, counting the outermost one as zero.</param>
+    /// <returns><see langword="true"/> if the <see cref="OpmlOutline"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    internal bool Load(XPathNavigator source, int depth)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
+        if (depth >= MaxOutlineNestingDepth)
+        {
+            return false;
+        }
+
         if (source.HasAttributes)
         {
             XPathNavigator attributesNavigator = source.CreateNavigator();
@@ -259,7 +297,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
                     }
 
                     OpmlOutline outline = new();
-                    if (outline.Load(outlinesNode))
+                    if (outline.Load(outlinesNode, depth + 1))
                     {
                         this.Outlines.Add(outline);
                         wasLoaded = true;
@@ -282,10 +320,27 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings) => this.Load(source, settings, 0);
+
+    /// <summary>
+    /// Loads this <see cref="OpmlOutline"/> using the supplied <see cref="XPathNavigator"/> and
+    /// <see cref="SyndicationResourceLoadSettings"/>, refusing to descend past
+    /// <see cref="MaxOutlineNestingDepth"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
+    /// <param name="depth">The nesting depth of this outline, counting the outermost one as zero.</param>
+    /// <returns><see langword="true"/> if the <see cref="OpmlOutline"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    internal bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings, int depth)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
+        if (depth >= MaxOutlineNestingDepth)
+        {
+            return false;
+        }
+
         if (source.HasAttributes)
         {
             XPathNavigator attributesNavigator = source.CreateNavigator();
@@ -319,7 +374,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
                     }
 
                     OpmlOutline outline = new();
-                    if (outline.Load(outlinesNode, settings))
+                    if (outline.Load(outlinesNode, settings, depth + 1))
                     {
                         this.Outlines.Add(outline);
                         wasLoaded = true;

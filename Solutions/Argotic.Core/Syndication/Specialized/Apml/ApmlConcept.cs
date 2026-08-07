@@ -123,25 +123,52 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
     /// <summary>
     /// Gets or sets the decimal score of this concept.
     /// </summary>
-    /// <value>The <c>value</c> attribute: a score in the closed range <c>-1</c> to <c>1</c>, where <c>1</c> is complete interest and <c>-1</c> complete aversion.</value>
+    /// <value>
+    ///     The <c>value</c> attribute: a score in the closed range <c>-1</c> to <c>1</c>, where <c>1</c> is
+    ///     complete interest and <c>-1</c> complete aversion. The default is <see langword="null"/>, meaning
+    ///     no score is known, which suppresses the attribute on save.
+    /// </value>
     /// <remarks>
-    ///     The initial value is <see cref="Decimal.MinValue"/>, which the setter itself would reject — it is an
-    ///     unset marker, not a legal score. <see cref="WriteTo(XmlWriter)"/> writes the attribute
-    ///     unconditionally, so a concept saved without a score emits that sentinel rather than omitting the
-    ///     attribute. Assign a score before saving.
+    ///     <para>
+    ///         <see langword="null"/> and <c>0</c> are different answers and are serialised differently. Zero
+    ///         is a real score — indifference, asserted — while <see langword="null"/> is the absence of one.
+    ///         An unscored concept therefore omits the attribute rather than writing a number, because in an
+    ///         attention-profiling format the score <i>is</i> the payload and any number invented here would
+    ///         be read as a claim the profile never made.
+    ///     </para>
+    ///     <para>
+    ///         <b>Omitting the attribute is a known, deliberate deviation from the schema.</b> APML 0.6
+    ///         declares <c>value</c> as <c>use="required"</c> on <c>ExplicitNodeType</c>, typed
+    ///         <c>NodeValueType</c> — an <c>xs:decimal</c> restricted to <c>[-1, 1]</c>. That type has no
+    ///         spelling for "unknown", so a node whose score was never established cannot be serialised
+    ///         conformantly at all, and the only question is which non-conformance to prefer.
+    ///     </para>
+    ///     <para>
+    ///         Omission is preferred over the two alternatives. The previous behaviour — defaulting to
+    ///         <see cref="decimal.MinValue"/>, a value this setter would itself reject, and writing it
+    ///         unconditionally as <c>-79228162514264337593543950335.00</c> — is non-conformant <i>and</i>
+    ///         asserts a score twenty-nine orders of magnitude outside the declared range. Writing
+    ///         <c>0.00</c> would be schema-valid but would fabricate a neutral-interest claim the profile
+    ///         never made, and in an attention-profiling format the score is the entire payload. A missing
+    ///         attribute is the only one of the three a consumer can recognise as missing.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than -1.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is greater than 1.</exception>
-    public decimal Value
+    public decimal? Value
     {
         get;
         set
         {
-            ArgumentOutOfRangeException.ThrowIfLessThan(value, decimal.MinusOne);
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(value, decimal.One);
+            if (value.HasValue)
+            {
+                ArgumentOutOfRangeException.ThrowIfLessThan(value.Value, decimal.MinusOne);
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(value.Value, decimal.One);
+            }
+
             field = value;
         }
-    } = decimal.MinValue;
+    }
 
     /// <summary>
     /// Loads this <see cref="ApmlConcept"/> using the supplied <see cref="XPathNavigator"/>.
@@ -232,8 +259,14 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("Concept", ApmlUtility.ApmlNamespace);
 
+        // key is use="required" and typed xs:string, for which the empty string is a legal value, so an
+        // empty key must still be written: omitting it is invalid, emitting it empty is not.
         writer.WriteAttributeString("key", this.Key);
-        writer.WriteAttributeString("value", this.Value.ToString("0.00", System.Globalization.NumberFormatInfo.InvariantInfo));
+
+        if (this.Value.HasValue)
+        {
+            writer.WriteAttributeString("value", this.Value.Value.ToString("0.00", System.Globalization.NumberFormatInfo.InvariantInfo));
+        }
 
         if (!string.IsNullOrEmpty(this.From))
         {
@@ -242,7 +275,7 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
 
         if (this.UpdatedOn != DateTime.MinValue)
         {
-            writer.WriteAttributeString("updated", SyndicationDateTimeUtility.ToRfc3339DateTime(this.UpdatedOn));
+            writer.WriteAttributeString("updated", ApmlUtility.ToApmlDateTime(this.UpdatedOn));
         }
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
@@ -273,7 +306,7 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
         int result = string.Compare(this.From, other.From, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Key, other.Key, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = this.UpdatedOn.CompareTo(other.UpdatedOn);
-        if (result == 0) result = this.Value.CompareTo(other.Value);
+        if (result == 0) result = Nullable.Compare(this.Value, other.Value);
 
         return result;
     }

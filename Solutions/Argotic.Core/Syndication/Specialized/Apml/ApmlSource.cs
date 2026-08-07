@@ -180,25 +180,32 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// <summary>
     /// Gets or sets the decimal score of this source.
     /// </summary>
-    /// <value>The <c>value</c> attribute: a score in the closed range <c>-1</c> to <c>1</c>, where <c>1</c> is complete interest and <c>-1</c> complete aversion.</value>
+    /// <value>
+    ///     The <c>value</c> attribute: a score in the closed range <c>-1</c> to <c>1</c>, where <c>1</c> is
+    ///     complete interest and <c>-1</c> complete aversion. The default is <see langword="null"/>, meaning
+    ///     no score is known, which suppresses the attribute on save.
+    /// </value>
     /// <remarks>
-    ///     The initial value is <see cref="Decimal.MinValue"/>, which the setter itself would reject — it is an
-    ///     unset marker, not a legal score. <see cref="WriteTo(XmlWriter)"/> writes the attribute
-    ///     unconditionally, so a source saved without a score emits that sentinel rather than omitting the
-    ///     attribute. Assign a score before saving.
+    ///     <see langword="null"/> and <c>0</c> are different answers and are serialised differently, and
+    ///     omitting the attribute is a known deviation from a schema that declares it required. The
+    ///     reasoning, and the sentinel this replaced, are set out on <see cref="ApmlConcept.Value"/>.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than -1.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is greater than 1.</exception>
-    public decimal Value
+    public decimal? Value
     {
         get;
         set
         {
-            ArgumentOutOfRangeException.ThrowIfLessThan(value, decimal.MinusOne);
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(value, decimal.One);
+            if (value.HasValue)
+            {
+                ArgumentOutOfRangeException.ThrowIfLessThan(value.Value, decimal.MinusOne);
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(value.Value, decimal.One);
+            }
+
             field = value;
         }
-    } = decimal.MinValue;
+    }
 
     /// <summary>
     /// Loads this <see cref="ApmlSource"/> using the supplied <see cref="XPathNavigator"/>.
@@ -407,9 +414,18 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("Source", ApmlUtility.ApmlNamespace);
 
+        // key, name and type are all use="required" on the source types, so all three are written even when
+        // empty: for key and name the empty string is a legal xs:string and omitting them is not legal.
+        // type is the exception that cannot be made conformant either way -- apml:MimeType restricts it to
+        // the pattern [^/]+/[^/]+, which "" fails -- so a source with no MIME type is unrepresentable, and
+        // the write stays consistent with its neighbours rather than inventing a third behaviour for it.
         writer.WriteAttributeString("key", this.Key);
         writer.WriteAttributeString("name", this.Name);
-        writer.WriteAttributeString("value", this.Value.ToString("0.00", System.Globalization.NumberFormatInfo.InvariantInfo));
+        if (this.Value.HasValue)
+        {
+            writer.WriteAttributeString("value", this.Value.Value.ToString("0.00", System.Globalization.NumberFormatInfo.InvariantInfo));
+        }
+
         writer.WriteAttributeString("type", this.MimeType);
 
         if (!string.IsNullOrEmpty(this.From))
@@ -419,7 +435,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
 
         if (this.UpdatedOn != DateTime.MinValue)
         {
-            writer.WriteAttributeString("updated", SyndicationDateTimeUtility.ToRfc3339DateTime(this.UpdatedOn));
+            writer.WriteAttributeString("updated", ApmlUtility.ToApmlDateTime(this.UpdatedOn));
         }
 
         foreach (ApmlAuthor author in this.Authors)
@@ -458,7 +474,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
         if (result == 0) result = string.Compare(this.MimeType, other.MimeType, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = this.UpdatedOn.CompareTo(other.UpdatedOn);
-        if (result == 0) result = this.Value.CompareTo(other.Value);
+        if (result == 0) result = Nullable.Compare(this.Value, other.Value);
 
         return result;
     }

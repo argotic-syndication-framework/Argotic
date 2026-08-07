@@ -183,7 +183,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
 
         if (this.CreatedOn != DateTime.MinValue)
         {
-            writer.WriteElementString("DateCreated", ApmlUtility.ApmlNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.CreatedOn));
+            writer.WriteElementString("DateCreated", ApmlUtility.ApmlNamespace, ApmlUtility.ToApmlDateTime(this.CreatedOn));
         }
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 

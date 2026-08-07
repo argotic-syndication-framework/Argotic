@@ -464,8 +464,10 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(settings);
+        // No version attribute: the BlogML 2.0 schema declares blogType with date-created and root-url and
+        // nothing else, and admits no attribute wildcard, so writing one would make the output invalid
+        // against the very schema it claims to conform to. Version is a property of the object model only.
         writer.WriteStartElement("blog", BlogMLUtility.BlogMLNamespace);
-        //writer.WriteAttributeString("version", this.Version.ToString());
 
         if (settings.AutoDetectExtensions)
         {

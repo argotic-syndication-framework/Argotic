@@ -9,7 +9,7 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Rsd;
 
 /// <summary>
 /// Covers <see cref="RsdDocument"/> end to end: declaring application interfaces, parsing an RSD
-/// 1.0 document, and what survives a save and reload — including the settings block that does not.
+/// 1.0 document, and what survives a save and reload — the settings block included.
 /// </summary>
 [TestClass]
 public class RsdDocumentBehaviorTests
@@ -44,11 +44,7 @@ public class RsdDocumentBehaviorTests
         </rsd>
         """;
 
-    // Note: The RsdApplicationInterface.Load method currently has an XPath issue
-    // that prevents settings from being parsed correctly when they are directly
-    // nested under the api element. The XPath "rsd:api/rsd:settings" looks for
-    // an additional nested api element that doesn't exist in standard RSD format.
-    // This test documents the current behavior where settings are not loaded from XML.
+    // A settings block nested directly under api, which is where RSD 1.0 puts it.
     private const string RsdWithApiSettings = """
         <?xml version="1.0"?>
         <rsd version="1.0" xmlns="http://archipelago.phrasewise.com/rsd">
@@ -279,23 +275,19 @@ public class RsdDocumentBehaviorTests
     }
 
     /// <summary>
-    /// An <c>api</c> element carrying a <c>settings</c> block loads
-    /// its name, preferred flag and link, and loses the settings.
+    /// An <c>api</c> element carrying a <c>settings</c> block loads its name, preferred flag and link,
+    /// and also the documentation link, the notes and every named setting inside that block.
     /// </summary>
     /// <remarks>
-    ///     <c>RsdApplicationInterface.Load</c> selects the settings with the XPath <c>rsd:api/rsd:settings</c>,
-    ///     from a navigator already positioned on the <c>api</c> element. That asks for an <c>api</c> nested
-    ///     inside an <c>api</c>, which no RSD document contains, so <c>docs</c>, <c>notes</c> and <c>setting</c>
-    ///     are never read. The assertions below record what the loader does today, not what RSD 1.0 asks of it.
+    ///     <c>RsdApplicationInterface.Load</c> used to select the settings with the XPath
+    ///     <c>rsd:api/rsd:settings</c> from a navigator already positioned on the <c>api</c> element — an
+    ///     <c>api</c> nested inside an <c>api</c>, which no RSD document contains. <c>docs</c>, <c>notes</c>
+    ///     and every <c>setting</c> were therefore silently dropped on both RSD load paths. The step is now
+    ///     <c>rsd:settings</c>, and this test is the pin that keeps it there.
     /// </remarks>
     [TestMethod]
-    public void RsdDocument_WhenLoadedFromXmlWithApiSettings_ParsesBasicApiProperties()
+    public void RsdDocument_WhenLoadedFromXmlWithApiSettings_ReadsDocumentationNotesAndSettings()
     {
-        // Note: Due to an XPath issue in RsdApplicationInterface.Load, the settings
-        // (docs, notes, setting elements) are not currently parsed from XML.
-        // The XPath "rsd:api/rsd:settings" expects a nested api element that doesn't exist.
-        // This test documents the current behavior.
-
         // Arrange
         RsdDocument document = new();
 
@@ -310,10 +302,12 @@ public class RsdDocumentBehaviorTests
         api.IsPreferred.ShouldBeTrue();
         api.Link.ShouldBe(new Uri("http://example.com/api"));
 
-        // Settings are not loaded due to XPath issue - documenting current behavior
-        api.Documentation.ShouldBeNull();
-        api.Notes.ShouldBeEmpty();
-        api.Settings.ShouldBeEmpty();
+        // Assert - and the settings block, which is the whole point of the element
+        api.Documentation.ShouldBe(new Uri("http://example.com/docs/api"));
+        api.Notes.ShouldBe("Additional configuration notes");
+        api.Settings.Count.ShouldBe(2);
+        api.Settings["auth-type"].ShouldBe("oauth2");
+        api.Settings["api-version"].ShouldBe("2.0");
     }
 
     /// <summary>
@@ -446,61 +440,6 @@ public class RsdDocumentBehaviorTests
     }
 
     /// <summary>
-    /// An interface survives a save and reload with its four core properties,
-    /// and arrives without the documentation, notes or settings it was given.
-    /// </summary>
-    /// <remarks>
-    ///     <c>RsdApplicationInterface.Load</c> selects the settings with the XPath <c>rsd:api/rsd:settings</c>,
-    ///     from a navigator already positioned on the <c>api</c> element. That asks for an <c>api</c> nested
-    ///     inside an <c>api</c>, which no RSD document contains, so <c>docs</c>, <c>notes</c> and <c>setting</c>
-    ///     are never read. The assertions below record what the loader does today, not what RSD 1.0 asks of it.
-    /// </remarks>
-    [TestMethod]
-    public void RsdDocument_WhenSavedAndReloaded_PreservesBasicApiProperties()
-    {
-        // Note: Due to an XPath issue in RsdApplicationInterface.Load, the settings
-        // (Documentation, Notes, Settings) are not preserved through round-trip.
-        // This test documents the current behavior.
-
-        // Arrange
-        RsdDocument originalDocument = new()
-        {
-            EngineName = "Settings CMS",
-            EngineLink = new Uri("http://settings.example.com/"),
-            Homepage = new Uri("http://settings.example.com/blog")
-        };
-        RsdApplicationInterface api = new("Conversant", new Uri("http://example.com/api"), true, "blog123")
-        {
-            Documentation = new Uri("http://example.com/docs/"),
-            Notes = "Test notes for round trip"
-        };
-        api.Settings.Add("setting1", "value1");
-        api.Settings.Add("setting2", "value2");
-        originalDocument.Interfaces.Add(api);
-
-        // Act
-        using MemoryStream stream = new();
-        originalDocument.Save(stream);
-        stream.Position = 0;
-
-        RsdDocument loadedDocument = new();
-        loadedDocument.Load(stream);
-
-        // Assert - Basic API properties are preserved
-        loadedDocument.Interfaces.Count.ShouldBe(1);
-        RsdApplicationInterface loadedApi = loadedDocument.Interfaces[0];
-        loadedApi.Name.ShouldBe(api.Name);
-        loadedApi.Link.ShouldBe(api.Link);
-        loadedApi.IsPreferred.ShouldBe(api.IsPreferred);
-        loadedApi.WeblogId.ShouldBe(api.WeblogId);
-
-        // Settings are not loaded due to XPath issue - documenting current behavior
-        loadedApi.Documentation.ShouldBeNull();
-        loadedApi.Notes.ShouldBeEmpty();
-        loadedApi.Settings.ShouldBeEmpty();
-    }
-
-    /// <summary>
     /// A second save and reload leaves the service properties and the interface count where the first one left them.
     /// </summary>
     [TestMethod]
@@ -562,22 +501,23 @@ public class RsdDocumentBehaviorTests
     #region Format and Version Tests
 
     /// <summary>
-    /// A document reports <c>SyndicationContentFormat.Opml</c> as its format, which is the wrong answer.
+    /// A document reports <c>SyndicationContentFormat.Rsd</c> as its format.
     /// </summary>
     /// <remarks>
-    ///     <c>SyndicationContentFormat</c> has an <c>Rsd</c> member, and <c>RsdDocument</c> does not return
-    ///     it: the type hard-codes <c>SyndicationContentFormat.Opml</c> (<c>RsdDocument.cs:35</c>). The test
-    ///     pins the shipped behaviour so that correcting it is a visible change rather than a silent one.
+    ///     The type used to hard-code <c>SyndicationContentFormat.Opml</c> while both of its load paths passed
+    ///     <c>SyndicationContentFormat.Rsd</c> to the adapter — so the one public place a consumer could ask
+    ///     what it was holding answered with a different format entirely. Nothing inside the library reads
+    ///     <see cref="ISyndicationResource.Format"/>, which is why it went unnoticed: the blast radius is
+    ///     consumer dispatch, and consumer dispatch is exactly what the property exists for.
     /// </remarks>
     [TestMethod]
-    public void RsdDocument_Format_ReturnsOpml()
+    public void RsdDocument_Format_ReturnsRsd()
     {
-        // Note: RsdDocument currently returns SyndicationContentFormat.Opml due to implementation
         // Arrange
         RsdDocument document = new();
 
         // Assert
-        document.Format.ShouldBe(SyndicationContentFormat.Opml);
+        document.Format.ShouldBe(SyndicationContentFormat.Rsd);
     }
 
     /// <summary>

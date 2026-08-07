@@ -294,6 +294,22 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// </summary>
     /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+    /// <remarks>
+    ///     <para>
+    ///         The comparison folds the same six members <see cref="GetHashCode"/> does, in this order:
+    ///         <see cref="Title"/> (case-insensitively, as it is hashed), <see cref="CreatedOn"/>,
+    ///         <see cref="ModifiedOn"/>, <see cref="VerticalScrollState"/>, <see cref="Owner"/> and
+    ///         <see cref="Window"/>. The last two delegate to their own comparisons, and a
+    ///         <see langword="null"/> sorts below a present one.
+    ///     </para>
+    ///     <para>
+    ///         <see cref="ExpansionState"/> is deliberately excluded from both, and the two must stay in
+    ///         step. It is a collection, and folding one into <see cref="HashCode.Combine{T1, T2, T3, T4, T5, T6}"/>
+    ///         by its instance rather than its elements is the defect that had to be removed from seven
+    ///         types; comparing it without hashing it the same way would put this type straight back into
+    ///         the state this method was written to leave — equality and hashing disagreeing.
+    ///     </para>
+    /// </remarks>
     public int CompareTo(OpmlHead? other)
     {
         if (other is null)
@@ -301,7 +317,31 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
             return 1;
         }
 
-        int result = 0; //String.Compare(this.Domain, other.Domain, StringComparison.OrdinalIgnoreCase);
+        int result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.CreatedOn.CompareTo(other.CreatedOn);
+        if (result == 0) result = this.ModifiedOn.CompareTo(other.ModifiedOn);
+        if (result == 0) result = this.VerticalScrollState.CompareTo(other.VerticalScrollState);
+        if (result == 0)
+        {
+            result = (this.Owner, other.Owner) switch
+            {
+                (null, null) => 0,
+                (not null, null) => 1,
+                (null, not null) => -1,
+                var (mine, theirs) => mine.CompareTo(theirs),
+            };
+        }
+
+        if (result == 0)
+        {
+            result = (this.Window, other.Window) switch
+            {
+                (null, null) => 0,
+                (not null, null) => 1,
+                (null, not null) => -1,
+                var (mine, theirs) => mine.CompareTo(theirs),
+            };
+        }
 
         return result;
     }

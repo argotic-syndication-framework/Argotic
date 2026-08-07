@@ -136,10 +136,7 @@ public class ComparisonOperatorContractTests
             () => MediaRestriction("de", "fr"),
             () => MediaRestriction("us", "gb", "ca")),
 
-        // OpmlHead.CompareTo always returns 0 - ordering is not implemented on the type. The file this
-        // replaced worked around that by overriding four base tests to assert the opposite outcome. Naming
-        // the degeneracy is more honest than inverting the assertions.
-        DegenerateRow<OpmlHead>(() => new() { Title = "Head B" }),
+        Row<OpmlHead>(() => new() { Title = "Head B" }, () => new() { Title = "Head A" }, () => new() { Title = "Head C" }),
     ];
 
     /// <summary>
@@ -218,16 +215,6 @@ public class ComparisonOperatorContractTests
         => [typeof(T).Name, () => VerifyOrdered(create, lesser, greater)];
 
     /// <summary>
-    /// Registers a type whose <see cref="IComparable{T}.CompareTo"/> always returns zero.
-    /// </summary>
-    /// <typeparam name="T">The type under test.</typeparam>
-    /// <param name="create">Creates an instance.</param>
-    /// <returns>A registration row.</returns>
-    private static object[] DegenerateRow<T>(Func<T> create)
-        where T : class, IComparable<T>, IComparisonOperators
-        => [typeof(T).Name, () => VerifyDegenerate(create)];
-
-    /// <summary>
     /// Asserts the full ordering contract.
     /// </summary>
     /// <typeparam name="T">The type under test.</typeparam>
@@ -270,36 +257,6 @@ public class ComparisonOperatorContractTests
 
         EqualityOperator(lesser, greater).ShouldBeFalse($"{typeof(T).Name}: unequal instances are not ==");
         InequalityOperator(lesser, greater).ShouldBeTrue($"{typeof(T).Name}: unequal instances are !=");
-
-        VerifyEquality(first, second, none, alsoNone);
-    }
-
-    /// <summary>
-    /// Asserts the contract for a type whose comparison always reports equality.
-    /// </summary>
-    /// <typeparam name="T">The type under test.</typeparam>
-    /// <param name="create">Creates an instance.</param>
-    private static void VerifyDegenerate<T>(Func<T> create)
-        where T : class, IComparable<T>, IComparisonOperators
-    {
-        T first = create();
-        T second = create();
-        T? none = null;
-        T? alsoNone = null;
-
-        (first < second).ShouldBeFalse($"{typeof(T).Name}: CompareTo returns 0, so < is never true");
-        (first > second).ShouldBeFalse($"{typeof(T).Name}: CompareTo returns 0, so > is never true");
-        (first <= second).ShouldBeTrue($"{typeof(T).Name}: CompareTo returns 0, so <= is always true");
-        (first >= second).ShouldBeTrue($"{typeof(T).Name}: CompareTo returns 0, so >= is always true");
-
-        (none < first).ShouldBeTrue($"{typeof(T).Name}: null < instance");
-        (first < none).ShouldBeFalse($"{typeof(T).Name}: instance < null");
-        (none > first).ShouldBeFalse($"{typeof(T).Name}: null > instance");
-        (first > none).ShouldBeTrue($"{typeof(T).Name}: instance > null");
-        (none <= first).ShouldBeTrue($"{typeof(T).Name}: null <= instance");
-        (first >= none).ShouldBeTrue($"{typeof(T).Name}: instance >= null");
-        (none <= alsoNone).ShouldBeTrue($"{typeof(T).Name}: null <= null");
-        (none >= alsoNone).ShouldBeTrue($"{typeof(T).Name}: null >= null");
 
         VerifyEquality(first, second, none, alsoNone);
     }

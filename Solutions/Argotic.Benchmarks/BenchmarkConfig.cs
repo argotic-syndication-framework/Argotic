@@ -1,5 +1,7 @@
+using BenchmarkDotNet.Columns;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
+using BenchmarkDotNet.Exporters.Json;
 using BenchmarkDotNet.Jobs;
 
 namespace Argotic.Benchmarks;
@@ -47,6 +49,33 @@ namespace Argotic.Benchmarks;
 /// BenchmarkDotNet.Diagnostics.Windows — this repository targets net10.0 and runs its builds on
 /// Linux, so an ETW-based diagnoser would report nothing.
 /// </para>
+/// <para>
+/// Also deliberately absent: an orderer. BenchmarkDotNet can sort a summary from fastest to slowest,
+/// but several classes here document an arm order that carries meaning — position in a dispatch
+/// chain, or successive stages of a pipeline whose adjacent differences are the measurement — and
+/// re-sorting the table would destroy the property those classes were built on.
+/// </para>
+/// <para>
+/// Tiered compilation is left at its default, and the reason is worth recording because the common
+/// advice is the opposite. Disabling it does reduce dispersion: measured over the eighteen cases of
+/// <c>FrozenLookupBenchmarks</c>, <c>DOTNET_TieredCompilation=0</c> tightened seventeen of them and
+/// halved the mean error, from 13.3% of the mean to 6.5%. It reduces dispersion by changing what is
+/// measured. The same run reported the frozen-dictionary lookup at 8.83 ns against 1.61 ns by
+/// default, and a three-entry linear scan at 2.97 ns against 0.52 ns — between 1.3 and 7.4 times the
+/// default across the eighteen. The error bars narrow because slower code jitters proportionally
+/// less, and the result would be a table quoting several times the real cost with better-looking
+/// confidence intervals to support it.
+/// </para>
+/// <para>
+/// The mechanism is dynamic profile-guided optimisation, which is implemented through tiered
+/// compilation: methods are instrumented in the first tier and recompiled in the second using the
+/// collected profile. Disabling tiering discards the profile rather than skipping a warmup phase.
+/// A third run isolated this — tiering left on with <c>DOTNET_TieredPGO=0</c> reproduced most of the
+/// slowdown, placing the same two arms at 5.18 ns and 2.41 ns — which identifies profile-guided
+/// optimisation as the dominant component and leaves a smaller residue attributable to tiering
+/// itself. Since the library runs under the default configuration, that is the configuration these
+/// benchmarks measure.
+/// </para>
 /// </remarks>
 internal sealed class BenchmarkConfig : ManualConfig
 {
@@ -68,5 +97,20 @@ internal sealed class BenchmarkConfig : ManualConfig
         this.AddDiagnoser(MemoryDiagnoser.Default);
         this.AddDiagnoser(ExceptionDiagnoser.Default);
         this.AddDiagnoser(ThreadingDiagnoser.Default);
+
+        // The default table reports mean, error and standard deviation only, which describes a
+        // distribution adequately when it is symmetric and misleads when it is not. Timing on this
+        // machine is not reliably symmetric: thermal throttling truncates a run at one end, so the mean
+        // moves while the median does not. These three columns make that visible instead of leaving it
+        // to be inferred from an error bar.
+        this.AddColumn(StatisticColumn.Median);
+        this.AddColumn(StatisticColumn.Min);
+        this.AddColumn(StatisticColumn.Max);
+
+        // The default exporters emit Markdown, HTML and CSV, all of which are for reading. None can be
+        // consumed by a regression detector. The full compressed JSON document is the format both
+        // BenchmarkDotNet.Analyser and the github-action-benchmark action read, so emitting it is what
+        // makes a future comparison against a stored baseline possible at all.
+        this.AddExporter(JsonExporter.FullCompressed);
     }
 }

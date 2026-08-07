@@ -23,10 +23,10 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Data.Adapters;
 ///     seen instead answers one where the caller asked for two.
 ///     </para>
 ///     <para>
-///     The live Sitemap paths are exercised through <c>Sitemap.Load</c> and <c>SitemapIndex.Load</c>
-///     rather than through <see cref="Sitemap09SyndicationResourceAdapter"/>, because those two resources
-///     do not route through the adapter: they carry their own private element walk, and it is the only
-///     Sitemap code a consumer reaches.
+///     The Sitemap limits are exercised twice — through <c>Sitemap.Load</c> and <c>SitemapIndex.Load</c>
+///     as well as through <see cref="Sitemap09SyndicationResourceAdapter"/> directly. The resources route
+///     their loads through the dispatcher into that adapter, so both spellings reach the same walk, and
+///     keeping both pins the convergence.
 ///     </para>
 /// </remarks>
 [TestClass]

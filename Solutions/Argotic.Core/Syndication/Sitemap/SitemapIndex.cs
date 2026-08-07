@@ -2,6 +2,7 @@ using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
+using Argotic.Data.Adapters;
 using Argotic.Extensions;
 
 namespace Argotic.Syndication;
@@ -393,9 +394,14 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     ///     After the load operation has successfully completed, the <see cref="SitemapIndex.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
     ///     </para>
     ///     <para>
-    ///     This walk, not <see cref="Argotic.Data.Adapters.Sitemap09SyndicationResourceAdapter"/>, is what
-    ///     every public <c>Load</c> on this type reaches. <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/>
-    ///     is a budget of entries <i>kept</i>, so a <c>sitemap</c> that fails to load costs nothing against it.
+    ///     Every public <c>Load</c> on this type funnels here, and this routes through
+    ///     <see cref="SyndicationResourceAdapter"/> like every other resource, so the document is
+    ///     format-checked before anything is read: a document that is not a root-level
+    ///     <c>sitemapindex</c> in the sitemaps.org namespace is refused rather than answered with an
+    ///     empty index and a raised event. The element walk itself lives in
+    ///     <see cref="Sitemap09SyndicationResourceAdapter"/>, where
+    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is a budget of entries
+    ///     <i>kept</i>: a <c>sitemap</c> that fails to load costs nothing against it.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
@@ -408,37 +414,8 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(eventData);
 
-        XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
-
-        XPathNodeIterator sitemapIterator = navigator.Select("//sm:sitemapindex/sm:sitemap", manager);
-
-        if (sitemapIterator is { Count: > 0 })
-        {
-            int added = 0;
-            while (sitemapIterator.MoveNext())
-            {
-                if (settings.RetrievalLimit != 0 && added >= settings.RetrievalLimit)
-                {
-                    break;
-                }
-
-                XPathNavigator? sitemapNode = sitemapIterator.Current;
-                if (sitemapNode is null)
-                {
-                    continue;
-                }
-
-                SitemapIndexEntry entry = new();
-                if (entry.Load(sitemapNode))
-                {
-                    this.Sitemaps.Add(entry);
-                    added++;
-                }
-            }
-        }
-
-        SyndicationExtensionAdapter adapter = new(navigator, settings);
-        adapter.Fill(this);
+        SyndicationResourceAdapter adapter = new(navigator, settings);
+        adapter.Fill(this, SyndicationContentFormat.SitemapIndex);
 
         this.OnSitemapIndexLoaded(eventData);
     }

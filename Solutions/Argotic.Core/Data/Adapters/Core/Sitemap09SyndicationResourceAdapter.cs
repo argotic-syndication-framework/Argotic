@@ -37,7 +37,9 @@ public sealed class Sitemap09SyndicationResourceAdapter : SyndicationResourceAda
     /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the syndication resource information.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="Sitemap"/> or <see cref="SitemapIndex"/>.</param>
     /// <remarks>
-    ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="Sitemap"/> or <see cref="SitemapIndex"/>.
+    ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the document
+    ///     root: each <c>Fill</c> selects the <c>urlset</c> or <c>sitemapindex</c> element as a child of
+    ///     where the navigator stands, not as the navigator's own position.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>

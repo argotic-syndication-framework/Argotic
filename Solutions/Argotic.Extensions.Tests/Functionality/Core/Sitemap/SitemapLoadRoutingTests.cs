@@ -10,20 +10,24 @@ using SitemapResource = Argotic.Syndication.Sitemap;
 namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 
 /// <summary>
-/// Pins what <c>Sitemap.Load</c> and <c>SitemapIndex.Load</c> accept, which is currently everything.
+/// Covers what <c>Sitemap.Load</c> and <c>SitemapIndex.Load</c> accept now that they route through the
+/// dispatcher like every other resource.
 /// </summary>
 /// <remarks>
 ///     <para>
-///     The two sitemap resources are the only ones that do not route through
-///     <c>SyndicationResourceAdapter</c>: their private walks select with the absolute expression
-///     <c>//sm:urlset/sm:url</c> and never sniff the format, so a non-sitemap document yields an empty
-///     resource and a raised <c>Loaded</c>, a nested <c>urlset</c> loads from anywhere in the tree, and a
-///     navigator positioned on an element rather than the document node loads regardless — the absolute
-///     path starts at the root no matter where the navigator stands.
+///     The two sitemap resources were the only ones that bypassed <c>SyndicationResourceAdapter</c>,
+///     running a private walk over the absolute expression <c>//sm:urlset/sm:url</c> with no format
+///     check. Routing through the dispatcher buys the refusal every other resource already had: a
+///     non-sitemap document, an un-namespaced root, a <c>urlset</c> nested below a foreign root, and a
+///     navigator positioned on an element rather than the document node are all refused with a
+///     <see cref="FormatException"/> instead of yielding an empty resource and a raised <c>Loaded</c>.
 ///     </para>
 ///     <para>
-///     Characterisations, not guards: each pins an answer the dispatcher rewiring deliberately inverts,
-///     and exists so that the inversion is seen red before the behaviour moves.
+///     The element-positioned refusal is the deliberate cost of consistency: detection sniffs child
+///     elements from where the navigator stands, exactly as it does for the other nine formats. The one
+///     format family with a positioned-navigator concession is the Atom Publishing Protocol, whose
+///     categories detection carries a self-arm because <c>AtomMemberResources</c> hands it an element;
+///     nothing in this library hands a sitemap one.
 ///     </para>
 /// </remarks>
 [TestClass]
@@ -91,10 +95,11 @@ public class SitemapLoadRoutingTests
     private static MemoryStream StreamFor(string xml) => new(Encoding.UTF8.GetBytes(xml));
 
     /// <summary>
-    /// An RSS document handed to <c>Sitemap.Load</c> yields an empty sitemap and a raised <c>Loaded</c>.
+    /// An RSS document handed to <c>Sitemap.Load</c> is refused with a message naming both formats, and
+    /// <c>Loaded</c> is not raised.
     /// </summary>
     [TestMethod]
-    public void ANonSitemapDocument_HandedToSitemapLoad_YieldsAnEmptySitemapAndRaisesLoaded()
+    public void ANonSitemapDocument_HandedToSitemapLoad_IsRefused()
     {
         // Arrange
         SitemapResource sitemap = new();
@@ -103,55 +108,62 @@ public class SitemapLoadRoutingTests
         using MemoryStream stream = StreamFor(Rss20Document);
 
         // Act
-        sitemap.Load(stream);
+        FormatException exception = Should.Throw<FormatException>(() => sitemap.Load(stream));
 
         // Assert
+        exception.Message.ShouldContain("Rss");
+        exception.Message.ShouldContain("Sitemap");
         sitemap.Urls.ShouldBeEmpty();
-        loadedCount.ShouldBe(1);
+        loadedCount.ShouldBe(0);
     }
 
     /// <summary>
-    /// A <c>urlset</c> without the sitemaps.org namespace yields an empty sitemap.
+    /// A <c>urlset</c> without the sitemaps.org namespace is refused — the detection reports no format at
+    /// all.
     /// </summary>
     [TestMethod]
-    public void AnUnNamespacedUrlset_HandedToSitemapLoad_YieldsAnEmptySitemap()
+    public void AnUnNamespacedUrlset_HandedToSitemapLoad_IsRefused()
     {
         // Arrange
         SitemapResource sitemap = new();
         using MemoryStream stream = StreamFor(UnNamespacedUrlset);
 
         // Act
-        sitemap.Load(stream);
+        FormatException exception = Should.Throw<FormatException>(() => sitemap.Load(stream));
 
         // Assert
+        exception.Message.ShouldContain("None");
+        exception.Message.ShouldContain("Sitemap");
         sitemap.Urls.ShouldBeEmpty();
     }
 
     /// <summary>
-    /// A namespaced <c>urlset</c> nested below a foreign root still loads — the absolute <c>//</c> walk
-    /// finds it at any depth.
+    /// A namespaced <c>urlset</c> nested below a foreign root is refused: the protocol requires
+    /// <c>urlset</c> to be the document element, and only the old absolute <c>//</c> walk ever read one
+    /// from deeper in the tree.
     /// </summary>
     [TestMethod]
-    public void ANestedUrlset_HandedToSitemapLoad_ReadsTheNestedUrls()
+    public void ANestedUrlset_HandedToSitemapLoad_IsRefused()
     {
         // Arrange
         SitemapResource sitemap = new();
         using MemoryStream stream = StreamFor(NestedUrlset);
 
         // Act
-        sitemap.Load(stream);
+        FormatException exception = Should.Throw<FormatException>(() => sitemap.Load(stream));
 
         // Assert
-        sitemap.Urls.Count.ShouldBe(1);
-        sitemap.Urls[0].Location.ShouldBe(new Uri("http://example.com/a"));
+        exception.Message.ShouldContain("None");
+        exception.Message.ShouldContain("Sitemap");
+        sitemap.Urls.ShouldBeEmpty();
     }
 
     /// <summary>
-    /// A conforming document behind a navigator positioned on the <c>urlset</c> element still loads — the
-    /// absolute path starts at the document root regardless of where the navigator stands.
+    /// A conforming document behind a navigator positioned on the <c>urlset</c> element is refused —
+    /// detection sniffs from where the navigator stands, for sitemaps exactly as for every other format.
     /// </summary>
     [TestMethod]
-    public void AConformingSitemap_LoadedFromANavigatorPositionedOnUrlset_ReadsTheUrls()
+    public void AConformingSitemap_LoadedFromANavigatorPositionedOnUrlset_IsRefused()
     {
         // Arrange
         using MemoryStream stream = StreamFor(ConformingSitemap);
@@ -161,18 +173,19 @@ public class SitemapLoadRoutingTests
         SitemapResource sitemap = new();
 
         // Act
-        sitemap.Load(navigator);
+        FormatException exception = Should.Throw<FormatException>(() => sitemap.Load(navigator));
 
         // Assert
-        sitemap.Urls.Count.ShouldBe(1);
-        sitemap.Urls[0].Location.ShouldBe(new Uri("http://example.com/a"));
+        exception.Message.ShouldContain("None");
+        exception.Message.ShouldContain("Sitemap");
+        sitemap.Urls.ShouldBeEmpty();
     }
 
     /// <summary>
-    /// An RSS document handed to <c>SitemapIndex.Load</c> yields an empty index and a raised <c>Loaded</c>.
+    /// An RSS document handed to <c>SitemapIndex.Load</c> is refused, and <c>Loaded</c> is not raised.
     /// </summary>
     [TestMethod]
-    public void ANonSitemapDocument_HandedToSitemapIndexLoad_YieldsAnEmptyIndex()
+    public void ANonSitemapDocument_HandedToSitemapIndexLoad_IsRefused()
     {
         // Arrange
         SitemapIndex index = new();
@@ -181,53 +194,58 @@ public class SitemapLoadRoutingTests
         using MemoryStream stream = StreamFor(Rss20Document);
 
         // Act
-        index.Load(stream);
+        FormatException exception = Should.Throw<FormatException>(() => index.Load(stream));
 
         // Assert
+        exception.Message.ShouldContain("Rss");
+        exception.Message.ShouldContain("SitemapIndex");
         index.Sitemaps.ShouldBeEmpty();
-        loadedCount.ShouldBe(1);
+        loadedCount.ShouldBe(0);
     }
 
     /// <summary>
-    /// A <c>sitemapindex</c> without the sitemaps.org namespace yields an empty index.
+    /// A <c>sitemapindex</c> without the sitemaps.org namespace is refused.
     /// </summary>
     [TestMethod]
-    public void AnUnNamespacedSitemapindex_HandedToSitemapIndexLoad_YieldsAnEmptyIndex()
+    public void AnUnNamespacedSitemapindex_HandedToSitemapIndexLoad_IsRefused()
     {
         // Arrange
         SitemapIndex index = new();
         using MemoryStream stream = StreamFor(UnNamespacedSitemapindex);
 
         // Act
-        index.Load(stream);
+        FormatException exception = Should.Throw<FormatException>(() => index.Load(stream));
 
         // Assert
+        exception.Message.ShouldContain("None");
+        exception.Message.ShouldContain("SitemapIndex");
         index.Sitemaps.ShouldBeEmpty();
     }
 
     /// <summary>
-    /// A namespaced <c>sitemapindex</c> nested below a foreign root still loads.
+    /// A namespaced <c>sitemapindex</c> nested below a foreign root is refused.
     /// </summary>
     [TestMethod]
-    public void ANestedSitemapindex_HandedToSitemapIndexLoad_ReadsTheNestedEntries()
+    public void ANestedSitemapindex_HandedToSitemapIndexLoad_IsRefused()
     {
         // Arrange
         SitemapIndex index = new();
         using MemoryStream stream = StreamFor(NestedSitemapindex);
 
         // Act
-        index.Load(stream);
+        FormatException exception = Should.Throw<FormatException>(() => index.Load(stream));
 
         // Assert
-        index.Sitemaps.Count.ShouldBe(1);
-        index.Sitemaps[0].Location.ShouldBe(new Uri("http://example.com/sitemap1.xml"));
+        exception.Message.ShouldContain("None");
+        exception.Message.ShouldContain("SitemapIndex");
+        index.Sitemaps.ShouldBeEmpty();
     }
 
     /// <summary>
-    /// A conforming document behind a navigator positioned on the <c>sitemapindex</c> element still loads.
+    /// A conforming document behind a navigator positioned on the <c>sitemapindex</c> element is refused.
     /// </summary>
     [TestMethod]
-    public void AConformingSitemapIndex_LoadedFromANavigatorPositionedOnSitemapindex_ReadsTheEntries()
+    public void AConformingSitemapIndex_LoadedFromANavigatorPositionedOnSitemapindex_IsRefused()
     {
         // Arrange
         using MemoryStream stream = StreamFor(ConformingSitemapIndex);
@@ -237,11 +255,12 @@ public class SitemapLoadRoutingTests
         SitemapIndex index = new();
 
         // Act
-        index.Load(navigator);
+        FormatException exception = Should.Throw<FormatException>(() => index.Load(navigator));
 
         // Assert
-        index.Sitemaps.Count.ShouldBe(1);
-        index.Sitemaps[0].Location.ShouldBe(new Uri("http://example.com/sitemap1.xml"));
+        exception.Message.ShouldContain("None");
+        exception.Message.ShouldContain("SitemapIndex");
+        index.Sitemaps.ShouldBeEmpty();
     }
 
     /// <summary>

@@ -2,6 +2,7 @@ using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
+using Argotic.Data.Adapters;
 using Argotic.Extensions;
 
 namespace Argotic.Syndication;
@@ -405,11 +406,13 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
     ///     After the load operation has successfully completed, the <see cref="Sitemap.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
     ///     </para>
     ///     <para>
-    ///     This walk, not <see cref="Argotic.Data.Adapters.Sitemap09SyndicationResourceAdapter"/>, is what
-    ///     every public <c>Load</c> on this type reaches — the adapter has no caller in this library. The two
-    ///     are kept in step deliberately: <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is a
-    ///     budget of urls <i>kept</i>, so a <c>url</c> that fails to load costs nothing and a limit of ten
-    ///     yields ten urls and ten parses.
+    ///     Every public <c>Load</c> on this type funnels here, and this routes through
+    ///     <see cref="SyndicationResourceAdapter"/> like every other resource, so the document is
+    ///     format-checked before anything is read: a document that is not a root-level <c>urlset</c> in
+    ///     the sitemaps.org namespace is refused rather than answered with an empty sitemap and a raised
+    ///     event. The element walk itself lives in <see cref="Sitemap09SyndicationResourceAdapter"/>,
+    ///     where <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is a budget of urls
+    ///     <i>kept</i>: a <c>url</c> that fails to load costs nothing, and a limit of ten yields ten urls.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
@@ -422,37 +425,8 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(eventData);
 
-        XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
-
-        XPathNodeIterator urlIterator = navigator.Select("//sm:urlset/sm:url", manager);
-
-        if (urlIterator is { Count: > 0 })
-        {
-            int added = 0;
-            while (urlIterator.MoveNext())
-            {
-                if (settings.RetrievalLimit != 0 && added >= settings.RetrievalLimit)
-                {
-                    break;
-                }
-
-                XPathNavigator? urlNode = urlIterator.Current;
-                if (urlNode is null)
-                {
-                    continue;
-                }
-
-                SitemapUrl url = new();
-                if (url.Load(urlNode, settings))
-                {
-                    this.Urls.Add(url);
-                    added++;
-                }
-            }
-        }
-
-        SyndicationExtensionAdapter adapter = new(navigator, settings);
-        adapter.Fill(this);
+        SyndicationResourceAdapter adapter = new(navigator, settings);
+        adapter.Fill(this, SyndicationContentFormat.Sitemap);
 
         this.OnSitemapLoaded(eventData);
     }

@@ -1,3 +1,6 @@
+using System.Text;
+using System.Xml;
+
 using Argotic.Extensions.Core;
 using Shouldly;
 
@@ -8,6 +11,31 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 /// <see cref="SitemapVideoPlatform"/>, whose members are combinable flags, and
 /// <see cref="SitemapVideoRelationship"/>, which supplies the allow-or-deny sense.
 /// </summary>
+/// <remarks>
+///     <para>
+///     The remaining enum tests pin the <i>declared values</i> — <c>None = 0</c>, <c>Web = 1</c>,
+///     <c>Mobile = 2</c>, <c>Tv = 4</c>, and the <c>[Flags]</c> attribute. Those are load-bearing
+///     because <c>SitemapVideo.LoadPlatform</c> composes with <c>|=</c> and <c>WritePlatformElement</c>
+///     tests with <c>&amp;</c>: both are wrong the moment the members stop being distinct powers of two.
+///     </para>
+///     <para>
+///     Twelve further tests were removed from this class rather than kept. They asserted things like
+///     <c>(Web | Mobile).HasFlag(Web)</c>, <c>(SitemapVideoPlatform)(int)combined == combined</c>, and
+///     <c>SitemapVideoRelationship.Allow.ShouldBe(SitemapVideoRelationship.Allow)</c> — bit arithmetic
+///     and language guarantees, authored in the test and true of every enum in .NET. Two of them ran a
+///     <c>switch</c> written inside the test body and asserted its arms.
+///     </para>
+///     <para>
+///     What they stood in for, and what the <c>TheParsePath_*</c> tests below now cover, is where the
+///     two enumerations acquire meaning: the space-delimited composition in
+///     <c>SitemapVideo.LoadPlatform</c> and the fail-closed relationship rule beside it, under which
+///     <i>only</i> the literal <c>allow</c> yields <see cref="SitemapVideoRelationship.Allow"/> and
+///     anything else — including a typo — yields <see cref="SitemapVideoRelationship.Deny"/>. Neither
+///     was asserted anywhere in the suite: the only test that parsed a <c>video:platform</c> element
+///     asserted <c>video.Platform.ShouldNotBeNull()</c> and never looked at the flags or the
+///     relationship.
+///     </para>
+/// </remarks>
 [TestClass]
 public class SitemapVideoPlatformTests
 {
@@ -58,133 +86,9 @@ public class SitemapVideoPlatformTests
         // Assert
         type.GetCustomAttributes(typeof(FlagsAttribute), false).Length.ShouldBe(1);
     }
-
-    /// <summary>
-    /// <c>Web | Mobile</c> reports both of those flags set and <c>Tv</c> clear.
-    /// </summary>
-    [TestMethod]
-    public void SitemapVideoPlatform_CanCombineWebAndMobile()
-    {
-        // Arrange
-        SitemapVideoPlatform combined = SitemapVideoPlatform.Web | SitemapVideoPlatform.Mobile;
-
-        // Assert
-        combined.HasFlag(SitemapVideoPlatform.Web).ShouldBeTrue();
-        combined.HasFlag(SitemapVideoPlatform.Mobile).ShouldBeTrue();
-        combined.HasFlag(SitemapVideoPlatform.Tv).ShouldBeFalse();
-    }
-
-    /// <summary>
-    /// All three platform flags together are <c>7</c>, and each reads back as set.
-    /// </summary>
-    [TestMethod]
-    public void SitemapVideoPlatform_CanCombineAllPlatforms()
-    {
-        // Arrange
-        SitemapVideoPlatform allPlatforms = SitemapVideoPlatform.Web | SitemapVideoPlatform.Mobile | SitemapVideoPlatform.Tv;
-
-        // Assert
-        allPlatforms.HasFlag(SitemapVideoPlatform.Web).ShouldBeTrue();
-        allPlatforms.HasFlag(SitemapVideoPlatform.Mobile).ShouldBeTrue();
-        allPlatforms.HasFlag(SitemapVideoPlatform.Tv).ShouldBeTrue();
-        ((int)allPlatforms).ShouldBe(7);
-    }
-
-    /// <summary>
-    /// A combination cast to <see cref="int"/> and back is the same combination, so the numeric form is
-    /// lossless.
-    /// </summary>
-    [TestMethod]
-    public void SitemapVideoPlatform_CombinedValue_CanBeParsedBack()
-    {
-        // Arrange
-        SitemapVideoPlatform combined = SitemapVideoPlatform.Web | SitemapVideoPlatform.Mobile;
-        int numericValue = (int)combined;
-
-        // Act
-        SitemapVideoPlatform parsed = (SitemapVideoPlatform)numericValue;
-
-        // Assert
-        parsed.ShouldBe(combined);
-        parsed.HasFlag(SitemapVideoPlatform.Web).ShouldBeTrue();
-        parsed.HasFlag(SitemapVideoPlatform.Mobile).ShouldBeTrue();
-    }
-
-    /// <summary>
-    /// <c>None</c> reports every platform flag clear.
-    /// </summary>
-    [TestMethod]
-    public void SitemapVideoPlatform_None_DoesNotHaveAnyPlatformFlags()
-    {
-        // Arrange
-        SitemapVideoPlatform none = SitemapVideoPlatform.None;
-
-        // Assert
-        none.HasFlag(SitemapVideoPlatform.Web).ShouldBeFalse();
-        none.HasFlag(SitemapVideoPlatform.Mobile).ShouldBeFalse();
-        none.HasFlag(SitemapVideoPlatform.Tv).ShouldBeFalse();
-    }
-
-    /// <summary>
-    /// Masking a flag out of a combination leaves the remaining flag set and the removed one clear.
-    /// </summary>
-    [TestMethod]
-    public void SitemapVideoPlatform_BitwiseOperations_WorkCorrectly()
-    {
-        // Arrange
-        SitemapVideoPlatform webAndMobile = SitemapVideoPlatform.Web | SitemapVideoPlatform.Mobile;
-
-        // Act - Remove Mobile
-        SitemapVideoPlatform webOnly = webAndMobile & ~SitemapVideoPlatform.Mobile;
-
-        // Assert
-        webOnly.ShouldBe(SitemapVideoPlatform.Web);
-        webOnly.HasFlag(SitemapVideoPlatform.Mobile).ShouldBeFalse();
-    }
-
-    /// <summary>
-    /// The three platform values are successive powers of two — <c>1</c>, <c>2</c> and <c>4</c> — so no
-    /// combination collides with a single member.
-    /// </summary>
-    [TestMethod]
-    public void SitemapVideoPlatform_ValuesArePowersOfTwo()
-    {
-        // Assert - Each value should be a power of 2 (except None which is 0)
-        ((int)SitemapVideoPlatform.Web).ShouldBe(1);    // 2^0
-        ((int)SitemapVideoPlatform.Mobile).ShouldBe(2); // 2^1
-        ((int)SitemapVideoPlatform.Tv).ShouldBe(4);     // 2^2
-    }
-
     #endregion
 
     #region SitemapVideoRelationship Enum Tests
-
-    /// <summary>
-    /// <c>Allow</c> is a member of the relationship enumeration.
-    /// </summary>
-    [TestMethod]
-    public void SitemapVideoRelationship_Allow_Exists()
-    {
-        // Arrange & Act
-        SitemapVideoRelationship relationship = SitemapVideoRelationship.Allow;
-
-        // Assert
-        relationship.ShouldBe(SitemapVideoRelationship.Allow);
-    }
-
-    /// <summary>
-    /// <c>Deny</c> is a member of the relationship enumeration.
-    /// </summary>
-    [TestMethod]
-    public void SitemapVideoRelationship_Deny_Exists()
-    {
-        // Arrange & Act
-        SitemapVideoRelationship relationship = SitemapVideoRelationship.Deny;
-
-        // Assert
-        relationship.ShouldBe(SitemapVideoRelationship.Deny);
-    }
-
     /// <summary>
     /// The relationship enumeration has exactly two members, so a restriction is allow or deny and
     /// nothing else.
@@ -206,91 +110,125 @@ public class SitemapVideoPlatformTests
     public void SitemapVideoRelationship_AllowAndDeny_AreDifferent() =>
         // Assert
         SitemapVideoRelationship.Allow.ShouldNotBe(SitemapVideoRelationship.Deny);
-
-    /// <summary>
-    /// <c>Allow</c> takes the allow arm of a switch over the enumeration rather than falling to the discard.
-    /// </summary>
-    [TestMethod]
-    public void SitemapVideoRelationship_CanBeUsedInSwitch()
-    {
-        // Arrange
-        SitemapVideoRelationship relationship = SitemapVideoRelationship.Allow;
-
-        // Act
-        string result = relationship switch
-        {
-            SitemapVideoRelationship.Allow => "allow",
-            SitemapVideoRelationship.Deny => "deny",
-            _ => "unknown"
-        };
-
-        // Assert
-        result.ShouldBe("allow");
-    }
-
-    /// <summary>
-    /// <c>Deny</c> takes the deny arm of the same switch.
-    /// </summary>
-    [TestMethod]
-    public void SitemapVideoRelationship_DenyCanBeUsedInSwitch()
-    {
-        // Arrange
-        SitemapVideoRelationship relationship = SitemapVideoRelationship.Deny;
-
-        // Act
-        string result = relationship switch
-        {
-            SitemapVideoRelationship.Allow => "allow",
-            SitemapVideoRelationship.Deny => "deny",
-            _ => "unknown"
-        };
-
-        // Assert
-        result.ShouldBe("deny");
-    }
-
     #endregion
 
     #region Combined Usage Tests
+    #endregion
+
+
+    #region Parse and write behaviour
 
     /// <summary>
-    /// Read the way a consumer would read them, <c>Web | Mobile</c> under <c>Allow</c> permits web and
-    /// does not permit TV.
+    /// Builds a sitemap carrying one video whose <c>video:platform</c> element is as supplied, and
+    /// returns the parsed video.
     /// </summary>
-    [TestMethod]
-    public void CombinedUsage_PlatformWithRelationship_WorksTogether()
+    /// <param name="platformElement">The <c>video:platform</c> element to embed.</param>
+    /// <returns>The single parsed video.</returns>
+    private static SitemapVideo ParseVideoWith(string platformElement)
     {
-        // This test demonstrates how the enums would be used together
-        // in a video sitemap extension
+        string xml = $"""
+            <?xml version="1.0" encoding="UTF-8"?>
+            <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+                    xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+              <url>
+                <loc>https://example.com/watch</loc>
+                <video:video>
+                  <video:thumbnail_loc>https://example.com/thumb.jpg</video:thumbnail_loc>
+                  <video:title>Example Video</video:title>
+                  <video:description>A sample video description</video:description>
+                  <video:content_loc>https://example.com/video.mp4</video:content_loc>
+                  {platformElement}
+                </video:video>
+              </url>
+            </urlset>
+            """;
 
-        // Arrange
-        SitemapVideoPlatform platforms = SitemapVideoPlatform.Web | SitemapVideoPlatform.Mobile;
-        SitemapVideoRelationship relationship = SitemapVideoRelationship.Allow;
+        Argotic.Syndication.Sitemap sitemap = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
+        sitemap.Load(stream);
 
-        // Act - Simulate determining if a platform is allowed
-        bool isWebAllowed = platforms.HasFlag(SitemapVideoPlatform.Web) && relationship == SitemapVideoRelationship.Allow;
-        bool isTvAllowed = platforms.HasFlag(SitemapVideoPlatform.Tv) && relationship == SitemapVideoRelationship.Allow;
-
-        // Assert
-        isWebAllowed.ShouldBeTrue();
-        isTvAllowed.ShouldBeFalse();
+        return sitemap.Urls.Single().Extensions.OfType<SitemapVideoExtension>().Single().Videos.Single();
     }
 
     /// <summary>
-    /// <c>Web</c> under <c>Deny</c> reads as the web platform being denied.
+    /// The platform text is split on spaces and each recognised token is folded in as a flag, so
+    /// <c>web mobile</c> yields <c>Web | Mobile</c> and leaves <c>Tv</c> clear.
+    /// </summary>
+    /// <param name="text">The text content of the <c>video:platform</c> element.</param>
+    /// <param name="expected">The flag combination it must produce.</param>
+    /// <remarks>
+    ///     The <c>tv web</c> row is deliberately out of declaration order, and the mixed-case row proves
+    ///     the token match is case-insensitive. The unrecognised-token rows pin the silent drop: a
+    ///     misspelt platform contributes nothing rather than failing the parse.
+    /// </remarks>
+    [TestMethod]
+    [DataRow("web", SitemapVideoPlatform.Web)]
+    [DataRow("mobile", SitemapVideoPlatform.Mobile)]
+    [DataRow("tv", SitemapVideoPlatform.Tv)]
+    [DataRow("web mobile", SitemapVideoPlatform.Web | SitemapVideoPlatform.Mobile)]
+    [DataRow("tv web", SitemapVideoPlatform.Web | SitemapVideoPlatform.Tv)]
+    [DataRow("web mobile tv", SitemapVideoPlatform.Web | SitemapVideoPlatform.Mobile | SitemapVideoPlatform.Tv)]
+    [DataRow("WEB Mobile", SitemapVideoPlatform.Web | SitemapVideoPlatform.Mobile)]
+    [DataRow("web  mobile", SitemapVideoPlatform.Web | SitemapVideoPlatform.Mobile)]
+    [DataRow("desktop", SitemapVideoPlatform.None)]
+    [DataRow("web desktop", SitemapVideoPlatform.Web)]
+    public void TheParsePath_ComposesThePlatformFlagsFromTheSpaceDelimitedText(string text, SitemapVideoPlatform expected) =>
+        ParseVideoWith($"<video:platform>{text}</video:platform>").Platform.ShouldBe(expected);
+
+    /// <summary>
+    /// Only the literal <c>allow</c> yields <see cref="SitemapVideoRelationship.Allow"/>; every other
+    /// spelling, including a typo, falls closed to <see cref="SitemapVideoRelationship.Deny"/>.
+    /// </summary>
+    /// <param name="relationship">The <c>relationship</c> attribute value.</param>
+    /// <param name="expected">The relationship it must produce.</param>
+    /// <remarks>
+    ///     The <c>allwo</c> row is the point of the test. A restriction list that silently widens on a
+    ///     typo is a security-shaped defect, and this is the rule that stops it — but nothing in the
+    ///     suite asserted the rule until now.
+    /// </remarks>
+    [TestMethod]
+    [DataRow("allow", SitemapVideoRelationship.Allow)]
+    [DataRow("ALLOW", SitemapVideoRelationship.Allow)]
+    [DataRow("deny", SitemapVideoRelationship.Deny)]
+    [DataRow("allwo", SitemapVideoRelationship.Deny)]
+    [DataRow("permit", SitemapVideoRelationship.Deny)]
+    public void TheParsePath_TreatsAnythingButAllowAsDeny(string relationship, SitemapVideoRelationship expected) =>
+        ParseVideoWith($"""<video:platform relationship="{relationship}">web</video:platform>""")
+            .PlatformRelationship.ShouldBe(expected);
+
+    /// <summary>
+    /// A platform element with no <c>relationship</c> attribute leaves the relationship unset rather
+    /// than defaulting it, so the flags survive without inventing an allow-or-deny sense.
     /// </summary>
     [TestMethod]
-    public void CombinedUsage_DenyRelationship_WorksCorrectly()
+    public void TheParsePath_LeavesTheRelationshipUnsetWhenTheAttributeIsAbsent()
     {
-        // Arrange
-        SitemapVideoPlatform platforms = SitemapVideoPlatform.Web;
-        SitemapVideoRelationship relationship = SitemapVideoRelationship.Deny;
+        SitemapVideo video = ParseVideoWith("<video:platform>web tv</video:platform>");
 
-        // Act - If relationship is Deny, the platform should be denied, not allowed
-        bool isWebDenied = platforms.HasFlag(SitemapVideoPlatform.Web) && relationship == SitemapVideoRelationship.Deny;
+        video.Platform.ShouldBe(SitemapVideoPlatform.Web | SitemapVideoPlatform.Tv);
+        video.PlatformRelationship.ShouldBeNull();
+    }
 
-        // Assert
-        isWebDenied.ShouldBeTrue();
+    /// <summary>
+    /// The flags are written back out as the same space-delimited tokens, in declaration order, beside
+    /// the relationship — so a document survives being read and written.
+    /// </summary>
+    [TestMethod]
+    public void TheWritePath_EmitsTheFlagsAsSpaceDelimitedTokensBesideTheRelationship()
+    {
+        SitemapVideo video = ParseVideoWith($"""<video:platform relationship="deny">tv web</video:platform>""");
+
+        SitemapVideoExtension extension = new();
+        extension.Videos.Add(video);
+
+        using StringWriter sw = new();
+        using (XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment }))
+        {
+            extension.WriteTo(writer);
+        }
+
+        // Declaration order, not the order the document used: the writer tests Web, then Mobile, then Tv.
+        sw.ToString().ShouldContain("""<platform relationship="deny">web tv</platform>""");
     }
 
     #endregion

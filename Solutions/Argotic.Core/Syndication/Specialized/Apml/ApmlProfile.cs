@@ -337,59 +337,14 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
 
         writer.WriteAttributeString("name", this.Name);
 
-        if (this.ImplicitConcepts.Count > 0 || this.ImplicitSources.Count > 0)
-        {
-            writer.WriteStartElement("ImplicitData", ApmlUtility.ApmlNamespace);
+        // ImplicitData and ExplicitData are both mandatory children of ProfileType -- the schema's sequence
+        // gives neither a minOccurs, so both default to 1 -- and they must appear in that order. They are
+        // therefore written even when the profile holds nothing of that kind. An empty container is an
+        // honest statement: it says "no implicit data" and asserts nothing untrue, which is what separates
+        // it from inventing a score for a concept nobody scored.
+        WriteDataBlock(writer, "ImplicitData", this.ImplicitConcepts, this.ImplicitSources);
+        WriteDataBlock(writer, "ExplicitData", this.ExplicitConcepts, this.ExplicitSources);
 
-            if (this.ImplicitConcepts.Count > 0)
-            {
-                writer.WriteStartElement("Concepts", ApmlUtility.ApmlNamespace);
-                foreach (ApmlConcept concept in this.ImplicitConcepts)
-                {
-                    concept.WriteTo(writer);
-                }
-                writer.WriteEndElement();
-            }
-
-            if (this.ImplicitSources.Count > 0)
-            {
-                writer.WriteStartElement("Sources", ApmlUtility.ApmlNamespace);
-                foreach (ApmlSource source in this.ImplicitSources)
-                {
-                    source.WriteTo(writer);
-                }
-                writer.WriteEndElement();
-            }
-
-            writer.WriteEndElement();
-        }
-
-        if (this.ExplicitConcepts.Count > 0 || this.ExplicitSources.Count > 0)
-        {
-            writer.WriteStartElement("ExplicitData", ApmlUtility.ApmlNamespace);
-
-            if (this.ExplicitConcepts.Count > 0)
-            {
-                writer.WriteStartElement("Concepts", ApmlUtility.ApmlNamespace);
-                foreach (ApmlConcept concept in this.ExplicitConcepts)
-                {
-                    concept.WriteTo(writer);
-                }
-                writer.WriteEndElement();
-            }
-
-            if (this.ExplicitSources.Count > 0)
-            {
-                writer.WriteStartElement("Sources", ApmlUtility.ApmlNamespace);
-                foreach (ApmlSource source in this.ExplicitSources)
-                {
-                    source.WriteTo(writer);
-                }
-                writer.WriteEndElement();
-            }
-
-            writer.WriteEndElement();
-        }
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
         writer.WriteEndElement();
@@ -403,6 +358,48 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
+    /// <summary>
+    /// Writes one of the two mandatory data blocks of a <c>Profile</c>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to write to.</param>
+    /// <param name="elementName">The block element name, <c>ImplicitData</c> or <c>ExplicitData</c>.</param>
+    /// <param name="concepts">The concepts belonging to this block.</param>
+    /// <param name="sources">The sources belonging to this block.</param>
+    /// <remarks>
+    ///     The block element itself is always written, because the schema makes it mandatory. Its
+    ///     <c>Concepts</c> and <c>Sources</c> children are <c>minOccurs="0"</c>, so those are written only
+    ///     when they have something in them: an empty <c>Concepts</c> element would be valid but would say
+    ///     nothing the absent one does not.
+    /// </remarks>
+    private static void WriteDataBlock(XmlWriter writer, string elementName, IList<ApmlConcept> concepts, IList<ApmlSource> sources)
+    {
+        writer.WriteStartElement(elementName, ApmlUtility.ApmlNamespace);
+
+        if (concepts.Count > 0)
+        {
+            writer.WriteStartElement("Concepts", ApmlUtility.ApmlNamespace);
+            foreach (ApmlConcept concept in concepts)
+            {
+                concept.WriteTo(writer);
+            }
+
+            writer.WriteEndElement();
+        }
+
+        if (sources.Count > 0)
+        {
+            writer.WriteStartElement("Sources", ApmlUtility.ApmlNamespace);
+            foreach (ApmlSource source in sources)
+            {
+                source.WriteTo(writer);
+            }
+
+            writer.WriteEndElement();
+        }
+
+        writer.WriteEndElement();
+    }
 
     /// <summary>
     /// Compares the current instance with another object of the same type.

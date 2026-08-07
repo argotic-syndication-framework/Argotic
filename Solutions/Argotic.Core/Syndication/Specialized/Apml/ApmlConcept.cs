@@ -275,7 +275,7 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
 
         if (this.UpdatedOn != DateTime.MinValue)
         {
-            writer.WriteAttributeString("updated", SyndicationDateTimeUtility.ToRfc3339DateTime(this.UpdatedOn));
+            writer.WriteAttributeString("updated", ApmlUtility.ToApmlDateTime(this.UpdatedOn));
         }
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 

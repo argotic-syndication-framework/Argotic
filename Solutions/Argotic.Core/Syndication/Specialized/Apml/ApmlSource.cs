@@ -435,7 +435,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
 
         if (this.UpdatedOn != DateTime.MinValue)
         {
-            writer.WriteAttributeString("updated", SyndicationDateTimeUtility.ToRfc3339DateTime(this.UpdatedOn));
+            writer.WriteAttributeString("updated", ApmlUtility.ToApmlDateTime(this.UpdatedOn));
         }
 
         foreach (ApmlAuthor author in this.Authors)

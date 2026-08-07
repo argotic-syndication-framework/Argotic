@@ -112,7 +112,7 @@ public class PodcastChapters : IComparable<PodcastChapters>, IEquatable<PodcastC
             return 1;
         }
 
-        int result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        int result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.MediaType, other.MediaType, StringComparison.OrdinalIgnoreCase);
 
         return result;

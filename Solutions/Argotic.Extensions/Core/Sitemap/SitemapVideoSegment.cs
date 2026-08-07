@@ -188,7 +188,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
             return 1;
         }
 
-        return Uri.Compare(this.Location, other.Location, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        return Uri.Compare(this.Location, other.Location, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>

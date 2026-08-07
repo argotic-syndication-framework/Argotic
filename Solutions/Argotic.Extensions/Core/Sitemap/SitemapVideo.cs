@@ -1072,12 +1072,27 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <param name="second">The second location, which may be <see langword="null"/>.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the two locations.</returns>
     /// <remarks>
+    ///     <para>
     ///     Disregarding case is what keeps this in step with <see cref="HashCodeUtility.Component(Uri)"/>,
     ///     which hashes the URI's text under <see cref="StringComparison.OrdinalIgnoreCase"/>. A relative
     ///     URI — which <see cref="Load"/> accepts — is compared rather than rejected.
+    ///     </para>
+    ///     <para>
+    ///     <see cref="UriFormat.SafeUnescaped"/> is load-bearing, and <see cref="UriFormat.Unescaped"/>
+    ///     is wrong here. The latter decodes reserved characters too, collapsing
+    ///     <c>http://example.com/a%2Fb</c> onto <c>http://example.com/a/b</c> — but RFC 3986 §2.2 says
+    ///     "URIs that differ in the replacement of a reserved character with its corresponding
+    ///     percent-encoded octet are not equivalent", and Google's sitemap specification requires the
+    ///     escaping, so both spellings arrive from real documents. Worse, the two disagreed with
+    ///     <see cref="HashCodeUtility.Component(Uri)"/>, which hashes <see cref="Uri.ToString"/> and
+    ///     keeps a reserved escape escaped — equal instances with different hash codes, so a
+    ///     <see cref="HashSet{T}"/> lookup missed. <see cref="UriFormat.SafeUnescaped"/> decodes only
+    ///     the unreserved escapes, which is RFC 3986 §6.2.2.2's percent-encoding normalization and
+    ///     exactly what <see cref="Uri.ToString"/> does.
+    ///     </para>
     /// </remarks>
     private static int CompareLocation(Uri? first, Uri? second) =>
-        Uri.Compare(first, second, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        Uri.Compare(first, second, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
     /// Determines whether the specified <see cref="SitemapVideo"/> is equal to the current instance.

@@ -124,9 +124,9 @@ public class SitemapVideoComparisonBreadthTests
     {
         Uri relative = new("/video.mp4", UriKind.Relative);
 
-        Uri.Compare(relative, new Uri("/other.mp4", UriKind.Relative), UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase).ShouldNotBe(0);
-        Uri.Compare(relative, new Uri("/video.mp4", UriKind.Relative), UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase).ShouldBe(0);
-        Uri.Compare(relative, new Uri("/VIDEO.MP4", UriKind.Relative), UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase).ShouldBe(0);
+        Uri.Compare(relative, new Uri("/other.mp4", UriKind.Relative), UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase).ShouldNotBe(0);
+        Uri.Compare(relative, new Uri("/video.mp4", UriKind.Relative), UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase).ShouldBe(0);
+        Uri.Compare(relative, new Uri("/VIDEO.MP4", UriKind.Relative), UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase).ShouldBe(0);
     }
 
     /// <summary>

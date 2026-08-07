@@ -114,7 +114,7 @@ public class PodcastFunding : IComparable<PodcastFunding>, IEquatable<PodcastFun
             return 1;
         }
 
-        int result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        int result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Message, other.Message, StringComparison.OrdinalIgnoreCase);
 
         return result;

@@ -140,7 +140,7 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
             return 1;
         }
 
-        return Uri.Compare(this.Location, other.Location, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        return Uri.Compare(this.Location, other.Location, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>

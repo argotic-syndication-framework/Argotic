@@ -109,44 +109,40 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// <param name="target">The second collection.</param>
     /// <returns>
     ///     <c>1</c> if <paramref name="source"/> holds more members than <paramref name="target"/>;
-    ///     <c>-1</c> if it holds fewer, or if the counts match but some member of
-    ///     <paramref name="source"/> is absent from <paramref name="target"/>; otherwise, <c>0</c>.
+    ///     <c>-1</c> if it holds fewer; otherwise the lexical relationship between the two sequences,
+    ///     compared member by member.
     /// </returns>
     /// <remarks>
-    ///     Equal counts are compared as <i>sets</i>, so order is not consulted — which is right here,
-    ///     because an XML-RPC structure is unordered.
+    ///     <para>
+    ///         Equal counts are compared <i>positionally</i>, each member against the one at the same
+    ///         index, using <see cref="XmlRpcStructureMember.CompareTo"/>.
+    ///     </para>
+    ///     <para>
+    ///         This used to walk <paramref name="source"/> asking <c>!target.Contains(member)</c>, on the
+    ///         grounds that an XML-RPC structure is unordered. That reading was already contradicted one
+    ///         level up: a structure nested in an array or in another structure's value is identified by
+    ///         <see cref="XmlRpcStructureValue.ToString"/>, its XML, which carries the members in list
+    ///         order — so the same two structures compared equal at the top level and unequal when
+    ///         nested. Ordering by position makes the type agree with itself.
+    ///     </para>
+    ///     <para>
+    ///         The membership loop also had only two answers — <c>-1</c> when a member was absent,
+    ///         <c>0</c> otherwise — so two equal-length structures with disjoint members each reported
+    ///         <i>themselves</i> the lesser. <b>The consequence was a silently arbitrary order, not a
+    ///         crash</b>: on .NET 10 the introsort partition loop carries bounds guards, so
+    ///         <see cref="List{T}.Sort()"/> returns quietly on such a comparer rather than throwing the
+    ///         <see cref="IndexOutOfRangeException"/> older runtimes did, and what it returned depended
+    ///         on the order the elements happened to arrive in.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<XmlRpcStructureMember> source, IList<XmlRpcStructureMember> target)
     {
-        int result = 0;
-
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(target);
 
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                XmlRpcStructureMember member = source[i];
-                if (!target.Contains(member))
-                {
-                    result = -1;
-                    break;
-                }
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
+        return ComparisonUtility.CompareSequence(source, target);
     }
 
     /// <summary>

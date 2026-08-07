@@ -253,11 +253,11 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         if (result == 0) result = Nullable.Compare(this.Context.Episode, other.Context.Episode);
         if (result == 0) result = this.Context.EpisodeType.CompareTo(other.Context.EpisodeType);
         if (result == 0) result = this.Context.ExplicitMaterial.CompareTo(other.Context.ExplicitMaterial);
-        if (result == 0) result = Uri.Compare(this.Context.Image, other.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.Image, other.Context.Image, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = this.Context.IsBlocked.CompareTo(other.Context.IsBlocked);
         if (result == 0) result = this.Context.IsComplete.CompareTo(other.Context.IsComplete);
         if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Keywords, other.Context.Keywords, StringComparison.OrdinalIgnoreCase);
-        if (result == 0) result = Uri.Compare(this.Context.NewFeedUrl, other.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.NewFeedUrl, other.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = Comparer<ITunesOwner>.Default.Compare(this.Context.Owner, other.Context.Owner);
         if (result == 0) result = this.Context.PodcastType.CompareTo(other.Context.PodcastType);
         if (result == 0) result = Nullable.Compare(this.Context.Season, other.Context.Season);

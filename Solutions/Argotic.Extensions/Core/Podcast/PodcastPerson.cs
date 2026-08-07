@@ -184,8 +184,8 @@ public class PodcastPerson : IComparable<PodcastPerson>, IEquatable<PodcastPerso
         int result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Role, other.Role, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Group, other.Group, StringComparison.OrdinalIgnoreCase);
-        if (result == 0) result = Uri.Compare(this.ImageUrl, other.ImageUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-        if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.ImageUrl, other.ImageUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }

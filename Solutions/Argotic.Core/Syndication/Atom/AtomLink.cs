@@ -517,7 +517,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Length), HashCodeUtility.Component(this.ContentType), HashCodeUtility.Component(this.Relation), HashCodeUtility.Component(this.ContentLanguage?.Name), HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.Uri));
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Length), HashCodeUtility.Component(this.ContentType), HashCodeUtility.Component(this.Relation), HashCodeUtility.Component(this.ContentLanguage), HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.Uri));
 
     /// <summary>
     /// Determines if operands are equal.

@@ -232,12 +232,15 @@ public class XmlRpcArrayValueTests
     }
 
     /// <summary>
-    /// Two arrays of the same length holding different values each report themselves the lesser: the
-    /// membership test behind <c>CompareSequence</c> can only say "not present", so it answers <c>-1</c> in
-    /// both directions rather than ordering the pair.
+    /// Two arrays of the same length holding different values order oppositely.
     /// </summary>
+    /// <remarks>
+    ///     This used to assert the opposite — that both operands reported themselves the lesser —
+    ///     because <c>CompareSequence</c> asked <c>!target.Contains(element)</c>, a test with only two
+    ///     answers. It now compares positionally, so the pair carries a usable ordering.
+    /// </remarks>
     [TestMethod]
-    public void CompareTo_SameLengthArraysHoldingDifferentValues_ReportsBothAsLesser()
+    public void CompareTo_SameLengthArraysHoldingDifferentValues_OrdersThemOppositely()
     {
         // Arrange
         XmlRpcArrayValue array1 = new();
@@ -251,11 +254,8 @@ public class XmlRpcArrayValueTests
         int reverse = array2.CompareTo(array1);
 
         // Assert
-        // Counts match, so XmlRpcMessage.CompareSequence falls back to IList.Contains and returns -1 the
-        // moment an element is absent from the other side. Both operands therefore sort before each other:
-        // the pair is unequal, but it carries no usable ordering.
         forward.ShouldBeLessThan(0);
-        reverse.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>

@@ -121,7 +121,7 @@ public enum SyndicationContentFormat
     ///     <c>&lt;entry&gt;</c>. They are read by <c>AtomFeed</c> and <c>AtomEntry</c> respectively.
     ///     </para>
     ///     <para>
-    ///     <b>Both used to report <see cref="Atom"/>.</b> The detector distinguished them — it tests the
+    ///     Both used to report <see cref="Atom"/>. The detector distinguished them — it tests the
     ///     two roots in separate arms — and then discarded the answer by assigning one value to both. So
     ///     the format check that rejects every other mismatched pairing compared <c>Atom</c> against
     ///     <c>Atom</c> and passed, and a feed handed to an <c>AtomEntry</c> produced a

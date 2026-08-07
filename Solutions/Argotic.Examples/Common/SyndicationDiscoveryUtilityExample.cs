@@ -5,16 +5,16 @@ using Spectre.Console;
 namespace Argotic.Examples.Common;
 
 /// <summary>
-/// Contains the code examples for the <see cref="SyndicationDiscoveryUtility"/> class.
+/// Demonstrates <see cref="SyndicationDiscoveryUtility"/>: what format a URL serves, whether one page links to another, whether a URL exists, conditional GET, and locating syndication, Pingback and Trackback endpoints.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="SyndicationDiscoveryUtility"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
+///     Every method here fetches from a live origin, so all of them are marked
+///     <see cref="RequiresNetworkAttribute"/> and are skipped by the offline gate.
 /// </remarks>
 internal static class SyndicationDiscoveryUtilityExample
 {
     /// <summary>
-    /// Provides example code for the SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(Uri) method
+    /// Determines which syndication format a URL serves, without parsing it fully.
     /// </summary>
     [RequiresNetwork]
     public static async Task SyndicationContentFormatGetExampleAsync()
@@ -33,7 +33,7 @@ internal static class SyndicationDiscoveryUtilityExample
     }
 
     /// <summary>
-    /// Provides example code for the SyndicationDiscoveryUtility.SourceReferencesTargetAsync(Uri, Uri) method
+    /// Determines whether one web resource links to another — the check behind Pingback and Trackback validation.
     /// </summary>
     [RequiresNetwork]
     public static async Task SourceReferencesTargetExampleAsync()
@@ -55,7 +55,7 @@ internal static class SyndicationDiscoveryUtilityExample
     }
 
     /// <summary>
-    /// Provides example code for the SyndicationDiscoveryUtility.UriExistsAsync(Uri) method
+    /// Determines whether a URL resolves, without downloading its body.
     /// </summary>
     [RequiresNetwork]
     public static async Task UriExistsExampleAsync()
@@ -73,7 +73,7 @@ internal static class SyndicationDiscoveryUtilityExample
     }
 
     /// <summary>
-    /// Provides example code for the SyndicationDiscoveryUtility.ConditionalGet(Uri, DateTime, string) method
+    /// Re-fetches a feed only if it changed, using the modification date and entity tag from the previous response.
     /// </summary>
     [RequiresNetwork]
     public static async Task ConditionalGetExampleAsync()
@@ -108,7 +108,7 @@ internal static class SyndicationDiscoveryUtilityExample
 
 
     /// <summary>
-    /// Provides example code for the SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(Uri) method
+    /// Finds the feeds an HTML page advertises through its <c>link</c> elements.
     /// </summary>
     [RequiresNetwork]
     public static async Task LocateDiscoverableSyndicationEndpointsExampleAsync()
@@ -135,7 +135,7 @@ internal static class SyndicationDiscoveryUtilityExample
     }
 
     /// <summary>
-    /// Provides example code for the SyndicationDiscoveryUtility.IsPingbackEnabledAsync(Uri) method
+    /// Determines whether a page accepts Pingback notifications.
     /// </summary>
     [RequiresNetwork]
     public static async Task IsPingbackEnabledExampleAsync()
@@ -153,7 +153,7 @@ internal static class SyndicationDiscoveryUtilityExample
     }
 
     /// <summary>
-    /// Provides example code for the SyndicationDiscoveryUtility.LocatePingbackNotificationServerAsync(Uri) method
+    /// Finds a page's Pingback server and sends it an XML-RPC notification.
     /// </summary>
     [RequiresNetwork]
     public static async Task LocatePingbackNotificationServerExampleAsync()
@@ -176,7 +176,7 @@ internal static class SyndicationDiscoveryUtilityExample
     }
 
     /// <summary>
-    /// Provides example code for the SyndicationDiscoveryUtility.IsTrackbackEnabledAsync(Uri) method
+    /// Determines whether a page accepts Trackback notifications.
     /// </summary>
     [RequiresNetwork]
     public static async Task IsTrackbackEnabledExampleAsync()
@@ -194,7 +194,7 @@ internal static class SyndicationDiscoveryUtilityExample
     }
 
     /// <summary>
-    /// Provides example code for the SyndicationDiscoveryUtility.LocateTrackbackNotificationServersAsync(Uri) method
+    /// Finds a page's Trackback servers and sends each one a notification.
     /// </summary>
     [RequiresNetwork]
     public static async Task LocateTrackbackNotificationServersExampleAsync()

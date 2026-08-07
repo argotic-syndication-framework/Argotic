@@ -6,6 +6,15 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.iTunes;
 
+/// <summary>
+/// Covers <c>ITunesSyndicationExtension</c> across a context populated with every element Apple's
+/// original podcasting specification defines.
+/// </summary>
+/// <remarks>
+///     The elements Apple added later, and the spellings real feeds use for them, are covered separately
+///     by <c>ITunesExplicitSpellingTests</c>, <c>ITunesCompleteTests</c> and
+///     <c>ITunesVerificationTokenTests</c>.
+/// </remarks>
 [TestClass]
 public class ITunesSyndicationExtensionTest
 {
@@ -35,6 +44,9 @@ public class ITunesSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor produces a non-null <c>ITunesSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void ITunesSyndicationExtensionConstructorTest()
     {
@@ -43,6 +55,10 @@ public class ITunesSyndicationExtensionTest
         target.ShouldBeOfType<ITunesSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions built from the same podcast metadata compare equal, so <c>CompareTo</c> returns
+    /// <c>0</c> — the category and keyword lists are compared by their contents.
+    /// </summary>
     [TestMethod]
     public void ITunesCompareToTest()
     {
@@ -52,6 +68,9 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// <c>ITunesExplicitMaterial.Clean</c> is written back as the lower-case spelling <c>clean</c>.
+    /// </summary>
     [TestMethod]
     public void ITunesExplicitMaterialAsStringTest()
     {
@@ -61,6 +80,9 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// The spelling <c>clean</c> is read back as <c>ITunesExplicitMaterial.Clean</c>.
+    /// </summary>
     [TestMethod]
     public void ITunesExplicitMaterialByNameTest()
     {
@@ -69,6 +91,10 @@ public class ITunesSyndicationExtensionTest
         ((double)actual).ShouldBe((double)expected, 3e-6);
     }
 
+    /// <summary>
+    /// Two separately built extensions carrying the same podcast metadata are equal through the
+    /// <c>object</c> overload of <c>Equals</c>.
+    /// </summary>
     [TestMethod]
     public void ITunesEqualsTest()
     {
@@ -78,6 +104,9 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The hash code is stable across repeated calls, and two equal extensions agree on it.
+    /// </summary>
     [TestMethod]
     public void ITunesGetHashCodeTest()
     {
@@ -91,6 +120,11 @@ public class ITunesSyndicationExtensionTest
         target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
+    /// <summary>
+    /// Saving a feed with the extension attached writes the iTunes elements in the order the extension
+    /// declares, with <c>owner</c> nested and <c>image</c> and <c>category</c> carrying their values as
+    /// attributes rather than as text.
+    /// </summary>
     [TestMethod]
     public void ITunesCreateXmlTest()
     {
@@ -101,6 +135,10 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// An item carrying the full set of iTunes elements is found again after the feed is parsed, by both
+    /// the generic lookup and the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void ITunesFullTest()
     {
@@ -119,6 +157,10 @@ public class ITunesSyndicationExtensionTest
             .ShouldBeOfType<ITunesSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts an <c>ISyndicationExtension</c> that is an
+    /// <c>ITunesSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void ITunesMatchByTypeTest()
     {
@@ -127,6 +169,11 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders every populated element, with the duration as <c>00:03:21</c>, the
+    /// keywords joined by commas into one <c>keywords</c> element, and a <c>category</c> element per
+    /// category.
+    /// </summary>
     [TestMethod]
     public void ITunesToStringTest()
     {
@@ -135,6 +182,10 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBe(nycText);
     }
 
+    /// <summary>
+    /// Writing to a non-indenting fragment <c>XmlWriter</c> emits the same elements as <c>ToString</c>,
+    /// without the line breaks or the indentation of the nested <c>owner</c> children.
+    /// </summary>
     [TestMethod]
     public void ITunesWriteToTest()
     {
@@ -147,6 +198,9 @@ public class ITunesSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(nycText.Replace(Environment.NewLine + "  ", "", StringComparison.Ordinal).Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Two extensions describing different podcasts are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void ITunesOpEqualityTestFailure()
     {
@@ -156,6 +210,9 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions describing the same podcast are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void ITunesOpEqualityTestSuccess()
     {
@@ -165,6 +222,10 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension authored by <c>BigStar</c> does not sort above the one authored by <c>NewStar</c> —
+    /// the author is the first member the comparison reaches.
+    /// </summary>
     [TestMethod]
     public void ITunesOpGreaterThanTest()
     {
@@ -174,6 +235,9 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions describing different podcasts are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void ITunesOpInequalityTest()
     {
@@ -183,6 +247,9 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension authored by <c>BigStar</c> sorts below the one authored by <c>NewStar</c>.
+    /// </summary>
     [TestMethod]
     public void ITunesOpLessThanTest()
     {
@@ -192,6 +259,10 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>Context</c> property hands back every value the extension was built from, including both
+    /// categories, both keywords and the owner's name and address.
+    /// </summary>
     [TestMethod]
     public void ITunesContextTest()
     {
@@ -212,6 +283,11 @@ public class ITunesSyndicationExtensionTest
         context.Summary.ShouldBe("Duh... That song you like");
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the lesser, authored by <c>BigStar</c> and
+    /// carrying a value in every element of Apple's original specification.
+    /// </summary>
+    /// <returns>A fully populated extension.</returns>
     private static ITunesSyndicationExtension CreateExtension1()
     {
         ITunesSyndicationExtension nyc = new()
@@ -237,6 +313,11 @@ public class ITunesSyndicationExtensionTest
         return nyc;
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the greater, authored by <c>NewStar</c> and
+    /// differing from the first in every member.
+    /// </summary>
+    /// <returns>A fully populated extension.</returns>
     private static ITunesSyndicationExtension CreateExtension2()
     {
         ITunesSyndicationExtension nyc = new()
@@ -260,5 +341,9 @@ public class ITunesSyndicationExtensionTest
         return nyc;
     }
 
+    /// <summary>
+    /// Builds an empty context, without an extension around it.
+    /// </summary>
+    /// <returns>A context carrying no podcast metadata.</returns>
     public static ITunesSyndicationExtensionContext CreateContext1() => new();
 }

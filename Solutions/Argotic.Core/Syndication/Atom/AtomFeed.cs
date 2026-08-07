@@ -18,21 +18,20 @@ namespace Argotic.Syndication;
 ///     </para>
 ///     <para>
 ///         This implementation conforms to the Atom 1.0 specification, which can be found
-///         at <a href="http://www.atomenabled.org/developers/syndication/atom-format-spec.php">http://www.atomenabled.org/developers/syndication/atom-format-spec.php</a>.
+///         at <a href="https://www.rfc-editor.org/rfc/rfc4287.html">https://www.rfc-editor.org/rfc/rfc4287.html</a>.
 ///     </para>
 ///     <para>
-///         If multiple <see cref="AtomEntry"/> objects with the same <see cref="AtomEntry.Id"/> value appear in an Atom Feed Document, they represent the same entry.
-///         Their <see cref="AtomEntry.UpdatedOn"/> timestamps <i>should</i> be different. If an Atom Feed Document contains multiple entries with the same <see cref="AtomEntry.Id"/>,
-///         Atom Processors <u>may</u> choose to display all them or some subset of them. One typical behavior would be to display only the entry with the latest <see cref="AtomEntry.UpdatedOn"/> timestamp.
+///         <b>Three members are required and none of them is defaulted.</b> RFC 4287 §4.1.1 requires exactly one <see cref="Id"/>, one <see cref="Title"/>
+///         and one <see cref="UpdatedOn"/>, plus at least one <see cref="Authors">author</see> unless every entry supplies its own. Save writes what is
+///         set and omits what is not, so a feed built by leaving <see cref="UpdatedOn"/> alone serialises to well-formed XML that is not conformant Atom.
+///     </para>
+///     <para>
+///         Entries sharing an <see cref="AtomEntry.Id"/> are the same entry, and their <see cref="AtomEntry.UpdatedOn"/> timestamps <i>should</i> differ.
+///         A processor <i>may</i> display all of them or a subset; showing only the one with the latest <see cref="AtomEntry.UpdatedOn"/> is typical.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the AtomFeed class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
-///             region="AtomFeed"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs" language="cs" title="The following code example demonstrates the usage of the AtomFeed class." />
 /// </example>
 public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExtensibleSyndicationObject
 {
@@ -57,8 +56,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this feed was modified in a way the publisher considers significant.
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </param>
-    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is <see langword="null"/>.</exception>
     public AtomFeed(AtomId id, AtomTextConstruct title, DateTime utcUpdatedOn)
     {
         this.Id = id;
@@ -80,23 +79,32 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     protected virtual void OnFeedLoaded(SyndicationResourceLoadedEventArgs e) => this.Loaded?.Invoke(this, e);
 
     /// <summary>
-    /// Gets or sets the base URI other than the base URI of the document or external entity.
+    /// Gets or sets the base against which relative references inside this element are resolved.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>xml:base</c> in effect for this element, or <see langword="null"/> when none is. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-    ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+    ///         RFC 4287 §2 gives <c>xml:base</c> the function described in section 5.1.1 of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a> — it establishes the base URI,
+    ///         or IRI, for every relative reference in the attribute's effective scope. The value itself is a URI reference after processing according to
+    ///         <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.
+    ///     </para>
+    ///     <para>
+    ///         Loading resolves inheritance: an element without an <c>xml:base</c> of its own reports the nearest ancestor's, so the value here is the
+    ///         <i>effective</i> base a consumer can resolve an href against, not the literal attribute.
+    ///     </para>
     /// </remarks>
     public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>The language declared by <c>xml:lang</c>, or <see langword="null"/> when none is in scope. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         RFC 4287 defines <c>atomLanguageTag</c> as a language identifier per
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>, or its successor. A tag this runtime cannot turn
+    ///         into a <see cref="CultureInfo"/> is traced and dropped rather than failing the load.
     ///     </para>
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -104,23 +112,25 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Extensions"/> holds at least one <see cref="ISyndicationExtension"/>; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets the authors of this feed.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the authors of this feed.</value>
     /// <remarks>
-    ///     <para>A <see cref="AtomFeed"/> <b>must</b> contain one or more authors, unless all the feeds' child <see cref="AtomEntry"/> objects contain at least one author.</para>
     ///     <para>
-    ///         The <see cref="Authors"/> are considered to apply to any <see cref="AtomEntry"/> contained in this feed if the entry does not contain any authors and the entry's source does contain any authors.
+    ///         RFC 4287 §4.1.1 requires at least one author here <i>unless</i> every child <see cref="AtomEntry"/> carries one of its own — the one
+    ///         conformance rule in Atom that cannot be checked by looking at a single element.
+    ///     </para>
+    ///     <para>
+    ///         These authors apply to an entry that supplies none itself and whose <see cref="AtomEntry.Source"/> supplies none either. An entry copied in
+    ///         from elsewhere therefore keeps its original authorship through <c>atom:source</c> rather than silently acquiring this feed's.
     ///     </para>
     /// </remarks>
     public IList<AtomPersonConstruct> Authors { get; } = [];
@@ -128,37 +138,33 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Gets the categories associated with this feed.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomCategory"/> objects that represent the categories associated with this feed.</value>
     public IList<AtomCategory> Categories { get; } = [];
 
     /// <summary>
     /// Gets the entities who contributed to this feed.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the entities who contributed to this feed.</value>
     public IList<AtomPersonConstruct> Contributors { get; } = [];
 
     /// <summary>
     /// Gets the distinct content published in this feed.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomEntry"/> objects that represent distinct content published in this feed.</value>
     public IList<AtomEntry> Entries => feedEntries;
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
     /// </summary>
-    /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
     public SyndicationContentFormat Format => SyndicationContentFormat.Atom;
 
     /// <summary>
     /// Gets or sets the agent used to generate this feed.
     /// </summary>
-    /// <value>A <see cref="AtomGenerator"/> object that represents the agent used to generate this feed. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>atom:generator</c>, or <see langword="null"/> when the feed names no agent. The default value is <see langword="null"/>.</value>
     public AtomGenerator? Generator { get; set; }
 
     /// <summary>
     /// Gets or sets an image that provides iconic visual identification for this feed.
     /// </summary>
-    /// <value>A <see cref="AtomIcon"/> object that represents an image that provides iconic visual identification for this feed. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>atom:icon</c>, or <see langword="null"/> when the feed has none. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     The image <i>should</i> have an aspect ratio of one (horizontal) to one (vertical) and <i>should</i> be suitable for presentation at a small size.
     /// </remarks>
@@ -167,15 +173,14 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Gets or sets a permanent, universally unique identifier for this feed.
     /// </summary>
-    /// <value>A <see cref="AtomId"/> object that represents a permanent, universally unique identifier for this feed.</value>
+    /// <value>The <c>atom:id</c>. The default value is <see langword="null"/>; RFC 4287 §4.1.1 requires exactly one on a conformant document.</value>
     /// <remarks>
     ///     <para>
-    ///         When an <i>Atom Document</i> is relocated, migrated, syndicated, republished, exported, or imported, the content of its universally unique identifier <b>must not</b> change.
-    ///         Put another way, an <see cref="AtomId"/> pertains to all instantiations of a particular <see cref="AtomFeed"/>; revisions retain the same
-    ///         content in their <see cref="AtomId"/> properties. It is suggested that the<see cref="AtomId"/> be stored along with the associated resource.
+    ///         This identifier must never change — not when the feed is relocated, migrated, syndicated, republished, exported or imported, and not
+    ///         across revisions. Store it alongside the feed. See <see cref="AtomId"/> for the comparison and normalisation rules that follow from that.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public AtomId? Id
     {
         get;
@@ -189,14 +194,13 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Gets references from this feed to one or more Web resources.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomLink"/> objects that represent references from this feed to one or more Web resources.</value>
     /// <remarks>
     ///     <para>
     ///         A feed <i>should</i> contain one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> property of <i>self</i>.
     ///         This is the preferred URI for retrieving Atom Feed Documents representing this Atom feed.
     ///     </para>
     ///     <para>
-    ///         A feed <b>must not</b> contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> property of <i>alternate</i>
+    ///         A feed must not contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> property of <i>alternate</i>
     ///         that has the same combination of <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> property values.
     ///     </para>
     /// </remarks>
@@ -205,7 +209,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Gets or sets an image that provides visual identification for this feed.
     /// </summary>
-    /// <value>A <see cref="AtomLogo"/> object that represents an image that provides visual identification for this feed. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>atom:logo</c>, or <see langword="null"/> when the feed has none. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     The image <i>should</i> have an aspect ratio of 2 (horizontal) to 1 (vertical).
     /// </remarks>
@@ -214,7 +218,6 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Gets or sets information about rights held in and over this feed.
     /// </summary>
-    /// <value>A <see cref="AtomTextConstruct"/> object that represents information about rights held in and over this feed.</value>
     /// <remarks>
     ///     The <see cref="Rights"/> property <i>should not</i> be used to convey machine-readable licensing information.
     /// </remarks>
@@ -223,14 +226,13 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Gets or sets information that conveys a human-readable description or subtitle for this feed.
     /// </summary>
-    /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable description or subtitle for this feed.</value>
     public AtomTextConstruct? Subtitle { get; set; }
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable title for this feed.
     /// </summary>
-    /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this feed.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>atom:title</c>. The default value is <see langword="null"/>; RFC 4287 §4.1.1 requires exactly one on a conformant feed.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public AtomTextConstruct? Title
     {
         get;
@@ -245,18 +247,26 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// Gets or sets a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this feed was modified in a way the publisher considers significant.
-    ///     Publishers <i>may</i> change the value of this element over time. The default value is <see cref="DateTime.MinValue"/>, which indicates that no update time was provided.
+    ///     The <c>atom:updated</c> timestamp. The default value is <see cref="DateTime.MinValue"/>, which means none was provided — and no
+    ///     <c>atom:updated</c> is written when it is left there.
     /// </value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     <para>
+    ///         <b>A conformant feed must carry this.</b> RFC 4287 §4.1.1 requires exactly one <c>atom:updated</c>, and the
+    ///         sentinel default means a feed you build without setting it saves without the element — valid XML, invalid Atom, and aggregators that
+    ///         order by update time will place it arbitrarily.
+    ///     </para>
+    ///     <para>
+    ///         Supply it in UTC. Loading parses the RFC 3339 timestamp §3.3 requires; the value is significant modification as the <i>publisher</i> judges
+    ///         it, so a typo fix need not move it and publishers <i>may</i> change it over time.
+    ///     </para>
     /// </remarks>
     public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
-    /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
+    /// <value>Always <c>1.0</c>. Atom 1.0 is the only version this type reads or writes; Atom 0.3 documents are handled by a separate legacy adapter.</value>
     public Version Version { get; } = new(1, 0);
 
     /// <summary>
@@ -270,14 +280,14 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <c>1</c>.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <c>-1</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<AtomCategory> source, IList<AtomCategory> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -292,14 +302,14 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <c>1</c>.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <c>-1</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<AtomLink> source, IList<AtomLink> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -314,14 +324,14 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <c>1</c>.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <c>-1</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<AtomPersonConstruct> source, IList<AtomPersonConstruct> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -336,14 +346,14 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <c>1</c>.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <c>-1</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<AtomTextConstruct> source, IList<AtomTextConstruct> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -351,18 +361,18 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// Creates a new <see cref="AtomFeed"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="AtomFeed"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
     ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
     ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the CreateAsync method.">
+    ///     <code language="cs" title="The following code example demonstrates the usage of the CreateAsync method.">
     ///         var feed = await AtomFeed.CreateAsync(new Uri("https://example.com/feed.xml"));
     ///     </code>
     /// </example>
@@ -378,8 +388,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="AtomFeed"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
@@ -392,8 +402,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<AtomFeed> CreateAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
@@ -432,32 +442,27 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
-    ///             region="Load(IXPathNavigable source)"
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(IXPathNavigable source) => this.Load(source, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
@@ -474,32 +479,27 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
-    ///             region="Load(Stream stream)"
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(Stream stream) => this.Load(stream, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
@@ -512,32 +512,27 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
-    ///             region="Load(XmlReader reader)"
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(XmlReader reader) => this.Load(reader, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(XmlReader reader, SyndicationResourceLoadSettings? settings)
@@ -559,7 +554,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
     ///     <para>After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
@@ -569,8 +564,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous load operation.</returns>
     /// <remarks>
@@ -584,8 +579,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///     </para>
     ///     <para>After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public async Task LoadAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
@@ -606,24 +601,19 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
-    ///             region="Save(Stream stream)"
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
     /// </example>
     public void Save(Stream stream) => this.Save(stream, null);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomFeed"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     <b>Save writes the object graph as it stands; it does not enforce RFC 4287's document-level
     ///     requirements.</b> A conformant feed document must carry exactly one <c>atom:id</c>,
@@ -633,7 +623,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///     that were invalid on arrival — but it means conformance of the output is the caller's to
     ///     ensure, not this method's to guarantee.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream, SyndicationResourceSaveSettings? settings)
     {
@@ -655,16 +645,11 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
-    ///             region="Save(XmlWriter writer)"
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
     /// </example>
     public void Save(XmlWriter writer)
     {
@@ -676,10 +661,10 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomFeed"/> instance.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(XmlWriter writer, SyndicationResourceSaveSettings? settings)
     {
@@ -776,9 +761,9 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings? settings, SyndicationResourceLoadedEventArgs eventData)
     {
@@ -796,7 +781,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// Saves the current <see cref="AtomFeed"/> collection entities to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     private void WriteFeedCollections(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -826,7 +811,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// Saves the current <see cref="AtomFeed"/> optional entities to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     private void WriteFeedOptionals(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);

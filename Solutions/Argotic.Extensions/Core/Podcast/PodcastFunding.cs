@@ -59,8 +59,8 @@ public class PodcastFunding : IComparable<PodcastFunding>, IEquatable<PodcastFun
     /// Loads this <see cref="PodcastFunding"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="PodcastFunding"/> was initialized using the supplied <paramref name="source"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="PodcastFunding"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -86,7 +86,7 @@ public class PodcastFunding : IComparable<PodcastFunding>, IEquatable<PodcastFun
     /// Saves the current <see cref="PodcastFunding"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -124,14 +124,14 @@ public class PodcastFunding : IComparable<PodcastFunding>, IEquatable<PodcastFun
     /// Determines whether the specified <see cref="PodcastFunding"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="PodcastFunding"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if equal; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if equal; otherwise, <see langword="false"/>.</returns>
     public bool Equals(PodcastFunding? other) => other is not null && this.CompareTo(other) == 0;
 
     /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if equal; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if equal; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is PodcastFunding other && this.Equals(other);
 
     /// <summary>
@@ -147,7 +147,7 @@ public class PodcastFunding : IComparable<PodcastFunding>, IEquatable<PodcastFun
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(PodcastFunding? first, PodcastFunding? second)
     {
         if (first is null) return second is null;
@@ -159,6 +159,6 @@ public class PodcastFunding : IComparable<PodcastFunding>, IEquatable<PodcastFun
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(PodcastFunding? first, PodcastFunding? second) => !(first == second);
 }

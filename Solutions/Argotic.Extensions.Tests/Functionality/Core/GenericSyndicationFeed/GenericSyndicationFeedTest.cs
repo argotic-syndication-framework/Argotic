@@ -5,11 +5,22 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.GenericSyndicationFeed;
 
+/// <summary>
+/// Covers what the format-agnostic wrapper reports about a document it has just loaded: the format it
+/// recognised, the concrete resource underneath, and the title and description lifted onto the wrapper.
+/// </summary>
 [TestClass]
 public class GenericSyndicationFeedTest
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// An RSS document that declares a custom namespace prefix it never uses loads without throwing.
+    /// </summary>
+    /// <remarks>
+    ///     Carries the <c>fix-39</c> test category, which is how the regression it was written for is
+    ///     selected from the suite.
+    /// </remarks>
     [TestMethod, TestCategory("fix-39")]
     public void TestCustomXmlNamespace()
     {
@@ -21,6 +32,9 @@ public class GenericSyndicationFeedTest
         feed.ShouldNotBeSameAs(new Syndication.GenericSyndicationFeed());
     }
 
+    /// <summary>
+    /// A loaded RSS 2.0 document reports its format as <c>Rss</c>.
+    /// </summary>
     [TestMethod]
     public void Load_MinimalRssFeed_SetsFormatToRss()
     {
@@ -30,6 +44,9 @@ public class GenericSyndicationFeedTest
         feed.Format.ShouldBe(SyndicationContentFormat.Rss);
     }
 
+    /// <summary>
+    /// A loaded Atom 1.0 document reports its format as <c>Atom</c>.
+    /// </summary>
     [TestMethod]
     public void Load_MinimalAtomFeed_SetsFormatToAtom()
     {
@@ -39,6 +56,9 @@ public class GenericSyndicationFeedTest
         feed.Format.ShouldBe(SyndicationContentFormat.Atom);
     }
 
+    /// <summary>
+    /// An RSS document leaves a real <c>RssFeed</c> behind the wrapper, with its channel intact.
+    /// </summary>
     [TestMethod]
     public void Resource_CastToRssFeed_WhenRssFormat()
     {
@@ -54,6 +74,9 @@ public class GenericSyndicationFeedTest
         rssFeed.Channel.Title.ShouldBe("Test Feed");
     }
 
+    /// <summary>
+    /// An Atom document leaves a real <c>AtomFeed</c> behind the wrapper, with its title intact.
+    /// </summary>
     [TestMethod]
     public void Resource_CastToAtomFeed_WhenAtomFormat()
     {
@@ -69,6 +92,9 @@ public class GenericSyndicationFeedTest
         atomFeed.Title!.Content.ShouldBe("Test Feed");
     }
 
+    /// <summary>
+    /// The wrapper's title and description are lifted from the RSS channel's own elements.
+    /// </summary>
     [TestMethod]
     public void Feed_Title_IsPopulatedFromRss()
     {
@@ -79,6 +105,9 @@ public class GenericSyndicationFeedTest
         feed.Description.ShouldBe("A test feed");
     }
 
+    /// <summary>
+    /// The wrapper's title is lifted from the Atom feed's <c>title</c>, giving the same answer as RSS.
+    /// </summary>
     [TestMethod]
     public void Feed_Title_IsPopulatedFromAtom()
     {

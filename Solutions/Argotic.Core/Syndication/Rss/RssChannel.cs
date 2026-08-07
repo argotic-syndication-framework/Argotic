@@ -8,16 +8,17 @@ using Argotic.Extensions;
 namespace Argotic.Syndication;
 
 /// <summary>
-/// Represents information about the meta-data and contents associated to an <see cref="RssFeed"/>.
+/// Represents the metadata and content of an <see cref="RssFeed"/>.
 /// </summary>
+/// <remarks>
+///     The <c>&lt;channel&gt;</c> element, and the whole of an RSS document that is not the
+///     <c>&lt;rss&gt;</c> wrapper. Three of its children are required — <see cref="Title"/>,
+///     <see cref="Link"/> and <see cref="Description"/> — and everything else, <see cref="Items">items</see>
+///     included, is optional. A channel with no items is a valid feed.
+/// </remarks>
 /// <seealso cref="RssFeed"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the RssChannel class.">
-///         <code 
-///             source="..\..\Argotic.Examples\Core\Rss\RssChannelExample.cs" 
-///             region="RssChannel" 
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Rss\RssChannelExample.cs" language="cs" title="The following code example demonstrates the usage of the RssChannel class." />
 /// </example>
 public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
@@ -37,11 +38,11 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <param name="link">A <see cref="Uri"/> that represents the URL of the website associated with this feed.</param>
     /// <param name="title">Character data that provides the name of this feed.</param>
     /// <param name="description">Character data that provides a human-readable characterization or summary of this feed.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="description"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="description"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="title"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="description"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="description"/> is an empty string.</exception>
     public RssChannel(Uri link, string title, string description)
     {
         this.Link = link;
@@ -52,13 +53,12 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
@@ -72,19 +72,17 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Gets or sets the meta-data clients can use to register to be notified of updates to this feed.
     /// </summary>
-    /// <value>
-    ///     A <see cref="RssCloud"/> object that represents the meta-data clients can use for monitoring 
-    ///     updates to this feed using a web service that implements the RssCloud application programming interface. 
-    ///     The default value is a <b>null</b> reference.
-    /// </value>
+    /// <value>The default value is <see langword="null"/>, meaning the feed offers no notification service and must be polled.</value>
     public RssCloud? Cloud { get; set; }
 
     /// <summary>
     /// Gets or sets the human-readable copyright statement that applies to this feed.
     /// </summary>
-    /// <value>The human-readable copyright statement that applies to this feed.</value>
+    /// <value>A human-readable notice, not a machine-readable licence. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     When a feed lacks a copyright element, aggregators <i>should not</i> assume that is in the public domain and can be republished and redistributed without restriction.
+    ///     An absent copyright statement grants nothing. A consumer must not read the empty case as a
+    ///     dedication to the public domain or as permission to republish. For a licence a machine can act on,
+    ///     use the Creative Commons extension rather than this element.
     /// </remarks>
     public string Copyright
     {
@@ -95,12 +93,9 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Gets or sets character data that provides a human-readable characterization or summary of this feed.
     /// </summary>
-    /// <value>Character data that provides a human-readable characterization or summary of this feed.</value>
-    /// <remarks>
-    ///     The description character data <b>must</b> be suitable for presentation as HTML.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>A summary of the feed, suitable for rendering as HTML. Required by the specification. The default value is an <i>empty</i> string.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Description
     {
         get;
@@ -112,15 +107,20 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     } = string.Empty;
 
     /// <summary>
-    /// Gets the URL of the RSS specification implemented by the software that created this feed.
+    /// Gets the URL written to the channel's <c>docs</c> element.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the RSS specification implemented by the software that created this feed.</value>
+    /// <value>The RSS 2.0 specification at rssboard.org. Fixed, and written on every save.</value>
+    /// <remarks>
+    ///     <c>&lt;docs&gt;</c> points a human who has stumbled onto the raw XML at an explanation of the
+    ///     format. It describes the format, not this feed, which is why it is a constant rather than a
+    ///     settable property.
+    /// </remarks>
     public static Uri Documentation { get; } = new("http://www.rssboard.org/rss-specification");
 
     /// <summary>
     /// Gets or sets a value that credits the software that created this feed.
     /// </summary>
-    /// <value>A value that credits the software that created this feed. The default value is an agent that describes this syndication framework.</value>
+    /// <value>The default value names this framework and its assembly version.</value>
     public string Generator
     {
         get;
@@ -130,41 +130,43 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Gets or sets the graphical logo for this feed.
     /// </summary>
-    /// <value>
-    ///     A <see cref="RssImage"/> object that represents the graphical logo for this feed. The default value is a <b>null</b> reference.
-    /// </value>
+    /// <value>The default value is <see langword="null"/>, meaning the feed declares no logo.</value>
     public RssImage? Image { get; set; }
 
     /// <summary>
     /// Gets the distinct content published in this feed.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="RssItem"/> objects that represent distinct content published in this feed.</value>
+    /// <value>The <c>&lt;item&gt;</c> elements, in document order. Items are optional; an empty collection is a valid feed.</value>
     public IList<RssItem> Items { get; } = [];
 
     /// <summary>
     /// Gets or sets the natural language employed in this feed.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> object that represents the natural language employed in this feed. The default value is a <b>null</b> reference.</value>
+    /// <value>The default value is <see langword="null"/>, meaning the feed declares no language.</value>
     /// <remarks>
-    ///     The language <b>must</b> be identified using one of the <a href="http://www.rssboard.org/rss-language-codes">RSS language codes</a> 
-    ///     or a <a href="http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes">W3C language code</a>.
+    ///     Saving writes <see cref="CultureInfo.Name"/>, so the tag on the wire is whatever the culture is
+    ///     named — <c>en-GB</c>, <c>fr</c>. The specification admits both its own
+    ///     <a href="https://www.rssboard.org/rss-language-codes">RSS language codes</a> and
+    ///     <a href="https://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes">W3C language codes</a>;
+    ///     the two overlap but are not identical, and neither is validated here.
     /// </remarks>
     public CultureInfo? Language { get; set; }
 
     /// <summary>
     /// Gets or sets the last date and time the content of this feed was updated.
     /// </summary>
-    /// <value>
-    ///     A <see cref="DateTime"/> object that represents the last date and time the content of this feed was updated. 
-    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no last build date was specified.
-    /// </value>
+    /// <value>The default value is <see cref="DateTime.MinValue"/>, the sentinel for "no <c>lastBuildDate</c> was specified".</value>
+    /// <remarks>
+    ///     When the <i>content</i> last changed, as distinct from <see cref="PublicationDate"/>, which is when
+    ///     the feed was published. Both are written in the RFC 822 date-and-time syntax RSS 2.0 requires.
+    /// </remarks>
     public DateTime LastBuildDate { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the URL of the website associated with this feed.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the website associated with this feed.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The site this feed describes — not the feed document, which is <see cref="SelfLink"/>. Required by the specification.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Link
     {
         get;
@@ -178,11 +180,15 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Gets or sets the e-mail address of the person to contact regarding the editorial content of this feed.
     /// </summary>
-    /// <value>The e-mail address of the person to contact regarding the editorial content of this feed.</value>
+    /// <value>An e-mail address. The default value is an <i>empty</i> string.</value>
     /// <remarks>
     ///     <para>
-    ///         There is no requirement to follow a specific format for email addresses. Publishers can format addresses according to the RFC 2822 Address Specification,
-    ///         the RFC 2368 guidelines for mailto links, or some other scheme. The recommended format for e-mail addresses is <i>username@hostname.tld (Real Name)</i>.
+    ///         RSS pins no format here. Publishers use the addr-spec of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc2822.html">RFC 2822</a> (now RFC 5322 §3.4.1), the
+    ///         mailto conventions of <a href="https://www.rfc-editor.org/rfc/rfc2368.html">RFC 2368</a> (now
+    ///         RFC 6068), or something of their own. The recommended shape is
+    ///         <c>username@hostname.tld (Real Name)</c> — an address with the display name in parentheses
+    ///         after it, not before.
     ///     </para>
     /// </remarks>
     public string ManagingEditor
@@ -194,24 +200,23 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Gets or sets the publication date and time of this feed's content.
     /// </summary>
-    /// <value>
-    ///     A <see cref="DateTime"/> object that represents the publication date and time of this feed's content. 
-    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no publication date was specified.
-    /// </value>
+    /// <value>The default value is <see cref="DateTime.MinValue"/>, the sentinel for "no <c>pubDate</c> was specified".</value>
     /// <remarks>
-    ///     Publishers of daily, weekly or monthly periodicals can use this element to associate feed items with the date they most recently went to press.
+    ///     For a periodical, the date the issue went to press. Written in the RFC 822 date-and-time syntax
+    ///     RSS 2.0 requires — see <see cref="RssItem.PublicationDate"/> for why the citation is RFC 822 and
+    ///     not RFC 5322.
     /// </remarks>
     public DateTime PublicationDate { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets an advisory label for the content in this feed.
     /// </summary>
-    /// <value>A string value, formatted according to the specification for the Platform for Internet Content Selection (PICS), that supplies an advisory label for the content in this feed.</value>
+    /// <value>A PICS label. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     <para>
-    ///         For further information on the <b>Platform for Internet Content Selection (PICS)</b> advisory label formatting specification,
-    ///         see <a href="http://www.w3.org/TR/REC-PICS-labels#General">http://www.w3.org/TR/REC-PICS-labels#General</a>.
-    ///     </para>
+    ///     The Platform for Internet Content Selection was a 1996 W3C content-labelling scheme, superseded by
+    ///     POWDER and supported by essentially nothing today. It is here because RSS 2.0 defines the element,
+    ///     so a document carrying one round-trips; it is not a facility to reach for. The label format is at
+    ///     <a href="https://www.w3.org/TR/REC-PICS-labels/#General">https://www.w3.org/TR/REC-PICS-labels/#General</a>.
     /// </remarks>
     public string Rating
     {
@@ -222,64 +227,60 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Gets or sets a URL that describes the feed itself.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a URL that points to where this feed can be retrieved from.</value>
+    /// <value>Where this feed document is published, or <see langword="null"/> if it does not say. Distinct from <see cref="Link"/>, which is the site.</value>
     /// <remarks>
-    ///     <para>
-    ///         Identifying a feed's URL within the feed makes it more portable, self-contained, and easier to cache. 
-    ///         For these reasons, a feed <i>should</i> provide a value for <see cref="SelfLink"/> that is used for this purpose.
-    ///     </para>
-    ///     <para>
-    ///         Identifying a self-referential link is achieved by including an <i>atom:link</i> element within the channel. 
-    ///         See <a href="http://www.rssboard.org/rss-profile#namespace-elements-atom-link">RSS Profile</a> for more information.
-    ///     </para>
+    ///     RSS 2.0 has no element for this, so the RSS Best Practices Profile borrows Atom's:
+    ///     <c>&lt;atom:link rel="self" href="…"/&gt;</c> inside the channel. Supplying it is what lets a feed
+    ///     that has been copied, cached or proxied still say where it came from, so a reader can re-subscribe
+    ///     from the document alone. See
+    ///     <a href="https://www.rssboard.org/rss-profile#namespace-elements-atom-link">the profile</a>.
     /// </remarks>
     public Uri? SelfLink { get; set; }
 
     /// <summary>
     /// Gets the days of the week during which this feed is not updated.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="DayOfWeek"/> enumeration values that indicate the days of the week during which this feed is not updated.</value>
+    /// <value>Up to seven days, without duplicates. The default value is an <i>empty</i> collection.</value>
     /// <remarks>
-    ///     <see cref="DayOfWeek"/> enumeration values within this collection <b>must not</b> be duplicated.
+    ///     A hint: "Aggregators may not read the channel during days listed in the <c>&lt;skipDays&gt;</c>
+    ///     element." Neither the seven-element ceiling nor the no-duplicates rule is enforced here.
     /// </remarks>
     public IList<DayOfWeek> SkipDays { get; } = [];
 
     /// <summary>
     /// Gets the hours of the day during which this feed is not updated.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="Int32"/> objects that indicate the hours of the day during which this feed is not updated.</value>
+    /// <value>Hours in the range <c>0</c> to <c>23</c>, without duplicates. The default value is an <i>empty</i> collection.</value>
     /// <remarks>
-    ///     Values from 0 to 23 are permitted, with 0 representing midnight. Integer values within this collection <b>must not</b> be duplicated.
+    ///     "The hour beginning at midnight is hour zero", and the specification states the hours are GMT —
+    ///     not the publisher's local time, which is the usual mistake. Neither the range nor the
+    ///     no-duplicates rule is enforced here.
     /// </remarks>
     public IList<int> SkipHours { get; } = [];
 
     /// <summary>
     /// Gets or sets a form to submit a text query to this feed's publisher over the Common Gateway Interface (CGI).
     /// </summary>
-    /// <value>
-    ///     A <see cref="TextInput"/> object that represents a form to submit a text query to this feed's publisher over the Common Gateway Interface (CGI). 
-    ///     The default value is a <b>null</b> reference.
-    /// </value>
+    /// <value>The default value is <see langword="null"/>. See <see cref="RssTextInput"/> before adding one — most readers ignore the element.</value>
     public RssTextInput? TextInput { get; set; }
 
     /// <summary>
     /// Gets or sets the maximum number of minutes to cache the data before a client should request it again.
     /// </summary>
-    /// <value>
-    ///     The maximum number of minutes to cache the data before an aggregator should request it again. 
-    ///     The default value is <see cref="Int32.MinValue"/>, which indicates no time-to-live was specified.
-    /// </value>
+    /// <value>Minutes. The default value is <see cref="int.MinValue"/>, the sentinel for "no <c>ttl</c> was specified".</value>
     /// <remarks>
-    ///     Aggregators that support this property <i>should</i> treat it as a publisher's suggestion of a feed's update frequency, not a hard rule.
+    ///     Minutes, not seconds — <c>&lt;ttl&gt;60&lt;/ttl&gt;</c> is an hour. A suggestion of how long the
+    ///     feed may be cached, and readers treat it as one; it does not override HTTP cache headers, which are
+    ///     the mechanism that actually governs revalidation.
     /// </remarks>
     public int TimeToLive { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets character data that provides the name of this feed.
     /// </summary>
-    /// <value>Character data that provides the name of this feed.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The feed's name. Required by the specification. The default value is an <i>empty</i> string.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Title
     {
         get;
@@ -293,11 +294,15 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Gets or sets the e-mail address of the person to contact about technical issues regarding this feed.
     /// </summary>
-    /// <value>The e-mail address of the person to contact about technical issues regarding this feed.</value>
+    /// <value>An e-mail address. The default value is an <i>empty</i> string.</value>
     /// <remarks>
     ///     <para>
-    ///         There is no requirement to follow a specific format for email addresses. Publishers can format addresses according to the RFC 2822 Address Specification,
-    ///         the RFC 2368 guidelines for mailto links, or some other scheme. The recommended format for e-mail addresses is <i>username@hostname.tld (Real Name)</i>.
+    ///         RSS pins no format here. Publishers use the addr-spec of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc2822.html">RFC 2822</a> (now RFC 5322 §3.4.1), the
+    ///         mailto conventions of <a href="https://www.rfc-editor.org/rfc/rfc2368.html">RFC 2368</a> (now
+    ///         RFC 6068), or something of their own. The recommended shape is
+    ///         <c>username@hostname.tld (Real Name)</c> — an address with the display name in parentheses
+    ///         after it, not before.
     ///     </para>
     /// </remarks>
     public string Webmaster
@@ -310,11 +315,11 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// Loads this <see cref="RssChannel"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="RssChannel"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssChannel"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssChannel"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source) => this.Load(source, new SyndicationResourceLoadSettings());
 
     /// <summary>
@@ -322,12 +327,12 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="RssChannel"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssChannel"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssChannel"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -385,7 +390,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// Saves the current <see cref="RssChannel"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -497,7 +502,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="RssChannel"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssChannel"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>
     ///         This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssChannel"/>.
@@ -506,9 +511,9 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///         The number of <see cref="RssChannel.Items"/> that are loaded is limited based on the <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private bool LoadCollections(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -629,12 +634,12 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="RssChannel"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssChannel"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssChannel"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -764,12 +769,12 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="RssChannel"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssChannel"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssChannel"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     private bool LoadProfile(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -891,7 +896,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// Determines whether the specified <see cref="RssChannel"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="RssChannel"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="RssChannel"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="RssChannel"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(RssChannel? other)
     {
         if (other is null)
@@ -906,7 +911,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is RssChannel other && this.Equals(other);
 
     /// <summary>
@@ -935,7 +940,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(RssChannel? first, RssChannel? second)
     {
         if (first is null) return second is null;
@@ -947,6 +952,6 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(RssChannel? first, RssChannel? second) => !(first == second);
 }

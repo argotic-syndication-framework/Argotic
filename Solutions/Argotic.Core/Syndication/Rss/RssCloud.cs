@@ -7,19 +7,33 @@ using Argotic.Extensions;
 namespace Argotic.Syndication;
 
 /// <summary>
-/// Represents the meta-data necessary for monitoring updates to an <see cref="RssFeed"/> using a web service that implements the RssCloud application programming interface.
+/// Represents the address of a web service that will notify subscribers when an <see cref="RssFeed"/> changes.
 /// </summary>
 /// <seealso cref="RssChannel.Cloud"/>
 /// <remarks>
-///     For more information about the RssCloud application programming interface, see <a href="http://www.rssboard.org/rsscloud-interface">http://www.rssboard.org/rsscloud-interface</a>.
+///     <para>
+///         RSS 2.0 describes the purpose of <c>&lt;cloud&gt;</c> as allowing "processes to register with a
+///         cloud to be notified of updates to the channel, implementing a lightweight publish-subscribe
+///         protocol for RSS feeds". The five attributes are an address, not a payload: a subscriber calls
+///         <see cref="RegisterProcedure"/> at <see cref="Domain"/>:<see cref="Port"/><see cref="Path"/>,
+///         over <see cref="Protocol"/>, passing its own callback address. The cloud then calls back on
+///         every subsequent update, so the subscriber stops polling.
+///     </para>
+///     <para>
+///         Registration is not permanent. The interface's frequency conventions are that a cloud discards a
+///         registration after 25 hours and a client re-registers every 24 — so the element is an address to
+///         be re-used, not a one-time handshake. It also requires the registration call to originate from
+///         the same IP address that will receive the callbacks, which is why a subscriber behind NAT or a
+///         firewall may register successfully and then never hear anything.
+///     </para>
+///     <para>
+///         Nothing in this class performs the registration; it carries the co-ordinates a client needs in
+///         order to perform it. The interface is specified at
+///         <a href="https://www.rssboard.org/rsscloud-interface">https://www.rssboard.org/rsscloud-interface</a>.
+///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the RssCloud class.">
-///         <code 
-///             source="..\..\Argotic.Examples\Core\Rss\RssCloudExample.cs" 
-///             region="RssCloud" 
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Rss\RssCloudExample.cs" language="cs" title="The following code example demonstrates the usage of the RssCloud class." />
 /// </example>
 public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
@@ -39,14 +53,14 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <param name="port">The TCP port of the web service that monitors updates to a feed.</param>
     /// <param name="protocol"> An <see cref="RssCloudProtocol"/> enumeration value that represents the message format utilized by the web service that monitors updates to a feed.</param>
     /// <param name="registerProcedure">The name of the remote procedure to call when requesting notification of feed updates.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="domain"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="domain"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="path"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="path"/> is an empty string.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="port"/> is less than <i>zero</i>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="domain"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="domain"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="path"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="path"/> is an empty string.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="port"/> is less than <c>0</c>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="protocol"/> is equal to <see cref="RssCloudProtocol.None"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="registerProcedure"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="registerProcedure"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="registerProcedure"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="registerProcedure"/> is an empty string.</exception>
     public RssCloud(string domain, string path, int port, RssCloudProtocol protocol, string registerProcedure)
     {
         this.Domain = domain;
@@ -59,21 +73,20 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
-    /// Gets or sets the host name or IP address of the web service that monitors updates to a feed.
+    /// Gets or sets the host name or IP address of the notification web service.
     /// </summary>
-    /// <value>The host name or IP address of the web service that monitors updates to a feed.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>A bare host, such as <c>rpc.sys.com</c> — not a URL, and carrying neither scheme nor port.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Domain
     {
         get;
@@ -85,11 +98,11 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the path of the web service that monitors updates to a feed.
+    /// Gets or sets the request path of the notification web service.
     /// </summary>
-    /// <value>The path of the web service that monitors updates to a feed.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>An absolute path beginning with <c>/</c>, such as <c>/RPC2</c>.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Path
     {
         get;
@@ -103,8 +116,8 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <summary>
     /// Gets or sets the TCP port of the web service that monitors updates to a feed.
     /// </summary>
-    /// <value>The TCP port of the web service that monitors updates to a feed. The default value is <b>80</b>.</value>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <i>zero</i>.</exception>
+    /// <value>The TCP port. The default value is <c>80</c>, matching the example in the RSS 2.0 specification.</value>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than <c>0</c>.</exception>
     public int Port
     {
         get;
@@ -118,11 +131,16 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <summary>
     /// Gets or sets the message format utilized by the web service that monitors updates to a feed.
     /// </summary>
-    /// <value>
-    ///     An <see cref="RssCloudProtocol"/> enumeration value that represents the message format utilized by the web service that monitors updates to a feed. 
-    ///     The default value is <see cref="RssCloudProtocol.XmlRpc"/>.
-    /// </value>
-    /// <exception cref="ArgumentException">The <paramref name="value"/> is equivalent to <see cref="RssCloudProtocol.None"/>.</exception>
+    /// <value>The default value is <see cref="RssCloudProtocol.XmlRpc"/>.</value>
+    /// <remarks>
+    ///     The RssCloud interface defines three transports and three corresponding attribute values:
+    ///     <c>xml-rpc</c>, <c>soap</c> and <c>http-post</c>. <see cref="RssCloudProtocol"/> models only the
+    ///     first two. A feed declaring <c>protocol="http-post"</c> therefore loads with this property left
+    ///     at its default and the declared transport lost, because
+    ///     <see cref="CloudProtocolByName(string)"/> returns <see cref="RssCloudProtocol.None"/> for it and
+    ///     the load skips the assignment.
+    /// </remarks>
+    /// <exception cref="ArgumentException">The value specified for a set operation is equivalent to <see cref="RssCloudProtocol.None"/>.</exception>
     public RssCloudProtocol Protocol
     {
         get;
@@ -132,11 +150,11 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     } = RssCloudProtocol.XmlRpc;
 
     /// <summary>
-    /// Gets or sets the name of the remote procedure to call when requesting notification of feed updates.
+    /// Gets or sets the name of the remote procedure a subscriber calls to register for notifications.
     /// </summary>
-    /// <value>The name of the remote procedure to call when requesting notification of feed updates.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>A procedure name, such as <c>myCloud.rssPleaseNotify</c>.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string RegisterProcedure
     {
         get;
@@ -151,14 +169,9 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// Returns the cloud protocol identifier for the supplied <see cref="RssCloudProtocol"/>.
     /// </summary>
     /// <param name="protocol">The <see cref="RssCloudProtocol"/> to get the cloud protocol identifier for.</param>
-    /// <returns>The cloud protocol identifier for the supplied <paramref name="protocol"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The <c>protocol</c> attribute value for the supplied <paramref name="protocol"/> — <c>soap</c> or <c>xml-rpc</c> — or an empty string for <see cref="RssCloudProtocol.None"/>.</returns>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the CloudProtocolAsString method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\Rss\RssCloudExample.cs" 
-    ///             region="CloudProtocolAsString(RssCloudProtocol protocol)" 
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\Rss\RssCloudExample.cs" language="cs" title="The following code example demonstrates the usage of the CloudProtocolAsString method." />
     /// </example>
     public static string CloudProtocolAsString(RssCloudProtocol protocol) =>
         EnumerationMetadataAttribute.GetAlternateValue(protocol);
@@ -166,18 +179,10 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <summary>
     /// Returns the <see cref="RssCloudProtocol"/> enumeration value that corresponds to the specified protocol name.
     /// </summary>
-    /// <param name="name">The name of the cloud protocol.</param>
-    /// <returns>A <see cref="RssCloudProtocol"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>RssCloudProtocol.None</b>.</returns>
-    /// <remarks>This method disregards case of specified protocol name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <param name="name">The <c>protocol</c> attribute value, matched without regard to case.</param>
+    /// <returns>The matching <see cref="RssCloudProtocol"/>, or <see cref="RssCloudProtocol.None"/> if <paramref name="name"/> matches no known protocol.</returns>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the CloudProtocolByName method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\Rss\RssCloudExample.cs" 
-    ///             region="CloudProtocolByName(string name)" 
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\Rss\RssCloudExample.cs" language="cs" title="The following code example demonstrates the usage of the CloudProtocolByName method." />
     /// </example>
     public static RssCloudProtocol CloudProtocolByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, RssCloudProtocol.None);
@@ -190,11 +195,11 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <see langword="true"/> if the object passed to it matches the conditions defined in the delegate.
     ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is <see langword="null"/>.</exception>
     public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
@@ -213,11 +218,11 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// Loads this <see cref="RssCloud"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="RssCloud"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssCloud"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssCloud"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -279,12 +284,12 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="RssCloud"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssCloud"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssCloud"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -300,7 +305,7 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// Saves the current <see cref="RssCloud"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -350,7 +355,7 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// Determines whether the specified <see cref="RssCloud"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="RssCloud"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="RssCloud"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="RssCloud"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(RssCloud? other)
     {
         if (other is null)
@@ -365,7 +370,7 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is RssCloud other && this.Equals(other);
 
     /// <summary>
@@ -387,7 +392,7 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(RssCloud? first, RssCloud? second)
     {
         if (first is null) return second is null;
@@ -399,6 +404,6 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(RssCloud? first, RssCloud? second) => !(first == second);
 }

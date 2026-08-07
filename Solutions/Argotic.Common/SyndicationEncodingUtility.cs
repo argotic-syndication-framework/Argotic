@@ -61,7 +61,7 @@ public static partial class SyndicationEncodingUtility
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     <b>A separate type purely to move the cost off everyone else's path.</b> This class has no
+    ///     A separate type purely to move the cost off everyone else's path. This class has no
     ///     static constructor, so it is <c>beforefieldinit</c> and every static field initialiser on it
     ///     runs together, on first touch of any one of them. <see cref="DefaultRequestTimeout"/> is one
     ///     of those fields, and <see cref="SyndicationResourceLoadSettings"/> reads it in the field
@@ -101,7 +101,7 @@ public static partial class SyndicationEncodingUtility
         ///     silently disagree is the wrong trade.
         ///     </para>
         ///     <para>
-        ///     <b>This is a candidate finder, not a predicate.</b> It necessarily contains the whole of
+        ///     This is a candidate finder, not a predicate. It necessarily contains the whole of
         ///     <c>[D800-DFFF]</c> — a surrogate is not a valid XML character on its own — so it fires on
         ///     every astral character, including the perfectly valid ones. The pair rule is stateful and
         ///     stays where it is; what the set buys is skipping the runs in between.
@@ -142,7 +142,7 @@ public static partial class SyndicationEncodingUtility
     ///     generator emits a matcher directly instead of the engine parsing the pattern at run time.
     ///     </para>
     ///     <para>
-    ///     <b>Three alternations, because XML permits either quote character.</b> The single-quoted arm
+    ///     Three alternations, because XML permits either quote character. The single-quoted arm
     ///     was missing, so <c>encoding='iso-8859-1'</c> fell through to the bare-value arm, which
     ///     captured <c>'iso-8859-1'</c> <i>including the quotes</i>. <see cref="Encoding.GetEncoding(string)"/>
     ///     then threw <see cref="ArgumentException"/>, the caller swallowed it, and the document was
@@ -186,7 +186,7 @@ public static partial class SyndicationEncodingUtility
     /// Applies the handler settings every Argotic HTTP pipeline shares.
     /// </summary>
     /// <param name="handler">The handler to configure.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="handler"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="handler"/> is <see langword="null"/>.</exception>
     /// <remarks>
     ///     <para>
     ///     Named so that the shared client and anything built by <c>IHttpClientFactory</c> cannot drift
@@ -195,14 +195,14 @@ public static partial class SyndicationEncodingUtility
     ///     keeps cookies while the singleton does not.
     ///     </para>
     ///     <para>
-    ///     <b>Cookies are off.</b> <see cref="SocketsHttpHandler.UseCookies"/> defaults to
+    ///     Cookies are off. <see cref="SocketsHttpHandler.UseCookies"/> defaults to
     ///     <see langword="true"/>, so a <c>Set-Cookie</c> from any origin was replayed on the next
     ///     request to that host — and on a process-wide singleton that means per-domain session state
     ///     accumulating for the lifetime of the application, with no API to inspect or clear it. A feed
     ///     reader has no use for a cookie jar.
     ///     </para>
     ///     <para>
-    ///     <b>Brotli is on.</b> It has been in the platform since .NET Core 3.0 and is what most origins
+    ///     Brotli is on. It has been in the platform since .NET Core 3.0 and is what most origins
     ///     prefer; advertising only gzip and deflate meant declining the smallest encoding available.
     ///     </para>
     /// </remarks>
@@ -217,11 +217,22 @@ public static partial class SyndicationEncodingUtility
     /// <summary>
     /// Gets the shared <see cref="HttpClient"/> instance for making HTTP requests.
     /// </summary>
-    /// <value>A shared <see cref="HttpClient"/> instance configured for optimal connection pooling.</value>
+    /// <value>The process-wide client, created on first use and never replaced.</value>
     /// <remarks>
-    /// This shared client is intended for use when no custom credentials or proxy settings are needed.
-    /// For requests requiring authentication or custom proxy configuration, create an <see cref="HttpClient"/>
-    /// with a configured <see cref="HttpClientHandler"/> or use <c>IHttpClientFactory</c>.
+    ///     <para>
+    ///     Its <see cref="HttpClient.Timeout"/> is
+    ///     <see cref="System.Threading.Timeout.InfiniteTimeSpan"/>, deliberately: every deadline in this
+    ///     library is imposed by a <see cref="CancellationTokenSource"/> so that it covers the body read
+    ///     as well as the headers. Reading <see cref="HttpClient.Timeout"/> therefore tells a caller
+    ///     nothing; <see cref="DefaultRequestTimeout"/> is the value that does.
+    ///     </para>
+    ///     <para>
+    ///     Intended for use when no custom credentials or proxy settings are needed. Handler-level
+    ///     settings cannot be changed on it after the fact, so for authentication, a proxy, or a
+    ///     rotating handler, create an <see cref="HttpClient"/> of your own — passing it to
+    ///     <see cref="ApplyArgoticHandlerDefaults(SocketsHttpHandler)"/> to keep it in step with this
+    ///     one — or use <c>IHttpClientFactory</c>.
+    ///     </para>
     /// </remarks>
     public static HttpClient SharedHttpClient => sharedHttpClient.Value;
 
@@ -249,7 +260,7 @@ public static partial class SyndicationEncodingUtility
     /// <summary>
     /// Creates <see cref="XmlWriterSettings"/> for writing a syndication entity as an XML fragment.
     /// </summary>
-    /// <param name="encoding">The character encoding to write with, or <b>null</b> to leave the writer's default.</param>
+    /// <param name="encoding">The character encoding to write with, or <see langword="null"/> to leave the writer's default.</param>
     /// <returns>Settings that indent, omit the XML declaration, and permit a fragment rather than a whole document.</returns>
     /// <remarks>
     ///     Entities are written as fragments because they are composed into a document by their parent.
@@ -275,7 +286,7 @@ public static partial class SyndicationEncodingUtility
     /// <summary>
     /// Creates <see cref="XmlWriterSettings"/> for writing a complete syndication document.
     /// </summary>
-    /// <param name="encoding">The character encoding to write with, or <b>null</b> to leave the writer's default.</param>
+    /// <param name="encoding">The character encoding to write with, or <see langword="null"/> to leave the writer's default.</param>
     /// <returns>Settings that indent, emit the XML declaration, and require a well-formed document.</returns>
     /// <remarks>This shape was repeated inline at 12 call sites before being named here.</remarks>
     public static XmlWriterSettings CreateDocumentXmlWriterSettings(Encoding? encoding = null)
@@ -304,8 +315,8 @@ public static partial class SyndicationEncodingUtility
     ///     The supplied <paramref name="xml"/> data is parsed to remove invalid XML characters that would normally prevent
     ///     a navigator from being created.
     /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xml"/> data is an empty string.</exception>
     /// <remarks>
     ///     Filters through the same streaming reader the other overloads use, so a dirty document is no
     ///     longer rebuilt into a second string before parsing. The explicit guard stays: unlike the
@@ -334,23 +345,24 @@ public static partial class SyndicationEncodingUtility
     ///     The supplied <paramref name="stream"/> XML data is parsed to remove invalid XML characters that would normally prevent
     ///     a navigator from being created.
     /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <remarks>
-    ///     The character encoding of the supplied <paramref name="stream"/> is automatically determined based on the <i>encoding</i> attribute of the XML document declaration.
-    ///     If the character encoding cannot be determined, a default encoding of <see cref="Encoding.UTF8"/> is used.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
-    /// <remarks>
+    ///     <para>
+    ///     The encoding is determined from the byte-order mark if there is one and the <c>encoding</c>
+    ///     pseudo-attribute of the XML declaration otherwise, falling back to <see cref="Encoding.UTF8"/>
+    ///     when a document declares neither.
+    ///     </para>
     ///     <para>
     ///     Reads a bounded head, sniffs the declaration from it, then decodes the head and the
     ///     remainder as one stream. The document is never buffered whole, and never becomes a string.
     ///     </para>
     ///     <para>
-    ///     <b>The head is filled with <c>ReadAtLeast</c>, not one <c>Read</c>.</b> A single read on a
+    ///     The head is filled with <c>ReadAtLeast</c>, not one <c>Read</c>. A single read on a
     ///     network stream routinely returns far less than asked for, so a naive read would sniff
     ///     whatever happened to be in the first TCP segment.
     ///     </para>
     ///     <para>
-    ///     <b>The head grows when a declaration did not close inside it.</b> Whitespace between the
+    ///     The head grows when a declaration did not close inside it. Whitespace between the
     ///     pseudo-attributes of a declaration is legal and unbounded, so one can run past any fixed
     ///     window. Growing on that condition — rather than on "no <c>encoding=</c> was found" — is what
     ///     keeps the answer identical to reading the document whole. Past
@@ -406,11 +418,11 @@ public static partial class SyndicationEncodingUtility
     ///     The supplied <paramref name="stream"/> XML data is parsed to remove invalid XML characters that would normally prevent
     ///     a navigator from being created.
     /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="encoding"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="encoding"/> is <see langword="null"/>.</exception>
     /// <remarks>
     ///     <para>
-    ///     <b>This overload no longer closes the caller's stream.</b> It wrapped it in a
+    ///     This overload no longer closes the caller's stream. It wrapped it in a
     ///     <see cref="StreamReader"/> it owned and disposed, which closed the stream as a side effect —
     ///     while the single-argument overload, which looks symmetrical, did not. Nothing documented the
     ///     difference and no test observed it. Callers who relied on it to dispose their stream must now
@@ -444,7 +456,7 @@ public static partial class SyndicationEncodingUtility
     /// Creates a <see cref="XPathNavigator"/> over a stream, honouring the caller's load settings.
     /// </summary>
     /// <param name="stream">The stream to navigate.</param>
-    /// <param name="settings">The load settings. This value can be <b>null</b>.</param>
+    /// <param name="settings">The load settings. This value can be <see langword="null"/>.</param>
     /// <returns>A navigator over the supplied <paramref name="stream"/>.</returns>
     /// <remarks>
     ///     <para>
@@ -454,7 +466,7 @@ public static partial class SyndicationEncodingUtility
     ///     written down twelve times.
     ///     </para>
     ///     <para>
-    ///     <b>Behaviour is unchanged and is presently wrong</b> — a non-null settings object forces
+    ///     Behaviour is unchanged and is presently wrong — a non-null settings object forces
     ///     <see cref="SyndicationResourceLoadSettings.CharacterEncoding"/>, whose default overrides a
     ///     correctly declared <c>iso-8859-1</c>. That is pinned by
     ///     <c>SettingsEncodingCharacterisationTests</c> and fixed by the commit that makes the
@@ -467,7 +479,7 @@ public static partial class SyndicationEncodingUtility
     ///     cannot see this one.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     internal static XPathNavigator CreateSafeNavigator(Stream stream, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
@@ -489,7 +501,7 @@ public static partial class SyndicationEncodingUtility
     ///     The supplied <paramref name="reader"/> XML data is parsed to remove invalid XML characters that would normally prevent
     ///     a navigator from being created.
     /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <remarks>
     ///     <para>
     ///     Filters as it reads. The other overloads still drain their input to a string first; this one
@@ -526,26 +538,26 @@ public static partial class SyndicationEncodingUtility
     /// <returns>The drained body. The caller owns it and must dispose it.</returns>
     /// <remarks>
     ///     <para>
-    ///     The rule this exists to enforce: <b><see cref="HttpCompletionOption.ResponseHeadersRead"/> is
-    ///     correct exactly where the body is consumed asynchronously or not at all.</b> Every site that
+    ///     The rule this exists to enforce: <see cref="HttpCompletionOption.ResponseHeadersRead"/> is
+    ///     correct exactly where the body is consumed asynchronously or not at all. Every site that
     ///     hands the stream to a synchronous reader — an <c>XPathDocument</c>, an <c>XmlReader</c> over a
     ///     <see cref="Stream"/>, <c>ReadToEnd</c>, <c>CopyTo</c> — must come through here first, or it
     ///     performs a blocking drain of a socket on a thread-pool thread.
     ///     </para>
     ///     <para>
-    ///     The declared-length check is <b>an optimisation, not the defence</b>. Automatic decompression
+    ///     The declared-length check is an optimisation, not the defence. Automatic decompression
     ///     strips <c>Content-Length</c> from every response it decompresses, so on a compressing origin
     ///     it never fires at all. The streaming counter below it is the only guaranteed bound, and it
     ///     counts <i>decompressed</i> bytes — which is the right unit, because a few kilobytes of gzip
     ///     can expand to a megabyte.
     ///     </para>
     ///     <para>
-    ///     The limit is checked <b>before</b> each chunk is written, so the buffer never holds more than
+    ///     The limit is checked <i>before</i> each chunk is written, so the buffer never holds more than
     ///     the cap. Reading to the end and then comparing totals would have spent the memory the cap
     ///     exists to save.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="response"/> is <see langword="null"/>.</exception>
     /// <exception cref="SyndicationContentTooLargeException">The body exceeds <paramref name="maxBytes"/>.</exception>
     internal static async Task<PooledContentBuffer> ReadContentAsync(
         HttpResponseMessage response,
@@ -563,7 +575,7 @@ public static partial class SyndicationEncodingUtility
     /// Reads a stream into a pooled buffer, refusing one longer than <paramref name="maxBytes"/>.
     /// </summary>
     /// <param name="stream">The stream to drain. The caller keeps ownership of it.</param>
-    /// <param name="declaredLength">The length the origin declared, or <b>null</b> if it declared none.</param>
+    /// <param name="declaredLength">The length the origin declared, or <see langword="null"/> if it declared none.</param>
     /// <param name="maxBytes">The most to accept.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>The drained body. The caller owns it and must dispose it.</returns>
@@ -572,7 +584,7 @@ public static partial class SyndicationEncodingUtility
     ///     stream rather than a response — the body having been left unread on purpose, so that
     ///     deciding not to want it costs nothing.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="SyndicationContentTooLargeException">The stream exceeds <paramref name="maxBytes"/>.</exception>
     internal static async Task<PooledContentBuffer> ReadContentAsync(
         Stream stream,
@@ -625,7 +637,7 @@ public static partial class SyndicationEncodingUtility
     /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> asynchronously using the shared <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-    /// <param name="encoding">A <see cref="Encoding"/> object that indicates the expected character encoding of the supplied <paramref name="source"/>. This value can be <b>null</b>.</param>
+    /// <param name="encoding">A <see cref="Encoding"/> object that indicates the expected character encoding of the supplied <paramref name="source"/>. This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>
     ///     A task that represents the asynchronous operation. The task result contains an <see cref="XPathNavigator"/>
@@ -634,11 +646,11 @@ public static partial class SyndicationEncodingUtility
     /// <remarks>
     ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
     ///     <para>
-    ///         If the <paramref name="encoding"/> is <b>null</b>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
+    ///         If the <paramref name="encoding"/> is <see langword="null"/>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
     ///         Otherwise, the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="HttpRequestException">The response status code does not indicate success.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static Task<XPathNavigator> CreateSafeNavigatorAsync(
@@ -651,8 +663,8 @@ public static partial class SyndicationEncodingUtility
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="encoding">A <see cref="Encoding"/> object that indicates the expected character encoding of the supplied <paramref name="source"/>. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="encoding">A <see cref="Encoding"/> object that indicates the expected character encoding of the supplied <paramref name="source"/>. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>
     ///     A task that represents the asynchronous operation. The task result contains an <see cref="XPathNavigator"/>
@@ -664,12 +676,12 @@ public static partial class SyndicationEncodingUtility
     ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="encoding"/> is <b>null</b>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
+    ///         If the <paramref name="encoding"/> is <see langword="null"/>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
     ///         Otherwise, the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="HttpRequestException">The response status code does not indicate success.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<XPathNavigator> CreateSafeNavigatorAsync(
@@ -695,10 +707,10 @@ public static partial class SyndicationEncodingUtility
     /// Creates an <see cref="HttpRequestMessage"/> for a resource located at the supplied <see cref="Uri"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <b>null</b>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <see langword="null"/>.</param>
     /// <param name="method">The HTTP method to use. Defaults to <see cref="HttpMethod.Get"/>.</param>
     /// <returns>An <see cref="HttpRequestMessage"/> configured for the request.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public static HttpRequestMessage CreateHttpRequestMessage(Uri source, SyndicationRequestOptions? requestOptions = null, HttpMethod? method = null)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -714,7 +726,7 @@ public static partial class SyndicationEncodingUtility
     /// Sends an HTTP request using the shared <see cref="HttpClient"/> and returns the response asynchronously.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <b>null</b>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="HttpResponseMessage"/>.</returns>
     /// <remarks>
@@ -722,7 +734,7 @@ public static partial class SyndicationEncodingUtility
     ///     For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
     ///     Requests made through this overload are subject to a 100-second default time-out, mirroring the legacy <see cref="HttpWebRequest"/> behavior.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The request was canceled or exceeded the 100-second default time-out.</exception>
     public static async Task<HttpResponseMessage> SendHttpRequestAsync(Uri source, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
@@ -736,7 +748,7 @@ public static partial class SyndicationEncodingUtility
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <b>null</b>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="HttpResponseMessage"/>.</returns>
     /// <remarks>
@@ -749,8 +761,8 @@ public static partial class SyndicationEncodingUtility
     ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     public static async Task<HttpResponseMessage> SendHttpRequestAsync(Uri source, HttpClient httpClient, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -769,12 +781,12 @@ public static partial class SyndicationEncodingUtility
     ///     The size cap to apply when <see cref="SyndicationResourceLoadSettings.MaxResponseContentLength"/>
     ///     is unset — the format default for whichever type is loading.
     /// </param>
-    /// <param name="requestOptions">Request-level options. This value can be <b>null</b>.</param>
+    /// <param name="requestOptions">Request-level options. This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>A navigator over the fetched document.</returns>
     /// <remarks>
     ///     <para>
-    ///     <b>The cap default comes from the caller, not from the settings object.</b> A settings object
+    ///     The cap default comes from the caller, not from the settings object. A settings object
     ///     cannot know what kind of document is being loaded, and the answer differs by a factor of
     ///     eight between a feed and a sitemap. So the loading type passes its own default and the
     ///     settings override it when set — which is what lets a caller construct settings for an
@@ -787,9 +799,9 @@ public static partial class SyndicationEncodingUtility
     ///     deleted rather than rewritten.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     /// <exception cref="SyndicationContentTooLargeException">The response exceeds the effective size cap.</exception>
     internal static async Task<XPathNavigator> CreateSafeNavigatorAsync(
         Uri source,
@@ -843,7 +855,7 @@ public static partial class SyndicationEncodingUtility
     ///     not care that more exists. Detecting a document's format needs its first element, not its
     ///     contents.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="response"/> is <see langword="null"/>.</exception>
     internal static async Task<PooledContentBuffer> ReadContentPrefixAsync(
         HttpResponseMessage response,
         int maxBytes,
@@ -887,7 +899,7 @@ public static partial class SyndicationEncodingUtility
     /// </summary>
     /// <param name="source">The resource to request.</param>
     /// <param name="httpClient">The client to send with.</param>
-    /// <param name="requestOptions">Request-level options. This value can be <b>null</b>.</param>
+    /// <param name="requestOptions">Request-level options. This value can be <see langword="null"/>.</param>
     /// <param name="completionOption">When the returned task completes.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>The response. The caller owns it.</returns>
@@ -905,8 +917,8 @@ public static partial class SyndicationEncodingUtility
     ///     <c>ReadContentAsync</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     internal static async Task<HttpResponseMessage> SendHttpRequestAsync(
         Uri source,
         HttpClient httpClient,
@@ -925,9 +937,10 @@ public static partial class SyndicationEncodingUtility
     /// Decodes a base64 encoded string.
     /// </summary>
     /// <param name="encodedValue">The base64 encoded string to decode.</param>
-    /// <returns>A <see cref="Stream"/> the represents the decoded result of the base64 encoded value.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="encodedValue"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="encodedValue"/> is an empty string.</exception>
+    /// <returns>A readable, seekable stream over the decoded bytes, positioned at the start. The caller owns it.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="encodedValue"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="encodedValue"/> is an empty string.</exception>
+    /// <exception cref="FormatException">The <paramref name="encodedValue"/> is not valid base64.</exception>
     public static Stream DecodeBase64String(string encodedValue)
     {
         ArgumentException.ThrowIfNullOrEmpty(encodedValue);
@@ -947,9 +960,14 @@ public static partial class SyndicationEncodingUtility
     /// Decodes an HTML escaped string.
     /// </summary>
     /// <param name="escapedValue">The HTML escaped string to decode.</param>
-    /// <returns>A string the represents the unescaped result of the HTML escaped value.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is an empty string.</exception>
+    /// <returns>The unescaped value.</returns>
+    /// <remarks>
+    ///     Two decodes, not one: HTML entity decoding followed by URL decoding. The second is what makes
+    ///     this unsuitable for arbitrary prose — URL decoding reads <c>+</c> as a space and <c>%</c> as
+    ///     the start of an escape, so text that legitimately contains either comes back altered.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="escapedValue"/> is an empty string.</exception>
     public static string DecodeHtmlEscapedString(string escapedValue)
     {
         ArgumentException.ThrowIfNullOrEmpty(escapedValue);
@@ -968,7 +986,7 @@ public static partial class SyndicationEncodingUtility
     ///     A <see cref="Encoding"/> that represents the character encoding specified by the XML data source.
     ///     If the character encoding is not specified or unable to be determined, returns <see cref="Encoding.UTF8"/>.
     /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is <see langword="null"/>.</exception>
     public static Encoding GetXmlEncoding(byte[] data)
     {
         ArgumentNullException.ThrowIfNull(data);
@@ -1002,8 +1020,8 @@ public static partial class SyndicationEncodingUtility
     ///     A <see cref="Encoding"/> that represents the character encoding specified by the XML data.
     ///     If the character encoding is not specified or unable to be determined, returns <see cref="Encoding.UTF8"/>.
     /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
     public static Encoding GetXmlEncoding(string content)
     {
         ArgumentException.ThrowIfNullOrEmpty(content);
@@ -1027,14 +1045,14 @@ public static partial class SyndicationEncodingUtility
     /// unknown, or the window is empty.</returns>
     /// <remarks>
     ///     <para>
-    ///     <b>The flag is not optional.</b> Three different situations all produce
+    ///     The flag is not optional. Three different situations all produce
     ///     <see cref="Encoding.UTF8"/> — the document declared UTF-8, the document declared nothing, and
     ///     the document opened a declaration this window could not see the end of. Only the third means
     ///     "ask again with more bytes", and a caller cannot tell them apart from the return value alone.
     ///     </para>
     ///     <para>
-    ///     The trigger is <b>a declaration that did not close</b>, not <b>an <c>encoding=</c> that was
-    ///     not found</b>, and the difference is a silent mis-decode. The declaration regex requires the
+    ///     The trigger is <i>a declaration that did not close</i>, not <i>an <c>encoding=</c> that was
+    ///     not found</i>, and the difference is a silent mis-decode. The declaration regex requires the
     ///     closing <c>?&gt;</c>, so a declaration whose <c>encoding=</c> sits inside the window but whose
     ///     <c>?&gt;</c> does not fails to match even though the answer was right there. Growing on
     ///     "no <c>encoding=</c>" would stop early on exactly that document and answer <c>utf-8</c> for a
@@ -1112,8 +1130,8 @@ public static partial class SyndicationEncodingUtility
     ///         and any Unicode character; excluding the surrogate blocks FFFE and FFFF.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
     public static string RemoveInvalidXmlHexadecimalCharacters(string content)
     {
         ArgumentException.ThrowIfNullOrEmpty(content);
@@ -1153,7 +1171,7 @@ public static partial class SyndicationEncodingUtility
     /// Returns the index of the first character that <see cref="RemoveInvalidXmlHexadecimalCharacters(string)"/> would drop.
     /// </summary>
     /// <param name="content">The content to scan.</param>
-    /// <returns>The index of the first character that would be removed, or <b>-1</b> if the content is already valid.</returns>
+    /// <returns>The index of the first character that would be removed, or <c>-1</c> if the content is already valid.</returns>
     /// <remarks>
     ///     The two keep conditions mirror the rebuild loop exactly: a character survives if it is a valid
     ///     XML character, or if it opens a valid surrogate pair with the character after it.
@@ -1213,8 +1231,8 @@ public static partial class SyndicationEncodingUtility
     /// </summary>
     /// <param name="name">The directory name to encode.</param>
     /// <returns>A string that can be safely used as an argument when <see cref="Directory.CreateDirectory(string)">creating a directory</see>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
     public static string EncodeSafeDirectoryName(string name)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);

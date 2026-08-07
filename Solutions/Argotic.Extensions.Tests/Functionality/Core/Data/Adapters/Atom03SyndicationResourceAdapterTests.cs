@@ -11,13 +11,21 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Data.Adapters;
 
 /// <summary>
-/// Unit tests for <see cref="Atom03SyndicationResourceAdapter"/> that verify Atom 0.3 parsing.
+/// Covers <see cref="Atom03SyndicationResourceAdapter"/>: what the Atom 0.3 vocabulary in
+/// <c>http://purl.org/atom/ns#</c> fills on an <see cref="AtomFeed"/>, including the elements RFC 4287
+/// later renamed — <c>modified</c>, <c>tagline</c>, <c>copyright</c>, <c>created</c> and a person's
+/// <c>url</c> — the <c>mode</c> attribute that types a text construct, the retrieval limit, and the
+/// argument guards.
 /// </summary>
 [TestClass]
 public class Atom03SyndicationResourceAdapterTests
 {
     #region Feed Parsing Tests
 
+    /// <summary>
+    /// A minimal Atom 0.3 feed fills the title, the <c>id</c> as a URN, and the <c>modified</c> date that
+    /// Atom 1.0 spells <c>updated</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalAtom03Feed_PopulatesFeed()
     {
@@ -40,6 +48,10 @@ public class Atom03SyndicationResourceAdapterTests
         feed.UpdatedOn.ShouldNotBe(DateTime.MinValue);
     }
 
+    /// <summary>
+    /// A full Atom 0.3 feed fills every construct it carries, with <c>tagline</c> reaching <c>Subtitle</c>
+    /// and <c>copyright</c> reaching <c>Rights</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_FullAtom03Feed_PopulatesAllProperties()
     {
@@ -96,6 +108,15 @@ public class Atom03SyndicationResourceAdapterTests
         feed.Entries.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// The single <c>entry</c> of an Atom 0.3 feed is filled with its own title, <c>id</c>, <c>modified</c>
+    /// date and links.
+    /// </summary>
+    /// <remarks>
+    ///     Reached through <c>Fill(AtomFeed)</c> rather than <c>Fill(AtomEntry)</c>: the file records that
+    ///     the entry overload selects an <c>atom:entry</c> child, so it wants a navigator sitting above the
+    ///     entry rather than on it.
+    /// </remarks>
     [TestMethod]
     public void Fill_Atom03EntryFromFeed_PopulatesEntry()
     {
@@ -126,6 +147,9 @@ public class Atom03SyndicationResourceAdapterTests
 
     #region Text Construct Mode Tests
 
+    /// <summary>
+    /// A text construct written <c>mode="escaped"</c> is typed <see cref="AtomTextConstructType.Html"/>.
+    /// </summary>
     [TestMethod]
     public void Fill_WithTextConstructEscapedMode_ParsesAsHtml()
     {
@@ -145,6 +169,9 @@ public class Atom03SyndicationResourceAdapterTests
         feed.Title.TextType.ShouldBe(AtomTextConstructType.Html);
     }
 
+    /// <summary>
+    /// An entry's <c>content</c> written <c>mode="xml"</c> yields the text of the <c>xhtml:div</c> it wraps.
+    /// </summary>
     [TestMethod]
     public void Fill_WithXmlModeContent_ParsesXhtmlContent()
     {
@@ -169,6 +196,10 @@ public class Atom03SyndicationResourceAdapterTests
 
     #region Person Construct Tests
 
+    /// <summary>
+    /// An Atom 0.3 <c>author</c> fills a name, an email address, and the <c>url</c> element that Atom 1.0
+    /// renamed <c>uri</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_WithPersonConstruct_PopulatesAuthor()
     {
@@ -191,6 +222,9 @@ public class Atom03SyndicationResourceAdapterTests
         author.EmailAddress.ShouldBe("author@example.com");
     }
 
+    /// <summary>
+    /// A feed-level <c>contributor</c> fills its own name and email address, separately from the author.
+    /// </summary>
     [TestMethod]
     public void Fill_WithContributors_PopulatesContributors()
     {
@@ -215,6 +249,9 @@ public class Atom03SyndicationResourceAdapterTests
 
     #region Generator Tests
 
+    /// <summary>
+    /// The <c>generator</c> element fills its text, its <c>url</c> attribute and its <c>version</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_WithGenerator_PopulatesGenerator()
     {
@@ -240,6 +277,9 @@ public class Atom03SyndicationResourceAdapterTests
 
     #region Entry Collections Tests
 
+    /// <summary>
+    /// An entry carrying its own <c>author</c> keeps that author, rather than the feed-level one.
+    /// </summary>
     [TestMethod]
     public void Fill_EntryWithAuthors_PopulatesEntryAuthors()
     {
@@ -260,6 +300,9 @@ public class Atom03SyndicationResourceAdapterTests
         feed.Entries[0].Authors[0].Name.ShouldBe("Entry Author");
     }
 
+    /// <summary>
+    /// An entry's <c>summary</c> fills its content, typed HTML by its <c>mode="escaped"</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_EntryWithSummary_PopulatesSummary()
     {
@@ -280,6 +323,10 @@ public class Atom03SyndicationResourceAdapterTests
         feed.Entries[0].Summary!.TextType.ShouldBe(AtomTextConstructType.Html);
     }
 
+    /// <summary>
+    /// Atom 0.3's <c>created</c> element fills the entry's <c>PublishedOn</c>, which Atom 1.0 spells
+    /// <c>published</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_EntryWithCreated_PopulatesPublishedOn()
     {
@@ -306,6 +353,9 @@ public class Atom03SyndicationResourceAdapterTests
 
     #region Error Handling Tests
 
+    /// <summary>
+    /// Filling a <see langword="null"/> feed throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_NullFeedResource_ThrowsArgumentNullException()
     {
@@ -320,6 +370,9 @@ public class Atom03SyndicationResourceAdapterTests
         Should.Throw<ArgumentNullException>(() => adapter.Fill((AtomFeed)null!));
     }
 
+    /// <summary>
+    /// Filling a <see langword="null"/> entry throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_NullEntryResource_ThrowsArgumentNullException()
     {
@@ -334,6 +387,9 @@ public class Atom03SyndicationResourceAdapterTests
         Should.Throw<ArgumentNullException>(() => adapter.Fill((AtomEntry)null!));
     }
 
+    /// <summary>
+    /// Constructing the adapter without a navigator throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_NullNavigator_ThrowsArgumentNullException()
     {
@@ -344,6 +400,9 @@ public class Atom03SyndicationResourceAdapterTests
         Should.Throw<ArgumentNullException>(() => new Atom03SyndicationResourceAdapter(null!, settings));
     }
 
+    /// <summary>
+    /// Constructing the adapter without load settings throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_NullSettings_ThrowsArgumentNullException()
     {
@@ -360,6 +419,10 @@ public class Atom03SyndicationResourceAdapterTests
 
     #region Links Tests
 
+    /// <summary>
+    /// A feed <c>link</c> fills its href, its <c>rel</c> of <c>alternate</c> and its <c>type</c> of
+    /// <c>text/html</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_WithLinks_PopulatesLinks()
     {
@@ -386,6 +449,9 @@ public class Atom03SyndicationResourceAdapterTests
 
     #region Retrieval Limit Tests
 
+    /// <summary>
+    /// A retrieval limit of <c>2</c> stops a three-entry feed at two entries.
+    /// </summary>
     [TestMethod]
     public void Fill_WithRetrievalLimit_RespectsLimit()
     {

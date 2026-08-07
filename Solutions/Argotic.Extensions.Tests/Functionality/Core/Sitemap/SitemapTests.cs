@@ -9,14 +9,23 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 
 /// <summary>
-/// Unit tests for Sitemap XML parsing and serialization.
-/// These tests verify the correct parsing of sitemap XML format.
+/// Covers the shape of a <c>urlset</c> document: the elements a url may carry, the change-frequency and
+/// priority vocabularies, the datetime and entity-escaping rules the protocol inherits from XML, and
+/// writing a sitemap element by element.
 /// </summary>
+/// <remarks>
+///     These assert against an <c>XPathDocument</c> built straight from the fixture rather than through
+///     <see cref="Argotic.Syndication.Sitemap"/>. Where a test calls <see cref="SitemapUtility"/> it is
+///     exercising this library; the rest describe the document format itself.
+/// </remarks>
 [TestClass]
 public class SitemapTests
 {
     #region XML Parsing Tests
 
+    /// <summary>
+    /// The minimal sitemap fixture holds exactly one <c>url</c>.
+    /// </summary>
     [TestMethod]
     public void ParseMinimalSitemap_ContainsOneUrl()
     {
@@ -33,6 +42,9 @@ public class SitemapTests
         urls.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// That url's <c>loc</c> is <c>https://www.example.com/</c>.
+    /// </summary>
     [TestMethod]
     public void ParseMinimalSitemap_ExtractsLocation()
     {
@@ -50,6 +62,9 @@ public class SitemapTests
         locNode.Value.ShouldBe("https://www.example.com/");
     }
 
+    /// <summary>
+    /// The full sitemap fixture holds three <c>url</c> entries.
+    /// </summary>
     [TestMethod]
     public void ParseFullSitemap_ContainsThreeUrls()
     {
@@ -66,6 +81,10 @@ public class SitemapTests
         urls.Count.ShouldBe(3);
     }
 
+    /// <summary>
+    /// The first url carries all four elements the protocol defines — <c>loc</c>, <c>lastmod</c>,
+    /// <c>changefreq</c> and <c>priority</c> — and each reads back as written.
+    /// </summary>
     [TestMethod]
     public void ParseFullSitemap_ExtractsAllOptionalElements()
     {
@@ -91,6 +110,9 @@ public class SitemapTests
         priority.ShouldBe("1.0");
     }
 
+    /// <summary>
+    /// A <c>urlset</c> with no children yields no <c>url</c> nodes.
+    /// </summary>
     [TestMethod]
     public void ParseEmptySitemap_ContainsNoUrls()
     {
@@ -111,6 +133,10 @@ public class SitemapTests
 
     #region ChangeFreq Parsing Tests
 
+    /// <summary>
+    /// All seven change-frequency tokens appear in the fixture, in the order <c>always</c>, <c>hourly</c>,
+    /// <c>daily</c>, <c>weekly</c>, <c>monthly</c>, <c>yearly</c>, <c>never</c>.
+    /// </summary>
     [TestMethod]
     public void ParseSitemapWithAllChangeFrequencies_ExtractsAllValues()
     {
@@ -136,6 +162,9 @@ public class SitemapTests
         actualValues.ShouldBe(expectedValues);
     }
 
+    /// <summary>
+    /// Every one of the seven tokens maps to its matching <see cref="SitemapChangeFrequency"/> member.
+    /// </summary>
     [TestMethod]
     public void ParseChangeFrequencies_ConvertToEnumCorrectly()
     {
@@ -163,6 +192,10 @@ public class SitemapTests
 
     #region Priority Parsing Tests
 
+    /// <summary>
+    /// The boundary fixture's three priorities — <c>0.0</c>, <c>1.0</c> and <c>0.5</c> — all parse, so
+    /// both ends of the permitted range are inclusive.
+    /// </summary>
     [TestMethod]
     public void ParseSitemapWithPriorityBoundaries_ExtractsBoundaryValues()
     {
@@ -191,6 +224,9 @@ public class SitemapTests
         priorityValues.ShouldContain(0.5m);
     }
 
+    /// <summary>
+    /// Every tenth from <c>0.0</c> to <c>1.0</c> parses, and parses to the value written.
+    /// </summary>
     [TestMethod]
     public void ParsePriority_ValidRange_ReturnsTrue()
     {
@@ -203,6 +239,10 @@ public class SitemapTests
         }
     }
 
+    /// <summary>
+    /// A priority outside <c>0.0</c>–<c>1.0</c> is rejected, and the out parameter is left at the
+    /// documented default of <c>0.5</c> rather than at the offending number.
+    /// </summary>
     [TestMethod]
     public void ParsePriority_OutOfRange_ReturnsFalse()
     {
@@ -224,6 +264,10 @@ public class SitemapTests
 
     #region Date Format Parsing Tests
 
+    /// <summary>
+    /// The date-format fixture carries four <c>lastmod</c> spellings: a bare date, a UTC instant, and
+    /// instants with a positive and a negative offset.
+    /// </summary>
     [TestMethod]
     public void ParseSitemapWithDateFormats_ExtractsAllDates()
     {
@@ -250,6 +294,9 @@ public class SitemapTests
         dates[3].ShouldBe("2024-01-15T10:30:00-08:00");     // DateTime with negative offset
     }
 
+    /// <summary>
+    /// A bare <c>2024-01-15</c> parses to that calendar day.
+    /// </summary>
     [TestMethod]
     public void ParseDateOnlyFormat_CanBeParsedAsDateTime()
     {
@@ -266,6 +313,10 @@ public class SitemapTests
         parsed.Day.ShouldBe(15);
     }
 
+    /// <summary>
+    /// Each of the three offset-bearing spellings parses as a <see cref="DateTimeOffset"/> on 15 January
+    /// 2024, whichever way the offset leans.
+    /// </summary>
     [TestMethod]
     public void ParseDateTimeWithTimezone_CanBeParsedAsDateTimeOffset()
     {
@@ -294,6 +345,10 @@ public class SitemapTests
 
     #region URL Entity Escaping Tests
 
+    /// <summary>
+    /// An <c>&amp;amp;</c> in a <c>loc</c> is decoded by the XML reader, so the location reaches the
+    /// caller as a single <c>&amp;</c> and needs no unescaping of its own.
+    /// </summary>
     [TestMethod]
     public void ParseSitemapWithEscapedUrls_HandlesAmpersandCorrectly()
     {
@@ -312,6 +367,10 @@ public class SitemapTests
         firstLoc.Value.ShouldBe("https://www.example.com/page?param1=value1&param2=value2");
     }
 
+    /// <summary>
+    /// A percent-encoded space stays percent-encoded: <c>%20</c> is not XML markup, so the reader passes
+    /// it through untouched.
+    /// </summary>
     [TestMethod]
     public void ParseSitemapWithEscapedUrls_HandlesEncodedSpaceCorrectly()
     {
@@ -329,6 +388,10 @@ public class SitemapTests
         secondLoc.Value.ShouldBe("https://www.example.com/search?q=test%20query");
     }
 
+    /// <summary>
+    /// A location with two query parameters forms an absolute URI whose query is the whole
+    /// <c>?param1=value1&amp;param2=value2</c>.
+    /// </summary>
     [TestMethod]
     public void UrlWithSpecialCharacters_CanBeCreatedAsUri()
     {
@@ -348,6 +411,9 @@ public class SitemapTests
 
     #region Sitemap Index Parsing Tests
 
+    /// <summary>
+    /// The minimal index fixture holds exactly one <c>sitemap</c> entry.
+    /// </summary>
     [TestMethod]
     public void ParseMinimalSitemapIndex_ContainsOneSitemap()
     {
@@ -364,6 +430,9 @@ public class SitemapTests
         sitemaps.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// That entry's <c>loc</c> is <c>https://www.example.com/sitemap1.xml</c>.
+    /// </summary>
     [TestMethod]
     public void ParseMinimalSitemapIndex_ExtractsLocation()
     {
@@ -381,6 +450,9 @@ public class SitemapTests
         locNode.Value.ShouldBe("https://www.example.com/sitemap1.xml");
     }
 
+    /// <summary>
+    /// The full index fixture holds three <c>sitemap</c> entries.
+    /// </summary>
     [TestMethod]
     public void ParseFullSitemapIndex_ContainsThreeSitemaps()
     {
@@ -397,6 +469,10 @@ public class SitemapTests
         sitemaps.Count.ShouldBe(3);
     }
 
+    /// <summary>
+    /// Only two of the three entries declare a <c>lastmod</c>, so selecting them yields two dates rather
+    /// than three padded with blanks.
+    /// </summary>
     [TestMethod]
     public void ParseFullSitemapIndex_ExtractsLastmodDates()
     {
@@ -421,6 +497,9 @@ public class SitemapTests
         dates[1].ShouldBe("2024-01-14T10:00:00Z");
     }
 
+    /// <summary>
+    /// An index with no children yields no <c>sitemap</c> nodes.
+    /// </summary>
     [TestMethod]
     public void ParseEmptySitemapIndex_ContainsNoSitemaps()
     {
@@ -441,6 +520,9 @@ public class SitemapTests
 
     #region Format Detection Tests
 
+    /// <summary>
+    /// A sitemap is told apart from an index by its document element, which is <c>urlset</c>.
+    /// </summary>
     [TestMethod]
     public void DetectSitemapFormat_UrlsetRoot_IsSitemap()
     {
@@ -458,6 +540,9 @@ public class SitemapTests
         rootElementName.ShouldBe("urlset");
     }
 
+    /// <summary>
+    /// An index is told apart by its document element, which is <c>sitemapindex</c>.
+    /// </summary>
     [TestMethod]
     public void DetectSitemapFormat_SitemapindexRoot_IsSitemapIndex()
     {
@@ -475,6 +560,10 @@ public class SitemapTests
         rootElementName.ShouldBe("sitemapindex");
     }
 
+    /// <summary>
+    /// A sitemap's document element is qualified with the namespace
+    /// <see cref="SitemapUtility.SitemapNamespace"/> names, not left unqualified.
+    /// </summary>
     [TestMethod]
     public void DetectSitemapNamespace_CorrectNamespace()
     {
@@ -496,6 +585,9 @@ public class SitemapTests
 
     #region XML Writing Tests
 
+    /// <summary>
+    /// A <c>urlset</c> written by hand with one fully populated url parses back with its <c>loc</c> intact.
+    /// </summary>
     [TestMethod]
     public void WriteSitemapUrl_ProducesValidXml()
     {
@@ -536,6 +628,9 @@ public class SitemapTests
         loc.Value.ShouldBe("https://example.com/");
     }
 
+    /// <summary>
+    /// A <c>sitemapindex</c> written by hand parses back with its entry's <c>loc</c> intact.
+    /// </summary>
     [TestMethod]
     public void WriteSitemapIndex_ProducesValidXml()
     {
@@ -578,6 +673,10 @@ public class SitemapTests
 
     #region Round-Trip Tests
 
+    /// <summary>
+    /// Reading the full sitemap, writing every url back, and reading again preserves each location,
+    /// <c>lastmod</c>, <c>changefreq</c> and <c>priority</c>, including the ones that were absent.
+    /// </summary>
     [TestMethod]
     public void RoundTrip_ParseWriteParse_PreservesUrlData()
     {
@@ -664,6 +763,14 @@ public class SitemapTests
 
     #region Edge Cases
 
+    /// <summary>
+    /// Whitespace around an element's text survives the XPath read, and once trimmed <c>daily</c> and
+    /// <c>0.8</c> parse.
+    /// </summary>
+    /// <remarks>
+    ///     The trim is the caller's job here, not <c>XPathNavigator.Value</c>'s — a publisher who indents
+    ///     the inside of a <c>changefreq</c> produces a value that fails to parse unless it is trimmed first.
+    /// </remarks>
     [TestMethod]
     public void ParseSitemap_WithWhitespaceInElements_TrimsValues()
     {
@@ -697,6 +804,10 @@ public class SitemapTests
         pri.ShouldBe(0.8m);
     }
 
+    /// <summary>
+    /// A percent-encoded non-ASCII path reaches the caller in its encoded form and still forms an
+    /// absolute URI.
+    /// </summary>
     [TestMethod]
     public void ParseSitemap_UrlWithInternationalCharacters_HandlesCorrectly()
     {
@@ -723,6 +834,12 @@ public class SitemapTests
         Uri.TryCreate(loc, UriKind.Absolute, out Uri? uri).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A location of some 1,900 characters is read whole, with nothing truncated.
+    /// </summary>
+    /// <remarks>
+    ///     The protocol caps a location at 2,048 characters; this sits just under it.
+    /// </remarks>
     [TestMethod]
     public void ParseSitemap_VeryLongUrl_HandlesCorrectly()
     {

@@ -8,14 +8,15 @@ namespace Argotic.Net;
 /// <summary>
 /// Represents the response to a Trackback ping request.
 /// </summary>
+/// <remarks>
+///     The whole protocol response is two elements: <c>&lt;error&gt;</c>, holding <c>0</c> or <c>1</c>,
+///     and an optional <c>&lt;message&gt;</c> explaining a rejection. There is no status code beyond
+///     that, and a server that rejects a ping still answers <c>200 OK</c> — so a send that did not throw
+///     tells you nothing about whether the ping was accepted. Read <see cref="HasError"/>.
+/// </remarks>
 /// <seealso cref="TrackbackClient.SendAsync(TrackbackMessage, CancellationToken)"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the TrackbackResponse class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Net\TrackbackClientExample.cs"
-///             region="TrackbackClient"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Net\TrackbackClientExample.cs" language="cs" title="The following code example demonstrates the usage of the TrackbackResponse class." />
 /// </example>
 public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<TrackbackResponse>, IComparisonOperators
 {
@@ -33,12 +34,16 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// <summary>
     /// Initializes a new instance of the <see cref="TrackbackResponse"/> class using the supplied error message.
     /// </summary>
-    /// <param name="errorMessage">Information about cause of the Trackback ping request failure.</param>
+    /// <param name="errorMessage">Information about the cause of the Trackback ping request failure.</param>
     /// <remarks>
-    ///     The <paramref name="errorMessage"/> <b>must</b> be provided in a <b>UTF-8</b> character encoding.
+    ///     This constructor sets <see cref="ErrorMessage"/> but leaves <see cref="HasError"/> at
+    ///     <see langword="false"/>. That mismatch is invisible on the wire — <see cref="WriteTo"/>
+    ///     decides the <c>error</c> element from the message, not from the flag — but it is visible to a
+    ///     caller who inspects the object, so treat a non-empty <see cref="ErrorMessage"/> as the failure
+    ///     signal on an instance you constructed yourself.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="errorMessage"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="errorMessage"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="errorMessage"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="errorMessage"/> is an empty string.</exception>
     public TrackbackResponse(string errorMessage)
     {
         ArgumentException.ThrowIfNullOrEmpty(errorMessage);
@@ -49,12 +54,20 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// <summary>
     /// Creates a new instance of the <see cref="TrackbackResponse"/> class asynchronously using the supplied <see cref="HttpResponseMessage"/>.
     /// </summary>
-    /// <param name="response">An <see cref="HttpResponseMessage"/> object that represents the Trackback server's response to the ping request.</param>
+    /// <param name="response">The Trackback server's response to the ping request. Its media type must be <c>text/xml</c>, and its content length must not be explicitly <c>0</c>.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="TrackbackResponse"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
-    /// <exception cref="ArgumentException">The <paramref name="response"/> has an invalid content type.</exception>
-    /// <exception cref="ArgumentException">The <paramref name="response"/> has an invalid content length.</exception>
+    /// <returns>
+    ///     A task whose result is the parsed <see cref="TrackbackResponse"/>. A well-formed document with
+    ///     no <c>response</c> element yields a default instance rather than an error, because that is
+    ///     indistinguishable from a successful ping on this protocol.
+    /// </returns>
+    /// <remarks>
+    ///     An absent <c>Content-Length</c> is accepted: the Trackback specification does not require the
+    ///     header, and chunked transfer encoding omits it. Only an explicit <c>0</c> is rejected.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="response"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="response"/> media type is not <c>text/xml</c>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="response"/> declares a content length of <c>0</c>.</exception>
     /// <exception cref="XmlException">The <paramref name="response"/> body does not represent a valid XML document, or an error was encountered in the XML data.</exception>
     public static async Task<TrackbackResponse> CreateAsync(HttpResponseMessage response, CancellationToken cancellationToken = default)
     {
@@ -97,26 +110,36 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     }
 
     /// <summary>
-    /// Gets information about cause of the Trackback ping request failure.
+    /// Gets information about the cause of the Trackback ping request failure.
     /// </summary>
-    /// <value>Information about the cause of the Trackback ping request failure. The default value is an <b>empty</b> string.</value>
+    /// <value>
+    ///     The server's <c>message</c> element. The default value is <see langword="null"/>, and a
+    ///     response that carried an empty <c>message</c> yields an <i>empty</i> string — the two are
+    ///     distinguishable, and only <see langword="null"/> means the element was absent.
+    /// </value>
     public string? ErrorMessage { get; private set; }
 
     /// <summary>
-    /// Gets a value indicating if the Trackback ping request failed.
+    /// Gets a value indicating whether the Trackback ping request failed.
     /// </summary>
-    /// <value><b>true</b> if the Trackback ping response contains an error indicator; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
+    /// <value><see langword="true"/> if the response's <c>error</c> element held <c>1</c>; otherwise, <see langword="false"/>. The default value is <see langword="false"/>.</value>
+    /// <remarks>
+    ///     A response carrying neither <c>0</c> nor <c>1</c> — or no <c>error</c> element at all — leaves
+    ///     this <see langword="false"/>, so an unparseable response is indistinguishable from success
+    ///     here. <see cref="Load(XPathNavigator)"/> returning <see langword="false"/> is what separates
+    ///     them.
+    /// </remarks>
     public bool HasError { get; private set; }
 
     /// <summary>
     /// Loads this <see cref="TrackbackResponse"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="TrackbackResponse"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="TrackbackResponse"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="TrackbackResponse"/>.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -156,7 +179,13 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// Saves the current <see cref="TrackbackResponse"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <remarks>
+    ///     The <c>error</c> element is derived from <see cref="ErrorMessage"/>, not from
+    ///     <see cref="HasError"/>: a non-empty message writes <c>1</c> and the message, anything else
+    ///     writes <c>0</c> alone. A response loaded with <c>error</c> <c>1</c> and no <c>message</c>
+    ///     therefore writes back as a success.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -177,12 +206,9 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="TrackbackResponse"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance, as <see cref="WriteTo(XmlWriter)"/> would write it.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -221,7 +247,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// Determines whether the specified <see cref="TrackbackResponse"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="TrackbackResponse"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="TrackbackResponse"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="TrackbackResponse"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(TrackbackResponse? other)
     {
         if (other is null)
@@ -236,7 +262,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is TrackbackResponse other && this.Equals(other);
 
     /// <summary>
@@ -250,7 +276,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(TrackbackResponse? first, TrackbackResponse? second)
     {
         if (first is null) return second is null;
@@ -262,6 +288,6 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(TrackbackResponse? first, TrackbackResponse? second) => !(first == second);
 }

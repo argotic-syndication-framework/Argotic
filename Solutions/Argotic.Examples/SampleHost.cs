@@ -9,7 +9,7 @@ namespace Argotic.Examples;
 ///     <para>
 ///     Most <c>Uri</c> examples point at a live feed, which is the honest demonstration: that is what a
 ///     caller does. <see cref="Argotic.Syndication.AtomEntry"/> cannot be shown that way, because its
-///     overloads take an RFC 4287 §2 <b>stand-alone entry document</b> — <c>&lt;entry&gt;</c> as the
+///     overloads take an RFC 4287 §2 <i>stand-alone entry document</i> — <c>&lt;entry&gt;</c> as the
 ///     document element — and essentially nothing on the open web serves one. They are Atom Publishing
 ///     Protocol member resources, which live behind authentication.
 ///     </para>

@@ -3,8 +3,16 @@ using Argotic.Common;
 namespace Argotic.Syndication;
 
 /// <summary>
-/// Represents a format agnostic view of a syndication category.
+/// Represents a format-agnostic view of a syndication category.
 /// </summary>
+/// <remarks>
+///     A category is a label plus, optionally, the vocabulary the label belongs to. Atom spells those
+///     <c>term</c> and <c>scheme</c>; RSS spells them the element's text and its <c>domain</c> attribute.
+///     They are projected onto <see cref="Term"/> and <see cref="Scheme"/> respectively — but only
+///     spelling is shared, not meaning. Atom requires <c>scheme</c> to be an IRI; RSS says only that
+///     <c>domain</c> is "a string that identifies a categorization taxonomy", and publishers put bare
+///     words there. Two categories from different formats comparing equal is a coincidence of text.
+/// </remarks>
 /// <seealso cref="GenericSyndicationFeed.Categories"/>
 /// <seealso cref="GenericSyndicationItem.Categories"/>
 public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory>, IEquatable<GenericSyndicationCategory>, IComparisonOperators
@@ -14,8 +22,8 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term.
     /// </summary>
     /// <param name="term">A string that identifies the category.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="term"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="term"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="term"/> is an empty string.</exception>
     public GenericSyndicationCategory(string term)
     {
         ArgumentException.ThrowIfNullOrEmpty(term);
@@ -26,9 +34,9 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term and scheme.
     /// </summary>
     /// <param name="term">A string that identifies this category.</param>
-    /// <param name="scheme">A string that identifies the categorization scheme used by this category.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="term"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
+    /// <param name="scheme">A string that identifies the categorization scheme used by this category. Stored as given — not trimmed, and not checked against <see cref="Uri"/> syntax even though Atom requires an IRI.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="term"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="term"/> is an empty string.</exception>
     public GenericSyndicationCategory(string term, string scheme) : this(term)
     {
         Scheme = scheme;
@@ -38,7 +46,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied <see cref="AtomCategory"/>.
     /// </summary>
     /// <param name="category">The <see cref="AtomCategory"/> to build an abstraction against.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="category"/> is <see langword="null"/>.</exception>
     public GenericSyndicationCategory(AtomCategory category)
     {
         ArgumentNullException.ThrowIfNull(category);
@@ -62,7 +70,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied <see cref="RssCategory"/>.
     /// </summary>
     /// <param name="category">The <see cref="RssCategory"/> to build an abstraction against.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="category"/> is <see langword="null"/>.</exception>
     public GenericSyndicationCategory(RssCategory category)
     {
         ArgumentNullException.ThrowIfNull(category);
@@ -80,22 +88,32 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// <summary>
     /// Gets a string that identifies the categorization scheme.
     /// </summary>
-    /// <value>A string that identifies the categorization scheme used by this category.</value>
+    /// <value>
+    ///     An Atom category's <c>scheme</c>, or an RSS category's <c>domain</c>, trimmed. The default
+    ///     value is an <i>empty</i> string, which indicates that the category names no taxonomy — the
+    ///     common case in the wild.
+    /// </value>
     public string Scheme { get; } = string.Empty;
 
     /// <summary>
     /// Gets a string that identifies the category.
     /// </summary>
-    /// <value>A string that identifies the category.</value>
+    /// <value>
+    ///     An Atom category's <c>term</c>, or an RSS category's element text, trimmed. The default value
+    ///     is an <i>empty</i> string.
+    /// </value>
+    /// <remarks>
+    ///     For an <see cref="AtomCategory"/> carrying no <c>term</c>, its <c>label</c> stands in. That is
+    ///     a substitution across a real distinction: <c>term</c> is the machine-readable identifier and
+    ///     <c>label</c> is human-readable text meant for display, so a term arrived at this way may be
+    ///     capitalised, spaced, or in the feed's natural language.
+    /// </remarks>
     public string Term { get; } = string.Empty;
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.</returns>
-    /// <remarks>
-    ///     This method returns a human-readable representation for the current instance.
-    /// </remarks>
+    /// <returns>A human-readable rendering of the term and scheme, for diagnostics. Not a syndication format, and not round-trippable.</returns>
     public override string ToString() => $"GenericSyndicationCategory(Term = {this.Term}, Scheme = {this.Scheme})";
 
     /// <summary>
@@ -120,7 +138,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// Determines whether the specified <see cref="GenericSyndicationCategory"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="GenericSyndicationCategory"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="GenericSyndicationCategory"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="GenericSyndicationCategory"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(GenericSyndicationCategory? other)
     {
         if (other is null)
@@ -135,7 +153,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is GenericSyndicationCategory other && this.Equals(other);
 
     /// <summary>
@@ -149,7 +167,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(GenericSyndicationCategory? first, GenericSyndicationCategory? second)
     {
         if (first is null) return second is null;
@@ -161,6 +179,6 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(GenericSyndicationCategory? first, GenericSyndicationCategory? second) => !(first == second);
 }

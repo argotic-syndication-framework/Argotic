@@ -11,11 +11,12 @@ namespace Argotic.Benchmarks.Utilities;
 /// <remarks>
 /// <para>
 /// The audit that went looking for a <c>FrozenDictionary</c> rebuilt per call found none — every one
-/// is <c>static readonly</c>. It found this instead. Six <c>new Regex(...)</c> are constructed as
-/// local variables, so each pays the engine's pattern parse on every call, and one of them is
-/// worse than per-call: <c>ExtractHtmlAttributes</c> builds its pattern once per invocation and
+/// is <c>static readonly</c>. It found this instead. Six <c>new Regex(...)</c> were constructed as
+/// local variables, so each paid the engine's pattern parse on every call, and one of them was
+/// worse than per-call: <c>ExtractHtmlAttributes</c> built its pattern once per invocation and
 /// <c>ExtractUrls</c> invokes it once per matched <c>&lt;link&gt;</c> and once per matched
-/// <c>&lt;a&gt;</c>. A page with 50 links and 200 anchors constructs 250 of them.
+/// <c>&lt;a&gt;</c>. A page with 50 links and 200 anchors constructed 250 of them. All six are now
+/// <c>[GeneratedRegex]</c>, and this class is what measured the change.
 /// </para>
 /// <para>
 /// The <c>Count</c> axis is the number of anchors on the page, which is what multiplies the
@@ -23,11 +24,12 @@ namespace Argotic.Benchmarks.Utilities;
 /// hoisted variants pay construction once whatever the page contains.
 /// </para>
 /// <para>
-/// Three variants, and the middle one matters. Interpreted-per-call is what ships.
+/// Three variants, and the middle one matters. Interpreted-per-call is what used to ship.
 /// Interpreted-hoisted isolates how much of the cost is construction alone rather than
 /// matching, which is the number that says whether source generation is doing anything beyond what a
-/// <c>static readonly</c> field would. Source-generated is the house style already used for
-/// <c>XmlDeclarationEncodingRegex</c>.
+/// <c>static readonly</c> field would — without that arm, a two-arm comparison would have credited
+/// source generation with a win a one-line field declaration already delivers. Source-generated is
+/// what ships now, and was already the house style for <c>XmlDeclarationEncodingRegex</c>.
 /// </para>
 /// </remarks>
 [BenchmarkCategory("utilities", "discovery", "regex")]
@@ -76,7 +78,8 @@ public partial class DiscoveryRegexBenchmarks
     }
 
     /// <summary>
-    /// The whole public path, as it ships: one construction per matched element.
+    /// The whole public path, as it ships — source-generated throughout, where it once constructed a
+    /// pattern per matched element.
     /// </summary>
     /// <returns>The number of URLs extracted.</returns>
     [Benchmark(Baseline = true, Description = "ExtractUrls (public path, as shipped)")]

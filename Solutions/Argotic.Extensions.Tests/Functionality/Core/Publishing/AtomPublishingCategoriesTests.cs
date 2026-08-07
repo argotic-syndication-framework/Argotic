@@ -99,6 +99,8 @@ public sealed class AtomPublishingCategoriesTests
     /// <summary>
     /// A collection carrying categories loads whichever of the two spellings RFC 5023 permits it uses.
     /// </summary>
+    /// <param name="categories">The markup to place inside the collection element: either spelling of an <c>app:categories</c> element, or an empty string for a collection that carries none.</param>
+    /// <param name="spelling">A name for the row, used as the failure message on the assertion.</param>
     /// <remarks>
     ///     The third row is the control. Without it, the first two passing is equally consistent with
     ///     "collections no longer load at all", which would be a larger and worse change.

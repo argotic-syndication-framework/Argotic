@@ -4,8 +4,16 @@ using Argotic.Common;
 namespace Argotic.Syndication;
 
 /// <summary>
-/// Represents a format agnostic view of the discrete content for a syndication feed.
+/// Represents a format-agnostic view of one item published in a syndication feed.
 /// </summary>
+/// <remarks>
+///     Four fields — title, summary, publication date, categories — projected from an
+///     <see cref="RssItem"/> or an <see cref="AtomEntry"/>. There is deliberately no link and no
+///     identifier here, so this type cannot tell you <i>where</i> the item is or whether two items are
+///     the same item. It is a read-only view: there is no setter, no <c>Save</c>, and no way back to the
+///     underlying object from an item. Go through <see cref="GenericSyndicationFeed.Resource"/> and index
+///     the real collection when you need more.
+/// </remarks>
 /// <seealso cref="GenericSyndicationFeed.Items"/>
 public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEquatable<GenericSyndicationItem>, IComparisonOperators
 {
@@ -14,7 +22,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
     /// </summary>
     /// <param name="entry">The <see cref="AtomEntry"/> to build an abstraction against.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is <see langword="null"/>.</exception>
     public GenericSyndicationItem(AtomEntry entry)
     {
         ArgumentNullException.ThrowIfNull(entry);
@@ -25,7 +33,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="RssItem"/>.
     /// </summary>
     /// <param name="item">The <see cref="RssItem"/> to build an abstraction against.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="item"/> is <see langword="null"/>.</exception>
     public GenericSyndicationItem(RssItem item)
     {
         ArgumentNullException.ThrowIfNull(item);
@@ -36,7 +44,8 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Gets the categories associated with this item.
     /// </summary>
     /// <value>
-    ///     A <see cref="IList{T}"/> collection of <see cref="GenericSyndicationCategory"/> objects that represent the categories associated with this item.
+    ///     An RSS item's <c>category</c> elements, or an Atom entry's <c>category</c> elements. The
+    ///     default value is an <i>empty</i> collection.
     /// </value>
     public IList<GenericSyndicationCategory> Categories => field ??= [];
 
@@ -44,13 +53,16 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Gets a date-time indicating an instant in time associated with an event early in the life cycle of this item.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> object that represents a date-time indicating an instant in time associated with an event early in the life cycle of this item.
-    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that publication date was specified.
+    ///     An RSS item's <c>pubDate</c>, or an Atom entry's <c>published</c>. The default value is
+    ///     <see cref="DateTime.MinValue"/>, which indicates that no date was specified.
     /// </value>
     /// <remarks>
-    ///     When an <see cref="AtomEntry"/> is being abstracted by this generic item, the <see cref="PublishedOn"/> will represent
-    ///     the <see cref="AtomEntry.PublishedOn"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>,
-    ///     the <see cref="AtomEntry.UpdatedOn"/> property value will be used if present.
+    ///     For an <see cref="AtomEntry"/> with no <see cref="AtomEntry.PublishedOn"/>, the
+    ///     <see cref="AtomEntry.UpdatedOn"/> value stands in — <c>published</c> is optional in Atom and
+    ///     <c>updated</c> is not, so without the substitution most Atom entries would report no date at
+    ///     all. The substitution is silent: this property cannot tell you which of the two you are
+    ///     holding, and an entry revised long after publication reports the revision. Read
+    ///     <see cref="GenericSyndicationFeed.Resource"/> when the distinction matters.
     /// </remarks>
     public DateTime PublishedOn { get; private set; } = DateTime.MinValue;
 
@@ -58,13 +70,16 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Gets a short summary, abstract, or excerpt for this item.
     /// </summary>
     /// <value>
-    ///     A short summary, abstract, or excerpt for this item.
-    ///     The default value is an <b>empty</b> string, which indicates that no excerpt was specified.
+    ///     An RSS item's <c>description</c>, or an Atom entry's <c>summary</c>, trimmed. The default
+    ///     value is an <i>empty</i> string, which indicates that none was specified.
     /// </value>
     /// <remarks>
-    ///     When an <see cref="AtomEntry"/> is being abstracted by this generic item, the <see cref="Summary"/> will represent
-    ///     the <see cref="AtomEntry.Summary"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>,
-    ///     the <see cref="AtomEntry.Content"/> property value will be used if present.
+    ///     For an <see cref="AtomEntry"/> with no <see cref="AtomEntry.Summary"/>, the whole of
+    ///     <see cref="AtomEntry.Content"/> stands in. That substitution is silent and unbounded: an entry
+    ///     publishing its full text arrives here as its full text, and nothing distinguishes it from a
+    ///     genuinely long summary. Neither source is escaped or sanitised — RSS <c>description</c> is
+    ///     routinely HTML, and Atom <c>content</c> may declare any type — so treat this as untrusted
+    ///     markup, not as text.
     /// </remarks>
     public string Summary { get; private set; } = string.Empty;
 
@@ -72,18 +87,15 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Gets the human-readable title for this item.
     /// </summary>
     /// <value>
-    ///     The human-readable title for this item.
-    ///     The default value is an <b>empty</b> string, which indicates that no title was specified.
+    ///     An RSS item's <c>title</c>, or an Atom entry's <c>title</c>, trimmed. The default value is an
+    ///     <i>empty</i> string, which indicates that none was specified.
     /// </value>
     public string Title { get; private set; } = string.Empty;
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.</returns>
-    /// <remarks>
-    ///     This method returns a human-readable representation for the current instance.
-    /// </remarks>
+    /// <returns>A human-readable rendering of the title, summary and publication date, for diagnostics. Not a syndication format, and not round-trippable.</returns>
     public override string ToString() => $"GenericSyndicationItem(Title = {this.Title}, Summary = {this.Summary}, PublishedOn = {(this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : string.Empty)})";
 
     /// <summary>
@@ -109,7 +121,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Determines whether the specified <see cref="GenericSyndicationItem"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="GenericSyndicationItem"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="GenericSyndicationItem"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="GenericSyndicationItem"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(GenericSyndicationItem? other)
     {
         if (other is null)
@@ -124,7 +136,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is GenericSyndicationItem other && this.Equals(other);
 
     /// <summary>
@@ -138,7 +150,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(GenericSyndicationItem? first, GenericSyndicationItem? second)
     {
         if (first is null) return second is null;
@@ -150,14 +162,14 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(GenericSyndicationItem? first, GenericSyndicationItem? second) => !(first == second);
 
     /// <summary>
     /// Loads the generic syndication item using the supplied <see cref="AtomEntry"/>.
     /// </summary>
     /// <param name="entry">The <see cref="AtomEntry"/> to build an abstraction against.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is <see langword="null"/>.</exception>
     private void LoadFrom(AtomEntry entry)
     {
         ArgumentNullException.ThrowIfNull(entry);
@@ -196,7 +208,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Loads the generic syndication item using the supplied <see cref="RssItem"/>.
     /// </summary>
     /// <param name="item">The <see cref="RssItem"/> to build an abstraction against.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="item"/> is <see langword="null"/>.</exception>
     private void LoadFrom(RssItem item)
     {
         ArgumentNullException.ThrowIfNull(item);

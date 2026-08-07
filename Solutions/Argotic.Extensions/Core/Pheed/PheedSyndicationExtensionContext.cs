@@ -19,10 +19,10 @@ public class PheedSyndicationExtensionContext
     /// <summary>
     /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class using the supplied parameters.
     /// </summary>
-    /// <param name="source">>A <see cref="Uri"/> that represents a URL to the original version of this photograph.</param>
-    /// <param name="thumbnail">A <see cref="Uri"/> that represents a URL to a thumbnail sized version of this photograph.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="thumbnail"/> is a null reference.</exception>
+    /// <param name="source">The location of the full-size photograph.</param>
+    /// <param name="thumbnail">The location of the thumbnail-sized photograph.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="thumbnail"/> is <see langword="null"/>.</exception>
     public PheedSyndicationExtensionContext(Uri source, Uri thumbnail)
     {
         this.Source = source;
@@ -32,8 +32,12 @@ public class PheedSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the original version of this photograph.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a URL to the original version of this photograph.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>A <see cref="Uri"/> that represents the location of the full-size photograph, or <see langword="null"/> if none was specified.</value>
+    /// <remarks>
+    ///     Written as <c>photo:imgsrc</c>, and written <i>unconditionally</i>: saving a context that
+    ///     never had a source emits an empty <c>photo:imgsrc</c> rather than omitting it.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Source
     {
         get;
@@ -48,11 +52,13 @@ public class PheedSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the thumbnail sized version of this photograph.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a URL to a thumbnail sized version of this photograph.</value>
+    /// <value>A <see cref="Uri"/> that represents the location of the thumbnail-sized photograph, or <see langword="null"/> if none was specified.</value>
     /// <remarks>
-    ///     The maximum size of the longest dimension <b>must be</b> 120 pixels.
+    ///     The module requires the longest dimension to be at most <c>120</c> pixels. Nothing here
+    ///     checks that, and nothing can: the constraint is on the image the URL points at, not on the
+    ///     URL.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Thumbnail
     {
         get;
@@ -67,11 +73,11 @@ public class PheedSyndicationExtensionContext
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="PheedSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="PheedSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="PheedSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="PheedSyndicationExtensionContext"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -108,11 +114,11 @@ public class PheedSyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);

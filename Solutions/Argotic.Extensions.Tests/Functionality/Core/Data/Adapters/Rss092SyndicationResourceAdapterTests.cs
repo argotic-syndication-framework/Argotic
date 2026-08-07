@@ -11,11 +11,17 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Data.Adapters;
 
 /// <summary>
-/// Unit tests for <see cref="Rss092SyndicationResourceAdapter"/>.
+/// Covers <see cref="Rss092SyndicationResourceAdapter"/>. RSS 0.92 is the RSS 0.91 document plus four
+/// things — <c>cloud</c> on the channel, and <c>category</c>, <c>enclosure</c> and <c>source</c> on an
+/// item — and these tests state what each of those fills, what the inherited 0.91 vocabulary still does,
+/// what a minimal channel leaves unset, and how the retrieval limit behaves.
 /// </summary>
 [TestClass]
 public class Rss092SyndicationResourceAdapterTests
 {
+    /// <summary>
+    /// A minimal RSS 0.92 channel fills its title, link and description.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalRss092_PopulatesChannel()
     {
@@ -36,6 +42,10 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Description.ShouldBe("A test RSS 0.92 feed");
     }
 
+    /// <summary>
+    /// A <c>cloud</c> element fills its domain, port, path and register procedure, and its <c>protocol</c>
+    /// of <c>soap</c> maps onto <see cref="RssCloudProtocol.Soap"/>.
+    /// </summary>
     [TestMethod]
     public void Fill_WithCloud_PopulatesCloudProperties()
     {
@@ -59,6 +69,10 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Cloud.Protocol.ShouldBe(RssCloudProtocol.Soap);
     }
 
+    /// <summary>
+    /// An item's two <c>category</c> elements fill in document order, the second keeping the <c>domain</c>
+    /// attribute that names its taxonomy.
+    /// </summary>
     [TestMethod]
     public void Fill_WithCategories_PopulatesCategories()
     {
@@ -80,6 +94,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Items[0].Categories[1].Domain.ShouldBe("http://example.com/categories");
     }
 
+    /// <summary>
+    /// An item's <c>enclosure</c> fills its URL, its length in bytes and its <c>audio/mpeg</c> content type.
+    /// </summary>
     [TestMethod]
     public void Fill_WithEnclosure_PopulatesEnclosure()
     {
@@ -102,6 +119,10 @@ public class Rss092SyndicationResourceAdapterTests
         enclosure.ContentType.ShouldBe("audio/mpeg");
     }
 
+    /// <summary>
+    /// An item's <c>source</c> fills the originating feed's title from the element text and its URL from
+    /// the <c>url</c> attribute.
+    /// </summary>
     [TestMethod]
     public void Fill_WithSource_PopulatesSource()
     {
@@ -122,6 +143,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel!.Items[0].Source!.Url.ShouldBe(new Uri("http://other.example.com/feed.xml"));
     }
 
+    /// <summary>
+    /// Both items fill in document order, each with its title, link and description.
+    /// </summary>
     [TestMethod]
     public void Fill_WithItems_PopulatesItems()
     {
@@ -146,6 +170,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Items[1].Description.ShouldBe("Second item description");
     }
 
+    /// <summary>
+    /// An <c>image</c> fills its title, URL, link and its <c>88</c> by <c>31</c> dimensions.
+    /// </summary>
     [TestMethod]
     public void Fill_WithImage_PopulatesImage()
     {
@@ -169,6 +196,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Image.Height.ShouldBe(31);
     }
 
+    /// <summary>
+    /// A <c>textInput</c> fills its title, description, name and link.
+    /// </summary>
     [TestMethod]
     public void Fill_WithTextInput_PopulatesTextInput()
     {
@@ -191,6 +221,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.TextInput.Link.ShouldBe(new Uri("http://example.com/search"));
     }
 
+    /// <summary>
+    /// A retrieval limit of <c>1</c> keeps only the first item.
+    /// </summary>
     [TestMethod]
     public void Fill_WithRetrievalLimit_EnforcesLimit()
     {
@@ -213,6 +246,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Items[0].Title.ShouldBe("Test Item with Enclosure");
     }
 
+    /// <summary>
+    /// Filling a <see langword="null"/> feed throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_NullResource_ThrowsArgumentNullException()
     {
@@ -227,6 +263,9 @@ public class Rss092SyndicationResourceAdapterTests
         Should.Throw<ArgumentNullException>(() => adapter.Fill(null!));
     }
 
+    /// <summary>
+    /// Constructing the adapter without a navigator throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_NullNavigator_ThrowsArgumentNullException()
     {
@@ -237,6 +276,9 @@ public class Rss092SyndicationResourceAdapterTests
         Should.Throw<ArgumentNullException>(() => new Rss092SyndicationResourceAdapter(null!, settings));
     }
 
+    /// <summary>
+    /// Constructing the adapter without load settings throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_NullSettings_ThrowsArgumentNullException()
     {
@@ -249,6 +291,9 @@ public class Rss092SyndicationResourceAdapterTests
         Should.Throw<ArgumentNullException>(() => new Rss092SyndicationResourceAdapter(navigator, null!));
     }
 
+    /// <summary>
+    /// A channel with no <c>cloud</c> leaves the property <see langword="null"/>, not an empty instance.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalFeed_LeavesCloudNull()
     {
@@ -267,6 +312,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Cloud.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A channel with no <c>image</c> leaves the property <see langword="null"/>, not an empty instance.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalFeed_LeavesImageNull()
     {
@@ -285,6 +333,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Image.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A channel with no <c>textInput</c> leaves the property <see langword="null"/>, not an empty instance.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalFeed_LeavesTextInputNull()
     {
@@ -303,6 +354,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.TextInput.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A channel with no <c>item</c> leaves the item collection empty.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalFeed_LeavesItemsEmpty()
     {
@@ -321,6 +375,10 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Items.ShouldBeEmpty();
     }
 
+    /// <summary>
+    /// A <c>language</c> of <c>en-us</c> is parsed into a culture whose name is the canonically cased
+    /// <c>en-US</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_WithLanguage_ParsesCultureInfo()
     {
@@ -340,6 +398,10 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Language.Name.ShouldBe("en-US");
     }
 
+    /// <summary>
+    /// The optional <c>copyright</c>, <c>managingEditor</c> and <c>webMaster</c> elements are filled
+    /// verbatim.
+    /// </summary>
     [TestMethod]
     public void Fill_WithOptionalElements_PopulatesOptionals()
     {
@@ -361,6 +423,9 @@ public class Rss092SyndicationResourceAdapterTests
         // Note: Date parsing depends on RFC 822 format - these verify the values were read
     }
 
+    /// <summary>
+    /// The <c>day</c> children of <c>skipDays</c> are parsed by name into <c>DayOfWeek</c> values.
+    /// </summary>
     [TestMethod]
     public void Fill_WithSkipDays_ParsesDaysCorrectly()
     {
@@ -381,6 +446,14 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.SkipDays.ShouldContain(DayOfWeek.Sunday);
     }
 
+    /// <summary>
+    /// The <c>hour</c> children of <c>skipHours</c> are renumbered on the way in, so a document saying
+    /// <c>1</c> and <c>2</c> yields <c>0</c> and <c>1</c>.
+    /// </summary>
+    /// <remarks>
+    ///     RSS 0.92 inherits the 0.91 clock, which counts the hours of the day from 1, while the object model
+    ///     holds the RSS 2.0 0-based form; the adapter subtracts one from every hour it reads.
+    /// </remarks>
     [TestMethod]
     public void Fill_WithSkipHours_ParsesHoursCorrectly()
     {
@@ -402,6 +475,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.SkipHours.ShouldContain(1);  // Hour 2 becomes 1
     }
 
+    /// <summary>
+    /// A retrieval limit of <c>0</c> means no limit, and both items are read.
+    /// </summary>
     [TestMethod]
     public void Fill_WithZeroRetrievalLimit_RetrievesAllItems()
     {
@@ -423,6 +499,13 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Items.Count.ShouldBe(2);
     }
 
+    /// <summary>
+    /// An item carrying two <c>enclosure</c> elements fills both, in document order.
+    /// </summary>
+    /// <remarks>
+    ///     Deliberately beyond the specification. RSS 0.92 allows one enclosure per item; the adapter accepts
+    ///     several because real feeds emit them and dropping the extras loses media.
+    /// </remarks>
     [TestMethod]
     public void Fill_WithMultipleEnclosures_PopulatesAllEnclosures()
     {
@@ -462,6 +545,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Items[0].Enclosures[1].ContentType.ShouldBe("application/pdf");
     }
 
+    /// <summary>
+    /// An item with no <c>source</c> leaves the property <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void Fill_WithItemWithoutSource_LeavesSourceNull()
     {
@@ -481,6 +567,10 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Items[1].Source.ShouldBeNull();
     }
 
+    /// <summary>
+    /// An empty <c>language</c> element leaves the channel's language <see langword="null"/> instead of
+    /// throwing.
+    /// </summary>
     [TestMethod]
     public void Fill_WithEmptyLanguage_DoesNotThrow()
     {
@@ -509,6 +599,14 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Language.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A channel carrying <c>pubDate</c> and <c>lastBuildDate</c> fills without throwing, whether or not
+    /// those dates parse.
+    /// </summary>
+    /// <remarks>
+    ///     Nothing is asserted about the two dates themselves, only about the channel around them: the file
+    ///     records that date-format compatibility is covered by the <c>SyndicationDateTimeUtility</c> tests.
+    /// </remarks>
     [TestMethod]
     public void Fill_WithDateElements_AttemptsToParseDates()
     {
@@ -541,6 +639,10 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Title.ShouldBe("Test RSS 0.92 Feed");
     }
 
+    /// <summary>
+    /// A <c>category</c> with no <c>domain</c> attribute fills its value and leaves the domain an
+    /// <i>empty</i> string, not <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void Fill_WithCategoryWithoutDomain_PopulatesCategoryWithoutDomain()
     {
@@ -561,6 +663,9 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Items[0].Categories[0].Domain.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// A <c>protocol</c> of <c>xml-rpc</c> maps onto <see cref="RssCloudProtocol.XmlRpc"/>, hyphen and all.
+    /// </summary>
     [TestMethod]
     public void Fill_WithCloudProtocolXmlRpc_ParsesProtocolCorrectly()
     {
@@ -592,6 +697,10 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Cloud.Protocol.ShouldBe(RssCloudProtocol.XmlRpc);
     }
 
+    /// <summary>
+    /// A <c>cloud</c> with no <c>protocol</c> attribute still fills its domain and port, and keeps
+    /// <c>RssCloud</c>'s default protocol of <see cref="RssCloudProtocol.XmlRpc"/>.
+    /// </summary>
     [TestMethod]
     public void Fill_WithCloudWithoutProtocol_UsesDefaultProtocol()
     {

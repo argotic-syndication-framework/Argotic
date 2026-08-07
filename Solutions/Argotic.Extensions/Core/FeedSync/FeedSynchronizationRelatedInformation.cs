@@ -29,7 +29,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// </summary>
     /// <param name="link">A <see cref="Uri"/> that represents the URI for this related feed.</param>
     /// <param name="type">A <see cref="FeedSynchronizationRelatedInformationType"/> enumeration values that represents the type of the related feed.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="type"/> is equal to <see cref="FeedSynchronizationRelatedInformationType.None"/>.</exception>
     public FeedSynchronizationRelatedInformation(Uri link, FeedSynchronizationRelatedInformationType type)
     {
@@ -43,7 +43,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// <param name="link">A <see cref="Uri"/> that represents the URI for this related feed.</param>
     /// <param name="type">A <see cref="FeedSynchronizationRelatedInformationType"/> enumeration values that represents the type of the related feed.</param>
     /// <param name="title">The name or description of this related feed.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="type"/> is equal to <see cref="FeedSynchronizationRelatedInformationType.None"/>.</exception>
     public FeedSynchronizationRelatedInformation(Uri link, FeedSynchronizationRelatedInformationType type, string title) : this(link, type)
     {
@@ -57,7 +57,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// <remarks>
     ///     The value <b>must not</b> be a relative reference.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Link
     {
         get;
@@ -86,7 +86,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     ///         ability for the latter feed to reference the complete feed.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentException">The <paramref name="value"/> is equal to <see cref="FeedSynchronizationRelatedInformationType.None"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is equal to <see cref="FeedSynchronizationRelatedInformationType.None"/>.</exception>
     public FeedSynchronizationRelatedInformationType RelationType
     {
         get;
@@ -98,7 +98,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// <summary>
     /// Gets or sets the name or description of this related feed.
     /// </summary>
-    /// <value>The name or description of this related feed.</value>
+    /// <value>The title. The default value is an <i>empty</i> string.</value>
     public string Title
     {
         get;
@@ -109,7 +109,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// Returns the relation type identifier for the supplied <see cref="FeedSynchronizationRelatedInformationType"/>.
     /// </summary>
     /// <param name="type">The <see cref="FeedSynchronizationRelatedInformationType"/> to get the relation type identifier for.</param>
-    /// <returns>The relation type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The relation type identifier for the supplied <paramref name="type"/>; otherwise, an empty string.</returns>
     public static string RelationTypeAsString(FeedSynchronizationRelatedInformationType type) =>
         EnumerationMetadataAttribute.GetAlternateValue(type);
 
@@ -117,10 +117,8 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// Returns the <see cref="FeedSynchronizationRelatedInformationType"/> enumeration value that corresponds to the specified relation type name.
     /// </summary>
     /// <param name="name">The name of the relation type.</param>
-    /// <returns>A <see cref="FeedSynchronizationRelatedInformationType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>FeedSynchronizationRelatedInformationType.None</b>.</returns>
+    /// <returns>A <see cref="FeedSynchronizationRelatedInformationType"/> enumeration value that corresponds to the specified string; otherwise, <see cref="FeedSynchronizationRelatedInformationType.None"/>.</returns>
     /// <remarks>This method disregards case of specified relation type name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static FeedSynchronizationRelatedInformationType RelationTypeByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, FeedSynchronizationRelatedInformationType.None);
 
@@ -128,11 +126,11 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// Loads this <see cref="FeedSynchronizationRelatedInformation"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="FeedSynchronizationRelatedInformation"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="FeedSynchronizationRelatedInformation"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="FeedSynchronizationRelatedInformation"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -176,7 +174,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// Saves the current <see cref="FeedSynchronizationRelatedInformation"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -239,7 +237,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// Determines whether the specified <see cref="FeedSynchronizationRelatedInformation"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="FeedSynchronizationRelatedInformation"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="FeedSynchronizationRelatedInformation"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="FeedSynchronizationRelatedInformation"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(FeedSynchronizationRelatedInformation? other)
     {
         if (other is null)
@@ -254,7 +252,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is FeedSynchronizationRelatedInformation other && this.Equals(other);
 
     /// <summary>
@@ -268,7 +266,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(FeedSynchronizationRelatedInformation? first, FeedSynchronizationRelatedInformation? second)
     {
         if (first is null) return second is null;
@@ -280,7 +278,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(FeedSynchronizationRelatedInformation? first, FeedSynchronizationRelatedInformation? second) => !(first == second);
 
 }

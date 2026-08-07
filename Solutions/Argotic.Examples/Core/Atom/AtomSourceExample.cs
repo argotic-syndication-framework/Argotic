@@ -3,16 +3,12 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Atom;
 
 /// <summary>
-/// Contains the code examples for the <see cref="AtomSource"/> class.
+/// Preserves the metadata of the feed an entry was copied from, using <see cref="AtomSource"/>.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="AtomSource"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class AtomSourceExample
 {
     /// <summary>
-    /// Provides example code for the AtomSource class.
+    /// Builds the containing <see cref="AtomFeed"/> and prints the <see cref="AtomSource"/> it holds.
     /// </summary>
     public static void ClassExample()
     {

@@ -12,20 +12,24 @@ namespace Argotic.Syndication.Specialized;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         This implementation conforms to the BlogML 2.0 specification, 
-///         which can be found at <a href="http://blogml.org">http://blogml.org</a>.
+///         BlogML 2.0 is a blog-migration format: one document holds an entire blog — every post with its
+///         comments, trackbacks and attachments, plus the author and category tables they refer to — so that a
+///         site can be lifted from one engine and dropped into another. It is not a syndication format, and
+///         nothing subscribes to it. It is also effectively dead: the format has not changed since 2006, and
+///         current platforms export their own shapes instead.
 ///     </para>
 ///     <para>
-///         The purpose of this format is to provide an open format derived from XML to store and restore the content of a blog.
+///         This implementation conforms to the BlogML 2.0 specification,
+///         which can be found at <a href="https://web.archive.org/web/20210506123858/http://blogml.org/">https://web.archive.org/web/20210506123858/http://blogml.org/</a>.
+///     </para>
+///     <para>
+///         Because a document is a whole blog rather than a window onto one, these are the largest resources
+///         the library handles, and the asynchronous loads read them under the archive size limit rather than
+///         the feed one.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the BlogMLDocument class.">
-///         <code 
-///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" 
-///             region="BlogMLDocument" 
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the BlogMLDocument class." />
 /// </example>
 public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
 {
@@ -63,80 +67,87 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets the authors of this web log.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="BlogMLAuthor"/> objects that represent the authors of this web log.</value>
     /// <remarks>
-    ///     This collection of <see cref="BlogMLAuthor"/> objects acts as a master listing of authers that can be referenced by other BlogML syndication entities.
+    ///     The document's author table. A post does not embed its authors; <see cref="BlogMLPost.Authors"/>
+    ///     holds <see cref="BlogMLAuthor.Id"/> strings that are resolved against this collection. Nothing here
+    ///     enforces that a referenced identifier exists, so a document can be structurally valid and still have
+    ///     posts pointing at authors it does not define.
     /// </remarks>
     public IList<BlogMLAuthor> Authors { get; } = [];
 
     /// <summary>
     /// Gets the categories for this web log.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="BlogMLCategory"/> objects that represent the categories for this web log.</value>
     /// <remarks>
-    ///     This collection of <see cref="BlogMLCategory"/> objects acts as a master listing of categories that can be referenced by other BlogML syndication entities.
+    ///     The document's category table, referenced by identifier from <see cref="BlogMLPost.Categories"/>
+    ///     under the same rules — and by <see cref="BlogMLCategory.ParentId"/>, which is how the category tree
+    ///     is expressed, since the categories themselves are stored flat.
     /// </remarks>
     public IList<BlogMLCategory> Categories { get; } = [];
 
     /// <summary>
     /// Gets the extended properties of this web log.
     /// </summary>
-    /// <value>A <see cref="Dictionary{T, T}"/> collection of string key/value pairs that represent the extended properties of this web log.</value>
+    /// <remarks>
+    ///     Blog-wide settings the format does not model, written as <c>property</c> elements with <c>name</c>
+    ///     and <c>value</c> attributes. The vocabulary is whatever the exporting engine chose.
+    /// </remarks>
     public Dictionary<string, string> ExtendedProperties { get; } = [];
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
     /// </summary>
-    /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
     public SyndicationContentFormat Format => documentFormat;
 
     /// <summary>
     /// Gets or sets a date-time indicating when this BlogML document was created.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the creation date of this web log storage media.
-    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided.
+    ///     The <c>date-created</c> attribute of the document — when this export was taken, not when the blog began.
+    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided, and suppresses the attribute on save.
     /// </value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     Supply this in Coordinated Universal Time. BlogML dates are written as RFC 3339.
     /// </remarks>
     public DateTime GeneratedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets the posts for this web log.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="BlogMLPost"/> objects that represents the posts for this web log.</value>
+    /// <remarks>
+    ///     Every post in the blog, each carrying its own comments, trackbacks and attachments. This is where
+    ///     the bulk of a document lives.
+    /// </remarks>
     public IList<BlogMLPost> Posts { get; } = [];
 
     /// <summary>
     /// Gets or sets the root URL of this web log.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the base URL of this web log.</value>
+    /// <value>The <c>root-url</c> attribute — the blog's base address, against which relative post URLs are resolved — or <see langword="null"/> if none was specified.</value>
     public Uri? RootUrl { get; set; }
 
     /// <summary>
     /// Gets or sets the sub-title of this web log.
     /// </summary>
-    /// <value>A <see cref="BlogMLTextConstruct"/> object that represents the sub-title of this web log.</value>
+    /// <value>The <c>sub-title</c> element, or <see langword="null"/> if the blog has none. Unlike <see cref="Title"/>, this is optional and is omitted from the output when null.</value>
     public BlogMLTextConstruct? Subtitle { get; set; }
 
     /// <summary>
     /// Gets or sets the title of this web log.
     /// </summary>
-    /// <value>A <see cref="BlogMLTextConstruct"/> object that represents the title of this web log.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>title</c> element. Never <see langword="null"/> — a new document starts with an empty text construct, and the setter rejects null.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public BlogMLTextConstruct Title
     {
         get;
@@ -151,24 +162,24 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
-    /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
+    /// <value>Always <c>2.0</c>. It is reported only: <see cref="Save(XmlWriter)"/> writes no <c>version</c> attribute, so a saved document does not declare which version it is.</value>
     public Version Version => documentVersion;
 
     /// <summary>
     /// Creates a new <see cref="BlogMLDocument"/> instance asynchronously using the specified <see cref="Uri"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="BlogMLDocument"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
     ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
     ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the CreateAsync method.">
+    ///     <code language="cs" title="The following code example demonstrates the usage of the CreateAsync method.">
     ///         var document = await BlogMLDocument.CreateAsync(new Uri("https://example.com/blog.xml"));
     ///     </code>
     /// </example>
@@ -184,8 +195,8 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="BlogMLDocument"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
@@ -198,8 +209,8 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     public static async Task<BlogMLDocument> CreateAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
@@ -221,7 +232,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     public Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
 
@@ -230,8 +241,8 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A token that can be used to cancel the asynchronous operation.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous load operation.</returns>
     /// <remarks>
@@ -247,8 +258,8 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     public async Task LoadAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
@@ -294,32 +305,27 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" 
-    ///             region="Load(IXPathNavigable source)" 
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(IXPathNavigable source) => this.Load(source, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
@@ -334,32 +340,27 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" 
-    ///             region="Load(Stream stream)" 
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(Stream stream) => this.Load(stream, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
@@ -371,32 +372,27 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" 
-    ///             region="Load(XmlReader reader)" 
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Load method." />
     /// </example>
     public void Load(XmlReader reader) => this.Load(reader, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(XmlReader reader, SyndicationResourceLoadSettings? settings)
@@ -410,25 +406,20 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" 
-    ///             region="Save(Stream stream)" 
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
     /// </example>
     public void Save(Stream stream) => this.Save(stream, null);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="BlogMLDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="BlogMLDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream, SyndicationResourceSaveSettings? settings)
     {
@@ -449,16 +440,11 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" 
-    ///             region="Save(XmlWriter writer)" 
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLDocumentExample.cs" language="cs" title="The following code example demonstrates the usage of the Save method." />
     /// </example>
     public void Save(XmlWriter writer)
     {
@@ -469,10 +455,10 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="BlogMLDocument"/> instance.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(XmlWriter writer, SyndicationResourceSaveSettings? settings)
     {
@@ -552,7 +538,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Fills the supported extensions collection of the supplied <see cref="SyndicationResourceSaveSettings"/> object based on syndication extensions present in the current instance hierarchy.
     /// </summary>
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object whose <see cref="SyndicationResourceSaveSettings.SupportedExtensions"/> collection is to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private void FillExtensionTypes(SyndicationResourceSaveSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(settings);
@@ -644,9 +630,9 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="BlogMLDocument.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings? settings, SyndicationResourceLoadedEventArgs eventData)
     {

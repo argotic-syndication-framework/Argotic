@@ -52,6 +52,8 @@ public sealed class HtmlDiscoveryScanTests
     /// <summary>
     /// The attribute scan reads double-quoted, single-quoted and bare values alike.
     /// </summary>
+    /// <param name="markup">A <c>link rel="pingback"</c> element, spelled one of the three legal ways.</param>
+    /// <param name="spelling">Names the spelling under test, and is used as the assertion message.</param>
     /// <remarks>
     ///     The bare branch is the second alternation of the pattern, and no test reached it before.
     ///     Real HTML emits all three, and a regex edit can keep one working while dropping another.
@@ -71,6 +73,7 @@ public sealed class HtmlDiscoveryScanTests
     /// <summary>
     /// The relation is matched without regard to case.
     /// </summary>
+    /// <param name="relation">The <c>rel</c> attribute value, cased differently in each row.</param>
     [TestMethod]
     [DataRow("PINGBACK")]
     [DataRow("PingBack")]

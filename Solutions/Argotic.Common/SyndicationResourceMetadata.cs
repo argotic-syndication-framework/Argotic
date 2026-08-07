@@ -6,6 +6,19 @@ namespace Argotic.Common;
 /// <summary>
 /// Represents metadata associated with a <see cref="ISyndicationResource">syndication resource</see>.
 /// </summary>
+/// <remarks>
+///     What a document turns out to be, as opposed to <see cref="ISyndicationResource.Format"/>, which is
+///     what a type <i>is</i>. Constructing this sniffs the document: the formats are tried in the order
+///     the <c>TryParse</c> members appear below, first match wins, and a document matching none reports
+///     <see cref="SyndicationContentFormat.None"/> with a <see langword="null"/> <see cref="Resource"/>
+///     and <see cref="Version"/>.
+///     <para>
+///     Most formats are recognised by root element <i>and</i> namespace, so a document borrowing a root
+///     element name without the namespace is not recognised as that format. RSS 2.0 and RSD are the
+///     deliberate exceptions — a bare <c>&lt;rss&gt;</c> is accepted as RSS 2.0, and RSD is accepted
+///     without its namespace because most publishing software omits it.
+///     </para>
+/// </remarks>
 public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetadata>, IEquatable<SyndicationResourceMetadata>, IComparisonOperators
 {
 
@@ -13,7 +26,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// Initializes a new instance of the <see cref="SyndicationResourceMetadata"/> class using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the syndication resource meta-data from.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     public SyndicationResourceMetadata(XPathNavigator navigator)
     {
         ArgumentNullException.ThrowIfNull(navigator);
@@ -39,13 +52,20 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// <summary>
     /// Gets a read-only <see cref="XPathNavigator"/> object that can be used to navigate the root element of the syndication resource.
     /// </summary>
-    /// <value>A read-only <see cref="XPathNavigator"/> object that can be used to navigate the root element of the syndication resource.</value>
+    /// <value>
+    ///     A navigator positioned on the document element of the recognised format, or
+    ///     <see langword="null"/> when <see cref="Format"/> is <see cref="SyndicationContentFormat.None"/>.
+    /// </value>
     public XPathNavigator? Resource { get; private set; }
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the syndication specification that the resource conforms to.
     /// </summary>
-    /// <value>The version number of the syndication specification that the resource conforms to. If format version is unable to be determined, returns <b>null</b>.</value>
+    /// <value>
+    ///     The version from the document element's <c>version</c> attribute, or the version the
+    ///     recognised namespace implies when the document declared none — <c>1.0</c> for the Atom 1.0
+    ///     namespace, for example. <see langword="null"/> when no format was recognised.
+    /// </value>
     public Version? Version { get; private set; }
 
     /// <summary>
@@ -53,10 +73,10 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// </summary>
     /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the XML attribute value from.</param>
     /// <param name="name">The name of the attribute to parse in the <paramref name="navigator"/>.</param>
-    /// <returns>The <see cref="Version"/> represented by the value of the specified XML attribute. If unable to determine version, returns <b>null</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <returns>The <see cref="Version"/> represented by the value of the specified XML attribute. If unable to determine version, returns <see langword="null"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
     protected static Version? GetVersionFromAttribute(XPathNavigator navigator, string name)
     {
         ArgumentNullException.ThrowIfNull(navigator);
@@ -68,13 +88,13 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     }
 
     /// <summary>
-    /// Determines if the specified <see cref="XPathNavigator"/> represents a Attention Profiling Markup Language (APML) formatted syndication resource.
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an Attention Profiling Markup Language (APML) formatted syndication resource.
     /// </summary>
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a Attention Profiling Markup Language (APML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an Attention Profiling Markup Language (APML) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseApmlResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -100,14 +120,14 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     }
 
     /// <summary>
-    /// Determines if the specified <see cref="XPathNavigator"/> represents a Atom formatted syndication resource.
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an Atom formatted syndication resource.
     /// </summary>
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <param name="isEntryDocument">When this method returns, <b>true</b> if the document element is <c>&lt;entry&gt;</c> rather than <c>&lt;feed&gt;</c>. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <param name="isEntryDocument">When this method returns, <see langword="true"/> if the document element is <c>&lt;entry&gt;</c> rather than <c>&lt;feed&gt;</c>. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an Atom formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseAtomResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version, out bool isEntryDocument)
     {
         bool resourceConformsToFormat = false;
@@ -160,13 +180,13 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     }
 
     /// <summary>
-    /// Determines if the specified <see cref="XPathNavigator"/> represents a Atom Publishing Protocol category document formatted syndication resource.
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an Atom Publishing Protocol category document formatted syndication resource.
     /// </summary>
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an Atom Publishing Protocol category document; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseAtomPublishingCategoriesResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -220,13 +240,13 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             : null;
 
     /// <summary>
-    /// Determines if the specified <see cref="XPathNavigator"/> represents a Atom Publishing Protocol service document formatted syndication resource.
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an Atom Publishing Protocol service document formatted syndication resource.
     /// </summary>
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an Atom Publishing Protocol service document; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseAtomPublishingServiceResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -255,13 +275,13 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     }
 
     /// <summary>
-    /// Determines if the specified <see cref="XPathNavigator"/> represents a  Web Log Markup Language (BlogML) formatted syndication resource.
+    /// Determines if the specified <see cref="XPathNavigator"/> represents a Web Log Markup Language (BlogML) formatted syndication resource.
     /// </summary>
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a  Web Log Markup Language (BlogML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Web Log Markup Language (BlogML) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseBlogMLResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -293,8 +313,8 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a Microsummary Generator formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Microsummary Generator formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseMicroSummaryGeneratorResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -326,8 +346,8 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a News Markup Language (NewsML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a News Markup Language (NewsML) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseNewsMLResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -347,13 +367,13 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     }
 
     /// <summary>
-    /// Determines if the specified <see cref="XPathNavigator"/> represents a OpenSearch Description formatted syndication resource.
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an OpenSearch Description formatted syndication resource.
     /// </summary>
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a OpenSearch Description formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an OpenSearch Description formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseOpenSearchDescriptionResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -380,13 +400,13 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     }
 
     /// <summary>
-    /// Determines if the specified <see cref="XPathNavigator"/> represents a  Outline Processor Markup Language (OPML) formatted syndication resource.
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an Outline Processor Markup Language (OPML) formatted syndication resource.
     /// </summary>
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a  Outline Processor Markup Language (OPML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an Outline Processor Markup Language (OPML) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseOpmlResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -411,8 +431,8 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a Really Simple Discovery (RSD) formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Really Simple Discovery (RSD) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseRsdResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -449,8 +469,8 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a Really Simple Syndication (RSS) formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Really Simple Syndication (RSS) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseRssResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -496,8 +516,8 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a Sitemap 0.9 formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Sitemap 0.9 formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseSitemapResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -528,8 +548,8 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
     /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="resource"/> represents a Sitemap Index 0.9 formatted syndication resource; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Sitemap Index 0.9 formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     protected static bool TryParseSitemapIndexResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
     {
         bool resourceConformsToFormat = false;
@@ -558,7 +578,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// Extracts the content format, version, and XML namespaces for a syndication resource from the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="resource">The <see cref="XPathNavigator"/> to extract the syndication resource meta-data from.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     private void Load(XPathNavigator resource)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -660,10 +680,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceMetadata"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceMetadata"/>.</returns>
-    /// <remarks>
-    ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
-    /// </remarks>
+    /// <returns>The format and version in full, with <see cref="Namespaces"/> and <see cref="Resource"/> reduced to their hash codes rather than serialized.</returns>
     public override string ToString()
     {
         string format = this.Format.ToString();
@@ -725,7 +742,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// Determines whether the specified <see cref="SyndicationResourceMetadata"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SyndicationResourceMetadata"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SyndicationResourceMetadata"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SyndicationResourceMetadata"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SyndicationResourceMetadata? other)
     {
         if (other is null)
@@ -740,7 +757,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SyndicationResourceMetadata other && this.Equals(other);
 
     /// <summary>
@@ -754,7 +771,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(SyndicationResourceMetadata? first, SyndicationResourceMetadata? second)
     {
         if (first is null) return second is null;
@@ -766,6 +783,6 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(SyndicationResourceMetadata? first, SyndicationResourceMetadata? second) => !(first == second);
 }

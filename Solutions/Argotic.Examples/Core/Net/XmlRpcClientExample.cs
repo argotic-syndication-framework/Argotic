@@ -4,22 +4,17 @@ using Argotic.Net;
 namespace Argotic.Examples.Core.Net;
 
 /// <summary>
-/// Contains the code examples for the <see cref="XmlRpcClient"/> class.
+/// Configures an <see cref="XmlRpcClient"/> and builds the <c>pingback.ping</c> notification it would post.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="XmlRpcClient"/> class.
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
+///     Nothing is sent. The endpoint is a placeholder, so the example stops at a configured client and a
+///     well-formed message; the <c>SendAsync</c> call is left commented out beside them.
 /// </remarks>
 internal static class XmlRpcClientExample
 {
     /// <summary>
-    /// Provides example code for the XmlRpcClient class.
+    /// Configures an <see cref="XmlRpcClient"/> and the <c>pingback.ping</c> <see cref="XmlRpcMessage"/> it would post.
     /// </summary>
-    /// <remarks>
-    /// This example demonstrates how to configure and use the XmlRpcClient.
-    /// Note: This example does not make actual network calls since it uses placeholder URLs.
-    /// In a real application, you would use actual XML-RPC server endpoints.
-    /// </remarks>
     public static void ClassExample()
     {
         // Initialize the XML-RPC client

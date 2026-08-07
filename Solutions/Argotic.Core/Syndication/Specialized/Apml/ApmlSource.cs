@@ -12,12 +12,7 @@ namespace Argotic.Syndication.Specialized;
 /// <seealso cref="ApmlProfile.ExplicitSources"/>
 /// <seealso cref="ApmlProfile.ImplicitSources"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the ApmlSource class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Apml\ApmlSourceExample.cs"
-///             region="ApmlSource"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlSourceExample.cs" language="cs" title="The following code example demonstrates the usage of the ApmlSource class." />
 /// </example>
 public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
@@ -36,16 +31,16 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// <param name="type">the MIME content type for this source.</param>
     /// <param name="value">The decimal score of this source.</param>
     /// <remarks>
-    ///     This constructor is meant to be used when creating an <b>explicit</b> source. Explicit data is for items that are explicitly added by a user to represent something.
+    ///     This constructor is meant to be used when creating an <i>explicit</i> source. Explicit data is for items that are explicitly added by a user to represent something.
     ///     For example, a user could edit their own APML file and add items they know they're interested in.
     ///     For this reason the <see cref="From"/> and <see cref="UpdatedOn"/> properties are not necessary for explicit data items, because it's a manual process.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="type"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="key"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="type"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="type"/> is an empty string.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than -1.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than 1.</exception>
     public ApmlSource(string key, string name, string type, decimal value)
@@ -65,21 +60,21 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// <param name="value">The decimal score of this source.</param>
     /// <param name="from">The name of the entity that contributed this concept.</param>
     /// <remarks>
-    ///     This constructor is meant to be used when creating an <b>implicit</b> source. Implicit data is added by machines/computers that try to make
+    ///     This constructor is meant to be used when creating an <i>implicit</i> source. Implicit data is added by machines/computers that try to make
     ///     some informed guesses about the things that you are interested in. This stuff will change over time and are added with a certain degree of confidence
     ///     that may have a decay in certain applications. For this reason it is important to keep a track of when things were added/modified.
     /// </remarks>
     /// <param name="utcUpdatedOn">A <see cref="DateTime"/> object that indicates the last time this concept was updated.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="type"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="key"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="key"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="type"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="type"/> is an empty string.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than -1.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than 1.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="from"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="from"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="from"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="from"/> is an empty string.</exception>
     public ApmlSource(string key, string name, string type, decimal value, string from, DateTime utcUpdatedOn) : this(key, name, type, value)
     {
         ArgumentException.ThrowIfNullOrEmpty(from);
@@ -90,25 +85,31 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets the authors of this source.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ApmlAuthor"/> objects that represent the authors of this source.</value>
+    /// <remarks>
+    ///     A source is scored as a whole, and its authors are scored individually within it, so that liking a
+    ///     publication and liking one of its writers are separate facts.
+    /// </remarks>
     public IList<ApmlAuthor> Authors { get; } = [];
 
     /// <summary>
     /// Gets or sets the name of the entity that contributed this source.
     /// </summary>
-    /// <value>The name of the entity that contributed this source. The default value is an empty string, which indicates no contributor was specified.</value>
+    /// <value>The <c>from</c> attribute — which service or algorithm inferred this — or an <i>empty</i> string if none was specified.</value>
+    /// <remarks>
+    ///     Meaningful only for implicit sources, where a consumer needs to know whose guess it is reading.
+    ///     Explicit sources came from the user and leave it empty.
+    /// </remarks>
     public string From
     {
         get;
@@ -118,9 +119,9 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// <summary>
     /// Gets or sets the unique key for this source.
     /// </summary>
-    /// <value>The unique key for this source.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The <c>key</c> attribute, which for a source is normally the feed's address.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Key
     {
         get;
@@ -134,12 +135,12 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// <summary>
     /// Gets or sets the MIME content type for this source.
     /// </summary>
-    /// <value>the MIME content type for this source.</value>
+    /// <value>The <c>type</c> attribute — the media type of what the <see cref="Key"/> addresses, such as <c>application/rss+xml</c>.</value>
     /// <remarks>
-    ///     See <a href="http://www.iana.org/assignments/media-types/">http://www.iana.org/assignments/media-types/</a> for a listing of registered MIME content types.
+    ///     See <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a> for the registry of media types.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string MimeType
     {
         get;
@@ -153,9 +154,9 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// <summary>
     /// Gets or sets the friendly name of this source.
     /// </summary>
-    /// <value>The friendly name of this source.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The <c>name</c> attribute — what to show a person, as against the <see cref="Key"/> that identifies the source.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Name
     {
         get;
@@ -169,18 +170,25 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// <summary>
     /// Gets or sets a date-time indicating the last time this source was updated.
     /// </summary>
-    /// <value>A <see cref="DateTime"/> object that indicates the last time this source was updated. The default value is <see cref="DateTime.MinValue"/>, which indicates that no update date was specified.</value>
+    /// <value>The <c>updated</c> attribute, written as RFC 3339. The default value is <see cref="DateTime.MinValue"/>, which indicates that no update date was specified, and suppresses the attribute on save.</value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     Supply this in Coordinated Universal Time. It is what lets a consumer decay an inferred score
+    ///     rather than treat an old guess as current.
     /// </remarks>
     public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the decimal score of this source.
     /// </summary>
-    /// <value>The decimal score of this source.</value>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than -1.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than 1.</exception>
+    /// <value>The <c>value</c> attribute: a score in the closed range <c>-1</c> to <c>1</c>, where <c>1</c> is complete interest and <c>-1</c> complete aversion.</value>
+    /// <remarks>
+    ///     The initial value is <see cref="Decimal.MinValue"/>, which the setter itself would reject — it is an
+    ///     unset marker, not a legal score. <see cref="WriteTo(XmlWriter)"/> writes the attribute
+    ///     unconditionally, so a source saved without a score emits that sentinel rather than omitting the
+    ///     attribute. Assign a score before saving.
+    /// </remarks>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than -1.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is greater than 1.</exception>
     public decimal Value
     {
         get;
@@ -196,11 +204,11 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// Loads this <see cref="ApmlSource"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="ApmlSource"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="ApmlSource"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ApmlSource"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -293,12 +301,12 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="ApmlSource"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="ApmlSource"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ApmlSource"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -393,7 +401,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// Saves the current <see cref="ApmlSource"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -459,7 +467,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// Determines whether the specified <see cref="ApmlSource"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="ApmlSource"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="ApmlSource"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="ApmlSource"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(ApmlSource? other)
     {
         if (other is null)
@@ -474,7 +482,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is ApmlSource other && this.Equals(other);
 
     /// <summary>
@@ -498,7 +506,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(ApmlSource? first, ApmlSource? second)
     {
         if (first is null) return second is null;
@@ -510,6 +518,6 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(ApmlSource? first, ApmlSource? second) => !(first == second);
 }

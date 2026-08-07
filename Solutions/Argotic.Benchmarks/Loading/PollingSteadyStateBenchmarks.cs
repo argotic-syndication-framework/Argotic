@@ -13,7 +13,7 @@ namespace Argotic.Benchmarks.Loading;
 /// <remarks>
 /// <para>
 /// Argotic is used in production to gather the Azure Weekly and Power BI Weekly newsletters, which
-/// means fetching a set of feeds on a schedule and extracting their items. Not one of the twenty-five
+/// means fetching a set of feeds on a schedule and extracting their items. Not one of the twenty-seven
 /// public <c>CreateAsync(Uri, …)</c> overloads had a benchmark, so the composite a consumer actually
 /// invokes - fetch, decode, parse, walk - had never been priced as a unit.
 /// </para>

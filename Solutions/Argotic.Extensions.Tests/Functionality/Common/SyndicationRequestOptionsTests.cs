@@ -3,9 +3,21 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
+/// <summary>
+/// Covers what <c>SyndicationRequestOptions</c> puts on a request, and what it refuses to send at all.
+/// </summary>
+/// <remarks>
+///     Several rows here record a deliberate reversal, and each says so at its assertion: a value that
+///     cannot be sent used to leave the header quietly absent, and now throws. The failure a silent
+///     drop produces is a <c>406</c> from a server the caller has no reason to suspect, which is why
+///     the noisy option was chosen.
+/// </remarks>
 [TestClass]
 public class SyndicationRequestOptionsTests
 {
+    /// <summary>
+    /// An <c>Accept</c> value reaches the request's <c>Accept</c> header.
+    /// </summary>
     [TestMethod]
     public void ApplyTo_SetsAcceptHeader()
     {
@@ -20,6 +32,9 @@ public class SyndicationRequestOptionsTests
         request.Headers.Accept.ToString().ShouldBe("application/xml");
     }
 
+    /// <summary>
+    /// A <c>UserAgent</c> value reaches the request's <c>User-Agent</c> header.
+    /// </summary>
     [TestMethod]
     public void ApplyTo_SetsUserAgentHeader()
     {
@@ -34,6 +49,9 @@ public class SyndicationRequestOptionsTests
         request.Headers.UserAgent.ToString().ShouldBe("TestApp/1.0");
     }
 
+    /// <summary>
+    /// An absolute <c>http</c> referer reaches the request's <c>Referer</c> header.
+    /// </summary>
     [TestMethod]
     public void ApplyTo_SetsRefererHeader()
     {
@@ -49,6 +67,14 @@ public class SyndicationRequestOptionsTests
         request.Headers.Referrer.ToString().ShouldBe("http://example.com/source");
     }
 
+    /// <summary>
+    /// A referer that is not a URI throws, and the message names the value the caller wrote.
+    /// </summary>
+    /// <remarks>
+    ///     This row used to assert the opposite — no throw, and the header simply left unset. Quoting
+    ///     the offending value back is what makes the exception actionable, since the alternative
+    ///     surfaces as a status code from a server that had nothing to do with the mistake.
+    /// </remarks>
     [TestMethod]
     public void ApplyTo_WithInvalidReferer_Throws()
     {
@@ -65,6 +91,15 @@ public class SyndicationRequestOptionsTests
             .Message.ShouldContain("not a valid uri");
     }
 
+    /// <summary>
+    /// A relative referer throws, and no header is sent in its place.
+    /// </summary>
+    /// <remarks>
+    ///     The row that was worse than a silent drop. <c>Uri.TryCreate(…, Absolute, …)</c> accepts
+    ///     <c>/relative/path</c> on this platform and yields <c>file:///relative/path</c>, so the old
+    ///     behaviour disclosed a local-looking path to a remote origin in a header the caller believed
+    ///     pointed at a page.
+    /// </remarks>
     [TestMethod]
     public void ApplyTo_WithRelativeReferer_Throws()
     {
@@ -81,6 +116,9 @@ public class SyndicationRequestOptionsTests
         request.Headers.Referrer.ShouldBeNull();
     }
 
+    /// <summary>
+    /// An <c>Accept</c> of <c>@@@</c> throws rather than being dropped on the way to the wire.
+    /// </summary>
     [TestMethod]
     public void ApplyTo_WithMalformedAccept_Throws()
     {
@@ -90,6 +128,13 @@ public class SyndicationRequestOptionsTests
         Should.Throw<FormatException>(() => options.ApplyTo(request));
     }
 
+    /// <summary>
+    /// An <c>Accept</c> whose q-value is not a number is still sent, as one media type.
+    /// </summary>
+    /// <remarks>
+    ///     The control for the row above: without it, the malformed case is equally consistent with
+    ///     "the parser rejects anything unusual", and the header parser is looser than it looks.
+    /// </remarks>
     [TestMethod]
     public void ApplyTo_WithATolerableAccept_StillSetsIt()
     {
@@ -104,6 +149,15 @@ public class SyndicationRequestOptionsTests
         request.Headers.Accept.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// A custom header naming a content header throws a message that names <c>Content-Type</c>.
+    /// </summary>
+    /// <remarks>
+    ///     This already threw before the guard was rewritten, which the plan did not record:
+    ///     <c>request.Headers.Contains</c> raises on a content header name, so the check written to
+    ///     avoid clobbering an existing header was itself the failure — and the platform message talked
+    ///     about <c>HttpContent</c> while naming nothing the caller had written.
+    /// </remarks>
     [TestMethod]
     public void ApplyTo_WithAContentHeaderInCustomHeaders_ThrowsSomethingLegible()
     {
@@ -121,6 +175,9 @@ public class SyndicationRequestOptionsTests
             .Message.ShouldContain("Content-Type");
     }
 
+    /// <summary>
+    /// Every custom header pair reaches the request, not just the first.
+    /// </summary>
     [TestMethod]
     public void ApplyTo_SetsCustomHeaders()
     {
@@ -140,6 +197,13 @@ public class SyndicationRequestOptionsTests
         request.Headers.GetValues("X-Another-Header").ShouldContain("another-value");
     }
 
+    /// <summary>
+    /// A custom header the request already carries is skipped, leaving the original value alone.
+    /// </summary>
+    /// <remarks>
+    ///     This is what stops custom headers displacing the conditional-GET validators or the
+    ///     <c>User-Agent</c>, both of which are set on the request before the options are applied.
+    /// </remarks>
     [TestMethod]
     public void ApplyTo_DoesNotOverwriteExistingCustomHeaders()
     {
@@ -161,6 +225,9 @@ public class SyndicationRequestOptionsTests
         values.ShouldNotContain("new-value");
     }
 
+    /// <summary>
+    /// A null request is rejected with <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void ApplyTo_WithNullRequest_ThrowsArgumentNullException()
     {
@@ -169,6 +236,9 @@ public class SyndicationRequestOptionsTests
         Should.Throw<ArgumentNullException>(() => options.ApplyTo(null!));
     }
 
+    /// <summary>
+    /// Options with nothing set leave the request's headers exactly as they were.
+    /// </summary>
     [TestMethod]
     public void ApplyTo_WithAllNullProperties_DoesNotModifyRequest()
     {
@@ -182,6 +252,9 @@ public class SyndicationRequestOptionsTests
         request.Headers.Referrer.ShouldBeNull();
     }
 
+    /// <summary>
+    /// Accept, User-Agent, Referer and a custom header are all applied in a single pass.
+    /// </summary>
     [TestMethod]
     public void ApplyTo_WithAllPropertiesSet_SetsAllHeaders()
     {
@@ -205,6 +278,9 @@ public class SyndicationRequestOptionsTests
         request.Headers.GetValues("X-Test").ShouldContain("test-value");
     }
 
+    /// <summary>
+    /// An <i>empty</i> referer means "send none", and is not treated as a malformed URI.
+    /// </summary>
     [TestMethod]
     public void ApplyTo_WithEmptyReferer_DoesNotSetHeader()
     {
@@ -220,6 +296,9 @@ public class SyndicationRequestOptionsTests
         request.Headers.Referrer.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A comma-separated <c>Accept</c> becomes one header value per media type, not one long string.
+    /// </summary>
     [TestMethod]
     public void ApplyTo_AcceptWithMultipleTypes_SetsAllTypes()
     {
@@ -234,6 +313,9 @@ public class SyndicationRequestOptionsTests
         request.Headers.Accept.Count.ShouldBe(2);
     }
 
+    /// <summary>
+    /// A <c>with</c> expression carries the untouched members across and leaves the original intact.
+    /// </summary>
     [TestMethod]
     public void Record_WithExpression_CreatesModifiedCopy()
     {
@@ -250,6 +332,9 @@ public class SyndicationRequestOptionsTests
         original.UserAgent.ShouldBe("OriginalAgent/1.0");
     }
 
+    /// <summary>
+    /// Two option sets holding the same values compare equal, by value rather than by reference.
+    /// </summary>
     [TestMethod]
     public void Record_Equality_WorksCorrectly()
     {

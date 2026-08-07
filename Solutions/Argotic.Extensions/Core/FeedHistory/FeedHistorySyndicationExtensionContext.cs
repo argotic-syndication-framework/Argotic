@@ -21,29 +21,29 @@ public class FeedHistorySyndicationExtensionContext
     /// <summary>
     /// Gets or sets a value indicating the feed is a set of linked feed documents that together contain the entries of a logical feed, without any guarantees about the stability of the documents' contents.
     /// </summary>
-    /// <value><b>true</b> if feed is a set of linked feed documents that together contain the entries of a logical feed; Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if feed is a set of linked feed documents that together contain the entries of a logical feed; otherwise, <see langword="false"/>.</value>
     public bool IsArchive { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating the feed contains all the entries of a logical feed; any entry not actually in the feed document should not be considered to be part of that feed.
     /// </summary>
-    /// <value><b>true</b> if feed contains all the entries of a logical feed; Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if feed contains all the entries of a logical feed; otherwise, <see langword="false"/>.</value>
     public bool IsComplete { get; set; }
 
     /// <summary>
     /// Gets a collection of <see cref="FeedHistoryLinkRelation"/> objects that represent the relationships between feed documents.
     /// </summary>
-    /// <value>A collection of <see cref="FeedHistoryLinkRelation"/> objects that represent the relationships between feed documents.</value>
+    /// <value>The relations. The default value is an <i>empty</i> collection.</value>
     public IList<FeedHistoryLinkRelation> Relations { get; } = [];
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="FeedHistorySyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="FeedHistorySyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="FeedHistorySyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="FeedHistorySyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -103,11 +103,11 @@ public class FeedHistorySyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);

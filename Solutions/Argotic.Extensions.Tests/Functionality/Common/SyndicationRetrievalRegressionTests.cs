@@ -12,6 +12,13 @@ namespace Argotic.Extensions.Tests.Functionality.Common;
 [TestClass]
 public class SyndicationRetrievalRegressionTests
 {
+    /// <summary>
+    /// A stream declaring <c>iso-8859-1</c> is decoded as that, so accented text survives the load.
+    /// </summary>
+    /// <remarks>
+    ///     Decoding as UTF-8 regardless would not fail — it would replace each accented byte with
+    ///     U+FFFD and parse cleanly, so the damage reaches the caller as data rather than as an error.
+    /// </remarks>
     [TestMethod]
     public void CreateSafeNavigator_WithStream_DecodesUsingTheDeclaredEncoding()
     {
@@ -59,6 +66,9 @@ public class SyndicationRetrievalRegressionTests
         SyndicationEncodingUtility.DefaultRequestTimeout.ShouldBe(TimeSpan.FromSeconds(100));
     }
 
+    /// <summary>
+    /// A caller's <c>User-Agent</c> replaces the framework's rather than being appended beside it.
+    /// </summary>
     [TestMethod]
     public void CreateHttpRequestMessage_WithCustomUserAgent_ReplacesTheFrameworkUserAgent()
     {
@@ -75,6 +85,9 @@ public class SyndicationRetrievalRegressionTests
         userAgent.ShouldNotContain("Argotic");
     }
 
+    /// <summary>
+    /// A request built with no options still identifies the framework to the origin.
+    /// </summary>
     [TestMethod]
     public void CreateHttpRequestMessage_WithoutCustomUserAgent_SendsTheFrameworkUserAgent()
     {
@@ -86,6 +99,9 @@ public class SyndicationRetrievalRegressionTests
         request.Headers.UserAgent.ToString().ShouldContain("Argotic");
     }
 
+    /// <summary>
+    /// A lower-case <c>gmt+02:00</c> zone parses, and its two hours are subtracted rather than ignored.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithLowerCaseGmtOffset_ParsesTheOffset()
     {
@@ -98,6 +114,9 @@ public class SyndicationRetrievalRegressionTests
         result.ToUniversalTime().ShouldBe(new DateTime(2024, 1, 1, 10, 0, 0, DateTimeKind.Utc));
     }
 
+    /// <summary>
+    /// A trackback ping URL is recovered from an RDF island embedded in an HTML page.
+    /// </summary>
     [TestMethod]
     public void ExtractTrackbackNotificationServers_FindsEmbeddedRdfBlock()
     {

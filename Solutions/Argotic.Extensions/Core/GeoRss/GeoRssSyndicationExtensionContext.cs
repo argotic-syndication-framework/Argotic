@@ -122,7 +122,7 @@ public class GeoRssSyndicationExtensionContext
     /// <summary>
     /// Gets or sets a value indicating whether the geometry was written inside a <c>georss:where</c> element.
     /// </summary>
-    /// <value><b>true</b> if the geometry is wrapped; otherwise, <b>false</b>.</value>
+    /// <value><see langword="true"/> if the geometry is wrapped; otherwise, <see langword="false"/>.</value>
     /// <remarks>
     ///     The specification allows a geometry to be a direct child or to sit inside <c>georss:where</c>,
     ///     and the wrapper carries no information a consumer can act on. It is recorded anyway so that a
@@ -145,7 +145,7 @@ public class GeoRssSyndicationExtensionContext
     /// <summary>
     /// Gets a value indicating whether any geometry was specified.
     /// </summary>
-    /// <value><b>true</b> if a point, line, polygon or box is present; otherwise, <b>false</b>.</value>
+    /// <value><see langword="true"/> if a point, line, polygon or box is present; otherwise, <see langword="false"/>.</value>
     /// <remarks>
     ///     A line or polygon holding no positions does not count. It would write an element with nothing
     ///     in it — and, wrapped, an empty <c>georss:where</c> — which reloads as no extension at all, so
@@ -160,11 +160,11 @@ public class GeoRssSyndicationExtensionContext
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this context.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this context.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve prefixed elements.</param>
-    /// <returns><b>true</b> if the context was initialized using the supplied <paramref name="source"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the context was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     /// <remarks>
     ///     <b>Returning <see langword="false"/> when nothing was read is load-bearing.</b> An extension is
     ///     probed by namespace <em>declaration</em>, so a feed that declares <c>georss</c> and never uses
@@ -215,10 +215,10 @@ public class GeoRssSyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed elements.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is a null reference or an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is <see langword="null"/> or an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -396,7 +396,7 @@ public class GeoRssSyndicationExtensionContext
     /// </summary>
     /// <param name="source">The navigator to read from.</param>
     /// <param name="manager">The namespace manager.</param>
-    /// <returns><b>true</b> if any geometry was read; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if any geometry was read; otherwise, <see langword="false"/>.</returns>
     private bool LoadGeometry(XPathNavigator source, XmlNamespaceManager manager)
     {
         // Both passes run. An entry may carry a direct-child geometry AND a georss:where sibling -- the
@@ -432,7 +432,7 @@ public class GeoRssSyndicationExtensionContext
     /// </summary>
     /// <param name="source">The navigator positioned on the <c>georss:where</c> element.</param>
     /// <param name="manager">The namespace manager, which must have the <c>gml</c> prefix registered.</param>
-    /// <returns><b>true</b> if any geometry was read; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if any geometry was read; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>
     ///     GML nests further than GeoRSS Simple does — a polygon's coordinates are four elements deep —
@@ -514,7 +514,7 @@ public class GeoRssSyndicationExtensionContext
     /// </summary>
     /// <param name="source">The navigator to read from.</param>
     /// <param name="manager">The namespace manager.</param>
-    /// <returns><b>true</b> if any geometry was read; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if any geometry was read; otherwise, <see langword="false"/>.</returns>
     private bool LoadGeometryFrom(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -563,7 +563,7 @@ public class GeoRssSyndicationExtensionContext
     /// </summary>
     /// <param name="source">The navigator to read from.</param>
     /// <param name="manager">The namespace manager.</param>
-    /// <returns><b>true</b> if any property was read; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if any property was read; otherwise, <see langword="false"/>.</returns>
     private bool LoadProperties(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;

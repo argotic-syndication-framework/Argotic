@@ -7,11 +7,22 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
+/// <summary>
+/// Covers <see cref="TrackbackDiscoveryMetadata"/>: the <c>rdf:Description</c> record a Trackback
+/// autodiscovery island carries, the guards on its properties, its round trip through <c>rdf:RDF</c>
+/// markup, and its ordering and equality.
+/// </summary>
 [TestClass]
 public class TrackbackDiscoveryMetadataTests
 {
+    /// <summary>
+    /// Gets or sets the test context supplied by MSTest.
+    /// </summary>
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// A default-constructed record has an empty title and no about, identifier or ping URL.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_CreatesInstance()
     {
@@ -26,6 +37,14 @@ public class TrackbackDiscoveryMetadataTests
         metadata.PingUrl.ShouldBeNull();
     }
 
+    /// <summary>
+    /// Constructing from a navigator over a Trackback RDF island completes without throwing.
+    /// </summary>
+    /// <remarks>
+    ///     That is the whole of the guarantee: nothing here asserts what was loaded. The body also
+    ///     catches an <c>XPathException</c> the current source cannot raise — the selector it was written
+    ///     around now reads <c>rdf:RDF/rdf:Description</c> — so the record does in fact load.
+    /// </remarks>
     [TestMethod]
     public void Constructor_WithNavigator_CallsLoad()
     {
@@ -53,11 +72,17 @@ public class TrackbackDiscoveryMetadataTests
         }
     }
 
+    /// <summary>
+    /// A <see langword="null"/> navigator is refused at construction.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullNavigator_ThrowsArgumentNullException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentNullException>(() => new TrackbackDiscoveryMetadata(null!));
 
+    /// <summary>
+    /// The <c>rdf:about</c> address of the entry being described can be assigned.
+    /// </summary>
     [TestMethod]
     public void About_Set_SetsValue()
     {
@@ -72,6 +97,9 @@ public class TrackbackDiscoveryMetadataTests
         metadata.About.ShouldBe(about);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> <c>rdf:about</c> is refused rather than clearing the address.
+    /// </summary>
     [TestMethod]
     public void About_SetNull_ThrowsArgumentNullException()
     {
@@ -82,6 +110,9 @@ public class TrackbackDiscoveryMetadataTests
         Should.Throw<ArgumentNullException>(() => metadata.About = null!);
     }
 
+    /// <summary>
+    /// The <c>dc:identifier</c> permalink can be assigned.
+    /// </summary>
     [TestMethod]
     public void Identifier_Set_SetsValue()
     {
@@ -96,6 +127,9 @@ public class TrackbackDiscoveryMetadataTests
         metadata.Identifier.ShouldBe(identifier);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> <c>dc:identifier</c> is refused rather than clearing it.
+    /// </summary>
     [TestMethod]
     public void Identifier_SetNull_ThrowsArgumentNullException()
     {
@@ -106,6 +140,9 @@ public class TrackbackDiscoveryMetadataTests
         Should.Throw<ArgumentNullException>(() => metadata.Identifier = null!);
     }
 
+    /// <summary>
+    /// The <c>trackback:ping</c> endpoint can be assigned.
+    /// </summary>
     [TestMethod]
     public void PingUrl_Set_SetsValue()
     {
@@ -120,6 +157,10 @@ public class TrackbackDiscoveryMetadataTests
         metadata.PingUrl.ShouldBe(pingUrl);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> ping URL is refused, which is the one attribute the record exists to
+    /// carry.
+    /// </summary>
     [TestMethod]
     public void PingUrl_SetNull_ThrowsArgumentNullException()
     {
@@ -130,6 +171,9 @@ public class TrackbackDiscoveryMetadataTests
         Should.Throw<ArgumentNullException>(() => metadata.PingUrl = null!);
     }
 
+    /// <summary>
+    /// The <c>dc:title</c> can be assigned.
+    /// </summary>
     [TestMethod]
     public void Title_Set_SetsValue()
     {
@@ -143,6 +187,9 @@ public class TrackbackDiscoveryMetadataTests
         metadata.Title.ShouldBe("Test Title");
     }
 
+    /// <summary>
+    /// Surrounding whitespace is trimmed from an assigned title.
+    /// </summary>
     [TestMethod]
     public void Title_SetWithWhitespace_TrimsValue()
     {
@@ -156,6 +203,10 @@ public class TrackbackDiscoveryMetadataTests
         metadata.Title.ShouldBe("Test Title");
     }
 
+    /// <summary>
+    /// A <see langword="null"/> title clears the title to an empty string rather than throwing, unlike
+    /// the three URI properties.
+    /// </summary>
     [TestMethod]
     public void Title_SetNull_SetsEmpty()
     {
@@ -170,6 +221,9 @@ public class TrackbackDiscoveryMetadataTests
         metadata.Title.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// An empty title clears whatever title was there.
+    /// </summary>
     [TestMethod]
     public void Title_SetEmpty_SetsEmpty()
     {
@@ -184,6 +238,13 @@ public class TrackbackDiscoveryMetadataTests
         metadata.Title.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// Loading from a navigator over a Trackback RDF island completes without throwing.
+    /// </summary>
+    /// <remarks>
+    ///     The return value is read into a local and never asserted, and the <c>XPathException</c> the
+    ///     body catches can no longer be raised: the selector now reads <c>rdf:RDF/rdf:Description</c>.
+    /// </remarks>
     [TestMethod]
     public void Load_WithNavigator_DoesNotThrowArgumentNullExceptionForValidNavigator()
     {
@@ -209,6 +270,9 @@ public class TrackbackDiscoveryMetadataTests
         }
     }
 
+    /// <summary>
+    /// A <see langword="null"/> navigator is refused by the load.
+    /// </summary>
     [TestMethod]
     public void Load_NullNavigator_ThrowsArgumentNullException()
     {
@@ -219,6 +283,10 @@ public class TrackbackDiscoveryMetadataTests
         Should.Throw<ArgumentNullException>(() => metadata.Load(null!));
     }
 
+    /// <summary>
+    /// A document carrying no <c>rdf:Description</c> element loads nothing and reports
+    /// <see langword="false"/>.
+    /// </summary>
     [TestMethod]
     public void Load_EmptyDocument_ReturnsFalse()
     {
@@ -240,6 +308,10 @@ public class TrackbackDiscoveryMetadataTests
         loaded.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A fully populated record writes an <c>rdf:RDF</c> island carrying the about, identifier, title
+    /// and ping URL.
+    /// </summary>
     [TestMethod]
     public void WriteTo_WithAllProperties_WritesCorrectXml()
     {
@@ -278,6 +350,9 @@ public class TrackbackDiscoveryMetadataTests
         result.ShouldContain("http://example.com/trackback/1");
     }
 
+    /// <summary>
+    /// A <see langword="null"/> writer is refused.
+    /// </summary>
     [TestMethod]
     public void WriteTo_NullWriter_ThrowsArgumentNullException()
     {
@@ -288,6 +363,9 @@ public class TrackbackDiscoveryMetadataTests
         Should.Throw<ArgumentNullException>(() => metadata.WriteTo(null!));
     }
 
+    /// <summary>
+    /// The string form of a record is the same <c>rdf:RDF</c> island the writer emits.
+    /// </summary>
     [TestMethod]
     public void ToString_ReturnsXmlRepresentation()
     {
@@ -308,6 +386,9 @@ public class TrackbackDiscoveryMetadataTests
         result.ShouldContain("rdf:Description");
     }
 
+    /// <summary>
+    /// Two records agreeing on about, identifier, title and ping URL compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_EqualMetadata_ReturnsZero()
     {
@@ -335,6 +416,9 @@ public class TrackbackDiscoveryMetadataTests
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Every record sorts after <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void CompareTo_Null_ReturnsOne()
     {
@@ -352,6 +436,9 @@ public class TrackbackDiscoveryMetadataTests
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Records describing different entries do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_DifferentMetadata_ReturnsNonZero()
     {
@@ -374,6 +461,9 @@ public class TrackbackDiscoveryMetadataTests
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// Equality is by value across all four fields, not by reference.
+    /// </summary>
     [TestMethod]
     public void Equals_SameMetadata_ReturnsTrue()
     {
@@ -398,6 +488,9 @@ public class TrackbackDiscoveryMetadataTests
         metadata1.Equals(metadata2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Records differing in about and ping URL are not equal.
+    /// </summary>
     [TestMethod]
     public void Equals_DifferentMetadata_ReturnsFalse()
     {
@@ -418,6 +511,9 @@ public class TrackbackDiscoveryMetadataTests
         metadata1.Equals(metadata2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Comparing against an unrelated type answers <see langword="false"/> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void Equals_NonTrackbackDiscoveryMetadata_ReturnsFalse()
     {
@@ -428,6 +524,9 @@ public class TrackbackDiscoveryMetadataTests
         metadata.Equals("not metadata").ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Equal records hash alike, and the hash is stable across repeated calls within a process.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_EqualMetadata_ReturnSameValue()
     {
@@ -449,6 +548,9 @@ public class TrackbackDiscoveryMetadataTests
         first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
+    /// <summary>
+    /// <c>==</c> follows value equality.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_EqualMetadata_ReturnsTrue()
     {
@@ -469,6 +571,9 @@ public class TrackbackDiscoveryMetadataTests
         (metadata1 == metadata2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> operands are equal under <c>==</c>, with neither dereferenced.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_NullOperands_ReturnsTrue()
     {
@@ -480,6 +585,9 @@ public class TrackbackDiscoveryMetadataTests
         (metadata1 == metadata2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>!=</c> is the negation of <c>==</c> for two differing records.
+    /// </summary>
     [TestMethod]
     public void OperatorNotEquals_DifferentMetadata_ReturnsTrue()
     {
@@ -500,6 +608,9 @@ public class TrackbackDiscoveryMetadataTests
         (metadata1 != metadata2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <see langword="null"/> sorts before any record under <c>&lt;</c>.
+    /// </summary>
     [TestMethod]
     public void OperatorLessThan_NullFirst_ReturnsTrue()
     {
@@ -515,6 +626,9 @@ public class TrackbackDiscoveryMetadataTests
         (metadata1 < metadata2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <see langword="null"/> is not greater than a record.
+    /// </summary>
     [TestMethod]
     public void OperatorGreaterThan_NullFirst_ReturnsFalse()
     {
@@ -530,6 +644,9 @@ public class TrackbackDiscoveryMetadataTests
         (metadata1 > metadata2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// <see langword="null"/> satisfies <c>&lt;=</c> against any record.
+    /// </summary>
     [TestMethod]
     public void OperatorLessThanOrEqual_NullFirst_ReturnsTrue()
     {
@@ -545,6 +662,9 @@ public class TrackbackDiscoveryMetadataTests
         (metadata1 <= metadata2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> operands satisfy <c>&gt;=</c>.
+    /// </summary>
     [TestMethod]
     public void OperatorGreaterThanOrEqual_NullBoth_ReturnsTrue()
     {

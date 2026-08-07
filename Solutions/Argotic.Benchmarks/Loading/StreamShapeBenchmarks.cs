@@ -15,9 +15,10 @@ namespace Argotic.Benchmarks.Loading;
 /// <c>SyndicationEncodingUtility.GetStreamBytes</c> branches on <c>Stream.CanSeek</c>: a seekable
 /// stream is sized and filled with one <c>ReadExactly</c>, a non-seekable one falls into
 /// <c>stream.CopyTo</c>. Every benchmark in this harness passes a <c>MemoryStream</c>, and the
-/// test suite reports that branch at 2 of 4 — the <c>CopyTo</c> arm has never executed anywhere in
-/// this repository. It is also the arm that runs against a live network stream, and the one a
-/// switch to <c>ResponseHeadersRead</c> would make the common case.
+/// test suite reports that branch at 2 of 4 — the <c>CopyTo</c> arm executes nowhere else in this
+/// repository, and nothing measured it before this class. It is also the arm that runs against a
+/// live network stream, and the one a switch to <c>ResponseHeadersRead</c> would make the common
+/// case.
 /// </para>
 /// <para>
 /// The one-byte arm is not a pathology for its own sake. It forces every possible chunk boundary,

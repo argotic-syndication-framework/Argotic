@@ -64,6 +64,9 @@ public sealed class ITunesCompleteTests
     ///     read, and matching the corpus — which capitalises <c>itunes:type</c> inconsistently and would
     ///     do the same here.
     /// </remarks>
+    /// <param name="spelling">The node value to write into <c>itunes:complete</c>; any casing of
+    /// <c>yes</c>.</param>
+    /// <param name="why">Why the row is here, quoted back as the failure message.</param>
     [TestMethod]
     [DataRow("yes", "the spelling Apple documents")]
     [DataRow("Yes", "case is disregarded")]
@@ -92,6 +95,9 @@ public sealed class ITunesCompleteTests
     ///     publisher emitting an empty sibling here is not hypothetical.
     ///     </para>
     /// </remarks>
+    /// <param name="spelling">The node value to write into <c>itunes:complete</c>; anything at all
+    /// except <c>yes</c>.</param>
+    /// <param name="why">Why the row is here, quoted back as the failure message.</param>
     [TestMethod]
     [DataRow("no", "the default, spelled out")]
     [DataRow("", "an empty element -- the corpus contains an empty itunes:block")]

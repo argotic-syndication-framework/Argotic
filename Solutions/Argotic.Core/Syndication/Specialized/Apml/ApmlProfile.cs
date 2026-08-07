@@ -9,14 +9,14 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents an attention profile that can be associated to an <see cref="ApmlDocument"/>.
 /// </summary>
+/// <remarks>
+///     One named view of what a person is interested in, holding concepts and sources twice over: once as
+///     the user stated them, once as software inferred them. Keeping the two apart is the point of the
+///     format — a consumer that merged them could no longer tell an assertion from a guess.
+/// </remarks>
 /// <seealso cref="ApmlDocument.Profiles"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the ApmlProfile class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Apml\ApmlProfileExample.cs"
-///             region="ApmlProfile"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Apml\ApmlProfileExample.cs" language="cs" title="The following code example demonstrates the usage of the ApmlProfile class." />
 /// </example>
 public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
@@ -30,45 +30,48 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets the explicit concepts of this profile.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ApmlConcept"/> objects that represent the explicit concepts of this profile.</value>
+    /// <remarks>Concepts the user stated an interest in. Written under <c>ExplicitData/Concepts</c>.</remarks>
     public IList<ApmlConcept> ExplicitConcepts { get; } = [];
 
     /// <summary>
     /// Gets the explicit sources of this profile.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ApmlSource"/> objects that represent the explicit sources of this profile.</value>
+    /// <remarks>Sources the user chose. Written under <c>ExplicitData/Sources</c>.</remarks>
     public IList<ApmlSource> ExplicitSources { get; } = [];
 
     /// <summary>
     /// Gets the implicit concepts of this profile.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ApmlConcept"/> objects that represent the implicit concepts of this profile.</value>
+    /// <remarks>
+    ///     Concepts a machine inferred, written under <c>ImplicitData/Concepts</c>. Each should name what
+    ///     inferred it in <see cref="ApmlConcept.From"/> and when in <see cref="ApmlConcept.UpdatedOn"/>, so a
+    ///     consumer can discount an old guess; neither is enforced here.
+    /// </remarks>
     public IList<ApmlConcept> ImplicitConcepts { get; } = [];
 
     /// <summary>
     /// Gets the implicit sources of this profile.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ApmlSource"/> objects that represent the implicit sources of this profile.</value>
+    /// <remarks>Sources a machine inferred. Written under <c>ImplicitData/Sources</c>.</remarks>
     public IList<ApmlSource> ImplicitSources { get; } = [];
 
     /// <summary>
     /// Gets or sets the name of this profile.
     /// </summary>
-    /// <value>The unique name of this profile.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The <c>name</c> attribute, which must be unique within the document — <see cref="ApmlDocument.DefaultProfileName"/> selects a profile by it. Uniqueness is not enforced here.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Name
     {
         get;
@@ -83,11 +86,11 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     /// Loads this <see cref="ApmlProfile"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="ApmlProfile"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="ApmlProfile"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ApmlProfile"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -203,12 +206,12 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="ApmlProfile"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="ApmlProfile"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ApmlProfile"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -326,7 +329,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     /// Saves the current <see cref="ApmlProfile"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -426,7 +429,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     /// Determines whether the specified <see cref="ApmlProfile"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="ApmlProfile"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="ApmlProfile"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="ApmlProfile"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(ApmlProfile? other)
     {
         if (other is null)
@@ -441,7 +444,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is ApmlProfile other && this.Equals(other);
 
     /// <summary>
@@ -463,7 +466,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(ApmlProfile? first, ApmlProfile? second)
     {
         if (first is null) return second is null;
@@ -475,6 +478,6 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(ApmlProfile? first, ApmlProfile? second) => !(first == second);
 }

@@ -21,11 +21,11 @@ namespace Argotic.Extensions.Core;
 ///     this to be the only one affected.
 ///     </para>
 /// </remarks>
-/// <seealso cref="YahooMediaTextConstruct"/>
+/// <seealso cref="YahooMediaContent.Expression"/>
 public enum YahooMediaExpression
 {
     /// <summary>
-    /// No media expression specified.
+    /// No media expression specified. The specification's default when the attribute is absent is <see cref="Full"/>.
     /// </summary>
     /// <remarks>
     ///     The empty alternate value is deliberate here and only here: this member means "the document

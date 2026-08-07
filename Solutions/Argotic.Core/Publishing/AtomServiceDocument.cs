@@ -13,7 +13,7 @@ namespace Argotic.Publishing;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="AtomServiceDocument"/> class implements the <i>app:service</i> element of the <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a>.
+///         The <see cref="AtomServiceDocument"/> class implements the <i>app:service</i> element of the <a href="https://www.rfc-editor.org/rfc/rfc5023.html">Atom Publishing Protocol</a>.
 ///     </para>
 ///     <para>
 ///         Service documents represent server-defined groups of <see cref="AtomMemberResources">collections</see>, and are used to initialize the process of creating and editing resources.
@@ -53,7 +53,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <param name="workspaces">
     ///     A <see cref="IEnumerable{T}"/> collection of <see cref="AtomWorkspace"/> objects that represent server-defined groups of <see cref="AtomWorkspace"/> objects associate with the document.
     /// </param>
-    /// <exception cref="ArgumentNullException">The <paramref name="workspaces"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="workspaces"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="workspaces"/> collection does not contain at least one <see cref="AtomWorkspace"/>.</exception>
     public AtomServiceDocument(IEnumerable<AtomWorkspace> workspaces)
     {
@@ -74,7 +74,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <returns>The <see cref="AtomWorkspace"/> at the specified index.</returns>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="index"/> is less than zero.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="index"/> is equal to or greater than the count for <see cref="AtomServiceDocument.Workspaces"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public AtomWorkspace this[int index]
     {
         get => this.Workspaces[index];
@@ -100,23 +100,32 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     protected virtual void OnDocumentLoaded(SyndicationResourceLoadedEventArgs e) => this.Loaded?.Invoke(this, e);
 
     /// <summary>
-    /// Gets or sets the base URI other than the base URI of the document or external entity.
+    /// Gets or sets the base against which relative references inside this element are resolved.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>xml:base</c> in effect for this element, or <see langword="null"/> when none is. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-    ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+    ///         RFC 4287 §2 gives <c>xml:base</c> the function described in section 5.1.1 of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a> — it establishes the base URI,
+    ///         or IRI, for every relative reference in the attribute's effective scope. The value itself is a URI reference after processing according to
+    ///         <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.
+    ///     </para>
+    ///     <para>
+    ///         Loading resolves inheritance: an element without an <c>xml:base</c> of its own reports the nearest ancestor's, so the value here is the
+    ///         <i>effective</i> base a consumer can resolve an href against, not the literal attribute.
+    ///     </para>
     /// </remarks>
     public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>The language declared by <c>xml:lang</c>, or <see langword="null"/> when none is in scope. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         RFC 4287 defines <c>atomLanguageTag</c> as a language identifier per
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>, or its successor. A tag this runtime cannot turn
+    ///         into a <see cref="CultureInfo"/> is traced and dropped rather than failing the load.
     ///     </para>
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -124,42 +133,42 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Extensions"/> holds at least one <see cref="ISyndicationExtension"/>; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets the IANA MIME media type identifier assigned to Atom service documents.
     /// </summary>
-    /// <value>A string that identifies the IANA MIME media type for Atom service documents.</value>
+    /// <value><c>application/atomsvc+xml</c>.</value>
     /// <remarks>
-    ///     See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.
+    ///     See <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a> for a listing of the registered IANA MIME media types and subtypes.
     /// </remarks>
     public static string MediaType => "application/atomsvc+xml";
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
     /// </summary>
-    /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
     public SyndicationContentFormat Format => documentFormat;
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
-    /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
+    /// <value>Always <c>1.0</c>. The Atom Publishing Protocol has only ever had one version.</value>
     public Version Version => documentVersion;
 
     /// <summary>
     /// Gets the workspaces associated with this document.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomWorkspace"/> objects that represent workspaces associated with this document.</value>
     /// <remarks>
-    ///     <para>The <see cref="Workspaces"/> collection of a <see cref="AtomServiceDocument"/> <b>must</b> contain at least one <see cref="AtomWorkspace"/>.</para>
+    ///     <para>
+    ///         RFC 5023 §8.3.1 requires at least one. Nothing enforces that on save — the collection-taking constructor checks it, but a document built
+    ///         through this property alone can serialise with none.
+    ///     </para>
     /// </remarks>
     public IList<AtomWorkspace> Workspaces { get; } = [];
 
@@ -167,13 +176,13 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// Asynchronously creates a new <see cref="AtomServiceDocument"/> instance using the specified <see cref="Uri"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task{AtomServiceDocument}"/> that represents the asynchronous operation. The task result contains the loaded <see cref="AtomServiceDocument"/>.</returns>
     /// <remarks>
     ///     This method uses the shared <see cref="HttpClient"/> from <see cref="SyndicationEncodingUtility.SharedHttpClient"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     public static async Task<AtomServiceDocument> CreateAsync(Uri source, SyndicationResourceLoadSettings? settings = null, CancellationToken cancellationToken = default)
     {
@@ -187,8 +196,8 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
     /// <returns>A <see cref="Task{AtomServiceDocument}"/> that represents the asynchronous operation. The task result contains the loaded <see cref="AtomServiceDocument"/>.</returns>
     /// <remarks>
@@ -197,8 +206,8 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     public static async Task<AtomServiceDocument> CreateAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
@@ -236,11 +245,11 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomServiceDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(IXPathNavigable source) => this.Load(source, null);
@@ -248,12 +257,12 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomServiceDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
@@ -270,11 +279,11 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomServiceDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Stream stream) => this.Load(stream, null);
@@ -282,12 +291,12 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomServiceDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
@@ -300,11 +309,11 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomServiceDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(XmlReader reader) => this.Load(reader, null);
@@ -312,12 +321,12 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomServiceDocument.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(XmlReader reader, SyndicationResourceLoadSettings? settings)
@@ -339,7 +348,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
     ///     <para>After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
@@ -349,8 +358,8 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomServiceDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous load operation.</returns>
     /// <remarks>
@@ -364,8 +373,8 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     ///     </para>
     ///     <para>After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public async Task LoadAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
@@ -386,17 +395,17 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream) => this.Save(stream, null);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomServiceDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomServiceDocument"/> instance. This value can be <see langword="null"/>.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream, SyndicationResourceSaveSettings? settings)
     {
@@ -418,8 +427,8 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(XmlWriter writer)
     {
@@ -431,10 +440,10 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomServiceDocument"/> instance.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(XmlWriter writer, SyndicationResourceSaveSettings? settings)
     {
@@ -476,9 +485,9 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomServiceDocument.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings? settings, SyndicationResourceLoadedEventArgs eventData)
     {

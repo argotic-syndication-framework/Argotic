@@ -72,7 +72,7 @@ public readonly record struct GeoRssPosition(decimal Latitude, decimal Longitude
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if <paramref name="first"/> sorts before <paramref name="second"/>; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if <paramref name="first"/> sorts before <paramref name="second"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(GeoRssPosition first, GeoRssPosition second) => first.CompareTo(second) < 0;
 
     /// <summary>
@@ -80,7 +80,7 @@ public readonly record struct GeoRssPosition(decimal Latitude, decimal Longitude
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if <paramref name="first"/> sorts after <paramref name="second"/>; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if <paramref name="first"/> sorts after <paramref name="second"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(GeoRssPosition first, GeoRssPosition second) => first.CompareTo(second) > 0;
 
     /// <summary>
@@ -88,7 +88,7 @@ public readonly record struct GeoRssPosition(decimal Latitude, decimal Longitude
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if <paramref name="first"/> does not sort after <paramref name="second"/>; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if <paramref name="first"/> does not sort after <paramref name="second"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(GeoRssPosition first, GeoRssPosition second) => first.CompareTo(second) <= 0;
 
     /// <summary>
@@ -96,6 +96,6 @@ public readonly record struct GeoRssPosition(decimal Latitude, decimal Longitude
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if <paramref name="first"/> does not sort before <paramref name="second"/>; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if <paramref name="first"/> does not sort before <paramref name="second"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(GeoRssPosition first, GeoRssPosition second) => first.CompareTo(second) >= 0;
 }

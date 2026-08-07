@@ -9,11 +9,17 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Configuration;
 
+/// <summary>
+/// Covers <c>AddXmlRpcClient</c> and <c>AddTrackbackClient</c>: what they register, how they bind options, and with what lifetime.
+/// </summary>
 [TestClass]
 public class ServiceCollectionExtensionsTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// <c>AddXmlRpcClient</c> makes an <c>XmlRpcClient</c> resolvable.
+    /// </summary>
     [TestMethod]
     public void AddXmlRpcClient_RegistersXmlRpcClient()
     {
@@ -29,6 +35,9 @@ public class ServiceCollectionExtensionsTests
         client.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> configure delegate still registers the client rather than throwing.
+    /// </summary>
     [TestMethod]
     public void AddXmlRpcClient_WithNullConfigure_RegistersXmlRpcClient()
     {
@@ -44,6 +53,9 @@ public class ServiceCollectionExtensionsTests
         client.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// The configure delegate reaches <c>IOptions&lt;XmlRpcClientOptions&gt;</c> — timeout, user agent and host alike.
+    /// </summary>
     [TestMethod]
     public void AddXmlRpcClient_WithOptions_ConfiguresOptions()
     {
@@ -69,6 +81,9 @@ public class ServiceCollectionExtensionsTests
         options.Value.Host.ShouldBe(expectedHost);
     }
 
+    /// <summary>
+    /// Options bind from the <c>Argotic:XmlRpc</c> configuration section when no section name is given.
+    /// </summary>
     [TestMethod]
     public void AddXmlRpcClient_WithConfiguration_BindsOptions()
     {
@@ -95,6 +110,9 @@ public class ServiceCollectionExtensionsTests
         options.Value.Host.ShouldBe(new Uri("http://configured-host.com/xmlrpc"));
     }
 
+    /// <summary>
+    /// A caller-supplied section name is used in place of the default, here <c>CustomSection</c>.
+    /// </summary>
     [TestMethod]
     public void AddXmlRpcClient_WithConfiguration_CustomSectionName_BindsOptions()
     {
@@ -119,6 +137,9 @@ public class ServiceCollectionExtensionsTests
         options.Value.UserAgent.ShouldBe("CustomAgent/3.0");
     }
 
+    /// <summary>
+    /// The extension returns the very collection it was called on, so registrations chain.
+    /// </summary>
     [TestMethod]
     public void AddXmlRpcClient_ReturnsSameServiceCollection()
     {
@@ -132,6 +153,9 @@ public class ServiceCollectionExtensionsTests
         result.ShouldBeSameAs(services);
     }
 
+    /// <summary>
+    /// <c>AddTrackbackClient</c> makes a <c>TrackbackClient</c> resolvable.
+    /// </summary>
     [TestMethod]
     public void AddTrackbackClient_RegistersTrackbackClient()
     {
@@ -147,6 +171,9 @@ public class ServiceCollectionExtensionsTests
         client.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> configure delegate still registers the client rather than throwing.
+    /// </summary>
     [TestMethod]
     public void AddTrackbackClient_WithNullConfigure_RegistersTrackbackClient()
     {
@@ -162,6 +189,9 @@ public class ServiceCollectionExtensionsTests
         client.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// The configure delegate reaches <c>IOptions&lt;TrackbackClientOptions&gt;</c> — timeout, user agent and host alike.
+    /// </summary>
     [TestMethod]
     public void AddTrackbackClient_WithOptions_ConfiguresOptions()
     {
@@ -187,6 +217,9 @@ public class ServiceCollectionExtensionsTests
         options.Value.Host.ShouldBe(expectedHost);
     }
 
+    /// <summary>
+    /// Options bind from the <c>Argotic:Trackback</c> configuration section when no section name is given.
+    /// </summary>
     [TestMethod]
     public void AddTrackbackClient_WithConfiguration_BindsOptions()
     {
@@ -213,6 +246,9 @@ public class ServiceCollectionExtensionsTests
         options.Value.Host.ShouldBe(new Uri("http://configured-trackback.com/ping"));
     }
 
+    /// <summary>
+    /// A caller-supplied section name is used in place of the default, here <c>MyTrackback</c>.
+    /// </summary>
     [TestMethod]
     public void AddTrackbackClient_WithConfiguration_CustomSectionName_BindsOptions()
     {
@@ -237,6 +273,9 @@ public class ServiceCollectionExtensionsTests
         options.Value.UserAgent.ShouldBe("CustomTrackbackAgent/3.0");
     }
 
+    /// <summary>
+    /// The extension returns the very collection it was called on, so registrations chain.
+    /// </summary>
     [TestMethod]
     public void AddTrackbackClient_ReturnsSameServiceCollection()
     {
@@ -250,6 +289,9 @@ public class ServiceCollectionExtensionsTests
         result.ShouldBeSameAs(services);
     }
 
+    /// <summary>
+    /// Two resolutions yield two different <c>XmlRpcClient</c> instances, so the registration is transient rather than shared.
+    /// </summary>
     [TestMethod]
     public void AddXmlRpcClient_RegistersAsTransient()
     {
@@ -266,6 +308,9 @@ public class ServiceCollectionExtensionsTests
         client1.ShouldNotBeSameAs(client2);
     }
 
+    /// <summary>
+    /// Two resolutions yield two different <c>TrackbackClient</c> instances, so the registration is transient rather than shared.
+    /// </summary>
     [TestMethod]
     public void AddTrackbackClient_RegistersAsTransient()
     {

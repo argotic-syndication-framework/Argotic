@@ -5,33 +5,38 @@ using Argotic.Common;
 namespace Argotic.Examples.Common;
 
 /// <summary>
-/// Example implementation of the <see cref="ISyndicationResource"/> interface.
+/// Demonstrates implementing <see cref="ISyndicationResource"/> from scratch, for a format the framework does not ship.
 /// </summary>
+/// <remarks>
+///     Every resource in the library has this shape: eight public <c>Load</c>/<c>Save</c> overloads that
+///     all funnel into one private <c>Load(XPathNavigator, …)</c>, which raises <see cref="Loaded"/> exactly
+///     once. Implementing the interface is mostly reproducing that funnel; the parsing is the small part,
+///     and it is the part left as a comment here.
+/// </remarks>
 // CA1852 suggests sealing this, but it declares a protected virtual member and exists to
 // demonstrate extending the framework - sealing it would defeat the example (and not compile).
 #pragma warning disable CA1852
 internal class MyCustomRssFeed : ISyndicationResource
 {
     /// <summary>
-    /// Private member to hold the syndication format for this syndication resource.
+    /// The format this resource claims to speak.
     /// </summary>
     private const SyndicationContentFormat feedFormat = SyndicationContentFormat.Rss;
 
     /// <summary>
-    /// Private member to hold the version of the syndication format for this syndication resource conforms to.
+    /// The version this resource claims to conform to.
     /// </summary>
     private static readonly Version feedVersion = new(3, 0);
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
     /// </summary>
-    /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
     public SyndicationContentFormat Format => feedFormat;
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
-    /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
+    /// <value>Always <c>3.0</c>. The version is the resource's own claim, not something the framework validates.</value>
     public Version Version => feedVersion;
 
     /// <summary>
@@ -72,14 +77,14 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
     public void Load(IXPathNavigable source) => this.Load(source, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="MyCustomRssFeed"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="MyCustomRssFeed"/> instance. This value can be <see langword="null"/>.</param>
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -93,14 +98,14 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
     public void Load(Stream stream) => this.Load(stream, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="MyCustomRssFeed"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="MyCustomRssFeed"/> instance. This value can be <see langword="null"/>.</param>
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
@@ -118,14 +123,14 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
     public void Load(XmlReader reader) => this.Load(reader, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="MyCustomRssFeed"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="MyCustomRssFeed"/> instance. This value can be <see langword="null"/>.</param>
     public void Load(XmlReader reader, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -151,8 +156,8 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="MyCustomRssFeed"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="MyCustomRssFeed"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous load operation.</returns>
     /// <remarks>
@@ -191,14 +196,14 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
     public void Save(Stream stream) => this.Save(stream, null);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="MyCustomRssFeed"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="MyCustomRssFeed"/> instance. This value can be <see langword="null"/>.</param>
     public void Save(Stream stream, SyndicationResourceSaveSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
@@ -218,7 +223,7 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
     public void Save(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -228,7 +233,7 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/> using the supplied <see cref="SyndicationResourceSaveSettings"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="MyCustomRssFeed"/> instance.</param>
     public void Save(XmlWriter writer, SyndicationResourceSaveSettings? settings)
     {

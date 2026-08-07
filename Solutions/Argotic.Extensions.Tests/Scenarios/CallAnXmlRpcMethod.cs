@@ -118,7 +118,8 @@ public sealed class CallAnXmlRpcMethod : IDisposable
     }
 
     /// <summary>
-    /// An ISO 8601 date decodes to a date.
+    /// A <c>dateTime.iso8601</c> element decodes to the instant it names, typed as a date rather than
+    /// left as its text.
     /// </summary>
     /// <returns>A task representing the test.</returns>
     [TestMethod]

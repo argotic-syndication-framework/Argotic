@@ -9,7 +9,7 @@ namespace Argotic.Common;
 ///     so that a caller raising one knows what they are raising it from.
 ///     </para>
 ///     <para>
-///     <b>These are keyed on the loading type, not on whether settings were supplied.</b> Keying the
+///     These are keyed on the loading type, not on whether settings were supplied. Keying the
 ///     sitemap allowance on <c>settings is null</c> would mean a caller who constructed a
 ///     <see cref="SyndicationResourceLoadSettings"/> for an unrelated reason — to set a retrieval limit,
 ///     say — silently lost 56 MiB of headroom. The type being loaded is what determines how large a

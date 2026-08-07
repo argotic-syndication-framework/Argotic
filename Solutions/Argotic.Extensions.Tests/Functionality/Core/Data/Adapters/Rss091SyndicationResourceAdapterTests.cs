@@ -11,11 +11,18 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Data.Adapters;
 
 /// <summary>
-/// Unit tests for <see cref="Rss091SyndicationResourceAdapter"/>.
+/// Covers <see cref="Rss091SyndicationResourceAdapter"/>. RSS 0.91 begins the plain, namespace-free
+/// <c>rss</c> line, with items nested inside the channel; these tests state which of its channel
+/// vocabulary reaches the <see cref="RssFeed"/> — <c>language</c>, <c>rating</c>, <c>skipDays</c>,
+/// <c>skipHours</c>, <c>image</c> and <c>textInput</c> — how a malformed value is dropped rather than
+/// thrown, and how the retrieval limit behaves.
 /// </summary>
 [TestClass]
 public class Rss091SyndicationResourceAdapterTests
 {
+    /// <summary>
+    /// A minimal RSS 0.91 channel fills its title, link and description.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalRss091_PopulatesChannel()
     {
@@ -36,6 +43,10 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.Description.ShouldBe("A test RSS 0.91 feed");
     }
 
+    /// <summary>
+    /// A <c>language</c> of <c>en-us</c> is parsed into a culture whose name is the canonically cased
+    /// <c>en-US</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_WithLanguage_ParsesCultureInfo()
     {
@@ -55,6 +66,9 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.Language.Name.ShouldBe("en-US");
     }
 
+    /// <summary>
+    /// The <c>day</c> children of <c>skipDays</c> are parsed by name into <c>DayOfWeek</c> values.
+    /// </summary>
     [TestMethod]
     public void Fill_WithSkipDays_ParsesDaysCorrectly()
     {
@@ -75,6 +89,15 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.SkipDays.ShouldContain(DayOfWeek.Sunday);
     }
 
+    /// <summary>
+    /// The <c>hour</c> children of <c>skipHours</c> are renumbered on the way in, so a document saying
+    /// <c>1</c> and <c>2</c> yields <c>0</c> and <c>1</c>.
+    /// </summary>
+    /// <remarks>
+    ///     RSS 0.91 counts the hours of the day from 1 and the object model holds the RSS 2.0 0-based form,
+    ///     so the adapter subtracts one from every hour it reads. A 0.91 document written to the 2.0
+    ///     convention is therefore read an hour out throughout.
+    /// </remarks>
     [TestMethod]
     public void Fill_WithSkipHours_ParsesHoursCorrectly()
     {
@@ -96,6 +119,9 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.SkipHours.ShouldContain(1);  // Hour 2 becomes 1
     }
 
+    /// <summary>
+    /// An item fills its title, link and description — the three elements 0.91 defines on an item.
+    /// </summary>
     [TestMethod]
     public void Fill_WithItems_PopulatesItems()
     {
@@ -117,6 +143,10 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.Items[0].Description.ShouldBe("Test item description");
     }
 
+    /// <summary>
+    /// An <c>image</c> fills its title, URL and link along with the <c>width</c>, <c>height</c> and
+    /// <c>description</c> that 0.91 adds over 0.90.
+    /// </summary>
     [TestMethod]
     public void Fill_WithImage_PopulatesImageWithDimensions()
     {
@@ -141,6 +171,9 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.Image.Description.ShouldBe("Logo for the feed");
     }
 
+    /// <summary>
+    /// A <c>textInput</c> fills its title, description, name and link.
+    /// </summary>
     [TestMethod]
     public void Fill_WithTextInput_PopulatesTextInput()
     {
@@ -163,6 +196,10 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.TextInput.Link.ShouldBe(new Uri("http://example.com/search"));
     }
 
+    /// <summary>
+    /// The optional <c>copyright</c>, <c>managingEditor</c>, <c>webMaster</c> and PICS <c>rating</c>
+    /// elements are filled verbatim, the rating including its quotes and parentheses.
+    /// </summary>
     [TestMethod]
     public void Fill_WithOptionalElements_PopulatesOptionals()
     {
@@ -186,6 +223,9 @@ public class Rss091SyndicationResourceAdapterTests
         // If dates aren't parsing, verify the date format matches RFC 822
     }
 
+    /// <summary>
+    /// A retrieval limit of <c>2</c> keeps the first two of three items, in document order.
+    /// </summary>
     [TestMethod]
     public void Fill_WithRetrievalLimit_EnforcesLimit()
     {
@@ -233,6 +273,9 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.Items[1].Title.ShouldBe("Second Item");
     }
 
+    /// <summary>
+    /// Filling a <see langword="null"/> feed throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_NullResource_ThrowsArgumentNullException()
     {
@@ -247,6 +290,9 @@ public class Rss091SyndicationResourceAdapterTests
         Should.Throw<ArgumentNullException>(() => adapter.Fill(null!));
     }
 
+    /// <summary>
+    /// Constructing the adapter without a navigator throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_NullNavigator_ThrowsArgumentNullException()
     {
@@ -257,6 +303,9 @@ public class Rss091SyndicationResourceAdapterTests
         Should.Throw<ArgumentNullException>(() => new Rss091SyndicationResourceAdapter(null!, settings));
     }
 
+    /// <summary>
+    /// Constructing the adapter without load settings throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_NullSettings_ThrowsArgumentNullException()
     {
@@ -269,6 +318,10 @@ public class Rss091SyndicationResourceAdapterTests
         Should.Throw<ArgumentNullException>(() => new Rss091SyndicationResourceAdapter(navigator, null!));
     }
 
+    /// <summary>
+    /// A channel with no <c>image</c> leaves the channel's image <see langword="null"/>, not an empty
+    /// instance.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalFeed_LeavesImageNull()
     {
@@ -287,6 +340,10 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.Image.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A channel with no <c>textInput</c> leaves the channel's text input <see langword="null"/>, not an
+    /// empty instance.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalFeed_LeavesTextInputNull()
     {
@@ -305,6 +362,9 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.TextInput.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A channel with no <c>skipDays</c> leaves the skipped-days collection empty.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalFeed_LeavesSkipDaysEmpty()
     {
@@ -323,6 +383,9 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.SkipDays.ShouldBeEmpty();
     }
 
+    /// <summary>
+    /// A channel with no <c>skipHours</c> leaves the skipped-hours collection empty.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalFeed_LeavesSkipHoursEmpty()
     {
@@ -341,6 +404,10 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.SkipHours.ShouldBeEmpty();
     }
 
+    /// <summary>
+    /// An empty <c>language</c> element leaves the channel's language <see langword="null"/> instead of
+    /// throwing.
+    /// </summary>
     [TestMethod]
     public void Fill_WithInvalidLanguage_DoesNotThrow()
     {
@@ -370,6 +437,10 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.Language.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A <c>day</c> that names no weekday is dropped and the rest of <c>skipDays</c> still fills, so
+    /// <c>InvalidDay</c> costs nothing and Monday survives.
+    /// </summary>
     [TestMethod]
     public void Fill_WithInvalidSkipDay_DoesNotThrow()
     {
@@ -403,6 +474,9 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.SkipDays.ShouldContain(DayOfWeek.Monday);
     }
 
+    /// <summary>
+    /// A retrieval limit of <c>0</c> means no limit, and the feed's one item is read.
+    /// </summary>
     [TestMethod]
     public void Fill_WithZeroRetrievalLimit_RetrievesAllItems()
     {
@@ -424,6 +498,14 @@ public class Rss091SyndicationResourceAdapterTests
         feed.Channel.Items.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// A channel carrying <c>pubDate</c> and <c>lastBuildDate</c> fills without throwing, whether or not
+    /// those dates parse.
+    /// </summary>
+    /// <remarks>
+    ///     Nothing is asserted about the two dates themselves, only about the channel around them: the file
+    ///     records that date-format compatibility is covered by the <c>SyndicationDateTimeUtility</c> tests.
+    /// </remarks>
     [TestMethod]
     public void Fill_WithDateElements_AttemptsToParseDates()
     {

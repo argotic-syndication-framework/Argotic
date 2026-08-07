@@ -33,6 +33,9 @@ public sealed class GeoRssGeometryParsingTests
     ///     than reading nothing: nothing is visibly absent, whereas a truncated geometry is silently
     ///     incorrect. The same applies to a token that will not parse.
     /// </remarks>
+    /// <param name="written">The node value to write into <c>georss:line</c>; anything that is not a
+    /// whitespace-separated run of an even number of invariant-culture decimals.</param>
+    /// <param name="why">Why the value cannot be read, quoted back as the failure message.</param>
     [TestMethod]
     [DataRow("45.256 -110.45 46.46", "an odd number of coordinates leaves one without a partner")]
     [DataRow("45.256", "a single coordinate is not a position")]
@@ -58,6 +61,9 @@ public sealed class GeoRssGeometryParsingTests
     ///     Two pairs is not a point. Taking the first and discarding the second would invent a geometry
     ///     the publisher did not write.
     /// </remarks>
+    /// <param name="written">The node value to write into <c>georss:point</c>; any number of
+    /// coordinates other than two.</param>
+    /// <param name="why">Why the value is not a point, quoted back as the failure message.</param>
     [TestMethod]
     [DataRow("45.256 -110.45 46.46 -109.48", "two pairs is a line or a box, not a point")]
     [DataRow("45.256", "half a pair is not a point either")]
@@ -72,6 +78,9 @@ public sealed class GeoRssGeometryParsingTests
     /// <summary>
     /// A box carrying anything other than two pairs is refused.
     /// </summary>
+    /// <param name="written">The node value to write into <c>georss:box</c>; any number of
+    /// coordinates other than four.</param>
+    /// <param name="why">Why the value is not a box, quoted back as the failure message.</param>
     [TestMethod]
     [DataRow("42.943 -71.032", "one corner does not bound anything")]
     [DataRow("42.943 -71.032 43.039 -69.856 44.0 -68.0", "three corners is not a box")]
@@ -92,6 +101,9 @@ public sealed class GeoRssGeometryParsingTests
     ///     character yields empty entries and tokens with newlines still attached. Every row here is the
     ///     same three positions written differently, and all three must agree.
     /// </remarks>
+    /// <param name="written">The same three positions, written with a different arrangement of
+    /// spaces, tabs and newlines each time.</param>
+    /// <param name="shape">The arrangement the row stands for, quoted back as the failure message.</param>
     [TestMethod]
     [DataRow("45.256 -110.45 46.46 -109.48 43.84 -109.86", "single spaces")]
     [DataRow("  45.256   -110.45\t46.46 -109.48\n43.84 -109.86  ", "mixed runs, tabs, newlines, and surrounding space")]

@@ -14,8 +14,10 @@ public static class ArgoticHttpClients
     /// The client used to fetch syndication resources.
     /// </summary>
     /// <remarks>
-    ///     Pass the resolved client to any <c>LoadAsync</c> or <c>CreateAsync</c> overload that accepts
-    ///     an <see cref="HttpClient"/>.
+    ///     Registered by <see cref="ServiceCollectionExtensions.AddArgoticSyndicationClient"/>. Resolve
+    ///     it with <c>IHttpClientFactory.CreateClient</c> and pass it to any <c>LoadAsync</c> or
+    ///     <c>CreateAsync</c> overload that accepts an <see cref="HttpClient"/>.
     /// </remarks>
+    /// <seealso cref="ServiceCollectionExtensions.AddArgoticSyndicationClient"/>
     public const string Syndication = "Argotic.Syndication";
 }

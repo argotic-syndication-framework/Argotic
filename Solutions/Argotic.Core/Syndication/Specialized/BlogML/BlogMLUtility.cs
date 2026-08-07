@@ -32,12 +32,13 @@ internal static class BlogMLUtility
     /// <summary>
     /// Gets the XML namespace URI for the Web Log Markup Language (BlogML) 2.0 specification.
     /// </summary>
-    /// <value>The XML namespace URI for the Web Log Markup Language (BlogML) 2.0 specification.</value>
+    /// <value>Always <c>http://www.blogml.com/2006/09/BlogML</c>.</value>
     public static string BlogMLNamespace => BLOGML_NAMESPACE;
 
     /// <summary>
-    /// Creates the enum-to-string mapping for BlogMLApprovalStatus.
+    /// Creates the enum-to-string mapping for <see cref="BlogMLApprovalStatus"/>.
     /// </summary>
+    /// <returns>A lookup from each declared value to its <see cref="EnumerationMetadataAttribute.AlternateValue"/>, built once by reflection at type initialization.</returns>
     private static FrozenDictionary<BlogMLApprovalStatus, string> CreateStatusToStringMap()
     {
         var map = new Dictionary<BlogMLApprovalStatus, string>();
@@ -57,8 +58,9 @@ internal static class BlogMLUtility
     }
 
     /// <summary>
-    /// Creates the string-to-enum mapping for BlogMLApprovalStatus.
+    /// Creates the string-to-enum mapping for <see cref="BlogMLApprovalStatus"/>.
     /// </summary>
+    /// <returns>A case-insensitive lookup from each <see cref="EnumerationMetadataAttribute.AlternateValue"/> back to its declared value, built once by reflection at type initialization.</returns>
     private static FrozenDictionary<string, BlogMLApprovalStatus> CreateStringToStatusMap()
     {
         var map = new Dictionary<string, BlogMLApprovalStatus>(StringComparer.OrdinalIgnoreCase);
@@ -80,19 +82,19 @@ internal static class BlogMLUtility
     /// <summary>
     /// Returns the approval status identifier for the supplied <see cref="BlogMLApprovalStatus"/>.
     /// </summary>
-    /// <param name="status">The <see cref="BlogMLApprovalStatus"/> to get the text construct identifier for.</param>
-    /// <returns>The approval status identifier for the supplied <paramref name="status"/>, Otherwise, returns an empty string.</returns>
+    /// <param name="status">The <see cref="BlogMLApprovalStatus"/> to get the approval status identifier for.</param>
+    /// <returns>The identifier written to the <c>approved</c> attribute — <c>true</c> or <c>false</c> — or an <i>empty</i> string for <see cref="BlogMLApprovalStatus.None"/> or an undefined value.</returns>
     public static string ApprovalStatusAsString(BlogMLApprovalStatus status) =>
         s_statusToString.GetValueOrDefault(status, string.Empty);
 
     /// <summary>
     /// Returns the <see cref="BlogMLApprovalStatus"/> enumeration value that corresponds to the specified approval status value.
     /// </summary>
-    /// <param name="value">The value of the approval status identifier.</param>
-    /// <returns>A <see cref="BlogMLApprovalStatus"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>BlogMLApprovalStatus.None</b>.</returns>
-    /// <remarks>This method disregards case of specified approval status value.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <param name="value">The value of the <c>approved</c> attribute.</param>
+    /// <returns>The matching <see cref="BlogMLApprovalStatus"/>, or <see cref="BlogMLApprovalStatus.None"/> if <paramref name="value"/> matches nothing.</returns>
+    /// <remarks>The comparison disregards case. An unrecognised value is not an error and is not preserved: it becomes <see cref="BlogMLApprovalStatus.None"/> and is dropped on save.</remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="value"/> is an empty string.</exception>
     public static BlogMLApprovalStatus ApprovalStatusByValue(string value)
     {
         ArgumentException.ThrowIfNullOrEmpty(value);
@@ -145,7 +147,7 @@ internal static class BlogMLUtility
     /// </summary>
     /// <param name="nameTable">The table of atomized string objects.</param>
     /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is <see langword="null"/>.</exception>
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);
@@ -160,9 +162,9 @@ internal static class BlogMLUtility
     /// </summary>
     /// <param name="target">The object that implements the <see cref="IBlogMLCommonObject"/> interface to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract BlogML common object information from.</param>
-    /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -244,10 +246,10 @@ internal static class BlogMLUtility
     /// <param name="target">The object that implements the <see cref="IBlogMLCommonObject"/> interface to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract BlogML common object information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill operation.</param>
-    /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -329,8 +331,8 @@ internal static class BlogMLUtility
     /// </summary>
     /// <param name="source">A object that implements the <see cref="IBlogMLCommonObject"/> interface to extract BlogML common object information from.</param>
     /// <param name="writer">The <see cref="XmlWriter"/> to which the <paramref name="source"/> information will be written.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public static void WriteCommonObjectAttributes(IBlogMLCommonObject source, XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -362,8 +364,8 @@ internal static class BlogMLUtility
     /// </summary>
     /// <param name="source">A object that implements the <see cref="IBlogMLCommonObject"/> interface to extract BlogML common object information from.</param>
     /// <param name="writer">The <see cref="XmlWriter"/> to which the <paramref name="source"/> information will be written.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public static void WriteCommonObjectElements(IBlogMLCommonObject source, XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(source);

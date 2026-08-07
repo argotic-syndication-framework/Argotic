@@ -4,16 +4,16 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Sitemap;
 
 /// <summary>
-/// Contains the code examples for the <see cref="SitemapIndex"/> class.
+/// Demonstrates the <see cref="SitemapIndex"/> surface: pointing at child sitemaps, then the <c>Load</c>, <c>CreateAsync</c> and <c>Save</c> overloads.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="SitemapIndex"/> class.
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
+///     An index exists because the protocol caps a single sitemap at 50,000 URLs; the index is how a
+///     larger site is split across several files and still announced as one.
 /// </remarks>
 internal static class SitemapIndexExample
 {
     /// <summary>
-    /// Provides example code for the SitemapIndex class.
+    /// Builds a <see cref="SitemapIndex"/> pointing at three child sitemaps and prints it.
     /// </summary>
     public static void ClassExample()
     {
@@ -37,7 +37,7 @@ internal static class SitemapIndexExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(Stream) method.
+    /// Loads a <see cref="SitemapIndex"/> from a <see cref="Stream"/>.
     /// </summary>
     public static void LoadStreamExample()
     {
@@ -48,7 +48,7 @@ internal static class SitemapIndexExample
     }
 
     /// <summary>
-    /// Provides example code for the Save(Stream) method.
+    /// Saves a <see cref="SitemapIndex"/> to a <see cref="Stream"/>.
     /// </summary>
     public static void SaveStreamExample()
     {
@@ -69,7 +69,7 @@ internal static class SitemapIndexExample
     }
 
     /// <summary>
-    /// Provides example code for the SitemapIndex.CreateAsync(Uri) method.
+    /// Creates a <see cref="SitemapIndex"/> from a <see cref="Uri"/> in a single call.
     /// </summary>
     [RequiresNetwork]
     public static async Task LoadUriExampleAsync()
@@ -89,7 +89,7 @@ internal static class SitemapIndexExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(XmlReader) method.
+    /// Loads a <see cref="SitemapIndex"/> from an <see cref="XmlReader"/>.
     /// </summary>
     public static void LoadXmlReaderExample()
     {
@@ -112,7 +112,7 @@ internal static class SitemapIndexExample
     }
 
     /// <summary>
-    /// Provides example code for saving with XmlWriter.
+    /// Saves a <see cref="SitemapIndex"/> through an <see cref="XmlWriter"/>.
     /// </summary>
     public static void SaveXmlWriterExample()
     {

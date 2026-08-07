@@ -5,11 +5,19 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Async;
 
 /// <summary>
-/// Tests for concurrent LoadAsync operations to verify the static field bug is fixed.
+/// Covers loads that overlap, and asserts that no resource ends up holding another's state.
 /// </summary>
+/// <remarks>
+///     The class guards a fixed defect in which load state was held in a static field. Each test
+///     therefore asserts a per-instance outcome — every resource's own <c>Loaded</c> event and its
+///     own parsed title — rather than merely that the calls completed.
+/// </remarks>
 [TestClass]
 public class LoadAsyncConcurrencyTests
 {
+    /// <summary>
+    /// Five RSS feeds loaded in turn from separate streams each raise their own <c>Loaded</c> event and each keep their own parsed title.
+    /// </summary>
     [TestMethod]
     public void RssFeed_MultipleConcurrentLoads_DoNotInterfere()
     {
@@ -39,6 +47,9 @@ public class LoadAsyncConcurrencyTests
         }
     }
 
+    /// <summary>
+    /// Five Atom feeds loaded in turn from separate streams each raise their own <c>Loaded</c> event and each keep their own parsed title.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_MultipleConcurrentLoads_DoNotInterfere()
     {
@@ -68,6 +79,9 @@ public class LoadAsyncConcurrencyTests
         }
     }
 
+    /// <summary>
+    /// An RSS feed, an Atom feed, an OPML document and a generic feed loaded in turn each raise their own <c>Loaded</c> event and keep their own parsed title.
+    /// </summary>
     [TestMethod]
     public void MixedFeeds_MultipleConcurrentLoads_DoNotInterfere()
     {
@@ -117,6 +131,10 @@ public class LoadAsyncConcurrencyTests
         genericFeed.Title.ShouldBe("Test Feed");
     }
 
+    /// <summary>
+    /// Five RSS feeds loaded at once through a single <c>HttpClient</c> under <c>Task.WhenAll</c> each raise their own <c>Loaded</c> event and each keep their own parsed title.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task RssFeed_MultipleConcurrentLoadAsync_DoNotInterfere()
     {
@@ -151,6 +169,10 @@ public class LoadAsyncConcurrencyTests
         }
     }
 
+    /// <summary>
+    /// Five Atom feeds loaded at once through a single <c>HttpClient</c> under <c>Task.WhenAll</c> each raise their own <c>Loaded</c> event and each keep their own parsed title.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task AtomFeed_MultipleConcurrentLoadAsync_DoNotInterfere()
     {
@@ -185,6 +207,10 @@ public class LoadAsyncConcurrencyTests
         }
     }
 
+    /// <summary>
+    /// Four resources of different formats loaded at once, each through its own handler, all finish holding their own content.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task MixedFeeds_ConcurrentLoadAsync_AllLoadSuccessfully()
     {

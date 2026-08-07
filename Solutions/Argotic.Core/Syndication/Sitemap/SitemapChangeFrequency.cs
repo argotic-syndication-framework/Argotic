@@ -3,23 +3,28 @@ using Argotic.Common;
 namespace Argotic.Syndication;
 
 /// <summary>
-/// Specifies the change frequency of a URL in a sitemap.
+/// How often a page in a sitemap is likely to change.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The value "always" should be used to describe documents that change each time they are accessed.
-///         The value "never" should be used to describe archived URLs.
+///         <i>This is a hint, not a command.</i> The protocol is explicit that crawlers "may crawl pages
+///         marked <c>hourly</c> less frequently than that, and they may crawl pages marked <c>yearly</c>
+///         more frequently than that", and that they "may periodically crawl pages marked <c>never</c> so
+///         that they can handle unexpected changes to those pages". A sitemap cannot be used to schedule a
+///         crawler, only to inform one.
 ///     </para>
 ///     <para>
-///         Please note that the value of this tag is considered a hint and not a command.
-///         Even though search engine crawlers may consider this information when making decisions,
-///         they may crawl pages marked "hourly" less frequently than that, and they may crawl pages marked "yearly" more frequently than that.
+///         The seven members are the seven values the protocol permits; there is no member for an absent
+///         element. <see cref="SitemapUrl.ChangeFrequency"/> is nullable for that reason. Beware that the
+///         zero value of this enumeration is <see cref="Always"/>, so a default-initialised
+///         <see cref="SitemapChangeFrequency"/> claims the most aggressive frequency there is rather than
+///         no frequency at all.
 ///     </para>
 /// </remarks>
 public enum SitemapChangeFrequency
 {
     /// <summary>
-    /// The document changes each time it is accessed.
+    /// The document changes each time it is accessed. Reserved by the protocol for exactly that case, not as a way to ask for frequent crawling.
     /// </summary>
     [EnumerationMetadata(DisplayName = "always", AlternateValue = "always")]
     Always = 0,
@@ -55,7 +60,7 @@ public enum SitemapChangeFrequency
     Yearly = 5,
 
     /// <summary>
-    /// The document is an archived URL that will never change.
+    /// The document is archived and will not change. Crawlers may still revisit it periodically.
     /// </summary>
     [EnumerationMetadata(DisplayName = "never", AlternateValue = "never")]
     Never = 6

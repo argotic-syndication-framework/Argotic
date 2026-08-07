@@ -9,13 +9,25 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 
 /// <summary>
-/// Unit tests for Sitemap Index XML parsing and serialization.
+/// Covers the shape of a <c>sitemapindex</c> document: the entries and locations the fixtures yield,
+/// the <c>lastmod</c> spellings the protocol permits, writing an index element by element, and a
+/// parse-write-parse round trip.
 /// </summary>
+/// <remarks>
+///     These assert against an <c>XPathDocument</c> built straight from the fixture rather than through
+///     <see cref="SitemapIndex"/>, so with the exception of the namespace manager they take from
+///     <see cref="SitemapUtility"/> they describe the document format rather than this library's
+///     object model. <c>SitemapIndex.Load</c> itself is exercised in <c>SitemapRegressionTests</c>.
+/// </remarks>
 [TestClass]
 public class SitemapIndexTests
 {
     #region Parsing Tests
 
+    /// <summary>
+    /// The minimal index fixture's document element is <c>sitemapindex</c>, qualified with the sitemap
+    /// 0.9 namespace.
+    /// </summary>
     [TestMethod]
     public void ParseMinimalSitemapIndex_HasCorrectRootElement()
     {
@@ -33,6 +45,9 @@ public class SitemapIndexTests
         navigator.NamespaceURI.ShouldBe(SitemapUtility.SitemapNamespace);
     }
 
+    /// <summary>
+    /// The minimal index fixture holds exactly one <c>sitemap</c> entry.
+    /// </summary>
     [TestMethod]
     public void ParseMinimalSitemapIndex_ContainsOneSitemapEntry()
     {
@@ -49,6 +64,9 @@ public class SitemapIndexTests
         sitemaps.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// That entry's <c>loc</c> is <c>https://www.example.com/sitemap1.xml</c>.
+    /// </summary>
     [TestMethod]
     public void ParseMinimalSitemapIndex_ExtractsSitemapLocation()
     {
@@ -66,6 +84,9 @@ public class SitemapIndexTests
         locNode.Value.ShouldBe("https://www.example.com/sitemap1.xml");
     }
 
+    /// <summary>
+    /// The full index fixture holds three <c>sitemap</c> entries.
+    /// </summary>
     [TestMethod]
     public void ParseFullSitemapIndex_ContainsThreeSitemapEntries()
     {
@@ -82,6 +103,9 @@ public class SitemapIndexTests
         sitemaps.Count.ShouldBe(3);
     }
 
+    /// <summary>
+    /// The three locations come back in document order, <c>sitemap1.xml</c> through <c>sitemap3.xml</c>.
+    /// </summary>
     [TestMethod]
     public void ParseFullSitemapIndex_ExtractsAllSitemapLocations()
     {
@@ -107,6 +131,10 @@ public class SitemapIndexTests
         locations[2].ShouldBe("https://www.example.com/sitemap3.xml");
     }
 
+    /// <summary>
+    /// Each entry's <c>lastmod</c> is read alongside its <c>loc</c>, and the third entry, which declares
+    /// none, yields <see langword="null"/> rather than a substituted date.
+    /// </summary>
     [TestMethod]
     public void ParseFullSitemapIndex_ExtractsLastmodDates()
     {
@@ -134,6 +162,9 @@ public class SitemapIndexTests
         sitemapData[2].lastmod.ShouldBeNull(); // Third sitemap has no lastmod
     }
 
+    /// <summary>
+    /// An index with no children yields no <c>sitemap</c> nodes.
+    /// </summary>
     [TestMethod]
     public void ParseEmptySitemapIndex_ContainsNoSitemapEntries()
     {
@@ -154,6 +185,10 @@ public class SitemapIndexTests
 
     #region Lastmod Date Format Tests
 
+    /// <summary>
+    /// The first entry's <c>lastmod</c> parses as a <see cref="DateTimeOffset"/> of 15 January 2024 at
+    /// 10:00 with a zero offset, so the trailing <c>Z</c> is honoured rather than discarded.
+    /// </summary>
     [TestMethod]
     public void ParseSitemapIndex_LastmodWithTimezone_ParsesCorrectly()
     {
@@ -177,6 +212,10 @@ public class SitemapIndexTests
         parsed.Offset.ShouldBe(TimeSpan.Zero);
     }
 
+    /// <summary>
+    /// All three W3C datetime spellings the protocol permits for <c>lastmod</c> — a bare date, a UTC
+    /// instant, and an explicit <c>+00:00</c> offset — resolve to the same calendar day.
+    /// </summary>
     [TestMethod]
     public void ParseSitemapIndex_LastmodWithVariousFormats_ParsesCorrectly()
     {
@@ -205,6 +244,9 @@ public class SitemapIndexTests
 
     #region Writing Tests
 
+    /// <summary>
+    /// An index written with a single entry parses back with that entry's <c>loc</c> intact.
+    /// </summary>
     [TestMethod]
     public void WriteSitemapIndex_WithOneSitemap_ProducesValidXml()
     {
@@ -245,6 +287,9 @@ public class SitemapIndexTests
         loc.Value.ShouldBe("https://example.com/sitemap1.xml");
     }
 
+    /// <summary>
+    /// A written <c>lastmod</c> survives the round trip verbatim, as <c>2024-01-15T10:00:00Z</c>.
+    /// </summary>
     [TestMethod]
     public void WriteSitemapIndex_WithLastmod_ProducesValidXml()
     {
@@ -283,6 +328,9 @@ public class SitemapIndexTests
         lastmod.Value.ShouldBe("2024-01-15T10:00:00Z");
     }
 
+    /// <summary>
+    /// Three entries written in sequence read back in the order they were written.
+    /// </summary>
     [TestMethod]
     public void WriteSitemapIndex_WithMultipleSitemaps_ProducesValidXml()
     {
@@ -340,6 +388,10 @@ public class SitemapIndexTests
 
     #region Round-Trip Tests
 
+    /// <summary>
+    /// Reading the full index, writing every entry back, and reading again preserves each location and
+    /// its <c>lastmod</c> — including the entry that has none.
+    /// </summary>
     [TestMethod]
     public void RoundTrip_ParseWriteParse_PreservesSitemapData()
     {
@@ -416,6 +468,13 @@ public class SitemapIndexTests
 
     #region Edge Cases
 
+    /// <summary>
+    /// An index built with a hundred entries yields a hundred <c>sitemap</c> nodes.
+    /// </summary>
+    /// <remarks>
+    ///     The protocol allows up to 50,000 entries in one index. A hundred is what this exercises, chosen
+    ///     to keep the test's running time reasonable.
+    /// </remarks>
     [TestMethod]
     public void ParseSitemapIndex_WithMaximumSitemaps_HandlesCorrectly()
     {
@@ -446,6 +505,9 @@ public class SitemapIndexTests
         sitemaps.Count.ShouldBe(100);
     }
 
+    /// <summary>
+    /// Every location in the full index fixture forms an absolute URI, and every one uses <c>https</c>.
+    /// </summary>
     [TestMethod]
     public void ParseSitemapIndex_UrlsAreValidUris()
     {
@@ -468,6 +530,10 @@ public class SitemapIndexTests
         }
     }
 
+    /// <summary>
+    /// An index may point at both a plain <c>.xml</c> sitemap and a gzipped <c>.xml.gz</c> one, and each
+    /// suffix is carried through untouched.
+    /// </summary>
     [TestMethod]
     public void ParseSitemapIndex_WithDifferentSitemapExtensions_HandlesCorrectly()
     {
@@ -507,6 +573,10 @@ public class SitemapIndexTests
 
     #region Validation Tests
 
+    /// <summary>
+    /// An entry carrying only a <c>lastmod</c> yields no <c>loc</c> node — nothing synthesises the
+    /// element the protocol requires.
+    /// </summary>
     [TestMethod]
     public void ValidateSitemapIndex_AllSitemapsMustHaveLoc()
     {
@@ -532,6 +602,9 @@ public class SitemapIndexTests
         locNode.ShouldBeNull();
     }
 
+    /// <summary>
+    /// The third entry of the full index has a <c>loc</c> and no <c>lastmod</c>, which the protocol permits.
+    /// </summary>
     [TestMethod]
     public void ValidateSitemapIndex_LastmodIsOptional()
     {

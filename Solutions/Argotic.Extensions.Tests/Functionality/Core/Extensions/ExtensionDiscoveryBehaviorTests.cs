@@ -8,9 +8,9 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Extensions;
 
 /// <summary>
-/// Behavior tests that verify the extension auto-discovery system works correctly.
-/// These tests cover auto-discovery from namespaces, extension application at various
-/// levels (feed, channel, item/entry), and FindExtension behavior.
+/// Covers extension auto-discovery end to end: which namespaces are recognised while a document is
+/// read, which object the resulting extension attaches to, how <c>FindExtension</c> reaches it again,
+/// and what the reflection scan behind all of it returns.
 /// </summary>
 [TestClass]
 public class ExtensionDiscoveryBehaviorTests
@@ -19,6 +19,9 @@ public class ExtensionDiscoveryBehaviorTests
 
     #region Auto-Discovery from Namespaces
 
+    /// <summary>
+    /// An item declaring the iTunes namespace acquires an <c>ITunesSyndicationExtension</c> with nothing registered by the caller, and its author is parsed.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithITunesNamespace_AutoDiscoversExtension()
     {
@@ -40,6 +43,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.Context.Author.ShouldBe("Test Author");
     }
 
+    /// <summary>
+    /// An item declaring the Dublin Core element-set namespace acquires a <c>DublinCoreElementSetSyndicationExtension</c>, and its creator is parsed.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithDublinCoreNamespace_AutoDiscoversExtension()
     {
@@ -61,6 +67,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.Context.Creator.ShouldBe("Test Creator");
     }
 
+    /// <summary>
+    /// An item declaring the WGS 84 namespace acquires a <c>BasicGeocodingSyndicationExtension</c> whose coordinates keep their decimal precision, <c>40.7128</c> and <c>-74.0060</c>.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithBasicGeocodingNamespace_AutoDiscoversExtension()
     {
@@ -83,6 +92,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.Context.Longitude.ShouldBe(-74.0060m);
     }
 
+    /// <summary>
+    /// An item declaring two extension namespaces acquires both extensions, each holding its own value.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithMultipleNamespaces_DiscoversMultipleExtensions()
     {
@@ -110,6 +122,9 @@ public class ExtensionDiscoveryBehaviorTests
         dcExtension.Context.Creator.ShouldBe("Dublin Core Creator");
     }
 
+    /// <summary>
+    /// An item declaring the Yahoo Media namespace acquires a <c>YahooMediaSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithYahooMediaNamespace_AutoDiscoversExtension()
     {
@@ -130,6 +145,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// An item declaring the Creative Commons namespace acquires a <c>CreativeCommonsSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithCreativeCommonsNamespace_AutoDiscoversExtension()
     {
@@ -154,6 +172,9 @@ public class ExtensionDiscoveryBehaviorTests
 
     #region Extension Application at Different Levels
 
+    /// <summary>
+    /// An extension element that is a child of <c>channel</c> attaches to the channel, not to the item beneath it.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithChannelLevelExtension_AttachesToChannel()
     {
@@ -187,6 +208,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.Context.Creator.ShouldBe("Channel Creator");
     }
 
+    /// <summary>
+    /// An extension element that is a child of <c>item</c> attaches to that item.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithItemLevelExtension_AttachesToItem()
     {
@@ -208,6 +232,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.Context.Creator.ShouldBe("Item Creator");
     }
 
+    /// <summary>
+    /// An extension element that is a child of <c>feed</c> attaches to the feed itself.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WithFeedLevelExtension_AttachesToFeed()
     {
@@ -235,6 +262,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.Context.Creator.ShouldBe("Feed Level Creator");
     }
 
+    /// <summary>
+    /// An extension element that is a child of <c>entry</c> attaches to that entry.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WithEntryLevelExtension_AttachesToEntry()
     {
@@ -269,6 +299,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.Context.Creator.ShouldBe("Entry Level Creator");
     }
 
+    /// <summary>
+    /// The same extension declared at both channel and item level yields one instance at each, each holding the value written at its own level.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithExtensionsAtMultipleLevels_AttachesCorrectly()
     {
@@ -314,6 +347,9 @@ public class ExtensionDiscoveryBehaviorTests
 
     #region FindExtension Behavior
 
+    /// <summary>
+    /// The generic <c>FindExtension&lt;T&gt;</c> returns the attached extension already typed as <c>T</c>.
+    /// </summary>
     [TestMethod]
     public void FindExtension_WithMatchingExtension_ReturnsExtension()
     {
@@ -335,6 +371,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.ShouldBeOfType<ITunesSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Asking for an extension that is not attached returns <see langword="null"/> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void FindExtension_WithNoMatchingExtension_ReturnsNull()
     {
@@ -355,6 +394,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.ShouldBeNull();
     }
 
+    /// <summary>
+    /// The predicate overload reaches the same extension through <c>MatchByType</c>.
+    /// </summary>
     [TestMethod]
     public void FindExtension_WithPredicate_ReturnsMatchingExtension()
     {
@@ -376,6 +418,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.ShouldBeOfType<ITunesSyndicationExtension>();
     }
 
+    /// <summary>
+    /// A predicate written by the caller can select on <c>XmlNamespace</c>, reaching the extension without naming its type.
+    /// </summary>
     [TestMethod]
     public void FindExtension_ByNamespace_ReturnsMatchingExtension()
     {
@@ -398,6 +443,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.ShouldBeOfType<DublinCoreElementSetSyndicationExtension>();
     }
 
+    /// <summary>
+    /// A feed built in code carries no extensions at feed, channel or item level.
+    /// </summary>
     [TestMethod]
     public void HasExtensions_WhenNoExtensions_ReturnsFalse()
     {
@@ -421,6 +469,9 @@ public class ExtensionDiscoveryBehaviorTests
         feed.Channel.Items.First().HasExtensions.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An item that picked up an extension while loading reports that it has one.
+    /// </summary>
     [TestMethod]
     public void HasExtensions_WhenExtensionsPresent_ReturnsTrue()
     {
@@ -438,6 +489,9 @@ public class ExtensionDiscoveryBehaviorTests
         item.HasExtensions.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// With three extensions on one item, each lookup returns its own extension holding its own value.
+    /// </summary>
     [TestMethod]
     public void FindExtension_WithMultipleExtensions_FindsCorrectOne()
     {
@@ -469,6 +523,9 @@ public class ExtensionDiscoveryBehaviorTests
 
     #region AutoDetectExtensions Setting
 
+    /// <summary>
+    /// With <c>AutoDetectExtensions</c> set, a channel-level Dublin Core element is discovered.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithAutoDetectExtensionsTrue_DiscoversExtensions()
     {
@@ -501,6 +558,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// With <c>AutoDetectExtensions</c> set, a feed-level Dublin Core element is discovered and its publisher parsed.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WithAutoDetectExtensionsTrue_DiscoversExtensions()
     {
@@ -536,6 +596,9 @@ public class ExtensionDiscoveryBehaviorTests
 
     #region Specific Extension Type Tests
 
+    /// <summary>
+    /// An item declaring the Slash namespace acquires a <c>SiteSummarySlashSyndicationExtension</c>, and its comment count is parsed as the <c>int</c> <c>42</c>.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithSiteSummarySlashNamespace_AutoDiscoversExtension()
     {
@@ -557,6 +620,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.Context.Comments.ShouldBe(42);
     }
 
+    /// <summary>
+    /// An item whose content module element wraps its markup in CDATA still acquires a <c>SiteSummaryContentSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithSiteSummaryContentNamespace_AutoDiscoversExtension()
     {
@@ -577,6 +643,9 @@ public class ExtensionDiscoveryBehaviorTests
         extension.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// An item declaring the Dublin Core <i>terms</i> namespace acquires a <c>DublinCoreMetadataTermsSyndicationExtension</c>, distinct from the element-set extension, and its abstract is parsed.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WithDublinCoreMetadataTermsNamespace_AutoDiscoversExtension()
     {
@@ -602,6 +671,14 @@ public class ExtensionDiscoveryBehaviorTests
 
     #region FrameworkExtensions Reflection Scan
 
+    /// <summary>
+    /// Every type the reflection scan returns derives from <c>SyndicationExtension</c>, is concrete, and has a parameterless constructor.
+    /// </summary>
+    /// <remarks>
+    ///     <c>GetExtensions</c> calls <c>Activator.CreateInstance</c> on everything the scan returns, so an
+    ///     abstract type or one without a parameterless constructor would throw while a document was
+    ///     being loaded.
+    /// </remarks>
     [TestMethod]
     public void FrameworkExtensions_ReturnsOnlyInstantiableSyndicationExtensions()
     {
@@ -619,9 +696,20 @@ public class ExtensionDiscoveryBehaviorTests
         }
     }
 
+    /// <summary>
+    /// The abstract <c>SyndicationExtension</c> base is not itself among the types the scan returns.
+    /// </summary>
     [TestMethod]
     public void FrameworkExtensions_DoesNotReturnTheAbstractBase() => SyndicationExtensionAdapter.FrameworkExtensions.ShouldNotContain(typeof(SyndicationExtension));
 
+    /// <summary>
+    /// The six extensions the hand-maintained list had drifted past are all present.
+    /// </summary>
+    /// <remarks>
+    ///     That list sat behind a disabled <c>#if</c> branch in <c>SyndicationExtensionAdapter</c>. Because
+    ///     the branch never compiled, nothing caught the drift; this asserts the reflection scan that
+    ///     replaced it does not share the blind spot.
+    /// </remarks>
     [TestMethod]
     public void FrameworkExtensions_ReturnsExtensionsAddedAfterTheHandMaintainedList()
     {
@@ -638,6 +726,12 @@ public class ExtensionDiscoveryBehaviorTests
         types.ShouldContain(typeof(SitemapHreflangExtension));
     }
 
+    /// <summary>
+    /// <c>GetExtensions</c> instantiates every type the scan returns, one instance each, with none dropped.
+    /// </summary>
+    /// <remarks>
+    ///     The scan feeds <c>GetExtensions</c> directly, so instantiability is the contract that matters.
+    /// </remarks>
     [TestMethod]
     public void FrameworkExtensions_EveryReturnedTypeCanBeInstantiated()
     {

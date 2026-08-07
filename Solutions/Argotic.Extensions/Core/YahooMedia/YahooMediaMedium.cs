@@ -3,13 +3,17 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents the type of a media object .
+/// Represents the broad kind of a media object.
 /// </summary>
-/// <seealso cref="YahooMediaTextConstruct"/>
+/// <remarks>
+///     The five values the Media RSS <c>medium</c> attribute defines. It says only what sort of thing this is;
+///     <see cref="YahooMediaContent.ContentType"/> carries the media type that says exactly what it is.
+/// </remarks>
+/// <seealso cref="YahooMediaContent.Medium"/>
 public enum YahooMediaMedium
 {
     /// <summary>
-    /// No object medium specified.
+    /// No object medium specified, or one this library does not recognise.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
     None = 0,

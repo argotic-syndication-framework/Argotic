@@ -6,8 +6,10 @@ namespace Argotic.Common;
 /// Provides data for the <see cref="ISyndicationResource.Loaded"/> event.
 /// </summary>
 /// <remarks>
-///     A <see cref="ISyndicationResource.Loaded"/> event occurs whenever the <see cref="ISyndicationResource.Load(System.Xml.XmlReader)"/>
-///     or <see cref="ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"/> methods are called.
+///     Raised after any load of an <see cref="ISyndicationResource"/> completes successfully, whichever
+///     overload was called. <see cref="Source"/> is present only where the load began with a
+///     <see cref="Uri"/> — the stream, reader and navigator overloads have never known one — so a
+///     handler must treat its absence as normal rather than as a failure.
 /// </remarks>
 /// <seealso cref="ISyndicationResource"/>
 /// <seealso cref="ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"/>
@@ -26,7 +28,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs
     /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
     /// <param name="data">A <see cref="IXPathNavigable"/> object that represents the XML data that was used to load the syndication resource.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is <see langword="null"/>.</exception>
     public SyndicationResourceLoadedEventArgs(IXPathNavigable data) : this()
     {
         ArgumentNullException.ThrowIfNull(data);
@@ -41,8 +43,8 @@ public class SyndicationResourceLoadedEventArgs : EventArgs
     /// <param name="source">
     ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
     /// </param>
-    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source) : this(data)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -54,7 +56,8 @@ public class SyndicationResourceLoadedEventArgs : EventArgs
     /// Gets a read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication resource.
     /// </summary>
     /// <value>
-    ///     A read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication resource.
+    ///     A navigator over the XML the resource was built from, or <see langword="null"/> when the
+    ///     arguments were constructed without any — which is what the parameterless constructor does.
     /// </value>
     public XPathNavigator? Data { get; }
 
@@ -62,18 +65,15 @@ public class SyndicationResourceLoadedEventArgs : EventArgs
     /// Gets the <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
     /// </summary>
     /// <value>
-    ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
-    ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource, returns <b>null</b>.
+    ///     The address the resource was fetched from, or <see langword="null"/> when it was loaded from a
+    ///     stream, a reader or a navigator — none of which carries one.
     /// </value>
     public Uri? Source { get; }
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.</returns>
-    /// <remarks>
-    ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
-    /// </remarks>
+    /// <returns>The source address, and the hash code of <see cref="Data"/> in place of the document itself.</returns>
     public override string ToString()
     {
         string source = this.Source?.ToString() ?? string.Empty;

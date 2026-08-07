@@ -6,6 +6,12 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.LiveJournal;
 
+/// <summary>
+/// Covers the LiveJournal extension, <c>http://livejournal.org/rss/lj/2.0/</c>: the music, mood,
+/// security and preformatted flag its context carries, the user picture's dimension guard, how those
+/// elements are read from an RSS 2.0 item and written back out, and its comparison, equality and
+/// ordering contracts.
+/// </summary>
 [TestClass]
 public class LiveJournalSyndicationExtensionTest
 {
@@ -23,6 +29,9 @@ public class LiveJournalSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor yields an instance of the LiveJournal extension type.
+    /// </summary>
     [TestMethod]
     public void LiveJournalSyndicationExtensionConstructorTest()
     {
@@ -31,6 +40,9 @@ public class LiveJournalSyndicationExtensionTest
         target.ShouldBeOfType<LiveJournalSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions holding identical context compare equal.
+    /// </summary>
     [TestMethod]
     public void LiveJournalCompareToTest()
     {
@@ -40,6 +52,9 @@ public class LiveJournalSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// An extension is equal to a separately constructed extension holding the same context.
+    /// </summary>
     [TestMethod]
     public void LiveJournalEqualsTest()
     {
@@ -49,6 +64,9 @@ public class LiveJournalSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Hashing a populated extension returns a non-zero value rather than throwing.
+    /// </summary>
     [TestMethod]
     public void LiveJournalGetHashCodeTest()
     {
@@ -59,6 +77,9 @@ public class LiveJournalSyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// An RSS 2.0 feed whose item carries <c>lj:</c> elements loads without error.
+    /// </summary>
     [TestMethod]
     public void LiveJournalLoadTest()
     {
@@ -69,6 +90,9 @@ public class LiveJournalSyndicationExtensionTest
         feed.Load(reader);
     }
 
+    /// <summary>
+    /// Attaching the extension to an item and saving the feed produces non-empty XML.
+    /// </summary>
     [TestMethod]
     public void LiveJournalCreateXmlTest()
     {
@@ -77,6 +101,10 @@ public class LiveJournalSyndicationExtensionTest
         actual.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// A loaded feed's single item reports that it has extensions, and the LiveJournal one is found both by
+    /// type argument and through the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void LiveJournalFullTest()
     {
@@ -95,6 +123,9 @@ public class LiveJournalSyndicationExtensionTest
             .ShouldBeOfType<LiveJournalSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts a LiveJournal extension.
+    /// </summary>
     [TestMethod]
     public void LiveJournalMatchByTypeTest()
     {
@@ -103,6 +134,9 @@ public class LiveJournalSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> returns a non-empty rendering of a populated extension.
+    /// </summary>
     [TestMethod]
     public void LiveJournalToStringTest()
     {
@@ -111,6 +145,10 @@ public class LiveJournalSyndicationExtensionTest
         actual.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// <c>WriteTo</c> emits <c>music</c>, <c>mood</c> with its <c>id</c>, <c>security</c> with its
+    /// <c>type</c>, and an empty <c>preformatted</c>, each carrying the LiveJournal namespace.
+    /// </summary>
     [TestMethod]
     public void LiveJournalWriteToTest()
     {
@@ -123,6 +161,9 @@ public class LiveJournalSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Extensions holding different context are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void LiveJournalOpEqualityTestFailure()
     {
@@ -132,6 +173,9 @@ public class LiveJournalSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Extensions holding the same context are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void LiveJournalOpEqualityTestSuccess()
     {
@@ -141,6 +185,10 @@ public class LiveJournalSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&gt;</c> yields a boolean for two differing extensions without throwing; the direction is not
+    /// asserted.
+    /// </summary>
     [TestMethod]
     public void LiveJournalOpGreaterThanTest()
     {
@@ -151,6 +199,9 @@ public class LiveJournalSyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>
+    /// Extensions holding different context are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void LiveJournalOpInequalityTest()
     {
@@ -160,6 +211,10 @@ public class LiveJournalSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&lt;</c> yields a boolean for two differing extensions without throwing; the direction is not
+    /// asserted.
+    /// </summary>
     [TestMethod]
     public void LiveJournalOpLessThanTest()
     {
@@ -170,6 +225,10 @@ public class LiveJournalSyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>
+    /// The context of a populated extension carries the music, the preformatted flag, the mood with its
+    /// numeric <c>id</c>, and public security.
+    /// </summary>
     [TestMethod]
     public void LiveJournalContextTest()
     {
@@ -186,6 +245,9 @@ public class LiveJournalSyndicationExtensionTest
         context.Security.Accessibility.ShouldBe(LiveJournalSecurityType.Public);
     }
 
+    /// <summary>
+    /// Assigning a <see langword="null"/> context throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void LiveJournalContextSetterThrowsOnNull()
     {
@@ -196,6 +258,10 @@ public class LiveJournalSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Context = null!);
     }
 
+    /// <summary>
+    /// An RSS 2.0 item carrying <c>lj:music</c>, <c>lj:mood</c>, <c>lj:security</c> and
+    /// <c>lj:preformatted</c> fills all four onto the extension found on that item.
+    /// </summary>
     [TestMethod]
     public void LiveJournalRoundTripTest()
     {
@@ -219,6 +285,9 @@ public class LiveJournalSyndicationExtensionTest
         itemExtension.Context.Security.Accessibility.ShouldBe(LiveJournalSecurityType.Public);
     }
 
+    /// <summary>
+    /// <c>&lt;=</c> holds between two extensions holding identical context.
+    /// </summary>
     [TestMethod]
     public void LiveJournalOpLessThanOrEqualTest()
     {
@@ -230,6 +299,9 @@ public class LiveJournalSyndicationExtensionTest
         (first <= second).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&gt;=</c> holds between two extensions holding identical context.
+    /// </summary>
     [TestMethod]
     public void LiveJournalOpGreaterThanOrEqualTest()
     {
@@ -241,6 +313,9 @@ public class LiveJournalSyndicationExtensionTest
         (first >= second).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> rejects an extension from another family.
+    /// </summary>
     [TestMethod]
     public void LiveJournalMatchByTypeReturnsFalseForDifferentType()
     {
@@ -254,6 +329,9 @@ public class LiveJournalSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension is not equal to a value of an unrelated type.
+    /// </summary>
     [TestMethod]
     public void LiveJournalEqualsReturnsFalseForDifferentType()
     {
@@ -264,6 +342,9 @@ public class LiveJournalSyndicationExtensionTest
         target.Equals("not an extension").ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension sorts after <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void LiveJournalCompareToNullReturnsPositive()
     {
@@ -277,6 +358,9 @@ public class LiveJournalSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Extensions holding different context do not compare equal.
+    /// </summary>
     [TestMethod]
     public void LiveJournalCompareToWithDifferentExtensionReturnsNonZero()
     {
@@ -291,6 +375,9 @@ public class LiveJournalSyndicationExtensionTest
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// A mood keeps the content and the numeric <c>id</c> assigned to it.
+    /// </summary>
     [TestMethod]
     public void LiveJournalMoodPropertyTest()
     {
@@ -306,6 +393,9 @@ public class LiveJournalSyndicationExtensionTest
         mood.Id.ShouldBe(42);
     }
 
+    /// <summary>
+    /// The two-argument security constructor keeps the accessibility and the friends-group mask.
+    /// </summary>
     [TestMethod]
     public void LiveJournalSecurityPropertyTest()
     {
@@ -317,6 +407,10 @@ public class LiveJournalSyndicationExtensionTest
         security.Mask.ShouldBe(123);
     }
 
+    /// <summary>
+    /// Each security type renders as the <c>type</c> attribute spelling — <c>public</c>, <c>friends</c>,
+    /// <c>private</c> — and <c>None</c> as an <i>empty</i> string.
+    /// </summary>
     [TestMethod]
     public void LiveJournalSecurityAccessibilityAsStringTest()
     {
@@ -327,6 +421,9 @@ public class LiveJournalSyndicationExtensionTest
         LiveJournalSecurity.AccessibilityAsString(LiveJournalSecurityType.None).ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// The names <c>public</c>, <c>friends</c> and <c>private</c> map back onto their security types.
+    /// </summary>
     [TestMethod]
     public void LiveJournalSecurityAccessibilityByNameTest()
     {
@@ -336,6 +433,9 @@ public class LiveJournalSyndicationExtensionTest
         LiveJournalSecurity.AccessibilityByName("private").ShouldBe(LiveJournalSecurityType.Private);
     }
 
+    /// <summary>
+    /// The four-argument user-picture constructor keeps the URL, the keyword and both dimensions.
+    /// </summary>
     [TestMethod]
     public void LiveJournalUserPicturePropertyTest()
     {
@@ -354,6 +454,10 @@ public class LiveJournalSyndicationExtensionTest
         userPic.Height.ShouldBe(100);
     }
 
+    /// <summary>
+    /// A width or height above <c>100</c> throws <c>ArgumentOutOfRangeException</c>, which is LiveJournal's
+    /// per-dimension limit for a user picture.
+    /// </summary>
     [TestMethod]
     public void LiveJournalUserPictureMaxDimensionTest()
     {
@@ -365,6 +469,9 @@ public class LiveJournalSyndicationExtensionTest
         Should.Throw<ArgumentOutOfRangeException>(() => userPic.Height = 101);
     }
 
+    /// <summary>
+    /// Two moods with the same content and <c>id</c> compare equal.
+    /// </summary>
     [TestMethod]
     public void LiveJournalMoodCompareToTest()
     {
@@ -379,6 +486,9 @@ public class LiveJournalSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Two moods with the same content and <c>id</c> are equal.
+    /// </summary>
     [TestMethod]
     public void LiveJournalMoodEqualsTest()
     {
@@ -390,6 +500,9 @@ public class LiveJournalSyndicationExtensionTest
         mood1.Equals(mood2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Two securities with the same accessibility and mask compare equal.
+    /// </summary>
     [TestMethod]
     public void LiveJournalSecurityCompareToTest()
     {
@@ -404,6 +517,9 @@ public class LiveJournalSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Two user pictures with the same URL, keyword and dimensions compare equal.
+    /// </summary>
     [TestMethod]
     public void LiveJournalUserPictureCompareToTest()
     {

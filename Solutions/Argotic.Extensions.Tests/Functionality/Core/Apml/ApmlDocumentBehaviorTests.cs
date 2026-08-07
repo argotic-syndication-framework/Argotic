@@ -10,7 +10,8 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Apml;
 
 /// <summary>
-/// Behavior tests for <see cref="ApmlDocument"/> that verify the public API.
+/// Covers <see cref="ApmlDocument"/> end to end: building profiles, parsing an APML 0.6
+/// document, the weight range a concept must lie in, and what survives a save and reload.
 /// </summary>
 [TestClass]
 public class ApmlDocumentBehaviorTests
@@ -109,6 +110,9 @@ public class ApmlDocumentBehaviorTests
 
     #region Document Creation Tests
 
+    /// <summary>
+    /// A default-constructed document has a profile collection, and that collection is empty.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_WhenCreated_HasEmptyProfilesCollection()
     {
@@ -121,6 +125,9 @@ public class ApmlDocumentBehaviorTests
         document.Profiles.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A default-constructed document already has a head to write metadata into.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_WhenCreated_HasDefaultHead()
     {
@@ -131,6 +138,9 @@ public class ApmlDocumentBehaviorTests
         document.Head.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A document reports <c>SyndicationContentFormat.Apml</c> as the format it implements.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_WhenCreated_HasCorrectFormat()
     {
@@ -141,6 +151,9 @@ public class ApmlDocumentBehaviorTests
         document.Format.ShouldBe(SyndicationContentFormat.Apml);
     }
 
+    /// <summary>
+    /// A document reports version <c>0.6</c>, the version of APML this library writes.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_WhenCreated_HasCorrectVersion()
     {
@@ -152,6 +165,9 @@ public class ApmlDocumentBehaviorTests
         document.Version.Minor.ShouldBe(6);
     }
 
+    /// <summary>
+    /// The name of the default profile is read back exactly as assigned.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_SettingDefaultProfileName_SetsValue()
     {
@@ -166,6 +182,9 @@ public class ApmlDocumentBehaviorTests
         document.DefaultProfileName.ShouldBe("Work");
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> as the default profile name throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_SettingDefaultProfileNameToNull_ThrowsArgumentException()
     {
@@ -176,6 +195,10 @@ public class ApmlDocumentBehaviorTests
         Should.Throw<ArgumentNullException>(() => document.DefaultProfileName = null!);
     }
 
+    /// <summary>
+    /// Assigning an empty string as the default profile name throws
+    /// <see cref="ArgumentException"/>, not the null exception.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_SettingDefaultProfileNameToEmpty_ThrowsArgumentException()
     {
@@ -186,6 +209,9 @@ public class ApmlDocumentBehaviorTests
         Should.Throw<ArgumentException>(() => document.DefaultProfileName = string.Empty);
     }
 
+    /// <summary>
+    /// A profile added to the document appears in the profile collection under its own name.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_AddingProfile_WorksCorrectly()
     {
@@ -201,6 +227,9 @@ public class ApmlDocumentBehaviorTests
         document.Profiles[0].Name.ShouldBe("Home");
     }
 
+    /// <summary>
+    /// Profiles are held in the order they were added.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_AddingMultipleProfiles_PreservesOrder()
     {
@@ -219,6 +248,9 @@ public class ApmlDocumentBehaviorTests
         document.Profiles[2].Name.ShouldBe("Mobile");
     }
 
+    /// <summary>
+    /// Implicit concepts are held in the order they were added, each keeping its key and weight.
+    /// </summary>
     [TestMethod]
     public void ApmlProfile_AddingImplicitConcepts_WorksCorrectly()
     {
@@ -236,6 +268,9 @@ public class ApmlDocumentBehaviorTests
         profile.ImplicitConcepts[1].Key.ShouldBe("science");
     }
 
+    /// <summary>
+    /// Explicit concepts are held in the order they were added, each keeping its key and weight.
+    /// </summary>
     [TestMethod]
     public void ApmlProfile_AddingExplicitConcepts_WorksCorrectly()
     {
@@ -252,6 +287,10 @@ public class ApmlDocumentBehaviorTests
         profile.ExplicitConcepts[0].Value.ShouldBe(0.99m);
     }
 
+    /// <summary>
+    /// A concept weight must lie between <c>-1.0</c> and <c>1.0</c>: both bounds and zero are
+    /// accepted, and <c>1.5</c> and <c>-1.5</c> throw <see cref="ArgumentOutOfRangeException"/>.
+    /// </summary>
     [TestMethod]
     public void ApmlConcept_ValueValidation_EnforcesRange()
     {
@@ -269,6 +308,10 @@ public class ApmlDocumentBehaviorTests
         conceptZero.Value.ShouldBe(0m);
     }
 
+    /// <summary>
+    /// Authors are held in the order they were added, and the
+    /// overload taking a source records where the rating came from.
+    /// </summary>
     [TestMethod]
     public void ApmlSource_AddingAuthors_WorksCorrectly()
     {
@@ -297,6 +340,9 @@ public class ApmlDocumentBehaviorTests
 
     #region Document Parsing Tests
 
+    /// <summary>
+    /// Loading a minimal APML 0.6 stream populates the head title, the default profile name and the profile itself.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_LoadingMinimalApml_PopulatesBasicProperties()
     {
@@ -313,6 +359,9 @@ public class ApmlDocumentBehaviorTests
         document.Profiles.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Every <c>Profile</c> element in the body becomes a profile that can be found by name.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_LoadingApml_ParsesProfilesCorrectly()
     {
@@ -333,6 +382,10 @@ public class ApmlDocumentBehaviorTests
         workProfile.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// Concepts under <c>ImplicitData</c> load with their key, their
+    /// weight and the <c>from</c> attribute naming the gathering tool.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_LoadingApml_ParsesImplicitConceptsCorrectly()
     {
@@ -354,6 +407,9 @@ public class ApmlDocumentBehaviorTests
         gamingConcept.From.ShouldBe("GatheringTool.com");
     }
 
+    /// <summary>
+    /// Concepts under <c>ExplicitData</c> load with their key and their weight.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_LoadingApml_ParsesExplicitConceptsCorrectly()
     {
@@ -374,6 +430,9 @@ public class ApmlDocumentBehaviorTests
         programmingConcept.Value.ShouldBe(0.99m);
     }
 
+    /// <summary>
+    /// A source loads with its key, name, weight and MIME type, and carries the authors nested inside it.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_LoadingApml_ParsesSourcesWithAuthors()
     {
@@ -399,6 +458,9 @@ public class ApmlDocumentBehaviorTests
         source.Authors[0].Value.ShouldBe(0.75m);
     }
 
+    /// <summary>
+    /// The head loads the title, the generator and the user email address.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_LoadingApml_ParsesHeadMetadata()
     {
@@ -415,6 +477,9 @@ public class ApmlDocumentBehaviorTests
         document.Head.EmailAddress.ShouldBe("test@example.com");
     }
 
+    /// <summary>
+    /// An unclosed element surfaces as <see cref="XmlException"/> rather than as a partly populated document.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_LoadingMalformedXml_ThrowsXmlException()
     {
@@ -427,6 +492,9 @@ public class ApmlDocumentBehaviorTests
         Should.Throw<XmlException>(() => document.Load(stream));
     }
 
+    /// <summary>
+    /// Loading raises <c>Loaded</c>, and the handler receives event arguments rather than <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_LoadingValidApml_RaisesLoadedEvent()
     {
@@ -451,6 +519,9 @@ public class ApmlDocumentBehaviorTests
         eventArgs.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// An <c>Applications</c> section in the body loads as an application named by its <c>name</c> attribute.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_LoadingApml_ParsesApplications()
     {
@@ -470,6 +541,9 @@ public class ApmlDocumentBehaviorTests
 
     #region Round-Trip Tests
 
+    /// <summary>
+    /// The default profile name survives a save and reload.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_RoundTrip_PreservesDefaultProfileName()
     {
@@ -497,6 +571,9 @@ public class ApmlDocumentBehaviorTests
         loadedDocument.DefaultProfileName.ShouldBe(originalDocument.DefaultProfileName);
     }
 
+    /// <summary>
+    /// The head title, generator and email address survive a save and reload.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_RoundTrip_PreservesHeadProperties()
     {
@@ -529,6 +606,9 @@ public class ApmlDocumentBehaviorTests
         loadedDocument.Head.EmailAddress.ShouldBe(originalDocument.Head.EmailAddress);
     }
 
+    /// <summary>
+    /// All three profiles survive a save and reload, in the order they were added.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_RoundTrip_PreservesProfiles()
     {
@@ -561,6 +641,9 @@ public class ApmlDocumentBehaviorTests
             ignoreOrder: false);
     }
 
+    /// <summary>
+    /// Concept weights survive a save and reload to the hundredth, on both the explicit and the implicit side.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_RoundTrip_PreservesConceptWeights()
     {
@@ -607,6 +690,9 @@ public class ApmlDocumentBehaviorTests
         loadedProfile.ImplicitConcepts[0].Value.ShouldBe(0.80m);
     }
 
+    /// <summary>
+    /// A source survives a save and reload with its key, name, weight, MIME type and its authors.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_RoundTrip_PreservesSources()
     {
@@ -657,6 +743,10 @@ public class ApmlDocumentBehaviorTests
         loadedSource.Authors[0].Value.ShouldBe(0.8m);
     }
 
+    /// <summary>
+    /// Parsing, serialising and parsing again gives the same default profile name, head title
+    /// and profiles, each with the same number of implicit and explicit concepts and sources.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_ParseSerializeParse_ProducesSameDocument()
     {
@@ -693,6 +783,9 @@ public class ApmlDocumentBehaviorTests
         }
     }
 
+    /// <summary>
+    /// An application survives a save and reload under its own name.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_RoundTrip_PreservesApplications()
     {
@@ -726,6 +819,9 @@ public class ApmlDocumentBehaviorTests
 
     #region Save/Serialization Tests
 
+    /// <summary>
+    /// Saving writes a root element named <c>APML</c> declaring <c>version="0.6"</c>.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_Save_ProducesValidXml()
     {
@@ -752,6 +848,9 @@ public class ApmlDocumentBehaviorTests
         xml.Root.Attribute("version")?.Value.ShouldBe("0.6");
     }
 
+    /// <summary>
+    /// The navigator a document creates is rooted on an <c>APML</c> element.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_CreateNavigator_ReturnsValidNavigator()
     {
@@ -782,6 +881,10 @@ public class ApmlDocumentBehaviorTests
 
     #region Async Operations Tests
 
+    /// <summary>
+    /// Loading over a caller-supplied client populates the head
+    /// and the default profile name, and raises <c>Loaded</c>.
+    /// </summary>
     [TestMethod]
     public async Task ApmlDocument_LoadAsync_LoadsDocumentCorrectly()
     {
@@ -805,6 +908,9 @@ public class ApmlDocumentBehaviorTests
         document.DefaultProfileName.ShouldBe("default");
     }
 
+    /// <summary>
+    /// The static create returns a document already populated from the response body, profiles included.
+    /// </summary>
     [TestMethod]
     public async Task ApmlDocument_CreateAsync_CreatesAndLoadsDocument()
     {
@@ -825,6 +931,9 @@ public class ApmlDocumentBehaviorTests
         document.Profiles.Count.ShouldBe(2);
     }
 
+    /// <summary>
+    /// The <c>Loaded</c> event reports the URI the document was fetched from.
+    /// </summary>
     [TestMethod]
     public async Task ApmlDocument_LoadAsync_IncludesSourceUriInEventArgs()
     {
@@ -852,6 +961,9 @@ public class ApmlDocumentBehaviorTests
 
     #region Additional Behavior Tests
 
+    /// <summary>
+    /// The document indexer reads the profile at a position in the collection.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_IndexerAccess_ReturnsCorrectProfile()
     {
@@ -872,6 +984,9 @@ public class ApmlDocumentBehaviorTests
         document[1].Name.ShouldBe("Work");
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> through the document indexer throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_IndexerSetNull_ThrowsArgumentNullException()
     {
@@ -890,6 +1005,9 @@ public class ApmlDocumentBehaviorTests
         Should.Throw<ArgumentNullException>(() => document[0] = null!);
     }
 
+    /// <summary>
+    /// A document carrying no extensions says so, and its extension collection is empty rather than null.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
@@ -901,6 +1019,10 @@ public class ApmlDocumentBehaviorTests
         document.Extensions.ShouldBeEmpty();
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> to the head throws
+    /// <see cref="ArgumentNullException"/> rather than leaving the document headless.
+    /// </summary>
     [TestMethod]
     public void ApmlDocument_SetHeadToNull_ThrowsArgumentNullException()
     {
@@ -911,6 +1033,9 @@ public class ApmlDocumentBehaviorTests
         Should.Throw<ArgumentNullException>(() => document.Head = null!);
     }
 
+    /// <summary>
+    /// A profile carrying no extensions says so.
+    /// </summary>
     [TestMethod]
     public void ApmlProfile_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
@@ -921,6 +1046,9 @@ public class ApmlDocumentBehaviorTests
         profile.HasExtensions.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A concept carrying no extensions says so.
+    /// </summary>
     [TestMethod]
     public void ApmlConcept_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
@@ -931,6 +1059,9 @@ public class ApmlDocumentBehaviorTests
         concept.HasExtensions.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A source carrying no extensions says so.
+    /// </summary>
     [TestMethod]
     public void ApmlSource_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
@@ -947,6 +1078,9 @@ public class ApmlDocumentBehaviorTests
         source.HasExtensions.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An author carrying no extensions says so.
+    /// </summary>
     [TestMethod]
     public void ApmlAuthor_HasExtensions_ReturnsFalseWhenNoExtensions()
     {

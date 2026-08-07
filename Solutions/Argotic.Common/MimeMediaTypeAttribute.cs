@@ -4,13 +4,13 @@ namespace Argotic.Common;
 /// Associates IANA MIME media type information with a target element. This class cannot be inherited.
 /// </summary>
 /// <remarks>
-///     See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.
+///     See <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a> for a listing of the registered IANA MIME media types and subtypes.
 /// </remarks>
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
 public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTypeAttribute>, IEquatable<MimeMediaTypeAttribute>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold a URI that points to the documentation the describes the MIME media type.
+    /// Private member to hold a URI that points to the documentation describing the MIME media type.
     /// </summary>
     private Uri? mimeMediaDocumentation;
 
@@ -22,9 +22,15 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     }
 
     /// <summary>
-    /// Gets or sets a URI that points to the documentation the describes the MIME media type for the attributed field.
+    /// Gets or sets the location of the documentation describing the MIME media type for the attributed field.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that points to the documentation the describes the MIME media type for the attributed field.</value>
+    /// <value>An absolute or relative URI as a string, or an <i>empty</i> string if none was specified. The default value is an <i>empty</i> string.</value>
+    /// <remarks>
+    ///     A value that will not parse as a <see cref="Uri"/> is discarded rather than rejected, so
+    ///     reading this property back can yield an <i>empty</i> string after a non-empty set. It is a
+    ///     documentation pointer that nothing dereferences, and an attribute argument cannot throw at the
+    ///     point a reader would notice.
+    /// </remarks>
     public string Documentation
     {
         get => mimeMediaDocumentation?.ToString() ?? string.Empty;
@@ -34,7 +40,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <summary>
     /// Gets or sets the MIME media type name for the attributed field.
     /// </summary>
-    /// <value>The MIME media type name for the attributed field.</value>
+    /// <value>The top-level type, such as <c>application</c> or <c>text</c>, trimmed. The default value is an <i>empty</i> string.</value>
     public string Name
     {
         get;
@@ -44,7 +50,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <summary>
     /// Gets or sets the MIME media subtype name for the attributed field.
     /// </summary>
-    /// <value>The MIME media subtype name for the attributed field.</value>
+    /// <value>The subtype, such as <c>rss+xml</c>, trimmed. The default value is an <i>empty</i> string.</value>
     public string SubName
     {
         get;
@@ -54,10 +60,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.</returns>
-    /// <remarks>
-    ///     This method returns a human-readable string for the current instance.
-    /// </remarks>
+    /// <returns>The attribute written out as it would appear in source.</returns>
     public override string ToString() => $"""[MimeMediaType(Name = "{this.Name}", SubName = "{this.SubName}", Documentation = "{this.Documentation ?? string.Empty}")]""";
 
     /// <summary>
@@ -83,7 +86,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// Determines whether the specified <see cref="MimeMediaTypeAttribute"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="MimeMediaTypeAttribute"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="MimeMediaTypeAttribute"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="MimeMediaTypeAttribute"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(MimeMediaTypeAttribute? other)
     {
         if (other is null)
@@ -98,7 +101,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is MimeMediaTypeAttribute other && this.Equals(other);
 
     /// <summary>
@@ -112,7 +115,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(MimeMediaTypeAttribute? first, MimeMediaTypeAttribute? second)
     {
         if (first is null) return second is null;
@@ -124,7 +127,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(MimeMediaTypeAttribute? first, MimeMediaTypeAttribute? second) => !(first == second);
 
 }

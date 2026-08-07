@@ -11,7 +11,26 @@ namespace Argotic.Publishing;
 /// <summary>
 /// Represents a resource whose IRI is listed in a <see cref="AtomFeed"/> and uses <see cref="AtomEntry"/> as its representation.
 /// </summary>
+/// <remarks>
+///     <para>
+///         An <see cref="AtomEntry"/> is a syndicated item; an <see cref="AtomEntryResource"/> is the same entry viewed as something a client can
+///         <c>PUT</c> back — an Entry Resource in the sense of RFC 5023 §4.2. That is the whole reason the type exists separately. The protocol adds two
+///         pieces of state that mean nothing in a plain feed: <see cref="EditedOn"/> (§10.2), the server's record of when the resource was last written,
+///         and <see cref="IsDraft"/> (§13.1.1), the client's request that it not be published yet.
+///     </para>
+///     <para>
+///         Both travel as syndication extensions on the wire — <c>app:edited</c> and <c>app:control/app:draft</c> — so an <see cref="AtomEntry"/> loaded
+///         from a member resource still carries them, just as extension objects rather than as members. This type projects them onto properties when it
+///         loads and writes them back when it saves.
+///     </para>
+///     <para>
+///         The <c>CreateAsync</c> overloads are deliberately shadowed. The base ones are <c>static</c> and cannot be overridden, so without the shadows
+///         <c>AtomEntryResource.CreateAsync(uri)</c> bound the inherited method and handed back an <see cref="AtomEntry"/> — losing the two members the
+///         caller named this type to get.
+///     </para>
+/// </remarks>
 /// <seealso cref="AtomEntry"/>
+/// <seealso cref="AtomMemberResources"/>
 public class AtomEntryResource : AtomEntry
 {
     /// <summary>
@@ -30,8 +49,8 @@ public class AtomEntryResource : AtomEntry
     ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this entry was modified in a way the publisher considers significant.
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </param>
-    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is <see langword="null"/>.</exception>
     public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn) : base(id, title, updatedOn)
     {
     }
@@ -49,8 +68,8 @@ public class AtomEntryResource : AtomEntry
     ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this entry was edited.
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </param>
-    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is <see langword="null"/>.</exception>
     public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn) : this(id, title, updatedOn)
     {
         this.EditedOn = editedOn;
@@ -70,8 +89,8 @@ public class AtomEntryResource : AtomEntry
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </param>
     /// <param name="isDraft">A value indicating if client has requested to control the visibility of the entry.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is <see langword="null"/>.</exception>
     public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn, bool isDraft) : this(id, title, updatedOn, editedOn)
     {
         this.IsDraft = isDraft;
@@ -81,11 +100,13 @@ public class AtomEntryResource : AtomEntry
     /// Gets or sets a date-time indicating the most recent instant in time when this entry was edited.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this entry was edited.
-    ///     If the entry has not been edited yet, indicates the time the entry was created. The default value is <see cref="DateTime.MinValue"/>, which indicates that no edit time was provided.
+    ///     The <c>app:edited</c> timestamp, or the creation time if the entry has never been edited. The default value is
+    ///     <see cref="DateTime.MinValue"/>, which means none was provided — and no <c>app:edited</c> is written when it is left there.
     /// </value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     Distinct from <see cref="AtomEntry.UpdatedOn"/>, and the distinction matters: <c>atom:updated</c> is the <i>publisher's</i> judgement that the
+    ///     content changed significantly, while <c>app:edited</c> is the <i>server's</i> record that the resource was written at all. A whitespace fix
+    ///     moves this and should not move <see cref="AtomEntry.UpdatedOn"/>. Supply it in UTC.
     /// </remarks>
     /// <seealso cref="AtomPublishingEditedSyndicationExtension"/>
     public DateTime EditedOn { get; set; } = DateTime.MinValue;
@@ -93,7 +114,12 @@ public class AtomEntryResource : AtomEntry
     /// <summary>
     /// Gets or sets a value indicating if client has requested to control the visibility of this entry.
     /// </summary>
-    /// <value><b>true</b> if the client is requesting to control the visibility of this entry; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
+    /// <value><see langword="true"/> when <c>app:control/app:draft</c> is <c>yes</c>; otherwise, <see langword="false"/>. The default value is <see langword="false"/>.</value>
+    /// <remarks>
+    ///     A request, not a guarantee: RFC 5023 §13.1.1 states the value is a hint and the server is free to ignore it. <see langword="false"/> here means
+    ///     either that the entry is not a draft or that no <c>app:control</c> element was present at all — the two are indistinguishable through this
+    ///     property.
+    /// </remarks>
     /// <seealso cref="AtomPublishingControlSyndicationExtension"/>
     public bool IsDraft { get; set; }
 
@@ -106,11 +132,6 @@ public class AtomEntryResource : AtomEntry
     /// <remarks>
     ///     <para>The <see cref="AtomEntryResource"/> is created using the default <see cref="SyndicationResourceLoadSettings"/> and the shared <see cref="HttpClient"/>.</para>
     ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format.</exception>
-    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    /// <remarks>
     ///     <para>
     ///     The <see cref="CancellationToken"/> has no default value, and that is load-bearing rather
     ///     than an oversight. Without a settings-taking overload here,
@@ -126,6 +147,9 @@ public class AtomEntryResource : AtomEntry
     ///     plan's suggestion — would not.
     ///     </para>
     /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<AtomEntryResource> CreateAsync(Uri source, CancellationToken cancellationToken)
     {
         AtomEntryResource entry = new();
@@ -137,7 +161,7 @@ public class AtomEntryResource : AtomEntry
     /// Creates a new <see cref="AtomEntryResource"/> instance using data from the specified <see cref="Uri"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the instance. This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the instance. This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the new <see cref="AtomEntryResource"/> instance.</returns>
     /// <remarks>
@@ -146,7 +170,7 @@ public class AtomEntryResource : AtomEntry
     ///     <c>static</c> and therefore cannot be overridden; without this shadow the inherited method
     ///     bound instead and handed back an <see cref="AtomEntry"/>, with the publishing members gone.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static new async Task<AtomEntryResource> CreateAsync(
@@ -164,8 +188,8 @@ public class AtomEntryResource : AtomEntry
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntryResource"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntryResource"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the new <see cref="AtomEntryResource"/> instance.</returns>
     /// <remarks>
@@ -178,8 +202,8 @@ public class AtomEntryResource : AtomEntry
     ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static new async Task<AtomEntryResource> CreateAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
@@ -192,12 +216,12 @@ public class AtomEntryResource : AtomEntry
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
     public override void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
@@ -211,8 +235,8 @@ public class AtomEntryResource : AtomEntry
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntryResource"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntryResource"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous load operation.</returns>
     /// <remarks>
@@ -226,8 +250,8 @@ public class AtomEntryResource : AtomEntry
     ///     </para>
     ///     <para>After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public override async Task LoadAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
@@ -250,10 +274,10 @@ public class AtomEntryResource : AtomEntry
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/> and <see cref="SyndicationResourceSaveSettings"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomEntry"/> instance.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public override void Save(XmlWriter writer, SyndicationResourceSaveSettings? settings)
     {

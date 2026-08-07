@@ -11,11 +11,11 @@ namespace Argotic.Common;
 /// remainder.
 /// </para>
 /// <para>
-/// <b>It does not own the inner stream</b> and never disposes it. Nothing should close what it did not
+/// It does not own the inner stream and never disposes it. Nothing should close what it did not
 /// open, and the caller of <c>CreateSafeNavigator</c> still owns what they passed in.
 /// </para>
 /// <para>
-/// <b>There is deliberately no seekable fast path.</b> A seekable stream could be rewound instead of
+/// There is deliberately no seekable fast path. A seekable stream could be rewound instead of
 /// prefixed, which would avoid this type entirely for a <see cref="MemoryStream"/> or a buffered
 /// response body — and that is most traffic today. It is still not worth having: two code paths means
 /// two behaviours, and the one taken only by real sockets would be the one no test exercises. That is

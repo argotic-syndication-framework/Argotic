@@ -9,6 +9,12 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents machine or human readable text.
 /// </summary>
+/// <remarks>
+///     BlogML's one carrier for text, used for titles, post bodies, excerpts and slugs alike. It has no
+///     element name of its own: the caller supplies one at write time, which is why
+///     <see cref="WriteTo(XmlWriter, string)"/> takes it as an argument and the parameterless
+///     <see cref="IXmlWritable"/> form has to invent <c>TextConstruct</c>.
+/// </remarks>
 public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<BlogMLTextConstruct>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritableWithElementName
 {
     /// <summary>
@@ -50,19 +56,22 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets the content of this text.
     /// </summary>
-    /// <value>The content of this text.</value>
+    /// <value>The element's text, or an <i>empty</i> string if it carries none. The value is trimmed on assignment.</value>
+    /// <remarks>
+    ///     Whether this text is markup, plain text or base-64 is stated by <see cref="ContentType"/> and is
+    ///     not inferred from the content. Nothing here decodes it.
+    /// </remarks>
     public string Content
     {
         get;
@@ -74,20 +83,20 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// Gets or sets the entity encoding utilized by this text.
     /// </summary>
     /// <value>
-    ///     An <see cref="BlogMLContentType"/> enumeration value that represents the entity encoding utilized by this text.
-    ///     The default value is <see cref="BlogMLContentType.None"/>.
+    ///     The <c>type</c> attribute, declaring how <see cref="Content"/> is to be read.
+    ///     The default value is <see cref="BlogMLContentType.None"/>, which suppresses the attribute on save and leaves a consumer to guess.
     /// </value>
     public BlogMLContentType ContentType { get; set; } = BlogMLContentType.None;
 
     /// <summary>
     /// Gets or sets a value indicating if the content of this text is escaped using a CDATA block.
     /// </summary>
-    /// <value><b>true</b> if the content of this text will be escaped using a CDATA block section; Otherwise, <b>false</b>. The default value is <b>true</b>.</value>
+    /// <value><see langword="true"/> to wrap <see cref="Content"/> in a CDATA section on save; otherwise, <see langword="false"/>, which entity-escapes it instead. The default value is <see langword="true"/>.</value>
     /// <remarks>
-    ///     <i>CDATA</i> sections are used to escape blocks of text containing characters which would Otherwise, be recognized as markup.
-    ///     All tags and entity references are ignored by an XML processor that treats them just like any character data.
-    ///     <i>CDATA</i> blocks should be used when you want to include large blocks of special characters as character data,
-    ///     but you do not want to have to use entity references all the time.
+    ///     Both settings produce well-formed XML and both round-trip: the choice is about the file a human
+    ///     opens afterwards, and CDATA is the readable one for a post body full of HTML. It is not recorded in
+    ///     the document, so a construct that was read from a CDATA section is written back as CDATA only
+    ///     because that is the default, not because anything remembered.
     /// </remarks>
     public bool EscapeContent { get; set; } = true;
 
@@ -95,14 +104,9 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// Returns the text construct identifier for the supplied <see cref="BlogMLContentType"/>.
     /// </summary>
     /// <param name="type">The <see cref="BlogMLContentType"/> to get the text construct identifier for.</param>
-    /// <returns>The text construct identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The identifier written to the <c>type</c> attribute, such as <c>html</c>; an <i>empty</i> string for <see cref="BlogMLContentType.None"/> or an undefined value.</returns>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the ConstructTypeAsString method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLTextConstructExample.cs" 
-    ///             region="ConstructTypeAsString(BlogMLContentType type)" 
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLTextConstructExample.cs" language="cs" title="The following code example demonstrates the usage of the ConstructTypeAsString method." />
     /// </example>
     public static string ConstructTypeAsString(BlogMLContentType type) =>
         EnumerationMetadataAttribute.GetAlternateValue(type);
@@ -110,18 +114,11 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// <summary>
     /// Returns the <see cref="BlogMLContentType"/> enumeration value that corresponds to the specified text construct type name.
     /// </summary>
-    /// <param name="name">The name of the text construct type.</param>
-    /// <returns>A <see cref="BlogMLContentType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>BlogMLContentType.None</b>.</returns>
-    /// <remarks>This method disregards case of specified text construct type name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <param name="name">The name of the text construct type, as it appears in the <c>type</c> attribute.</param>
+    /// <returns>The matching <see cref="BlogMLContentType"/>, or <see cref="BlogMLContentType.None"/> if <paramref name="name"/> matches nothing.</returns>
+    /// <remarks>The comparison disregards case. An unrecognised name is not an error and is not preserved: it becomes <see cref="BlogMLContentType.None"/> and is dropped on save.</remarks>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the ConstructTypeByName method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLTextConstructExample.cs" 
-    ///             region="ConstructTypeByName(string name)" 
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLTextConstructExample.cs" language="cs" title="The following code example demonstrates the usage of the ConstructTypeByName method." />
     /// </example>
     public static BlogMLContentType ConstructTypeByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, BlogMLContentType.None);
@@ -130,11 +127,11 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// Loads this <see cref="BlogMLTextConstruct"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="BlogMLTextConstruct"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="BlogMLTextConstruct"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLTextConstruct"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -163,16 +160,16 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     }
 
     /// <summary>
-    /// Loads this <see cref="ApmlApplication"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
+    /// Loads this <see cref="BlogMLTextConstruct"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="ApmlApplication"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="BlogMLTextConstruct"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ApmlApplication"/>.
+    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLTextConstruct"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -188,7 +185,7 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// Saves the current <see cref="BlogMLTextConstruct"/> to the specified <see cref="XmlWriter"/> using the default element name "TextConstruct".
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     void IXmlWritable.WriteTo(XmlWriter writer) => this.WriteTo(writer, "TextConstruct");
 
     /// <summary>
@@ -196,9 +193,9 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
     /// <param name="elementName">The local name of the text construct being written.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="elementName"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="elementName"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="elementName"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="elementName"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string elementName)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -257,7 +254,7 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// Determines whether the specified <see cref="BlogMLTextConstruct"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="BlogMLTextConstruct"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="BlogMLTextConstruct"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="BlogMLTextConstruct"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(BlogMLTextConstruct? other)
     {
         if (other is null)
@@ -272,7 +269,7 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is BlogMLTextConstruct other && this.Equals(other);
 
     /// <summary>
@@ -286,7 +283,7 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(BlogMLTextConstruct? first, BlogMLTextConstruct? second)
     {
         if (first is null) return second is null;
@@ -298,6 +295,6 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(BlogMLTextConstruct? first, BlogMLTextConstruct? second) => !(first == second);
 }

@@ -4,16 +4,17 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core;
 
 /// <summary>
-/// Contains the code examples for the <see cref="GenericSyndicationFeed"/> class.
+/// Reads a feed without knowing whether it is RSS or Atom, through <see cref="GenericSyndicationFeed"/>.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="GenericSyndicationFeed"/> class.
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
+///     The wrapper exposes only what both formats agree on — title, description, categories, items — and
+///     hands back the underlying <c>RssFeed</c> or <c>AtomFeed</c> through <c>Resource</c> when you need
+///     the rest.
 /// </remarks>
 internal static class GenericSyndicationFeedExample
 {
     /// <summary>
-    /// Provides example code for the GenericSyndicationFeed class.
+    /// Walks a feed's categories and items without knowing which format produced them.
     /// </summary>
     [RequiresNetwork]
     public static async Task ClassExampleAsync()
@@ -57,7 +58,7 @@ internal static class GenericSyndicationFeedExample
     }
 
     /// <summary>
-    /// Provides example code for the GenericSyndicationFeed.CreateAsync(Uri) method
+    /// Creates a <see cref="GenericSyndicationFeed"/> from a <see cref="Uri"/> in a single call.
     /// </summary>
     [RequiresNetwork]
     public static async Task CreateExampleAsync()
@@ -84,7 +85,7 @@ internal static class GenericSyndicationFeedExample
     }
 
     /// <summary>
-    /// Provides example code for the LoadAsync(Uri, HttpClient) method
+    /// Loads a <see cref="GenericSyndicationFeed"/> from a <see cref="Uri"/>, and shows where a caller-supplied <see cref="HttpClient"/> goes.
     /// </summary>
     [RequiresNetwork]
     public static async Task LoadUriExampleAsync()

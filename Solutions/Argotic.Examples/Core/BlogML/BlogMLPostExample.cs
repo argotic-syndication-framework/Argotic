@@ -3,16 +3,12 @@ using Argotic.Syndication.Specialized;
 namespace Argotic.Examples.Core.BlogML;
 
 /// <summary>
-/// Contains the code examples for the <see cref="BlogMLPost"/> class.
+/// Builds a <see cref="BlogMLPost"/> inside a document, and converts between <c>BlogMLPostType</c> and the string that appears in the XML.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="BlogMLPost"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class BlogMLPostExample
 {
     /// <summary>
-    /// Provides example code for the BlogMLPost class.
+    /// Builds the containing <see cref="BlogMLDocument"/> and prints the <see cref="BlogMLPost"/> it holds.
     /// </summary>
     public static void ClassExample()
     {
@@ -108,7 +104,7 @@ internal static class BlogMLPostExample
     }
 
     /// <summary>
-    /// Provides example code for the BlogMLPost.PostTypeAsString(BlogMLPostType) method
+    /// Converts a <c>BlogMLPostType</c> to the string that appears in the XML.
     /// </summary>
     public static void PostTypeAsStringExample()
     {
@@ -120,7 +116,7 @@ internal static class BlogMLPostExample
     }
 
     /// <summary>
-    /// Provides example code for the BlogMLPost.PostTypeByName(string) method
+    /// Converts the string that appears in the XML back to a <c>BlogMLPostType</c>.
     /// </summary>
     public static void PostTypeByNameExample()
     {

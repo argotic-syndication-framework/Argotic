@@ -9,9 +9,11 @@ namespace Argotic.Extensions.Core;
 /// Represents the copyright information for a media object.
 /// </summary>
 /// <remarks>
-///     <para>
-///         If the media is operating under a <i>Creative Commons license</i>, the <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
-///     </para>
+///     Both parts are optional: <see cref="Text"/> is the notice a reader sees, <see cref="Url"/> points at the
+///     terms. Neither is machine-readable — a consumer cannot decide from this whether it is allowed to
+///     redistribute anything. Where the media is under a Creative Commons licence, the
+///     <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> says so in a form a
+///     machine can act on, and is the right element to use instead.
 /// </remarks>
 public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<YahooMediaCopyright>, IComparisonOperators
 {
@@ -35,7 +37,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// <summary>
     /// Gets or sets the human-readable copyright information.
     /// </summary>
-    /// <value>The human-readable copyright information.</value>
+    /// <value>The notice, trimmed. The default value is an <i>empty</i> string.</value>
     public string Text
     {
         get;
@@ -45,18 +47,18 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// <summary>
     /// Gets or sets the location of a terms of use page or additional copyright information.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL for a terms of use page or additional copyright information.</value>
+    /// <value>The terms-of-use page, or <see langword="null"/> if none was given.</value>
     public Uri? Url { get; set; }
 
     /// <summary>
     /// Loads this <see cref="YahooMediaCopyright"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="YahooMediaCopyright"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="YahooMediaCopyright"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaCopyright"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -87,7 +89,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// Saves the current <see cref="YahooMediaCopyright"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -110,10 +112,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaCopyright"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaCopyright"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -152,7 +151,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// Determines whether the specified <see cref="YahooMediaCopyright"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="YahooMediaCopyright"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="YahooMediaCopyright"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="YahooMediaCopyright"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(YahooMediaCopyright? other)
     {
         if (other is null)
@@ -167,7 +166,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is YahooMediaCopyright other && this.Equals(other);
 
     /// <summary>
@@ -181,7 +180,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(YahooMediaCopyright? first, YahooMediaCopyright? second)
     {
         if (first is null) return second is null;
@@ -193,6 +192,6 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(YahooMediaCopyright? first, YahooMediaCopyright? second) => !(first == second);
 }

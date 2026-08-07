@@ -22,21 +22,21 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <see langword="null"/> reference.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-    ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+    ///         The value of this property is interpreted as a URI Reference as defined in <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a>,
+    ///         after processing according to <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
     /// </remarks>
     public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <see langword="null"/> reference.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         The value of this property is a language identifier as defined by <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066: Tags for the Identification of Languages</a> (BCP 47; now RFC 5646).
     ///     </para>
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -50,13 +50,20 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets a value indicating if client has requested to control the visibility of the resource.
     /// </summary>
-    /// <value><b>true</b> if the client is requesting to control the visibility of the resource; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
+    /// <value><see langword="true"/> if the client is requesting to control the visibility of the resource; otherwise, <see langword="false"/>. The default value is <see langword="false"/>.</value>
+    /// <remarks>
+    ///     Asymmetric on the wire. <c>app:draft</c> is written only when this is <see langword="true"/>;
+    ///     the <see langword="false"/> case omits the element rather than writing <c>no</c>, so an entry
+    ///     that said <c>no</c> explicitly comes back out without it. On the way in, a <c>draft</c>
+    ///     element holding anything but <c>yes</c> or <c>no</c> is read as <see langword="false"/> and
+    ///     does not count as data loaded.
+    /// </remarks>
     public bool IsDraft { get; set; }
 
     /// <summary>
@@ -67,11 +74,11 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <see langword="true"/> if the object passed to it matches the conditions defined in the delegate.
     ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is <see langword="null"/>.</exception>
     public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
@@ -82,11 +89,11 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="AtomPublishingControlSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="AtomPublishingControlSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="AtomPublishingControlSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="AtomPublishingControlSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -130,13 +137,13 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="AtomPublishingControlSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="AtomPublishingControlSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="AtomPublishingControlSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="AtomPublishingControlSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -152,11 +159,11 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);

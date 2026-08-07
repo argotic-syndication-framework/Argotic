@@ -81,6 +81,10 @@ public sealed class ITunesComparisonCoversEveryMemberTests
     ///     Each row mutates exactly one member of an otherwise identical pair. A member missing from
     ///     <c>CompareTo</c> fails its own row and no other, so the failure names the member.
     /// </remarks>
+    /// <param name="member">The name of the member the row mutates, quoted back as the failure
+    /// message.</param>
+    /// <param name="mutate">An action that changes exactly one member of the context it is
+    /// handed.</param>
     [TestMethod]
     [DynamicData(nameof(SingleMemberMutations))]
     public void ChangingASingleMember_MakesTheExtensionsUnequal(string member, Action<ITunesSyndicationExtensionContext> mutate)
@@ -107,6 +111,10 @@ public sealed class ITunesComparisonCoversEveryMemberTests
     ///     leaves a type that is correct in a <see cref="List{T}"/> and quietly lossy in a
     ///     <see cref="HashSet{T}"/>.
     /// </remarks>
+    /// <param name="member">The name of the member the row mutates, quoted back as the failure
+    /// message.</param>
+    /// <param name="mutate">An action that changes exactly one member of the context it is
+    /// handed.</param>
     [TestMethod]
     [DynamicData(nameof(SingleMemberMutations))]
     public void ChangingASingleMember_ChangesTheHashCode(string member, Action<ITunesSyndicationExtensionContext> mutate)

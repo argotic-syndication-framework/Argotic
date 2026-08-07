@@ -11,16 +11,16 @@ namespace Argotic.Syndication;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         This implementation conforms to the Sitemap 0.9 protocol specification,
-///         which can be found at <a href="https://www.sitemaps.org/protocol.html">https://www.sitemaps.org/protocol.html</a>.
+///         A <c>&lt;sitemapindex&gt;</c> document conforming to the Sitemap 0.9 protocol,
+///         <a href="https://www.sitemaps.org/protocol.html">https://www.sitemaps.org/protocol.html</a>. It lists
+///         other sitemaps rather than pages, and exists because a single <see cref="Sitemap"/> is capped at
+///         50,000 URLs: a larger site splits across several and submits one index.
 ///     </para>
 ///     <para>
-///         A Sitemap index file is used to list multiple Sitemap files. It can contain up to 50,000 Sitemap entries
-///         and must be no larger than 50MB (52,428,800 bytes).
-///     </para>
-///     <para>
-///         Using a Sitemap index allows you to submit multiple Sitemap files at once, making it easier to manage
-///         large sites with many pages.
+///         The same two limits apply to the index itself — no more than <b>50,000</b>
+///         <see cref="Sitemaps">entries</see>, no more than <b>50MB</b> (52,428,800 bytes) uncompressed — so
+///         one index covers 2.5 billion URLs, and a site needing more may publish several indexes. Neither
+///         limit is enforced here. An index may reference only sitemaps found on its own site.
 ///     </para>
 /// </remarks>
 public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
@@ -58,45 +58,44 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
     /// </summary>
-    /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
+    /// <value>Always <see cref="SyndicationContentFormat.SitemapIndex"/>.</value>
     public SyndicationContentFormat Format => sitemapIndexFormat;
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
-    /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>0.9</b>.</value>
+    /// <value>Always <c>0.9</c> — the only version of the Sitemap protocol that exists.</value>
     public Version Version => sitemapIndexVersion;
 
     /// <summary>
     /// Gets the sitemap entries in this index.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="SitemapIndexEntry"/> objects that represents the sitemap entries in this index.</value>
+    /// <value>The <c>&lt;sitemap&gt;</c> entries, in document order. The protocol caps a conforming index at 50,000; nothing here does.</value>
     public IList<SitemapIndexEntry> Sitemaps { get; } = [];
 
     /// <summary>
     /// Creates a new <see cref="SitemapIndex"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="SitemapIndex"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
     ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
     ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the sitemap index remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<SitemapIndex> CreateAsync(Uri source, SyndicationResourceLoadSettings? settings = null, CancellationToken cancellationToken = default)
@@ -111,8 +110,8 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="SitemapIndex"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
@@ -125,8 +124,8 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the sitemap index remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<SitemapIndex> CreateAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
@@ -165,11 +164,11 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="SitemapIndex.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the sitemap index remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the sitemap index remains empty.</exception>
     public void Load(IXPathNavigable source) => this.Load(source, null);
@@ -177,12 +176,12 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="SitemapIndex.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the sitemap index remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the sitemap index remains empty.</exception>
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
@@ -198,11 +197,11 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="SitemapIndex.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the sitemap index remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the sitemap index remains empty.</exception>
     public void Load(Stream stream) => this.Load(stream, null);
@@ -210,12 +209,12 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="SitemapIndex.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the sitemap index remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the sitemap index remains empty.</exception>
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
@@ -228,11 +227,11 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="SitemapIndex.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the sitemap index remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the sitemap index remains empty.</exception>
     public void Load(XmlReader reader) => this.Load(reader, null);
@@ -240,12 +239,12 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="SitemapIndex.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the sitemap index remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the sitemap index remains empty.</exception>
     public void Load(XmlReader reader, SyndicationResourceLoadSettings? settings)
@@ -267,7 +266,7 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
     ///     <para>After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the sitemap index remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
@@ -277,8 +276,8 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="SitemapIndex"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous load operation.</returns>
     /// <remarks>
@@ -292,8 +291,8 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     ///     </para>
     ///     <para>After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the sitemap index remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public async Task LoadAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
@@ -311,17 +310,17 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream) => this.Save(stream, null);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="SitemapIndex"/> instance. This value can be <b>null</b>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="SitemapIndex"/> instance. This value can be <see langword="null"/>.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream, SyndicationResourceSaveSettings? settings)
     {
@@ -343,8 +342,8 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(XmlWriter writer)
     {
@@ -355,10 +354,10 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/> using the supplied <see cref="SyndicationResourceSaveSettings"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="SitemapIndex"/> instance.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(XmlWriter writer, SyndicationResourceSaveSettings? settings)
     {
@@ -392,9 +391,9 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="SitemapIndex.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the sitemap index remains empty.</exception>
     private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings? settings, SyndicationResourceLoadedEventArgs eventData)
     {

@@ -4,24 +4,24 @@ using System.Xml;
 namespace Argotic.Syndication;
 
 /// <summary>
-/// Provides methods for working with Sitemap resources. This class cannot be inherited.
+/// Converts between the string forms the <a href="https://www.sitemaps.org/protocol.html">Sitemaps Protocol</a> puts on the wire and their typed equivalents.
 /// </summary>
-/// <remarks>
-///     See <a href="https://www.sitemaps.org/protocol.html">Sitemaps Protocol</a> for further information about
-///     the Sitemap format implemented in this utility class.
-/// </remarks>
 public static class SitemapUtility
 {
     /// <summary>
-    /// The XML namespace URI for the Sitemap 0.9 protocol.
+    /// The XML namespace sitemap elements are qualified with.
     /// </summary>
+    /// <remarks>
+    ///     Version 0.9 is the only version the protocol has ever had; the number in the URI is not a
+    ///     negotiable version but part of the fixed namespace name.
+    /// </remarks>
     public const string SitemapNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
 
     /// <summary>
     /// Returns the change frequency identifier for the specified <see cref="SitemapChangeFrequency"/>.
     /// </summary>
     /// <param name="frequency">The <see cref="SitemapChangeFrequency"/> to get the change frequency identifier for.</param>
-    /// <returns>The change frequency identifier for the specified <paramref name="frequency"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The protocol's spelling of <paramref name="frequency"/>, such as <c>weekly</c>. An empty string if <paramref name="frequency"/> is not a defined member — which only an out-of-range cast can produce.</returns>
     public static string ChangeFrequencyAsString(SitemapChangeFrequency frequency)
     {
         return frequency switch
@@ -40,10 +40,15 @@ public static class SitemapUtility
     /// <summary>
     /// Returns the <see cref="SitemapChangeFrequency"/> enumeration value that corresponds to the specified change frequency name.
     /// </summary>
-    /// <param name="name">The name of the change frequency.</param>
-    /// <returns>A <see cref="SitemapChangeFrequency"/> enumeration value that corresponds to the specified string, Otherwise, returns <see cref="SitemapChangeFrequency.Daily"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <param name="name">A change frequency name, matched after trimming and without regard to case.</param>
+    /// <returns>The matching <see cref="SitemapChangeFrequency"/>, or <see cref="SitemapChangeFrequency.Daily"/> if <paramref name="name"/> matches none.</returns>
+    /// <remarks>
+    ///     The fallback is indistinguishable from a genuine <c>daily</c>: this method cannot tell a caller
+    ///     that the input was unrecognised. Use <see cref="TryParseChangeFrequency(string, out SitemapChangeFrequency)"/>
+    ///     when that distinction matters — which, when parsing a document written by someone else, it does.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
     public static SitemapChangeFrequency ChangeFrequencyByName(string name)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
@@ -67,10 +72,10 @@ public static class SitemapUtility
     /// <param name="value">A string containing a change frequency to convert.</param>
     /// <param name="result">
     ///     When this method returns, contains the <see cref="SitemapChangeFrequency"/> value equivalent to the change frequency contained in <paramref name="value"/>, if the conversion succeeded, or <see cref="SitemapChangeFrequency.Daily"/> if the conversion failed.
-    ///     The conversion fails if the <paramref name="value"/> parameter is a <b>null</b> or empty string, or does not contain a valid string representation of a change frequency.
+    ///     The conversion fails if the <paramref name="value"/> parameter is a <see langword="null"/> or empty string, or does not contain a valid string representation of a change frequency.
     ///     This parameter is passed uninitialized.
     /// </param>
-    /// <returns><b>true</b> if the <paramref name="value"/> parameter was converted successfully; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <paramref name="value"/> parameter was converted successfully; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>
     ///     One normalisation, not two. This used to <c>Trim().ToLowerInvariant()</c> once to choose the
@@ -89,7 +94,7 @@ public static class SitemapUtility
     ///     </para>
     ///     <para>
     ///     Comparing spans under <see cref="StringComparison.OrdinalIgnoreCase"/> would remove the
-    ///     remaining allocation entirely, and was <b>rejected</b>: it is not the same comparison.
+    ///     remaining allocation entirely, and was <i>rejected</i>: it is not the same comparison.
     ///     <c>ToLowerInvariant</c> folds the Kelvin sign U+212A to <c>k</c>, so this method accepts
     ///     <c>weeKly</c> today and an ordinal comparison would not. A silent narrowing of what
     ///     parses is not an optimisation, and the input that exposes it is too obscure for a test to
@@ -123,10 +128,10 @@ public static class SitemapUtility
     /// <param name="value">A string containing a priority value to convert.</param>
     /// <param name="result">
     ///     When this method returns, contains the <see cref="decimal"/> value equivalent to the priority contained in <paramref name="value"/>, if the conversion succeeded, or <c>0.5m</c> if the conversion failed.
-    ///     The conversion fails if the <paramref name="value"/> parameter is a <b>null</b> or empty string, or does not contain a valid decimal representation within the range 0.0 to 1.0.
+    ///     The conversion fails if the <paramref name="value"/> parameter is a <see langword="null"/> or empty string, or does not contain a valid decimal representation within the range 0.0 to 1.0.
     ///     This parameter is passed uninitialized.
     /// </param>
-    /// <returns><b>true</b> if the <paramref name="value"/> parameter was converted successfully; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <paramref name="value"/> parameter was converted successfully; otherwise, <see langword="false"/>.</returns>
     public static bool TryParsePriority(string value, out decimal result)
     {
         result = 0.5m;
@@ -152,8 +157,8 @@ public static class SitemapUtility
     /// Creates an <see cref="XmlNamespaceManager"/> using the specified <see cref="XmlNameTable"/>.
     /// </summary>
     /// <param name="nameTable">The <see cref="XmlNameTable"/> used to build the <see cref="XmlNamespaceManager"/>.</param>
-    /// <returns>An <see cref="XmlNamespaceManager"/> configured with the Sitemap XML namespace.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
+    /// <returns>An <see cref="XmlNamespaceManager"/> binding the prefix <c>sm</c> to <see cref="SitemapNamespace"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is <see langword="null"/>.</exception>
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);

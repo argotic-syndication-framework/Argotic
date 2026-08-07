@@ -6,15 +6,14 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents an hreflang link in a sitemap for international and multilingual content.
+/// Represents one alternate language or region version of a page, as an XHTML <c>link</c> element.
 /// </summary>
 /// <remarks>
-///     <para>
-///         The <see cref="SitemapHreflangLink"/> class represents an alternate language version of a page.
-///         It is used to indicate to search engines that different URLs serve the same content in different languages
-///         or for different regions.
-///     </para>
+///     A link is written as <c>&lt;xhtml:link rel="alternate" hreflang="…" href="…"/&gt;</c>. The
+///     <c>rel</c> is always <c>alternate</c> — it is not a property, because no other value is meaningful
+///     here, and <see cref="Load"/> ignores any <c>link</c> that says otherwise.
 /// </remarks>
+/// <seealso cref="SitemapHreflangExtension.Links"/>
 public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<SitemapHreflangLink>, IComparisonOperators
 {
     /// <summary>
@@ -37,10 +36,11 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// <summary>
     /// Initializes a new instance of the <see cref="SitemapHreflangLink"/> class with the specified hreflang and href.
     /// </summary>
-    /// <param name="hreflang">The language/region code or "x-default" for the default version.</param>
-    /// <param name="href">The URL of the alternate version.</param>
-    /// <exception cref="ArgumentException">The <paramref name="hreflang"/> is null or empty.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
+    /// <param name="hreflang">An ISO 639-1 language code with an optional region, or <c>x-default</c>.</param>
+    /// <param name="href">The fully-qualified URL of the alternate version.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="hreflang"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="hreflang"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is <see langword="null"/>.</exception>
     public SitemapHreflangLink(string hreflang, Uri href)
     {
         ArgumentException.ThrowIfNullOrEmpty(hreflang);
@@ -54,14 +54,23 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// Gets or sets the language and optional regional code for the alternate page.
     /// </summary>
     /// <value>
-    ///     A language code in ISO 639-1 format, optionally followed by a region in ISO 3166-1 Alpha 2 format,
-    ///     or "x-default" for the default/fallback version. This is a required property.
+    ///     An ISO 639-1 language code, optionally followed by an ISO 3166-1 Alpha 2 region — <c>en</c>,
+    ///     <c>en-US</c>, <c>de-AT</c> — or <c>x-default</c>. The default value is an <i>empty</i> string.
+    ///     Required by the specification.
     /// </value>
     /// <remarks>
-    ///     <para>Examples: "en", "en-US", "en-GB", "de", "de-AT", "x-default".</para>
-    ///     <para>Use "x-default" to specify the page that should be shown when no other language matches the user's browser settings.</para>
+    ///     <para>
+    ///     <b>The language comes first and cannot be omitted.</b> A bare country code is not a valid value:
+    ///     Google does not infer a language from a region, so <c>hreflang="de"</c> targets German speakers
+    ///     everywhere while a lone <c>AT</c> targets nobody. Region without language is the common mistake.
+    ///     </para>
+    ///     <para>
+    ///     <c>x-default</c> is the reserved fallback for a visitor whose browser settings match none of the
+    ///     alternates. It names no language, by design.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentException">The <paramref name="value"/> is null or empty.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Hreflang
     {
         get => linkHreflang;
@@ -76,8 +85,15 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// <summary>
     /// Gets or sets the fully-qualified URL of the alternate language/region version of the page.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the alternate version. This is a required property.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>
+    ///     A fully-qualified <see cref="Uri"/> for the alternate version, or <see langword="null"/> if none
+    ///     was specified. Required by the specification.
+    /// </value>
+    /// <remarks>
+    ///     This is the URL the alternate page must point back to for the pair to count as reciprocal. See
+    ///     <see cref="SitemapHreflangExtension"/> for what happens when it does not.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Href
     {
         get => linkHref;
@@ -94,9 +110,9 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="SitemapHreflangLink"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed XML namespaces.</param>
-    /// <returns><b>true</b> if the <see cref="SitemapHreflangLink"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="SitemapHreflangLink"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -132,8 +148,9 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which the hreflang link will be written.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed elements.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference or empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -176,7 +193,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// Determines whether the specified <see cref="SitemapHreflangLink"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SitemapHreflangLink"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SitemapHreflangLink"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SitemapHreflangLink"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SitemapHreflangLink? other)
     {
         if (other is null)
@@ -191,7 +208,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SitemapHreflangLink other && this.Equals(other);
 
     /// <summary>
@@ -211,7 +228,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(SitemapHreflangLink? first, SitemapHreflangLink? second)
     {
         if (first is null) return second is null;
@@ -223,7 +240,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(SitemapHreflangLink? first, SitemapHreflangLink? second) => !(first == second);
 
 }

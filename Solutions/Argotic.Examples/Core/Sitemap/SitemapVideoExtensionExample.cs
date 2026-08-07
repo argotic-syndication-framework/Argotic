@@ -5,16 +5,12 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Sitemap;
 
 /// <summary>
-/// Contains the code examples for the <see cref="SitemapVideoExtension"/> class.
+/// Declares video metadata with <see cref="SitemapVideoExtension"/>, then reads it back out of a saved sitemap.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="SitemapVideoExtension"/> class.
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class SitemapVideoExtensionExample
 {
     /// <summary>
-    /// Provides example code for the SitemapVideoExtension class.
+    /// Attaches a <see cref="SitemapVideoExtension"/> to a <see cref="SitemapUrl"/> and prints the sitemap.
     /// </summary>
     public static void ClassExample()
     {
@@ -63,7 +59,7 @@ internal static class SitemapVideoExtensionExample
     }
 
     /// <summary>
-    /// Provides example code for loading a sitemap with video extensions from a stream.
+    /// Reads the video extension back out of a sitemap loaded from a <see cref="Stream"/>.
     /// </summary>
     public static void LoadStreamExample()
     {
@@ -94,7 +90,7 @@ internal static class SitemapVideoExtensionExample
     }
 
     /// <summary>
-    /// Provides example code for saving a sitemap with video extension to a stream.
+    /// Saves a sitemap carrying the video extension, and shows the namespace it declares.
     /// </summary>
     public static void SaveStreamExample()
     {

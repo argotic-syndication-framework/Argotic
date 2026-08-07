@@ -101,6 +101,9 @@ public sealed class GeoRssSyndicationExtensionTests
     ///     Every one of the 47 <c>georss:elev</c> values in the corpus is negative — they are earthquake
     ///     hypocentre depths. A reader that treated a negative as invalid would discard all of them.
     /// </remarks>
+    /// <param name="written">The node value to write into <c>georss:elev</c>, in invariant-culture
+    /// decimal notation; metres, and usually below the ellipsoid.</param>
+    /// <param name="provenance">Where the value came from, quoted back as the failure message.</param>
     [TestMethod]
     [DataRow("-5280.0002098083", "the corpus value, in full precision")]
     [DataRow("-8100.0003814697", "another")]

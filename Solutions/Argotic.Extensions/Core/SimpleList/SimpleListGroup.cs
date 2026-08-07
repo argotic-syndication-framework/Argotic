@@ -6,21 +6,26 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents information that informs the client that the property to which it refers is one that is <i>groupable</i>,
-/// meaning that the client should provide a user interface that allows the user to group or filter on the values of that property.
+/// Declares that a property of the feed's items is one a client should offer to group or filter by.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         This informational entity makes reference to XML elements that are child-elements within the items of the same feed, using the supported extension mechanism of the feed format.
-///         Groupable properties <i>should</i> contain a small set of discrete values.
+///     The grouping counterpart to <see cref="SimpleListSort"/>, and it points at the feed's items in the
+///     same way: <see cref="Element"/> names an element the client must read from every item.
 ///     </para>
 ///     <para>
-///         The value which is to be grouped <b>must be</b> the text content of the element itself (i.e. the character data contained in the element).
-///         Values of attributes or nested elements <b>cannot</b> be used for grouping. The property referred to must have no child-elements.
-///         In general, only one instance of a property should appear in each item. Clients are free to ignore repeated instances of properties.
+///     A groupable property should hold a small set of discrete values — a category, a status, a
+///     manufacturer. Pointing one at a free-text or continuous field is legal and useless, because it
+///     yields as many groups as there are items.
+///     </para>
+///     <para>
+///     <b>Only an element's own text can be grouped on.</b> Attribute values and nested elements cannot,
+///     and the element referred to must have no children. A property should appear at most once per item;
+///     a client is free to ignore repeats.
 ///     </para>
 /// </remarks>
 /// <seealso cref="SimpleListSyndicationExtensionContext.Grouping"/>
+/// <seealso cref="SimpleListSort"/>
 public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleListGroup>, IComparisonOperators
 {
 
@@ -34,10 +39,13 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// <summary>
     /// Get or sets the name of this groupable property.
     /// </summary>
-    /// <value>The name of this groupable property. The default value is <see cref="String.Empty"/>.</value>
+    /// <value>
+    ///     The local name of an element carried by each item of the feed, trimmed. The default value is an
+    ///     <i>empty</i> string.
+    /// </value>
     /// <remarks>
-    ///     If this property is equal to <see cref="String.Empty"/>, it is assumed that the <see cref="Label"/> property is included
-    ///     and that this <see cref="SimpleListGroup"/> refers to the default sort order.
+    ///     Left empty, <see cref="Label"/> must be supplied, since there is no element name to fall back on
+    ///     for display.
     /// </remarks>
     public string Element
     {
@@ -48,12 +56,13 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// <summary>
     /// Get or sets a human-readable name for this groupable property.
     /// </summary>
-    /// <value>A human-readable name for this groupable property. The default value is <see cref="String.Empty"/>.</value>
+    /// <value>
+    ///     The name to show a user, trimmed. The default value is an <i>empty</i> string, in which case a
+    ///     client should display <see cref="Element"/> instead.
+    /// </value>
     /// <remarks>
-    ///     <para>
-    ///         If this property is <see cref="String.Empty"/>, the client should use the value of the <see cref="Element"/> property as the human-readable name.
-    ///     </para>
-    ///     <para>The <see cref="Label"/> property is <b>required</b> if the <see cref="Element"/> property is an <i>empty string</i>.</para>
+    ///     Required when <see cref="Element"/> is empty, because then there is nothing else to display.
+    ///     Neither the setter nor <see cref="WriteTo"/> enforces that pairing.
     /// </remarks>
     public string Label
     {
@@ -64,9 +73,13 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// <summary>
     /// Gets or sets the full namespace identifier used to qualify this <see cref="Element"/>.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the full namespace identifier used to qualify this <see cref="Element"/> property. The default value is <b>null</b>.</value>
+    /// <value>
+    ///     The namespace URI that qualifies <see cref="Element"/>, or <see langword="null"/> if the element
+    ///     is unqualified. The default value is <see langword="null"/>.
+    /// </value>
     /// <remarks>
-    ///     If the value of this property is <b>null</b>, it is assumed that the <see cref="Element"/> does not live in a namespace.
+    ///     Without it, <see cref="Element"/> is just a local name, and two extensions using the same local
+    ///     name in different namespaces are indistinguishable to a client resolving the reference.
     /// </remarks>
     public Uri? Namespace { get; set; }
 
@@ -74,11 +87,11 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// Loads this <see cref="SimpleListGroup"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="SimpleListGroup"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="SimpleListGroup"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="SimpleListGroup"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -118,7 +131,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// Saves the current <see cref="SimpleListGroup"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -146,10 +159,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SimpleListGroup"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SimpleListGroup"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -189,7 +199,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// Determines whether the specified <see cref="SimpleListGroup"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SimpleListGroup"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SimpleListGroup"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SimpleListGroup"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SimpleListGroup? other)
     {
         if (other is null)
@@ -204,7 +214,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SimpleListGroup other && this.Equals(other);
 
     /// <summary>
@@ -218,7 +228,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(SimpleListGroup? first, SimpleListGroup? second)
     {
         if (first is null) return second is null;
@@ -230,7 +240,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(SimpleListGroup? first, SimpleListGroup? second) => !(first == second);
 
 }

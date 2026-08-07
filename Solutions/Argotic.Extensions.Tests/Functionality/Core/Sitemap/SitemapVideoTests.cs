@@ -4,7 +4,9 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 
 /// <summary>
-/// Unit tests for <see cref="SitemapVideo"/>.
+/// Covers <see cref="SitemapVideo"/>: the three values Google requires of every entry, the length and
+/// count limits the properties enforce on assignment, the advisory duration and rating constants, the
+/// defaults of the boolean elements, and the equality, ordering and hashing contracts.
 /// </summary>
 [TestClass]
 public class SitemapVideoTests
@@ -19,6 +21,10 @@ public class SitemapVideoTests
 
     #region Constructor Tests
 
+    /// <summary>
+    /// A video constructed with no arguments has no thumbnail and an <i>empty</i> title and description,
+    /// not nulls.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_CreatesEmptyVideo()
     {
@@ -31,6 +37,10 @@ public class SitemapVideoTests
         video.Description.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// The three values Google requires of every entry — thumbnail, title and description — are stored
+    /// as given.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithRequiredProperties_SetsThemCorrectly()
     {
@@ -43,26 +53,43 @@ public class SitemapVideoTests
         video.Description.ShouldBe(TestDescription);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> thumbnail location throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullThumbnail_ThrowsArgumentNullException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentNullException>(() => new SitemapVideo(null!, TestTitle, TestDescription));
 
+    /// <summary>
+    /// A <see langword="null"/> title is rejected; the guard is <c>ArgumentException.ThrowIfNullOrEmpty</c>,
+    /// so what surfaces is its <see cref="ArgumentNullException"/> branch.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullTitle_ThrowsArgumentException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentException>(() => new SitemapVideo(TestThumbnailUri, null!, TestDescription));
 
+    /// <summary>
+    /// An <i>empty</i> title throws <see cref="ArgumentException"/>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithEmptyTitle_ThrowsArgumentException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentException>(() => new SitemapVideo(TestThumbnailUri, string.Empty, TestDescription));
 
+    /// <summary>
+    /// A <see langword="null"/> description is rejected by the same guard, and so by the same
+    /// <see cref="ArgumentNullException"/> branch.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullDescription_ThrowsArgumentException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentException>(() => new SitemapVideo(TestThumbnailUri, TestTitle, null!));
 
+    /// <summary>
+    /// An <i>empty</i> description throws <see cref="ArgumentException"/>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithEmptyDescription_ThrowsArgumentException() =>
         // Arrange & Act & Assert
@@ -72,6 +99,13 @@ public class SitemapVideoTests
 
     #region Title Validation Tests
 
+    /// <summary>
+    /// A 150-character title is cut to <c>MaxTitleLength</c> characters on assignment.
+    /// </summary>
+    /// <remarks>
+    ///     The setter truncates rather than throwing, so a publisher's over-long title still produces a
+    ///     document Google will accept.
+    /// </remarks>
     [TestMethod]
     public void Title_TruncatesToMaxTitleLength()
     {
@@ -86,6 +120,9 @@ public class SitemapVideoTests
         video.Title.Length.ShouldBe(SitemapVideo.MaxTitleLength);
     }
 
+    /// <summary>
+    /// Leading and trailing whitespace is stripped from a title on assignment.
+    /// </summary>
     [TestMethod]
     public void Title_TrimsWhitespace()
     {
@@ -100,6 +137,14 @@ public class SitemapVideoTests
         video.Title.ShouldBe("Test Title");
     }
 
+    /// <summary>
+    /// The title limit is <c>100</c> characters.
+    /// </summary>
+    /// <remarks>
+    ///     That is the <c>maxLength</c> facet the Video Sitemap 1.1 XSD puts on <c>video:title</c>.
+    ///     Google's prose documentation states no title limit at all, so the schema is the stricter of the
+    ///     two sources and the one this library follows.
+    /// </remarks>
     [TestMethod]
     public void MaxTitleLength_EqualsOneHundred() =>
         // Assert
@@ -109,6 +154,9 @@ public class SitemapVideoTests
 
     #region Description Validation Tests
 
+    /// <summary>
+    /// A 3,000-character description is cut to <c>MaxDescriptionLength</c> characters on assignment.
+    /// </summary>
     [TestMethod]
     public void Description_TruncatesToMaxDescriptionLength()
     {
@@ -123,6 +171,9 @@ public class SitemapVideoTests
         video.Description.Length.ShouldBe(SitemapVideo.MaxDescriptionLength);
     }
 
+    /// <summary>
+    /// Leading and trailing whitespace is stripped from a description on assignment.
+    /// </summary>
     [TestMethod]
     public void Description_TrimsWhitespace()
     {
@@ -137,6 +188,12 @@ public class SitemapVideoTests
         video.Description.ShouldBe("Test Description");
     }
 
+    /// <summary>
+    /// The description limit is <c>2048</c> characters.
+    /// </summary>
+    /// <remarks>
+    ///     The XSD and Google's documentation agree on this one: "Maximum 2048 characters."
+    /// </remarks>
     [TestMethod]
     public void MaxDescriptionLength_EqualsTwoThousandFortyEight() =>
         // Assert
@@ -146,21 +203,38 @@ public class SitemapVideoTests
 
     #region Duration and Rating Constant Tests
 
+    /// <summary>
+    /// The shortest duration Google accepts is <c>1</c> second.
+    /// </summary>
     [TestMethod]
     public void MinDuration_EqualsOne() =>
         // Assert
         SitemapVideo.MinDuration.ShouldBe(1);
 
+    /// <summary>
+    /// The longest duration Google accepts is <c>28800</c> seconds.
+    /// </summary>
+    /// <remarks>
+    ///     Eight hours. This constant and the rating pair are advisory: they are published so a caller can
+    ///     range-check before assigning, but <c>Duration</c> itself is unvalidated and nothing in the class
+    ///     consults them.
+    /// </remarks>
     [TestMethod]
     public void MaxDuration_EqualsTwentyEightThousandEightHundred() =>
         // Assert
         SitemapVideo.MaxDuration.ShouldBe(28_800);
 
+    /// <summary>
+    /// The lowest rating Google accepts is <c>0.0</c>.
+    /// </summary>
     [TestMethod]
     public void MinRating_EqualsZeroPointZero() =>
         // Assert
         SitemapVideo.MinRating.ShouldBe(0.0m);
 
+    /// <summary>
+    /// The highest rating Google accepts is <c>5.0</c>.
+    /// </summary>
     [TestMethod]
     public void MaxRating_EqualsFivePointZero() =>
         // Assert
@@ -170,11 +244,22 @@ public class SitemapVideoTests
 
     #region Tag Tests
 
+    /// <summary>
+    /// At most <c>32</c> tags are carried.
+    /// </summary>
+    /// <remarks>
+    ///     Google: "A maximum of 32 tags is permitted per video." Unlike the duration and rating constants
+    ///     this one is enforced — reading and writing both stop once 32 tags have been seen.
+    /// </remarks>
     [TestMethod]
     public void MaxTagCount_EqualsThirtyTwo() =>
         // Assert
         SitemapVideo.MaxTagCount.ShouldBe(32);
 
+    /// <summary>
+    /// A new video exposes an empty tag collection rather than <see langword="null"/>, so a caller can
+    /// add to it without a null check.
+    /// </summary>
     [TestMethod]
     public void Tags_ReturnsEmptyListByDefault()
     {
@@ -186,6 +271,9 @@ public class SitemapVideoTests
         video.Tags.ShouldBeEmpty();
     }
 
+    /// <summary>
+    /// Tags added to the collection are held in the order they were added.
+    /// </summary>
     [TestMethod]
     public void Tags_CanAddTags()
     {
@@ -206,6 +294,10 @@ public class SitemapVideoTests
 
     #region Boolean Property Default Tests
 
+    /// <summary>
+    /// A video is family friendly unless it says otherwise, matching the sense of Google's
+    /// <c>family_friendly</c> element.
+    /// </summary>
     [TestMethod]
     public void FamilyFriendly_DefaultsToTrue()
     {
@@ -216,6 +308,9 @@ public class SitemapVideoTests
         video.FamilyFriendly.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A video does not require a subscription unless it says so.
+    /// </summary>
     [TestMethod]
     public void RequiresSubscription_DefaultsToFalse()
     {
@@ -226,6 +321,9 @@ public class SitemapVideoTests
         video.RequiresSubscription.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A video is not a live stream unless it says so.
+    /// </summary>
     [TestMethod]
     public void Live_DefaultsToFalse()
     {
@@ -240,6 +338,9 @@ public class SitemapVideoTests
 
     #region Uploader Tests
 
+    /// <summary>
+    /// A 300-character uploader name is cut to <c>MaxUploaderLength</c> characters on assignment.
+    /// </summary>
     [TestMethod]
     public void Uploader_TruncatesToMaxUploaderLength()
     {
@@ -254,6 +355,9 @@ public class SitemapVideoTests
         video.Uploader.Length.ShouldBe(SitemapVideo.MaxUploaderLength);
     }
 
+    /// <summary>
+    /// Leading and trailing whitespace is stripped from an uploader name on assignment.
+    /// </summary>
     [TestMethod]
     public void Uploader_TrimsWhitespace()
     {
@@ -268,11 +372,21 @@ public class SitemapVideoTests
         video.Uploader.ShouldBe("Test Uploader");
     }
 
+    /// <summary>
+    /// The uploader-name limit is <c>255</c> characters.
+    /// </summary>
+    /// <remarks>
+    ///     Google: "The string value can be a maximum of 255 characters."
+    /// </remarks>
     [TestMethod]
     public void MaxUploaderLength_EqualsTwoHundredFiftyFive() =>
         // Assert
         SitemapVideo.MaxUploaderLength.ShouldBe(255);
 
+    /// <summary>
+    /// Assigning <see langword="null"/> to the uploader clears it to an <i>empty</i> string rather than
+    /// throwing, so the element is simply omitted when the video is written.
+    /// </summary>
     [TestMethod]
     public void Uploader_NullValue_SetsEmptyString()
     {
@@ -286,6 +400,9 @@ public class SitemapVideoTests
         video.Uploader.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// Assigning an <i>empty</i> string to the uploader clears a name that was already there.
+    /// </summary>
     [TestMethod]
     public void Uploader_EmptyValue_SetsEmptyString()
     {
@@ -303,6 +420,9 @@ public class SitemapVideoTests
 
     #region Equality and Comparison Tests
 
+    /// <summary>
+    /// Two videos built from the same thumbnail, title and description are equal.
+    /// </summary>
     [TestMethod]
     public void Equals_ReturnsTrueForEqualVideos()
     {
@@ -314,6 +434,9 @@ public class SitemapVideoTests
         video1.Equals(video2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A difference in title alone is enough to make two videos unequal.
+    /// </summary>
     [TestMethod]
     public void Equals_ReturnsFalseForDifferentVideos()
     {
@@ -325,6 +448,9 @@ public class SitemapVideoTests
         video1.Equals(video2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A video is never equal to an object of another type, here a <see cref="string"/>.
+    /// </summary>
     [TestMethod]
     public void Equals_ReturnsFalseForNonSitemapVideoObject()
     {
@@ -336,6 +462,9 @@ public class SitemapVideoTests
         video.Equals(other).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A video is never equal to <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void Equals_ReturnsFalseForNull()
     {
@@ -346,6 +475,9 @@ public class SitemapVideoTests
         video.Equals(null).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two videos with the same thumbnail, title and description compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_ReturnsZeroForEqualVideos()
     {
@@ -357,6 +489,9 @@ public class SitemapVideoTests
         video1.CompareTo(video2).ShouldBe(0);
     }
 
+    /// <summary>
+    /// Two videos differing only in title do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_ReturnsNonZeroForDifferentVideos()
     {
@@ -368,6 +503,9 @@ public class SitemapVideoTests
         video1.CompareTo(video2).ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// A video compares greater than <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void CompareTo_ReturnsOneForNull()
     {
@@ -378,6 +516,9 @@ public class SitemapVideoTests
         video.CompareTo(null).ShouldBe(1);
     }
 
+    /// <summary>
+    /// Two videos differing in every required value do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_DifferentVideos_ReturnsNonZero()
     {
@@ -392,6 +533,9 @@ public class SitemapVideoTests
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// The equality operator agrees with <c>Equals</c> for two identically built videos.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_ReturnsTrueForEqualVideos()
     {
@@ -403,6 +547,9 @@ public class SitemapVideoTests
         (video1 == video2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> references compare equal under the operator rather than dereferencing.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_ReturnsTrueForBothNull()
     {
@@ -414,6 +561,9 @@ public class SitemapVideoTests
         (video1 == video2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> left operand is not equal to a video, and the operator does not throw.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_ReturnsFalseWhenFirstIsNull()
     {
@@ -425,6 +575,9 @@ public class SitemapVideoTests
         (video1 == video2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> right operand is not equal to a video, and the operator does not throw.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_ReturnsFalseWhenSecondIsNull()
     {
@@ -436,6 +589,9 @@ public class SitemapVideoTests
         (video1 == video2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The inequality operator is the negation of the equality operator for two identically built videos.
+    /// </summary>
     [TestMethod]
     public void OperatorNotEquals_ReturnsFalseForEqualVideos()
     {
@@ -447,6 +603,9 @@ public class SitemapVideoTests
         (video1 != video2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The inequality operator reports videos differing in title as different.
+    /// </summary>
     [TestMethod]
     public void OperatorNotEquals_ReturnsTrueForDifferentVideos()
     {
@@ -462,6 +621,9 @@ public class SitemapVideoTests
 
     #region ToString Tests
 
+    /// <summary>
+    /// A video renders as its title alone, with no element name or punctuation around it.
+    /// </summary>
     [TestMethod]
     public void ToString_ReturnsTitle()
     {
@@ -472,6 +634,9 @@ public class SitemapVideoTests
         video.ToString().ShouldBe(TestTitle);
     }
 
+    /// <summary>
+    /// A video with no title renders as an <i>empty</i> string rather than throwing or naming the type.
+    /// </summary>
     [TestMethod]
     public void ToString_ReturnsEmptyStringWhenTitleIsEmpty()
     {
@@ -486,6 +651,9 @@ public class SitemapVideoTests
 
     #region GetHashCode Tests
 
+    /// <summary>
+    /// Equal videos hash equally, which is the contract a hash set relies on.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_ReturnsSameValueForEqualVideos()
     {
@@ -497,6 +665,10 @@ public class SitemapVideoTests
         video1.GetHashCode().ShouldBe(video2.GetHashCode());
     }
 
+    /// <summary>
+    /// Videos differing only in title hash differently, so the title is part of the hash and not just of
+    /// <c>Equals</c>.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_ReturnsDifferentValueForDifferentVideos()
     {
@@ -512,6 +684,10 @@ public class SitemapVideoTests
 
     #region ThumbnailLocation Property Tests
 
+    /// <summary>
+    /// Assigning <see langword="null"/> to the thumbnail location throws
+    /// <see cref="ArgumentNullException"/>, so a video that has one cannot lose it.
+    /// </summary>
     [TestMethod]
     public void ThumbnailLocation_SetterThrowsOnNull()
     {
@@ -522,6 +698,9 @@ public class SitemapVideoTests
         Should.Throw<ArgumentNullException>(() => video.ThumbnailLocation = null!);
     }
 
+    /// <summary>
+    /// A thumbnail location assigned after construction is stored unchanged.
+    /// </summary>
     [TestMethod]
     public void ThumbnailLocation_SetterWorksCorrectly()
     {

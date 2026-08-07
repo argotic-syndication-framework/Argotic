@@ -6,6 +6,10 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.FeedRank;
 
+/// <summary>
+/// Covers <c>FeedRankSyndicationExtension</c>, the Atom ranking extension whose single <c>re:rank</c>
+/// element carries a value alongside a scheme, a domain and a label.
+/// </summary>
 [TestClass]
 public class FeedRankSyndicationExtensionTest
 {
@@ -16,6 +20,9 @@ public class FeedRankSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor produces a non-null <c>FeedRankSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void FeedRankSyndicationExtensionConstructorTest()
     {
@@ -24,6 +31,10 @@ public class FeedRankSyndicationExtensionTest
         target.ShouldBeOfType<FeedRankSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions built from the same scheme, domain, label and value compare equal, so
+    /// <c>CompareTo</c> returns <c>0</c>.
+    /// </summary>
     [TestMethod]
     public void FeedRankCompareToTest()
     {
@@ -33,6 +44,10 @@ public class FeedRankSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Two separately built extensions carrying the same rank are equal through the <c>object</c>
+    /// overload of <c>Equals</c>.
+    /// </summary>
     [TestMethod]
     public void FeedRankEqualsTest()
     {
@@ -42,6 +57,9 @@ public class FeedRankSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The hash code is stable across repeated calls, and two equal extensions agree on it.
+    /// </summary>
     [TestMethod]
     public void FeedRankGetHashCodeTest()
     {
@@ -55,6 +73,10 @@ public class FeedRankSyndicationExtensionTest
         target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
+    /// <summary>
+    /// Saving a feed with the extension attached writes a single <c>re:rank</c> element whose
+    /// <c>scheme</c> and <c>domain</c> attributes are prefixed and whose <c>label</c> is not.
+    /// </summary>
     [TestMethod]
     public void FeedRankCreateXmlTest()
     {
@@ -65,6 +87,10 @@ public class FeedRankSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// An item carrying a <c>re:rank</c> element is found again after the feed is parsed, by both the
+    /// generic lookup and the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void FeedRankFullTest()
     {
@@ -83,6 +109,10 @@ public class FeedRankSyndicationExtensionTest
             .ShouldBeOfType<FeedRankSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts an <c>ISyndicationExtension</c> that is a
+    /// <c>FeedRankSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void FeedRankMatchByTypeTest()
     {
@@ -91,6 +121,11 @@ public class FeedRankSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders the rank as a single element carrying the value <c>1.0</c>, its two
+    /// qualified attributes bound to a generated <c>p1</c> prefix and the ranking namespace as its
+    /// default.
+    /// </summary>
     [TestMethod]
     public void FeedRankToStringTest()
     {
@@ -99,6 +134,10 @@ public class FeedRankSyndicationExtensionTest
         actual.ShouldBe(nycText);
     }
 
+    /// <summary>
+    /// Writing to a non-indenting fragment <c>XmlWriter</c> emits the same element as <c>ToString</c>,
+    /// down to the generated prefix and the pair of namespace declarations.
+    /// </summary>
     [TestMethod]
     public void FeedRankWriteToTest()
     {
@@ -111,6 +150,9 @@ public class FeedRankSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(writeToText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Two extensions carrying different ranks are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void FeedRankOpEqualityTestFailure()
     {
@@ -120,6 +162,9 @@ public class FeedRankSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions carrying the same rank are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void FeedRankOpEqualityTestSuccess()
     {
@@ -129,6 +174,11 @@ public class FeedRankSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension whose domain is <c>example.com</c> does not sort above the one whose domain is
+    /// <c>example.net</c> — the domain is the first member that differs, so neither the label nor the
+    /// value is reached.
+    /// </summary>
     [TestMethod]
     public void FeedRankOpGreaterThanTest()
     {
@@ -138,6 +188,9 @@ public class FeedRankSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions carrying different ranks are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void FeedRankOpInequalityTest()
     {
@@ -147,6 +200,10 @@ public class FeedRankSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension whose domain is <c>example.com</c> sorts below the one whose domain is
+    /// <c>example.net</c>.
+    /// </summary>
     [TestMethod]
     public void FeedRankOpLessThanTest()
     {
@@ -156,6 +213,10 @@ public class FeedRankSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>Context</c> property hands back the domain, label, scheme and value the extension was
+    /// built from.
+    /// </summary>
     [TestMethod]
     public void FeedRankContextTest()
     {
@@ -169,6 +230,11 @@ public class FeedRankSyndicationExtensionTest
         context.Value.ShouldBe(1.0m);
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the lesser: domain <c>example.com</c>, label
+    /// <c>Title</c>, value <c>1.0</c>.
+    /// </summary>
+    /// <returns>An extension carrying a complete rank.</returns>
     private static FeedRankSyndicationExtension CreateExtension1()
     {
         FeedRankSyndicationExtension re = new()
@@ -184,6 +250,11 @@ public class FeedRankSyndicationExtensionTest
         return re;
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the greater: domain <c>example.net</c>, label
+    /// <c>label</c>, value <c>2.0</c>.
+    /// </summary>
+    /// <returns>An extension carrying a complete rank.</returns>
     private static FeedRankSyndicationExtension CreateExtension2()
     {
         FeedRankSyndicationExtension re = new()
@@ -199,6 +270,11 @@ public class FeedRankSyndicationExtensionTest
         return re;
     }
 
+    /// <summary>
+    /// Builds a context carrying value <c>1.0</c> and nothing else meaningful, without an extension
+    /// around it.
+    /// </summary>
+    /// <returns>A context whose scheme and domain are empty relative URIs.</returns>
     public static FeedRankSyndicationExtensionContext CreateContext1()
     {
         FeedRankSyndicationExtensionContext re = new()

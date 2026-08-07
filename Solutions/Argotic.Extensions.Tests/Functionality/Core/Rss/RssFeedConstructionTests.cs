@@ -4,11 +4,18 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Rss;
 
+/// <summary>
+/// Covers building an <see cref="RssFeed"/> through the object model rather than by parsing one —
+/// channel metadata, cloud, image, items, enclosures and the skip schedules — and writing it out.
+/// </summary>
 [TestClass]
 public class RssFeedConstructionTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The title, link and description assigned to a channel are read back exactly as assigned.
+    /// </summary>
     [TestMethod]
     public void Construction_SetsBasicProperties_Correctly()
     {
@@ -27,6 +34,9 @@ public class RssFeedConstructionTests
         feed.Channel.Description.ShouldBe("Test description");
     }
 
+    /// <summary>
+    /// Channel categories are held in the order they were added, each keeping the optional domain it was given.
+    /// </summary>
     [TestMethod]
     public void Construction_WithCategories_AddsCorrectly()
     {
@@ -40,6 +50,9 @@ public class RssFeedConstructionTests
         feed.Channel.Categories[1].Domain.ShouldBe("dmoz");
     }
 
+    /// <summary>
+    /// A cloud keeps the domain, path, port, protocol and registration procedure it was constructed from.
+    /// </summary>
     [TestMethod]
     public void Construction_WithCloud_SetsCorrectly()
     {
@@ -59,6 +72,9 @@ public class RssFeedConstructionTests
         feed.Channel.Cloud.RegisterProcedure.ShouldBe("cloud.notify");
     }
 
+    /// <summary>
+    /// A channel image keeps its link, title and URL, and the description, height and width set afterwards.
+    /// </summary>
     [TestMethod]
     public void Construction_WithImage_SetsCorrectly()
     {
@@ -83,6 +99,9 @@ public class RssFeedConstructionTests
         feed.Channel.Image.Width.ShouldBe(96);
     }
 
+    /// <summary>
+    /// An item added to a channel keeps its title, link, description, author, categories and GUID.
+    /// </summary>
     [TestMethod]
     public void Construction_WithItem_SetsCorrectly()
     {
@@ -112,6 +131,9 @@ public class RssFeedConstructionTests
         addedItem.Guid!.Value.ShouldBe("http://example.com/item");
     }
 
+    /// <summary>
+    /// An enclosure keeps the length, content type and URL it was constructed from.
+    /// </summary>
     [TestMethod]
     public void Construction_WithEnclosure_SetsCorrectly()
     {
@@ -130,6 +152,9 @@ public class RssFeedConstructionTests
         enclosure.Url.ShouldBe(new Uri("http://example.com/audio.mp3"));
     }
 
+    /// <summary>
+    /// The channel holds every day added to its skip-days collection.
+    /// </summary>
     [TestMethod]
     public void Construction_WithSkipDays_SetsCorrectly()
     {
@@ -142,6 +167,9 @@ public class RssFeedConstructionTests
         feed.Channel.SkipDays.ShouldContain(DayOfWeek.Sunday);
     }
 
+    /// <summary>
+    /// The channel holds every hour added to its skip-hours collection, including <c>0</c> and <c>23</c>.
+    /// </summary>
     [TestMethod]
     public void Construction_WithSkipHours_SetsCorrectly()
     {
@@ -156,6 +184,9 @@ public class RssFeedConstructionTests
         feed.Channel.SkipHours.ShouldContain(23);
     }
 
+    /// <summary>
+    /// A fully populated feed saved to a stream and loaded back keeps its channel title, description and item count.
+    /// </summary>
     [TestMethod]
     public void RoundTrip_SaveAndLoad_PreservesData()
     {
@@ -177,6 +208,9 @@ public class RssFeedConstructionTests
         loadedFeed.Channel.Items.Count.ShouldBe(originalFeed.Channel.Items.Count);
     }
 
+    /// <summary>
+    /// Saving writes an XML declaration and the <c>rss</c>, <c>channel</c>, <c>title</c> and <c>item</c> elements.
+    /// </summary>
     [TestMethod]
     public void Save_ProducesValidXml()
     {

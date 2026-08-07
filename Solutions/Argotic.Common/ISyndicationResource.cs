@@ -8,18 +8,14 @@ namespace Argotic.Common;
 /// </summary>
 /// <seealso cref="Argotic.Common.SyndicationResourceMetadata"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the ISyndicationResource interface.">
-///         <code
-///             source="..\..\Argotic.Examples\\Common\ISyndicationResourceExample.cs"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Common\ISyndicationResourceExample.cs" language="cs" title="The following code example demonstrates the usage of the ISyndicationResource interface." />
 /// </example>
 public interface ISyndicationResource
 {
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that the resource implements.
     /// </summary>
-    /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that the resource implements.</value>
+    /// <value>A fixed value per implementing type — <see cref="SyndicationContentFormat.Rss"/> for an RSS feed, and so on. It reports what the type <i>is</i>, not what was parsed, so it never reports <see cref="SyndicationContentFormat.None"/>.</value>
     SyndicationContentFormat Format
     {
         get;
@@ -28,7 +24,7 @@ public interface ISyndicationResource
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that the resource conforms to.
     /// </summary>
-    /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that the resource conforms to.</value>
+    /// <value>The specification version the type implements, such as <c>2.0</c> for RSS or <c>1.0</c> for Atom. Never <see langword="null"/>.</value>
     Version Version
     {
         get;
@@ -37,6 +33,12 @@ public interface ISyndicationResource
     /// <summary>
     /// Occurs when the syndication resource state has been changed by a load operation.
     /// </summary>
+    /// <remarks>
+    ///     Raised after a load has completed successfully — synchronous or asynchronous — and not at all
+    ///     when one throws. The event arguments carry the <see cref="XPathNavigator"/> the resource was
+    ///     built from, and a <see cref="SyndicationResourceLoadedEventArgs.Source"/> only where the load
+    ///     began with a <see cref="Uri"/>; the stream and reader overloads have never known one.
+    /// </remarks>
     /// <seealso cref="ISyndicationResource.Load(IXPathNavigable)"/>
     /// <seealso cref="ISyndicationResource.Load(XmlReader)"/>
     event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
@@ -54,27 +56,26 @@ public interface ISyndicationResource
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
     /// <remarks>
-    ///     <para>Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the specified <see cref="IXPathNavigable"/>.</para>
     ///     <para>
-    ///         <b>Notes to Implementers:</b>
+    ///         Notes to implementers:
     ///         <list type="bullet">
     ///             <item>
     ///                 <description>
     ///                     When implementing this method, the <paramref name="source"/> should be passed to the <see cref="ISyndicationResource.Load(IXPathNavigable, SyndicationResourceLoadSettings)"/> method
-    ///                     with the <item>settings</item> parameter as <b>null</b>.
+    ///                     with the <c>settings</c> parameter as <see langword="null"/>.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <b>must</b> be raised.
+    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <i>must</i> be raised.
     ///                 </description>
     ///             </item>
     ///         </list>
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
     void Load(IXPathNavigable source);
@@ -82,13 +83,12 @@ public interface ISyndicationResource
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
-    ///     <para>Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the specified <see cref="IXPathNavigable"/>.</para>
-    ///     <para><b>Notes to Implementers:</b> After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <b>must</b> be raised.</para>
+    ///     <para>Notes to implementers: After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <i>must</i> be raised.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
     void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings);
@@ -96,27 +96,26 @@ public interface ISyndicationResource
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
     /// <remarks>
-    ///     <para>Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the specified <see cref="Stream"/>.</para>
     ///     <para>
-    ///         <b>Notes to Implementers:</b>
+    ///         Notes to implementers:
     ///         <list type="bullet">
     ///             <item>
     ///                 <description>
     ///                     When implementing this method, the <paramref name="stream"/> should be passed to the <see cref="ISyndicationResource.Load(Stream, SyndicationResourceLoadSettings)"/> method
-    ///                     with the <item>settings</item> parameter as <b>null</b>.
+    ///                     with the <c>settings</c> parameter as <see langword="null"/>.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <b>must</b> be raised.
+    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <i>must</i> be raised.
     ///                 </description>
     ///             </item>
     ///         </list>
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
     void Load(Stream stream);
@@ -124,12 +123,11 @@ public interface ISyndicationResource
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="stream">The <see cref="Stream"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
-    ///     <para>Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the specified <see cref="Stream"/>.</para>
     ///     <para>
-    ///         <b>Notes to Implementers:</b>
+    ///         Notes to implementers:
     ///         <list type="bullet">
     ///             <item>
     ///                 <description>
@@ -139,13 +137,13 @@ public interface ISyndicationResource
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <b>must</b> be raised.
+    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <i>must</i> be raised.
     ///                 </description>
     ///             </item>
     ///         </list>
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
     void Load(Stream stream, SyndicationResourceLoadSettings? settings);
@@ -153,27 +151,26 @@ public interface ISyndicationResource
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
     /// <remarks>
-    ///     <para>Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the specified <see cref="XmlReader"/>.</para>
     ///     <para>
-    ///         <b>Notes to Implementers:</b>
+    ///         Notes to implementers:
     ///         <list type="bullet">
     ///             <item>
     ///                 <description>
     ///                     When implementing this method, the <paramref name="reader"/> should be passed to the <see cref="ISyndicationResource.Load(XmlReader, SyndicationResourceLoadSettings)"/> method
-    ///                     with the <item>settings</item> parameter as <b>null</b>.
+    ///                     with the <c>settings</c> parameter as <see langword="null"/>.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <b>must</b> be raised.
+    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <i>must</i> be raised.
     ///                 </description>
     ///             </item>
     ///         </list>
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
     void Load(XmlReader reader);
@@ -181,12 +178,11 @@ public interface ISyndicationResource
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
-    ///     <para>Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the specified <see cref="XmlReader"/>.</para>
     ///     <para>
-    ///         <b>Notes to Implementers:</b>
+    ///         Notes to implementers:
     ///         <list type="bullet">
     ///             <item>
     ///                 <description>
@@ -196,13 +192,13 @@ public interface ISyndicationResource
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <b>must</b> be raised.
+    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <i>must</i> be raised.
     ///                 </description>
     ///             </item>
     ///         </list>
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
     void Load(XmlReader reader, SyndicationResourceLoadSettings? settings);
@@ -218,7 +214,7 @@ public interface ISyndicationResource
     ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
     ///     <para>After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     Task LoadAsync(Uri source, CancellationToken cancellationToken = default);
@@ -228,8 +224,8 @@ public interface ISyndicationResource
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous load operation.</returns>
     /// <remarks>
@@ -243,8 +239,8 @@ public interface ISyndicationResource
     ///     </para>
     ///     <para>After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     Task LoadAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default);
@@ -252,65 +248,53 @@ public interface ISyndicationResource
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
     /// <remarks>
     ///     <para>
-    ///         Place your custom code in the <b>Save</b> virtual method to save the syndication resource to the specified <see cref="Stream"/>.
-    ///     </para>
-    ///     <para>
-    ///         <b>Notes to Implementers:</b> When implementing this method, the <paramref name="stream"/> should be passed
-    ///         to the <see cref="ISyndicationResource.Save(Stream, SyndicationResourceSaveSettings)"/> method with the <item>settings</item> parameter as <b>null</b>.
+    ///         Notes to implementers: When implementing this method, the <paramref name="stream"/> should be passed
+    ///         to the <see cref="ISyndicationResource.Save(Stream, SyndicationResourceSaveSettings)"/> method with the <c>settings</c> parameter as <see langword="null"/>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     void Save(Stream stream);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
-    /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="stream">The <see cref="Stream"/> to which you want to save the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ISyndicationResource"/> instance. This value can be <see langword="null"/>.</param>
     /// <remarks>
     ///     <para>
-    ///         Place your custom code in the <b>Save</b> virtual method to save the syndication resource to the specified <see cref="Stream"/>.
-    ///     </para>
-    ///     <para>
-    ///         <b>Notes to Implementers:</b> When implementing this method, the <paramref name="stream"/> should be used to create a <see cref="XmlWriter"/>
+    ///         Notes to implementers: When implementing this method, the <paramref name="stream"/> should be used to create a <see cref="XmlWriter"/>
     ///         that is then passed to the <see cref="ISyndicationResource.Save(XmlWriter)"/> method.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     void Save(Stream stream, SyndicationResourceSaveSettings? settings);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
     /// <remarks>
     ///     <para>
-    ///         Place your custom code in the <b>Save</b> virtual method to save the syndication resource to the specified <see cref="XmlWriter"/>.
-    ///     </para>
-    ///     <para>
-    ///         <b>Notes to Implementers:</b> When implementing this method, a default instance the <see cref="SyndicationResourceSaveSettings"/> should be created
+    ///         Notes to implementers: When implementing this method, a default instance the <see cref="SyndicationResourceSaveSettings"/> should be created
     ///         and then passed to the <see cref="ISyndicationResource.Save(XmlWriter, SyndicationResourceSaveSettings)"/> method along with the supplied <paramref name="writer"/>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     void Save(XmlWriter writer);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save the syndication resource.</param>
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ISyndicationResource"/> instance.</param>
-    /// <remarks>
-    ///     Place your custom code in the <b>Save</b> virtual method to save the syndication resource to the specified <see cref="XmlWriter"/> using the <see cref="SyndicationResourceSaveSettings"/>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     void Save(XmlWriter writer, SyndicationResourceSaveSettings? settings);
 }

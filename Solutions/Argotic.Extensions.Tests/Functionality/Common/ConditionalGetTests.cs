@@ -6,8 +6,13 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>
-/// Tests for <see cref="SyndicationDiscoveryUtility.ConditionalGetAsync(Uri, DateTime, string, HttpClient, CancellationToken)"/>.
+/// Covers the validator a conditional GET puts on the wire, and what it makes of the reply.
 /// </summary>
+/// <remarks>
+///     Four outcomes, and only one of them is an exception: a <c>304</c> and a <c>200</c> are both
+///     results, and an error status is a throw. That asymmetry is what distinguishes this fetch from
+///     every other one in the library, so it is pinned here rather than assumed.
+/// </remarks>
 [TestClass]
 public class ConditionalGetTests
 {
@@ -16,6 +21,9 @@ public class ConditionalGetTests
     /// </summary>
     public TestContext TestContext { get; set; } = null!;
 
+    /// <summary>
+    /// A validator of <c>Unspecified</c> kind is sent as <c>If-Modified-Since</c> at UTC, unshifted.
+    /// </summary>
     [TestMethod]
     public async Task ConditionalGetAsync_SendsTheSuppliedInstantAsIfModifiedSince()
     {
@@ -41,6 +49,9 @@ public class ConditionalGetTests
         sent.Value.ShouldBe(new DateTimeOffset(2024, 1, 15, 12, 0, 0, TimeSpan.Zero));
     }
 
+    /// <summary>
+    /// A <c>304</c> is delivered as a result reporting the resource unchanged, not as an exception.
+    /// </summary>
     [TestMethod]
     public async Task ConditionalGetAsync_WithNotModifiedResponse_ReportsUnmodified()
     {
@@ -61,6 +72,9 @@ public class ConditionalGetTests
         result.WasModified.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <c>404</c> throws <c>HttpRequestException</c> rather than passing for a cache hit.
+    /// </summary>
     [TestMethod]
     public async Task ConditionalGetAsync_WithErrorStatus_ThrowsHttpRequestException()
     {
@@ -78,6 +92,9 @@ public class ConditionalGetTests
                 TestContext.CancellationToken));
     }
 
+    /// <summary>
+    /// A <c>200</c> carrying a <c>Last-Modified</c> newer than the one sent is reported as modified.
+    /// </summary>
     [TestMethod]
     public async Task ConditionalGetAsync_WithNewerContent_ReportsModified()
     {

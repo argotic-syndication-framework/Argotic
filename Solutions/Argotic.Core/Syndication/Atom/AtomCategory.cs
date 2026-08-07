@@ -13,12 +13,7 @@ namespace Argotic.Syndication;
 /// <seealso cref="AtomEntry.Categories"/>
 /// <seealso cref="AtomFeed.Categories"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the AtomCategory class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Atom\AtomCategoryExample.cs"
-///             region="AtomCategory"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Atom\AtomCategoryExample.cs" language="cs" title="The following code example demonstrates the usage of the AtomCategory class." />
 /// </example>
 public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategory>, IEquatable<AtomCategory>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
@@ -33,31 +28,40 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// Initializes a new instance of the <see cref="AtomCategory"/> class using the supplied term.
     /// </summary>
     /// <param name="term">A string that identifies this category.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="term"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="term"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="term"/> is an empty string.</exception>
     public AtomCategory(string term)
     {
         this.Term = term;
     }
 
     /// <summary>
-    /// Gets or sets the base URI other than the base URI of the document or external entity.
+    /// Gets or sets the base against which relative references inside this element are resolved.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>xml:base</c> in effect for this element, or <see langword="null"/> when none is. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-    ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+    ///         RFC 4287 §2 gives <c>xml:base</c> the function described in section 5.1.1 of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a> — it establishes the base URI,
+    ///         or IRI, for every relative reference in the attribute's effective scope. The value itself is a URI reference after processing according to
+    ///         <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.
+    ///     </para>
+    ///     <para>
+    ///         Loading resolves inheritance: an element without an <c>xml:base</c> of its own reports the nearest ancestor's, so the value here is the
+    ///         <i>effective</i> base a consumer can resolve an href against, not the literal attribute.
+    ///     </para>
     /// </remarks>
     public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>The language declared by <c>xml:lang</c>, or <see langword="null"/> when none is in scope. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         RFC 4287 defines <c>atomLanguageTag</c> as a language identifier per
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>, or its successor. A tag this runtime cannot turn
+    ///         into a <see cref="CultureInfo"/> is traced and dropped rather than failing the load.
     ///     </para>
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -65,23 +69,22 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Extensions"/> holds at least one <see cref="ISyndicationExtension"/>; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets the human-readable label of this category for display in end-user applications.
     /// </summary>
-    /// <value>The human-readable label of this category for display in end-user applications.</value>
+    /// <value>The <c>label</c> attribute. The default value is an <i>empty</i> string, and no attribute is written when it is empty.</value>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="Label"/> property is <i>language-sensitive</i>, with the natural language of the value being specified by the <see cref="Language"/> property.
-    ///         Entities represent their corresponding characters, not markup.
+    ///         Language-sensitive: the natural language of the value is whatever <see cref="Language"/> reports. It is plain text — entities represent
+    ///         their corresponding characters, never markup. Display this to a person; match on <see cref="Term"/>.
     ///     </para>
     /// </remarks>
     public string Label
@@ -93,19 +96,26 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// <summary>
     /// Gets or sets an IRI that identifies the categorization scheme used by this category.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the categorization scheme used by this category.</value>
+    /// <value>The <c>scheme</c> attribute — the vocabulary <see cref="Term"/> is drawn from — or <see langword="null"/> when absent. The default value is <see langword="null"/>.</value>
     /// <remarks>
-    ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
-    ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
+    ///     <para>
+    ///         RFC 4287 §4.2.2.2 makes this an IRI reference (<a href="https://www.rfc-editor.org/rfc/rfc3987.html">RFC 3987</a>). Two categories with the
+    ///         same <see cref="Term"/> under different schemes are different categories; comparing terms alone across feeds conflates them.
+    ///     </para>
+    ///     <para>See <see cref="Uri"/> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
     public Uri? Scheme { get; set; }
 
     /// <summary>
-    /// Gets or sets a string that identifies this category.
+    /// Gets or sets the string that identifies this category.
     /// </summary>
-    /// <value>A string that identifies this category.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The <c>term</c> attribute. The default value is an <i>empty</i> string.</value>
+    /// <remarks>
+    ///     The only attribute RFC 4287 §4.2.2.1 requires, and the one to match on: <see cref="Label"/> is for display. Its meaning is fixed by
+    ///     <see cref="Scheme"/>, so a bare term is only comparable within one vocabulary.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Term
     {
         get;
@@ -120,11 +130,11 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// Loads this <see cref="AtomCategory"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="AtomCategory"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomCategory"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomCategory"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -172,12 +182,12 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="AtomCategory"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomCategory"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomCategory"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -195,7 +205,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// Saves the current <see cref="AtomCategory"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -260,7 +270,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// Determines whether the specified <see cref="AtomCategory"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="AtomCategory"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="AtomCategory"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="AtomCategory"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(AtomCategory? other)
     {
         if (other is null)
@@ -275,7 +285,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is AtomCategory other && this.Equals(other);
 
     /// <summary>
@@ -289,7 +299,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(AtomCategory? first, AtomCategory? second)
     {
         if (first is null) return second is null;
@@ -301,7 +311,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are not equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(AtomCategory? first, AtomCategory? second) => !(first == second);
 
 }

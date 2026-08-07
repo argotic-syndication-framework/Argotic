@@ -6,8 +6,15 @@ using Argotic.Common;
 namespace Argotic.Net;
 
 /// <summary>
-/// Represents a remote procedure parameter value that is typically used to encapsulate small groups of related variables.
+/// Represents a remote procedure parameter value that holds a set of named members.
 /// </summary>
+/// <remarks>
+///     XML-RPC's <c>&lt;struct&gt;</c>: an unordered bag of name-and-value pairs, of which the
+///     <c>faultCode</c>/<c>faultString</c> pair carried by <see cref="XmlRpcResponse.Fault"/> is the one
+///     every server emits. The specification neither forbids a repeated member name nor defines what one
+///     means, and nothing here rejects it: <see cref="Members"/> keeps both, while the indexer returns
+///     the first.
+/// </remarks>
 /// <seealso cref="XmlRpcMessage.Parameters"/>
 /// <seealso cref="IXmlRpcValue"/>
 public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureValue>, IEquatable<XmlRpcStructureValue>, IComparisonOperators
@@ -22,8 +29,8 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcStructureValue"/> class using the supplied <see cref="XPathNodeIterator"/>.
     /// </summary>
-    /// <param name="iterator">A <see cref="XPathNodeIterator"/> that represents the <i>member</i> nodes for the structured list.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="iterator"/> is a null reference.</exception>
+    /// <param name="iterator">An iterator over the <c>&lt;member&gt;</c> nodes for the structure. Nodes that will not parse are skipped silently, so a shorter <see cref="Members"/> than the iterator's <c>Count</c> is possible.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="iterator"/> is <see langword="null"/>.</exception>
     public XmlRpcStructureValue(XPathNodeIterator iterator)
     {
         ArgumentNullException.ThrowIfNull(iterator);
@@ -50,15 +57,15 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// <summary>
     /// Gets or sets the <see cref="XmlRpcStructureMember"/> that has the specified name.
     /// </summary>
-    /// <param name="name">The name that uniquely identifies the member to get or set.</param>
-    /// <returns>The <see cref="XmlRpcStructureMember"/> with the specified name.</returns>
+    /// <param name="name">The member name to look up. Matched without regard to case.</param>
+    /// <returns>The first member with that name, or <see langword="null"/> if the structure has none.</returns>
     /// <remarks>
-    ///     If no member exists for the specified <paramref name="name"/>, returns a <b>null</b> reference.
-    ///     This indexer uses a <i>case-insensitive</i> comparison of the specified member <paramref name="name"/>.
+    ///     A set for a name no member carries does nothing — it does not add one, and it does not throw.
+    ///     Build a structure through <see cref="Members"/>; use the indexer to replace.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public XmlRpcStructureMember? this[string name]
     {
         get
@@ -110,20 +117,17 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
+    /// <returns>
+    ///     <c>1</c> if <paramref name="source"/> holds more members than <paramref name="target"/>;
+    ///     <c>-1</c> if it holds fewer, or if the counts match but some member of
+    ///     <paramref name="source"/> is absent from <paramref name="target"/>; otherwise, <c>0</c>.
+    /// </returns>
     /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
+    ///     Equal counts are compared as <i>sets</i>, so order is not consulted — which is right here,
+    ///     because an XML-RPC structure is unordered.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<XmlRpcStructureMember> source, IList<XmlRpcStructureMember> target)
     {
         int result = 0;
@@ -159,11 +163,11 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// Loads this <see cref="XmlRpcStructureValue"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="XmlRpcStructureValue"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="XmlRpcStructureValue"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="XmlRpcStructureValue"/>.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -200,7 +204,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// Saves the current <see cref="XmlRpcStructureValue"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -220,10 +224,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcStructureValue"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcStructureValue"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The <c>&lt;value&gt;&lt;struct&gt;</c> XML for the current instance, written as a fragment — no XML declaration.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -261,7 +262,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// Determines whether the specified <see cref="XmlRpcStructureValue"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="XmlRpcStructureValue"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="XmlRpcStructureValue"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="XmlRpcStructureValue"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(XmlRpcStructureValue? other)
     {
         if (other is null)
@@ -276,7 +277,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is XmlRpcStructureValue other && this.Equals(other);
 
     /// <summary>
@@ -290,7 +291,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(XmlRpcStructureValue? first, XmlRpcStructureValue? second)
     {
         if (first is null) return second is null;
@@ -302,7 +303,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(XmlRpcStructureValue? first, XmlRpcStructureValue? second) => !(first == second);
 
 }

@@ -9,13 +9,15 @@ namespace Argotic.Net;
 /// <summary>
 /// Represents a Trackback ping request that can be sent using the <see cref="TrackbackClient"/> class.
 /// </summary>
+/// <remarks>
+///     Four fields, written as an <c>application/x-www-form-urlencoded</c> body: <c>url</c> from
+///     <see cref="Permalink"/>, and the optional <c>title</c>, <c>blog_name</c> and <c>excerpt</c>.
+///     Only <c>url</c> is always emitted; the rest are omitted when empty rather than sent blank.
+///     <see cref="Load(NameValueCollection)"/> reads the same four names back, case-insensitively.
+/// </remarks>
+/// <seealso cref="TrackbackClient.SendAsync"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the TrackbackMessage class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Net\TrackbackClientExample.cs"
-///             region="TrackbackClient"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Net\TrackbackClientExample.cs" language="cs" title="The following code example demonstrates the usage of the TrackbackMessage class." />
 /// </example>
 public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<TrackbackMessage>, IComparisonOperators
 {
@@ -33,7 +35,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <remarks>
     ///     The <paramref name="permalink"/> should point as closely as possible to the actual entry on the HTML page, as it will be used when linking to the entry in question.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="permalink"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="permalink"/> is <see langword="null"/>.</exception>
     public TrackbackMessage(Uri permalink)
     {
         this.Permalink = permalink;
@@ -42,8 +44,13 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <summary>
     /// Gets or sets the <see cref="Encoding">character encoding</see> of this message.
     /// </summary>
-    /// <value>A <see cref="Encoding"/> that specifies the character encoding of this message. The default value is <see cref="UTF8Encoding">UTF-8</see>.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The character encoding of this message. The default value is <see cref="UTF8Encoding">UTF-8</see>.</value>
+    /// <remarks>
+    ///     Travels as the <c>charset</c> parameter of the request's <c>Content-Type</c>, and encodes the
+    ///     body <see cref="TrackbackClient"/> writes. A byte-order mark is stripped before the body is
+    ///     sent: emitted, it would arrive as part of the name of the first field.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Encoding Encoding
     {
         get;
@@ -58,10 +65,8 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <summary>
     /// Gets or sets an excerpt for the entry.
     /// </summary>
-    /// <value>An excerpt of the entry.</value>
-    /// <remarks>
-    ///     The excerpt <b>must</b> be in the character encoding specified by the <see cref="Encoding"/> property.
-    /// </remarks>
+    /// <value>The excerpt, trimmed. The default value is an <i>empty</i> string, and setting <see langword="null"/> restores it rather than throwing.</value>
+    /// <remarks>Written percent-encoded as the <c>excerpt</c> field, and omitted entirely when empty.</remarks>
     public string Excerpt
     {
         get;
@@ -82,11 +87,14 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <summary>
     /// Gets or sets the permalink for the entry.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the permalink for the entry.</value>
+    /// <value>The permalink for the entry. The default value is <see langword="null"/>, which writes an <i>empty</i> <c>url</c> field — the one field always emitted.</value>
     /// <remarks>
-    ///     The permalink should point as closely as possible to the actual entry on the HTML page, as it will be used when linking to the entry in question.
+    ///     The permalink should point as closely as possible to the actual entry on the HTML page, as it
+    ///     will be used when linking to the entry in question. It is percent-encoded on the way out: a
+    ///     permalink carrying an ordinary query string would otherwise split into extra form fields and
+    ///     arrive truncated at the first ampersand.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Permalink
     {
         get;
@@ -101,10 +109,8 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <summary>
     /// Gets or sets the title of the entry.
     /// </summary>
-    /// <value>The title of the entry.</value>
-    /// <remarks>
-    ///     The title <b>must</b> be in the character encoding specified by the <see cref="Encoding"/> property.
-    /// </remarks>
+    /// <value>The title, trimmed. The default value is an <i>empty</i> string, and setting <see langword="null"/> restores it rather than throwing.</value>
+    /// <remarks>Written percent-encoded as the <c>title</c> field, and omitted entirely when empty.</remarks>
     public string Title
     {
         get;
@@ -125,10 +131,8 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <summary>
     /// Gets or sets the name of the weblog to which the entry was posted.
     /// </summary>
-    /// <value>The name of the weblog to which the entry was posted.</value>
-    /// <remarks>
-    ///     The blog name <b>must</b> be in the character encoding specified by the <see cref="Encoding"/> property.
-    /// </remarks>
+    /// <value>The weblog name, trimmed. The default value is an <i>empty</i> string, and setting <see langword="null"/> restores it rather than throwing.</value>
+    /// <remarks>Written percent-encoded as the <c>blog_name</c> field — note the underscore — and omitted entirely when empty.</remarks>
     public string WeblogName
     {
         get;
@@ -150,11 +154,16 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// Loads this <see cref="TrackbackMessage"/> using the supplied <see cref="NameValueCollection"/>.
     /// </summary>
     /// <param name="source">The <see cref="NameValueCollection"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="TrackbackMessage"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="TrackbackMessage"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    ///     <para>This method expects the supplied <paramref name="source"/> to be the <c>HttpRequest.Params</c> collection of an ASP.NET request or a similar subset.</para>
+    ///     <para>
+    ///         This is the receiving half: the collection is the form fields of an inbound ping, such as
+    ///         an ASP.NET request's parsed body. Keys are matched case-insensitively against <c>url</c>,
+    ///         <c>title</c>, <c>excerpt</c> and <c>blog_name</c>; anything else present is ignored, and a
+    ///         field whose value is empty leaves the corresponding property alone.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(NameValueCollection source)
     {
         bool wasLoaded = false;
@@ -209,8 +218,12 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <summary>
     /// Saves the current <see cref="TrackbackMessage"/> to the specified <see cref="StreamWriter"/>.
     /// </summary>
-    /// <param name="writer">The <see cref="StreamWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="StreamWriter"/> to which you want to save. Its encoding, not <see cref="Encoding"/>, is what reaches the stream.</param>
+    /// <remarks>
+    ///     Writes a form body, not XML: <c>url=…&amp;title=…&amp;blog_name=…&amp;excerpt=…</c>, each value
+    ///     percent-encoded, with the optional three omitted when empty. Nothing is flushed here.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(StreamWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -239,10 +252,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.</returns>
-    /// <remarks>
-    ///     This method returns the URL-encoded representation for the current instance.
-    /// </remarks>
+    /// <returns>The form-encoded body for the current instance, as <see cref="WriteTo(StreamWriter)"/> would write it.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -282,7 +292,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// Determines whether the specified <see cref="TrackbackMessage"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="TrackbackMessage"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="TrackbackMessage"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="TrackbackMessage"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(TrackbackMessage? other)
     {
         if (other is null)
@@ -297,7 +307,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is TrackbackMessage other && this.Equals(other);
 
     /// <summary>
@@ -319,7 +329,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(TrackbackMessage? first, TrackbackMessage? second)
     {
         if (first is null) return second is null;
@@ -331,6 +341,6 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(TrackbackMessage? first, TrackbackMessage? second) => !(first == second);
 }

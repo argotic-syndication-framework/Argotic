@@ -5,7 +5,7 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Extensions.Core;
 
 /// <summary>
-/// Contains the code examples for the <see cref="GeoRssSyndicationExtension"/> class.
+/// Reads a <see cref="GeoRssSyndicationExtension"/> out of both an RSS and an Atom feed.
 /// </summary>
 /// <remarks>
 ///     GeoRSS is read from both syndication formats because the two are filled by separate adapters and
@@ -15,7 +15,7 @@ namespace Argotic.Examples.Extensions.Core;
 internal static class GeoRssSyndicationExtensionExample
 {
     /// <summary>
-    /// Provides example code for the GeoRssSyndicationExtension class, reading an RSS feed.
+    /// Finds the extension on an <see cref="RssFeed"/>'s channel and items, then writes the feed back out.
     /// </summary>
     public static void ClassExample()
     {
@@ -49,7 +49,7 @@ internal static class GeoRssSyndicationExtensionExample
     }
 
     /// <summary>
-    /// Provides example code for the GeoRssSyndicationExtension class, reading an Atom feed.
+    /// Finds the extension on an <see cref="AtomFeed"/> and its entries, then writes the feed back out.
     /// </summary>
     /// <remarks>
     ///     The reference GeoRSS publisher is Atom, so reading only RSS would leave the format that

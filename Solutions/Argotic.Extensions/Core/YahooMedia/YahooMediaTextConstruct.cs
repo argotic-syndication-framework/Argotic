@@ -6,12 +6,13 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents human-readable text.
+/// Represents human-readable text carrying its own encoding declaration.
 /// </summary>
 /// <remarks>
-///     <para>
-///         This class is a generic representation for the <i>media:title</i> and <i>media:description</i> elements in the Yahoo media specificaton.
-///     </para>
+///     One class for both <c>media:title</c> and <c>media:description</c>, which differ only in element name.
+///     The name is therefore not a property of the instance: it is supplied by whoever writes it, which is why
+///     <see cref="WriteTo(XmlWriter, string)"/> takes it as an argument and <see cref="ToString()"/> has to invent
+///     one.
 /// </remarks>
 public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEquatable<YahooMediaTextConstruct>, IComparisonOperators
 {
@@ -27,8 +28,8 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// Initializes a new instance of the <see cref="YahooMediaTextConstruct"/> class using the supplied text.
     /// </summary>
     /// <param name="text">The content of this human-readable text.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="text"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="text"/> is an empty string.</exception>
     public YahooMediaTextConstruct(string text)
     {
         this.Content = text;
@@ -38,9 +39,9 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// Initializes a new instance of the <see cref="YahooMediaTextConstruct"/> class using the supplied text.
     /// </summary>
     /// <param name="text">The content of this human-readable text.</param>
-    /// <param name="type">An <see cref="YahooMediaTextConstruct"/> enumeration value that represents the entity encoding utilized by this human-readable text.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
+    /// <param name="type">The entity encoding used by <paramref name="text"/>.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="text"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="text"/> is an empty string.</exception>
     public YahooMediaTextConstruct(string text, YahooMediaTextConstructType type) : this(text)
     {
         this.TextType = type;
@@ -49,12 +50,14 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// <summary>
     /// Gets or sets the content of this human-readable text.
     /// </summary>
-    /// <value>The content of this human-readable text.</value>
+    /// <value>The text, trimmed. The default value is an <i>empty</i> string, which is the one value a set operation cannot produce.</value>
     /// <remarks>
-    ///     All HTML <b>must</b> be entity-encoded.
+    ///     Any markup is entity-encoded, which is what <see cref="TextType"/> is declaring. Set the decoded text
+    ///     here; the <see cref="XmlWriter"/> encodes it on save, and a caller who encodes it first will see it
+    ///     encoded twice.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Content
     {
         get;
@@ -69,30 +72,38 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// Gets or sets the entity encoding utilized by this human-readable text.
     /// </summary>
     /// <value>
-    ///     An <see cref="YahooMediaTextConstruct"/> enumeration value that represents the entity encoding utilized by this human-readable text.
-    ///     The default value is <see cref="YahooMediaTextConstructType.None"/>.
+    ///     The entity encoding. The default value is <see cref="YahooMediaTextConstructType.None"/>, which
+    ///     indicates that the <c>type</c> attribute was absent and the specification's default,
+    ///     <see cref="YahooMediaTextConstructType.Plain"/>, applies.
     /// </value>
-    /// <remarks>
-    ///     If no entity encoding is specified, a default value of <see cref="YahooMediaTextConstructType.Plain"/> can be assumed.
-    /// </remarks>
     public YahooMediaTextConstructType TextType { get; set; } = YahooMediaTextConstructType.None;
 
     /// <summary>
     /// Returns the entity encoding type identifier for the supplied <see cref="YahooMediaTextConstructType"/>.
     /// </summary>
     /// <param name="type">The <see cref="YahooMediaTextConstructType"/> to get the entity encoding type identifier for.</param>
-    /// <returns>The entity encoding type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>
+    ///     The <c>type</c> attribute value, <c>html</c> or <c>plain</c>.
+    ///     <see cref="YahooMediaTextConstructType.None"/> maps to an empty string, which is what keeps it out of
+    ///     the written feed.
+    /// </returns>
     public static string TextTypeAsString(YahooMediaTextConstructType type) =>
         EnumerationMetadataAttribute.GetAlternateValue(type);
 
     /// <summary>
     /// Returns the <see cref="YahooMediaTextConstructType"/> enumeration value that corresponds to the specified entity encoding type name.
     /// </summary>
-    /// <param name="name">The name of the entity encoding type.</param>
-    /// <returns>A <see cref="YahooMediaTextConstructType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>YahooMediaTextConstructType.None</b>.</returns>
-    /// <remarks>This method disregards case of specified entity encoding type name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <param name="name">The name of the entity encoding type. Matched without regard to case.</param>
+    /// <returns>
+    ///     The matching <see cref="YahooMediaTextConstructType"/>, or
+    ///     <see cref="YahooMediaTextConstructType.None"/> when <paramref name="name"/> is empty,
+    ///     <see langword="null"/>, or neither <c>html</c> nor <c>plain</c>. This method throws nothing.
+    /// </returns>
+    /// <remarks>
+    ///     <see cref="YahooMediaTextConstructType.None"/> means the attribute was absent, for which the
+    ///     specification's default is <c>plain</c>. That inference is left to the caller so that a save does
+    ///     not write a <c>type</c> the publisher did not.
+    /// </remarks>
     public static YahooMediaTextConstructType TextTypeByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, YahooMediaTextConstructType.None);
 
@@ -100,11 +111,11 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// Loads this <see cref="YahooMediaTextConstruct"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="YahooMediaTextConstruct"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="YahooMediaTextConstruct"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaTextConstruct"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -136,8 +147,8 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// Saves the current <see cref="YahooMediaTextConstruct"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <param name="elementName">The local name of the text construct being written.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="elementName">The local name to write — <c>title</c> or <c>description</c>. It is written unvalidated, so an invalid XML name throws from the <paramref name="writer"/>.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer, string elementName)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -160,10 +171,11 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaTextConstruct"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaTextConstruct"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance. A <i>generic</i> element name is used.
-    /// </remarks>
+    /// <returns>
+    ///     The XML representation for the current instance, written as <c>media:generic</c> — this type does not
+    ///     know whether it is a title or a description, so the output is a diagnostic aid and not a fragment that
+    ///     can be pasted into a feed. Use <see cref="WriteTo(XmlWriter, string)"/> for that.
+    /// </returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -202,7 +214,7 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// Determines whether the specified <see cref="YahooMediaTextConstruct"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="YahooMediaTextConstruct"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="YahooMediaTextConstruct"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="YahooMediaTextConstruct"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(YahooMediaTextConstruct? other)
     {
         if (other is null)
@@ -217,7 +229,7 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is YahooMediaTextConstruct other && this.Equals(other);
 
     /// <summary>
@@ -231,7 +243,7 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(YahooMediaTextConstruct? first, YahooMediaTextConstruct? second)
     {
         if (first is null) return second is null;
@@ -243,6 +255,6 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(YahooMediaTextConstruct? first, YahooMediaTextConstruct? second) => !(first == second);
 }

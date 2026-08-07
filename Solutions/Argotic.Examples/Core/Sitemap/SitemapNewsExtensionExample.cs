@@ -5,16 +5,12 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Sitemap;
 
 /// <summary>
-/// Contains the code examples for the <see cref="SitemapNewsExtension"/> class.
+/// Declares news-article metadata with <see cref="SitemapNewsExtension"/>, then reads it back out of a saved sitemap.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="SitemapNewsExtension"/> class.
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class SitemapNewsExtensionExample
 {
     /// <summary>
-    /// Provides example code for the SitemapNewsExtension class.
+    /// Attaches a <see cref="SitemapNewsExtension"/> to a <see cref="SitemapUrl"/> and prints the sitemap.
     /// </summary>
     public static void ClassExample()
     {
@@ -42,7 +38,7 @@ internal static class SitemapNewsExtensionExample
     }
 
     /// <summary>
-    /// Provides example code for loading a sitemap with news extensions from a stream.
+    /// Reads the news extension back out of a sitemap loaded from a <see cref="Stream"/>.
     /// </summary>
     public static void LoadStreamExample()
     {
@@ -61,7 +57,7 @@ internal static class SitemapNewsExtensionExample
     }
 
     /// <summary>
-    /// Provides example code for saving a sitemap with news extensions to a stream.
+    /// Saves a sitemap carrying the news extension, and shows the namespace it declares.
     /// </summary>
     public static void SaveStreamExample()
     {

@@ -12,11 +12,23 @@ namespace Argotic.Data.Adapters;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="BlogML20SyndicationResourceAdapter"/> serves as a bridge between a <see cref="BlogMLDocument"/> and an XML data source.
-///         The <see cref="BlogML20SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(BlogMLDocument)"/>, which changes the data
-///         in the <see cref="BlogMLDocument"/> to match the data in the data source.
+///     BlogML is a blog <i>export</i> format, not a syndication feed: a single <c>blog</c> root in
+///     <c>http://www.blogml.com/2006/09/BlogML</c> carrying the whole site — every author, category and
+///     post, and inside each post its comments, trackbacks and attachments — rather than a recent window of
+///     it. The consequence shows up here as scale: <c>blog:posts/blog:post</c> is the only collection
+///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> caps, and authors, categories and
+///     extended properties are always read in full however long the export is.
 ///     </para>
-///     <para>This syndication resource adapter is designed to fill <see cref="BlogMLDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the BlogML 2.0 specification.</para>
+///     <para>
+///     Element names use hyphens where the rest of the library uses camel case — <c>sub-title</c>,
+///     <c>date-created</c>, <c>root-url</c>, <c>extended-properties</c> — so a selector copied from another
+///     adapter and adjusted by eye will silently match nothing.
+///     </para>
+///     <para>
+///     Dates are XML Schema <c>dateTime</c>, and are read with the RFC 3339 parser, whose accepted grammar
+///     is close enough for the values real exporters emit. The RSS adapters use the RFC 822 parser instead;
+///     the two are not interchangeable.
+///     </para>
 /// </remarks>
 public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 {
@@ -28,17 +40,17 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <remarks>
     ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="BlogMLDocument"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public BlogML20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
     /// <summary>
-    /// Modifies the <see cref="BlogMLDocument"/> to match the data source.
+    /// Reads the <c>blog</c> root: its <c>date-created</c> and <c>root-url</c> attributes, its title and sub-title, its four collections, and its syndication extensions.
     /// </summary>
     /// <param name="resource">The <see cref="BlogMLDocument"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(BlogMLDocument resource)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -102,19 +114,32 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="BlogMLDocument"/> collection entities to match the supplied <see cref="XPathNavigator"/> data source.
+    /// Reads the four collections under <c>blog</c> — <c>authors/author</c>, <c>extended-properties/property</c>, <c>categories/category</c> and <c>posts/post</c> — recursing into each post's comments, trackbacks and attachments.
     /// </summary>
     /// <param name="document">The <see cref="BlogMLDocument"/> to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill operation.</param>
     /// <remarks>
+    ///     <para>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLDocument"/>.
+    ///     </para>
+    ///     <para>
+    ///     Extended properties are name/value attribute pairs, and the first spelling of a name wins: a
+    ///     repeated <c>name</c> is dropped rather than overwriting, because the dictionary is guarded with
+    ///     <c>ContainsKey</c> instead of an indexer assignment. A property with a name and no value is kept,
+    ///     with an empty string for the value.
+    ///     </para>
+    ///     <para>
+    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested after <c>post.Load</c> and
+    ///     inside its success branch, so the post that trips the limit is parsed in full — comments and all
+    ///     — and then discarded.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="document"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="document"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static void FillDocumentCollections(BlogMLDocument document, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(document);

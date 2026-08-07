@@ -8,6 +8,12 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Represents a single version of the content for its parent item.
 /// </summary>
+/// <remarks>
+///     One entry in the module's original RDF syntax, which let an item carry the same content in several
+///     formats and encodings at once. Publishers settled on the simpler
+///     <see cref="SiteSummaryContentSyndicationExtensionContext.Encoded"/> instead, and this form is
+///     essentially unseen in live feeds.
+/// </remarks>
 /// <seealso cref="SiteSummaryContentSyndicationExtensionContext.Items"/>
 public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEquatable<SiteSummaryContentItem>, IComparisonOperators
 {
@@ -22,19 +28,20 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <summary>
     /// Gets the URI used when syndicated content is encoded as well-formed XML.
     /// </summary>
-    /// <value>A <see cref="Uri"/> with a value of <b>http://www.w3.org/TR/REC-xml#dt-wellformed</b> that indicates that the encoding is well-formed XML.</value>
+    /// <value>The URI <c>http://www.w3.org/TR/REC-xml#dt-wellformed</c>.</value>
+    /// <remarks>A fresh <see cref="Uri"/> per call, so it is safe to hand out but not reference-comparable.</remarks>
     /// <seealso cref="SiteSummaryContentItem.Encoding"/>
     public static Uri WellFormedXmlEncoding => new("http://www.w3.org/TR/REC-xml#dt-wellformed");
 
     /// <summary>
     /// Gets or sets the textual content of this item.
     /// </summary>
-    /// <value>The textual or entity encoded content of this item.</value>
+    /// <value>The content itself, trimmed. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     The value of this property <i>may</i> be entity-encoded, but will <b>always</b> be CDATA-escaped. 
+    ///     What arrives may be entity-encoded; what is written out is <i>always</i> CDATA-escaped.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Content
     {
         get;
@@ -49,9 +56,14 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <summary>
     /// Gets or sets the encoding of this item.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the encoding of this item.</value>
+    /// <value>
+    ///     A <see cref="Uri"/> naming how the content was packaged for transport, or <see langword="null"/>
+    ///     if none was specified. <see cref="WellFormedXmlEncoding"/> is the common value.
+    /// </value>
     /// <remarks>
-    ///     An encoding is a reversable method of including content within syndicated content.
+    ///     An encoding is a reversible way of carrying content inside a feed, and is a separate question
+    ///     from <see cref="Format"/>: the format says what the content <i>is</i>, the encoding says how it
+    ///     was wrapped to survive the journey.
     /// </remarks>
     /// <seealso cref="SiteSummaryContentItem.WellFormedXmlEncoding"/>
     public Uri? Encoding { get; set; }
@@ -59,8 +71,15 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <summary>
     /// Gets or sets the format of this item.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the format of this item.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>
+    ///     A <see cref="Uri"/> naming the content's media type or schema, or <see langword="null"/> if none
+    ///     was specified.
+    /// </value>
+    /// <remarks>
+    ///     Unlike <see cref="Encoding"/>, the element is written whether or not this is set — a
+    ///     <see langword="null"/> format produces an empty <c>content:format</c> rather than no element.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Format
     {
         get;
@@ -76,11 +95,11 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// Loads this <see cref="SiteSummaryContentItem"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="SiteSummaryContentItem"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="SiteSummaryContentItem"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="SiteSummaryContentItem"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -124,7 +143,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// Saves the current <see cref="SiteSummaryContentItem"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -146,10 +165,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SiteSummaryContentItem"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SiteSummaryContentItem"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -189,7 +205,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// Determines whether the specified <see cref="SiteSummaryContentItem"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SiteSummaryContentItem"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SiteSummaryContentItem"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SiteSummaryContentItem"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SiteSummaryContentItem? other)
     {
         if (other is null)
@@ -204,7 +220,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SiteSummaryContentItem other && this.Equals(other);
 
     /// <summary>
@@ -218,7 +234,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(SiteSummaryContentItem? first, SiteSummaryContentItem? second)
     {
         if (first is null) return second is null;
@@ -230,6 +246,6 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(SiteSummaryContentItem? first, SiteSummaryContentItem? second) => !(first == second);
 }

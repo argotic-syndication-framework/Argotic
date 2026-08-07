@@ -21,41 +21,41 @@ public class BlogChannelSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the URL of a weblog that the author is promoting.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of a weblog that the author is promoting.</value>
+    /// <value>The URL, or <see langword="null"/> if none was specified.</value>
     public Uri? Blink { get; set; }
 
     /// <summary>
     /// Gets or sets the URL of an OPML file containing the blogroll for the website.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of an OPML file containing the blogroll for the website.</value>
+    /// <value>The URL, or <see langword="null"/> if none was specified.</value>
     public Uri? BlogRoll { get; set; }
 
     /// <summary>
     /// Gets or sets the URL the website's change tracking endpoint.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL the website's change tracking endpoint.</value>
+    /// <value>The URL, or <see langword="null"/> if none was specified.</value>
     /// <remarks>
     ///     When a feed that contains this element updates, it pings a server that updates this file.
     ///     The presence of this element indicates to aggregators that they only have to read the changes file to see if this feed has updated.
     ///     If several feeds point to the same changes file, aggregators have to do less polling, resulting in better use of server bandwidth and faster scans.
-    ///     See <a href="http://www.xmlrpc.com/weblogsComForRss">http://www.xmlrpc.com/weblogsComForRss</a> for technical details.
+    ///     See <a href="https://1998.xmlrpc.com/weblogsComForRss.html">https://1998.xmlrpc.com/weblogsComForRss.html</a> for technical details.
     /// </remarks>
     public Uri? Changes { get; set; }
 
     /// <summary>
     /// Gets or sets the URL of an OPML file containing the author's feed subscriptions.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of an OPML file containing the author's feed subscriptions.</value>
+    /// <value>The URL, or <see langword="null"/> if none was specified.</value>
     public Uri? MySubscriptions { get; set; }
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="BlogChannelSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="BlogChannelSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="BlogChannelSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="BlogChannelSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -111,11 +111,11 @@ public class BlogChannelSyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);

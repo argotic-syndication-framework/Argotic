@@ -3,11 +3,19 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Atom;
 
+/// <summary>
+/// Covers building an Atom 1.0 feed in memory — the required elements, each optional child collection,
+/// and the metadata elements — then writing it out and reading it back.
+/// </summary>
 [TestClass]
 public class AtomFeedConstructionTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The three elements RFC 4287 §4.1.1 requires of a feed — id, title and update time — are settable
+    /// through an object initialiser and read back unchanged.
+    /// </summary>
     [TestMethod]
     public void Construction_SetsBasicProperties_Correctly()
     {
@@ -23,6 +31,10 @@ public class AtomFeedConstructionTests
         feed.UpdatedOn.ShouldBe(new DateTime(2024, 1, 15, 12, 0, 0));
     }
 
+    /// <summary>
+    /// Links are held in the order added, and a relative href with a relation survives alongside an
+    /// absolute one with none.
+    /// </summary>
     [TestMethod]
     public void Construction_WithLinks_AddsCorrectly()
     {
@@ -35,6 +47,9 @@ public class AtomFeedConstructionTests
         feed.Links[1].Relation.ShouldBe("self");
     }
 
+    /// <summary>
+    /// Authors are held in order, a bare name and a fully populated person construct side by side.
+    /// </summary>
     [TestMethod]
     public void Construction_WithAuthors_AddsCorrectly()
     {
@@ -52,6 +67,9 @@ public class AtomFeedConstructionTests
         feed.Authors[1].EmailAddress.ShouldBe("jane@example.com");
     }
 
+    /// <summary>
+    /// Contributors are a collection of their own, separate from the authors.
+    /// </summary>
     [TestMethod]
     public void Construction_WithContributors_AddsCorrectly()
     {
@@ -62,6 +80,9 @@ public class AtomFeedConstructionTests
         feed.Contributors[0].Name.ShouldBe("Contributor One");
     }
 
+    /// <summary>
+    /// Categories are held in order, with the optional scheme kept only on the one that declared it.
+    /// </summary>
     [TestMethod]
     public void Construction_WithCategories_AddsCorrectly()
     {
@@ -75,6 +96,9 @@ public class AtomFeedConstructionTests
         feed.Categories[1].Scheme.ShouldBe(new Uri("http://example.com/categories"));
     }
 
+    /// <summary>
+    /// An entry added to a feed keeps its title and summary constructs intact.
+    /// </summary>
     [TestMethod]
     public void Construction_WithEntry_SetsCorrectly()
     {
@@ -95,6 +119,10 @@ public class AtomFeedConstructionTests
         addedEntry.Summary!.Content.ShouldBe("Test summary text.");
     }
 
+    /// <summary>
+    /// An entry keeps its content and its declared <c>html</c> content type, along with its own links
+    /// and authors, once it is inside a feed.
+    /// </summary>
     [TestMethod]
     public void Construction_EntryWithContent_SetsCorrectly()
     {
@@ -119,6 +147,9 @@ public class AtomFeedConstructionTests
         addedEntry.Authors.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// A generator keeps all three of its parts: the agent's name, its uri and its version.
+    /// </summary>
     [TestMethod]
     public void Construction_WithGenerator_SetsCorrectly()
     {
@@ -137,6 +168,9 @@ public class AtomFeedConstructionTests
         feed.Generator.Version.ShouldBe("1.0");
     }
 
+    /// <summary>
+    /// An icon holds the uri it was constructed from.
+    /// </summary>
     [TestMethod]
     public void Construction_WithIcon_SetsCorrectly()
     {
@@ -149,6 +183,9 @@ public class AtomFeedConstructionTests
         feed.Icon.Uri.ShouldBe(new Uri("http://example.com/icon.png"));
     }
 
+    /// <summary>
+    /// A logo holds the uri it was constructed from, and is a distinct element from the icon.
+    /// </summary>
     [TestMethod]
     public void Construction_WithLogo_SetsCorrectly()
     {
@@ -161,6 +198,9 @@ public class AtomFeedConstructionTests
         feed.Logo.Uri.ShouldBe(new Uri("http://example.com/logo.png"));
     }
 
+    /// <summary>
+    /// A feed built in memory keeps its title and its full entry count through a save and a reload.
+    /// </summary>
     [TestMethod]
     public void RoundTrip_SaveAndLoad_PreservesData()
     {
@@ -181,6 +221,10 @@ public class AtomFeedConstructionTests
         loadedFeed.Entries.Count.ShouldBe(originalFeed.Entries.Count);
     }
 
+    /// <summary>
+    /// Saving emits an XML declaration and a <c>feed</c> root bound to the Atom 1.0 namespace, with the
+    /// title and entry written as elements.
+    /// </summary>
     [TestMethod]
     public void Save_ProducesValidXml()
     {

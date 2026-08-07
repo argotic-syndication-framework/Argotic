@@ -9,6 +9,11 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents a trackback to a post.
 /// </summary>
+/// <remarks>
+///     A record that another page linked here, announced over the trackback protocol. Like a comment it
+///     carries its own <see cref="BlogMLTrackback.ApprovalStatus"/>, because trackback spam was the reason
+///     the protocol fell out of use.
+/// </remarks>
 /// <seealso cref="BlogMLPost.Trackbacks"/>
 public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>, IEquatable<BlogMLTrackback>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
@@ -24,8 +29,8 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// Gets or sets the approval status of this web log entity.
     /// </summary>
     /// <value>
-    ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available.
-    ///     The default value is <see cref="BlogMLApprovalStatus.None"/>, which indicates that no approval status information was specified.
+    ///     The <c>approved</c> attribute, read and written as <c>true</c> or <c>false</c>.
+    ///     The default value is <see cref="BlogMLApprovalStatus.None"/>, which indicates that no approval status information was specified, and suppresses the attribute on save.
     /// </value>
     public BlogMLApprovalStatus ApprovalStatus { get; set; } = BlogMLApprovalStatus.None;
 
@@ -33,18 +38,22 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// Gets or sets a date-time indicating when this web log entity was created.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates an instant in time associated with an event early in the life cycle of this web log entity.
-    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided.
+    ///     The <c>date-created</c> attribute.
+    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided, and suppresses the attribute on save.
     /// </value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     Supply this in Coordinated Universal Time; BlogML dates are written as RFC 3339. A value that is not
+    ///     RFC 3339 is retried under the invariant culture, which is how exports from engines that emitted
+    ///     ordinary .NET date strings still load. That retry does not adjust to universal time, so a
+    ///     non-conforming value carrying an offset comes back converted to the reading machine's local time —
+    ///     invisible on a UTC host, wrong everywhere else.
     /// </remarks>
     public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the unique identifier of this web log entity.
     /// </summary>
-    /// <value>An identification string for this web log entity. The default value is an <b>empty</b> string, which indicated that no identifier was specified.</value>
+    /// <value>An identification string for this web log entity, or an <i>empty</i> string if none was specified.</value>
     public string Id
     {
         get;
@@ -56,19 +65,19 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// Gets or sets a date-time indicating when this web log entity was last modified.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant.
-    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no modification date-time was provided.
+    ///     The <c>date-modified</c> attribute — the last change the publisher considered significant.
+    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no modification date-time was provided, and suppresses the attribute on save.
     /// </value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     Supply this in Coordinated Universal Time; the parsing caveat on <c>date-created</c> applies here too.
     /// </remarks>
     public DateTime LastModifiedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the title of this web log entity.
     /// </summary>
-    /// <value>A <see cref="BlogMLTextConstruct"/> object that represents the title of this web log entity.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>title</c> element. Never <see langword="null"/> — a new instance starts with an empty text construct, and the setter rejects null.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public BlogMLTextConstruct Title
     {
         get;
@@ -83,20 +92,19 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets the URL of this trackback.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of this trackback.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>url</c> attribute — the page that linked here. <see langword="null"/> until set; the setter rejects null.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Url
     {
         get;
@@ -112,11 +120,11 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// Loads this <see cref="BlogMLTrackback"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="BlogMLTrackback"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="BlogMLTrackback"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLTrackback"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -147,12 +155,12 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="ApmlApplication"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="ApmlApplication"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ApmlApplication"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -185,7 +193,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// Saves the current <see cref="BlogMLTrackback"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -232,7 +240,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// Determines whether the specified <see cref="BlogMLTrackback"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="BlogMLTrackback"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="BlogMLTrackback"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="BlogMLTrackback"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(BlogMLTrackback? other)
     {
         if (other is null)
@@ -247,7 +255,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is BlogMLTrackback other && this.Equals(other);
 
     /// <summary>
@@ -261,7 +269,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(BlogMLTrackback? first, BlogMLTrackback? second)
     {
         if (first is null) return second is null;
@@ -273,7 +281,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(BlogMLTrackback? first, BlogMLTrackback? second) => !(first == second);
 
 }

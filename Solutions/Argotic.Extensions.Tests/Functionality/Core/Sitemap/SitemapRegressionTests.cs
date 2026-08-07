@@ -47,6 +47,14 @@ public class SitemapRegressionTests
     private static int ImageCountFor(SitemapUrl url) =>
         url.Extensions.OfType<SitemapImageExtension>().FirstOrDefault()?.Images.Count ?? 0;
 
+    /// <summary>
+    /// Each <c>url</c> keeps only the images nested under it — two for the first, one for the second.
+    /// </summary>
+    /// <remarks>
+    ///     Every extension is handed the navigator for its own <c>url</c> element. Selecting from the
+    ///     document root instead would give every url every image in the file, and the resulting sitemap
+    ///     would still be well formed.
+    /// </remarks>
     [TestMethod]
     public void Load_BindsImagesToTheUrlTheyAppearUnder()
     {
@@ -61,6 +69,10 @@ public class SitemapRegressionTests
         ImageCountFor(sitemap.Urls[1]).ShouldBe(1);
     }
 
+    /// <summary>
+    /// A <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> of one stops the load after a
+    /// single url, leaving the second in the document unread.
+    /// </summary>
     [TestMethod]
     public void Load_WithRetrievalLimit_StopsAtTheLimit()
     {
@@ -71,6 +83,9 @@ public class SitemapRegressionTests
         sitemap.Urls.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Default load settings impose no limit, so both urls in the document are read.
+    /// </summary>
     [TestMethod]
     public void Load_WithoutRetrievalLimit_ReadsEveryUrl()
     {
@@ -81,6 +96,15 @@ public class SitemapRegressionTests
         sitemap.Urls.Count.ShouldBe(2);
     }
 
+    /// <summary>
+    /// A date-only <c>lastmod</c> of <c>2024-01-15</c> becomes midnight on that day with a
+    /// <see cref="DateTimeKind"/> of <c>Utc</c>.
+    /// </summary>
+    /// <remarks>
+    ///     A date-only W3C value carries no offset. Interpreting it in the machine's zone would move the
+    ///     modification date onto the neighbouring day for any host that is not at UTC, and the move is
+    ///     silent.
+    /// </remarks>
     [TestMethod]
     public void Load_WithDateOnlyLastModified_KeepsTheStatedCalendarDayInUtc()
     {
@@ -104,6 +128,9 @@ public class SitemapRegressionTests
         lastModified.Value.ShouldBe(new DateTime(2024, 1, 15, 0, 0, 0, DateTimeKind.Utc));
     }
 
+    /// <summary>
+    /// A sitemap index honours the same retrieval limit, reading two of its three <c>sitemap</c> entries.
+    /// </summary>
     [TestMethod]
     public void SitemapIndex_WithRetrievalLimit_StopsAtTheLimit()
     {

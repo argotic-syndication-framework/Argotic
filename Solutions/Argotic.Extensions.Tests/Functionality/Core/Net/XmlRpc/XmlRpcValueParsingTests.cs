@@ -64,6 +64,8 @@ public sealed class XmlRpcValueParsingTests
     /// <summary>
     /// The typed branches still answer with their own types, not with strings.
     /// </summary>
+    /// <param name="xml">A <c>value</c> element wrapping an integer, in one of its two legal spellings.</param>
+    /// <param name="expected">The <c>int</c> the parsed scalar must hold.</param>
     /// <remarks>
     ///     The second control, and the one that matters: making an untyped value parse means loosening
     ///     the dispatch, and the way to get that wrong is to catch typed payloads on the way past. Each
@@ -98,6 +100,9 @@ public sealed class XmlRpcValueParsingTests
     /// <summary>
     /// A date is read in the spelling XML-RPC 1.0 uses for it, and in RFC 3339.
     /// </summary>
+    /// <param name="spelling">The text content of the <c>dateTime.iso8601</c> element, one spelling per row.</param>
+    /// <param name="kind">The <c>DateTimeKind</c> that spelling must yield: <c>Unspecified</c> where it carries no offset.</param>
+    /// <param name="label">The row's description, passed to every assertion so a failure names the spelling that broke.</param>
     /// <remarks>
     ///     <para>
     ///     The element is named <c>dateTime.iso8601</c> and XML-RPC 1.0's own example spells it
@@ -137,6 +142,7 @@ public sealed class XmlRpcValueParsingTests
     /// <summary>
     /// A value that is neither typed nor carries text is still refused.
     /// </summary>
+    /// <param name="xml">An empty <c>value</c> element, in each of the two ways XML lets it be written.</param>
     /// <remarks>
     ///     The boundary control. The untyped fallback the fix makes reachable was written with a
     ///     <c>!string.IsNullOrEmpty</c> guard, and that guard is kept: an empty element is not a

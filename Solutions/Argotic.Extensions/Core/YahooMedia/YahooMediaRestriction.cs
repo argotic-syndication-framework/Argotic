@@ -10,9 +10,15 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Currently, restrictions are based on <b>distributor</b> or <b>country code</b>. 
-///         A <see cref="YahooMediaRestriction"/> is purely informational and no obligation can be assumed or implied. 
-///         Only one <see cref="YahooMediaRestriction"/> object of the same type can be applied to a media object, all others will be ignored.
+///         A restriction is three things together: a <see cref="Relationship"/> saying whether the list allows
+///         or denies, an <see cref="EntityType"/> saying what the list is a list of, and the
+///         <see cref="Entities"/> themselves. Read any one alone and you have the opposite of the publisher's
+///         meaning half the time.
+///     </para>
+///     <para>
+///         It is informational. Nothing in the format obliges an aggregator to honour it, and only one
+///         restriction of a given <see cref="EntityType"/> applies to a media object — a second is ignored
+///         rather than combined.
 ///     </para>
 /// </remarks>
 public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquatable<YahooMediaRestriction>, IComparisonOperators
@@ -28,20 +34,20 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <summary>
     /// Gets the entities this restriction applies to.
     /// </summary>
-    /// <value>
-    ///     A <see cref="IList{T}"/> collection of <see cref="string"/> objects that represent the entities this restriction applies to.
-    ///     The default value is an <i>empty</i> collection.
-    /// </value>
+    /// <value>The entity list, whose meaning is fixed by <see cref="EntityType"/>. The default value is an <i>empty</i> collection.</value>
     /// <remarks>
     ///     <para>
-    ///         To allow a producer to explicitly declare their intentions, two literal entity names are reserved: <b>all</b> and <b>none</b>. These literals can <u>only</u> be used once.
+    ///         Under <see cref="YahooMediaRestrictionType.Country"/> these are ISO 3166 country codes;
+    ///         under <see cref="YahooMediaRestrictionType.Uri"/>, distributor URIs. Nothing here
+    ///         validates either.
     ///     </para>
     ///     <para>
-    ///         When the restriction <see cref="EntityType"/> is <see cref="YahooMediaRestrictionType.Uri"/> the elements in this collection should represent distributor <see cref="Uri">Uri's</see>.
+    ///         Two names are reserved and stand alone: <c>all</c> and <c>none</c>, each usable once and with no
+    ///         <see cref="EntityType"/>.
     ///     </para>
     ///     <para>
-    ///         When the restriction <see cref="EntityType"/> is <see cref="YahooMediaRestrictionType.Country"/> the elements in this collection should represent country codes.
-    ///         See <a href="http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm">ISO 3166</a> for a listing of the permissible country codes.
+    ///         The element's content is one space-separated list, and this collection is that list split apart —
+    ///         so an entity containing a space cannot survive a round trip, and would be read back as two.
     ///     </para>
     /// </remarks>
     public IList<string> Entities { get; } = [];
@@ -49,31 +55,36 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <summary>
     /// Gets or sets the type of media that this restriction applies to.
     /// </summary>
-    /// <value>A <see cref="YahooMediaRestrictionType"/> enumeration value that indicates the type of media that this restriction applies to.</value>
+    /// <value>What <see cref="Entities"/> is a list of. The default value is <see cref="YahooMediaRestrictionType.None"/>, which is correct only for <c>all</c> and <c>none</c>.</value>
     public YahooMediaRestrictionType EntityType { get; set; } = YahooMediaRestrictionType.None;
 
     /// <summary>
-    /// Gets or sets the type of relationship that this restriction represents.
+    /// Gets or sets whether the entity list is the permitted set or the denied set.
     /// </summary>
-    /// <value>A <see cref="YahooMediaRestrictionRelationship"/> enumeration value that indicates the type of relationship that this restriction represents.</value>
+    /// <value>The relationship. The default value is <see cref="YahooMediaRestrictionRelationship.None"/>, which leaves the sense of <see cref="Entities"/> undetermined.</value>
     public YahooMediaRestrictionRelationship Relationship { get; set; } = YahooMediaRestrictionRelationship.None;
 
     /// <summary>
     /// Returns the relationship identifier for the supplied <see cref="YahooMediaRestrictionRelationship"/>.
     /// </summary>
     /// <param name="relationship">The <see cref="YahooMediaRestrictionRelationship"/> to get the relationship identifier for.</param>
-    /// <returns>The relationship identifier for the supplied <paramref name="relationship"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>
+    ///     The <c>relationship</c> attribute value, <c>allow</c> or <c>deny</c>.
+    ///     <see cref="YahooMediaRestrictionRelationship.None"/> maps to an empty string, which is what keeps it
+    ///     out of the written feed.
+    /// </returns>
     public static string RelationshipAsString(YahooMediaRestrictionRelationship relationship) =>
         EnumerationMetadataAttribute.GetAlternateValue(relationship);
 
     /// <summary>
     /// Returns the <see cref="YahooMediaRestrictionRelationship"/> enumeration value that corresponds to the specified relationship name.
     /// </summary>
-    /// <param name="name">The name of the relationship.</param>
-    /// <returns>A <see cref="YahooMediaRestrictionRelationship"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>YahooMediaRestrictionRelationship.None</b>.</returns>
-    /// <remarks>This method disregards case of specified relationship name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <param name="name">The name of the relationship. Matched without regard to case.</param>
+    /// <returns>
+    ///     The matching <see cref="YahooMediaRestrictionRelationship"/>, or
+    ///     <see cref="YahooMediaRestrictionRelationship.None"/> when <paramref name="name"/> is empty,
+    ///     <see langword="null"/>, or neither <c>allow</c> nor <c>deny</c>. This method throws nothing.
+    /// </returns>
     public static YahooMediaRestrictionRelationship RelationshipByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, YahooMediaRestrictionRelationship.None);
 
@@ -81,18 +92,29 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// Returns the restriction type identifier for the supplied <see cref="YahooMediaRestrictionType"/>.
     /// </summary>
     /// <param name="type">The <see cref="YahooMediaRestrictionType"/> to get the restriction type identifier for.</param>
-    /// <returns>The restriction type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>
+    ///     The <c>type</c> attribute value, <c>country</c> or <c>uri</c>.
+    ///     <see cref="YahooMediaRestrictionType.None"/> maps to an empty string, which is what keeps it out of
+    ///     the written feed. The specification permits omitting <c>type</c> only when the entity is one of the
+    ///     reserved literals <c>all</c> or <c>none</c>.
+    /// </returns>
     public static string RestrictionTypeAsString(YahooMediaRestrictionType type) =>
         EnumerationMetadataAttribute.GetAlternateValue(type);
 
     /// <summary>
     /// Returns the <see cref="YahooMediaRestrictionType"/> enumeration value that corresponds to the specified restriction type name.
     /// </summary>
-    /// <param name="name">The name of the restriction type.</param>
-    /// <returns>A <see cref="YahooMediaRestrictionType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>YahooMediaRestrictionType.None</b>.</returns>
-    /// <remarks>This method disregards case of specified restriction type name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <param name="name">The name of the restriction type. Matched without regard to case.</param>
+    /// <returns>
+    ///     The matching <see cref="YahooMediaRestrictionType"/>, or <see cref="YahooMediaRestrictionType.None"/>
+    ///     when <paramref name="name"/> is empty, <see langword="null"/>, or neither <c>country</c> nor
+    ///     <c>uri</c>. This method throws nothing.
+    /// </returns>
+    /// <remarks>
+    ///     The maintained specification also defines <c>sharing</c>, which this enumeration does not model, so a
+    ///     sharing restriction reads as <see cref="YahooMediaRestrictionType.None"/> and its type is lost on
+    ///     save. The entity list itself survives.
+    /// </remarks>
     public static YahooMediaRestrictionType RestrictionTypeByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, YahooMediaRestrictionType.None);
 
@@ -100,11 +122,11 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// Loads this <see cref="YahooMediaRestriction"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="YahooMediaRestriction"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="YahooMediaRestriction"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaRestriction"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -163,7 +185,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// Saves the current <see cref="YahooMediaRestriction"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -191,10 +213,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaRestriction"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaRestriction"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -234,7 +253,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// Determines whether the specified <see cref="YahooMediaRestriction"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="YahooMediaRestriction"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="YahooMediaRestriction"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="YahooMediaRestriction"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(YahooMediaRestriction? other)
     {
         if (other is null)
@@ -249,7 +268,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is YahooMediaRestriction other && this.Equals(other);
 
     /// <summary>
@@ -279,7 +298,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(YahooMediaRestriction? first, YahooMediaRestriction? second)
     {
         if (first is null) return second is null;
@@ -291,6 +310,6 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(YahooMediaRestriction? first, YahooMediaRestriction? second) => !(first == second);
 }

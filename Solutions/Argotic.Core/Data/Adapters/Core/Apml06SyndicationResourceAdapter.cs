@@ -12,11 +12,17 @@ namespace Argotic.Data.Adapters;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="Apml06SyndicationResourceAdapter"/> serves as a bridge between a <see cref="ApmlDocument"/> and an XML data source.
-///         The <see cref="Apml06SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(ApmlDocument)"/>, which changes the data
-///         in the <see cref="ApmlDocument"/> to match the data in the data source.
+///     APML 0.6 puts its elements in <c>http://www.apml.org/apml-0.6</c> and — unusually among the formats
+///     here — capitalises them: <c>APML</c>, <c>Head</c>, <c>Body</c>, <c>Profile</c>, <c>Applications</c>,
+///     <c>Application</c>. XML element names are case sensitive, so these selectors match nothing in a
+///     document that spells them in lower case, and there is no fallback that would rescue one.
 ///     </para>
-///     <para>This syndication resource adapter is designed to fill <see cref="ApmlDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the APML 0.6 specification.</para>
+///     <para>
+///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> caps profiles and does not cap
+///     applications: the profile loop counts and breaks, the application loop does neither. That is
+///     defensible — a profile carries the whole attention graph, an <see cref="ApmlApplication"/> carries
+///     a name and a payload string — but it is a difference a caller setting a limit will not expect.
+///     </para>
 /// </remarks>
 public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
 {
@@ -28,17 +34,23 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <remarks>
     ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="ApmlDocument"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public Apml06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
     /// <summary>
-    /// Modifies the <see cref="ApmlDocument"/> to match the data source.
+    /// Loads <c>APML/Head</c>, then the <c>Profile</c> and <c>Applications/Application</c> children of <c>APML/Body</c>, then attaches the syndication extensions found on <c>APML</c>.
     /// </summary>
     /// <param name="resource">The <see cref="ApmlDocument"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     The <c>defaultprofile</c> attribute on <c>Body</c> — lower case, unlike the elements — names which
+    ///     of the profiles is the active one. It is read as a string and never checked against the profiles
+    ///     actually present, so <see cref="ApmlDocument.DefaultProfileName"/> may name a profile that is not
+    ///     in the document.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(ApmlDocument resource)
     {
         ArgumentNullException.ThrowIfNull(resource);

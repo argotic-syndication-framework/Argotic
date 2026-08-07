@@ -12,32 +12,33 @@ namespace Argotic.Syndication;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Atom Documents <b>must</b> conform to the following <i>processing model</i> rules. Atom Processors <b>must</b> interpret <see cref="AtomContent"/> according to the first applicable rule.
+///         <b>The rules are ordered, and the first applicable one wins.</b> RFC 4287 §4.1.3.3 lists six, keyed on <see cref="ContentType"/>; reading them
+///         out of order is how <c>application/xhtml+xml</c> ends up Base64-decoded. This class follows the same order on both load and save.
 ///         <list type="number">
 ///             <item>
 ///                 <description>
-///                      If the value of the <see cref="ContentType"/> property is <b>text</b>, the value of the <see cref="Content"/> property <b>must not</b> contain child elements.
+///                      If the value of the <see cref="ContentType"/> property is <c>text</c>, the value of the <see cref="Content"/> property must not contain child elements.
 ///                      Such text is intended to be presented to humans in a readable fashion. Thus, Atom Processors <i>may</i> collapse white space (including line breaks),
 ///                      and display the text using typographic techniques such as justification and proportional fonts.
 ///                 </description>
 ///             </item>
 ///             <item>
 ///                 <description>
-///                      If the value of the <see cref="ContentType"/> property is <b>html</b>, the value of the <see cref="Content"/> property <b>must not</b> contain child elements
-///                      and <i>should</i> be suitable for handling as HTML. The HTML markup <b>must</b> be escaped. The HTML markup <i>should</i> be such that it could validly appear
-///                      directly within an HTML <b>div</b> element. Atom Processors that display the content <i>may</i> use the markup to aid in displaying it.
+///                      If the value of the <see cref="ContentType"/> property is <c>html</c>, the value of the <see cref="Content"/> property must not contain child elements
+///                      and <i>should</i> be suitable for handling as HTML. The HTML markup must be escaped. The HTML markup <i>should</i> be such that it could validly appear
+///                      directly within an HTML <c>div</c> element. Atom Processors that display the content <i>may</i> use the markup to aid in displaying it.
 ///                 </description>
 ///             </item>
 ///             <item>
 ///                 <description>
-///                      If the value of the <see cref="ContentType"/> property is <b>xhtml</b>, the value of the <see cref="Content"/> property <b>must</b> be a single XHTML div element
-///                      and <i>should</i> be suitable for handling as XHTML. The XHTML div element itself <b>must not</b> be considered part of the content. Atom Processors that display the
+///                      If the value of the <see cref="ContentType"/> property is <c>xhtml</c>, the value of the <see cref="Content"/> property must be a single XHTML div element
+///                      and <i>should</i> be suitable for handling as XHTML. The XHTML div element itself must not be considered part of the content. Atom Processors that display the
 ///                      content <i>may</i> use the markup to aid in displaying it. The escaped versions of characters represent those characters, not markup.
 ///                 </description>
 ///             </item>
 ///             <item>
 ///                 <description>
-///                      If the value is an <a href="http://www.ietf.org/rfc/rfc3023.txt">XML media type</a> or ends with <b>+xml</b> or <b>/xml</b> (case-insensitive),
+///                      If the value is an <a href="https://www.rfc-editor.org/rfc/rfc3023.html">XML media type</a> (RFC 3023, now RFC 7303) or ends with <c>+xml</c> or <c>/xml</c> (case-insensitive),
 ///                     the content <i>may</i> include child elements and <i>should</i> be suitable for handling as the indicated media type.
 ///                     If the <see cref="AtomContent.Source"/> is not provided, this would normally mean that the <see cref="AtomContent.Content"/> would contain a
 ///                     single child element that would serve as the root element of the XML document of the indicated type.
@@ -45,28 +46,24 @@ namespace Argotic.Syndication;
 ///             </item>
 ///             <item>
 ///                 <description>
-///                      If the value begins with <b>text/</b> (case-insensitive), the <see cref="AtomContent.Content"/> <b>must not</b> contain child elements.
+///                      If the value begins with <c>text/</c> (case-insensitive), the <see cref="AtomContent.Content"/> must not contain child elements.
 ///                 </description>
 ///             </item>
 ///             <item>
 ///                 <description>
-///                     For all other values , the <see cref="AtomContent.Content"/> <b>must</b> be a valid Base64 encoding, as described in
-///                     <a href="http://www.ietf.org/rfc/rfc3548.txt">RFC 3548: The Base16, Base32, and Base64 Data Encodings</a>, section 3.
-///                     When decoded, it <i>should</i> be suitable for handling as the indicated media type. In this case, the characters in
-///                     the Base64 encoding <i>may</i> be preceded and followed in the atom:content element by white space, and lines are
-///                     separated by a single newline (U+000A) character.
+///                     For all other values, the <see cref="AtomContent.Content"/> must be a valid Base64 encoding, as described in
+///                     <a href="https://www.rfc-editor.org/rfc/rfc3548.html">RFC 3548: The Base16, Base32, and Base64 Data Encodings</a>, section 3 —
+///                     the section RFC 4287 names. RFC 4648 obsoletes RFC 3548 and renumbers Base64 to <i>section 4</i>, so quoting "RFC 4648 section 3"
+///                     points at the wrong clause. When decoded, the content <i>should</i> be suitable for handling as the indicated media type. The
+///                     Base64 characters <i>may</i> be preceded and followed by white space, and lines are separated by a single newline (U+000A).
+///                     This class stores and writes such content verbatim; it neither decodes nor validates it.
 ///                 </description>
 ///             </item>
 ///         </list>
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the AtomContent class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Atom\AtomContentExample.cs"
-///             region="AtomContent"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Atom\AtomContentExample.cs" language="cs" title="The following code example demonstrates the usage of the AtomContent class." />
 /// </example>
 public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>, IEquatable<AtomContent>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
@@ -97,20 +94,20 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     ///         <list type="bullet">
     ///             <item>
     ///                 <description>
-    ///                      <i>html</i>: The content <b>must not</b> contain child elements and <i>should</i> be suitable for handling as HTML.
-    ///                      The HTML markup <b>must</b> be escaped, and <i>should</i> be such that it could validly appear directly within an HTML <b>div</b> element.
+    ///                      <i>html</i>: The content must not contain child elements and <i>should</i> be suitable for handling as HTML.
+    ///                      The HTML markup must be escaped, and <i>should</i> be such that it could validly appear directly within an HTML <c>div</c> element.
     ///                      Atom Processors that display the content <i>may</i> use the markup to aid in displaying it.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                      <i>text</i>: The content <b>must not</b> contain child elements. Such text is intended to be presented to humans in a readable fashion.
+    ///                      <i>text</i>: The content must not contain child elements. Such text is intended to be presented to humans in a readable fashion.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                      <i>xhtml</i>: The content <b>must</b> be a single XHTML div element and <i>should</i> be suitable for handling as XHTML.
-    ///                      The XHTML div element itself <b>must not</b> be considered part of the content. Atom Processors that display the content
+    ///                      <i>xhtml</i>: The content must be a single XHTML div element and <i>should</i> be suitable for handling as XHTML.
+    ///                      The XHTML div element itself must not be considered part of the content. Atom Processors that display the content
     ///                      <i>may</i> use the markup to aid in displaying it. The escaped versions of characters represent those characters, not markup.
     ///                 </description>
     ///             </item>
@@ -123,23 +120,32 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     }
 
     /// <summary>
-    /// Gets or sets the base URI other than the base URI of the document or external entity.
+    /// Gets or sets the base against which relative references inside this element are resolved.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>xml:base</c> in effect for this element, or <see langword="null"/> when none is. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-    ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+    ///         RFC 4287 §2 gives <c>xml:base</c> the function described in section 5.1.1 of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a> — it establishes the base URI,
+    ///         or IRI, for every relative reference in the attribute's effective scope. The value itself is a URI reference after processing according to
+    ///         <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.
+    ///     </para>
+    ///     <para>
+    ///         Loading resolves inheritance: an element without an <c>xml:base</c> of its own reports the nearest ancestor's, so the value here is the
+    ///         <i>effective</i> base a consumer can resolve an href against, not the literal attribute.
+    ///     </para>
     /// </remarks>
     public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>The language declared by <c>xml:lang</c>, or <see langword="null"/> when none is in scope. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         RFC 4287 defines <c>atomLanguageTag</c> as a language identifier per
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>, or its successor. A tag this runtime cannot turn
+    ///         into a <see cref="CultureInfo"/> is traced and dropped rather than failing the load.
     ///     </para>
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -147,21 +153,24 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Extensions"/> holds at least one <see cref="ISyndicationExtension"/>; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets the local content of this entry.
     /// </summary>
-    /// <value>The local content of this entry.</value>
+    /// <value>
+    ///     The content, unescaped. For <c>xhtml</c> this is the inner markup of the wrapping <c>div</c>; for an XML media type it is the raw fragment.
+    ///     Empty when <see cref="Source"/> names the content instead. The default value is an <i>empty</i> string.
+    /// </value>
     /// <remarks>
-    ///     The <see cref="Content"/> property is <i>language-sensitive</i>, with the natural language of the value being specified by the <see cref="Language"/> property.
+    ///     Language-sensitive: the natural language of the value is whatever <see cref="Language"/> reports. What this string means depends entirely on
+    ///     <see cref="ContentType"/> — see the ordered rules on <see cref="AtomContent"/>.
     /// </remarks>
     public string Content
     {
@@ -172,55 +181,58 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// <summary>
     /// Gets or sets a value indicating the entity encoding of this content.
     /// </summary>
-    /// <value>A value indicating the entity encoding of this content.</value>
+    /// <value>
+    ///     The <c>type</c> attribute: one of the keywords <c>text</c>, <c>html</c>, <c>xhtml</c>, or a media type. The default value is an <i>empty</i>
+    ///     string, which RFC 4287 §4.1.3.1 makes equivalent to <c>text</c>.
+    /// </value>
     /// <remarks>
     ///     <para>
     ///         The Atom specification defines three initial values for the type of entry content:
     ///         <list type="bullet">
     ///             <item>
     ///                 <description>
-    ///                      <i>html</i>: The content <b>must not</b> contain child elements and <i>should</i> be suitable for handling as HTML.
-    ///                      The HTML markup <b>must</b> be escaped, and <i>should</i> be such that it could validly appear directly within an HTML <b>div</b> element.
+    ///                      <i>html</i>: The content must not contain child elements and <i>should</i> be suitable for handling as HTML.
+    ///                      The HTML markup must be escaped, and <i>should</i> be such that it could validly appear directly within an HTML <c>div</c> element.
     ///                      Atom Processors that display the content <i>may</i> use the markup to aid in displaying it.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                      <i>text</i>: The content <b>must not</b> contain child elements. Such text is intended to be presented to humans in a readable fashion.
+    ///                      <i>text</i>: The content must not contain child elements. Such text is intended to be presented to humans in a readable fashion.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                      <i>xhtml</i>: The content <b>must</b> be a single XHTML div element and <i>should</i> be suitable for handling as XHTML.
-    ///                      The XHTML div element itself <b>must not</b> be considered part of the content. Atom Processors that display the content
+    ///                      <i>xhtml</i>: The content must be a single XHTML div element and <i>should</i> be suitable for handling as XHTML.
+    ///                      The XHTML div element itself must not be considered part of the content. Atom Processors that display the content
     ///                      <i>may</i> use the markup to aid in displaying it. The escaped versions of characters represent those characters, not markup.
     ///                 </description>
     ///             </item>
     ///         </list>
     ///     </para>
     ///     <para>
-    ///         If the value is an <a href="http://www.ietf.org/rfc/rfc3023.txt">XML media type</a> or ends with <b>+xml</b> or <b>/xml</b> (case-insensitive),
+    ///         If the value is an <a href="https://www.rfc-editor.org/rfc/rfc3023.html">XML media type</a> (RFC 3023, now RFC 7303) or ends with <c>+xml</c> or <c>/xml</c> (case-insensitive),
     ///         the content <i>may</i> include child elements and <i>should</i> be suitable for handling as the indicated media type.
     ///         If the <see cref="AtomContent.Source"/> is not provided, this would normally mean that the <see cref="AtomContent.Content"/> would contain a
     ///         single child element that would serve as the root element of the XML document of the indicated type.
     ///     </para>
     ///     <para>
-    ///         If the content type is not one of those specified above, it <b>must</b> conform to the syntax of a MIME media type, but <b>must not</b> be a composite type.
-    ///         See <a href="http://www.ietf.org/rfc/rfc4288.txt">RFC 4288: Media Type Specifications and Registration Procedures</a> for more details.
+    ///         If the content type is not one of those specified above, it must conform to the syntax of a MIME media type, but must not be a composite type.
+    ///         See <a href="https://www.rfc-editor.org/rfc/rfc4288.html">BCP 13 (RFC 4288, now RFC 6838)</a> for more details.
     ///     </para>
     ///     <para>
-    ///         If the value begins with <b>text/</b> (case-insensitive), the <see cref="AtomContent.Content"/> <b>must not</b> contain child elements.
+    ///         If the value begins with <c>text/</c> (case-insensitive), the <see cref="AtomContent.Content"/> must not contain child elements.
     ///     </para>
     ///     <para>
-    ///         For all other values , the <see cref="AtomContent.Content"/> <b>must</b> be a valid Base64 encoding, as described in
-    ///         <a href="http://www.ietf.org/rfc/rfc3548.txt">RFC 3548: The Base16, Base32, and Base64 Data Encodings</a>, section 3.
-    ///         When decoded, it <i>should</i> be suitable for handling as the indicated media type. In this case, the characters in
-    ///         the Base64 encoding <i>may</i> be preceded and followed in the atom:content element by white space, and lines are
+    ///         For all other values, the <see cref="AtomContent.Content"/> must be a valid Base64 encoding, as described in
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3548.html">RFC 3548: The Base16, Base32, and Base64 Data Encodings</a>, section 3 — the section
+    ///         RFC 4287 names. RFC 4648 obsoletes RFC 3548 and renumbers Base64 to <i>section 4</i>. When decoded, the content <i>should</i> be suitable
+    ///         for handling as the indicated media type. The Base64 characters <i>may</i> be preceded and followed by white space, and lines are
     ///         separated by a single newline (U+000A) character.
     ///     </para>
     ///     <para>
     ///         If neither the <see cref="AtomContent.ContentType"/> nor the <see cref="AtomContent.Source"/> is provided,
-    ///         Atom Processors <b>must</b> behave as though the<see cref="AtomContent.ContentType"/> property has a value of <i>text</i>.
+    ///         Atom Processors must behave as though this property has a value of <c>text</c>.
     ///     </para>
     /// </remarks>
     public string ContentType
@@ -232,20 +244,22 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// <summary>
     /// Gets or sets an IRI that identifies the remote location of this content.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the remote location of this content.</value>
+    /// <value>The <c>src</c> attribute as an IRI reference, or <see langword="null"/> when the content is carried in the element. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         If a <see cref="AtomContent.Source"/> property is specified, the <see cref="AtomContent.Content"/> property <b>must</b> be empty.
-    ///         Atom Processors <i>may</i> use the IRI to retrieve the content and <i>may</i> choose to ignore remote content or to present it in a different manner than local content.
+    ///         RFC 4287 §4.1.3.2 makes the value an IRI reference (<a href="https://www.rfc-editor.org/rfc/rfc3987.html">RFC 3987</a>) — a <i>reference</i>,
+    ///         so unlike <see cref="AtomId"/> it may be relative and resolved against <see cref="BaseUri"/>. When it is present the element must be empty,
+    ///         and §4.1.2 then requires the entry to carry an <c>atom:summary</c>, since there is no local text at all. Atom Processors <i>may</i> retrieve
+    ///         the remote content, ignore it, or present it differently from local content. Nothing here dereferences it.
     ///     </para>
     ///     <para>
-    ///         If a <see cref="AtomContent.Source"/> property is specified, the <see cref="AtomContent.ContentType"/> <i>should</i> be provided and <b>must</b> be a
-    ///         <a href="http://www.ietf.org/rfc/rfc4288.txt">MIME media type</a>, rather than <b>text</b>, <b>html</b>, or <b>xhtml</b>. The value is advisory;
+    ///         If a <see cref="AtomContent.Source"/> property is specified, the <see cref="AtomContent.ContentType"/> <i>should</i> be provided and must be a
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc4288.html">MIME media type</a> in the sense of BCP 13 (RFC 4288, now RFC 6838), rather than <c>text</c>, <c>html</c>, or <c>xhtml</c>. The value is advisory;
     ///         that is to say, when the corresponding URI (mapped from an IRI, if necessary) is dereferenced, if the server providing that content also provides
     ///         a media type, the server-provided media type is authoritative.
     ///     </para>
-    ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
-    ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
+    ///     <para>See <a href="https://www.rfc-editor.org/rfc/rfc3987.html">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
+    ///     <para>See <see cref="Uri"/> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
     public Uri? Source { get; set; }
 
@@ -253,11 +267,11 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// Loads this <see cref="AtomContent"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="AtomContent"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomContent"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomContent"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -322,12 +336,12 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="AtomContent"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomContent"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomContent"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -345,7 +359,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// Saves the current <see cref="AtomContent"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -423,7 +437,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// Determines whether the specified <see cref="AtomContent"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="AtomContent"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="AtomContent"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="AtomContent"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(AtomContent? other)
     {
         if (other is null)
@@ -438,7 +452,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is AtomContent other && this.Equals(other);
 
     /// <summary>
@@ -452,7 +466,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(AtomContent? first, AtomContent? second)
     {
         if (first is null) return second is null;
@@ -464,7 +478,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are not equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(AtomContent? first, AtomContent? second) => !(first == second);
 
 }

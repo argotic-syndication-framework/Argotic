@@ -9,7 +9,8 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Opml;
 
 /// <summary>
-/// Behavior-driven tests for <see cref="OpmlDocument"/> covering creation, parsing, and round-trip scenarios.
+/// Covers <see cref="OpmlDocument"/> end to end: building an outline tree, parsing one, the
+/// subscription-list and inclusion outlines OPML 2.0 defines, and what survives a save and reload.
 /// </summary>
 [TestClass]
 public class OpmlDocumentBehaviorTests
@@ -18,6 +19,9 @@ public class OpmlDocumentBehaviorTests
 
     #region Document Creation Tests
 
+    /// <summary>
+    /// A title assigned through the document initialiser reaches the head.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenCreatedWithTitle_SetsHeadTitle()
     {
@@ -34,6 +38,9 @@ public class OpmlDocumentBehaviorTests
         document.Head.Title.ShouldBe("My Subscriptions");
     }
 
+    /// <summary>
+    /// A default-constructed document has a head and an outline collection, neither null, and no outlines.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenCreatedWithDefaultConstructor_HasEmptyOutlines()
     {
@@ -47,6 +54,9 @@ public class OpmlDocumentBehaviorTests
         document.Head.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// Outlines are held in the order they were added.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenOutlinesAdded_ContainsAllOutlines()
     {
@@ -65,6 +75,9 @@ public class OpmlDocumentBehaviorTests
         document.Outlines[1].Text.ShouldBe("Second Outline");
     }
 
+    /// <summary>
+    /// An outline tree assembled three levels deep keeps every parent-child link and the order of siblings.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenNestedOutlinesAdded_PreservesHierarchy()
     {
@@ -90,6 +103,9 @@ public class OpmlDocumentBehaviorTests
         document.Outlines[0].Outlines[1].Text.ShouldBe("Child 2");
     }
 
+    /// <summary>
+    /// The document indexer reads the outline at a position in the collection.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_Indexer_ReturnsCorrectOutline()
     {
@@ -105,6 +121,9 @@ public class OpmlDocumentBehaviorTests
         document[2].Text.ShouldBe("Third");
     }
 
+    /// <summary>
+    /// The document indexer replaces the outline at a position in the collection.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_Indexer_CanSetOutline()
     {
@@ -119,6 +138,10 @@ public class OpmlDocumentBehaviorTests
         document[0].Text.ShouldBe("Replaced");
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> to the head throws
+    /// <see cref="ArgumentNullException"/> rather than leaving the document headless.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_HeadSetToNull_ThrowsArgumentNullException()
     {
@@ -129,6 +152,9 @@ public class OpmlDocumentBehaviorTests
         Should.Throw<ArgumentNullException>(() => document.Head = null!);
     }
 
+    /// <summary>
+    /// The head keeps the UTC creation and modification dates it is given.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_HeadWithDates_SetsCreatedAndModifiedDates()
     {
@@ -152,6 +178,9 @@ public class OpmlDocumentBehaviorTests
         document.Head.ModifiedOn.ShouldBe(modifiedOn);
     }
 
+    /// <summary>
+    /// An owner given a name, an email address and an identifying URI exposes all three.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_HeadWithOwner_SetsOwnerProperties()
     {
@@ -176,6 +205,9 @@ public class OpmlDocumentBehaviorTests
 
     #region Document Parsing Tests
 
+    /// <summary>
+    /// Loading an OPML 2.0 stream populates the head title.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenLoadedFromValidXml_PopulatesProperties()
     {
@@ -191,6 +223,9 @@ public class OpmlDocumentBehaviorTests
         document.Head.Title.ShouldBe("Test OPML");
     }
 
+    /// <summary>
+    /// Loading fills the outline collection from the body, one entry per <c>outline</c> element.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenLoadedFromOpmlWithOutlines_PopulatesOutlineCollection()
     {
@@ -208,6 +243,9 @@ public class OpmlDocumentBehaviorTests
         document.Outlines[0].Text.ShouldBe("Test Outline");
     }
 
+    /// <summary>
+    /// Loading from an <see cref="XmlReader"/> yields the same head and outlines as loading from a stream.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenLoadedFromXmlReader_PopulatesProperties()
     {
@@ -224,6 +262,9 @@ public class OpmlDocumentBehaviorTests
         document.Outlines.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// An unclosed element surfaces as <see cref="XmlException"/> rather than as a partly populated document.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenLoadedFromMalformedXml_ThrowsXmlException()
     {
@@ -246,6 +287,9 @@ public class OpmlDocumentBehaviorTests
         });
     }
 
+    /// <summary>
+    /// Nested <c>outline</c> elements load into a tree of the same shape, three levels deep and in document order.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenLoadedWithNestedOutlines_PreservesHierarchy()
     {
@@ -282,6 +326,9 @@ public class OpmlDocumentBehaviorTests
         document.Outlines[0].Outlines[1].Text.ShouldBe("Child 2");
     }
 
+    /// <summary>
+    /// Loading raises <c>Loaded</c>, and the handler receives event arguments rather than <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenLoaded_RaisesLoadedEvent()
     {
@@ -310,6 +357,9 @@ public class OpmlDocumentBehaviorTests
 
     #region Round-Trip Tests
 
+    /// <summary>
+    /// A saved document reloads with the same head title and the same outline text.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenSavedAndReloaded_PreservesBasicProperties()
     {
@@ -337,6 +387,9 @@ public class OpmlDocumentBehaviorTests
         loadedDocument.Outlines[0].Text.ShouldBe(originalDocument.Outlines[0].Text);
     }
 
+    /// <summary>
+    /// A three-level outline tree survives a save and reload, children and sibling order included.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenSavedAndReloaded_PreservesNestedOutlines()
     {
@@ -369,6 +422,10 @@ public class OpmlDocumentBehaviorTests
         loadedDocument.Outlines[0].Outlines[1].Text.ShouldBe("Child 2");
     }
 
+    /// <summary>
+    /// Head metadata survives a round trip: the owner, the vertical scroll
+    /// state, and the expansion state as an ordered list of outline numbers.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenSavedAndReloaded_PreservesHeadMetadata()
     {
@@ -410,6 +467,9 @@ public class OpmlDocumentBehaviorTests
         loadedDocument.Head.ExpansionState[1].ShouldBe(3);
     }
 
+    /// <summary>
+    /// A second save and reload leaves the title and the outline count where the first one left them.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WhenSavedAndReloadedTwice_MaintainsDataIntegrity()
     {
@@ -435,6 +495,9 @@ public class OpmlDocumentBehaviorTests
         document2.Outlines.Count.ShouldBe(originalDocument.Outlines.Count);
     }
 
+    /// <summary>
+    /// Parsing, serialising and parsing again yields the same head title and the same outline text.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_ParseSerializeParse_ProducesSameDocument()
     {
@@ -462,6 +525,10 @@ public class OpmlDocumentBehaviorTests
 
     #region OPML-Specific Behavior Tests - Subscription List Outlines
 
+    /// <summary>
+    /// A subscription list outline is given the content type
+    /// <c>rss</c> and the feed address as its <c>xmlUrl</c> attribute.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_CreateSubscriptionListOutline_CreatesRssOutline()
     {
@@ -479,6 +546,11 @@ public class OpmlDocumentBehaviorTests
         outline.Attributes["xmlUrl"].ShouldBe("http://example.com/feed.rss");
     }
 
+    /// <summary>
+    /// The full overload writes <c>xmlUrl</c>, <c>htmlUrl</c>, <c>version</c>,
+    /// <c>title</c>, <c>description</c> and <c>language</c> as outline attributes,
+    /// the site address in the trailing-slash form <see cref="Uri"/> normalises it to.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_CreateSubscriptionListOutline_WithAllParameters_SetsAllAttributes()
     {
@@ -505,6 +577,9 @@ public class OpmlDocumentBehaviorTests
         outline.Attributes["language"].ShouldBe("en-US");
     }
 
+    /// <summary>
+    /// An outline whose content type is <c>rss</c> reports itself as a subscription list.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_IsSubscriptionListOutline_ReturnsTrueForRssType()
     {
@@ -518,6 +593,9 @@ public class OpmlDocumentBehaviorTests
         outline.IsSubscriptionListOutline.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// An outline whose content type is <c>feed</c> reports itself as a subscription list.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_IsSubscriptionListOutline_ReturnsTrueForFeedType()
     {
@@ -531,6 +609,9 @@ public class OpmlDocumentBehaviorTests
         outline.IsSubscriptionListOutline.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Subscription list outlines survive a round trip with their content type and their <c>xmlUrl</c> attribute.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_WithSubscriptionOutlines_SavesAndLoadsCorrectly()
     {
@@ -573,6 +654,9 @@ public class OpmlDocumentBehaviorTests
 
     #region OPML-Specific Behavior Tests - Include Outlines
 
+    /// <summary>
+    /// An inclusion outline pointing at an <c>.opml</c> address is given the content type <c>include</c>.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_CreateInclusionOutline_WithOpmlUrl_CreatesIncludeType()
     {
@@ -588,6 +672,10 @@ public class OpmlDocumentBehaviorTests
         outline.Attributes["url"].ShouldBe("http://example.com/external.opml");
     }
 
+    /// <summary>
+    /// An inclusion outline pointing anywhere other than an
+    /// <c>.opml</c> address is given the content type <c>link</c>.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_CreateInclusionOutline_WithNonOpmlUrl_CreatesLinkType()
     {
@@ -603,6 +691,9 @@ public class OpmlDocumentBehaviorTests
         outline.Attributes["url"].ShouldBe("http://example.com/page.html");
     }
 
+    /// <summary>
+    /// An outline whose content type is <c>include</c> reports itself as an inclusion.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_IsInclusionOutline_ReturnsTrueForIncludeType()
     {
@@ -616,6 +707,9 @@ public class OpmlDocumentBehaviorTests
         outline.IsInclusionOutline.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// An outline whose content type is <c>link</c> reports itself as an inclusion.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_IsInclusionOutline_ReturnsTrueForLinkType()
     {
@@ -633,6 +727,10 @@ public class OpmlDocumentBehaviorTests
 
     #region OPML-Specific Behavior Tests - Outline Categories and Attributes
 
+    /// <summary>
+    /// Outline categories survive a round trip in order, a
+    /// slash-delimited path such as <c>Technology/Software</c> included.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_WithCategories_SavesAndLoadsCorrectly()
     {
@@ -661,6 +759,9 @@ public class OpmlDocumentBehaviorTests
         loadedDocument.Outlines[0].Categories[1].ShouldBe("News");
     }
 
+    /// <summary>
+    /// Attributes the format does not define are written out and read back verbatim.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_WithCustomAttributes_SavesAndLoadsCorrectly()
     {
@@ -690,6 +791,9 @@ public class OpmlDocumentBehaviorTests
         loadedDocument.Outlines[0].Attributes["customAttr2"].ShouldBe("value2");
     }
 
+    /// <summary>
+    /// The commented flag on an outline survives a round trip.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_WithIsCommented_SavesAndLoadsCorrectly()
     {
@@ -717,6 +821,9 @@ public class OpmlDocumentBehaviorTests
         loadedDocument.Outlines[0].IsCommented.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The breakpoint flag on an outline survives a round trip.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_WithHasBreakpoint_SavesAndLoadsCorrectly()
     {
@@ -744,6 +851,10 @@ public class OpmlDocumentBehaviorTests
         loadedDocument.Outlines[0].HasBreakpoint.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// An outline created date is written as a <c>created</c>
+    /// attribute whose month is spelled <c>Jun</c>, not numbered.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_WithCreatedOnDate_SerializesCreatedAttribute()
     {
@@ -774,6 +885,9 @@ public class OpmlDocumentBehaviorTests
         xml.ShouldContain("Jun");
     }
 
+    /// <summary>
+    /// An outline created date is read back exactly as assigned.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_CreatedOnDate_CanBeSetAndRetrieved()
     {
@@ -792,6 +906,9 @@ public class OpmlDocumentBehaviorTests
 
     #region Format and Version Tests
 
+    /// <summary>
+    /// A document reports <c>SyndicationContentFormat.Opml</c> as the format it implements.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_Format_ReturnsOpml()
     {
@@ -802,6 +919,9 @@ public class OpmlDocumentBehaviorTests
         document.Format.ShouldBe(SyndicationContentFormat.Opml);
     }
 
+    /// <summary>
+    /// A document reports version <c>2.0</c>, which is the version it writes rather than one it was told.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_Version_Returns2_0()
     {
@@ -812,6 +932,9 @@ public class OpmlDocumentBehaviorTests
         document.Version.ShouldBe(new Version(2, 0));
     }
 
+    /// <summary>
+    /// The head points by default at the OPML 2.0 specification, at <c>http://www.opml.org/spec2</c>.
+    /// </summary>
     [TestMethod]
     public void OpmlHead_Documentation_ReturnsOpmlSpecUrl()
     {
@@ -826,6 +949,9 @@ public class OpmlDocumentBehaviorTests
 
     #region CreateNavigator Tests
 
+    /// <summary>
+    /// The navigator a document creates is rooted on an <c>opml</c> element.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_CreateNavigator_ReturnsValidNavigator()
     {
@@ -850,6 +976,9 @@ public class OpmlDocumentBehaviorTests
 
     #region Extensions Tests
 
+    /// <summary>
+    /// A document carrying no extensions says so, and its extension collection is empty rather than null.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
@@ -861,6 +990,9 @@ public class OpmlDocumentBehaviorTests
         document.Extensions.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A head carrying no extensions says so.
+    /// </summary>
     [TestMethod]
     public void OpmlHead_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
@@ -871,6 +1003,9 @@ public class OpmlDocumentBehaviorTests
         document.Head.HasExtensions.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An outline carrying no extensions says so.
+    /// </summary>
     [TestMethod]
     public void OpmlOutline_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
@@ -885,6 +1020,9 @@ public class OpmlDocumentBehaviorTests
 
     #region Async Operations Tests
 
+    /// <summary>
+    /// Loading over a caller-supplied client populates the head and outlines, and raises <c>Loaded</c>.
+    /// </summary>
     [TestMethod]
     public async Task OpmlDocument_LoadAsync_LoadsDocumentCorrectly()
     {
@@ -908,6 +1046,9 @@ public class OpmlDocumentBehaviorTests
         document.Outlines.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// The static create returns a document already populated from the response body.
+    /// </summary>
     [TestMethod]
     public async Task OpmlDocument_CreateAsync_CreatesAndLoadsNewDocument()
     {
@@ -927,6 +1068,9 @@ public class OpmlDocumentBehaviorTests
         document.Format.ShouldBe(SyndicationContentFormat.Opml);
     }
 
+    /// <summary>
+    /// The <c>Loaded</c> event reports the URI the document was fetched from.
+    /// </summary>
     [TestMethod]
     public async Task OpmlDocument_LoadAsync_IncludesSourceUriInEventArgs()
     {
@@ -954,6 +1098,10 @@ public class OpmlDocumentBehaviorTests
 
     #region Save Tests
 
+    /// <summary>
+    /// Saving writes an XML declaration and an <c>opml</c> element
+    /// carrying <c>version="2.0"</c>, a head with the title, and a body.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_Save_ProducesValidXml()
     {
@@ -983,6 +1131,9 @@ public class OpmlDocumentBehaviorTests
         xml.ShouldContain("<outline");
     }
 
+    /// <summary>
+    /// Saving through a caller-configured <see cref="XmlWriter"/> writes the same document as saving to a stream.
+    /// </summary>
     [TestMethod]
     public void OpmlDocument_SaveWithXmlWriter_ProducesValidXml()
     {

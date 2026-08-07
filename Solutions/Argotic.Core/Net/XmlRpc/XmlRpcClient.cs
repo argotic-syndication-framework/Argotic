@@ -13,28 +13,36 @@ using Microsoft.Extensions.Options;
 namespace Argotic.Net;
 
 /// <summary>
-/// Allows applications to send remote procedure calls by using the Extensible Markup Language Remote Procedure Call (XML-RPC) protocol.
+/// Sends remote procedure calls using the XML-RPC protocol.
 /// </summary>
 /// <remarks>
-///     <para>This implementation of XML-RPC is based on the XML-RPC 1.0 specification which can be found at <a href="http://www.xmlrpc.com/spec">http://www.xmlrpc.com/spec</a>.</para>
-///     <para><b>XML-RPC</b> is a Remote Procedure Calling protocol that works over the Internet.</para>
 ///     <para>
-///         An XML-RPC <i>message</i> is an HTTP-POST request. The body of the request is in XML.
-///         A procedure executes on the server and the value it returns is also formatted in XML.
+///         A call is an HTTP <c>POST</c> of <c>text/xml</c>: a <c>&lt;methodCall&gt;</c> naming a method
+///         and carrying its parameters, answered by a <c>&lt;methodResponse&gt;</c> holding either one
+///         return value or a fault structure. Parameters are scalars, arrays or structures, and the last
+///         two nest. This implementation follows the XML-RPC 1.0 specification at
+///         <a href="https://xmlrpc.com/spec.md">https://xmlrpc.com/spec.md</a>.
 ///     </para>
-///     <para>Procedure parameters can be scalars, numbers, strings, dates and other simple types; and can also be complex record and list structures.</para>
+///     <para>
+///         The endpoint this library expects to reach is a Pingback server —
+///         <see cref="SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(string)"/> finds one,
+///         and <c>pingback.ping</c> is an XML-RPC call. Pingback is the sibling of Trackback and is
+///         legacy for the same reasons: the ping asserts a link with no authentication behind it, the
+///         spam followed, and most weblog software stopped accepting them years ago. Nothing here is
+///         specific to Pingback, though; the client will call any XML-RPC endpoint.
+///     </para>
+///     <para>
+///         A fault is not an exception. The server answers <c>200 OK</c> and puts the failure in the
+///         body, so a <see cref="SendAsync"/> that returns normally may still have failed — read
+///         <see cref="XmlRpcResponse.Fault"/>.
+///     </para>
 ///     <para>
 ///         For scenarios requiring authentication or proxy configuration, provide a pre-configured <see cref="HttpClient"/>
 ///         via the constructor. This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the XmlRpcClient class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Net\XmlRpcClientExample.cs"
-///             region="XmlRpcClient"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Net\XmlRpcClientExample.cs" language="cs" title="The following code example demonstrates the usage of the XmlRpcClient class." />
 /// </example>
 public class XmlRpcClient
 {
@@ -59,7 +67,7 @@ public class XmlRpcClient
     /// Initializes a new instance of the <see cref="XmlRpcClient"/> class with the specified options.
     /// </summary>
     /// <param name="options">The options to configure this client.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is <see langword="null"/>.</exception>
     /// <remarks>
     ///     This constructor is intended for use with dependency injection and the <see cref="IOptions{TOptions}"/> pattern.
     /// </remarks>
@@ -75,8 +83,8 @@ public class XmlRpcClient
     /// </summary>
     /// <param name="options">The options to configure this client.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for sending requests. The caller is responsible for managing the client's lifecycle.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <remarks>
     ///     <para>
     ///     This constructor is intended for use with dependency injection and the <see cref="IOptions{TOptions}"/> pattern.
@@ -105,7 +113,7 @@ public class XmlRpcClient
     ///     This constructor uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.
     ///     For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is <see langword="null"/>.</exception>
     public XmlRpcClient(Uri host) : this()
     {
         this.Host = host;
@@ -125,7 +133,7 @@ public class XmlRpcClient
     ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     public XmlRpcClient(HttpClient httpClient)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
@@ -147,8 +155,8 @@ public class XmlRpcClient
     ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     public XmlRpcClient(Uri host, HttpClient httpClient) : this(httpClient)
     {
         this.Host = host;
@@ -157,8 +165,11 @@ public class XmlRpcClient
     /// <summary>
     /// Gets or sets the location of the host computer that client remote procedure calls will be sent to.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>
+    ///     The XML-RPC endpoint URL. The default value is <see langword="null"/>, in which case
+    ///     <see cref="SendAsync"/> throws <see cref="InvalidOperationException"/>.
+    /// </value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Host
     {
         get;
@@ -173,7 +184,14 @@ public class XmlRpcClient
     /// <summary>
     /// Gets or sets a value that specifies the amount of time after which asynchronous send operations will time-out.
     /// </summary>
-    /// <value>A <see cref="TimeSpan"/> that specifies the time-out period. The default value is 15 seconds.</value>
+    /// <value>The time-out period. The default value is 15 seconds. The permitted range is zero to 365 days, inclusive.</value>
+    /// <remarks>
+    ///     Enforced by <see cref="CancellationTokenSource.CancelAfter(TimeSpan)"/> on a source linked to
+    ///     the token passed to <see cref="SendAsync"/>, not by <see cref="HttpClient.Timeout"/> — the
+    ///     shared client is built with <see cref="System.Threading.Timeout.InfiniteTimeSpan"/>. The
+    ///     deadline therefore covers reading the response body as well as the request, and expiry
+    ///     surfaces as <see cref="OperationCanceledException"/>.
+    /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is less than zero.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
     public TimeSpan Timeout
@@ -200,9 +218,9 @@ public class XmlRpcClient
     /// <summary>
     /// Gets or sets information such as the client application name, version, host operating system, and language.
     /// </summary>
-    /// <value>Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The <c>User-Agent</c> header value, trimmed. The default value is <c>Argotic-Syndication-Framework/</c> followed by this assembly's four-part version.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     // Both null-forgiving operators in the default value are provable. Assembly.GetAssembly returns
     // null only for a type with no backing assembly, which a typeof() of a type declared here cannot
     // be, and AssemblyName.Version is always populated because the SDK emits an assembly version
@@ -222,30 +240,23 @@ public class XmlRpcClient
     /// Returns the scalar type identifier for the supplied <see cref="XmlRpcScalarValueType"/>.
     /// </summary>
     /// <param name="type">The <see cref="XmlRpcScalarValueType"/> to get the scalar type identifier for.</param>
-    /// <returns>The scalar type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
-    /// <example>
-    ///     <code
-    ///         lang="cs"
-    ///         title="The following code example demonstrates the usage of the ScalarTypeAsString method."
-    ///     />
-    /// </example>
+    /// <returns>
+    ///     The element name XML-RPC uses for the type, such as <c>int</c> or <c>dateTime.iso8601</c>;
+    ///     an <i>empty</i> string for <see cref="XmlRpcScalarValueType.None"/> or a value outside the
+    ///     enumeration.
+    /// </returns>
     public static string ScalarTypeAsString(XmlRpcScalarValueType type) =>
         EnumerationMetadataAttribute.GetAlternateValue(type);
 
     /// <summary>
     /// Returns the <see cref="XmlRpcScalarValueType"/> enumeration value that corresponds to the specified scalar type name.
     /// </summary>
-    /// <param name="name">The name of the scalar type.</param>
-    /// <returns>A <see cref="XmlRpcScalarValueType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>XmlRpcScalarValueType.None</b>.</returns>
-    /// <remarks>This method disregards case of specified scalar type name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    /// <example>
-    ///     <code
-    ///         lang="cs"
-    ///         title="The following code example demonstrates the usage of the ScalarTypeByName method."
-    ///     />
-    /// </example>
+    /// <param name="name">The XML-RPC element name, such as <c>string</c> or <c>dateTime.iso8601</c>. Matched without regard to case.</param>
+    /// <returns>The matching <see cref="XmlRpcScalarValueType"/>; otherwise, <see cref="XmlRpcScalarValueType.None"/>, which is also what an unrecognised, <see langword="null"/> or empty <paramref name="name"/> yields.</returns>
+    /// <remarks>
+    ///     <c>i4</c> is not recognised here. XML-RPC permits it as a synonym for <c>int</c>, and callers
+    ///     that need to accept it map it themselves before asking.
+    /// </remarks>
     public static XmlRpcScalarValueType ScalarTypeByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, XmlRpcScalarValueType.None);
 
@@ -255,16 +266,25 @@ public class XmlRpcClient
     /// </summary>
     /// <param name="source">A <see cref="XPathNavigator"/> that represents the XML data source to be parsed.</param>
     /// <param name="value">
-    ///     When this method returns, contains an object that represents the <see cref="IXmlRpcValue"/> specified by the <paramref name="source"/>, or <b>null</b> if the conversion failed.
+    ///     When this method returns, contains an object that represents the <see cref="IXmlRpcValue"/> specified by the <paramref name="source"/>, or <see langword="null"/> if the conversion failed.
     ///     This parameter is passed uninitialized.
     /// </param>
     /// <returns>
-    ///     <b>true</b> if <paramref name="source"/> was converted successfully; otherwise, <b>false</b>.
-    ///     This operation returns <b>false</b> if the <paramref name="source"/> parameter is a null reference,
+    ///     <see langword="true"/> if <paramref name="source"/> was converted successfully; otherwise, <see langword="false"/>.
+    ///     This operation returns <see langword="false"/> if the <paramref name="source"/> parameter is <see langword="null"/>,
     ///     or represents XML data that is not in the expected format.
     /// </returns>
     /// <remarks>
-    ///     The <paramref name="source"/> is expected to represent an XML-RPC <b>value</b> node.
+    ///     <para>
+    ///     The <paramref name="source"/> is expected to be positioned on an XML-RPC
+    ///     <c>&lt;value&gt;</c> element; one positioned anywhere else fails rather than guessing.
+    ///     </para>
+    ///     <para>
+    ///     A typed element whose text will not parse — <c>&lt;value&gt;&lt;i4&gt;abc&lt;/i4&gt;&lt;/value&gt;</c>
+    ///     — is a failure, not the string <c>abc</c>. Only an element carrying no type at all falls back
+    ///     to a string, which is what the specification says: "If no type is indicated, the type is
+    ///     string."
+    ///     </para>
     /// </remarks>
     public static bool TryParseValue(XPathNavigator source, [NotNullWhen(true)] out IXmlRpcValue? value)
     {
@@ -418,7 +438,7 @@ public class XmlRpcClient
     /// </summary>
     /// <param name="value">A string containing the value to convert.</param>
     /// <param name="result">When this method returns, contains the converted value if the conversion succeeded, or <see cref="DateTime.MinValue"/> if it failed. This parameter is passed uninitialized.</param>
-    /// <returns><b>true</b> if <paramref name="value"/> was converted successfully; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if <paramref name="value"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>
     ///     RFC 3339 is tried first, unchanged, because that is what this element accepted before and
@@ -446,12 +466,12 @@ public class XmlRpcClient
     /// </summary>
     /// <param name="value">A string containing the value to convert.</param>
     /// <param name="result">
-    ///     When this method returns, if the conversion succeeded, contains <b>true</b> if value is equivalent to <i>1</i>, <i>true</i> or <i>True</i>;
-    ///     or <b>false</b> if value is equivalent to <i>0</i>, <i>false</i> or <i>False</i>. If the conversion failed, contains <b>false</b>.
-    ///     The conversion fails if value is a null reference or is not equivalent to <i>1</i>, <i>true</i>, <i>True</i>, <i>0</i>, <i>false</i> or <i>False</i>.
+    ///     When this method returns, if the conversion succeeded, contains <see langword="true"/> if value is equivalent to <i>1</i>, <i>true</i> or <i>True</i>;
+    ///     or <see langword="false"/> if value is equivalent to <i>0</i>, <i>false</i> or <i>False</i>. If the conversion failed, contains <see langword="false"/>.
+    ///     The conversion fails if value is <see langword="null"/> or is not equivalent to <i>1</i>, <i>true</i>, <i>True</i>, <i>0</i>, <i>false</i> or <i>False</i>.
     ///     This parameter is passed uninitialized.
     /// </param>
-    /// <returns><b>true</b> if <paramref name="value"/> was converted successfully; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if <paramref name="value"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
     internal static bool TryParseBoolean(string value, out bool result)
     {
         if (string.Equals(value, "1", StringComparison.OrdinalIgnoreCase))
@@ -486,9 +506,18 @@ public class XmlRpcClient
     /// </summary>
     /// <param name="message">A <see cref="XmlRpcMessage"/> that represents the information needed to execute the remote procedure call.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="XmlRpcResponse"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
-    /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference.</exception>
+    /// <returns>
+    ///     A task whose result is the server's <see cref="XmlRpcResponse"/>. A call the server faulted is
+    ///     still a successful send — read <see cref="XmlRpcResponse.Fault"/>, which no exception here
+    ///     reports.
+    /// </returns>
+    /// <remarks>
+    ///     Bounded by <see cref="Timeout"/>, applied to a source linked to
+    ///     <paramref name="cancellationToken"/>; whichever fires first cancels the send and the read of
+    ///     the response body alike.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="message"/> is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidOperationException">The <see cref="Host"/> has not been set.</exception>
     public async Task<XmlRpcResponse> SendAsync(XmlRpcMessage message, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(message);
@@ -513,11 +542,11 @@ public class XmlRpcClient
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="HttpResponseMessage"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="userAgent"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="message"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     private static async Task<HttpResponseMessage> SendRequestAsync(
         Uri host,
         string userAgent,

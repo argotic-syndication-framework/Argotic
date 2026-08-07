@@ -29,18 +29,18 @@ public static class SyndicationResourceReader
     /// <typeparam name="TResource">The type of syndication resource to load.</typeparam>
     /// <param name="source">A <see cref="Uri"/> that points to the resource.</param>
     /// <param name="validators">
-    ///     The validators held from a previous fetch, or <b>null</b> — equivalent to
+    ///     The validators held from a previous fetch, or <see langword="null"/> — equivalent to
     ///     <see cref="SyndicationValidators.None"/> — to fetch unconditionally.
     /// </param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to fetch with. The caller owns its lifetime.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> to parse with. This value can be <b>null</b>.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> to parse with. This value can be <see langword="null"/>.</param>
     /// <param name="maxResponseContentLength">
     ///     The most of the body to accept when <paramref name="settings"/> names no limit. Defaults to
     ///     <see cref="SyndicationContentLengthLimits.Feed"/>; pass
     ///     <see cref="SyndicationContentLengthLimits.Sitemap"/> for a sitemap or
     ///     <see cref="SyndicationContentLengthLimits.Archive"/> for an export.
     /// </param>
-    /// <param name="requestOptions">Request-level options. This value can be <b>null</b>.</param>
+    /// <param name="requestOptions">Request-level options. This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
     ///     A task whose result reports either a freshly loaded resource or that the origin sent
@@ -54,15 +54,15 @@ public static class SyndicationResourceReader
     ///     to this one too.
     ///     </para>
     ///     <para>
-    ///     <b>The <c>Loaded</c> event fires on a <c>200</c> and not on a <c>304</c>, with a null
-    ///     source.</b> It is raised by the resource's own <c>Load(Stream, settings)</c>, which is
+    ///     The <c>Loaded</c> event fires on a <c>200</c> and not on a <c>304</c>, and with a null
+    ///     source. It is raised by the resource's own <c>Load(Stream, settings)</c>, which is
     ///     reached only when there is a body — so a subscriber counting events is counting real
     ///     changes. The event arguments carry the navigator but no <see cref="Uri"/>, because
     ///     <c>Load(Stream, …)</c> has never known one.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="SyndicationContentTooLargeException">The response exceeds the effective size limit.</exception>
     /// <exception cref="HttpRequestException">The response status code indicates neither success nor a lack of modification.</exception>
     public static async Task<ConditionalLoadResult<TResource>> LoadIfModifiedAsync<TResource>(
@@ -115,8 +115,8 @@ public static class SyndicationResourceReader
     /// </summary>
     /// <typeparam name="TResource">The type of syndication resource to load.</typeparam>
     /// <param name="source">A <see cref="Uri"/> that points to the resource.</param>
-    /// <param name="validators">The validators held from a previous fetch, or <b>null</b> to fetch unconditionally.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> to parse with. This value can be <b>null</b>.</param>
+    /// <param name="validators">The validators held from a previous fetch, or <see langword="null"/> to fetch unconditionally.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> to parse with. This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
     ///     A task whose result reports either a freshly loaded resource or that the origin sent
@@ -128,7 +128,7 @@ public static class SyndicationResourceReader
     ///     <see cref="HttpClient"/> where one is available — a polling caller is exactly the caller who
     ///     benefits from a client whose handler is rotated for them.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public static async Task<ConditionalLoadResult<TResource>> LoadIfModifiedAsync<TResource>(
         Uri source,
         SyndicationValidators? validators = null,

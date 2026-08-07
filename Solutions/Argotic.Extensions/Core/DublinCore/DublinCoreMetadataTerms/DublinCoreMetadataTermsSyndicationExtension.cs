@@ -11,18 +11,28 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="DublinCoreMetadataTermsSyndicationExtension"/> extends syndicated content to specify all metadata terms maintained by the Dublin Core Metadata Initiative. 
-///         This syndication extension conforms to the <b>Dublin Core Metadata Initiative (DCMI) Metadata Terms</b> 1.0 specification, which can be found 
-///         at <a href="http://dublincore.org/documents/dcmi-terms/">http://dublincore.org/documents/dcmi-terms/</a>.
+///         DCMI Metadata Terms — the full vocabulary the Dublin Core Metadata Initiative maintains, in
+///         the <c>http://purl.org/dc/terms/</c> namespace under the prefix <c>dcterms</c>. The
+///         specification is at
+///         <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">https://www.dublincore.org/specifications/dublin-core/dcmi-terms/</a>,
+///         and unlike the older Element Set it is still revised.
+///     </para>
+///     <para>
+///         It is a superset of <see cref="DublinCoreElementSetSyndicationExtension"/> in vocabulary but
+///         <b>not</b> in namespace. Metadata Terms re-declares the original fifteen — <c>dcterms:title</c>,
+///         <c>dcterms:creator</c> and the rest — with tighter semantics, and adds refinements such as
+///         <c>dcterms:created</c>, <c>dcterms:modified</c> and <c>dcterms:license</c> beside them.
+///         <c>dc:title</c> and <c>dcterms:title</c> are different XML names in different namespaces, so
+///         a feed carrying both gets both extensions and neither one sees the other's values.
+///     </para>
+///     <para>
+///         Real feeds use the Element Set. This extension is for consumers of richer descriptive
+///         metadata — repositories, library catalogues, harvested OAI records — and it is large:
+///         fifty-five properties on the context, most of them optional strings.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the DublinCoreMetadataTermsSyndicationExtension class.">
-///         <code 
-///             source="..\..\Argotic.Examples\\Extensions\Core\DublinCoreMetadataTermsSyndicationExtensionExample.cs" 
-///             region="DublinCoreMetadataTermsSyndicationExtension"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Extensions\Core\DublinCoreMetadataTermsSyndicationExtensionExample.cs" language="cs" title="The following code example demonstrates the usage of the DublinCoreMetadataTermsSyndicationExtension class." />
 /// </example>
 public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension, IComparable<DublinCoreMetadataTermsSyndicationExtension>, IEquatable<DublinCoreMetadataTermsSyndicationExtension>, IComparisonOperators
 {
@@ -38,13 +48,13 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// <summary>
     /// Gets or sets the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
-    /// <value>A <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
+    /// <value>The context. Never <see langword="null"/>: one is created with the extension, and the setter rejects <see langword="null"/>.</value>
     /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
+    ///     The <c>Context</c> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
     ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
     ///     are defined for the custom syndication extension.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public DublinCoreMetadataTermsSyndicationExtensionContext Context
     {
         get;
@@ -61,8 +71,8 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
     /// </summary>
     /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -73,7 +83,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// Returns the type vocabulary identifier for the supplied <see cref="DublinCoreTypeVocabularies"/>.
     /// </summary>
     /// <param name="vocabulary">The <see cref="DublinCoreTypeVocabularies"/> to get the type vocabulary identifier for.</param>
-    /// <returns>The type vocabulary identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The type vocabulary identifier for the supplied <paramref name="vocabulary"/>; otherwise, an empty string.</returns>
     public static string TypeVocabularyAsString(DublinCoreTypeVocabularies vocabulary) =>
         EnumerationMetadataAttribute.GetAlternateValue(vocabulary);
 
@@ -81,19 +91,17 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// Returns the <see cref="DublinCoreTypeVocabularies"/> enumeration value that corresponds to the specified type vocabulary name.
     /// </summary>
     /// <param name="name">The name of the type vocabulary.</param>
-    /// <returns>A <see cref="DublinCoreTypeVocabularies"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>DublinCoreTypeVocabularies.None</b>.</returns>
+    /// <returns>A <see cref="DublinCoreTypeVocabularies"/> enumeration value that corresponds to the specified string; otherwise, <see cref="DublinCoreTypeVocabularies.None"/>.</returns>
     /// <remarks>This method disregards case of specified type vocabulary name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static DublinCoreTypeVocabularies TypeVocabularyByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, DublinCoreTypeVocabularies.None);
 
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="DublinCoreMetadataTermsSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="DublinCoreMetadataTermsSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="DublinCoreMetadataTermsSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public override bool Load(IXPathNavigable source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -109,9 +117,9 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="DublinCoreMetadataTermsSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="DublinCoreMetadataTermsSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="DublinCoreMetadataTermsSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -123,8 +131,8 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// <summary>
     /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public override void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -244,7 +252,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// Determines whether the specified <see cref="DublinCoreMetadataTermsSyndicationExtension"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="DublinCoreMetadataTermsSyndicationExtension"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="DublinCoreMetadataTermsSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="DublinCoreMetadataTermsSyndicationExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(DublinCoreMetadataTermsSyndicationExtension? other)
     {
         if (other is null)
@@ -259,7 +267,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is DublinCoreMetadataTermsSyndicationExtension other && this.Equals(other);
 
     /// <summary>
@@ -280,7 +288,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(DublinCoreMetadataTermsSyndicationExtension? first, DublinCoreMetadataTermsSyndicationExtension? second)
     {
         if (first is null) return second is null;
@@ -292,7 +300,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(DublinCoreMetadataTermsSyndicationExtension? first, DublinCoreMetadataTermsSyndicationExtension? second) => !(first == second);
 
 }

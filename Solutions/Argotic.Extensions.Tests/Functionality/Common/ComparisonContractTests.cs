@@ -11,6 +11,10 @@ namespace Argotic.Extensions.Tests.Functionality.Common;
 [TestClass]
 public class ComparisonContractTests
 {
+    /// <summary>
+    /// When two members disagree about the direction, the first differing one decides and the comparison
+    /// stays antisymmetric: <c>x.CompareTo(y)</c> and <c>y.CompareTo(x)</c> have opposite signs.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WhenEarlierMemberIsGreaterAndLaterMemberIsLess_IsAntisymmetric()
     {
@@ -29,6 +33,10 @@ public class ComparisonContractTests
         reverse.ShouldBeLessThan(0);
     }
 
+    /// <summary>
+    /// <see cref="List{T}.Sort()"/> orders the same pair by <c>Author</c>, the first differing member, rather
+    /// than rejecting the comparer for returning inconsistent results.
+    /// </summary>
     [TestMethod]
     public void Sort_WithMembersComparingInOppositeDirections_OrdersByFirstDifferingMember()
     {
@@ -45,6 +53,10 @@ public class ComparisonContractTests
         items[1].Author.ShouldBe("zoe@example.com");
     }
 
+    /// <summary>
+    /// <c>CompareSequence</c> is antisymmetric too: the first differing element decides, and a later element
+    /// comparing the other way does not make both sequences the lesser one.
+    /// </summary>
     [TestMethod]
     public void CompareSequence_WhenFirstElementIsGreaterAndSecondIsLess_IsAntisymmetric()
     {
@@ -61,6 +73,10 @@ public class ComparisonContractTests
         reverse.ShouldBeLessThan(0);
     }
 
+    /// <summary>
+    /// <c>Hello World</c> and <c>HELLO WORLD</c> are equal <c>AtomTextConstruct</c>s, and produce the same
+    /// hash code.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_ForValuesThatCompareEqualIgnoringCase_IsEqual()
     {
@@ -75,6 +91,10 @@ public class ComparisonContractTests
         lower.GetHashCode().ShouldBe(upper.GetHashCode());
     }
 
+    /// <summary>
+    /// The consequence, through the type that depends on it: a <see cref="HashSet{T}"/> holding
+    /// <c>Hello World</c> finds <c>HELLO WORLD</c>, so the two land in the same bucket.
+    /// </summary>
     [TestMethod]
     public void HashSet_FindsInstanceThatDiffersOnlyByCase()
     {
@@ -87,11 +107,19 @@ public class ComparisonContractTests
         set.Contains(upper).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>HashCodeUtility.Component</c> folds a string case-insensitively, so <c>abc</c> and <c>ABC</c>
+    /// contribute the same component.
+    /// </summary>
     [TestMethod]
     public void HashCodeUtility_Component_DisregardsCaseForStrings() =>
         // Act & Assert
         HashCodeUtility.Component("abc").ShouldBe(HashCodeUtility.Component("ABC"));
 
+    /// <summary>
+    /// It does the same for a <see cref="Uri"/>, whose path is where <see cref="Uri.GetHashCode"/> is
+    /// case-sensitive: <c>/Path</c> and <c>/path</c> contribute the same component.
+    /// </summary>
     [TestMethod]
     public void HashCodeUtility_Component_DisregardsCaseForUris()
     {
@@ -100,6 +128,10 @@ public class ComparisonContractTests
             .ShouldBe(HashCodeUtility.Component(new Uri("http://example.com/path")));
     }
 
+    /// <summary>
+    /// A value that is neither a string nor a <see cref="Uri"/> is returned unchanged, so the helper is a
+    /// pass-through everywhere case cannot arise.
+    /// </summary>
     [TestMethod]
     public void HashCodeUtility_Component_ReturnsNonTextualValuesUnchanged()
     {
@@ -108,6 +140,10 @@ public class ComparisonContractTests
         HashCodeUtility.Component(true).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> string or <see cref="Uri"/> contributes <c>0</c> rather than throwing, so an
+    /// unset member does not make <c>GetHashCode</c> fail.
+    /// </summary>
     [TestMethod]
     public void HashCodeUtility_Component_TreatsNullAsZero()
     {

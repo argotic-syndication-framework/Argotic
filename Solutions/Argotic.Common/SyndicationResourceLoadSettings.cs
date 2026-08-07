@@ -19,11 +19,11 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// Gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
     /// </summary>
     /// <value>
-    ///     <b>true</b> if the syndication extensions supported by the load operation are automatically determined based on the XML namespaces declared on a syndication resource; Otherwise, <b>false</b>.
-    ///     The default value is <b>true</b>.
+    ///     <see langword="true"/> if the syndication extensions supported by the load operation are automatically determined based on the XML namespaces declared on a syndication resource; otherwise, <see langword="false"/>.
+    ///     The default value is <see langword="true"/>.
     /// </value>
     /// <remarks>
-    ///     Automatic detection of supported syndication extensions will <b>not</b> remove any syndication extensions already added
+    ///     Automatic detection of supported syndication extensions will <i>not</i> remove any syndication extensions already added
     ///     to the <see cref="SupportedExtensions"/> collection prior to the load operation execution.
     /// </remarks>
     public bool AutoDetectExtensions { get; set; } = true;
@@ -43,8 +43,8 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     ///     for a server known to lie about its own encoding, and what you do not want otherwise.
     ///     </para>
     ///     <para>
-    ///     <b>This property used to default to <see cref="Encoding.UTF8"/> and to reject
-    ///     <see langword="null"/>.</b> Between them those two facts meant a settings object constructed
+    ///     This property used to default to <see cref="Encoding.UTF8"/> and to reject
+    ///     <see langword="null"/>. Between them those two facts meant a settings object constructed
     ///     for an unrelated reason — a retrieval limit, say — silently overrode a correctly declared
     ///     <c>iso-8859-1</c> and replaced every accented character with U+FFFD. There was no way to
     ///     spell "detect", because the value that meant it was also the value you got by accident.
@@ -60,12 +60,15 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <summary>
     /// Gets or sets the maximum number of resource entities to retrieve from a syndication resource.
     /// </summary>
-    /// <value>The maximum number of entities to retrieve from a syndication resource. The default value is 0, which indicates there is <b>no limit</b>.</value>
+    /// <value>The maximum number of entities to retrieve. The default value is <c>0</c>, which imposes no limit.</value>
     /// <remarks>
-    ///     This setting is typically used to optimize processing by reducing the number of resource entities that must be parsed.
-    ///     Some syndication resources may not utilize this setting if they do not represent a list of retrievable entities.
+    ///     Bounds how many entities are built into the object model, so reading the first ten items of a
+    ///     thousand-item feed costs ten items rather than a thousand. It bounds that and nothing before
+    ///     it: the whole document is still downloaded and still parsed into a navigator, because the
+    ///     limit is applied while walking that navigator. A resource that is not a list of retrievable
+    ///     entities ignores the setting.
     /// </remarks>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than zero.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than zero.</exception>
     public int RetrievalLimit
     {
         get;
@@ -78,6 +81,11 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <summary>
     /// The value of <see cref="MaxResponseContentLength"/> that asks for no limit at all.
     /// </summary>
+    /// <remarks>
+    ///     Spelled as <see cref="long.MaxValue"/> rather than as <c>0</c> or <see langword="null"/>,
+    ///     both of which already mean something else on that property. Asking for no limit means
+    ///     accepting whatever an origin sends, so it should read as a decision at the call site.
+    /// </remarks>
     public const long Unbounded = long.MaxValue;
 
     /// <summary>
@@ -89,7 +97,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// </value>
     /// <remarks>
     ///     <para>
-    ///     <b><see langword="null"/> means the loading type's format default, not unbounded.</b> Were
+    ///     A <see langword="null"/> means the loading type's format default, not unbounded. Were
     ///     it keyed on whether settings were supplied at all, a caller who constructed a settings object
     ///     for an unrelated reason would silently lose the larger allowance their document type is
     ///     entitled to. See <see cref="SyndicationContentLengthLimits"/>. Use <see cref="Unbounded"/> to
@@ -127,8 +135,8 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
-    ///     If <see cref="AutoDetectExtensions"/> is <b>true</b>, this collection will be automatically filled during the load operation based on the XML namespaces declared on the syndication resource.
-    ///     Automatic detection will <b>not</b> remove any syndication extensions already added to this collection prior to the load operation execution.
+    ///     If <see cref="AutoDetectExtensions"/> is <see langword="true"/>, this collection will be automatically filled during the load operation based on the XML namespaces declared on the syndication resource.
+    ///     Automatic detection will <i>not</i> remove any syndication extensions already added to this collection prior to the load operation execution.
     /// </remarks>
     public IList<Type> SupportedExtensions => field ??= [];
 
@@ -148,7 +156,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     ///     included — and not merely to the point where the headers arrive.
     ///     </para>
     ///     <para>
-    ///     <b><see langword="null"/> means no deadline, not "use the default".</b> The shared
+    ///     A <see langword="null"/> means no deadline, not "use the default". The shared
     ///     <see cref="HttpClient"/> is built with
     ///     <see cref="System.Threading.Timeout.InfiniteTimeSpan"/>, so a null here leaves nothing at
     ///     all bounding the load but the caller's own <see cref="CancellationToken"/>. That is the
@@ -175,10 +183,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.</returns>
-    /// <remarks>
-    ///     This method returns a human-readable string for the current instance.
-    /// </remarks>
+    /// <returns>The settings, with the unset cases spelled out as <c>detect</c>, <c>none</c> and <c>default</c> rather than as an empty value.</returns>
     public override string ToString() => $"[SyndicationResourceLoadSettings(CharacterEncoding = \"{this.CharacterEncoding?.WebName ?? "detect"}\", RetrievalLimit = \"{this.RetrievalLimit}\", Timeout = \"{this.Timeout?.TotalMilliseconds.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? "none"}\", MaxResponseContentLength = \"{this.MaxResponseContentLength?.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? "default"}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
 
     /// <summary>
@@ -212,7 +217,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// Determines whether the specified <see cref="SyndicationResourceLoadSettings"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SyndicationResourceLoadSettings"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SyndicationResourceLoadSettings"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SyndicationResourceLoadSettings"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SyndicationResourceLoadSettings? other)
     {
         if (other is null)
@@ -227,7 +232,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SyndicationResourceLoadSettings other && this.Equals(other);
 
     /// <summary>
@@ -241,7 +246,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(SyndicationResourceLoadSettings? first, SyndicationResourceLoadSettings? second)
     {
         if (first is null) return second is null;
@@ -253,7 +258,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(SyndicationResourceLoadSettings? first, SyndicationResourceLoadSettings? second) => !(first == second);
 
 }

@@ -9,12 +9,23 @@ using Microsoft.Extensions.Options;
 namespace Argotic.Net;
 
 /// <summary>
-/// Allows applications to send and received notification pings by using the Trackback peer-to-peer notification protocol.
+/// Sends and receives notification pings using the Trackback peer-to-peer notification protocol.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         This implementation of Trackback is based on the Trackback 1.2 specification which can be found
-///         at <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a>.
+///         Trackback is legacy. It carries no authentication of any kind — anyone who can reach the ping
+///         URL can claim any other site linked to yours — and the spam that followed is why most weblog
+///         software stopped accepting pings years ago. Support is here so that an archive of feeds and
+///         their <c>trackback:ping</c> elements round-trips; a receiving endpoint you build with it needs
+///         its own moderation.
+///     </para>
+///     <para>
+///         The wire format is plain: an HTTP <c>POST</c> whose body is
+///         <c>application/x-www-form-urlencoded</c> with the fields <c>url</c>, <c>title</c>,
+///         <c>blog_name</c> and <c>excerpt</c>, answered with a small XML document. There is no envelope
+///         and no method name — see <see cref="TrackbackMessage"/> and <see cref="TrackbackResponse"/>.
+///         The implementation follows the Trackback 1.2 specification at
+///         <a href="https://www.rssboard.org/trackback">https://www.rssboard.org/trackback</a>.
 ///     </para>
 ///     <para>
 ///         For scenarios requiring authentication or proxy configuration, provide a pre-configured <see cref="HttpClient"/>
@@ -22,12 +33,7 @@ namespace Argotic.Net;
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the TrackbackClient class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Net\TrackbackClientExample.cs"
-///             region="TrackbackClient"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Net\TrackbackClientExample.cs" language="cs" title="The following code example demonstrates the usage of the TrackbackClient class." />
 /// </example>
 public class TrackbackClient
 {
@@ -53,7 +59,7 @@ public class TrackbackClient
     /// Initializes a new instance of the <see cref="TrackbackClient"/> class with the specified options.
     /// </summary>
     /// <param name="options">The options to configure this client.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is <see langword="null"/>.</exception>
     /// <remarks>
     ///     This constructor is intended for use with dependency injection and the <see cref="IOptions{TOptions}"/> pattern.
     /// </remarks>
@@ -69,8 +75,8 @@ public class TrackbackClient
     /// </summary>
     /// <param name="options">The options to configure this client.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for sending requests. The caller is responsible for managing the client's lifecycle.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <remarks>
     ///     <para>
     ///     This constructor is intended for use with dependency injection and the <see cref="IOptions{TOptions}"/> pattern.
@@ -99,7 +105,7 @@ public class TrackbackClient
     ///     This constructor uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.
     ///     For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is <see langword="null"/>.</exception>
     public TrackbackClient(Uri host) : this()
     {
         this.Host = host;
@@ -119,7 +125,7 @@ public class TrackbackClient
     ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     public TrackbackClient(HttpClient httpClient)
     {
         ArgumentNullException.ThrowIfNull(httpClient);
@@ -141,8 +147,8 @@ public class TrackbackClient
     ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     public TrackbackClient(Uri host, HttpClient httpClient) : this(httpClient)
     {
         this.Host = host;
@@ -151,8 +157,11 @@ public class TrackbackClient
     /// <summary>
     /// Gets or sets the location of the host computer that client Trackback pings will be sent to.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>
+    ///     The Trackback ping URL. The default value is <see langword="null"/>, in which case
+    ///     <see cref="SendAsync"/> throws <see cref="InvalidOperationException"/>.
+    /// </value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Host
     {
         get;
@@ -167,7 +176,14 @@ public class TrackbackClient
     /// <summary>
     /// Gets or sets a value that specifies the amount of time after which asynchronous send operations will time out.
     /// </summary>
-    /// <value>A <see cref="TimeSpan"/> that specifies the time-out period. The default value is 15 seconds.</value>
+    /// <value>The time-out period. The default value is 15 seconds. The permitted range is zero to 365 days, inclusive.</value>
+    /// <remarks>
+    ///     Enforced by <see cref="CancellationTokenSource.CancelAfter(TimeSpan)"/> on a source linked to
+    ///     the token passed to <see cref="SendAsync"/>, not by <see cref="HttpClient.Timeout"/> — the
+    ///     shared client is built with <see cref="System.Threading.Timeout.InfiniteTimeSpan"/>. The
+    ///     deadline therefore covers reading the response body as well as the request, and expiry
+    ///     surfaces as <see cref="OperationCanceledException"/>.
+    /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is less than zero.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
     public TimeSpan Timeout
@@ -194,9 +210,9 @@ public class TrackbackClient
     /// <summary>
     /// Gets or sets information such as the client application name, version, host operating system, and language.
     /// </summary>
-    /// <value>Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The <c>User-Agent</c> header value, trimmed. The default value is <c>Argotic-Syndication-Framework/</c> followed by this assembly's four-part version.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     // Both null-forgiving operators in the default value are provable. Assembly.GetAssembly returns
     // null only for a type with no backing assembly, which a typeof() of a type declared here cannot
     // be, and AssemblyName.Version is always populated because the SDK emits an assembly version
@@ -217,9 +233,18 @@ public class TrackbackClient
     /// </summary>
     /// <param name="message">A <see cref="TrackbackMessage"/> that represents the information needed to execute the Trackback ping request.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="TrackbackResponse"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
-    /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference.</exception>
+    /// <returns>
+    ///     A task whose result is the server's <see cref="TrackbackResponse"/>. A ping the server
+    ///     rejected is still a successful send — read <see cref="TrackbackResponse.HasError"/>, which no
+    ///     exception here reports.
+    /// </returns>
+    /// <remarks>
+    ///     Bounded by <see cref="Timeout"/>, applied to a source linked to
+    ///     <paramref name="cancellationToken"/>; whichever fires first cancels the send and the read of
+    ///     the response body alike.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="message"/> is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidOperationException">The <see cref="Host"/> has not been set.</exception>
     public async Task<TrackbackResponse> SendAsync(TrackbackMessage message, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(message);
@@ -244,11 +269,11 @@ public class TrackbackClient
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="HttpResponseMessage"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="userAgent"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="message"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     private static async Task<HttpResponseMessage> SendRequestAsync(
         Uri host,
         string userAgent,

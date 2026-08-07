@@ -9,14 +9,18 @@ namespace Argotic.Syndication;
 /// <summary>
 /// Represents a graphical logo for an <see cref="RssFeed"/>.
 /// </summary>
+/// <remarks>
+///     <c>&lt;url&gt;</c>, <c>&lt;title&gt;</c> and <c>&lt;link&gt;</c> are required; <c>&lt;width&gt;</c>,
+///     <c>&lt;height&gt;</c> and <c>&lt;description&gt;</c> are optional. The three required elements exist
+///     to be rendered as HTML: the image becomes an <c>&lt;img&gt;</c> inside an <c>&lt;a&gt;</c>, with
+///     <see cref="Title"/> as its <c>alt</c> text and <see cref="Link"/> as the anchor target. That is why
+///     the specification notes that in practice <see cref="Title"/> and <see cref="Link"/> should carry the
+///     same values as the channel's own — they are not independent metadata, they are the accessible text
+///     for a link to the site.
+/// </remarks>
 /// <seealso cref="RssChannel.Image"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the RssImage class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Rss\RssImageExample.cs"
-///             region="RssImage"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Rss\RssImageExample.cs" language="cs" title="The following code example demonstrates the usage of the RssImage class." />
 /// </example>
 public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
@@ -55,10 +59,10 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <param name="link">A <see cref="Uri"/> that represents the URL of the website represented by this image.</param>
     /// <param name="title">Character data that provides a human-readable description of this image.</param>
     /// <param name="url">A <see cref="Uri"/> that represents the URL of this image.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="title"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is <see langword="null"/>.</exception>
     public RssImage(Uri link, string title, Uri url)
     {
         this.Link = link;
@@ -69,45 +73,45 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets the default height that should be assumed for images that do not explicitly define a height.
     /// </summary>
-    /// <value>The default height, in pixels, that should be assumed for images that do not explicitly define a height.</value>
+    /// <value><c>31</c> pixels, the default the RSS 2.0 specification assigns to an absent <c>&lt;height&gt;</c>.</value>
     public static int HeightDefault => DEFAULT_HEIGHT;
 
     /// <summary>
     /// Gets the maximum permissible height for an image.
     /// </summary>
-    /// <value>The maximum permissible height, in pixels, for an image.</value>
+    /// <value><c>400</c> pixels. <see cref="Height"/> rejects anything larger.</value>
     public static int HeightMaximum => MAX_HEIGHT;
 
     /// <summary>
     /// Gets the default width that should be assumed for images that do not explicitly define a width.
     /// </summary>
-    /// <value>The default width, in pixels, that should be assumed for images that do not explicitly define a width.</value>
+    /// <value><c>88</c> pixels, the default the RSS 2.0 specification assigns to an absent <c>&lt;width&gt;</c>.</value>
     public static int WidthDefault => DEFAULT_WIDTH;
 
     /// <summary>
     /// Gets the maximum permissible width for an image.
     /// </summary>
-    /// <value>The maximum permissible width, in pixels, for an image.</value>
+    /// <value><c>144</c> pixels. <see cref="Width"/> rejects anything larger.</value>
     public static int WidthMaximum => MAX_WIDTH;
 
     /// <summary>
     /// Gets or sets character data that provides a human-readable characterization of the site linked to this image.
     /// </summary>
-    /// <value>Character data that provides a human-readable characterization of the site linked to this image.</value>
+    /// <value>The optional <c>&lt;description&gt;</c>. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     The value of this property <i>should</i> be suitable for use as the <i>title</i> attribute of the <b>a</b> tag in an HTML rendering.
+    ///     Rendered as the <c>title</c> attribute of the anchor wrapped around the image — hover text, not
+    ///     alternative text. <see cref="Title"/> is the alternative text.
     /// </remarks>
     public string Description
     {
@@ -118,11 +122,14 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <summary>
     /// Gets or sets the height of this image.
     /// </summary>
-    /// <value>The height, in pixels, of this image. The default value is <see cref="Int32.MinValue"/>, which indicates no height was specified.</value>
+    /// <value>The height in pixels, at most <see cref="HeightMaximum"/>. The default value is <see cref="int.MinValue"/>, the sentinel for "no height was specified".</value>
     /// <remarks>
-    ///     If no height is specified for the image, the image is assumed to be 31 pixels tall.
+    ///     The absent case is a sentinel rather than a nullable, so a caller testing for it must compare
+    ///     against <see cref="int.MinValue"/>; <c>0</c> is a stated height of zero and means something else.
+    ///     A consumer that finds no height should assume <see cref="HeightDefault"/>, which is what the
+    ///     specification tells it to render.
     /// </remarks>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than <i>400</i>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is greater than <see cref="HeightMaximum"/>.</exception>
     public int Height
     {
         get;
@@ -136,11 +143,12 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <summary>
     /// Gets or sets the URL of the website represented by this image.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the website represented by this image.</value>
+    /// <value>The site the image links to, or <see langword="null"/> if none was specified. Required by the specification.</value>
     /// <remarks>
-    ///     The value of this property <i>should</i> be the same URL as the channel's <see cref="RssChannel.Link">link</see> property.
+    ///     In practice this should be the same URL as <see cref="RssChannel.Link"/>. The image is rendered as
+    ///     a link to the site, so pointing it elsewhere produces a logo that navigates somewhere unexpected.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Link
     {
         get;
@@ -154,13 +162,14 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <summary>
     /// Gets or sets character data that provides a human-readable description of this image.
     /// </summary>
-    /// <value>Character data that provides a human-readable description of this image.</value>
+    /// <value>The image's alternative text. Required by the specification. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     The value of this property <i>should</i> be the same as the channel's <see cref="RssChannel.Title">title</see> property
-    ///     and be suitable for use as the <i>alt</i> attribute of the <b>img</b> tag in an HTML rendering.
+    ///     Rendered as the <c>alt</c> attribute of the <c>&lt;img&gt;</c> tag, so it should read as a
+    ///     replacement for the image rather than a caption, and in practice should match
+    ///     <see cref="RssChannel.Title"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Title
     {
         get;
@@ -174,11 +183,12 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <summary>
     /// Gets or sets the URL of this image.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of this image.</value>
+    /// <value>The location of the image file, or <see langword="null"/> if none was specified. Required by the specification.</value>
     /// <remarks>
-    ///     The image <b>must</b> be in the <i>GIF</i>, <i>JPEG</i> or <i>PNG</i> formats.
+    ///     The specification admits three formats only — GIF, JPEG and PNG. Nothing here checks the format,
+    ///     and an SVG or WebP logo will round-trip happily while being unrenderable in a conforming reader.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Url
     {
         get;
@@ -192,11 +202,14 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <summary>
     /// Gets or sets the width of this image.
     /// </summary>
-    /// <value>The width, in pixels, of this image. The default value is <see cref="Int32.MinValue"/>, which indicates no width was specified.</value>
+    /// <value>The width in pixels, at most <see cref="WidthMaximum"/>. The default value is <see cref="int.MinValue"/>, the sentinel for "no width was specified".</value>
     /// <remarks>
-    ///     If no width is specified for the image, the image is assumed to be 88 pixels wide.
+    ///     The absent case is a sentinel rather than a nullable, so a caller testing for it must compare
+    ///     against <see cref="int.MinValue"/>; <c>0</c> is a stated width of zero and means something else.
+    ///     A consumer that finds no width should assume <see cref="WidthDefault"/>, which is what the
+    ///     specification tells it to render.
     /// </remarks>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than <i>144</i>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is greater than <see cref="WidthMaximum"/>.</exception>
     public int Width
     {
         get;
@@ -215,11 +228,11 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <see langword="true"/> if the object passed to it matches the conditions defined in the delegate.
     ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is <see langword="null"/>.</exception>
     public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
@@ -238,12 +251,12 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// Loads this <see cref="RssImage"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="RssImage"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssImage"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssImage"/>.</para>
     ///     <para>If the specified height or width of the image exceeds the maximum permissible values defined in the specification, the maximum value is used instead of the non-conformant value.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -312,12 +325,12 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="RssImage"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssImage"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssImage"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -333,7 +346,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// Saves the current <see cref="RssImage"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -395,7 +408,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// Determines whether the specified <see cref="RssImage"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="RssImage"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="RssImage"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="RssImage"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(RssImage? other)
     {
         if (other is null)
@@ -410,7 +423,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is RssImage other && this.Equals(other);
 
     /// <summary>
@@ -433,7 +446,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(RssImage? first, RssImage? second)
     {
         if (first is null) return second is null;
@@ -445,6 +458,6 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(RssImage? first, RssImage? second) => !(first == second);
 }

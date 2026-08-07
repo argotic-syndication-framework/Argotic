@@ -6,8 +6,13 @@ using Argotic.Common;
 namespace Argotic.Net;
 
 /// <summary>
-/// Represents a remote procedure parameter value that represents a collection of data elements.
+/// Represents a remote procedure parameter value that holds an ordered collection of data elements.
 /// </summary>
+/// <remarks>
+///     XML-RPC's <c>&lt;array&gt;</c>. The elements are not required to share a type — an array of an
+///     <c>int</c>, a <c>string</c> and a nested <c>&lt;struct&gt;</c> is legal — which is why the
+///     collection is of <see cref="IXmlRpcValue"/> rather than of anything narrower.
+/// </remarks>
 /// <seealso cref="XmlRpcMessage.Parameters"/>
 /// <seealso cref="IXmlRpcValue"/>
 public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEquatable<XmlRpcArrayValue>, IComparisonOperators
@@ -22,8 +27,8 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcArrayValue"/> class using the supplied <see cref="XPathNodeIterator"/>.
     /// </summary>
-    /// <param name="iterator">A <see cref="XPathNodeIterator"/> that represents the <i>value</i> nodes for the array.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="iterator"/> is a null reference.</exception>
+    /// <param name="iterator">An iterator over the <c>&lt;value&gt;</c> nodes for the array. Nodes that will not parse are skipped silently, so a shorter <see cref="Values"/> than the iterator's <c>Count</c> is possible.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="iterator"/> is <see langword="null"/>.</exception>
     public XmlRpcArrayValue(XPathNodeIterator iterator)
     {
         ArgumentNullException.ThrowIfNull(iterator);
@@ -59,11 +64,11 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// Loads this <see cref="XmlRpcArrayValue"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="XmlRpcArrayValue"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="XmlRpcArrayValue"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="XmlRpcArrayValue"/>.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -103,7 +108,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// Saves the current <see cref="XmlRpcArrayValue"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -127,10 +132,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcArrayValue"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcArrayValue"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The <c>&lt;value&gt;&lt;array&gt;</c> XML for the current instance, written as a fragment — no XML declaration.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -168,7 +170,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// Determines whether the specified <see cref="XmlRpcArrayValue"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="XmlRpcArrayValue"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="XmlRpcArrayValue"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="XmlRpcArrayValue"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(XmlRpcArrayValue? other)
     {
         if (other is null)
@@ -183,7 +185,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is XmlRpcArrayValue other && this.Equals(other);
 
     /// <summary>
@@ -207,7 +209,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(XmlRpcArrayValue? first, XmlRpcArrayValue? second)
     {
         if (first is null) return second is null;
@@ -219,7 +221,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(XmlRpcArrayValue? first, XmlRpcArrayValue? second) => !(first == second);
 
 }

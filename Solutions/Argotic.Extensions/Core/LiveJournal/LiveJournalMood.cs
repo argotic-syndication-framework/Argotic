@@ -22,9 +22,14 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
     /// <summary>
     /// Gets or sets the textual content that describes this mood.
     /// </summary>
-    /// <value>The textual or entity encoded content that describes this mood.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The mood text, such as <c>cheerful</c>. The default value is an <i>empty</i> string.</value>
+    /// <remarks>
+    ///     Written as a CDATA section, so it may contain markup. Note that the setter refuses an empty
+    ///     string while the default <i>is</i> one — a freshly constructed instance cannot be returned
+    ///     to its initial state.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Content
     {
         get;
@@ -38,18 +43,22 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
     /// <summary>
     /// Gets or sets a site specific identifier for this mood.
     /// </summary>
-    /// <value>A site specific identifier for this mood. The default value is <see cref="Int32.MinValue"/>, which indicates no identifier was specified.</value>
+    /// <value>The site-specific mood identifier. The default value is <see cref="Int32.MinValue"/>, which indicates no identifier was specified.</value>
+    /// <remarks>
+    ///     LiveJournal's own numbering for its predefined moods. It means nothing outside that site,
+    ///     and a mood typed freely by the author carries <see cref="Content"/> and no identifier.
+    /// </remarks>
     public int Id { get; set; } = int.MinValue;
 
     /// <summary>
     /// Loads this <see cref="LiveJournalMood"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="LiveJournalMood"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="LiveJournalMood"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="LiveJournalMood"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -80,7 +89,7 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
     /// Saves the current <see cref="LiveJournalMood"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -100,10 +109,7 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="LiveJournalMood"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="LiveJournalMood"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -142,7 +148,7 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
     /// Determines whether the specified <see cref="LiveJournalMood"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="LiveJournalMood"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="LiveJournalMood"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="LiveJournalMood"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(LiveJournalMood? other)
     {
         if (other is null)
@@ -157,7 +163,7 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is LiveJournalMood other && this.Equals(other);
 
     /// <summary>
@@ -171,7 +177,7 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(LiveJournalMood? first, LiveJournalMood? second)
     {
         if (first is null) return second is null;
@@ -183,7 +189,7 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(LiveJournalMood? first, LiveJournalMood? second) => !(first == second);
 
 }

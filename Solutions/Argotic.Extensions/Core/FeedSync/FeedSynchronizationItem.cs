@@ -10,14 +10,14 @@ namespace Argotic.Extensions.Core;
 /// Represents the information required for synchronization of syndication feeds.
 /// </summary>
 /// <remarks>
-///     <para>The <see cref="FeedSynchronizationItem"/> class represents a <b>sx:sync</b> element in the <i>FeedSync</i> specification.</para>
+///     <para>The <see cref="FeedSynchronizationItem"/> class represents a <c>sx:sync</c> element in the <i>FeedSync</i> specification.</para>
 ///     <para>
 ///         This is <b>required</b> of all items in all feeds wishing to participate in FeedSync-based synchronization.
 ///         Since <see cref="FeedSynchronizationSharingInformation"/> is not required, feed consumers <b>must</b> consider the presence of <see cref="FeedSynchronizationItem"/> in items or entries
 ///         as an indication that the feed contains sync data.
 ///     </para>
 ///     <para>
-///         It acceptable for a feed to have some items or entries with <see cref="FeedSynchronizationItem"/> elements, and some without a <see cref="FeedSynchronizationItem"/>.
+///         It is acceptable for a feed to have some items or entries with <see cref="FeedSynchronizationItem"/> elements, and some without a <see cref="FeedSynchronizationItem"/>.
 ///         Only the items and entries that include the <see cref="FeedSynchronizationItem"/> element participate in FeedSync synchronization.
 ///     </para>
 /// </remarks>
@@ -32,13 +32,13 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FeedSynchronizationItem"/> class using the supplied indentifier and number of updates.
+    /// Initializes a new instance of the <see cref="FeedSynchronizationItem"/> class using the supplied identifier and number of updates.
     /// </summary>
     /// <param name="id">The globally unique identifier for the item.</param>
     /// <param name="updates">The number of updates applied to this item.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is an empty string.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="updates"/> is less than <b>1</b>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="id"/> is an empty string.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="updates"/> is less than <c>1</c>.</exception>
     public FeedSynchronizationItem(string id, int updates)
     {
         this.Id = id;
@@ -46,15 +46,15 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FeedSynchronizationItem"/> class using the supplied indentifier, number of updates, and initial <see cref="FeedSynchronizationHistory"/>.
+    /// Initializes a new instance of the <see cref="FeedSynchronizationItem"/> class using the supplied identifier, number of updates, and initial <see cref="FeedSynchronizationHistory"/>.
     /// </summary>
     /// <param name="id">The globally unique identifier for the item.</param>
     /// <param name="updates">The number of updates applied to this item.</param>
     /// <param name="history">A <see cref="FeedSynchronizationHistory"/> object that represents the initial information about updates to this item.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is an empty string.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="updates"/> is less than <b>1</b>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="history"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="id"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="id"/> is an empty string.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="updates"/> is less than <c>1</c>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="history"/> is <see langword="null"/>.</exception>
     public FeedSynchronizationItem(string id, int updates, FeedSynchronizationHistory history) : this(id, updates)
     {
         ArgumentNullException.ThrowIfNull(history);
@@ -82,7 +82,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// <summary>
     /// Gets or sets the globally unique identifier for this item.
     /// </summary>
-    /// <value>The globally unique identifier for this item.</value>
+    /// <value>The identifier. The default value is an <i>empty</i> string; the setter rejects <see langword="null"/> and empty.</value>
     /// <remarks>
     ///     <para>
     ///         The <see cref="Id">identifier</see> <b>must</b> be globally unique within the feed and it <b>must</b> be identical across feeds if an item is being shared or synchronized as part of multiple distinct independent feeds.
@@ -94,17 +94,17 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     ///     </para>
     ///     <para>
     ///         In Atom feeds, it is acceptable to have multiple entries in the same feed with the same atom id element; in this case, the entries are considered different versions of the same entry.
-    ///         It is allowed to use FeedSync in such a feed, but the <b>sx:sync/@id</b> attributes are still required to be different in each entry.
+    ///         It is allowed to use FeedSync in such a feed, but the <c>sx:sync/@id</c> attributes are still required to be different in each entry.
     ///         FeedSync considers those entries to be different sync items.
     ///     </para>
     ///     <para>
     ///         The <see cref="Id">identifier</see> is assigned by the creator of the item, and <b>must not</b> be changed by subsequent publishers.
     ///         Applications will collate and compare these identifiers; therefore they <b>must</b> conform to the syntax for
-    ///         Namespace Specific Strings (the NSS portion of a URN) in <a href="http://www.ietf.org/rfc/rfc2141.txt">RFC 2141</a>.
+    ///         Namespace Specific Strings (the NSS portion of a URN) in <a href="https://www.rfc-editor.org/rfc/rfc2141.html">RFC 2141</a>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Id
     {
         get;
@@ -124,12 +124,12 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// </value>
     /// <remarks>
     ///     <para>
-    ///         This value <b>must</b> only be set once, and <i>shall</i> only be set when the updates property value is <b>1</b>.
+    ///         This value <b>must</b> only be set once, and <i>shall</i> only be set when the updates property value is <c>1</c>.
     ///         All updates to the item after the first update must propagate whatever state was set on the first update.
     ///     </para>
     ///     <para>
-    ///         Within this framework, <see cref="FeedSynchronizationConflictPreservationDirective.Ignore"/> is equivalent to <b>true</b> for the <i>noconflicts</i> attribute in the FeedSync specification,
-    ///         while <see cref="FeedSynchronizationConflictPreservationDirective.Perform"/> is equivalent to <b>false</b> for the <i>noconflicts</i> attribute in the FeedSync specification.
+    ///         Within this framework, <see cref="FeedSynchronizationConflictPreservationDirective.Ignore"/> is equivalent to <see langword="true"/> for the <i>noconflicts</i> attribute in the FeedSync specification,
+    ///         while <see cref="FeedSynchronizationConflictPreservationDirective.Perform"/> is equivalent to <see langword="false"/> for the <i>noconflicts</i> attribute in the FeedSync specification.
     ///         Specifying a value of <see cref="FeedSynchronizationConflictPreservationDirective.None"/> is equivalent to the <i>noconflicts</i> attribute not being present.
     ///     </para>
     /// </remarks>
@@ -144,8 +144,8 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// </value>
     /// <remarks>
     ///     <para>
-    ///         Within this framework, <see cref="FeedSynchronizationTombstoneStatus.Deleted"/> is equivalent to <b>true</b> for the <i>deleted</i> attribute in the FeedSync specification,
-    ///         while <see cref="FeedSynchronizationTombstoneStatus.Present"/> is equivalent to <b>false</b> for the <i>deleted</i> attribute in the FeedSync specification.
+    ///         Within this framework, <see cref="FeedSynchronizationTombstoneStatus.Deleted"/> is equivalent to <see langword="true"/> for the <i>deleted</i> attribute in the FeedSync specification,
+    ///         while <see cref="FeedSynchronizationTombstoneStatus.Present"/> is equivalent to <see langword="false"/> for the <i>deleted</i> attribute in the FeedSync specification.
     ///         Specifying a value of <see cref="FeedSynchronizationTombstoneStatus.None"/> is equivalent to the <i>deleted</i> attribute not being present.
     ///     </para>
     /// </remarks>
@@ -154,8 +154,8 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// <summary>
     /// Gets or sets the number of updates applied to this item.
     /// </summary>
-    /// <value>The number of updates applied to this item. The default value is <b>1</b>.</value>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <b>1</b>.</exception>
+    /// <value>The number of updates applied to this item. The default value is <c>1</c>.</value>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than <c>1</c>.</exception>
     public int Updates
     {
         get;
@@ -177,14 +177,14 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <c>1</c>.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <c>-1</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<FeedSynchronizationHistory> source, IList<FeedSynchronizationHistory> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -192,7 +192,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// Returns the conflict preservation identifier for the supplied <see cref="FeedSynchronizationConflictPreservationDirective"/>.
     /// </summary>
     /// <param name="directive">The <see cref="FeedSynchronizationConflictPreservationDirective"/> to get the conflict preservation identifier for.</param>
-    /// <returns>The conflict preservation identifier for the supplied <paramref name="directive"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The conflict preservation identifier for the supplied <paramref name="directive"/>; otherwise, an empty string.</returns>
     public static string ConflictPreservationAsString(FeedSynchronizationConflictPreservationDirective directive) =>
         EnumerationMetadataAttribute.GetAlternateValue(directive);
 
@@ -200,10 +200,8 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// Returns the <see cref="FeedSynchronizationConflictPreservationDirective"/> enumeration value that corresponds to the specified conflict preservation name.
     /// </summary>
     /// <param name="name">The name of the conflict preservation.</param>
-    /// <returns>A <see cref="FeedSynchronizationConflictPreservationDirective"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>FeedSynchronizationConflictPreservationDirective.None</b>.</returns>
+    /// <returns>A <see cref="FeedSynchronizationConflictPreservationDirective"/> enumeration value that corresponds to the specified string; otherwise, <see cref="FeedSynchronizationConflictPreservationDirective.None"/>.</returns>
     /// <remarks>This method disregards case of specified conflict preservation name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static FeedSynchronizationConflictPreservationDirective ConflictPreservationByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, FeedSynchronizationConflictPreservationDirective.None);
 
@@ -211,7 +209,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// Returns the tombstone status identifier for the supplied <see cref="FeedSynchronizationTombstoneStatus"/>.
     /// </summary>
     /// <param name="status">The <see cref="FeedSynchronizationTombstoneStatus"/> to get the tombstone status identifier for.</param>
-    /// <returns>The tombstone status identifier for the supplied <paramref name="status"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The tombstone status identifier for the supplied <paramref name="status"/>; otherwise, an empty string.</returns>
     public static string TombstoneStatusAsString(FeedSynchronizationTombstoneStatus status) =>
         EnumerationMetadataAttribute.GetAlternateValue(status);
 
@@ -219,10 +217,8 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// Returns the <see cref="FeedSynchronizationTombstoneStatus"/> enumeration value that corresponds to the specified tombstone status name.
     /// </summary>
     /// <param name="name">The name of the tombstone status.</param>
-    /// <returns>A <see cref="FeedSynchronizationTombstoneStatus"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>FeedSynchronizationTombstoneStatus.None</b>.</returns>
+    /// <returns>A <see cref="FeedSynchronizationTombstoneStatus"/> enumeration value that corresponds to the specified string; otherwise, <see cref="FeedSynchronizationTombstoneStatus.None"/>.</returns>
     /// <remarks>This method disregards case of specified tombstone status name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static FeedSynchronizationTombstoneStatus TombstoneStatusByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, FeedSynchronizationTombstoneStatus.None);
 
@@ -230,11 +226,11 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// Loads this <see cref="FeedSynchronizationItem"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="FeedSynchronizationItem"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="FeedSynchronizationItem"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="FeedSynchronizationItem"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -330,7 +326,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// Saves the current <see cref="FeedSynchronizationItem"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -417,7 +413,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// Determines whether the specified <see cref="FeedSynchronizationItem"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="FeedSynchronizationItem"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="FeedSynchronizationItem"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="FeedSynchronizationItem"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(FeedSynchronizationItem? other)
     {
         if (other is null)
@@ -432,7 +428,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is FeedSynchronizationItem other && this.Equals(other);
 
     /// <summary>
@@ -446,7 +442,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(FeedSynchronizationItem? first, FeedSynchronizationItem? second)
     {
         if (first is null) return second is null;
@@ -458,7 +454,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(FeedSynchronizationItem? first, FeedSynchronizationItem? second) => !(first == second);
 
 }

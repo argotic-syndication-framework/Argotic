@@ -6,6 +6,10 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Trackback;
 
+/// <summary>
+/// Covers <c>TrackbackSyndicationExtension</c>, the module whose <c>trackback:ping</c> element names the
+/// URL an item accepts trackbacks at.
+/// </summary>
 [TestClass]
 public class TrackbackSyndicationExtensionTest
 {
@@ -17,6 +21,9 @@ public class TrackbackSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor produces a non-null <c>TrackbackSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void TrackbackSyndicationExtensionConstructorTest()
     {
@@ -25,6 +32,9 @@ public class TrackbackSyndicationExtensionTest
         target.ShouldBeOfType<TrackbackSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions built from the same ping URL compare equal, so <c>CompareTo</c> returns <c>0</c>.
+    /// </summary>
     [TestMethod]
     public void TrackbackCompareToTest()
     {
@@ -34,6 +44,10 @@ public class TrackbackSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Two separately built extensions carrying the same ping URL are equal through the <c>object</c>
+    /// overload of <c>Equals</c>.
+    /// </summary>
     [TestMethod]
     public void TrackbackEqualsTest()
     {
@@ -43,6 +57,14 @@ public class TrackbackSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A populated extension hashes to something other than <c>0</c>.
+    /// </summary>
+    /// <remarks>
+    ///     Weaker than the contract its siblings assert — that equal objects agree on their hash code —
+    ///     and deliberately so: this pins only that hashing a populated extension completes and does not
+    ///     land on the default.
+    /// </remarks>
     [TestMethod]
     public void TrackbackGetHashCodeTest()
     {
@@ -53,6 +75,13 @@ public class TrackbackSyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// A feed carrying a <c>trackback:ping</c> element parses without throwing.
+    /// </summary>
+    /// <remarks>
+    ///     Nothing about the parsed value is asserted here; <c>TrackbackFullTest</c> is what checks that
+    ///     the extension was attached and <c>TrackbackContextTest</c> what it holds.
+    /// </remarks>
     [TestMethod]
     public void TrackbackLoadTest()
     {
@@ -63,6 +92,10 @@ public class TrackbackSyndicationExtensionTest
         feed.Load(reader);
     }
 
+    /// <summary>
+    /// Saving a feed with the extension attached writes a single <c>trackback:ping</c> element, with the
+    /// namespace declared on the <c>rss</c> element.
+    /// </summary>
     [TestMethod]
     public void TrackbackCreateXmlTest()
     {
@@ -73,6 +106,10 @@ public class TrackbackSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// An item carrying a <c>trackback:ping</c> element is found again after the feed is parsed, by both
+    /// the generic lookup and the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void TrackbackFullTest()
     {
@@ -91,6 +128,10 @@ public class TrackbackSyndicationExtensionTest
             .ShouldBeOfType<TrackbackSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts an <c>ISyndicationExtension</c> that is a
+    /// <c>TrackbackSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void TrackbackMatchByTypeTest()
     {
@@ -99,6 +140,10 @@ public class TrackbackSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders the single <c>ping</c> element declaring the trackback namespace as its
+    /// default rather than carrying the prefix.
+    /// </summary>
     [TestMethod]
     public void TrackbackToStringTest()
     {
@@ -107,6 +152,9 @@ public class TrackbackSyndicationExtensionTest
         actual.ShouldBe(toStringText);
     }
 
+    /// <summary>
+    /// Writing to a non-indenting fragment <c>XmlWriter</c> emits the same element as <c>ToString</c>.
+    /// </summary>
     [TestMethod]
     public void TrackbackWriteToTest()
     {
@@ -119,6 +167,9 @@ public class TrackbackSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Two extensions naming different ping URLs are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void TrackbackOpEqualityTestFailure()
     {
@@ -128,6 +179,9 @@ public class TrackbackSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions naming the same ping URL are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void TrackbackOpEqualityTestSuccess()
     {
@@ -137,6 +191,9 @@ public class TrackbackSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension pinging <c>trackback/1</c> does not sort above the one pinging <c>trackback/2</c>.
+    /// </summary>
     [TestMethod]
     public void TrackbackOpGreaterThanTest()
     {
@@ -146,6 +203,9 @@ public class TrackbackSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions naming different ping URLs are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void TrackbackOpInequalityTest()
     {
@@ -155,6 +215,9 @@ public class TrackbackSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension pinging <c>trackback/1</c> sorts below the one pinging <c>trackback/2</c>.
+    /// </summary>
     [TestMethod]
     public void TrackbackOpLessThanTest()
     {
@@ -164,6 +227,9 @@ public class TrackbackSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>Context</c> property hands back the ping URL the extension was built from.
+    /// </summary>
     [TestMethod]
     public void TrackbackContextTest()
     {
@@ -174,6 +240,11 @@ public class TrackbackSyndicationExtensionTest
         context.Ping.ShouldBe(new Uri("http://www.example.com/trackback/1"));
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the lesser, pinging
+    /// <c>http://www.example.com/trackback/1</c>.
+    /// </summary>
+    /// <returns>An extension carrying a ping URL.</returns>
     private static TrackbackSyndicationExtension CreateExtension1()
     {
         TrackbackSyndicationExtension ext = new()
@@ -187,6 +258,11 @@ public class TrackbackSyndicationExtensionTest
         return ext;
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the greater, pinging
+    /// <c>http://www.example.com/trackback/2</c>.
+    /// </summary>
+    /// <returns>An extension carrying a ping URL.</returns>
     private static TrackbackSyndicationExtension CreateExtension2()
     {
         TrackbackSyndicationExtension ext = new()

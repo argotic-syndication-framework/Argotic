@@ -3,16 +3,12 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Rss;
 
 /// <summary>
-/// Contains the code examples for the <see cref="RssGuid"/> class.
+/// Gives an item a permanent identifier with <see cref="RssGuid"/>.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="RssGuid"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class RssGuidExample
 {
     /// <summary>
-    /// Provides example code for the RssGuid class.
+    /// Builds the containing <see cref="RssFeed"/> and prints the <see cref="RssGuid"/> it holds.
     /// </summary>
     public static void ClassExample()
     {

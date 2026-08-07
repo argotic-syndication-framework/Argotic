@@ -31,7 +31,7 @@ public class PodcastSyndicationExtensionContext
     /// Gets or sets a value indicating whether this feed may be imported by another hosting platform.
     /// </summary>
     /// <value>
-    ///     <b>true</b> if any attempt to import this feed elsewhere should be rejected, <b>false</b> if
+    ///     <see langword="true"/> if any attempt to import this feed elsewhere should be rejected, <see langword="false"/> if
     ///     importing is permitted, and <see langword="null"/> if the feed said nothing.
     /// </value>
     /// <remarks>
@@ -42,7 +42,7 @@ public class PodcastSyndicationExtensionContext
     ///     <para>
     ///     It is <see cref="Nullable{T}"/> because saying nothing is not the same as saying no. A feed
     ///     with no <c>locked</c> element has expressed no view on being moved; reporting that as
-    ///     <b>false</b> would put a decision in the publisher's mouth, and would make an absent element
+    ///     <see langword="false"/> would put a decision in the publisher's mouth, and would make an absent element
     ///     appear on the next save.
     ///     </para>
     /// </remarks>
@@ -95,7 +95,7 @@ public class PodcastSyndicationExtensionContext
     /// <summary>
     /// Gets or sets a value indicating whether the medium is the "list" variant of <see cref="Medium"/>.
     /// </summary>
-    /// <value><b>true</b> for a list feed such as <c>musicL</c>; otherwise, <b>false</b>.</value>
+    /// <value><see langword="true"/> for a list feed such as <c>musicL</c>; otherwise, <see langword="false"/>.</value>
     /// <remarks>
     ///     The specification spells a list feed by suffixing the medium name with the letter <c>L</c>.
     ///     Modelling that as a flag rather than as ten more enumeration members keeps the two halves of
@@ -106,7 +106,7 @@ public class PodcastSyndicationExtensionContext
     /// <summary>
     /// Gets or sets a value indicating whether this feed sends Podping notifications when it changes.
     /// </summary>
-    /// <value><b>true</b> if the feed signals its changes by Podping; otherwise, <b>false</b>.</value>
+    /// <value><see langword="true"/> if the feed signals its changes by Podping; otherwise, <see langword="false"/>.</value>
     /// <remarks>
     ///     Podcasting 2.0's <c>podcast:podping</c>, present in <b>3.5%</b> of 1,934 live feeds surveyed.
     ///     A consumer that trusts it can poll far less often.
@@ -203,11 +203,11 @@ public class PodcastSyndicationExtensionContext
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="PodcastSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="PodcastSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve prefixed elements and attributes.</param>
-    /// <returns><b>true</b> if the context was initialized using the supplied <paramref name="source"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the context was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -228,10 +228,10 @@ public class PodcastSyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is a null reference or an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is <see langword="null"/> or an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -318,7 +318,7 @@ public class PodcastSyndicationExtensionContext
     /// </summary>
     /// <param name="source">The navigator to read from.</param>
     /// <param name="manager">The namespace manager.</param>
-    /// <returns><b>true</b> if any element was present; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if any element was present; otherwise, <see langword="false"/>.</returns>
     private bool LoadChannelScalars(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -374,7 +374,7 @@ public class PodcastSyndicationExtensionContext
     /// Interprets a medium value, separating the list suffix from the medium name.
     /// </summary>
     /// <param name="value">The raw node value.</param>
-    /// <returns><b>true</b> if the value named a medium; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the value named a medium; otherwise, <see langword="false"/>.</returns>
     private bool LoadMedium(string value)
     {
         PodcastMedium medium = EnumerationMetadataAttribute.GetEnumByAlternateValue(value, PodcastMedium.None);
@@ -407,7 +407,7 @@ public class PodcastSyndicationExtensionContext
     /// </summary>
     /// <param name="source">The navigator to read from.</param>
     /// <param name="manager">The namespace manager.</param>
-    /// <returns><b>true</b> if any element was present; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if any element was present; otherwise, <see langword="false"/>.</returns>
     private bool LoadItemScalars(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -476,7 +476,7 @@ public class PodcastSyndicationExtensionContext
     /// </summary>
     /// <param name="source">The navigator to read from.</param>
     /// <param name="manager">The namespace manager.</param>
-    /// <returns><b>true</b> if any element was present; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if any element was present; otherwise, <see langword="false"/>.</returns>
     private bool LoadCollections(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = LoadInto(source, manager, "transcript", this.Transcripts, static () => new PodcastTranscript(), static (t, n) => t.Load(n));
@@ -497,7 +497,7 @@ public class PodcastSyndicationExtensionContext
     /// <param name="target">The collection to fill.</param>
     /// <param name="create">Creates an instance to load into.</param>
     /// <param name="load">Loads an instance from a navigator.</param>
-    /// <returns><b>true</b> if at least one element loaded; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if at least one element loaded; otherwise, <see langword="false"/>.</returns>
     private static bool LoadInto<T>(
         XPathNavigator source,
         XmlNamespaceManager manager,

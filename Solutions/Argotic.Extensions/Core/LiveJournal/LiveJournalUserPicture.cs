@@ -23,15 +23,15 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalUserPicture"/> class using the supplied parameters.
     /// </summary>
-    /// <param name="url"></param>
-    /// <param name="keyword"></param>
-    /// <param name="width"></param>
-    /// <param name="height"></param>
-    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="keyword"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="keyword"/> is an empty string.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="width"/> is greater than <b>100</b>.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="height"/> is greater than <b>100</b>.</exception>
+    /// <param name="url">The location of a GIF, JPEG or PNG.</param>
+    /// <param name="keyword">The keyword or phrase the author files this picture under. Plain text, not entity encoded.</param>
+    /// <param name="width">The width in pixels, at most <c>100</c>.</param>
+    /// <param name="height">The height in pixels, at most <c>100</c>.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="keyword"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="keyword"/> is an empty string.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="width"/> is greater than <c>100</c>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="height"/> is greater than <c>100</c>.</exception>
     public LiveJournalUserPicture(Uri url, string keyword, int width, int height)
     {
         this.Url = url;
@@ -45,9 +45,11 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// </summary>
     /// <value>The height of this picture, in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates no height was specified.</value>
     /// <remarks>
-    ///     LiveJournal limits images to a maximum of <b>100</b> pixels in each dimension.
+    ///     LiveJournal limits images to a maximum of <c>100</c> pixels in each dimension. The setter
+    ///     throws above that; the loader instead clamps to <c>100</c>, so a document declaring a larger
+    ///     picture is read rather than refused, at the cost of not round-tripping the number it stated.
     /// </remarks>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than <b>100</b>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is greater than <c>100</c>.</exception>
     public int Height
     {
         get;
@@ -61,10 +63,10 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <summary>
     /// Gets or sets the keyword or phrase associated with the picture.
     /// </summary>
-    /// <value>The keyword or phrase associated with this picture.</value>
-    /// <remarks>The value of this property is expected to be <i>plain text</i>, and so entity-ecoded text should be ommited.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The keyword or phrase associated with this picture. The default value is an <i>empty</i> string.</value>
+    /// <remarks>Expected to be <i>plain text</i>; entity-encoded text does not belong here.</remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Keyword
     {
         get;
@@ -76,10 +78,10 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the URL this picture.
+    /// Gets or sets the URL of this picture.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of a GIF, JPEG, or PNG for this picture.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>A <see cref="Uri"/> that represents the location of a GIF, JPEG or PNG, or <see langword="null"/> if none was specified.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Url
     {
         get;
@@ -95,9 +97,11 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// </summary>
     /// <value>The width of this picture, in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates no width was specified.</value>
     /// <remarks>
-    ///     LiveJournal limits images to a maximum of <b>100</b> pixels in each dimension.
+    ///     LiveJournal limits images to a maximum of <c>100</c> pixels in each dimension. The setter
+    ///     throws above that; the loader instead clamps to <c>100</c>, so a document declaring a larger
+    ///     picture is read rather than refused, at the cost of not round-tripping the number it stated.
     /// </remarks>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than <b>100</b>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is greater than <c>100</c>.</exception>
     public int Width
     {
         get;
@@ -112,11 +116,11 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// Loads this <see cref="LiveJournalUserPicture"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="LiveJournalUserPicture"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="LiveJournalUserPicture"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="LiveJournalUserPicture"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -181,7 +185,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// Saves the current <see cref="LiveJournalUserPicture"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -199,10 +203,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="LiveJournalUserPicture"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="LiveJournalUserPicture"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -243,7 +244,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// Determines whether the specified <see cref="LiveJournalUserPicture"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="LiveJournalUserPicture"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="LiveJournalUserPicture"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="LiveJournalUserPicture"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(LiveJournalUserPicture? other)
     {
         if (other is null)
@@ -258,7 +259,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is LiveJournalUserPicture other && this.Equals(other);
 
     /// <summary>
@@ -272,7 +273,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(LiveJournalUserPicture? first, LiveJournalUserPicture? second)
     {
         if (first is null) return second is null;
@@ -284,7 +285,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(LiveJournalUserPicture? first, LiveJournalUserPicture? second) => !(first == second);
 
 }

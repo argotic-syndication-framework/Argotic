@@ -6,6 +6,10 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Pingback;
 
+/// <summary>
+/// Covers <c>PingbackSyndicationExtension</c>, the module that names the XML-RPC server an item accepts
+/// pingbacks at and the resource being pinged.
+/// </summary>
 [TestClass]
 public class PingbackSyndicationExtensionTest
 {
@@ -19,6 +23,9 @@ public class PingbackSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor produces a non-null <c>PingbackSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void PingbackSyndicationExtensionConstructorTest()
     {
@@ -27,6 +34,10 @@ public class PingbackSyndicationExtensionTest
         target.ShouldBeOfType<PingbackSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions built from the same server and target compare equal, so <c>CompareTo</c> returns
+    /// <c>0</c>.
+    /// </summary>
     [TestMethod]
     public void PingbackCompareToTest()
     {
@@ -36,6 +47,10 @@ public class PingbackSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Two separately built extensions carrying the same server and target are equal through the
+    /// <c>object</c> overload of <c>Equals</c>.
+    /// </summary>
     [TestMethod]
     public void PingbackEqualsTest()
     {
@@ -45,6 +60,14 @@ public class PingbackSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A populated extension hashes to something other than <c>0</c>.
+    /// </summary>
+    /// <remarks>
+    ///     Weaker than the contract its siblings assert — that equal objects agree on their hash code —
+    ///     and deliberately so: this pins only that hashing a populated extension completes and does not
+    ///     land on the default.
+    /// </remarks>
     [TestMethod]
     public void PingbackGetHashCodeTest()
     {
@@ -55,6 +78,13 @@ public class PingbackSyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// A feed carrying <c>pingback:server</c> and <c>pingback:target</c> parses without throwing.
+    /// </summary>
+    /// <remarks>
+    ///     Nothing about the parsed values is asserted here; <c>PingbackFullTest</c> is what checks that
+    ///     the extension was attached and <c>PingbackContextTest</c> what it holds.
+    /// </remarks>
     [TestMethod]
     public void PingbackLoadTest()
     {
@@ -65,6 +95,10 @@ public class PingbackSyndicationExtensionTest
         feed.Load(reader);
     }
 
+    /// <summary>
+    /// Saving a feed with the extension attached writes <c>pingback:server</c> before
+    /// <c>pingback:target</c>, with the namespace declared on the <c>rss</c> element.
+    /// </summary>
     [TestMethod]
     public void PingbackCreateXmlTest()
     {
@@ -75,6 +109,10 @@ public class PingbackSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// An item carrying the pingback elements is found again after the feed is parsed, by both the
+    /// generic lookup and the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void PingbackFullTest()
     {
@@ -93,6 +131,10 @@ public class PingbackSyndicationExtensionTest
             .ShouldBeOfType<PingbackSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts an <c>ISyndicationExtension</c> that is a
+    /// <c>PingbackSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void PingbackMatchByTypeTest()
     {
@@ -101,6 +143,10 @@ public class PingbackSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders <c>server</c> and then <c>target</c> on separate lines, each declaring
+    /// the pingback namespace as its default rather than carrying the prefix.
+    /// </summary>
     [TestMethod]
     public void PingbackToStringTest()
     {
@@ -109,6 +155,10 @@ public class PingbackSyndicationExtensionTest
         actual.ShouldBe(toStringText);
     }
 
+    /// <summary>
+    /// Writing to a non-indenting fragment <c>XmlWriter</c> emits the same two elements as
+    /// <c>ToString</c>, without the line break between them.
+    /// </summary>
     [TestMethod]
     public void PingbackWriteToTest()
     {
@@ -121,6 +171,9 @@ public class PingbackSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Two extensions naming different servers are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void PingbackOpEqualityTestFailure()
     {
@@ -130,6 +183,9 @@ public class PingbackSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions naming the same server and target are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void PingbackOpEqualityTestSuccess()
     {
@@ -139,6 +195,10 @@ public class PingbackSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension whose server is <c>xmlrpc.php</c> sorts above the one whose server is
+    /// <c>other-xmlrpc.php</c>, and the reverse comparison agrees.
+    /// </summary>
     [TestMethod]
     public void PingbackOpGreaterThanTest()
     {
@@ -150,6 +210,9 @@ public class PingbackSyndicationExtensionTest
         (second > first).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions naming different servers are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void PingbackOpInequalityTest()
     {
@@ -159,6 +222,10 @@ public class PingbackSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&lt;</c> agrees with <c>&gt;</c>: the <c>other-xmlrpc.php</c> extension is the lesser of the
+    /// two, in both directions.
+    /// </summary>
     [TestMethod]
     public void PingbackOpLessThanTest()
     {
@@ -168,6 +235,9 @@ public class PingbackSyndicationExtensionTest
         (second < first).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>Context</c> property hands back the server and target the extension was built from.
+    /// </summary>
     [TestMethod]
     public void PingbackContextTest()
     {
@@ -179,6 +249,11 @@ public class PingbackSyndicationExtensionTest
         context.Target.ShouldBe(new Uri("http://www.example.com/post/1"));
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the greater, whose server is
+    /// <c>http://www.example.com/xmlrpc.php</c>.
+    /// </summary>
+    /// <returns>An extension carrying a server and a target.</returns>
     private static PingbackSyndicationExtension CreateExtension1()
     {
         PingbackSyndicationExtension ext = new()
@@ -193,6 +268,11 @@ public class PingbackSyndicationExtensionTest
         return ext;
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the lesser, whose server is
+    /// <c>http://www.example.com/other-xmlrpc.php</c>.
+    /// </summary>
+    /// <returns>An extension carrying a server and a target.</returns>
     private static PingbackSyndicationExtension CreateExtension2()
     {
         PingbackSyndicationExtension ext = new()

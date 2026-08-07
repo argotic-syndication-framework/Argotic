@@ -6,14 +6,20 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Extends syndication specifications to provide a means of describing images in sitemaps.
+/// Extends a sitemap entry to list the images that appear on the page.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="SitemapImageExtension"/> extends sitemap content to include image information
-///         that helps search engines discover images on your site. This syndication extension conforms to the
-///         Google Image Sitemap extension specification, which can be found at
-///         <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps">https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps</a>.
+///     Google's image sitemap extension, specified at
+///     <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps">https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps</a>.
+///     It is the smallest of the sitemap extensions and got smaller still on 6 August 2022, when Google
+///     withdrew support for every child of <c>image:image</c> except <c>image:loc</c>. See
+///     <see cref="SitemapImage"/> for what went and what that means for a feed that still carries it.
+///     </para>
+///     <para>
+///     The prefix is bound to <c>http://www.google.com/schemas/sitemap-image/1.1</c>. That is an
+///     identifier, not an address — it stays <c>http</c> however the documentation is served, and a
+///     sitemap declaring the <c>https</c> spelling is a different namespace that will not match.
 ///     </para>
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">Image Sitemap 1.1 Schema</seealso>
@@ -36,9 +42,13 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     /// Gets the collection of images associated with this extension.
     /// </summary>
     /// <value>
-    ///     An <see cref="IList{T}"/> collection of <see cref="SitemapImage"/> objects that represent images
-    ///     associated with the sitemap URL. The default value is an <i>empty</i> collection.
+    ///     A collection of <see cref="SitemapImage"/> objects, at most 1,000 of which Google will read from
+    ///     a single <c>url</c> entry. The default value is an <i>empty</i> collection.
     /// </value>
+    /// <remarks>
+    ///     Nothing here enforces the cap. The collection is mutable and unbounded, and
+    ///     <see cref="WriteTo(XmlWriter)"/> writes every element it holds.
+    /// </remarks>
     public IList<SitemapImage> Images => extensionImages;
 
     /// <summary>
@@ -46,8 +56,8 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
     /// </summary>
     /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -57,9 +67,9 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="SitemapImageExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="SitemapImageExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="SitemapImageExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="SitemapImageExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public override bool Load(IXPathNavigable source)
     {
         bool wasLoaded = false;
@@ -99,9 +109,9 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="SitemapImageExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="SitemapImageExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="SitemapImageExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="SitemapImageExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -113,8 +123,8 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     /// <summary>
     /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public override void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -128,10 +138,7 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SitemapImageExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapImageExtension"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -168,7 +175,7 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     /// Determines whether the specified <see cref="SitemapImageExtension"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SitemapImageExtension"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SitemapImageExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SitemapImageExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SitemapImageExtension? other)
     {
         if (other is null)
@@ -183,7 +190,7 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SitemapImageExtension other && this.Equals(other);
 
     /// <summary>
@@ -206,7 +213,7 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(SitemapImageExtension? first, SitemapImageExtension? second)
     {
         if (first is null) return second is null;
@@ -218,7 +225,7 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(SitemapImageExtension? first, SitemapImageExtension? second) => !(first == second);
 
 }

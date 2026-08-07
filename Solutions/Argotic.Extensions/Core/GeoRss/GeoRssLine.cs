@@ -27,7 +27,7 @@ public class GeoRssLine : IComparable<GeoRssLine>, IEquatable<GeoRssLine>, IComp
     /// Initializes a new instance of the <see cref="GeoRssLine"/> class using the supplied positions.
     /// </summary>
     /// <param name="positions">The positions along the line.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="positions"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="positions"/> is <see langword="null"/>.</exception>
     public GeoRssLine(IEnumerable<GeoRssPosition> positions)
     {
         ArgumentNullException.ThrowIfNull(positions);
@@ -53,8 +53,8 @@ public class GeoRssLine : IComparable<GeoRssLine>, IEquatable<GeoRssLine>, IComp
     /// Loads this <see cref="GeoRssLine"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the whole coordinate list was read; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the whole coordinate list was read; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -77,7 +77,7 @@ public class GeoRssLine : IComparable<GeoRssLine>, IEquatable<GeoRssLine>, IComp
     /// Saves the current <see cref="GeoRssLine"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer) => this.WriteTo(writer, GeoRssExtensionUtility.NamespaceUri);
 
     /// <summary>
@@ -85,8 +85,8 @@ public class GeoRssLine : IComparable<GeoRssLine>, IEquatable<GeoRssLine>, IComp
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
     /// <param name="xmlNamespace">The XML namespace to qualify the element with.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is a null reference or an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is <see langword="null"/> or an empty string.</exception>
     /// <remarks>
     ///     The context passes the namespace its own caller supplied, so that every geometry it writes
     ///     lands in one namespace rather than two.
@@ -116,14 +116,14 @@ public class GeoRssLine : IComparable<GeoRssLine>, IEquatable<GeoRssLine>, IComp
     /// Determines whether the specified <see cref="GeoRssLine"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="GeoRssLine"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if equal; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if equal; otherwise, <see langword="false"/>.</returns>
     public bool Equals(GeoRssLine? other) => other is not null && this.CompareTo(other) == 0;
 
     /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if equal; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if equal; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is GeoRssLine other && this.Equals(other);
 
     /// <summary>
@@ -143,7 +143,7 @@ public class GeoRssLine : IComparable<GeoRssLine>, IEquatable<GeoRssLine>, IComp
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(GeoRssLine? first, GeoRssLine? second)
     {
         if (first is null) return second is null;
@@ -155,6 +155,6 @@ public class GeoRssLine : IComparable<GeoRssLine>, IEquatable<GeoRssLine>, IComp
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(GeoRssLine? first, GeoRssLine? second) => !(first == second);
 }

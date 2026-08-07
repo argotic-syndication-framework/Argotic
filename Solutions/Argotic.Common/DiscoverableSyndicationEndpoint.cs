@@ -26,9 +26,9 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the Uniform Resource Locator (URL) of the syndication endpoint.</param>
     /// <param name="contentType">The MIME content type that the syndicated resource conforms to.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="contentType"/> is an empty string.</exception>
     public DiscoverableSyndicationEndpoint(Uri source, string contentType)
     {
         this.ContentType = contentType;
@@ -41,9 +41,9 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <param name="source">A <see cref="Uri"/> that represents the Uniform Resource Locator (URL) of the syndication endpoint.</param>
     /// <param name="contentType">The MIME content type that the syndicated resource conforms to.</param>
     /// <param name="title">The title of the syndication endpoint.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="contentType"/> is an empty string.</exception>
     public DiscoverableSyndicationEndpoint(Uri source, string contentType, string title)
     {
         this.ContentType = contentType;
@@ -58,7 +58,16 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     ///     A <see cref="SyndicationContentFormat"/> enumeration value that indicates the syndication content format that the auto-discoverable syndicated content conforms to.
     ///     If a format cannot be determined for the <see cref="ContentType">content type</see>, returns <see cref="SyndicationContentFormat.None"/>.
     /// </value>
-    /// <remarks>The syndication content format is determined based upon the <see cref="ContentType"/> of the current instance.</remarks>
+    /// <remarks>
+    ///     Derived from <see cref="ContentType"/> alone, matched without regard to case. Two content
+    ///     types are claimed by two formats each, so this can never answer
+    ///     <see cref="SyndicationContentFormat.SitemapIndex"/> or
+    ///     <see cref="SyndicationContentFormat.AtomEntryDocument"/> — telling those from
+    ///     <see cref="SyndicationContentFormat.Sitemap"/> and <see cref="SyndicationContentFormat.Atom"/>
+    ///     needs the document's root element, which only
+    ///     <see cref="SyndicationDiscoveryUtility.SyndicationContentFormatGet(Stream)"/> and its
+    ///     overloads can see.
+    /// </remarks>
     public SyndicationContentFormat ContentFormat =>
         string.IsNullOrEmpty(this.ContentType)
             ? SyndicationContentFormat.None
@@ -70,7 +79,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <returns>The content type to format mapping, keyed without regard to case.</returns>
     /// <remarks>
     ///     <para>
-    ///     <b>Two content types are claimed by two formats each, so two formats are unreachable here.</b>
+    ///     Two content types are claimed by two formats each, so two formats are unreachable here.
     ///     <see cref="SyndicationContentFormat.Sitemap"/> and
     ///     <see cref="SyndicationContentFormat.SitemapIndex"/> are both <c>application/xml</c>;
     ///     <see cref="SyndicationContentFormat.Atom"/> and
@@ -81,7 +90,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     ///     <c>SyndicationDiscoveryUtility</c> sniffs.
     ///     </para>
     ///     <para>
-    ///     <b>What this does fix is that the winner used to be an accident.</b> The loop was written
+    ///     What this does fix is that the winner used to be an accident. The loop was written
     ///     over <see cref="Type.GetFields()"/> with <c>TryAdd</c>, so whichever field reflection happened
     ///     to yield first won. On this runtime that is declaration order, which is why
     ///     <c>Sitemap</c> and <c>Atom</c> win — but nothing in the code said they should, and nothing
@@ -119,10 +128,10 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <summary>
     /// Gets or sets the MIME content type of the syndication endpoint.
     /// </summary>
-    /// <value>The registered MIME type of the syndication endpoint.</value>
-    /// <remarks>See <a href="http://www.iana.org/assignments/media-types/">http://www.iana.org/assignments/media-types/</a> for a listing of registered MIME types.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>A registered MIME type, such as <c>application/rss+xml</c>. Surrounding whitespace is trimmed. The default value is an <i>empty</i> string.</value>
+    /// <remarks>See <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a> for a listing of registered MIME types.</remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string ContentType
     {
         get;
@@ -136,9 +145,17 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <summary>
     /// Gets or sets the Uniform Resource Locator (URL) of the syndication endpoint.
     /// </summary>
-    /// <value>The <see cref="Uri"/> of the syndication endpoint.</value>
-    /// <remarks>The <see cref="Uri"/>can be either <b>Relative</b> or <b>Absolute</b>. It is up to the caller to resolve the endpoint source as appropriate.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <see cref="Uri"/> of the endpoint, or <see langword="null"/> if none has been set.</value>
+    /// <remarks>
+    ///     The <see cref="Uri"/> may be <see cref="UriKind.Relative"/> or <see cref="UriKind.Absolute"/>,
+    ///     because <c>href="/feed.xml"</c> is the commonest form an auto-discovery link takes. A relative
+    ///     one cannot be fetched — <see cref="CreateNavigatorAsync(CancellationToken)"/> hands the address
+    ///     to <see cref="HttpClient"/>, which rejects it — so resolve it against the page's own address,
+    ///     or use the
+    ///     <see cref="SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(string, Uri?)"/>
+    ///     overload that takes a base URI and does it for you.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Source
     {
         get;
@@ -152,8 +169,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <summary>
     /// Gets or sets the title of the syndication endpoint.
     /// </summary>
-    /// <value>The title of the syndication endpoint.</value>
-    /// <remarks>This property will be empty if no title attribute was assigned to the syndication endpoint link.</remarks>
+    /// <value>The link's <c>title</c> attribute, trimmed, or an <i>empty</i> string if the markup carried none. The default value is an <i>empty</i> string.</value>
     public string Title
     {
         get;
@@ -165,7 +181,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// </summary>
     /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a read-only <see cref="XPathNavigator"/> object for navigating the auto-discoverable syndicated content.</returns>
-    /// <exception cref="ArgumentNullException">The <see cref="Source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <see cref="Source"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public Task<XPathNavigator> CreateNavigatorAsync(CancellationToken cancellationToken = default) => CreateNavigatorAsync(SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
 
@@ -180,8 +196,8 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     ///     and configure handler-level settings (credentials, proxy, cookies) on the client.
     ///     This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <see cref="Source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <see cref="Source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public Task<XPathNavigator> CreateNavigatorAsync(HttpClient httpClient, CancellationToken cancellationToken = default)
     {
@@ -199,10 +215,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="DiscoverableSyndicationEndpoint"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="DiscoverableSyndicationEndpoint"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XHTML representation for the current instance.
-    /// </remarks>
+    /// <returns>The endpoint as the XHTML <c>&lt;link rel="alternate"&gt;</c> element that would declare it.</returns>
     public override string ToString() => $"""<link rel="alternate" type="{this.ContentType}" title="{this.Title}" href="{this.Source?.ToString() ?? string.Empty}" />""";
 
     /// <summary>
@@ -228,7 +241,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// Determines whether the specified <see cref="DiscoverableSyndicationEndpoint"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="DiscoverableSyndicationEndpoint"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="DiscoverableSyndicationEndpoint"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="DiscoverableSyndicationEndpoint"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(DiscoverableSyndicationEndpoint? other)
     {
         if (other is null)
@@ -243,7 +256,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is DiscoverableSyndicationEndpoint other && this.Equals(other);
 
     /// <summary>
@@ -257,7 +270,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(DiscoverableSyndicationEndpoint? first, DiscoverableSyndicationEndpoint? second)
     {
         if (first is null) return second is null;
@@ -269,6 +282,6 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(DiscoverableSyndicationEndpoint? first, DiscoverableSyndicationEndpoint? second) => !(first == second);
 }

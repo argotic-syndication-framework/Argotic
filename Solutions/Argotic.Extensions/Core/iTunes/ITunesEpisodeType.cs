@@ -34,7 +34,7 @@ public enum ITunesEpisodeType
     Trailer = 2,
 
     /// <summary>
-    /// Extra material published outside the podcast's regular run, such as a interview or a cross-promotion.
+    /// Extra material published outside the podcast's regular run, such as an interview or a cross-promotion.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Bonus", AlternateValue = "bonus")]
     Bonus = 3,

@@ -23,19 +23,25 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     /// Gets or sets the base date to be used in concert with period and frequency to calculate the publishing schedule.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that represents the base date to be used in concert with period and frequency to calculate the publishing schedule.
-    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates no base date was specified.
+    ///     The instant the update cycle is measured from. The default value is
+    ///     <see cref="DateTime.MinValue"/>, which stands in for "absent" and is the one value
+    ///     <see cref="WriteTo"/> will not write.
     /// </value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     Supply it in UTC. It is read and written as an RFC 3339 date-time, so a value with an unhelpful
+    ///     <see cref="DateTimeKind"/> serialises to an offset that does not mean what the caller intended.
     /// </remarks>
     public DateTime Base { get; set; } = DateTime.MinValue;
 
     /// <summary>
-    /// Gets or sets the frequency of updates in relation to the update period.
+    /// Gets or sets how many times per <see cref="Period"/> the feed is updated.
     /// </summary>
-    /// <value>The frequency of updates in relation to the update period.</value>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <b>1</b>.</exception>
+    /// <value>
+    ///     A count of updates per period — <c>2</c> with an hourly <see cref="Period"/> means twice an
+    ///     hour. The default value is <see cref="int.MinValue"/>, which stands in for "absent"; note that
+    ///     the setter rejects it, so once a real value has been assigned there is no way back to unset.
+    /// </value>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than <c>1</c>.</exception>
     public int Frequency
     {
         get;
@@ -51,19 +57,32 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     /// Gets or sets the period over which the feed format is updated.
     /// </summary>
     /// <value>
-    ///     A <see cref="SiteSummaryUpdatePeriod"/> enumeration value that indicates the period over which the feed format is updated.
-    ///     The default value is <see cref="SiteSummaryUpdatePeriod.None"/>, which indicates that no update period was specified.
+    ///     The unit <see cref="Frequency"/> counts against. The default value is
+    ///     <see cref="SiteSummaryUpdatePeriod.None"/>, which stands in for "absent" and suppresses the
+    ///     element on write.
     /// </value>
+    /// <remarks>
+    ///     An unrecognised <c>sy:updatePeriod</c> value leaves this at
+    ///     <see cref="SiteSummaryUpdatePeriod.None"/> and is dropped rather than round-tripped, so
+    ///     <see cref="Frequency"/> can survive a load with nothing left to count against.
+    /// </remarks>
     public SiteSummaryUpdatePeriod Period { get; set; } = SiteSummaryUpdatePeriod.None;
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="SiteSummaryUpdateSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="SiteSummaryUpdateSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     Unrecognised values are skipped rather than rejected, with one exception:
+    ///     <c>sy:updateFrequency</c> is assigned through <see cref="Frequency"/>, whose guard rejects
+    ///     anything below <c>1</c>. A feed carrying <c>0</c> or a negative frequency therefore aborts the
+    ///     load with <see cref="ArgumentOutOfRangeException"/> instead of ignoring the element.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="source"/> carries a <c>sy:updateFrequency</c> that parses to less than <c>1</c>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -110,11 +129,11 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);

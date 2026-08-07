@@ -13,11 +13,37 @@ namespace Argotic.Data.Adapters;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="Rss091SyndicationResourceAdapter"/> serves as a bridge between a <see cref="RssFeed"/> and an XML data source.
-///         The <see cref="Rss091SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(RssFeed)"/>, which changes the data
-///         in the <see cref="RssFeed"/> to match the data in the data source.
+///     RSS 0.91 is where the plain-XML line starts: <c>rss</c> root, <c>channel</c> beneath it, items
+///     nested inside the channel, and no namespace anywhere. That is the shape RSS 0.92 and RSS 2.0 keep,
+///     and it is nothing like the RDF documents <see cref="Rss090SyndicationResourceAdapter"/> and
+///     <see cref="Rss10SyndicationResourceAdapter"/> read, despite the version numbers. Every selector here
+///     matches the no-namespace partition only.
 ///     </para>
-///     <para>This syndication resource adapter is designed to fill <see cref="RssFeed"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSS 0.91 specification.</para>
+///     <para>
+///     The vocabulary read is the 0.91 one: <c>title</c>, <c>link</c>, <c>description</c> and
+///     <c>language</c>, plus <c>copyright</c>, <c>managingEditor</c>, <c>webMaster</c>, <c>rating</c>,
+///     <c>pubDate</c>, <c>lastBuildDate</c>, <c>image</c>, <c>textInput</c>, <c>skipDays</c> and
+///     <c>skipHours</c> — and, on an item, <c>title</c>, <c>link</c> and <c>description</c> only.
+///     <c>cloud</c>, <c>category</c>, <c>enclosure</c> and <c>source</c> arrive with 0.92 and are read by
+///     <see cref="Rss092SyndicationResourceAdapter"/>; <c>guid</c>, <c>author</c>, <c>comments</c> and
+///     item-level <c>pubDate</c> arrive with 2.0. An element the version does not define is not looked for,
+///     so a 0.91 document carrying one loses it silently.
+///     </para>
+///     <para>
+///     <b>Skip hours are renumbered.</b> RSS 0.91 counts the hours of the day from 1, RSS 2.0 counts them
+///     from 0, and <see cref="RssChannel.SkipHours"/> holds the 0-based form. So each <c>hour</c> read here
+///     has one subtracted before it is stored, and a 0.91 feed saying <c>1</c> becomes midnight. The cost is
+///     that a 0.91 document written to the 2.0 convention is read an hour out throughout, and its <c>0</c>
+///     becomes <c>-1</c> and is dropped with a trace warning. There is no way to tell the two conventions
+///     apart from a single value, so the version is all there is to go on.
+///     </para>
+///     <para>
+///     Malformed values are dropped, never fatal, and the pattern is uniform: an unrecognised
+///     <c>language</c> leaves <see cref="RssChannel.Language"/> unset and traces a warning, an unparseable
+///     day name is skipped, a non-URI <c>link</c> is ignored, and an oversized image dimension is clamped to
+///     <see cref="RssImage.HeightMaximum"/> or <see cref="RssImage.WidthMaximum"/> rather than rejected.
+///     A feed of which nothing at all parses loads as an empty channel.
+///     </para>
 /// </remarks>
 public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 {
@@ -29,17 +55,22 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <remarks>
     ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="RssFeed"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public Rss091SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
     /// <summary>
-    /// Modifies the <see cref="RssFeed"/> to match the data source.
+    /// Loads the channel from <c>rss/channel</c> and attaches the feed-level syndication extensions found on <c>rss</c>.
     /// </summary>
     /// <param name="resource">The <see cref="RssFeed"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     Unlike <see cref="Rss20SyndicationResourceAdapter"/>, which delegates the whole channel to
+    ///     <see cref="RssChannel"/>, the walk from here down is this adapter's own. A document with no
+    ///     <c>rss</c> child leaves the feed untouched and raises nothing.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(RssFeed resource)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -62,16 +93,23 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Initializes the supplied <see cref="RssChannel"/> using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
+    /// Reads the required channel elements and the <c>image</c>, then hands off to the optional-element and collection walks and attaches the channel's syndication extensions.
     /// </summary>
     /// <param name="channel">The <see cref="RssChannel"/> to be filled.</param>
+    /// <remarks>
+    ///     <c>language</c> is turned into a <see cref="CultureInfo"/>, and a name the runtime rejects leaves
+    ///     <see cref="RssChannel.Language"/> null and writes a trace warning rather than failing the load.
+    ///     The catch is on <see cref="ArgumentException"/> rather than
+    ///     <see cref="CultureNotFoundException"/> — the constructor's documented throw, and a subclass of
+    ///     it — so it also covers whatever else the constructor may reject the value for.
+    /// </remarks>
     /// <param name="navigator">The <see cref="XPathNavigator"/> used to navigate the channel XML data.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="channel"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="channel"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static void FillChannel(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(channel);
@@ -131,16 +169,29 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Initializes the supplied <see cref="RssChannel"/> collection entities using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
+    /// Reads the repeatable children of a channel — <c>skipDays/day</c>, <c>skipHours/hour</c> and every <c>item</c> — and probes each item for syndication extensions.
     /// </summary>
     /// <param name="channel">The <see cref="RssChannel"/> to be filled.</param>
+    /// <remarks>
+    ///     <para>
+    ///     Day names are parsed case-insensitively onto <see cref="DayOfWeek"/>, so <c>monday</c> and
+    ///     <c>Monday</c> both work; anything else is traced and skipped. Duplicates are refused, because
+    ///     <see cref="RssChannel.SkipDays"/> and <see cref="RssChannel.SkipHours"/> are documented as
+    ///     duplicate-free.
+    ///     </para>
+    ///     <para>
+    ///     Each <c>hour</c> has one subtracted to reach the 0-based range the object model stores, which is
+    ///     why a feed's <c>1</c> arrives as <c>0</c>. A value outside the resulting 0–23 range is traced and
+    ///     dropped, and the trace prints the converted number, not the one in the document.
+    ///     </para>
+    /// </remarks>
     /// <param name="navigator">The <see cref="XPathNavigator"/> used to navigate the channel XML data.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="channel"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="channel"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static void FillChannelCollections(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(channel);
@@ -256,16 +307,22 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Initializes the supplied <see cref="RssChannel"/> optional entities using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
+    /// Reads the single-valued optional children of a channel — <c>copyright</c>, <c>managingEditor</c>, <c>webMaster</c>, <c>rating</c>, <c>pubDate</c>, <c>lastBuildDate</c> and <c>textInput</c>.
     /// </summary>
     /// <param name="channel">The <see cref="RssChannel"/> to be filled.</param>
+    /// <remarks>
+    ///     Both dates are read with the RFC 822 date-and-time parser, which is what RSS pins — see
+    ///     <a href="https://www.rfc-editor.org/rfc/rfc822.html">RFC 822</a>, Internet Standard STD 11. It is
+    ///     deliberately not RFC 5322: RFC 5322 forbids the two-digit years RSS permits, and it never took
+    ///     the STD number. A value the parser rejects leaves the property at its default.
+    /// </remarks>
     /// <param name="navigator">The <see cref="XPathNavigator"/> used to navigate the channel XML data.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="channel"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="channel"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static void FillChannelOptionals(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(channel);
@@ -325,16 +382,22 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Initializes the supplied <see cref="RssImage"/> using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
+    /// Reads the six elements RSS 0.91 defines on an image — <c>title</c>, <c>url</c>, <c>link</c>, <c>description</c>, <c>height</c> and <c>width</c> — and the image's syndication extensions.
     /// </summary>
     /// <param name="image">The <see cref="RssImage"/> to be filled.</param>
+    /// <remarks>
+    ///     A dimension larger than the specification's ceiling is <i>clamped</i> to
+    ///     <see cref="RssImage.HeightMaximum"/> or <see cref="RssImage.WidthMaximum"/>, not rejected. The
+    ///     resulting object therefore reports a size the document did not state, which matters if it is
+    ///     going to be written back out.
+    /// </remarks>
     /// <param name="navigator">The <see cref="XPathNavigator"/> used to navigate the image XML data.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="image"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="image"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static void FillImage(RssImage image, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(image);
@@ -396,16 +459,19 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Initializes the supplied <see cref="RssTextInput"/> using the specified <see cref="XPathNavigator"/> and <see cref="XmlNamespaceManager"/>.
+    /// Reads the four elements RSS 0.91 defines on a text input — <c>title</c>, <c>description</c>, <c>name</c> and <c>link</c> — and the text input's syndication extensions.
     /// </summary>
     /// <param name="textInput">The <see cref="RssTextInput"/> to be filled.</param>
+    /// <remarks>
+    ///     Spelled <c>textInput</c> from 0.91 onwards, against <c>textinput</c> in the RDF versions.
+    /// </remarks>
     /// <param name="navigator">The <see cref="XPathNavigator"/> used to navigate the text input XML data.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="textInput"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="textInput"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static void FillTextInput(RssTextInput textInput, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(textInput);

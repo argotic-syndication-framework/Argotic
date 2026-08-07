@@ -3,11 +3,18 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.GenericSyndicationFeed;
 
+/// <summary>
+/// Covers the term-and-scheme abstraction a category presents once an Atom <c>category</c> or an RSS
+/// <c>category</c> has been folded into it, together with its guards, comparison and equality contracts.
+/// </summary>
 [TestClass]
 public class GenericSyndicationCategoryTests
 {
     #region Constructor Tests - String Term
 
+    /// <summary>
+    /// A category built from a term alone keeps that term verbatim.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithTerm_SetsTermProperty()
     {
@@ -21,6 +28,9 @@ public class GenericSyndicationCategoryTests
         category.Term.ShouldBe(term);
     }
 
+    /// <summary>
+    /// A category built from a term alone has an empty scheme, not a <see langword="null"/> one.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithTerm_SchemeShouldBeEmpty()
     {
@@ -34,11 +44,18 @@ public class GenericSyndicationCategoryTests
         category.Scheme.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> term is refused with <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullTerm_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new GenericSyndicationCategory((string)null!));
 
+    /// <summary>
+    /// An empty term is refused with <see cref="ArgumentException"/>, which is the other half of the
+    /// pair <c>ArgumentException.ThrowIfNullOrEmpty</c> throws.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithEmptyTerm_ThrowsArgumentException() =>
         // Act & Assert
@@ -48,6 +65,9 @@ public class GenericSyndicationCategoryTests
 
     #region Constructor Tests - Term and Scheme
 
+    /// <summary>
+    /// A term and a scheme supplied together are both kept as given.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithTermAndScheme_SetsBothProperties()
     {
@@ -63,6 +83,10 @@ public class GenericSyndicationCategoryTests
         category.Scheme.ShouldBe(scheme);
     }
 
+    /// <summary>
+    /// A scheme passed explicitly as <see langword="null"/> is stored as <see langword="null"/> rather
+    /// than being normalised to the empty string the one-argument constructor leaves behind.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithTermAndNullScheme_SetsSchemeToNull()
     {
@@ -81,6 +105,9 @@ public class GenericSyndicationCategoryTests
 
     #region Constructor Tests - AtomCategory
 
+    /// <summary>
+    /// An Atom category's <c>term</c> attribute becomes the generic term.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomCategory_SetsTermFromAtomTerm()
     {
@@ -94,6 +121,9 @@ public class GenericSyndicationCategoryTests
         category.Term.ShouldBe("atomTerm");
     }
 
+    /// <summary>
+    /// An Atom category's <c>scheme</c> IRI becomes the generic scheme, flattened to its string form.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomCategory_SetsSchemeFromAtomScheme()
     {
@@ -110,6 +140,9 @@ public class GenericSyndicationCategoryTests
         category.Scheme.ShouldBe("http://example.com/scheme");
     }
 
+    /// <summary>
+    /// Whitespace around an Atom term is trimmed off on the way in.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomCategory_TrimsWhitespace()
     {
@@ -123,6 +156,9 @@ public class GenericSyndicationCategoryTests
         category.Term.ShouldBe("atomTerm");
     }
 
+    /// <summary>
+    /// An Atom category carrying only a <c>label</c> yields that label as its term.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomCategory_FallsBackToLabelWhenTermNotSet()
     {
@@ -139,6 +175,9 @@ public class GenericSyndicationCategoryTests
         category.Term.ShouldBe("labelValue");
     }
 
+    /// <summary>
+    /// When an Atom category carries both, the <c>term</c> wins and the <c>label</c> is ignored.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomCategory_PrefersTermOverLabel()
     {
@@ -155,11 +194,17 @@ public class GenericSyndicationCategoryTests
         category.Term.ShouldBe("termValue");
     }
 
+    /// <summary>
+    /// A <see langword="null"/> Atom category is refused rather than producing an empty abstraction.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullAtomCategory_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new GenericSyndicationCategory((AtomCategory)null!));
 
+    /// <summary>
+    /// An Atom category with no <c>scheme</c> yields an empty scheme, not a <see langword="null"/> one.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomCategory_NoScheme_SetsSchemeToEmpty()
     {
@@ -177,6 +222,9 @@ public class GenericSyndicationCategoryTests
 
     #region Constructor Tests - RssCategory
 
+    /// <summary>
+    /// An RSS category's element content becomes the generic term.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithRssCategory_SetsTermFromValue()
     {
@@ -190,6 +238,10 @@ public class GenericSyndicationCategoryTests
         category.Term.ShouldBe("rssValue");
     }
 
+    /// <summary>
+    /// An RSS category's <c>domain</c> attribute becomes the generic scheme, which is what makes an
+    /// RSS category and an Atom category comparable through one abstraction.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithRssCategory_SetsSchemeFromDomain()
     {
@@ -203,6 +255,9 @@ public class GenericSyndicationCategoryTests
         category.Scheme.ShouldBe("http://example.com/domain");
     }
 
+    /// <summary>
+    /// Whitespace around an RSS category's value and domain is trimmed off both.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithRssCategory_TrimsWhitespace()
     {
@@ -217,11 +272,17 @@ public class GenericSyndicationCategoryTests
         category.Scheme.ShouldBe("domain");
     }
 
+    /// <summary>
+    /// A <see langword="null"/> RSS category is refused rather than producing an empty abstraction.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullRssCategory_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new GenericSyndicationCategory((RssCategory)null!));
 
+    /// <summary>
+    /// An RSS category with no <c>domain</c> yields an empty scheme, matching the Atom side.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithRssCategory_NoDomain_SetsSchemeToEmpty()
     {
@@ -239,6 +300,10 @@ public class GenericSyndicationCategoryTests
 
     #region ToString Tests
 
+    /// <summary>
+    /// The string form names the type and spells out both the term and the scheme, so a category is
+    /// legible in a debugger and in an assertion failure.
+    /// </summary>
     [TestMethod]
     public void ToString_ReturnsFormattedString()
     {
@@ -258,6 +323,9 @@ public class GenericSyndicationCategoryTests
 
     #region CompareTo Tests
 
+    /// <summary>
+    /// Comparing against <see langword="null"/> yields <c>1</c>, so a null sorts before every category.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithNull_ReturnsPositive()
     {
@@ -271,6 +339,9 @@ public class GenericSyndicationCategoryTests
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Two categories with the same term and scheme compare equal, so ordering agrees with equality.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithEqualCategory_ReturnsZero()
     {
@@ -285,6 +356,9 @@ public class GenericSyndicationCategoryTests
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// The term participates in ordering: two categories differing only in it do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithDifferentTerm_ReturnsNonZero()
     {
@@ -299,6 +373,9 @@ public class GenericSyndicationCategoryTests
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// The scheme participates in ordering too, so the same term under two schemes stays distinct.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithDifferentScheme_ReturnsNonZero()
     {
@@ -317,6 +394,9 @@ public class GenericSyndicationCategoryTests
 
     #region Equals Tests
 
+    /// <summary>
+    /// Equality is by value: two separately constructed categories with the same term and scheme are equal.
+    /// </summary>
     [TestMethod]
     public void Equals_WithEqualCategory_ReturnsTrue()
     {
@@ -328,6 +408,9 @@ public class GenericSyndicationCategoryTests
         category1.Equals(category2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Categories differing only in their term are not equal.
+    /// </summary>
     [TestMethod]
     public void Equals_WithDifferentCategory_ReturnsFalse()
     {
@@ -339,6 +422,9 @@ public class GenericSyndicationCategoryTests
         category1.Equals(category2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Nothing equals <see langword="null"/>, and asking does not throw.
+    /// </summary>
     [TestMethod]
     public void Equals_WithNull_ReturnsFalse()
     {
@@ -349,6 +435,9 @@ public class GenericSyndicationCategoryTests
         category.Equals(null).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An object of an unrelated type is not equal to a category, and asking does not throw.
+    /// </summary>
     [TestMethod]
     public void Equals_WithWrongType_ReturnsFalse()
     {
@@ -363,6 +452,9 @@ public class GenericSyndicationCategoryTests
 
     #region GetHashCode Tests
 
+    /// <summary>
+    /// Asking a fully populated category for its hash code returns a value rather than throwing.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_ReturnsIntegerValue()
     {
@@ -383,6 +475,9 @@ public class GenericSyndicationCategoryTests
 
     #region Equality Operator Tests
 
+    /// <summary>
+    /// The <c>==</c> operator agrees with <c>Equals</c> for two equal categories.
+    /// </summary>
     [TestMethod]
     public void EqualityOperator_WithEqualCategories_ReturnsTrue()
     {
@@ -394,6 +489,9 @@ public class GenericSyndicationCategoryTests
         (category1 == category2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>==</c> operator separates two categories with different terms.
+    /// </summary>
     [TestMethod]
     public void EqualityOperator_WithDifferentCategories_ReturnsFalse()
     {
@@ -405,6 +503,9 @@ public class GenericSyndicationCategoryTests
         (category1 == category2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> references compare equal instead of dereferencing either one.
+    /// </summary>
     [TestMethod]
     public void EqualityOperator_WithBothNull_ReturnsTrue()
     {
@@ -416,6 +517,9 @@ public class GenericSyndicationCategoryTests
         (category1 == category2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> left operand is unequal to a real category rather than throwing.
+    /// </summary>
     [TestMethod]
     public void EqualityOperator_WithFirstNull_ReturnsFalse()
     {
@@ -427,6 +531,9 @@ public class GenericSyndicationCategoryTests
         (category1 == category2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> right operand is unequal to a real category, symmetrically.
+    /// </summary>
     [TestMethod]
     public void EqualityOperator_WithSecondNull_ReturnsFalse()
     {
@@ -442,6 +549,9 @@ public class GenericSyndicationCategoryTests
 
     #region Inequality Operator Tests
 
+    /// <summary>
+    /// The <c>!=</c> operator is the negation of <c>==</c> for two equal categories.
+    /// </summary>
     [TestMethod]
     public void InequalityOperator_WithEqualCategories_ReturnsFalse()
     {
@@ -453,6 +563,9 @@ public class GenericSyndicationCategoryTests
         (category1 != category2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The <c>!=</c> operator is the negation of <c>==</c> for two differing categories.
+    /// </summary>
     [TestMethod]
     public void InequalityOperator_WithDifferentCategories_ReturnsTrue()
     {

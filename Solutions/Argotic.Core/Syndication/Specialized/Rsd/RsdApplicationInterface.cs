@@ -9,14 +9,14 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents a discoverable application programming interface (API) that provides services to web log clients.
 /// </summary>
+/// <remarks>
+///     One <c>api</c> element: a protocol <see cref="Name">name</see>, the <see cref="Link">endpoint</see> to
+///     send to, and whatever the engine chose to add in <see cref="Settings"/>. A client picks one it
+///     recognises, preferring the one flagged <see cref="IsPreferred"/>.
+/// </remarks>
 /// <seealso cref="RsdDocument.Interfaces"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the RsdApplicationInterface class.">
-///         <code 
-///             source="..\..\Argotic.Examples\Core\Rsd\RsdApplicationInterfaceExample.cs" 
-///             region="RsdApplicationInterface" 
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Rsd\RsdApplicationInterfaceExample.cs" language="cs" title="The following code example demonstrates the usage of the RsdApplicationInterface class." />
 /// </example>
 public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEquatable<RsdApplicationInterface>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
@@ -34,9 +34,9 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// <param name="link">A <see cref="Uri"/> that represents the endpoint of this application interface clients should use to communication with the service.</param>
     /// <param name="isPreferred">A value indicating if this application interface is the preferred service.</param>
     /// <param name="weblogId">A custom web log identifier utilized by this application interface. Can be an empty string.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is <see langword="null"/>.</exception>
     public RsdApplicationInterface(string name, Uri link, bool isPreferred, string weblogId)
     {
         this.IsPreferred = isPreferred;
@@ -48,32 +48,31 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets the location of the documentation for this application interface.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the location of the documentation for this application interface.</value>
+    /// <value>The <c>docs</c> setting, or <see langword="null"/> if none was specified.</value>
     public Uri? Documentation { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if this application interface is preferred.
     /// </summary>
-    /// <value><b>true</b> if this application interface is the preferred service; Otherwise, <b>false</b>.</value>
+    /// <value><see langword="true"/> if this is the interface a client should choose when several are offered; otherwise, <see langword="false"/>. The default is <see langword="false"/>.</value>
     public bool IsPreferred { get; set; }
 
     /// <summary>
     /// Gets or sets the communication endpoint of this application interface.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the endpoint of this application interface clients should use to communication with the service.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>apiLink</c> attribute — where the client sends its requests. <see langword="null"/> until set; the setter rejects null.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Link
     {
         get;
@@ -87,35 +86,15 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// <summary>
     /// Gets or sets the name of this application interface.
     /// </summary>
-    /// <value>The name of this application interface.</value>
+    /// <value>The <c>name</c> attribute, naming the protocol rather than the site. The value is trimmed on assignment.</value>
     /// <remarks>
-    ///     Well known application interface names include the following:
-    ///     <list type="bullet">
-    ///         <item>
-    ///             <description><b>Antville</b></description>
-    ///         </item>
-    ///         <item>
-    ///             <description><b>Blogger</b></description>
-    ///         </item>
-    ///         <item>
-    ///             <description><b>Conversant</b></description>
-    ///         </item>
-    ///         <item>
-    ///             <description><b>LiveJournal</b></description>
-    ///         </item>
-    ///         <item>
-    ///             <description><b>Manila</b></description>
-    ///         </item>
-    ///         <item>
-    ///             <description><b>MetaWeblog</b></description>
-    ///         </item>
-    ///         <item>
-    ///             <description><b>MetaWiki</b></description>
-    ///         </item>
-    ///     </list>
+    ///     RSD 1.0 lists seven well-known names — <c>Antville</c>, <c>Blogger</c>, <c>Conversant</c>,
+    ///     <c>LiveJournal</c>, <c>Manila</c>, <c>MetaWeblog</c> and <c>MetaWiki</c> — but does not close the
+    ///     set, and later software added its own (<c>WordPress</c>, <c>Atom</c>). Treat the name as an opaque
+    ///     token to match against, not an enumeration.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Name
     {
         get;
@@ -129,7 +108,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// <summary>
     /// Gets or sets human readable text that explains the features and settings for this application interface.
     /// </summary>
-    /// <value>Human readable text that explains the features and settings for this application interface.</value>
+    /// <value>The <c>notes</c> setting, or an <i>empty</i> string if none was specified. Intended for a person, not a parser.</value>
     public string Notes
     {
         get;
@@ -139,13 +118,16 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// <summary>
     /// Gets a collection of service specific settings for this application interface.
     /// </summary>
-    /// <value>A <see cref="Dictionary{T, T}"/> collection of service specific settings for this application interface.</value>
+    /// <remarks>
+    ///     The <c>setting</c> elements, keyed by their <c>name</c> attribute. RSD defines no vocabulary for
+    ///     them — they are whatever the engine decided its clients need to know.
+    /// </remarks>
     public Dictionary<string, string> Settings { get; } = [];
 
     /// <summary>
     /// Gets or sets a custom web log identifier utilized by this application interface.
     /// </summary>
-    /// <value>A custom web log identifier utilized by this application interface.</value>
+    /// <value>The <c>blogID</c> attribute — which blog on the server to post to, for engines that host more than one — or an <i>empty</i> string if none was specified.</value>
     public string WeblogId
     {
         get;
@@ -156,11 +138,11 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// Loads this <see cref="RsdApplicationInterface"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="RsdApplicationInterface"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RsdApplicationInterface"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RsdApplicationInterface"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -259,12 +241,12 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="RsdApplicationInterface"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RsdApplicationInterface"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RsdApplicationInterface"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -280,7 +262,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// Saves the current <see cref="RsdApplicationInterface"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -356,7 +338,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// Determines whether the specified <see cref="RsdApplicationInterface"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="RsdApplicationInterface"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="RsdApplicationInterface"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="RsdApplicationInterface"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(RsdApplicationInterface? other)
     {
         if (other is null)
@@ -371,7 +353,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is RsdApplicationInterface other && this.Equals(other);
 
     /// <summary>
@@ -395,7 +377,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(RsdApplicationInterface? first, RsdApplicationInterface? second)
     {
         if (first is null) return second is null;
@@ -407,6 +389,6 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(RsdApplicationInterface? first, RsdApplicationInterface? second) => !(first == second);
 }

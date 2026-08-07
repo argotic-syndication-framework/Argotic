@@ -5,11 +5,11 @@ namespace Argotic.Common;
 /// </summary>
 /// <param name="LastModified">
 ///     The <c>Last-Modified</c> the origin last reported, sent as <c>If-Modified-Since</c>. This value
-///     can be <b>null</b>.
+///     can be <see langword="null"/>.
 /// </param>
 /// <param name="ETag">
 ///     The <c>ETag</c> the origin last reported, sent as <c>If-None-Match</c>. This value can be
-///     <b>null</b>. It must be sent exactly as received, quotes and any <c>W/</c> prefix included.
+///     <see langword="null"/>. It must be sent exactly as received, quotes and any <c>W/</c> prefix included.
 /// </param>
 /// <remarks>
 ///     <para>
@@ -19,7 +19,7 @@ namespace Argotic.Common;
 ///     call site, and inventing a <see cref="DateTime"/> for a resource that never sent one.
 ///     </para>
 ///     <para>
-///     <b>Deliberately not on <see cref="SyndicationRequestOptions"/>.</b> Every path that consumes
+///     Deliberately not on <see cref="SyndicationRequestOptions"/>. Every path that consumes
 ///     request options funnels through a fetch that calls
 ///     <see cref="System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode"/>, and <c>304</c> is not
 ///     a success code. Folding validators into the general options would therefore give every
@@ -49,7 +49,7 @@ public sealed record SyndicationValidators(DateTimeOffset? LastModified, string?
     ///     request to an unconditional GET, which succeeds, returns a body, and looks exactly like a
     ///     resource that changed. The caller would re-download on every poll and never learn why.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="request"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">The <see cref="ETag"/> is not a valid entity tag.</exception>
     public void ApplyTo(HttpRequestMessage request)
     {

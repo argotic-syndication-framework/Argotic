@@ -12,11 +12,23 @@ namespace Argotic.Data.Adapters;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="Rsd10SyndicationResourceAdapter"/> serves as a bridge between a <see cref="RsdDocument"/> and an XML data source.
-///         The <see cref="Rsd10SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(RsdDocument)"/>, which changes the data
-///         in the <see cref="RsdDocument"/> to match the data in the data source.
+///     RSD 1.0 defines a <c>rsd</c> root in the <c>http://archipelago.phrasewise.com/rsd</c> namespace,
+///     holding one <c>service</c> with <c>engineName</c>, <c>engineLink</c>, <c>homePageLink</c> and an
+///     <c>apis</c> list. This adapter reads exactly that, and each <c>api</c> is read by
+///     <see cref="RsdApplicationInterface"/> — including its <c>apiLink</c> attribute, which is the name RSD
+///     1.0 gave the attribute RSD 0.6 called <c>rpcLink</c>.
 ///     </para>
-///     <para>This syndication resource adapter is designed to fill <see cref="RsdDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSD 1.0 specification.</para>
+///     <para>
+///     Almost every selection goes through <c>RsdUtility.SelectSafe</c> or <c>SelectSafeSingleNode</c>,
+///     which retry the query with the <c>rsd:</c> prefix stripped when the namespaced form finds nothing.
+///     Real RSD documents are frequently served with no namespace at all — this is the concession that
+///     reads them, and it costs a second XPath evaluation only on the documents that need it.
+///     </para>
+///     <para>
+///     The <c>service</c> lookup carries a second, narrower concession: dasBlog emits <c>service</c> with an
+///     empty default namespace inside a namespaced <c>rsd</c>, so a mixed <c>rsd:rsd/service</c> path is
+///     tried when the fully namespaced one misses.
+///     </para>
 /// </remarks>
 public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
 {
@@ -28,17 +40,22 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <remarks>
     ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="RsdDocument"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public Rsd10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
     /// <summary>
-    /// Modifies the <see cref="RsdDocument"/> to match the data source.
+    /// Reads the engine identity and the API list from <c>rsd/service</c>, then attaches the syndication extensions found on <c>rsd</c>.
     /// </summary>
     /// <param name="resource">The <see cref="RsdDocument"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     Both links are accepted as <see cref="UriKind.RelativeOrAbsolute"/>. An <c>engineLink</c> that is
+    ///     not a URI at all is dropped silently rather than failing the load, which is the house treatment
+    ///     of a malformed value throughout the adapters.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(RsdDocument resource)
     {
         ArgumentNullException.ThrowIfNull(resource);

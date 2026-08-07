@@ -11,7 +11,13 @@ public static class XmlWritableExtensions
     /// Returns an XML string representation of the current <see cref="IXmlWritable"/> object.
     /// </summary>
     /// <param name="writable">The object to convert to an XML string.</param>
-    /// <returns>An XML string representation of the object.</returns>
+    /// <returns>The object as an indented XML fragment, without an XML declaration.</returns>
+    /// <remarks>
+    ///     Written as a fragment rather than as a document, because these entities are composed into a
+    ///     document by their parent. The result is therefore not a standalone XML document and carries
+    ///     no encoding declaration.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="writable"/> is <see langword="null"/>.</exception>
     public static string ToXmlString(this IXmlWritable writable)
     {
         ArgumentNullException.ThrowIfNull(writable);
@@ -31,11 +37,11 @@ public static class XmlWritableExtensions
     /// Returns an XML string representation of the current <see cref="IXmlWritableWithElementName"/> object using a specified element name.
     /// </summary>
     /// <param name="writable">The object to convert to an XML string.</param>
-    /// <param name="elementName">The element name to use when writing the object.</param>
-    /// <returns>An XML string representation of the object.</returns>
-    /// <remarks>
-    /// This overload is useful for objects that have a WriteTo method with an additional element name parameter.
-    /// </remarks>
+    /// <param name="elementName">The local name to write the object under. An Atom text construct is one shape written as <c>title</c>, <c>rights</c> or <c>subtitle</c> depending on where it sits, and a person construct as <c>author</c> or <c>contributor</c>; the name is what distinguishes them.</param>
+    /// <returns>The object as an indented XML fragment, without an XML declaration.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="writable"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="elementName"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="elementName"/> is an empty string.</exception>
     public static string ToXmlString(this IXmlWritableWithElementName writable, string elementName)
     {
         ArgumentNullException.ThrowIfNull(writable);

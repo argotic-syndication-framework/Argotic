@@ -13,11 +13,24 @@ namespace Argotic.Data.Adapters;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="AtomPublishing10SyndicationResourceAdapter"/> serves as a bridge between a <see cref="AtomServiceDocument"/> and an XML data source.
-///         The <see cref="AtomPublishing10SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(AtomServiceDocument)"/> or <see cref="Fill(AtomCategoryDocument)"/>, which changes the data
-///         in the <see cref="AtomServiceDocument"/> or <see cref="AtomCategoryDocument"/> to match the data in the data source.
+///     Reads the two document types RFC 5023 defines: a service document rooted at <c>app:service</c>, and a
+///     category document rooted at <c>app:categories</c>. Both live in <c>http://www.w3.org/2007/app</c>,
+///     while the <c>atom:category</c> elements inside a category document remain in the Atom namespace — so
+///     both prefixes must resolve, which is why the manager comes from <c>AtomUtility</c> rather than being
+///     built here.
 ///     </para>
-///     <para>This syndication resource adapter is designed to fill <see cref="AtomServiceDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the Atom Publishing Protocol 1.0 specification.</para>
+///     <para>
+///     A category document is the one resource in this library that appears in two positions. Stand-alone,
+///     it is a document whose root is <c>app:categories</c>. Nested, it is an <c>app:categories</c> element
+///     inside a collection in a service document, and <see cref="AtomMemberResources"/> hands this adapter a
+///     navigator already positioned on it — where a child selector finds nothing. Hence the second arm in
+///     <see cref="Fill(AtomCategoryDocument)"/>, which accepts the navigator itself.
+///     </para>
+///     <para>
+///     RFC 5023 §7.2.1 also allows an out-of-line category document: an <c>app:categories</c> element with
+///     an <c>href</c> and no children, naming where the real list lives. Fetching it is the caller's
+///     business; this adapter's job is to not lose the <c>href</c> while reading a childless element.
+///     </para>
 /// </remarks>
 public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAdapter
 {
@@ -29,17 +42,23 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
     /// <remarks>
     ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="AtomServiceDocument"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public AtomPublishing10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
     /// <summary>
-    /// Modifies the <see cref="AtomCategoryDocument"/> to match the data source.
+    /// Reads an <c>app:categories</c> element — its <c>fixed</c>, <c>scheme</c> and <c>href</c> attributes, its <c>atom:category</c> children, and its syndication extensions — whether it is the document root or the navigator's own position.
     /// </summary>
     /// <param name="resource">The <see cref="AtomCategoryDocument"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     <c>fixed</c> is read as the literal <c>yes</c> or <c>no</c> RFC 5023 specifies, case-insensitively;
+    ///     any other value leaves <see cref="AtomCategoryDocument.IsFixed"/> alone rather than guessing. Since
+    ///     that property is a plain <see cref="bool"/> defaulting to <see langword="false"/>, an absent or
+    ///     unreadable attribute is indistinguishable from <c>fixed="no"</c> once the load has finished.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(AtomCategoryDocument resource)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -140,10 +159,15 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
             : null;
 
     /// <summary>
-    /// Modifies the <see cref="AtomServiceDocument"/> to match the data source.
+    /// Reads the <c>app:workspace</c> children of <c>app:service</c>, and the service document's own syndication extensions.
     /// </summary>
     /// <param name="resource">The <see cref="AtomServiceDocument"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     The walk below this point re-enters this adapter: a workspace holds collections, a collection may
+    ///     hold an <c>app:categories</c> element, and that element comes back through
+    ///     <see cref="Fill(AtomCategoryDocument)"/> by its second arm.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(AtomServiceDocument resource)
     {
         ArgumentNullException.ThrowIfNull(resource);

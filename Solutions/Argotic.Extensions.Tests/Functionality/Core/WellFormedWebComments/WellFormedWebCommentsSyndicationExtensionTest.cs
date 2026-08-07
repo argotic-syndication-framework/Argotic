@@ -6,6 +6,10 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.WellFormedWebComments;
 
+/// <summary>
+/// Covers <c>WellFormedWebCommentsSyndicationExtension</c>, the wfw Comment API module that points an
+/// item at the endpoint comments are posted to and at the feed of comments already made.
+/// </summary>
 [TestClass]
 public class WellFormedWebCommentsSyndicationExtensionTest
 {
@@ -19,6 +23,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor produces a non-null
+    /// <c>WellFormedWebCommentsSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsSyndicationExtensionConstructorTest()
     {
@@ -27,6 +35,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         target.ShouldBeOfType<WellFormedWebCommentsSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions built from the same comment and comment-feed URLs compare equal, so
+    /// <c>CompareTo</c> returns <c>0</c>.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsCompareToTest()
     {
@@ -36,6 +48,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Two separately built extensions carrying the same two URLs are equal through the <c>object</c>
+    /// overload of <c>Equals</c>.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsEqualsTest()
     {
@@ -45,6 +61,14 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A populated extension hashes to something other than <c>0</c>.
+    /// </summary>
+    /// <remarks>
+    ///     Weaker than the contract its siblings assert — that equal objects agree on their hash code —
+    ///     and deliberately so: this pins only that hashing a populated extension completes and does not
+    ///     land on the default.
+    /// </remarks>
     [TestMethod]
     public void WellFormedWebCommentsGetHashCodeTest()
     {
@@ -55,6 +79,14 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// A feed carrying <c>wfw:comment</c> and <c>wfw:commentRss</c> parses without throwing.
+    /// </summary>
+    /// <remarks>
+    ///     Nothing about the parsed values is asserted here; <c>WellFormedWebCommentsFullTest</c> is what
+    ///     checks that the extension was attached and <c>WellFormedWebCommentsContextTest</c> what it
+    ///     holds.
+    /// </remarks>
     [TestMethod]
     public void WellFormedWebCommentsLoadTest()
     {
@@ -65,6 +97,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         feed.Load(reader);
     }
 
+    /// <summary>
+    /// Saving a feed with the extension attached writes <c>wfw:comment</c> before
+    /// <c>wfw:commentRss</c>, with the namespace declared on the <c>rss</c> element.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsCreateXmlTest()
     {
@@ -75,6 +111,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// An item carrying the wfw elements is found again after the feed is parsed, by both the generic
+    /// lookup and the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsFullTest()
     {
@@ -93,6 +133,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
             .ShouldBeOfType<WellFormedWebCommentsSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts an <c>ISyndicationExtension</c> that is a
+    /// <c>WellFormedWebCommentsSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsMatchByTypeTest()
     {
@@ -101,6 +145,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders <c>comment</c> and then <c>commentRss</c> on separate lines, each
+    /// declaring the Comment API namespace as its default rather than carrying the <c>wfw</c> prefix.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsToStringTest()
     {
@@ -109,6 +157,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         actual.ShouldBe(toStringText);
     }
 
+    /// <summary>
+    /// Writing to a non-indenting fragment <c>XmlWriter</c> emits the same two elements as
+    /// <c>ToString</c>, without the line break between them.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsWriteToTest()
     {
@@ -121,6 +173,9 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Two extensions pointing at different comment URLs are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsOpEqualityTestFailure()
     {
@@ -130,6 +185,9 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions pointing at the same comment URLs are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsOpEqualityTestSuccess()
     {
@@ -139,6 +197,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension whose comment endpoint is <c>post/1</c> does not sort above the one whose endpoint
+    /// is <c>post/2</c>.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsOpGreaterThanTest()
     {
@@ -148,6 +210,9 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions pointing at different comment URLs are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsOpInequalityTest()
     {
@@ -157,6 +222,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension whose comment endpoint is <c>post/1</c> sorts below the one whose endpoint is
+    /// <c>post/2</c>.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsOpLessThanTest()
     {
@@ -166,6 +235,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>Context</c> property hands back the comment endpoint and comment feed the extension was
+    /// built from.
+    /// </summary>
     [TestMethod]
     public void WellFormedWebCommentsContextTest()
     {
@@ -177,6 +250,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         context.CommentsFeed.ShouldBe(new Uri("http://www.example.com/comments/feed/1"));
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the lesser, commenting on post 1.
+    /// </summary>
+    /// <returns>An extension carrying a comment endpoint and a comment feed.</returns>
     private static WellFormedWebCommentsSyndicationExtension CreateExtension1()
     {
         WellFormedWebCommentsSyndicationExtension ext = new()
@@ -191,6 +268,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         return ext;
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the greater, commenting on post 2.
+    /// </summary>
+    /// <returns>An extension carrying a comment endpoint and a comment feed.</returns>
     private static WellFormedWebCommentsSyndicationExtension CreateExtension2()
     {
         WellFormedWebCommentsSyndicationExtension ext = new()

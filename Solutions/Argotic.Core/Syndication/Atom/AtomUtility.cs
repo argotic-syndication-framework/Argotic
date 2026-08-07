@@ -27,26 +27,26 @@ internal static class AtomUtility
     private const string XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
     /// <summary>
-    /// Private member to hold the XML 1.1 namespace identifier.
+    /// Private member to hold the XML namespace identifier, the one <c>xml:base</c> and <c>xml:lang</c> are bound to.
     /// </summary>
     private const string XML_NAMESPACE = "http://www.w3.org/XML/1998/namespace";
 
     /// <summary>
     /// Gets the XML namespace URI for the Atom 1.0 specification.
     /// </summary>
-    /// <value>The XML namespace URI for the Atom 1.0 specification.</value>
+    /// <value><c>http://www.w3.org/2005/Atom</c>.</value>
     public static string AtomNamespace => ATOM_NAMESPACE;
 
     /// <summary>
     /// Gets the XML namespace URI for the Atom Publishing Protocol 1.0 specification.
     /// </summary>
-    /// <value>The XML namespace URI for the Atom Publishing Protocol 1.0 specification.</value>
+    /// <value><c>http://www.w3.org/2007/app</c>.</value>
     public static string AtomPublishingNamespace => ATOMPUB_NAMESPACE;
 
     /// <summary>
     /// Gets the XML namespace URI for the XHTML specification.
     /// </summary>
-    /// <value>The XML namespace URI for the Extensible HyperText Markup Language (XHTML) specification.</value>
+    /// <value><c>http://www.w3.org/1999/xhtml</c>.</value>
     public static string XhtmlNamespace => XHTML_NAMESPACE;
 
     /// <summary>
@@ -111,7 +111,7 @@ internal static class AtomUtility
     /// </summary>
     /// <param name="nameTable">The table of atomized string objects.</param>
     /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is <see langword="null"/>.</exception>
 
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
@@ -155,9 +155,9 @@ internal static class AtomUtility
     /// </summary>
     /// <param name="target">The object that implements the <see cref="IAtomCommonObjectAttributes"/> interface to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract Atom common attribute information from.</param>
-    /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public static bool FillCommonObjectAttributes(IAtomCommonObjectAttributes target, XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -215,14 +215,14 @@ internal static class AtomUtility
     /// Resolves the effective xml:base governing an element from its ancestors.
     /// </summary>
     /// <param name="source">The element whose context to resolve. The supplied navigator is not moved.</param>
-    /// <returns>The nearest ancestor's effective base, or <b>null</b> when no ancestor declares one.</returns>
+    /// <returns>The nearest ancestor's effective base, or <see langword="null"/> when no ancestor declares one.</returns>
     /// <remarks>
     ///     Walks ancestors nearest-first collecting <c>xml:base</c> attributes, stopping at the first
     ///     absolute one; relative bases then stack outermost-first per W3C XML Base §4.3. A relative
     ///     base with no absolute ancestor above it resolves to nothing rather than to an invented
     ///     root.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public static Uri? ResolveInheritedXmlBase(XPathNavigator source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -263,7 +263,7 @@ internal static class AtomUtility
     /// Determines whether a content type names an XML media type.
     /// </summary>
     /// <param name="contentType">The value of a <c>type</c> attribute.</param>
-    /// <returns><b>true</b> for an XML media type per RFC 4287 §4.1.3.3 rule 5; otherwise <b>false</b>.</returns>
+    /// <returns><see langword="true"/> for an XML media type per RFC 4287 §4.1.3.3 rule 5; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     The rule-5 set: a subtype of <c>xml</c> or a subtype ending in <c>+xml</c>. The three
     ///     keyword values <c>text</c>/<c>html</c>/<c>xhtml</c> are not media types and are handled by
@@ -330,8 +330,8 @@ internal static class AtomUtility
     /// </summary>
     /// <param name="source">An object that implements the <see cref="IAtomCommonObjectAttributes"/> interface to extract Atom common attribute information from.</param>
     /// <param name="writer">The <see cref="XmlWriter"/> to which the <paramref name="source"/> information will be written.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public static void WriteCommonObjectAttributes(IAtomCommonObjectAttributes source, XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(source);

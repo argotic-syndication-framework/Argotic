@@ -27,10 +27,10 @@ public sealed class ConditionalLoadResult<TResource>
     /// <summary>
     /// Initializes a new instance of the <see cref="ConditionalLoadResult{TResource}"/> class.
     /// </summary>
-    /// <param name="resource">The loaded resource, or <b>null</b> if the origin reported no change.</param>
+    /// <param name="resource">The loaded resource, or <see langword="null"/> if the origin reported no change.</param>
     /// <param name="validators">The validators to send on the next request.</param>
     /// <param name="statusCode">The status code the origin returned.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="validators"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="validators"/> is <see langword="null"/>.</exception>
     internal ConditionalLoadResult(TResource? resource, SyndicationValidators validators, HttpStatusCode statusCode)
     {
         ArgumentNullException.ThrowIfNull(validators);
@@ -43,7 +43,7 @@ public sealed class ConditionalLoadResult<TResource>
     /// <summary>
     /// Gets a value indicating whether the origin returned a new representation.
     /// </summary>
-    /// <value><b>true</b> if <see cref="Resource"/> holds a freshly loaded resource; otherwise, <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Resource"/> holds a freshly loaded resource; otherwise, <see langword="false"/>.</value>
     /// <remarks>
     ///     Annotated with <see cref="MemberNotNullWhenAttribute"/>, so a caller who tests this reaches
     ///     <see cref="Resource"/> without a null check and without a null-forgiving operator. That is
@@ -55,7 +55,7 @@ public sealed class ConditionalLoadResult<TResource>
     /// <summary>
     /// Gets the loaded resource.
     /// </summary>
-    /// <value>The resource, or <b>null</b> when the origin reported no change.</value>
+    /// <value>The resource, or <see langword="null"/> when the origin reported no change.</value>
     public TResource? Resource { get; }
 
     /// <summary>
@@ -75,6 +75,6 @@ public sealed class ConditionalLoadResult<TResource>
     /// <summary>
     /// Gets the status code the origin returned.
     /// </summary>
-    /// <value>The <see cref="HttpStatusCode"/>, which is <see cref="HttpStatusCode.NotModified"/> exactly when <see cref="WasModified"/> is <b>false</b>.</value>
+    /// <value>The <see cref="HttpStatusCode"/>, which is <see cref="HttpStatusCode.NotModified"/> exactly when <see cref="WasModified"/> is <see langword="false"/>.</value>
     public HttpStatusCode StatusCode { get; }
 }

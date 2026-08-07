@@ -96,6 +96,8 @@ public sealed class Rfc822FallbackKindTests
     ///     conversion, not merely the annotation — and it holds on a UTC machine and a non-UTC one
     ///     alike, because both sides move together if the offset handling is wrong in the same way.
     /// </remarks>
+    /// <param name="fallbackShape">A spelling no pattern in the table matches.</param>
+    /// <param name="tableShape">A table-matched spelling of the same instant.</param>
     [TestMethod]
     [DataRow("01 Jan 2024 10:00:00 GMT", "Mon, 01 Jan 2024 10:00:00 GMT")]
     [DataRow("Mon, 01 Jan 2024 10:00 GMT", "Mon, 01 Jan 2024 10:00:00 GMT")]
@@ -115,6 +117,7 @@ public sealed class Rfc822FallbackKindTests
     ///     The second control. Without it, "return Unspecified for everything" would satisfy every
     ///     assertion above while discarding the zone information the document supplied.
     /// </remarks>
+    /// <param name="value">A date the format table matches, ending in a named zone or a numeric offset.</param>
     [TestMethod]
     [DataRow("Mon, 01 Jan 2024 10:00:00 GMT")]
     [DataRow("Mon, 01 Jan 2024 10:00:00 -0500")]
@@ -134,6 +137,7 @@ public sealed class Rfc822FallbackKindTests
     ///     RFC 1123 pattern, which ends in a literal <c>GMT</c> and performs no conversion, so
     ///     whatever wall-clock reading it is handed is published as though it were UTC.
     /// </remarks>
+    /// <param name="value">A spelling of <c>10:00 GMT on 1 January 2024</c>, fallback or table-matched.</param>
     [TestMethod]
     [DataRow("01 Jan 2024 10:00:00 GMT")]
     [DataRow("Mon, 01 Jan 2024 10:00 GMT")]

@@ -9,13 +9,14 @@ namespace Argotic.Net;
 /// <summary>
 /// Represents a remote procedure call that can be sent using the <see cref="XmlRpcClient"/> class.
 /// </summary>
+/// <remarks>
+///     A <c>&lt;methodCall&gt;</c>: a method name and an ordered, unnamed parameter list. Parameters are
+///     positional — XML-RPC has no named arguments, and <c>&lt;params&gt;</c> is omitted entirely rather
+///     than written empty when there are none.
+/// </remarks>
+/// <seealso cref="XmlRpcClient.SendAsync"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the XmlRpcMessage class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Net\XmlRpcClientExample.cs"
-///             region="XmlRpcClient"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Net\XmlRpcClientExample.cs" language="cs" title="The following code example demonstrates the usage of the XmlRpcMessage class." />
 /// </example>
 public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessage>, IComparisonOperators
 {
@@ -30,8 +31,8 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// Initializes a new instance of the <see cref="XmlRpcMessage"/> class using the specified method name.
     /// </summary>
     /// <param name="methodName">The name of the method to be called.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="methodName"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="methodName"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="methodName"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="methodName"/> is an empty string.</exception>
     public XmlRpcMessage(string methodName)
     {
         this.MethodName = methodName;
@@ -42,9 +43,9 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// </summary>
     /// <param name="methodName">The name of the method to be called.</param>
     /// <param name="parameters">An <see cref="IEnumerable{T}"/> collection of <see cref="IXmlRpcValue"/> objects that represent the method parameters.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="methodName"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="methodName"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="parameters"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="methodName"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="methodName"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="parameters"/> is <see langword="null"/>.</exception>
     public XmlRpcMessage(string methodName, IEnumerable<IXmlRpcValue> parameters) : this(methodName)
     {
         ArgumentNullException.ThrowIfNull(parameters);
@@ -58,8 +59,13 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// <summary>
     /// Gets or sets the <see cref="Encoding">character encoding</see> of this message.
     /// </summary>
-    /// <value>A <see cref="Encoding"/> that specifies the character encoding of this message. The default value is <see cref="UTF8Encoding">UTF-8</see>.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The character encoding of this message. The default value is <see cref="UTF8Encoding">UTF-8</see>.</value>
+    /// <remarks>
+    ///     Written into the XML declaration of the request body and repeated as the <c>charset</c>
+    ///     parameter of its <c>Content-Type</c>. Changing it changes what a server that ignores the
+    ///     declaration and trusts the header will read, so the two are kept deliberately in step.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Encoding Encoding
     {
         get;
@@ -74,9 +80,9 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// <summary>
     /// Gets or sets the name of the method to be called.
     /// </summary>
-    /// <value>The name of the method to be called.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The method name, trimmed. The default value is an <i>empty</i> string, which a server will reject; the setter refuses to restore it.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string MethodName
     {
         get;
@@ -102,20 +108,18 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
+    /// <returns>
+    ///     <c>1</c> if <paramref name="source"/> holds more elements than <paramref name="target"/>;
+    ///     <c>-1</c> if it holds fewer, or if the counts match but some element of
+    ///     <paramref name="source"/> is absent from <paramref name="target"/>; otherwise, <c>0</c>.
+    /// </returns>
     /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
+    ///     Equal counts are compared as <i>sets</i>, not sequences: order is not consulted, and a value
+    ///     appearing twice in one collection and once in the other still compares equal. XML-RPC
+    ///     parameters are positional, so this is weaker than the protocol's own notion of sameness.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<IXmlRpcValue> source, IList<IXmlRpcValue> target)
     {
         int result = 0;
@@ -151,11 +155,11 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// Loads this <see cref="XmlRpcMessage"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="XmlRpcMessage"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="XmlRpcMessage"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="XmlRpcMessage"/>.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -203,7 +207,7 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// Saves the current <see cref="XmlRpcMessage"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -230,10 +234,7 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The <c>&lt;methodCall&gt;</c> XML for the current instance, written as a fragment — no XML declaration, and not in <see cref="Encoding"/>.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -273,7 +274,7 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// Determines whether the specified <see cref="XmlRpcMessage"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="XmlRpcMessage"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="XmlRpcMessage"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="XmlRpcMessage"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(XmlRpcMessage? other)
     {
         if (other is null)
@@ -288,7 +289,7 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is XmlRpcMessage other && this.Equals(other);
 
     /// <summary>
@@ -302,7 +303,7 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(XmlRpcMessage? first, XmlRpcMessage? second)
     {
         if (first is null) return second is null;
@@ -314,6 +315,6 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(XmlRpcMessage? first, XmlRpcMessage? second) => !(first == second);
 }

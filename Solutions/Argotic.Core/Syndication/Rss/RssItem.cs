@@ -10,15 +10,12 @@ namespace Argotic.Syndication;
 /// </summary>
 /// <seealso cref="RssFeed"/>
 /// <remarks>
-///     A <see cref="RssItem"/> <b>must</b> contain either a <see cref="RssItem.Title"/> <i>or</i> <see cref="RssItem.Description"/>.
+///     Every element of an item is optional bar one constraint: at least one of <see cref="Title"/> and
+///     <see cref="Description"/> must be present. Nothing here enforces that, so it is possible to build and
+///     save an item that no conforming reader will display.
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the RssItem class.">
-///         <code 
-///             source="..\..\Argotic.Examples\Core\Rss\RssItemExample.cs" 
-///             region="RssItem" 
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Rss\RssItemExample.cs" language="cs" title="The following code example demonstrates the usage of the RssItem class." />
 /// </example>
 public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
@@ -33,27 +30,30 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets the e-mail address of the person who wrote this item.
     /// </summary>
-    /// <value>The e-mail address of the person who wrote this item.</value>
+    /// <value>An e-mail address. The default value is an <i>empty</i> string.</value>
     /// <remarks>
     ///     <para>
-    ///         There is no requirement to follow a specific format for email addresses. Publishers can format addresses according to the RFC 2822 Address Specification,
-    ///         the RFC 2368 guidelines for mailto links, or some other scheme. The recommended format for e-mail addresses is <i>username@hostname.tld (Real Name)</i>.
+    ///         RSS pins no format here. Publishers use the addr-spec of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc2822.html">RFC 2822</a> (now RFC 5322 §3.4.1), the
+    ///         mailto conventions of <a href="https://www.rfc-editor.org/rfc/rfc2368.html">RFC 2368</a> (now
+    ///         RFC 6068), or something of their own. The recommended shape is
+    ///         <c>username@hostname.tld (Real Name)</c> — an address with the display name in parentheses
+    ///         after it, not before.
     ///     </para>
     ///     <para>
-    ///         A feed published by an individual <i>should</i> omit the item <see cref="RssItem.Author">author</see>
-    ///         and use the <see cref="RssChannel.ManagingEditor"/> or <see cref="RssChannel.Webmaster"/> channel properties to provide contact information.
+    ///         A feed written by one person <i>should</i> leave this empty and identify its author once, at
+    ///         the channel, through <see cref="RssChannel.ManagingEditor"/> or <see cref="RssChannel.Webmaster"/>.
     ///     </para>
     /// </remarks>
     public string Author
@@ -73,22 +73,25 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <summary>
     /// Gets or sets the URL of a web page that contains comments received in response to this item.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of a web page that contains comments received in response to this item.</value>
+    /// <value>The comments page for this item, or <see langword="null"/> if none was specified.</value>
     public Uri? Comments { get; set; }
 
     /// <summary>
     /// Gets or sets character data that contains this item's full content or a summary of its contents.
     /// </summary>
-    /// <value>Character data that contains this item's full content or a summary of its contents.</value>
+    /// <value>The item's content, or a summary of it. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     <para>The description <i>may</i> be empty if the item specifies a <see cref="RssItem.Title"/>.</para>
     ///     <para>
-    ///         The description <b>must</b> be suitable for presentation as HTML.
-    ///         HTML markup must be encoded as character data either by employing the <b>HTML entities</b> (&lt; and &gt;) <i>or</i> a <b>CDATA</b> section.
+    ///         This is HTML, and the specification requires the markup to be escaped — either with entities
+    ///         (<c>&amp;lt;</c>, <c>&amp;gt;</c>) or inside a <c>CDATA</c> section. The distinction matters on
+    ///         the way in as well as out: <c>&amp;lt;p&amp;gt;</c> and <c>&lt;![CDATA[&lt;p&gt;]]&gt;</c> both
+    ///         yield the four characters <c>&lt;p&gt;</c> here, and both are correct. Unescaped markup is not
+    ///         a description containing HTML, it is a malformed item.
     ///     </para>
     ///     <para>
-    ///         The description <i>should not</i> contain relative URLs, because the RSS format does not provide a means to identify the base URL of a document.
-    ///         When a relative URL is present, an aggregator <i>may</i> attempt to resolve it to a full URL using the channel's <see cref="RssChannel.Link">link</see> as the base.
+    ///         Relative URLs do not belong here. RSS has no way to declare a base URL, so a reader has nothing
+    ///         to resolve them against beyond guessing at <see cref="RssChannel.Link"/> — which is a guess, and
+    ///         one many readers do not make. Absolute URLs, always.
     ///     </para>
     /// </remarks>
     public string Description
@@ -105,11 +108,10 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
-    ///     <para>
-    ///         Support for the enclosure element in RSS software varies significantly because of disagreement over whether the specification permits more than one enclosure per item.
-    ///         Although the original author intended to permit no more than one enclosure in each item, this limit is not explicit in the specification.
-    ///         For best support in the widest number of aggregators, an item <i>should not</i> contain more than one enclosure.
-    ///     </para>
+    ///     A list because the XML permits repetition, but publish only one. Whether the specification allows
+    ///     several is genuinely disputed — the original author intended a single enclosure and never wrote the
+    ///     limit down — and readers split accordingly: some present every enclosure, others fetch the first and
+    ///     ignore the rest. Podcasting relies on that first-enclosure behaviour.
     /// </remarks>
     public IList<RssEnclosure> Enclosures { get; } = [];
 
@@ -117,10 +119,13 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// Gets or sets the unique identifier for this item.
     /// </summary>
     /// <value>
-    ///     A <see cref="RssGuid"/> object that represents the unique identifier for this item. The default value is a <b>null</b> reference.
+    ///     A <see cref="RssGuid"/> object that represents the unique identifier for this item. The default value is a <see langword="null"/> reference.
     /// </value>
     /// <remarks>
-    ///     A publisher <i>should</i> provide a guid for each item.
+    ///     A publisher should provide one for every item. It is what lets a reader tell a revised item from a
+    ///     new one; without it, an aggregator falls back to comparing links or titles, and an edited headline
+    ///     reappears as an unread article. See <see cref="RssGuid.IsPermanentLink"/> for the default that
+    ///     catches publishers out.
     /// </remarks>
 #pragma warning disable CA1720 // RSS 2.0 names this element <guid>; the property matches the specification
     public RssGuid? Guid { get; set; }
@@ -129,37 +134,42 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <summary>
     /// Gets or sets the URL of a web page associated with this item.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of a web page associated with this item.</value>
+    /// <value>The page this item points at, or <see langword="null"/> if none was specified.</value>
     public Uri? Link { get; set; }
 
     /// <summary>
     /// Gets or sets the publication date and time of this item.
     /// </summary>
-    /// <value>
-    ///     A <see cref="DateTime"/> object that represents the publication date and time of this item. 
-    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no publication date was specified.
-    /// </value>
+    /// <value>The default value is <see cref="DateTime.MinValue"/>, the sentinel for "no <c>pubDate</c> was specified".</value>
     /// <remarks>
-    ///     The specification recommends that aggregators <i>should</i> ignore items with a publication date that occurs in the future, 
-    ///     providing a means for publishers to embargo an item until that date. However, it is recommended that publishers <i>should not</i> 
-    ///     include items in a feed until they are ready for publication.
+    ///     <para>
+    ///         RSS 2.0 pins this to the date-and-time syntax of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc822.html">RFC 822</a> — "with the exception that the
+    ///         year may be expressed with two characters or four characters (four preferred)". That exception
+    ///         is why the citation is RFC 822 and not RFC 5322: RFC 5322 forbids two-digit years, so a feed
+    ///         written to it would be conforming, and a parser written to it would reject conforming feeds.
+    ///     </para>
+    ///     <para>
+    ///         A future date is an embargo: "If it's a date in the future, aggregators may choose to not
+    ///         display the item until that date." Since <i>may</i> is not <i>must</i>, an embargoed item is
+    ///         still published — do not use this to hide an item that is not ready.
+    ///     </para>
     /// </remarks>
     public DateTime PublicationDate { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the source feed that this item was republished from.
     /// </summary>
-    /// <value>
-    ///     A <see cref="RssSource"/> object that represents the source feed that this item was republished from. The default value is a <b>null</b> reference.
-    /// </value>
+    /// <value>The default value is <see langword="null"/>, meaning the item is original to this feed.</value>
     public RssSource? Source { get; set; }
 
     /// <summary>
     /// Gets or sets character data that provides this item's headline.
     /// </summary>
-    /// <value>Character data that provides this item's headline.</value>
+    /// <value>The item's headline. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     This property is optional if the item contains a <see cref="RssItem.Description"/>.
+    ///     Optional, but only if <see cref="Description"/> carries something; an item with neither is not a
+    ///     conforming item.
     /// </remarks>
     public string Title
     {
@@ -171,21 +181,18 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// Searches for the first syndication extension of the specified type that is attached to this item.
     /// </summary>
     /// <typeparam name="TExtension">The type of <see cref="ISyndicationExtension"/> to search for.</typeparam>
-    /// <returns>
-    ///     The first extension in <see cref="RssItem.Extensions"/> that is assignable to <typeparamref name="TExtension"/>,
-    ///     Otherwise, a <b>null</b> reference if this item has no extension of that type.
-    /// </returns>
+    /// <returns>The first extension in <see cref="Extensions"/> assignable to <typeparamref name="TExtension"/>, or <see langword="null"/> if the item carries none.</returns>
     public TExtension? FindExtension<TExtension>() where TExtension : ISyndicationExtension => this.Extensions.OfType<TExtension>().FirstOrDefault();
 
     /// <summary>
     /// Loads this <see cref="RssItem"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="RssItem"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssItem"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssItem"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -311,12 +318,12 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="RssItem"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssItem"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssItem"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -442,7 +449,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// Saves the current <see cref="RssItem"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -552,7 +559,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// Determines whether the specified <see cref="RssItem"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="RssItem"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="RssItem"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="RssItem"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(RssItem? other)
     {
         if (other is null)
@@ -567,7 +574,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is RssItem other && this.Equals(other);
 
     /// <summary>
@@ -591,7 +598,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(RssItem? first, RssItem? second)
     {
         if (first is null) return second is null;
@@ -603,6 +610,6 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(RssItem? first, RssItem? second) => !(first == second);
 }

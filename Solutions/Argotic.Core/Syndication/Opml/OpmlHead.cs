@@ -9,6 +9,13 @@ namespace Argotic.Syndication;
 /// <summary>
 /// Represents the header information for an <see cref="OpmlDocument"/>.
 /// </summary>
+/// <remarks>
+///     Every sub-element of an OPML <c>head</c> is optional and may appear at most once, so nothing here is
+///     safe to assume present. Several of them — <see cref="Window"/>, <see cref="VerticalScrollState"/>,
+///     <see cref="ExpansionState"/> — describe how an outliner was displaying the file when it saved it, and
+///     are inert for anything reading the document as data.
+/// </remarks>
+/// <seealso cref="OpmlDocument.Head"/>
 public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 
@@ -23,61 +30,69 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets a date-time indicating when this document was created.
     /// </summary>
-    /// <value>A <see cref="DateTime"/> object that indicates when this document was created. The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date was provided.</value>
+    /// <value>The <c>dateCreated</c> element. The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date was provided.</value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     Supply this in Coordinated Universal Time. OPML pins its date-times to
+    ///     <a href="https://www.rfc-editor.org/rfc/rfc822.html">RFC 822</a> — Internet Standard STD 11, the same
+    ///     one RSS 2.0 uses, and not the later RFC 5322, which forbids the two-digit years OPML permits — and
+    ///     the RFC 822 form this library writes ends in a literal <c>GMT</c> that it does not convert to. A
+    ///     local-time <see cref="DateTime"/> is therefore republished as though it were UTC, silently and by
+    ///     exactly the machine's offset.
     /// </remarks>
     public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets the http address of the documentation that this OPML document conforms to.
     /// </summary>
-    /// <value>
-    ///     A <see cref="Uri"/> that represents the http address of the documentation that this OPML document conforms to.
-    /// </value>
+    /// <value>Always <c>http://www.opml.org/spec2</c>. This is a constant, not a parsed value: it is not settable and a <c>docs</c> element in a loaded document does not change it.</value>
+    /// <remarks>
+    ///     OPML's <c>docs</c> element exists for the reader who finds the file on a web server years later and
+    ///     wants to know what it is. Because this implementation is always OPML 2.0, the answer is always the
+    ///     same.
+    /// </remarks>
     public Uri Documentation { get; } = new("http://www.opml.org/spec2");
 
     /// <summary>
     /// Gets a collection of line numbers that are expanded within the outline.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> of integers that represent the line numbers that are expanded within the outline.</value>
     /// <remarks>
-    ///     The line numbers in the collection tell you which headlines to expand. The order is important. 
-    ///     For each element in the collection, X, starting at the first summit, navigate flat down X times and expand. Repeat for each element in the collection.
+    ///     Order is significant, and the numbers are relative, not absolute. Starting at the first top-level
+    ///     outline, navigate flat down by the first number and expand; from there navigate down by the second
+    ///     and expand; and so on. Reordering the collection changes which nodes it names.
     /// </remarks>
     public IList<int> ExpansionState => field ??= [];
 
     /// <summary>
-    /// Gets or sets a date-time indicating when this document was created.
+    /// Gets or sets a date-time indicating when this document was last modified.
     /// </summary>
-    /// <value>A <see cref="DateTime"/> object that indicates when this document was created. The default value is <see cref="DateTime.MinValue"/>, which indicates that no modification date was provided.</value>
+    /// <value>The <c>dateModified</c> element. The default value is <see cref="DateTime.MinValue"/>, which indicates that no modification date was provided.</value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     Supply this in Coordinated Universal Time; the RFC 822 caveat on <see cref="CreatedOn"/> applies
+    ///     here too.
     /// </remarks>
     public DateTime ModifiedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets information that describes the owner of this document.
     /// </summary>
-    /// <value>A <see cref="OpmlOwner"/> object that provides information that describes the owner of this document.</value>
+    /// <value>The owner, or <see langword="null"/> if the document names none.</value>
     public OpmlOwner? Owner { get; set; }
 
     /// <summary>
     /// Gets or sets the title of this document.
     /// </summary>
-    /// <value>The title of this document.</value>
+    /// <value>The <c>title</c> element, or an <i>empty</i> string if none was specified. The value is trimmed on assignment.</value>
     public string Title
     {
         get;
@@ -89,7 +104,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// Gets or sets a number indicating which line of this outline is displayed on the top line of the window.
     /// </summary>
     /// <value>
-    ///     An integer that indicates which line of this outline is displayed on the top line of the window.
+    ///     A line number, counted with <see cref="ExpansionState"/> already applied.
     ///     The default value is <see cref="Int32.MinValue"/>, which indicates that no vertical scroll state was provided.
     /// </value>
     public int VerticalScrollState { get; set; } = int.MinValue;
@@ -97,18 +112,18 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <summary>
     /// Gets or sets information that describes the pixel location of the edges of the outline window for this document.
     /// </summary>
-    /// <value>A <see cref="OpmlWindow"/> object that provides information that describes the pixel location of the edges of the outline window for this document.</value>
+    /// <value>The window geometry, or <see langword="null"/> if the document records none.</value>
     public OpmlWindow? Window { get; set; }
 
     /// <summary>
     /// Loads this <see cref="OpmlHead"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="OpmlHead"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="OpmlHead"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="OpmlHead"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -196,12 +211,12 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="OpmlHead"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="OpmlHead"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="OpmlHead"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -217,7 +232,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// Saves the current <see cref="OpmlHead"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -295,7 +310,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// Determines whether the specified <see cref="OpmlHead"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="OpmlHead"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="OpmlHead"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="OpmlHead"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(OpmlHead? other)
     {
         if (other is null)
@@ -310,7 +325,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is OpmlHead other && this.Equals(other);
 
     /// <summary>
@@ -324,7 +339,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(OpmlHead? first, OpmlHead? second)
     {
         if (first is null) return second is null;
@@ -336,6 +351,6 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(OpmlHead? first, OpmlHead? second) => !(first == second);
 }

@@ -17,7 +17,7 @@ internal static class ApmlUtility
     /// <summary>
     /// Gets the XML namespace URI for the Attention Profiling Markup Language (APML) 0.6 specification.
     /// </summary>
-    /// <value>The XML namespace URI for the Attention Profiling Markup Language (APML) 0.6 specification.</value>
+    /// <value>Always <c>http://www.apml.org/apml-0.6</c>.</value>
     public static string ApmlNamespace => APML_NAMESPACE;
 
     /// <summary>
@@ -25,7 +25,7 @@ internal static class ApmlUtility
     /// </summary>
     /// <param name="nameTable">The table of atomized string objects.</param>
     /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is <see langword="null"/>.</exception>
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);

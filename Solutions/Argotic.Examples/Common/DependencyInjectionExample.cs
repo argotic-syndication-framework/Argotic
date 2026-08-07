@@ -12,7 +12,7 @@ namespace Argotic.Examples.Common;
 internal static class DependencyInjectionExample
 {
     /// <summary>
-    /// Provides example code for the ServiceCollectionExtensions.AddArgoticSyndicationClient(IServiceCollection) method.
+    /// Registers the named <see cref="HttpClient"/> that syndication loads should use, and resolves one from the factory.
     /// </summary>
     public static void AddArgoticSyndicationClientExample()
     {

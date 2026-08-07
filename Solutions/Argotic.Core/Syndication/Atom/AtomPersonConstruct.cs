@@ -10,13 +10,19 @@ namespace Argotic.Syndication;
 /// <summary>
 /// Represents a person, corporation, or similar entity.
 /// </summary>
+/// <remarks>
+///     <para>
+///         The shape behind Atom's <c>author</c> and <c>contributor</c> elements (RFC 4287 §3.2). Exactly one <c>atom:name</c> is required; <c>atom:uri</c>
+///         and <c>atom:email</c> are optional and appear at most once each.
+///     </para>
+///     <para>
+///         <c>&lt;name&gt;&lt;/name&gt;</c> is conformant — the grammar is <c>element atom:name { text }</c>, and RELAX NG <c>text</c> admits the empty
+///         string. Static site generators emit exactly that when no author is configured. So loading a person with an empty name leaves
+///         <see cref="Name"/> at its default rather than throwing, while the setter stays strict for callers building a feed to publish.
+///     </para>
+/// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the AtomPersonConstruct class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Atom\AtomPersonConstructExample.cs"
-///             region="AtomPersonConstruct"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Atom\AtomPersonConstructExample.cs" language="cs" title="The following code example demonstrates the usage of the AtomPersonConstruct class." />
 /// </example>
 public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<AtomPersonConstruct>, IAtomCommonObjectAttributes, IExtensibleSyndicationObject, IComparisonOperators
 {
@@ -31,31 +37,40 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// Initializes a new instance of the <see cref="AtomPersonConstruct"/> class using the supplied name.
     /// </summary>
     /// <param name="name">The human-readable name for this entity.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
     public AtomPersonConstruct(string name)
     {
         this.Name = name;
     }
 
     /// <summary>
-    /// Gets or sets the base URI other than the base URI of the document or external entity.
+    /// Gets or sets the base against which relative references inside this element are resolved.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>xml:base</c> in effect for this element, or <see langword="null"/> when none is. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-    ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+    ///         RFC 4287 §2 gives <c>xml:base</c> the function described in section 5.1.1 of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a> — it establishes the base URI,
+    ///         or IRI, for every relative reference in the attribute's effective scope. The value itself is a URI reference after processing according to
+    ///         <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.
+    ///     </para>
+    ///     <para>
+    ///         Loading resolves inheritance: an element without an <c>xml:base</c> of its own reports the nearest ancestor's, so the value here is the
+    ///         <i>effective</i> base a consumer can resolve an href against, not the literal attribute.
+    ///     </para>
     /// </remarks>
     public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>The language declared by <c>xml:lang</c>, or <see langword="null"/> when none is in scope. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         RFC 4287 defines <c>atomLanguageTag</c> as a language identifier per
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>, or its successor. A tag this runtime cannot turn
+    ///         into a <see cref="CultureInfo"/> is traced and dropped rather than failing the load.
     ///     </para>
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -63,21 +78,23 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Extensions"/> holds at least one <see cref="ISyndicationExtension"/>; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets the e-mail address associated with this entity.
     /// </summary>
-    /// <value>The e-mail address associated with this entity.</value>
+    /// <value>A bare address such as <c>jane@example.org</c>. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     The email address <b>must</b> conform to <a href="http://www.ietf.org/rfc/rfc2822.txt">RFC 2822: Internet Message Format, 3.4.1, Addr-spec Specification</a>.
+    ///     RFC 4287 §3.2.3 pins the value to the <c>addr-spec</c> production of
+    ///     <a href="https://www.rfc-editor.org/rfc/rfc2822.html">RFC 2822: Internet Message Format</a> §3.4.1 — restated as RFC 5322 §3.4.1. That is the
+    ///     address alone: no display name, no angle brackets, so <c>Jane Doe &lt;jane@example.org&gt;</c> is not conformant. Nothing here validates it; a
+    ///     malformed address is loaded, stored and written back unchanged.
     /// </remarks>
     public string EmailAddress
     {
@@ -88,12 +105,13 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// <summary>
     /// Gets or sets the human-readable name for this entity.
     /// </summary>
-    /// <value>The human-readable name for this entity.</value>
+    /// <value>The name. The default value is an <i>empty</i> string, which is what a loaded <c>&lt;name&gt;&lt;/name&gt;</c> leaves behind.</value>
     /// <remarks>
-    ///     The <see cref="Name"/> property is <i>language-sensitive</i>, with the natural language of the value being specified by the <see cref="Language"/> property.
+    ///     Language-sensitive: the natural language of the value is whatever <see cref="Language"/> reports. The setter rejects null and empty, so a feed
+    ///     you construct always writes a name; the loader is the deliberate exception, described on <see cref="AtomPersonConstruct"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Name
     {
         get;
@@ -107,10 +125,10 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// <summary>
     /// Gets or sets the IRI associated with this entity.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) associated with this entity.</value>
+    /// <value>The <c>atom:uri</c> — typically the person's home page — or <see langword="null"/> when the element is absent. The default value is <see langword="null"/>.</value>
     /// <remarks>
-    ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
-    ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
+    ///     <para>RFC 4287 §3.2.2 makes this an IRI reference (<a href="https://www.rfc-editor.org/rfc/rfc3987.html">RFC 3987</a>), so it may be relative and resolved against <see cref="BaseUri"/>.</para>
+    ///     <para>See <see cref="Uri"/> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
     public Uri? Uri { get; set; }
 
@@ -118,11 +136,11 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// Loads this <see cref="AtomPersonConstruct"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="AtomPersonConstruct"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomPersonConstruct"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomPersonConstruct"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -181,12 +199,12 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="AtomPersonConstruct"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomPersonConstruct"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomPersonConstruct"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -203,9 +221,9 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
     /// <param name="elementName">The local name of the person construct being written.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="elementName"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="elementName"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="elementName"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="elementName"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string elementName)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -281,7 +299,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// Determines whether the specified <see cref="AtomPersonConstruct"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="AtomPersonConstruct"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="AtomPersonConstruct"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="AtomPersonConstruct"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(AtomPersonConstruct? other)
     {
         if (other is null)
@@ -296,7 +314,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is AtomPersonConstruct other && this.Equals(other);
 
     /// <summary>
@@ -310,7 +328,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(AtomPersonConstruct? first, AtomPersonConstruct? second)
     {
         if (first is null) return second is null;
@@ -322,6 +340,6 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are not equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(AtomPersonConstruct? first, AtomPersonConstruct? second) => !(first == second);
 }

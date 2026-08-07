@@ -7,6 +7,12 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.DublinCoreMetadataTerms;
 
+/// <summary>
+/// Covers the Dublin Core Metadata Terms extension — the fifty-five <c>dcterms:</c> elements under
+/// <c>http://purl.org/dc/terms/</c> — from the context that holds them, through the XML
+/// <c>WriteTo</c> and <c>ToString</c> produce, to the type vocabulary lookups and the comparison and
+/// equality contracts.
+/// </summary>
 [TestClass]
 public class DublinCoreMetadataTermsSyndicationExtensionTest
 {
@@ -128,6 +134,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
 
     #region Constructor Tests
 
+    /// <summary>
+    /// The parameterless constructor yields an instance of the Dublin Core metadata terms extension type.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsSyndicationExtensionConstructorTest()
     {
@@ -139,6 +148,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         target.ShouldBeOfType<DublinCoreMetadataTermsSyndicationExtension>();
     }
 
+    /// <summary>
+    /// A new extension declares the terms namespace <c>http://purl.org/dc/terms/</c> under the prefix <c>dcterms</c>, not the older element-set namespace.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsSyndicationExtensionConstructorSetsCorrectNamespace()
     {
@@ -150,6 +162,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         target.XmlPrefix.ShouldBe("dcterms");
     }
 
+    /// <summary>
+    /// A new extension names itself <c>Dublin Core Metadata Terms</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsSyndicationExtensionConstructorSetsCorrectName()
     {
@@ -160,6 +175,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         target.Name.ShouldBe("Dublin Core Metadata Terms");
     }
 
+    /// <summary>
+    /// A new extension reports version <c>1.0</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsSyndicationExtensionConstructorSetsCorrectVersion()
     {
@@ -170,6 +188,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         target.Version.ShouldBe(new Version("1.0"));
     }
 
+    /// <summary>
+    /// A new extension points its documentation at <c>http://dublincore.org/documents/dcmi-terms/</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsSyndicationExtensionConstructorSetsCorrectDocumentation()
     {
@@ -180,6 +201,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         target.Documentation.ShouldBe(new Uri("http://dublincore.org/documents/dcmi-terms/"));
     }
 
+    /// <summary>
+    /// A new extension already holds a context; reading it never gives <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsSyndicationExtensionContextIsNotNull()
     {
@@ -194,6 +218,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
 
     #region Context Property Tests
 
+    /// <summary>
+    /// The abstract set on the fixture reaches the context as <c>Test Abstract</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextAbstractTest()
     {
@@ -207,6 +234,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Abstract.ShouldBe("Test Abstract");
     }
 
+    /// <summary>
+    /// The access rights set on the fixture reach the context as <c>Public</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextAccessRightsTest()
     {
@@ -220,6 +250,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.AccessRights.ShouldBe("Public");
     }
 
+    /// <summary>
+    /// The accrual method set on the fixture reaches the context as <c>Deposit</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextAccrualMethodTest()
     {
@@ -233,6 +266,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.AccrualMethod.ShouldBe("Deposit");
     }
 
+    /// <summary>
+    /// The accrual periodicity set on the fixture reaches the context as <c>Monthly</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextAccrualPeriodicityTest()
     {
@@ -246,6 +282,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.AccrualPeriodicity.ShouldBe("Monthly");
     }
 
+    /// <summary>
+    /// The accrual policy set on the fixture reaches the context as <c>Active</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextAccrualPolicyTest()
     {
@@ -259,6 +298,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.AccrualPolicy.ShouldBe("Active");
     }
 
+    /// <summary>
+    /// The alternative title set on the fixture reaches the context as <c>Alt Title</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextAlternativeTitleTest()
     {
@@ -272,6 +314,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.AlternativeTitle.ShouldBe("Alt Title");
     }
 
+    /// <summary>
+    /// The audience set on the fixture reaches the context as <c>Developers</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextAudienceTest()
     {
@@ -285,6 +330,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Audience.ShouldBe("Developers");
     }
 
+    /// <summary>
+    /// The audience education level set on the fixture reaches the context as <c>Graduate</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextAudienceEducationLevelTest()
     {
@@ -298,6 +346,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.AudienceEducationLevel.ShouldBe("Graduate");
     }
 
+    /// <summary>
+    /// The bibliographic citation set on the fixture reaches the context as <c>Test Citation</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextBibliographicCitationTest()
     {
@@ -311,6 +362,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.BibliographicCitation.ShouldBe("Test Citation");
     }
 
+    /// <summary>
+    /// The conformance statement set on the fixture reaches the context as <c>ISO 9001</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextConformsToTest()
     {
@@ -324,6 +378,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.ConformsTo.ShouldBe("ISO 9001");
     }
 
+    /// <summary>
+    /// The contributor set on the fixture reaches the context as <c>Helper</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextContributorTest()
     {
@@ -337,6 +394,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Contributor.ShouldBe("Helper");
     }
 
+    /// <summary>
+    /// The coverage set on the fixture reaches the context as <c>US</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextCoverageTest()
     {
@@ -350,6 +410,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Coverage.ShouldBe("US");
     }
 
+    /// <summary>
+    /// The creator set on the fixture reaches the context as <c>The Big Guy</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextCreatorTest()
     {
@@ -363,6 +426,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Creator.ShouldBe("The Big Guy");
     }
 
+    /// <summary>
+    /// The date set on the fixture reaches the context as 1 August 2010, kind included.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextDateTest()
     {
@@ -376,6 +442,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Date.ShouldBe(new DateTime(2010, 8, 1, 0, 0, 0, DateTimeKind.Utc));
     }
 
+    /// <summary>
+    /// The acceptance date set on the fixture reaches the context as 1 July 2010, kind included.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextDateAcceptedTest()
     {
@@ -389,6 +458,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.DateAccepted.ShouldBe(new DateTime(2010, 7, 1, 0, 0, 0, DateTimeKind.Utc));
     }
 
+    /// <summary>
+    /// The availability date reaches the context as the string <c>2010-08-01</c>; unlike its sibling terms, <c>DateAvailable</c> is untyped.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextDateAvailableTest()
     {
@@ -402,6 +474,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.DateAvailable.ShouldBe("2010-08-01");
     }
 
+    /// <summary>
+    /// The copyright date set on the fixture reaches the context as 1 January 2010, kind included.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextDateCopyrightedTest()
     {
@@ -415,6 +490,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.DateCopyrighted.ShouldBe(new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Utc));
     }
 
+    /// <summary>
+    /// The creation date set on the fixture reaches the context as 1 June 2010, kind included.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextDateCreatedTest()
     {
@@ -428,6 +506,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.DateCreated.ShouldBe(new DateTime(2010, 6, 1, 0, 0, 0, DateTimeKind.Utc));
     }
 
+    /// <summary>
+    /// The issue date set on the fixture reaches the context as 1 September 2010, kind included.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextDateIssuedTest()
     {
@@ -441,6 +522,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.DateIssued.ShouldBe(new DateTime(2010, 9, 1, 0, 0, 0, DateTimeKind.Utc));
     }
 
+    /// <summary>
+    /// The modification date set on the fixture reaches the context as 1 October 2010, kind included.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextDateModifiedTest()
     {
@@ -454,6 +538,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.DateModified.ShouldBe(new DateTime(2010, 10, 1, 0, 0, 0, DateTimeKind.Utc));
     }
 
+    /// <summary>
+    /// The submission date set on the fixture reaches the context as 1 May 2010, kind included.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextDateSubmittedTest()
     {
@@ -467,6 +554,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.DateSubmitted.ShouldBe(new DateTime(2010, 5, 1, 0, 0, 0, DateTimeKind.Utc));
     }
 
+    /// <summary>
+    /// The validity date reaches the context as the string <c>2010-12-31</c>; unlike its sibling terms, <c>DateValid</c> is untyped.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextDateValidTest()
     {
@@ -480,6 +570,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.DateValid.ShouldBe("2010-12-31");
     }
 
+    /// <summary>
+    /// The description set on the fixture reaches the context as <c>That kind of thing</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextDescriptionTest()
     {
@@ -493,6 +586,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Description.ShouldBe("That kind of thing");
     }
 
+    /// <summary>
+    /// The extent set on the fixture reaches the context as <c>100 pages</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextExtentTest()
     {
@@ -506,6 +602,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Extent.ShouldBe("100 pages");
     }
 
+    /// <summary>
+    /// The format set on the fixture reaches the context as <c>application/pdf</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextFormatTest()
     {
@@ -519,6 +618,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Format.ShouldBe("application/pdf");
     }
 
+    /// <summary>
+    /// The <c>hasFormat</c> relation set on the fixture reaches the context as <c>urn:format:html</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextHasFormatTest()
     {
@@ -532,6 +634,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.HasFormat.ShouldBe("urn:format:html");
     }
 
+    /// <summary>
+    /// The <c>hasPart</c> relation set on the fixture reaches the context as <c>Chapter 1</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextHasPartTest()
     {
@@ -545,6 +650,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.HasPart.ShouldBe("Chapter 1");
     }
 
+    /// <summary>
+    /// The <c>hasVersion</c> relation set on the fixture reaches the context as <c>2.0</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextHasVersionTest()
     {
@@ -558,6 +666,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.HasVersion.ShouldBe("2.0");
     }
 
+    /// <summary>
+    /// The identifier set on the fixture reaches the context as <c>MYTESTCDROM-1</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextIdentifierTest()
     {
@@ -571,6 +682,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Identifier.ShouldBe("MYTESTCDROM-1");
     }
 
+    /// <summary>
+    /// The instructional method set on the fixture reaches the context as <c>Lecture</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextInstructionalMethodTest()
     {
@@ -584,6 +698,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.InstructionalMethod.ShouldBe("Lecture");
     }
 
+    /// <summary>
+    /// The <c>isFormatOf</c> relation set on the fixture reaches the context as <c>urn:original</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextIsFormatOfTest()
     {
@@ -597,6 +714,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.IsFormatOf.ShouldBe("urn:original");
     }
 
+    /// <summary>
+    /// The <c>isPartOf</c> relation set on the fixture reaches the context as <c>Collection A</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextIsPartOfTest()
     {
@@ -610,6 +730,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.IsPartOf.ShouldBe("Collection A");
     }
 
+    /// <summary>
+    /// The <c>isReferencedBy</c> relation set on the fixture reaches the context as <c>urn:reference</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextIsReferencedByTest()
     {
@@ -623,6 +746,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.IsReferencedBy.ShouldBe("urn:reference");
     }
 
+    /// <summary>
+    /// The <c>isReplacedBy</c> relation set on the fixture reaches the context as <c>urn:replacement</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextIsReplacedByTest()
     {
@@ -636,6 +762,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.IsReplacedBy.ShouldBe("urn:replacement");
     }
 
+    /// <summary>
+    /// The <c>isRequiredBy</c> relation set on the fixture reaches the context as <c>urn:dependent</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextIsRequiredByTest()
     {
@@ -649,6 +778,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.IsRequiredBy.ShouldBe("urn:dependent");
     }
 
+    /// <summary>
+    /// The <c>isVersionOf</c> relation set on the fixture reaches the context as <c>urn:original:v1</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextIsVersionOfTest()
     {
@@ -662,6 +794,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.IsVersionOf.ShouldBe("urn:original:v1");
     }
 
+    /// <summary>
+    /// The language set on the fixture reaches the context as a culture named <c>en-US</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextLanguageTest()
     {
@@ -676,6 +811,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Language.Name.ShouldBe("en-US");
     }
 
+    /// <summary>
+    /// The license set on the fixture reaches the context as <c>MIT License</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextLicenseTest()
     {
@@ -689,6 +827,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.License.ShouldBe("MIT License");
     }
 
+    /// <summary>
+    /// The mediator set on the fixture reaches the context as <c>Teacher</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextMediatorTest()
     {
@@ -702,6 +843,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Mediator.ShouldBe("Teacher");
     }
 
+    /// <summary>
+    /// The medium set on the fixture reaches the context as <c>Paper</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextMediumTest()
     {
@@ -715,6 +859,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Medium.ShouldBe("Paper");
     }
 
+    /// <summary>
+    /// The provenance set on the fixture reaches the context as <c>Original ownership</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextProvenanceTest()
     {
@@ -728,6 +875,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Provenance.ShouldBe("Original ownership");
     }
 
+    /// <summary>
+    /// The publisher set on the fixture reaches the context as <c>MeMeMe</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextPublisherTest()
     {
@@ -741,6 +891,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Publisher.ShouldBe("MeMeMe");
     }
 
+    /// <summary>
+    /// The <c>references</c> relation set on the fixture reaches the context as <c>urn:ref1</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextReferencesTest()
     {
@@ -754,6 +907,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.References.ShouldBe("urn:ref1");
     }
 
+    /// <summary>
+    /// The relation set on the fixture reaches the context as <c>MYTESTCDROM-2</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextRelationTest()
     {
@@ -767,6 +923,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Relation.ShouldBe("MYTESTCDROM-2");
     }
 
+    /// <summary>
+    /// The <c>replaces</c> relation set on the fixture reaches the context as <c>urn:old</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextReplacesTest()
     {
@@ -780,6 +939,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Replaces.ShouldBe("urn:old");
     }
 
+    /// <summary>
+    /// The <c>requires</c> relation set on the fixture reaches the context as <c>urn:dependency</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextRequiresTest()
     {
@@ -793,6 +955,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Requires.ShouldBe("urn:dependency");
     }
 
+    /// <summary>
+    /// The rights statement set on the fixture reaches the context as <c>Copyright 2010</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextRightsTest()
     {
@@ -806,6 +971,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Rights.ShouldBe("Copyright 2010");
     }
 
+    /// <summary>
+    /// The rights holder set on the fixture reaches the context as <c>Test Corp</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextRightsHolderTest()
     {
@@ -819,6 +987,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.RightsHolder.ShouldBe("Test Corp");
     }
 
+    /// <summary>
+    /// The source set on the fixture reaches the context as <c>Out of Me Head</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextSourceTest()
     {
@@ -832,6 +1003,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Source.ShouldBe("Out of Me Head");
     }
 
+    /// <summary>
+    /// The spatial coverage set on the fixture reaches the context as <c>New York</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextSpatialCoverageTest()
     {
@@ -845,6 +1019,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.SpatialCoverage.ShouldBe("New York");
     }
 
+    /// <summary>
+    /// The subject set on the fixture reaches the context as <c>Test data (Stupid variety)</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextSubjectTest()
     {
@@ -858,6 +1035,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Subject.ShouldBe("Test data (Stupid variety)");
     }
 
+    /// <summary>
+    /// The table of contents set on the fixture reaches the context as <c>Chapter 1; Chapter 2</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextTableOfContentsTest()
     {
@@ -871,6 +1051,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.TableOfContents.ShouldBe("Chapter 1; Chapter 2");
     }
 
+    /// <summary>
+    /// The temporal coverage set on the fixture reaches the context as <c>20th Century</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextTemporalCoverageTest()
     {
@@ -884,6 +1067,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.TemporalCoverage.ShouldBe("20th Century");
     }
 
+    /// <summary>
+    /// The title set on the fixture reaches the context as <c>Stupid test data</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextTitleTest()
     {
@@ -897,6 +1083,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.Title.ShouldBe("Stupid test data");
     }
 
+    /// <summary>
+    /// The type vocabulary set on the fixture reaches the context as <c>Text</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextTypeVocabularyTest()
     {
@@ -910,6 +1099,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.TypeVocabulary.ShouldBe(DublinCoreTypeVocabularies.Text);
     }
 
+    /// <summary>
+    /// Assigning a <see langword="null"/> context throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextSetterThrowsOnNull()
     {
@@ -920,6 +1112,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Context = null!);
     }
 
+    /// <summary>
+    /// Every one of the fifty-five terms the fixture populates survives the object initializer intact, read back in one pass.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsContextAllPropertiesTest()
     {
@@ -993,6 +1188,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
 
     #region XML Serialization Tests
 
+    /// <summary>
+    /// An RSS 2.0 feed carrying all fifty-five <c>dcterms:</c> elements parses without throwing.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsLoadTest()
     {
@@ -1008,6 +1206,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         feed.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// Attaching the extension to an RSS item emits every populated term under the <c>dcterms</c> prefix, in the order the fixture spells them.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsCreateXmlTest()
     {
@@ -1022,6 +1223,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// Terms written into a feed come back off the parsed item unchanged, spot-checked from the abstract through to the <c>Text</c> type vocabulary.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsRoundTripTest()
     {
@@ -1050,6 +1254,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         context.TypeVocabulary.ShouldBe(DublinCoreTypeVocabularies.Text);
     }
 
+    /// <summary>
+    /// An item parsed from a feed carrying the <c>dcterms:</c> elements exposes the extension both by generic lookup and through <c>MatchByType</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsFullTest()
     {
@@ -1075,6 +1282,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
 
     #region MatchByType Tests
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts an instance of its own extension type.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsMatchByTypeTest()
     {
@@ -1088,6 +1298,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> rejects the Dublin Core element set extension, which is a different type in the same family.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsMatchByTypeReturnsFalseForDifferentType()
     {
@@ -1101,6 +1314,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> throws <see cref="ArgumentNullException"/> rather than returning <see langword="false"/> for a <see langword="null"/> extension.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsMatchByTypeThrowsOnNull() =>
         // Arrange, Act & Assert
@@ -1110,6 +1326,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
 
     #region Comparison and Equality Tests
 
+    /// <summary>
+    /// Two extensions holding identical context compare equal.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsCompareToTest()
     {
@@ -1124,6 +1343,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Comparing against <see langword="null"/> returns <c>1</c>, sorting every instance after nothing.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsCompareToReturnsPositiveForNull()
     {
@@ -1137,6 +1359,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBe(1);
     }
 
+    /// <summary>
+    /// A populated extension does not compare equal to an empty one.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsCompareToDifferentExtensionReturnsNonZero()
     {
@@ -1151,6 +1376,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// An extension is equal to a separately constructed extension holding the same context.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsEqualsTest()
     {
@@ -1165,6 +1393,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// An extension is unequal to <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsEqualsReturnsFalseForNull()
     {
@@ -1178,6 +1409,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension is unequal to an object of an unrelated type, here a string.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsEqualsReturnsFalseForWrongType()
     {
@@ -1192,6 +1426,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A hash code is stable across repeated calls on the same instance.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsGetHashCodeTest()
     {
@@ -1202,6 +1439,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         target.GetHashCode().ShouldBe(target.GetHashCode());
     }
 
+    /// <summary>
+    /// Equal extensions hash equally, which is what the equality contract requires.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsGetHashCodeConsistencyWithEqualsTest()
     {
@@ -1218,6 +1458,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
 
     #region Comparison Operators Tests
 
+    /// <summary>
+    /// Extensions holding identical context are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpEqualityTestSuccess()
     {
@@ -1232,6 +1475,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Extensions differing in abstract, creator, title, description and type vocabulary are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpEqualityTestFailure()
     {
@@ -1246,6 +1492,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> left operand is not equal to an instance.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpEqualityWithNullLeft()
     {
@@ -1260,6 +1509,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An instance is not equal to a <see langword="null"/> right operand.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpEqualityWithNullRight()
     {
@@ -1274,6 +1526,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> references are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpEqualityWithBothNull()
     {
@@ -1288,6 +1543,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Extensions holding different context are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpInequalityTest()
     {
@@ -1302,6 +1560,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Extensions holding identical context are not unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpInequalityTestFalse()
     {
@@ -1316,6 +1577,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Comparing two differing extensions with <c>&gt;</c> completes and yields a boolean; the test pins no direction.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpGreaterThanTest()
     {
@@ -1330,6 +1594,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>
+    /// <see langword="null"/> is not greater than any instance.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpGreaterThanWithNullLeft()
     {
@@ -1344,6 +1611,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         result.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Comparing two differing extensions with <c>&lt;</c> completes and yields a boolean; the test pins no direction.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpLessThanTest()
     {
@@ -1358,6 +1628,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>
+    /// <see langword="null"/> is less than any instance.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpLessThanWithNullLeft()
     {
@@ -1372,6 +1645,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// No instance is less than <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpLessThanWithNullRight()
     {
@@ -1386,6 +1662,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         result.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Extensions holding identical context satisfy <c>&gt;=</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpGreaterThanOrEqualTest()
     {
@@ -1400,6 +1679,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <see langword="null"/> is greater than or equal to <see langword="null"/> — both operands here are <see langword="null"/>, not just the left one.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpGreaterThanOrEqualWithNullLeft()
     {
@@ -1414,6 +1696,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Extensions holding identical context satisfy <c>&lt;=</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpLessThanOrEqualTest()
     {
@@ -1428,6 +1713,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <see langword="null"/> is less than or equal to any instance.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpLessThanOrEqualWithNullLeft()
     {
@@ -1446,6 +1734,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
 
     #region ToString and WriteTo Tests
 
+    /// <summary>
+    /// <c>ToString</c> renders each populated term on its own line, every one redeclaring the terms namespace as its default.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsToStringTest()
     {
@@ -1459,6 +1750,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBe(toStringText);
     }
 
+    /// <summary>
+    /// Writing to an <see cref="XmlWriter"/> emits the same terms as <c>ToString</c>, once line breaks are discounted.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsWriteToTest()
     {
@@ -1476,6 +1770,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Writing to a <see langword="null"/> writer throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsWriteToThrowsOnNull()
     {
@@ -1490,6 +1787,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
 
     #region TypeVocabulary Tests
 
+    /// <summary>
+    /// The <c>Text</c> vocabulary term renders as the string <c>Text</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsTypeVocabularyAsStringTest()
     {
@@ -1503,6 +1803,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBe("Text");
     }
 
+    /// <summary>
+    /// The <c>MovingImage</c> term keeps its camel case rather than being split or lowercased.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsTypeVocabularyAsStringMovingImageTest()
     {
@@ -1516,6 +1819,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBe("MovingImage");
     }
 
+    /// <summary>
+    /// The name <c>Sound</c> resolves back to the <c>Sound</c> vocabulary term.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsTypeVocabularyByNameTest()
     {
@@ -1529,6 +1835,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// Lookup ignores case, so <c>sound</c> resolves to the <c>Sound</c> term.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsTypeVocabularyByNameCaseInsensitiveTest()
     {
@@ -1542,6 +1851,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// An unrecognised name resolves to <c>None</c> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsTypeVocabularyByNameReturnsNoneForInvalid()
     {
@@ -1552,11 +1864,17 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         actual.ShouldBe(DublinCoreTypeVocabularies.None);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> name resolves to <c>None</c> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsTypeVocabularyByNameReturnsNoneOnNull() =>
         // Arrange, Act & Assert
         DublinCoreMetadataTermsSyndicationExtension.TypeVocabularyByName(null!).ShouldBe(DublinCoreTypeVocabularies.None);
 
+    /// <summary>
+    /// An empty name resolves to <c>None</c> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsTypeVocabularyByNameReturnsNoneOnEmpty() =>
         // Arrange, Act & Assert
@@ -1566,6 +1884,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
 
     #region Load Tests
 
+    /// <summary>
+    /// Loading from a <see langword="null"/> <c>IXPathNavigable</c> throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsLoadFromXPathNavigableThrowsOnNull()
     {
@@ -1576,6 +1897,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Load((System.Xml.XPath.IXPathNavigable)null!));
     }
 
+    /// <summary>
+    /// Loading from a <see langword="null"/> <see cref="XmlReader"/> throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsLoadFromXmlReaderThrowsOnNull()
     {

@@ -36,24 +36,6 @@ public sealed class ContainerActivationTests
     public TestContext TestContext { get; set; } = null!;
 
     /// <summary>
-    /// <c>ActivatorUtilities</c> cannot pick a Trackback constructor when given an <see cref="HttpClient"/>.
-    /// </summary>
-    /// <remarks>
-    ///     <para>
-    ///     Three of the six constructors accept an <see cref="HttpClient"/> — <c>(HttpClient)</c>,
-    ///     <c>(IOptions, HttpClient)</c> and <c>(Uri, HttpClient)</c> — and <c>ActivatorUtilities</c>
-    ///     refuses to choose between them. This is the throw that <c>IHttpClientFactory</c>'s typed
-    ///     client registration would hit, because that is how it activates.
-    ///     </para>
-    ///     <para>
-    ///     <b>Deleting the <c>(IOptions)</c> constructor does not fix it</b>, which the plan assumed it
-    ///     would: that constructor cannot consume an <see cref="HttpClient"/>, so it is not one of the
-    ///     three and removing it takes the count from three to three. Only
-    ///     <c>[ActivatorUtilitiesConstructor]</c> resolves this, because the preferred-constructor pass
-    ///     short-circuits the matching pass entirely.
-    ///     </para>
-    /// </remarks>
-    /// <summary>
     /// A typed-client factory can be built for the Trackback client.
     /// </summary>
     /// <remarks>

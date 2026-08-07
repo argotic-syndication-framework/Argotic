@@ -249,6 +249,11 @@ public sealed class AtomSpecConformanceTests
     /// <summary>
     /// A5 — every one of the spec's six distinct ids round-trips character-for-character.
     /// </summary>
+    /// <param name="written">
+    /// The exact characters to write into the entry's <c>id</c> element. Every row is an absolute IRI,
+    /// differing from the others only in the case of a component or in percent-encoding — the
+    /// differences <c>System.Uri</c> normalises away and §4.2.6.2 does not.
+    /// </param>
     /// <remarks>
     ///     <para>
     ///     §4.2.6.2 lists six IRIs that are "all different"; §4.2.6.1 says an id "MUST NOT change".

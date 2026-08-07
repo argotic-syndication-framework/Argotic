@@ -13,13 +13,23 @@ using SitemapResource = Argotic.Syndication.Sitemap;
 namespace Argotic.Extensions.Tests.Functionality.Core.Data.Adapters;
 
 /// <summary>
-/// Unit tests for <see cref="Sitemap09SyndicationResourceAdapter"/> that verify Sitemap 0.9 parsing.
+/// Covers the retrieval limit in <see cref="Sitemap09SyndicationResourceAdapter"/>, on both of the
+/// documents it fills: a <c>urlset</c> read into a <c>Sitemap</c>, and a <c>sitemapindex</c> read into a
+/// <c>SitemapIndex</c>.
 /// </summary>
+/// <remarks>
+///     This adapter tests the limit <i>before</i> parsing each entry, where the Atom and BlogML adapters
+///     test it after and throw one parsed entry away. On a sitemap, which may legitimately carry 50,000
+///     URLs, that is the difference between reading the file and reading a prefix of it.
+/// </remarks>
 [TestClass]
 public class Sitemap09SyndicationResourceAdapterTests
 {
     #region Retrieval Limit Tests
 
+    /// <summary>
+    /// A retrieval limit of <c>1</c> stops a three-URL <c>urlset</c> at one URL.
+    /// </summary>
     [TestMethod]
     public void Fill_Sitemap_WithRetrievalLimit_RespectsLimit()
     {
@@ -41,6 +51,9 @@ public class Sitemap09SyndicationResourceAdapterTests
         sitemap.Urls.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// A retrieval limit of <c>2</c> stops the same three-URL <c>urlset</c> at two.
+    /// </summary>
     [TestMethod]
     public void Fill_Sitemap_WithRetrievalLimitTwo_ReturnsTwoUrls()
     {
@@ -62,6 +75,9 @@ public class Sitemap09SyndicationResourceAdapterTests
         sitemap.Urls.Count.ShouldBe(2);
     }
 
+    /// <summary>
+    /// A retrieval limit of <c>0</c> means no limit, and all three URLs are read.
+    /// </summary>
     [TestMethod]
     public void Fill_Sitemap_WithZeroRetrievalLimit_ReturnsAllUrls()
     {
@@ -83,6 +99,9 @@ public class Sitemap09SyndicationResourceAdapterTests
         sitemap.Urls.Count.ShouldBe(3);
     }
 
+    /// <summary>
+    /// A retrieval limit of <c>1</c> stops a three-entry <c>sitemapindex</c> at one sitemap.
+    /// </summary>
     [TestMethod]
     public void Fill_SitemapIndex_WithRetrievalLimit_RespectsLimit()
     {
@@ -104,6 +123,9 @@ public class Sitemap09SyndicationResourceAdapterTests
         sitemapIndex.Sitemaps.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// A retrieval limit of <c>2</c> stops the same <c>sitemapindex</c> at two sitemaps.
+    /// </summary>
     [TestMethod]
     public void Fill_SitemapIndex_WithRetrievalLimitTwo_ReturnsTwoSitemaps()
     {
@@ -125,6 +147,9 @@ public class Sitemap09SyndicationResourceAdapterTests
         sitemapIndex.Sitemaps.Count.ShouldBe(2);
     }
 
+    /// <summary>
+    /// A retrieval limit of <c>0</c> means no limit, and all three sitemaps are read.
+    /// </summary>
     [TestMethod]
     public void Fill_SitemapIndex_WithZeroRetrievalLimit_ReturnsAllSitemaps()
     {

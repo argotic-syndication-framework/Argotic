@@ -24,6 +24,14 @@ namespace Argotic.Extensions.Tests.Functionality.Common;
 [TestClass]
 public class UncoveredParsePathTests
 {
+    /// <summary>
+    /// All sixteen fields of a <c>video:video</c> element survive a sitemap load, down to the boolean
+    /// <c>yes</c>/<c>no</c> flags and the two elements read for their <c>relationship</c> attribute.
+    /// </summary>
+    /// <remarks>
+    ///     Ten of these branches had never run: the existing fixture carried six of the sixteen, and nothing
+    ///     loaded it end to end.
+    /// </remarks>
     [TestMethod]
     public void SitemapVideoExtension_EveryField_IsParsed()
     {
@@ -81,6 +89,10 @@ public class UncoveredParsePathTests
         video.Restriction.ShouldBe("CA");
     }
 
+    /// <summary>
+    /// Every child of an Atom entry's <c>source</c> element is read: its identifier, title, subtitle,
+    /// rights, update time, icon, logo and generator.
+    /// </summary>
     [TestMethod]
     public void AtomEntrySource_EveryField_IsParsed()
     {
@@ -127,6 +139,14 @@ public class UncoveredParsePathTests
         source.UpdatedOn.ShouldNotBe(DateTime.MinValue);
     }
 
+    /// <summary>
+    /// <c>RssItem.Load(navigator, settings)</c> fills all eight children of an <c>item</c> and reports
+    /// success.
+    /// </summary>
+    /// <remarks>
+    ///     The inline note gives the reason this needed writing: both <c>Load</c> overloads are public API
+    ///     that no adapter calls, so nothing in the suite reached either one's child selections.
+    /// </remarks>
     [TestMethod]
     public void RssItemLoadWithSettings_EveryField_IsParsed()
     {
@@ -162,6 +182,10 @@ public class UncoveredParsePathTests
         item.Source.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// The settings-free overload reads the same eight children to the same values, so omitting the settings
+    /// is not a different parse.
+    /// </summary>
     [TestMethod]
     public void RssItemLoadWithoutSettings_EveryField_IsParsed()
     {
@@ -195,6 +219,10 @@ public class UncoveredParsePathTests
         item.Source.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A channel's <c>image</c> yields all six of its fields, including the numeric <c>width</c> and
+    /// <c>height</c>, and its <c>textInput</c> all four of its own.
+    /// </summary>
     [TestMethod]
     public void RssChannelImageAndTextInput_EveryField_IsParsed()
     {

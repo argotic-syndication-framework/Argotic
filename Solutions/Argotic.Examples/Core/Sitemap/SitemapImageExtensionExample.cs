@@ -5,16 +5,12 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Sitemap;
 
 /// <summary>
-/// Contains the code examples for the <see cref="SitemapImageExtension"/> class.
+/// Declares the images on a page with <see cref="SitemapImageExtension"/>, then reads them back out of a saved sitemap.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="SitemapImageExtension"/> class.
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class SitemapImageExtensionExample
 {
     /// <summary>
-    /// Provides example code for the SitemapImageExtension class.
+    /// Attaches a <see cref="SitemapImageExtension"/> to a <see cref="SitemapUrl"/> and prints the sitemap.
     /// </summary>
     public static void ClassExample()
     {
@@ -42,7 +38,7 @@ internal static class SitemapImageExtensionExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(Stream) method.
+    /// Reads the image extension back out of a sitemap loaded from a <see cref="Stream"/>.
     /// </summary>
     public static void LoadStreamExample()
     {
@@ -63,7 +59,7 @@ internal static class SitemapImageExtensionExample
     }
 
     /// <summary>
-    /// Provides example code for the Save(Stream) method.
+    /// Saves a sitemap carrying the image extension, and shows the namespace it declares.
     /// </summary>
     public static void SaveStreamExample()
     {

@@ -7,21 +7,24 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents a content segment location element in a Google Video Sitemap.
+/// Represents a <c>video:content_segment_loc</c> element — one media file of a video split across several.
 /// </summary>
 /// <remarks>
-///     <para>
-///         The <see cref="SitemapVideoSegment"/> class represents a video segment that can be included
-///         in a video sitemap to describe a portion of a video. Each segment has a URL pointing to the
-///         segment content and an optional duration attribute.
-///     </para>
+///     Segments describe a single video delivered in pieces, so their order is the playback order and the
+///     durations are meant to sum to the whole. The list is a plain <see cref="IList{T}"/> that preserves
+///     insertion order and enforces neither property.
 /// </remarks>
+/// <seealso cref="SitemapVideo.ContentSegments"/>
 /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
 public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<SitemapVideoSegment>, IComparisonOperators
 {
     /// <summary>
-    /// The maximum allowed duration in seconds for a video segment (8 hours).
+    /// The longest segment duration Google accepts, in seconds — eight hours.
     /// </summary>
+    /// <remarks>
+    ///     Advisory. <see cref="Duration"/> is an unvalidated property; nothing in this class consults this
+    ///     constant.
+    /// </remarks>
     /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd"/>
     public const int MaxDuration = 28_800;
 
@@ -41,7 +44,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// Initializes a new instance of the <see cref="SitemapVideoSegment"/> class with the specified location.
     /// </summary>
     /// <param name="location">The URL of the video segment.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is <see langword="null"/>.</exception>
     public SitemapVideoSegment(Uri location)
     {
         ArgumentNullException.ThrowIfNull(location);
@@ -53,7 +56,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// </summary>
     /// <param name="location">The URL of the video segment.</param>
     /// <param name="duration">The duration of the video segment in seconds.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is <see langword="null"/>.</exception>
     public SitemapVideoSegment(Uri location, int? duration)
     {
         ArgumentNullException.ThrowIfNull(location);
@@ -64,11 +67,11 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// <summary>
     /// Gets or sets the URL of the video segment.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the video segment. This is a required property.</value>
-    /// <remarks>
-    ///     The URL must point to the actual video segment content file.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>
+    ///     A <see cref="Uri"/> pointing at the media file itself — not a player page — or
+    ///     <see langword="null"/> if none was specified. Required by the specification.
+    /// </value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Location
     {
         get => segmentLocation;
@@ -83,18 +86,19 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// <summary>
     /// Gets or sets the duration of the video segment in seconds.
     /// </summary>
-    /// <value>The duration of the video segment in seconds. Optional.</value>
-    /// <remarks>
-    ///     The duration should be between 1 and 28800 seconds (8 hours).
-    /// </remarks>
+    /// <value>
+    ///     Seconds, at most <see cref="MaxDuration"/>, or <see langword="null"/> if the <c>duration</c>
+    ///     attribute was absent.
+    /// </value>
+    /// <remarks>The range is not enforced; any <see cref="int"/> assigned here is written out verbatim.</remarks>
     public int? Duration { get; set; }
 
     /// <summary>
     /// Initializes the video segment using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="SitemapVideoSegment"/>.</param>
-    /// <returns><b>true</b> if the <see cref="SitemapVideoSegment"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="SitemapVideoSegment"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -126,8 +130,9 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which the video segment will be written.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed elements.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference or empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -167,7 +172,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// Determines whether the specified <see cref="SitemapVideoSegment"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SitemapVideoSegment"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SitemapVideoSegment"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SitemapVideoSegment"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SitemapVideoSegment? other)
     {
         if (other is null)
@@ -182,7 +187,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SitemapVideoSegment other && this.Equals(other);
 
     /// <summary>
@@ -209,7 +214,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(SitemapVideoSegment? first, SitemapVideoSegment? second)
     {
         if (first is null) return second is null;
@@ -221,6 +226,6 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(SitemapVideoSegment? first, SitemapVideoSegment? second) => !(first == second);
 }

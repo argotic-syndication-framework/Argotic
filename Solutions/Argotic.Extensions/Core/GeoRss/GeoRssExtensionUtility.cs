@@ -30,7 +30,7 @@ internal static class GeoRssExtensionUtility
     /// </summary>
     /// <param name="value">The element's node value.</param>
     /// <param name="positions">The positions read, or <see langword="null"/> if the value could not be read.</param>
-    /// <returns><b>true</b> if the whole value was read as complete latitude/longitude pairs; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the whole value was read as complete latitude/longitude pairs; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>
     ///     <b>All or nothing.</b> A single unparseable token, or a trailing coordinate with no partner,
@@ -110,7 +110,7 @@ internal static class GeoRssExtensionUtility
     /// </summary>
     /// <param name="value">The element's node value.</param>
     /// <param name="position">The position read, if there was exactly one.</param>
-    /// <returns><b>true</b> if the value held exactly one complete pair; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the value held exactly one complete pair; otherwise, <see langword="false"/>.</returns>
     public static bool TryReadPosition(string? value, out GeoRssPosition position)
     {
         position = default;
@@ -130,7 +130,7 @@ internal static class GeoRssExtensionUtility
     /// </summary>
     /// <param name="value">The element's node value.</param>
     /// <param name="box">The box read, if there were exactly two pairs.</param>
-    /// <returns><b>true</b> if the value held exactly two complete pairs; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the value held exactly two complete pairs; otherwise, <see langword="false"/>.</returns>
     public static bool TryReadBox(string? value, out GeoRssBox box)
     {
         box = default;

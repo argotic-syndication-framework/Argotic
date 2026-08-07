@@ -18,11 +18,23 @@ public class SiteSummaryContentSyndicationExtensionContext
     }
 
     /// <summary>
-    /// Gets or sets an alternative version of the content of this item.
+    /// Gets or sets the full content of the item, usually its complete HTML.
     /// </summary>
-    /// <value>The alternative version of the content of this item.</value>
+    /// <value>
+    ///     The content of <c>content:encoded</c>, trimmed. The default value is an <i>empty</i> string.
+    /// </value>
     /// <remarks>
-    ///     The value of this property <i>may</i> be entity-encoded, but will <b>always</b> be CDATA-escaped.
+    ///     <para>
+    ///     This is the element that matters. A publisher who puts a summary in RSS's <c>description</c>
+    ///     puts the whole article here, so an aggregator that ignores it shows excerpts of feeds that
+    ///     shipped the full text.
+    ///     </para>
+    ///     <para>
+    ///     What arrives may be entity-encoded HTML; what is written out is <i>always</i> CDATA-escaped.
+    ///     A round-trip therefore normalises the escaping — the markup is preserved, the way it was
+    ///     escaped is not. Setting <see langword="null"/> or an empty string clears the value rather than
+    ///     throwing.
+    ///     </para>
     /// </remarks>
     public string Encoded
     {
@@ -45,23 +57,24 @@ public class SiteSummaryContentSyndicationExtensionContext
     /// Gets the alternative versions of this item's content.
     /// </summary>
     /// <value>
-    ///     A <see cref="IList{T}"/> collection of <see cref="SiteSummaryContentItem"/> objects that represent multiple versions of this item's content.
-    ///     The default value is an <i>empty</i> collection.
+    ///     A collection of <see cref="SiteSummaryContentItem"/> objects, each one encoding of the same
+    ///     content. The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
-    ///     The <see cref="Encoded"/> property represents the <b>updated</b> syntax for the <see cref="SiteSummaryContentSyndicationExtension"/>.
-    ///     It is <i>recommended</i> that <see cref="Encoded"/> is utilized when defining an alternative encoding for the content of an item.
+    ///     The module's original RDF syntax, superseded by <see cref="Encoded"/> and effectively extinct in
+    ///     live feeds. Read and written for the feeds that still carry it; prefer <see cref="Encoded"/> for
+    ///     anything you generate.
     /// </remarks>
     public IList<SiteSummaryContentItem> Items { get; } = [];
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="SiteSummaryContentSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="SiteSummaryContentSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="SiteSummaryContentSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="SiteSummaryContentSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -108,11 +121,11 @@ public class SiteSummaryContentSyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);

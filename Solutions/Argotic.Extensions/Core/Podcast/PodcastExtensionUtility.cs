@@ -42,7 +42,7 @@ internal static class PodcastExtensionUtility
     /// Interprets a node value that the specification defines as "yes" or "no".
     /// </summary>
     /// <param name="value">The node value to interpret.</param>
-    /// <returns><b>true</b> for yes, <b>false</b> for no, and <see langword="null"/> for anything else.</returns>
+    /// <returns><see langword="true"/> for yes, <see langword="false"/> for no, and <see langword="null"/> for anything else.</returns>
     /// <remarks>
     ///     <para>
     ///     The specification says these elements carry <c>yes</c> or <c>no</c>. Live feeds disagree: of
@@ -52,7 +52,7 @@ internal static class PodcastExtensionUtility
     ///     defect §2.46 records for <c>itunes:explicit</c>.
     ///     </para>
     ///     <para>
-    ///     An unrecognised value returns <see langword="null"/> rather than <b>false</b>. The two are not
+    ///     An unrecognised value returns <see langword="null"/> rather than <see langword="false"/>. The two are not
     ///     the same: "the publisher said no" and "the publisher said something we did not understand"
     ///     lead to different handling, and collapsing them would invent a statement nobody made.
     ///     </para>

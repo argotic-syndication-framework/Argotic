@@ -12,12 +12,7 @@ namespace Argotic.Syndication;
 /// <seealso cref="RssChannel.Categories"/>
 /// <seealso cref="RssItem.Categories"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the RssCategory class.">
-///         <code 
-///             source="..\..\Argotic.Examples\Core\Rss\RssCategoryExample.cs" 
-///             region="RssCategory" 
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Rss\RssCategoryExample.cs" language="cs" title="The following code example demonstrates the usage of the RssCategory class." />
 /// </example>
 public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
@@ -53,7 +48,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// Initializes a new instance of the <see cref="RssCategory"/> class using the supplied <see cref="IList{T}"/>.
     /// </summary>
     /// <param name="value">A collection of strings that describe the hierarchical position in the taxonomy. The order of collection elements determines the taxonomy hierarchy.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is <see langword="null"/>.</exception>
     public RssCategory(IList<string> value)
     {
         ArgumentNullException.ThrowIfNull(value);
@@ -68,7 +63,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// </summary>
     /// <param name="value">A collection of strings that describe the hierarchical position in the taxonomy. The order of collection elements determines the taxonomy hierarchy.</param>
     /// <param name="domain">A string that identifies the taxonomy in which the category is placed.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is <see langword="null"/>.</exception>
     public RssCategory(IList<string> value, string domain) : this(value)
     {
         this.Domain = domain;
@@ -77,13 +72,12 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
@@ -117,11 +111,11 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <see langword="true"/> if the object passed to it matches the conditions defined in the delegate.
     ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is <see langword="null"/>.</exception>
     public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
@@ -140,11 +134,11 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// Loads this <see cref="RssCategory"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="RssCategory"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssCategory"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssCategory"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -182,12 +176,12 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="RssCategory"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssCategory"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssCategory"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -203,7 +197,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// Saves the current <see cref="RssCategory"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -251,7 +245,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// Determines whether the specified <see cref="RssCategory"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="RssCategory"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="RssCategory"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="RssCategory"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(RssCategory? other)
     {
         if (other is null)
@@ -266,7 +260,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is RssCategory other && this.Equals(other);
 
     /// <summary>
@@ -285,7 +279,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(RssCategory? first, RssCategory? second)
     {
         if (first is null) return second is null;
@@ -297,6 +291,6 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(RssCategory? first, RssCategory? second) => !(first == second);
 }

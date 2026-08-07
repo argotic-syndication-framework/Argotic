@@ -9,6 +9,53 @@ namespace Argotic.Extensions;
 /// <summary>
 /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="IExtensibleSyndicationObject"/>.
 /// </summary>
+/// <remarks>
+///     <para>
+///         This is where extensions are discovered and attached, and it is the only part of the
+///         extensibility model a custom extension has to satisfy. An adapter is constructed for the
+///         entity being loaded, and <see cref="Fill(IExtensibleSyndicationObject)"/> runs the pipeline:
+///     </para>
+///     <list type="number">
+///         <item>
+///             <description>
+///                 Build the candidate set. When
+///                 <see cref="SyndicationResourceLoadSettings.AutoDetectExtensions"/> is
+///                 <see langword="true"/> — the default — that is every framework extension whose
+///                 <see cref="ISyndicationExtension.XmlNamespace"/> appears among the namespaces in scope
+///                 at <see cref="Navigator"/>, or whose <see cref="ISyndicationExtension.XmlPrefix"/> is
+///                 bound there, plus every type in
+///                 <see cref="SyndicationResourceLoadSettings.SupportedExtensions"/>. When it is
+///                 <see langword="false"/>, only the latter.
+///             </description>
+///         </item>
+///         <item>
+///             <description>
+///                 Ask each candidate <see cref="ISyndicationExtension.ExistsInSource(XPathNavigator)"/>.
+///             </description>
+///         </item>
+///         <item>
+///             <description>
+///                 For each that says yes, construct a <i>fresh</i> instance and call
+///                 <see cref="ISyndicationExtension.Load(IXPathNavigable)"/>; add it to
+///                 <see cref="IExtensibleSyndicationObject.Extensions"/> only if that returns
+///                 <see langword="true"/>.
+///             </description>
+///         </item>
+///     </list>
+///     <para>
+///         The framework half of step 1 is reflection over this assembly, described on
+///         <see cref="FrameworkExtensions"/>; nothing registers an extension by hand. Those framework
+///         candidates are one shared instance per type, reused to probe every entity in the document —
+///         see the remarks on <see cref="SyndicationExtension.ExistsInSource(XPathNavigator)"/> for the
+///         constraint that places on an override. Step 3 always builds a new object, because that one
+///         escapes into the caller's object graph.
+///     </para>
+///     <para>
+///         Every instantiation here goes through <see cref="Activator.CreateInstance(Type)"/>, so an
+///         extension type without a public parameterless constructor throws
+///         <see cref="MissingMethodException"/> at load time rather than being skipped.
+///     </para>
+/// </remarks>
 public class SyndicationExtensionAdapter
 {
 
@@ -17,8 +64,8 @@ public class SyndicationExtensionAdapter
     /// </summary>
     /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the extended syndication resource information.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="IExtensibleSyndicationObject"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public SyndicationExtensionAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(navigator);
@@ -52,9 +99,22 @@ public class SyndicationExtensionAdapter
     /// <summary>
     /// Gets the collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
     /// </summary>
-    /// <value>
-    ///     <see cref="IList{T}"/> collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
-    /// </value>
+    /// <value>A newly built list, in reflection order. Every get repeats the reflection and allocates again; hold the result rather than calling this in a loop.</value>
+    /// <remarks>
+    ///     <para>
+    ///         The list is discovered, not maintained: every exported type of <c>Argotic.Extensions</c>
+    ///         that is assignable to <see cref="SyndicationExtension"/> and is not abstract. A new
+    ///         extension added to this assembly appears here with no registration step — and,
+    ///         symmetrically, one made <c>internal</c> silently disappears, because
+    ///         <see cref="Assembly.GetExportedTypes"/> sees only public types.
+    ///     </para>
+    ///     <para>
+    ///         The test is assignability to <see cref="SyndicationExtension"/>, not to
+    ///         <see cref="ISyndicationExtension"/>. A type that implements the interface directly is not
+    ///         found here; register it through
+    ///         <see cref="SyndicationResourceLoadSettings.SupportedExtensions"/> instead.
+    ///     </para>
+    /// </remarks>
     public static IList<Type> FrameworkExtensions
     {
         get
@@ -80,13 +140,12 @@ public class SyndicationExtensionAdapter
     /// <summary>
     /// Gets the <see cref="XPathNavigator"/> used to fill an extensible syndication resource.
     /// </summary>
-    /// <value>The <see cref="XPathNavigator"/> used to fill an extensible syndication resource.</value>
+    /// <value>The navigator positioned on the entity being filled. Its in-scope namespaces are what auto-detection matches against, so they include declarations inherited from ancestors, not only those written on the entity's own element.</value>
     public XPathNavigator Navigator { get; }
 
     /// <summary>
     /// Gets the <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of an extensible syndication resource.
     /// </summary>
-    /// <value>The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of an extensible syndication resource.</value>
     public SyndicationResourceLoadSettings Settings { get; } = new();
 
     /// <summary>
@@ -99,8 +158,8 @@ public class SyndicationExtensionAdapter
     ///    to fill a <see cref="SyndicationResourceSaveSettings.SupportedExtensions"/> collection when implementing the 
     ///    <see cref="ISyndicationResource.Save(XmlWriter, SyndicationResourceSaveSettings)"/> abstract method.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="types"/> is <see langword="null"/>.</exception>
     public static void FillExtensionTypes(IExtensibleSyndicationObject entity, IList<Type> types)
     {
         ArgumentNullException.ThrowIfNull(entity);
@@ -129,9 +188,9 @@ public class SyndicationExtensionAdapter
     /// <returns>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects instantiated using the supplied <paramref name="types"/>.</returns>
     /// <remarks>
     ///     <para>Each <see cref="ISyndicationExtension"/> instance in the <see cref="IList{T}"/> collection will be instantiated using its default constructor. </para>
-    ///     <para>Types that are a null reference or do not implement the <see cref="ISyndicationExtension"/> interface are ignored.</para>
+    ///     <para>Types that are <see langword="null"/> or do not implement the <see cref="ISyndicationExtension"/> interface are ignored.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="types"/> is <see langword="null"/>.</exception>
     public static IList<ISyndicationExtension> GetExtensions(IList<Type> types)
     {
         List<ISyndicationExtension> extensions = [];
@@ -155,7 +214,7 @@ public class SyndicationExtensionAdapter
     /// Creates a collection of <see cref="ISyndicationExtension"/> instances for the specified types.
     /// </summary>
     /// <param name="types">A <see cref="IList{T}"/> collection of <see cref="Type"/> objects that represent user-defined syndication extensions to be instantiated.</param>
-    /// <param name="namespaces">A collection of XML nameapces that are used to filter the available native framework syndication extensions.</param>
+    /// <param name="namespaces">The XML namespaces in scope, keyed by prefix, used to filter the native framework syndication extensions. A framework extension is kept when its namespace URI is one of the values, <i>or</i> its conventional prefix is one of the keys.</param>
     /// <returns>
     ///     A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects instantiated using the supplied <paramref name="types"/> and <paramref name="namespaces"/>.
     /// </returns>
@@ -163,8 +222,8 @@ public class SyndicationExtensionAdapter
     ///     This method instantiates all the available native framework syndication extensions, and then filters them based on the XML namespaces and prefixes contained in the supplied <paramref name="namespaces"/>. 
     ///     The user defined syndication extensions are then instantiated, and are added to the return collection if they do not already exist.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="namespaces"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="types"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="namespaces"/> is <see langword="null"/>.</exception>
     public static IList<ISyndicationExtension> GetExtensions(IList<Type> types, IDictionary<string, string> namespaces)
     {
         List<ISyndicationExtension> supportedExtensions = [];
@@ -259,8 +318,8 @@ public class SyndicationExtensionAdapter
     /// </summary>
     /// <param name="extensions">A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent the syndication extensions to be written.</param>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="extensions"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="extensions"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public static void WriteExtensionsTo(IEnumerable<ISyndicationExtension> extensions, XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(extensions);
@@ -277,8 +336,8 @@ public class SyndicationExtensionAdapter
     /// </summary>
     /// <param name="types">A <see cref="IList{T}"/> collection of <see cref="Type"/> objects that represent the syndication extensions to write prefixed XML namespace declarations for.</param>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="types"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public static void WriteXmlNamespaceDeclarations(IList<Type> types, XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(types);
@@ -307,11 +366,14 @@ public class SyndicationExtensionAdapter
     /// Modifies the <see cref="IExtensibleSyndicationObject"/> to match the data source.
     /// </summary>
     /// <remarks>
-    ///     A default <see cref="XmlNamespaceManager"/> is created against this adapter's <see cref="Navigator"/> property 
-    ///     when resolving prefixed syndication elements and attributes.
+    ///     This only adds. Nothing already in <see cref="IExtensibleSyndicationObject.Extensions"/> is
+    ///     inspected, so filling the same entity twice attaches a second copy of every extension the
+    ///     source declares. Prefix resolution is each extension's own business — see
+    ///     <see cref="SyndicationExtension.CreateNamespaceManager(XPathNavigator)"/> — so this method
+    ///     builds no <see cref="XmlNamespaceManager"/> of its own.
     /// </remarks>
     /// <param name="entity">The <see cref="IExtensibleSyndicationObject"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is <see langword="null"/>.</exception>
     public void Fill(IExtensibleSyndicationObject entity)
     {
         ArgumentNullException.ThrowIfNull(entity);
@@ -327,9 +389,17 @@ public class SyndicationExtensionAdapter
     /// Modifies the <see cref="IExtensibleSyndicationObject"/> to match the data source.
     /// </summary>
     /// <param name="entity">The <see cref="IExtensibleSyndicationObject"/> to be filled.</param>
-    /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve prefixed syndication elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <param name="manager">Ignored. It is rejected when <see langword="null"/> and otherwise never read.</param>
+    /// <remarks>
+    ///     Identical to <see cref="Fill(IExtensibleSyndicationObject)"/>. The <paramref name="manager"/>
+    ///     parameter is vestigial: extension probing resolves namespaces from
+    ///     <see cref="Navigator"/> itself, and each extension builds the manager it needs inside its own
+    ///     <c>Load</c>. It survives because this is public API with twenty-five call sites, and its
+    ///     null check survives because rejecting <see langword="null"/> is observable behaviour. Prefer
+    ///     the single-argument overload in new code.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public void Fill(IExtensibleSyndicationObject entity, XmlNamespaceManager manager)
     {
         ArgumentNullException.ThrowIfNull(entity);
@@ -344,7 +414,7 @@ public class SyndicationExtensionAdapter
     }
 
     /// <summary>
-    /// Adds every extension that the data source declares and this entity does not already carry.
+    /// Adds a loaded instance of every extension the data source declares.
     /// </summary>
     /// <param name="entity">The <see cref="IExtensibleSyndicationObject"/> to be filled.</param>
     private void FillCore(IExtensibleSyndicationObject entity)

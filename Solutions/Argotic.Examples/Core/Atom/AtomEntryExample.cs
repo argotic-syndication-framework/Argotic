@@ -6,16 +6,17 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Atom;
 
 /// <summary>
-/// Contains the code examples for the <see cref="AtomEntry"/> class.
+/// Demonstrates the whole <see cref="AtomEntry"/> surface: building one by hand, then the <c>Load</c>, <c>LoadAsync</c>, <c>CreateAsync</c> and <c>Save</c> overloads.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="AtomEntry"/> class.
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
+///     The <see cref="Uri"/> overloads take a stand-alone entry document — <c>&lt;entry&gt;</c> as the
+///     document element, not <c>&lt;feed&gt;</c> — which essentially nothing on the open web serves, so
+///     those examples are pointed at a loopback <see cref="SampleHost"/> rather than a live origin.
 /// </remarks>
 internal static class AtomEntryExample
 {
     /// <summary>
-    /// Provides example code for the AtomEntry class.
+    /// Builds a complete <see cref="AtomEntry"/> by hand and prints it.
     /// </summary>
     public static void ClassExample()
     {
@@ -34,7 +35,7 @@ internal static class AtomEntryExample
     }
 
     /// <summary>
-    /// Provides example code for the AtomEntry.CreateAsync(Uri) method
+    /// Creates an <see cref="AtomEntry"/> from a <see cref="Uri"/> in a single call.
     /// </summary>
     public static async Task CreateExampleAsync()
     {
@@ -57,7 +58,7 @@ internal static class AtomEntryExample
     }
 
     /// <summary>
-    /// Provides example code for the LoadAsync(Uri) method with event notification
+    /// Subscribes to <c>Loaded</c> before loading, so the handler sees the resource the moment it is parsed.
     /// </summary>
     public static async Task LoadAsyncExampleAsync()
     {
@@ -93,7 +94,7 @@ internal static class AtomEntryExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(IXPathNavigable) method
+    /// Loads an <see cref="AtomEntry"/> from an <see cref="IXPathNavigable"/>.
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
@@ -112,7 +113,7 @@ internal static class AtomEntryExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(Stream) method
+    /// Loads an <see cref="AtomEntry"/> from a <see cref="Stream"/>.
     /// </summary>
     public static void LoadStreamExample()
     {
@@ -130,7 +131,7 @@ internal static class AtomEntryExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(XmlReader) method
+    /// Loads an <see cref="AtomEntry"/> from an <see cref="XmlReader"/>.
     /// </summary>
     public static void LoadXmlReaderExample()
     {
@@ -155,7 +156,7 @@ internal static class AtomEntryExample
     }
 
     /// <summary>
-    /// Provides example code for the LoadAsync(Uri, HttpClient) method
+    /// Loads an <see cref="AtomEntry"/> from a <see cref="Uri"/>, and shows where a caller-supplied <see cref="HttpClient"/> goes.
     /// </summary>
     public static async Task LoadUriExampleAsync()
     {
@@ -187,7 +188,7 @@ internal static class AtomEntryExample
     }
 
     /// <summary>
-    /// Provides example code for the Save(Stream) method
+    /// Saves an <see cref="AtomEntry"/> to a <see cref="Stream"/>.
     /// </summary>
     public static void SaveStreamExample()
     {
@@ -202,7 +203,7 @@ internal static class AtomEntryExample
     }
 
     /// <summary>
-    /// Provides example code for the Save(XmlWriter) method
+    /// Saves an <see cref="AtomEntry"/> through an <see cref="XmlWriter"/>, with indentation turned on.
     /// </summary>
     public static void SaveXmlWriterExample()
     {

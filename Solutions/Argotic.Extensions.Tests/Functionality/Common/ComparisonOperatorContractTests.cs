@@ -352,7 +352,7 @@ public class ComparisonOperatorContractTests
     /// <typeparam name="T">The type under test.</typeparam>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand.</param>
-    /// <returns>The result of the type's equality operator.</returns>
+    /// <returns><see langword="true"/> if the type's own <c>operator ==</c> considers the operands equal; otherwise, <see langword="false"/>.</returns>
     private static bool EqualityOperator<T>(T? left, T? right)
         where T : class, IComparable<T>, IComparisonOperators
         => InvokeOperator("op_Equality", left, right);
@@ -363,7 +363,7 @@ public class ComparisonOperatorContractTests
     /// <typeparam name="T">The type under test.</typeparam>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand.</param>
-    /// <returns>The result of the type's inequality operator.</returns>
+    /// <returns><see langword="true"/> if the type's own <c>operator !=</c> considers the operands different; otherwise, <see langword="false"/>.</returns>
     private static bool InequalityOperator<T>(T? left, T? right)
         where T : class, IComparable<T>, IComparisonOperators
         => InvokeOperator("op_Inequality", left, right);
@@ -390,7 +390,7 @@ public class ComparisonOperatorContractTests
     /// <param name="name">The operator's metadata name.</param>
     /// <param name="left">The left operand.</param>
     /// <param name="right">The right operand.</param>
-    /// <returns>The result of the operator.</returns>
+    /// <returns><see langword="true"/> if the named operator returned <see langword="true"/> for the operands; otherwise, <see langword="false"/>.</returns>
     private static bool InvokeOperator<T>(string name, T? left, T? right)
         where T : class, IComparable<T>, IComparisonOperators
     {

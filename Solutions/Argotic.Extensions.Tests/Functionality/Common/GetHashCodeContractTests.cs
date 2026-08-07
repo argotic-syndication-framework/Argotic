@@ -27,6 +27,10 @@ namespace Argotic.Extensions.Tests.Functionality.Common;
 [TestClass]
 public class GetHashCodeContractTests
 {
+    /// <summary>
+    /// <c>http://example.com/Photo.JPG</c> and <c>http://example.com/photo.jpg</c> are equal
+    /// <c>SitemapImage</c>s, and hash equally — the case in the path must not reach the hash code.
+    /// </summary>
     [TestMethod]
     public void SitemapImage_LocationsDifferingOnlyByCase_AreEqualAndHashEqually()
     {
@@ -38,6 +42,10 @@ public class GetHashCodeContractTests
         first.GetHashCode().ShouldBe(second.GetHashCode());
     }
 
+    /// <summary>
+    /// The same for <c>SitemapVideoSegment</c>: <c>Clip.MP4</c> and <c>clip.mp4</c> are equal and hash
+    /// equally.
+    /// </summary>
     [TestMethod]
     public void SitemapVideoSegment_LocationsDifferingOnlyByCase_AreEqualAndHashEqually()
     {
@@ -49,6 +57,10 @@ public class GetHashCodeContractTests
         first.GetHashCode().ShouldBe(second.GetHashCode());
     }
 
+    /// <summary>
+    /// Two pingback extensions built from the same data — including a two-element <c>Abouts</c> collection —
+    /// hash equally, so the collection is folded in by its elements rather than by its instance.
+    /// </summary>
     [TestMethod]
     public void PingbackSyndicationExtension_EqualAbouts_HashEqually()
     {
@@ -65,6 +77,9 @@ public class GetHashCodeContractTests
         AssertEqualAndSameHash(Build(), Build());
     }
 
+    /// <summary>
+    /// The same for the trackback extension's <c>Abouts</c>.
+    /// </summary>
     [TestMethod]
     public void TrackbackSyndicationExtension_EqualAbouts_HashEqually()
     {
@@ -79,6 +94,10 @@ public class GetHashCodeContractTests
         AssertEqualAndSameHash(Build(), Build());
     }
 
+    /// <summary>
+    /// Two slash extensions carrying the same <c>HitParade</c> — <c>3</c>, <c>1</c>, <c>4</c>, in that order
+    /// — hash equally, so a collection of value types is folded in by its elements too.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashSyndicationExtension_EqualHitParade_HashEqually()
     {
@@ -97,6 +116,10 @@ public class GetHashCodeContractTests
         AssertEqualAndSameHash(Build(), Build());
     }
 
+    /// <summary>
+    /// Two feed-history extensions carrying the same <c>Relations</c> entry hash equally, so a collection
+    /// whose elements are themselves comparable types is folded in by those elements.
+    /// </summary>
     [TestMethod]
     public void FeedHistorySyndicationExtension_EqualRelations_HashEqually()
     {
@@ -112,6 +135,10 @@ public class GetHashCodeContractTests
         AssertEqualAndSameHash(Build(), Build());
     }
 
+    /// <summary>
+    /// Two simple-list extensions agreeing on <i>both</i> their <c>Grouping</c> and <c>Sorting</c>
+    /// collections hash equally.
+    /// </summary>
     [TestMethod]
     public void SimpleListSyndicationExtension_EqualGroupingAndSorting_HashEqually()
     {
@@ -127,6 +154,9 @@ public class GetHashCodeContractTests
         AssertEqualAndSameHash(Build(), Build());
     }
 
+    /// <summary>
+    /// Two media groups carrying the same single <c>Contents</c> entry hash equally.
+    /// </summary>
     [TestMethod]
     public void YahooMediaGroup_EqualContents_HashEqually()
     {
@@ -140,6 +170,10 @@ public class GetHashCodeContractTests
         AssertEqualAndSameHash(Build(), Build());
     }
 
+    /// <summary>
+    /// Two media restrictions carrying the same <c>Entities</c> — <c>us</c> then <c>gb</c> — hash equally,
+    /// with the entity type and relationship folded in alongside them.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_EqualEntities_HashEqually()
     {
@@ -158,6 +192,16 @@ public class GetHashCodeContractTests
         AssertEqualAndSameHash(Build(), Build());
     }
 
+    /// <summary>
+    /// Asserts that two distinct instances are equal, hash equally, and hash stably.
+    /// </summary>
+    /// <remarks>
+    ///     The reference check comes first because it is what stops the rest being vacuous: two aliases of
+    ///     one object satisfy every assertion below whatever the hash code does.
+    /// </remarks>
+    /// <typeparam name="T">The type under test.</typeparam>
+    /// <param name="first">An instance.</param>
+    /// <param name="second">A separately constructed instance built from identical data.</param>
     private static void AssertEqualAndSameHash<T>(T first, T second)
         where T : IEquatable<T>
     {

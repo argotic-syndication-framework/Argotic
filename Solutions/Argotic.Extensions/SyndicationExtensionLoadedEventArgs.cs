@@ -7,7 +7,8 @@ namespace Argotic.Extensions;
 /// </summary>
 /// <remarks>
 ///     A <see cref="ISyndicationExtension.Loaded"/> event occurs whenever the <see cref="ISyndicationExtension.Load(System.Xml.XmlReader)"/>
-///     or <see cref="ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"/> methods are called.
+///     or <see cref="ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"/> methods are called — including when the load found nothing,
+///     so a handler that counts events is counting attempts, not attachments.
 /// </remarks>
 /// <seealso cref="ISyndicationExtension"/>
 /// <seealso cref="ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"/>
@@ -26,7 +27,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs
     /// Initializes a new instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
     /// <param name="data">A <see cref="IXPathNavigable"/> object that represents the XML data that was used to load the syndication extension.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is <see langword="null"/>.</exception>
     public SyndicationExtensionLoadedEventArgs(IXPathNavigable data) : this()
     {
         ArgumentNullException.ThrowIfNull(data);
@@ -41,8 +42,8 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs
     /// <param name="extension">
     ///     A <see cref="ISyndicationExtension"/> that represents the syndication extension after the load operation completed.
     /// </param>
-    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public SyndicationExtensionLoadedEventArgs(IXPathNavigable data, ISyndicationExtension extension) : this(data)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -54,7 +55,8 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs
     /// Gets a read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
     /// </summary>
     /// <value>
-    ///     A read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
+    ///     A navigator over the entity's node, not merely over the extension's own elements, or
+    ///     <see langword="null"/> if the parameterless constructor was used.
     /// </value>
     public XPathNavigator? Data { get; }
 
@@ -62,7 +64,9 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs
     /// Gets the <see cref="ISyndicationExtension"/> that resulted from the load operation.
     /// </summary>
     /// <value>
-    ///     The <see cref="ISyndicationExtension"/> that resulted from the load operation. 
+    ///     The extension the load populated, or <see langword="null"/> unless the constructor taking one
+    ///     was used. It is the live instance, not a copy: reading its properties here shows what the
+    ///     load produced.
     /// </value>
     public ISyndicationExtension? Extension { get; }
 

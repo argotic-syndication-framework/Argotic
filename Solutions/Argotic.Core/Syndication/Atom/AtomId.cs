@@ -14,14 +14,18 @@ namespace Argotic.Syndication;
 /// <seealso cref="AtomFeed.Id"/>
 /// <remarks>
 ///     <para>
-///         When an <i>Atom Document</i> is relocated, migrated, syndicated, republished, exported, or imported, the content of its universally unique identifier <b>must not</b> change.
-///         Put another way, an <see cref="AtomId"/> pertains to all instantiations of a particular <see cref="AtomEntry"/> or <see cref="AtomFeed"/>; revisions retain the same
-///         content in their <see cref="AtomId"/> properties. It is suggested that the<see cref="AtomId"/> be stored along with the associated resource.
+///         <b>The identifier must never change.</b> RFC 4287 §4.2.6.1 holds it constant when a document is relocated, migrated, syndicated, republished,
+///         exported or imported: one <see cref="AtomId"/> pertains to every instantiation of a particular <see cref="AtomEntry"/> or <see cref="AtomFeed"/>,
+///         and a revision keeps the identifier it had. Store it alongside the resource. Deriving it instead from something that can move — the permalink,
+///         a reissued database key, the file path — is how a feed silently republishes its entire back catalogue as new.
 ///     </para>
 ///     <para>
-///         The content of an <see cref="AtomId"/> <b>must</b> be created in a way that assures uniqueness.
-///         Because of the risk of confusion between IRIs that would be equivalent if they were mapped to URIs and dereferenced,
-///         the following normalization strategy <i>should</i> be applied when generating unique identifiers:
+///         The value is an IRI (<a href="https://www.rfc-editor.org/rfc/rfc3987.html">RFC 3987</a>) and §4.2.6 excludes relative references. It need not be
+///         dereferenceable: <c>tag:</c> and <c>urn:uuid:</c> identifiers are conformant and common in the wild.
+///     </para>
+///     <para>
+///         The content must be created in a way that assures uniqueness. Because IRIs that would be equivalent only after mapping to URIs and dereferencing
+///         invite confusion, §4.2.6.1 recommends normalising an identifier once, when it is minted:
 ///         <list type="bullet">
 ///             <item>
 ///                 <description>
@@ -76,18 +80,13 @@ namespace Argotic.Syndication;
 ///         </list>
 ///     </para>
 ///     <para>
-///         Instances of <see cref="AtomId"/> objects can be compared to determine whether an entry or feed is the same as one seen before.
-///         Processors <b>must</b> compare <see cref="AtomId"/> objects on a character-by-character basis (in a case-sensitive fashion).
-///         Comparison operations <b>must</b> be based solely on the IRI character strings and <b>must not</b> rely on dereferencing the IRIs or URIs mapped from them.
+///         Comparing two instances answers "is this the entry I already have?". §4.2.6 requires that comparison to be character-by-character and
+///         case-sensitive, over the IRI strings alone, never by dereferencing them or the URIs they map to. <see cref="CompareTo(AtomId)"/> compares
+///         <see cref="Value"/> ordinally for exactly that reason.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the AtomId class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Atom\AtomIdExample.cs"
-///             region="AtomId"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Atom\AtomIdExample.cs" language="cs" title="The following code example demonstrates the usage of the AtomId class." />
 /// </example>
 public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatable<AtomId>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
@@ -100,9 +99,9 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomId"/> class using the supplied <see cref="Uri"/>.
-    /// <param name="uri">A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that represents a permanent, universally unique identifier for this entity.</param>
     /// </summary>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
+    /// <param name="uri">An absolute IRI that permanently and uniquely identifies the entity. Its <see cref="System.Uri.OriginalString"/> becomes <see cref="Value"/>.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is <see langword="null"/>.</exception>
     public AtomId(Uri uri)
     {
         this.Uri = uri;
@@ -111,7 +110,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     /// <summary>
     /// Gets or sets the permanent, universally unique identifier exactly as its characters appear.
     /// </summary>
-    /// <value>The IRI character string. The default value is an empty string.</value>
+    /// <value>The identifier exactly as its characters appear. The default value is an <i>empty</i> string.</value>
     /// <remarks>
     ///     <para>
     ///     This is the identity the specification means. RFC 4287 §4.2.6 requires processors to
@@ -126,7 +125,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     ///     characters the caller actually supplied, before the class had opinions about them.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public string Value
     {
         get;
@@ -138,23 +137,32 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the base URI other than the base URI of the document or external entity.
+    /// Gets or sets the base against which relative references inside this element are resolved.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>xml:base</c> in effect for this element, or <see langword="null"/> when none is. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-    ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+    ///         RFC 4287 §2 gives <c>xml:base</c> the function described in section 5.1.1 of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a> — it establishes the base URI,
+    ///         or IRI, for every relative reference in the attribute's effective scope. The value itself is a URI reference after processing according to
+    ///         <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.
+    ///     </para>
+    ///     <para>
+    ///         Loading resolves inheritance: an element without an <c>xml:base</c> of its own reports the nearest ancestor's, so the value here is the
+    ///         <i>effective</i> base a consumer can resolve an href against, not the literal attribute.
+    ///     </para>
     /// </remarks>
     public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>The language declared by <c>xml:lang</c>, or <see langword="null"/> when none is in scope. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         RFC 4287 defines <c>atomLanguageTag</c> as a language identifier per
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>, or its successor. A tag this runtime cannot turn
+    ///         into a <see cref="CultureInfo"/> is traced and dropped rather than failing the load.
     ///     </para>
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -162,25 +170,30 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Extensions"/> holds at least one <see cref="ISyndicationExtension"/>; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
-    /// Gets or sets an IRI that represents a permanent, universally unique identifier for this entity.
+    /// Gets or sets the identifier parsed as a <see cref="System.Uri"/>.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that represents a permanent, universally unique identifier for this entity.</value>
+    /// <value>The identifier as a <see cref="Uri"/>, or <see langword="null"/> when the loaded value was not an absolute IRI this runtime could parse.</value>
     /// <remarks>
-    ///     <para>This <see cref="Uri"/> <b>must</b> represent an <i>absolute</i> URI.</para>
-    ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
-    ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
+    ///     <para>
+    ///         A convenience derived from <see cref="Value"/>, which is the identity. §4.2.6 excludes relative references, so this holds an
+    ///         <i>absolute</i> IRI (<a href="https://www.rfc-editor.org/rfc/rfc3987.html">RFC 3987</a>) or nothing at all — a document whose <c>atom:id</c>
+    ///         is unparseable still loads, with <see cref="Value"/> carrying the characters verbatim and this property left <see langword="null"/>.
+    ///     </para>
+    ///     <para>
+    ///         Setting it writes <see cref="System.Uri.OriginalString"/> to <see cref="Value"/>, so the characters the caller supplied survive rather than
+    ///         the normalised form <see cref="System.Uri"/> would otherwise hand back.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Uri
     {
         get;
@@ -196,11 +209,11 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     /// Loads this <see cref="AtomId"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="AtomId"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomId"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomId"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -234,12 +247,12 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="AtomId"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomId"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomId"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -255,7 +268,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     /// Saves the current <see cref="AtomId"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -304,7 +317,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     /// Determines whether the specified <see cref="AtomId"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="AtomId"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="AtomId"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="AtomId"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(AtomId? other)
     {
         if (other is null)
@@ -319,7 +332,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is AtomId other && this.Equals(other);
 
     /// <summary>
@@ -333,7 +346,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(AtomId? first, AtomId? second)
     {
         if (first is null) return second is null;
@@ -345,7 +358,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are not equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(AtomId? first, AtomId? second) => !(first == second);
 
 }

@@ -18,19 +18,29 @@ public class PingbackSyndicationExtensionContext
     }
 
     /// <summary>
-    /// Gets the targets that were pinged in reference.
+    /// Gets the targets this item has already pinged.
     /// </summary>
     /// <value>
     ///     A <see cref="IList{T}"/> collection of <see cref="Uri"/> objects that represent targets that were pinged in reference.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
+    /// <remarks>
+    ///     One <c>pingback:about</c> element per entry, and the direction is the opposite of
+    ///     <see cref="Server"/> and <see cref="Target"/>: those two say how to ping <i>this</i> item,
+    ///     while these record what this item pinged.
+    /// </remarks>
     public IList<Uri> Abouts { get; } = [];
 
     /// <summary>
     /// Gets or sets the URL of the Pingback server.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the Pingback server.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>A <see cref="Uri"/> that represents the XML-RPC endpoint to call, or <see langword="null"/> if none was specified.</value>
+    /// <remarks>
+    ///     The address a linking site posts its <c>pingback.ping</c> call to. Written unconditionally
+    ///     as <c>pingback:server</c>: saving a context that never had one emits an empty element rather
+    ///     than omitting it.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Server
     {
         get;
@@ -45,8 +55,14 @@ public class PingbackSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the value that should be used as the <i>targetURI</i> in a ping.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the value that should be used as the <i>targetURI</i> in a ping.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>A <see cref="Uri"/> that represents the <i>targetURI</i> to pass in the ping, or <see langword="null"/> if none was specified.</value>
+    /// <remarks>
+    ///     The second argument of <c>pingback.ping</c>, and the reason this module exists: it is the
+    ///     canonical address of the item being linked to, which need not be the item's <c>link</c> and
+    ///     which a caller would otherwise have to derive by fetching the page. Written unconditionally,
+    ///     the same as <see cref="Server"/>.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Target
     {
         get;
@@ -61,11 +77,11 @@ public class PingbackSyndicationExtensionContext
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="PingbackSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="PingbackSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="PingbackSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="PingbackSyndicationExtensionContext"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -121,11 +137,11 @@ public class PingbackSyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);

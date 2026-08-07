@@ -3,11 +3,18 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.BlogML;
 
+/// <summary>
+/// Covers building a <see cref="BlogMLDocument"/> in code — its own properties, its author, category,
+/// post and extended-property collections, and what survives being written out and read back.
+/// </summary>
 [TestClass]
 public class BlogMLDocumentConstructionTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// A document accepts a <i>relative</i> root URL alongside its generation date, title and subtitle, and returns all four unchanged.
+    /// </summary>
     [TestMethod]
     public void Construction_SetsBasicProperties_Correctly()
     {
@@ -25,6 +32,9 @@ public class BlogMLDocumentConstructionTests
         document.Subtitle.Content.ShouldBe("This is a test blog");
     }
 
+    /// <summary>
+    /// An author added to a document keeps its identifier, email address and approval status.
+    /// </summary>
     [TestMethod]
     public void Construction_WithAuthor_AddsCorrectly()
     {
@@ -46,6 +56,9 @@ public class BlogMLDocumentConstructionTests
         document.Authors[0].ApprovalStatus.ShouldBe(BlogMLApprovalStatus.Approved);
     }
 
+    /// <summary>
+    /// A category added to a document keeps its identifier, description and title.
+    /// </summary>
     [TestMethod]
     public void Construction_WithCategories_AddsCorrectly()
     {
@@ -68,6 +81,9 @@ public class BlogMLDocumentConstructionTests
         document.Categories[0].Title.Content.ShouldBe("Category 1");
     }
 
+    /// <summary>
+    /// Extended properties are a name-keyed collection, and each value is retrievable by its name.
+    /// </summary>
     [TestMethod]
     public void Construction_WithExtendedProperties_AddsCorrectly()
     {
@@ -80,6 +96,9 @@ public class BlogMLDocumentConstructionTests
         document.ExtendedProperties["SendTrackback"].ShouldBe("yes");
     }
 
+    /// <summary>
+    /// A post added to a document keeps its identifier, title, post type, and the content together with its declared content type.
+    /// </summary>
     [TestMethod]
     public void Construction_WithPost_SetsCorrectly()
     {
@@ -108,6 +127,9 @@ public class BlogMLDocumentConstructionTests
         document.Posts[0].PostType.ShouldBe(BlogMLPostType.Normal);
     }
 
+    /// <summary>
+    /// A post refers to the document's categories by identifier string rather than by object reference.
+    /// </summary>
     [TestMethod]
     public void Construction_PostWithCategories_AddsCorrectly()
     {
@@ -132,6 +154,9 @@ public class BlogMLDocumentConstructionTests
         document.Posts[0].Categories.ShouldContain("102");
     }
 
+    /// <summary>
+    /// Comments hang off the post rather than the document, and keep their own title and content.
+    /// </summary>
     [TestMethod]
     public void Construction_PostWithComments_AddsCorrectly()
     {
@@ -160,6 +185,9 @@ public class BlogMLDocumentConstructionTests
         document.Posts[0].Comments[0].Content.Content.ShouldBe("This is a test comment.");
     }
 
+    /// <summary>
+    /// A post refers to the document's authors by identifier string rather than by object reference.
+    /// </summary>
     [TestMethod]
     public void Construction_PostWithAuthors_AddsCorrectly()
     {
@@ -181,6 +209,9 @@ public class BlogMLDocumentConstructionTests
         document.Posts[0].Authors.ShouldContain("1");
     }
 
+    /// <summary>
+    /// A document written to a stream and read back keeps its title and the size of its author, category and post collections.
+    /// </summary>
     [TestMethod]
     public void RoundTrip_SaveAndLoad_PreservesData()
     {
@@ -203,6 +234,9 @@ public class BlogMLDocumentConstructionTests
         loadedDocument.Posts.Count.ShouldBe(originalDocument.Posts.Count);
     }
 
+    /// <summary>
+    /// Saving emits an XML declaration and a <c>blog</c> root in the <c>http://www.blogml.com/2006/09/BlogML</c> namespace, carrying the title and post elements.
+    /// </summary>
     [TestMethod]
     public void Save_ProducesValidXml()
     {

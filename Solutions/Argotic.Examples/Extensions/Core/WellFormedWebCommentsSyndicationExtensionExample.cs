@@ -5,16 +5,19 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Extensions.Core;
 
 /// <summary>
-/// Contains the code examples for the <see cref="WellFormedWebCommentsSyndicationExtension"/> class.
+/// Reads a <see cref="WellFormedWebCommentsSyndicationExtension"/> out of a feed the framework has already parsed, then writes the feed back out.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="WellFormedWebCommentsSyndicationExtension"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
+///     Nothing registers the extension. Reflection over the assembly's exported types produces the
+///     candidates; those whose namespace or prefix is bound on the document are asked whether they are
+///     present; and each that says yes is attached to the entity that carried its elements — so the only
+///     call a consumer makes is <c>FindExtension(MatchByType)</c>. The namespace declarations written
+///     back on save are derived the same way, from the extensions actually present.
 /// </remarks>
 internal static class WellFormedWebCommentsSyndicationExtensionExample
 {
     /// <summary>
-    /// Provides example code for the WellFormedWebCommentsSyndicationExtension class.
+    /// Loads a feed carrying the extension, finds it on the channel and on the items, then writes the feed back out.
     /// </summary>
     public static void ClassExample()
     {

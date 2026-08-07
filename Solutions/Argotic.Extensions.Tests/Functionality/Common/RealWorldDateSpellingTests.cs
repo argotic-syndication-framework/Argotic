@@ -44,6 +44,14 @@ public sealed class RealWorldDateSpellingTests
     ///     the seconds and uses a named zone, three deviations in one value.
     ///     </para>
     /// </remarks>
+    /// <param name="spelling">The date exactly as the feed writes it.</param>
+    /// <param name="year">The year of the UTC instant the spelling names.</param>
+    /// <param name="month">The month of that instant.</param>
+    /// <param name="day">The day of that instant.</param>
+    /// <param name="hour">The hour of that instant, after the row's offset has been applied.</param>
+    /// <param name="minute">The minute of that instant.</param>
+    /// <param name="second">The second of that instant.</param>
+    /// <param name="shape">What makes the row deviate from the RFC, used as the failure message.</param>
     [TestMethod]
     [DataRow("Tuesday, 10 Aug 2021 11:30:00 -0400", 2021, 8, 10, 15, 30, 0, "full day name")]
     [DataRow("Wednesday, 21 May 2025 14:00:00 -0400", 2025, 5, 21, 18, 0, 0, "full day name")]
@@ -97,6 +105,8 @@ public sealed class RealWorldDateSpellingTests
     ///     instant so the pair is a true A/B on the padding alone.
     ///     </para>
     /// </remarks>
+    /// <param name="spelling">The date, padded or unpadded; both rows name the same instant.</param>
+    /// <param name="shape">Which of the pair this row is, used as the failure message.</param>
     [TestMethod]
     [DataRow("Fri, 1 Apr 2022 09:50:00 +0000", "unpadded, as Simplecast and BlogEngine.NET emit it")]
     [DataRow("Fri, 01 Apr 2022 09:50:00 +0000", "zero-padded — the control")]
@@ -127,6 +137,9 @@ public sealed class RealWorldDateSpellingTests
     ///     mistake can be made again from this file.
     ///     </para>
     /// </remarks>
+    /// <param name="spelling">The date, with a day name that either agrees with it or does not.</param>
+    /// <param name="expected"><see langword="true"/> where the day name agrees with the date; otherwise, <see langword="false"/>.</param>
+    /// <param name="why">Why the row expects that answer, used as the failure message.</param>
     [TestMethod]
     [DataRow("Wed, 5 Aug 2026 10:00:00 -0400", true, "5 August 2026 is a Wednesday")]
     [DataRow("Thu, 5 Aug 2026 10:00:00 -0400", false, "the same date called a Thursday")]
@@ -175,6 +188,8 @@ public sealed class RealWorldDateSpellingTests
     ///     The control for the test above, and the overwhelmingly common spelling: 76,478 of the corpus's
     ///     timestamps carry a numeric offset and a further 3,121 end in <c>Z</c>.
     /// </remarks>
+    /// <param name="spelling">The timestamp, carrying <c>Z</c>, a zero offset, a real offset or a fraction.</param>
+    /// <param name="expectedUtcHour">The hour the instant falls on once converted to UTC.</param>
     [TestMethod]
     [DataRow("2026-08-05T14:30:00Z", 14)]
     [DataRow("2026-08-05T14:30:00+00:00", 14)]

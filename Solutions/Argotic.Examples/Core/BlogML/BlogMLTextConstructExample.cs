@@ -3,16 +3,12 @@ using Argotic.Syndication.Specialized;
 namespace Argotic.Examples.Core.BlogML;
 
 /// <summary>
-/// Contains the code examples for the <see cref="BlogMLTextConstruct"/> class.
+/// Wraps post content in a <see cref="BlogMLTextConstruct"/>, and converts between <c>BlogMLContentType</c> and the string that appears in the XML.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="BlogMLTextConstruct"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class BlogMLTextConstructExample
 {
     /// <summary>
-    /// Provides example code for the BlogMLTextConstruct class.
+    /// Builds a <see cref="BlogMLTextConstruct"/> holding HTML-encoded content and prints it.
     /// </summary>
     public static void ClassExample()
     {
@@ -22,7 +18,7 @@ internal static class BlogMLTextConstructExample
     }
 
     /// <summary>
-    /// Provides example code for the BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType) method
+    /// Converts a <c>BlogMLContentType</c> to the string that appears in the XML.
     /// </summary>
     public static void ConstructTypeAsStringExample()
     {
@@ -34,7 +30,7 @@ internal static class BlogMLTextConstructExample
     }
 
     /// <summary>
-    /// Provides example code for the BlogMLTextConstruct.ConstructTypeByName(string) method
+    /// Converts the string that appears in the XML back to a <c>BlogMLContentType</c>.
     /// </summary>
     public static void ConstructTypeByNameExample()
     {

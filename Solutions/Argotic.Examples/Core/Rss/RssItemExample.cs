@@ -3,16 +3,12 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Rss;
 
 /// <summary>
-/// Contains the code examples for the <see cref="RssItem"/> class.
+/// Builds an <see cref="RssItem"/> carrying every optional element RSS 2.0 defines for one, and adds it to a channel.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="RssItem"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class RssItemExample
 {
     /// <summary>
-    /// Provides example code for the RssItem class.
+    /// Builds the containing <see cref="RssFeed"/> and prints the <see cref="RssItem"/> it holds.
     /// </summary>
     public static void ClassExample()
     {

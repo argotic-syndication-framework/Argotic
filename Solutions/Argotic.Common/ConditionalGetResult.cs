@@ -11,8 +11,8 @@ namespace Argotic.Common;
 ///     providing a modern wrapper around <see cref="HttpResponseMessage"/>.
 ///     </para>
 ///     <para>
-///     <b>The response size limits in <see cref="SyndicationContentLengthLimits"/> do not apply to
-///     this path, and that is deliberate.</b> Every other way this library fetches a body reads it
+///     The response size limits in <see cref="SyndicationContentLengthLimits"/> do not apply to this
+///     path, and that is deliberate. Every other way this library fetches a body reads it
 ///     into a buffer it owns and refuses one larger than the limit for the resource being loaded.
 ///     This type does not read the body at all — <c>ConditionalGetAsync</c> completes on headers, so
 ///     <see cref="GetResponseStream"/> hands out the live response stream and nothing has been
@@ -38,7 +38,7 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
     /// <summary>
     /// Initializes a new instance of the <see cref="ConditionalGetResult"/> class.
     /// </summary>
-    /// <param name="response">The HTTP response message, or null if the resource was not modified.</param>
+    /// <param name="response">The HTTP response message, or <see langword="null"/> if the resource was not modified.</param>
     /// <param name="wasModified">Indicates whether the resource was modified since the last request.</param>
     internal ConditionalGetResult(HttpResponseMessage? response, bool wasModified)
     {
@@ -73,7 +73,7 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
     ///     <see cref="Stream.Null"/>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="notModified"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="notModified"/> is <see langword="null"/>.</exception>
     internal ConditionalGetResult(HttpResponseMessage notModified)
     {
         ArgumentNullException.ThrowIfNull(notModified);
@@ -88,37 +88,51 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
     /// <summary>
     /// Gets a value indicating whether the resource was modified since the last request.
     /// </summary>
-    /// <value><b>true</b> if the resource was modified; otherwise, <b>false</b>.</value>
+    /// <value><see langword="true"/> when the origin returned a body; otherwise, <see langword="false"/>, which is what a <c>304</c> produces.</value>
     public bool WasModified { get; }
 
     /// <summary>
     /// Gets the HTTP status code of the response.
     /// </summary>
-    /// <value>The <see cref="HttpStatusCode"/> of the response, or null if no response was received.</value>
+    /// <value>The <see cref="HttpStatusCode"/> of the response, or <see langword="null"/> if no response was received.</value>
     public HttpStatusCode? StatusCode { get; }
 
     /// <summary>
     /// Gets the date and time the resource was last modified.
     /// </summary>
-    /// <value>A <see cref="DateTimeOffset"/> representing when the resource was last modified, or null if not available.</value>
+    /// <value>The origin's <c>Last-Modified</c>, or <see langword="null"/> if it sent none. Present on a <c>304</c> as well as on a <c>200</c>.</value>
     public DateTimeOffset? LastModified { get; }
 
     /// <summary>
     /// Gets the entity tag of the resource.
     /// </summary>
-    /// <value>A string representing the ETag of the resource, or null if not available.</value>
+    /// <value>
+    ///     The opaque quoted string of the entity tag — quotes included — or <see langword="null"/> if
+    ///     the origin sent none. Store it with its quotes: a tag stripped of them is not a well-formed
+    ///     entity tag, and <see cref="SyndicationValidators.ApplyTo(HttpRequestMessage)"/> refuses it.
+    /// </value>
+    /// <remarks>
+    ///     This is <see cref="System.Net.Http.Headers.EntityTagHeaderValue.Tag"/>, which does not carry
+    ///     the <c>W/</c> weakness indicator — that lives on
+    ///     <see cref="System.Net.Http.Headers.EntityTagHeaderValue.IsWeak"/>. A weak tag therefore
+    ///     round-trips as a strong one.
+    /// </remarks>
     public string? ETag { get; }
 
     /// <summary>
     /// Gets the content length of the response.
     /// </summary>
-    /// <value>The content length in bytes, or -1 if not available.</value>
+    /// <value>
+    ///     The length the origin declared, in bytes, or <c>-1</c> when it declared none — which is the
+    ///     case for every decompressed and every chunked response. It is not the number of bytes read:
+    ///     nothing has been read when this object is handed back.
+    /// </value>
     public long ContentLength { get; }
 
     /// <summary>
     /// Gets the content type of the response.
     /// </summary>
-    /// <value>A string representing the media type, or null if not available.</value>
+    /// <value>The media type alone, without any <c>charset</c> parameter, or <see langword="null"/> if the origin sent no <c>Content-Type</c>.</value>
     public string? ContentType { get; }
 
     /// <summary>

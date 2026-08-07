@@ -10,18 +10,27 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="CreativeCommonsSyndicationExtension"/> extends syndicated content to specify which <a href="http://creativecommons.org/license/">Creative Commons license</a> is applicable. 
-///         This syndication extension conforms to the <a>creativeCommons RSS Module</a> 1.0 specification, which can be found 
-///         at <a href="http://backend.userland.com/creativeCommonsRssModule">http://backend.userland.com/creativeCommonsRssModule</a>.
+///         The <c>creativeCommons</c> RSS module, defined by Userland at
+///         <a href="https://www.rssboard.org/creative-commons">https://www.rssboard.org/creative-commons</a>.
+///         The whole module is one repeatable element, <c>creativeCommons:license</c>, whose content is
+///         the URL of a licence — see
+///         <a href="https://creativecommons.org/licenses/">https://creativecommons.org/licenses/</a> for
+///         the current set. Argotic attaches the extension wherever the element appears, on a channel
+///         or on an item, and an entity may carry several.
+///     </para>
+///     <para>
+///         Like <see cref="BlogChannelSyndicationExtension"/>, this is a Userland-era module and long
+///         dormant. Read it; do not reach for it when writing something new.
+///     </para>
+///     <para>
+///         The licence is stored as a <see cref="Uri"/> parsed with
+///         <see cref="UriKind.RelativeOrAbsolute"/>, so a malformed or relative value survives a
+///         round-trip rather than being dropped. Do not assume
+///         <see cref="Uri.IsAbsoluteUri"/> before reading one.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the CreativeCommonsSyndicationExtension class.">
-///         <code 
-///             source="..\..\Argotic.Examples\\Extensions\Core\CreativeCommonsSyndicationExtensionExample.cs" 
-///             region="CreativeCommonsSyndicationExtension"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Extensions\Core\CreativeCommonsSyndicationExtensionExample.cs" language="cs" title="The following code example demonstrates the usage of the CreativeCommonsSyndicationExtension class." />
 /// </example>
 public class CreativeCommonsSyndicationExtension : SyndicationExtension, IComparable<CreativeCommonsSyndicationExtension>, IEquatable<CreativeCommonsSyndicationExtension>, IComparisonOperators
 {
@@ -36,13 +45,13 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// <summary>
     /// Gets or sets the <see cref="CreativeCommonsSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
-    /// <value>A <see cref="CreativeCommonsSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
+    /// <value>The context. Never <see langword="null"/>: one is created with the extension, and the setter rejects <see langword="null"/>.</value>
     /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity.
+    ///     The <c>Context</c> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity.
     ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that
     ///     are defined for the custom syndication extension.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public CreativeCommonsSyndicationExtensionContext Context
     {
         get;
@@ -58,8 +67,8 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
     /// </summary>
     /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -69,9 +78,9 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="CreativeCommonsSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="CreativeCommonsSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="CreativeCommonsSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="CreativeCommonsSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public override bool Load(IXPathNavigable source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -87,9 +96,9 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="CreativeCommonsSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="CreativeCommonsSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="CreativeCommonsSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="CreativeCommonsSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -101,8 +110,8 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// <summary>
     /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public override void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -160,7 +169,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// Determines whether the specified <see cref="CreativeCommonsSyndicationExtension"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="CreativeCommonsSyndicationExtension"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="CreativeCommonsSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="CreativeCommonsSyndicationExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(CreativeCommonsSyndicationExtension? other)
     {
         if (other is null)
@@ -175,7 +184,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is CreativeCommonsSyndicationExtension other && this.Equals(other);
 
     /// <summary>
@@ -203,7 +212,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(CreativeCommonsSyndicationExtension? first, CreativeCommonsSyndicationExtension? second)
     {
         if (first is null) return second is null;
@@ -215,7 +224,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(CreativeCommonsSyndicationExtension? first, CreativeCommonsSyndicationExtension? second) => !(first == second);
 
 }

@@ -290,7 +290,7 @@ internal sealed partial class LegacyParsePipeline(bool mutateRebuild)
     /// Returns the index of the first character the sanitiser would drop.
     /// </summary>
     /// <param name="content">The content to scan.</param>
-    /// <returns>The index of the first character that would be removed, or <b>-1</b> when the content is already valid.</returns>
+    /// <returns>The index of the first character that would be removed, or <c>-1</c> when the content is already valid.</returns>
     private static int IndexOfInvalidXmlCharacter(string content)
     {
         for (int i = 0; i < content.Length; i++)

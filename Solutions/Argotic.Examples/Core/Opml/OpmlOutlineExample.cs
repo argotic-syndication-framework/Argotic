@@ -3,16 +3,12 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Opml;
 
 /// <summary>
-/// Contains the code examples for the <see cref="OpmlOutline"/> class.
+/// Builds the nested <see cref="OpmlOutline"/> tree that is the whole of an OPML document's body.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="OpmlOutline"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class OpmlOutlineExample
 {
     /// <summary>
-    /// Provides example code for the OpmlOutline class.
+    /// Builds the containing <see cref="OpmlDocument"/> and prints the <see cref="OpmlOutline"/> it holds.
     /// </summary>
     public static void ClassExample()
     {

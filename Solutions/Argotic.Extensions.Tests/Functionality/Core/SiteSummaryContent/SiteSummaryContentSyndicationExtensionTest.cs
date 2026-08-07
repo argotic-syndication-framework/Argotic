@@ -7,6 +7,11 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.SiteSummaryContent;
 
+/// <summary>
+/// Covers the RSS content module, <c>http://purl.org/rss/1.0/modules/content/</c>: the
+/// <c>content:encoded</c> markup its context carries, the content items beside it, how the markup is
+/// read from an RSS 2.0 item and written back out, and its comparison, equality and ordering contracts.
+/// </summary>
 [TestClass]
 public class SiteSummaryContentSyndicationExtensionTest
 {
@@ -18,6 +23,9 @@ public class SiteSummaryContentSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor yields an instance of the content-module extension type.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentSyndicationExtensionConstructorTest()
     {
@@ -26,6 +34,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         target.ShouldBeOfType<SiteSummaryContentSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions holding identical context compare equal.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentCompareToTest()
     {
@@ -35,6 +46,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// An extension is equal to a separately constructed extension holding the same context.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentEqualsTest()
     {
@@ -44,6 +58,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Hashing a populated extension returns a non-zero value rather than throwing.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentGetHashCodeTest()
     {
@@ -54,6 +71,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// An RSS 2.0 feed whose item carries a <c>content:encoded</c> element loads without error.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentLoadTest()
     {
@@ -64,6 +84,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         feed.Load(reader);
     }
 
+    /// <summary>
+    /// Attaching the extension to an item and saving the feed produces non-empty XML.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentCreateXmlTest()
     {
@@ -72,6 +95,10 @@ public class SiteSummaryContentSyndicationExtensionTest
         actual.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// A loaded feed's single item reports that it has extensions, and the content-module one is found both
+    /// by type argument and through the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentFullTest()
     {
@@ -90,6 +117,9 @@ public class SiteSummaryContentSyndicationExtensionTest
             .ShouldBeOfType<SiteSummaryContentSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts a content-module extension.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentMatchByTypeTest()
     {
@@ -98,6 +128,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> returns a non-empty rendering of a populated extension.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentToStringTest()
     {
@@ -106,6 +139,10 @@ public class SiteSummaryContentSyndicationExtensionTest
         actual.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// <c>WriteTo</c> emits one <c>encoded</c> element in the content-module namespace, with the markup
+    /// wrapped in CDATA rather than entity-escaped.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentWriteToTest()
     {
@@ -118,6 +155,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Extensions holding different markup are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentOpEqualityTestFailure()
     {
@@ -127,6 +167,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Extensions holding the same markup are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentOpEqualityTestSuccess()
     {
@@ -136,6 +179,10 @@ public class SiteSummaryContentSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&gt;</c> yields a boolean for two differing extensions without throwing; the direction is not
+    /// asserted.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentOpGreaterThanTest()
     {
@@ -146,6 +193,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>
+    /// Extensions holding different markup are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentOpInequalityTest()
     {
@@ -155,6 +205,10 @@ public class SiteSummaryContentSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&lt;</c> yields a boolean for two differing extensions without throwing; the direction is not
+    /// asserted.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentOpLessThanTest()
     {
@@ -165,6 +219,10 @@ public class SiteSummaryContentSyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>
+    /// The context of a populated extension carries the encoded markup exactly as assigned, angle brackets
+    /// and all.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentContextTest()
     {
@@ -175,6 +233,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         context.Encoded.ShouldBe("<p>Test encoded content</p>");
     }
 
+    /// <summary>
+    /// Assigning a <see langword="null"/> context throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentContextSetterThrowsOnNull()
     {
@@ -185,6 +246,10 @@ public class SiteSummaryContentSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Context = null!);
     }
 
+    /// <summary>
+    /// An RSS 2.0 item carrying a CDATA <c>content:encoded</c> fills the context with the markup the CDATA
+    /// section wrapped, unescaped.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentRoundTripTest()
     {
@@ -203,6 +268,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         itemExtension.Context.Encoded.ShouldBe("<p>Test encoded content</p>");
     }
 
+    /// <summary>
+    /// <c>&lt;=</c> holds between two extensions holding identical context.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentOpLessThanOrEqualTest()
     {
@@ -214,6 +282,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         (first <= second).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&gt;=</c> holds between two extensions holding identical context.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentOpGreaterThanOrEqualTest()
     {
@@ -225,6 +296,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         (first >= second).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> rejects an extension from another family.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentMatchByTypeReturnsFalseForDifferentType()
     {
@@ -238,6 +312,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension is not equal to a value of an unrelated type.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentEqualsReturnsFalseForDifferentType()
     {
@@ -248,6 +325,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         target.Equals("not an extension").ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension sorts after <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentCompareToNullReturnsPositive()
     {
@@ -261,6 +341,10 @@ public class SiteSummaryContentSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// A content item added to the context keeps both its content and the format URI naming what that
+    /// content is.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentItemsPropertyTest()
     {
@@ -281,6 +365,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         ext.Context.Items[0].Format.ShouldBe(new Uri("http://www.w3.org/1999/xhtml"));
     }
 
+    /// <summary>
+    /// Two single-element sequences holding equal content items compare equal.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentCompareSequenceTest()
     {
@@ -301,6 +388,9 @@ public class SiteSummaryContentSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A longer sequence sorts after a shorter one on count alone, before any element is compared.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentCompareSequenceDifferentCountsTest()
     {
@@ -322,6 +412,10 @@ public class SiteSummaryContentSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// <c>WellFormedXmlEncoding</c> is the W3C well-formedness URI,
+    /// <c>http://www.w3.org/TR/REC-xml#dt-wellformed</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryContentItemWellFormedXmlEncodingTest()
     {

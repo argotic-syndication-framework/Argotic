@@ -6,6 +6,10 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.BasicGeocoding;
 
+/// <summary>
+/// Covers <c>BasicGeocodingSyndicationExtension</c>, the W3C Basic Geo vocabulary that locates an item
+/// with a <c>geo:lat</c> and a <c>geo:long</c> element.
+/// </summary>
 [TestClass]
 public class BasicGeocodingSyndicationExtensionTest
 {
@@ -18,6 +22,9 @@ public class BasicGeocodingSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor produces a non-null <c>BasicGeocodingSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingSyndicationExtensionConstructorTest()
     {
@@ -26,6 +33,10 @@ public class BasicGeocodingSyndicationExtensionTest
         target.ShouldBeOfType<BasicGeocodingSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions built from the same latitude and longitude compare equal, so <c>CompareTo</c>
+    /// returns <c>0</c>.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingCompareToTest()
     {
@@ -35,6 +46,10 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A decimal degree converts to the degrees-minutes-seconds spelling <c>12°34'56.78"</c>, with the
+    /// arcseconds rounded to two decimal places.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingConvertDecimalToDegreesMinutesSecondsTest()
     {
@@ -44,6 +59,10 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// The degrees-minutes-seconds spelling <c>12°34'56.78"</c> converts back to the decimal degrees it
+    /// names.
+    /// </summary>
     [TestMethod]
     public void ConvertDegreesMinutesSecondsToDecimalTest()
     {
@@ -53,6 +72,10 @@ public class BasicGeocodingSyndicationExtensionTest
         ((double)actual).ShouldBe((double)expected, 3e-6);
     }
 
+    /// <summary>
+    /// Two separately built extensions carrying the same coordinates are equal through the <c>object</c>
+    /// overload of <c>Equals</c>.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingEqualsTest()
     {
@@ -62,6 +85,9 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The hash code is stable across repeated calls, and two equal extensions agree on it.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingGetHashCodeTest()
     {
@@ -75,6 +101,10 @@ public class BasicGeocodingSyndicationExtensionTest
         target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
+    /// <summary>
+    /// Saving a feed with the extension attached writes <c>geo:lat</c> and <c>geo:long</c> as separate
+    /// elements padded to seven decimal places, with the namespace declared on the <c>rss</c> element.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingCreateXmlTest()
     {
@@ -92,6 +122,10 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// An item carrying <c>geo:lat</c> and <c>geo:long</c> is found again after the feed is parsed, by
+    /// both the generic lookup and the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingFullTest()
     {
@@ -110,6 +144,10 @@ public class BasicGeocodingSyndicationExtensionTest
             .ShouldBeOfType<BasicGeocodingSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts an <c>ISyndicationExtension</c> that is a
+    /// <c>BasicGeocodingSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingMatchByTypeTest()
     {
@@ -118,6 +156,10 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders <c>lat</c> and then <c>long</c> on separate lines, each declaring the
+    /// Basic Geo namespace as its default rather than carrying the <c>geo</c> prefix.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingToStringTest()
     {
@@ -127,6 +169,10 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// Writing to a non-indenting fragment <c>XmlWriter</c> emits the same two elements as
+    /// <c>ToString</c>, without the line breaks between them.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingWriteToTest()
     {
@@ -139,6 +185,9 @@ public class BasicGeocodingSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(nycText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Two extensions at different coordinates are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingOpEqualityTestFailure()
     {
@@ -148,6 +197,9 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions at the same coordinates are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingOpEqualityTestSuccess()
     {
@@ -157,6 +209,10 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension at latitude 40 does not sort above the one at latitude 43 — latitude is the first
+    /// member that differs between them.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingOpGreaterThanTest()
     {
@@ -166,6 +222,9 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions at different coordinates are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingOpInequalityTest()
     {
@@ -175,6 +234,9 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension at latitude 40 sorts below the one at latitude 43.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingOpLessThanTest()
     {
@@ -184,6 +246,9 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>Context</c> property hands back the latitude and longitude the extension was built from.
+    /// </summary>
     [TestMethod]
     public void BasicGeocodingContextTest()
     {
@@ -195,6 +260,11 @@ public class BasicGeocodingSyndicationExtensionTest
         context.Longitude.ShouldBe(-74m);
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the lesser: New York, at latitude 40 and
+    /// longitude -74.
+    /// </summary>
+    /// <returns>An extension whose context carries that position.</returns>
     private static BasicGeocodingSyndicationExtension CreateExtension1()
     {
         BasicGeocodingSyndicationExtension nyc = new()
@@ -208,6 +278,10 @@ public class BasicGeocodingSyndicationExtensionTest
         return nyc;
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the greater, at latitude 43 and longitude -80.
+    /// </summary>
+    /// <returns>An extension whose context carries that position.</returns>
     private static BasicGeocodingSyndicationExtension CreateExtension2()
     {
         BasicGeocodingSyndicationExtension nyc = new()
@@ -221,6 +295,10 @@ public class BasicGeocodingSyndicationExtensionTest
         return nyc;
     }
 
+    /// <summary>
+    /// Builds a context carrying latitude 40 and longitude -74, without an extension around it.
+    /// </summary>
+    /// <returns>A context carrying that position.</returns>
     public static BasicGeocodingSyndicationExtensionContext CreateContext1()
     {
         BasicGeocodingSyndicationExtensionContext nyc = new()

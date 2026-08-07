@@ -11,10 +11,12 @@ namespace Argotic.Syndication.Specialized;
 /// Represents a post attachment.
 /// </summary>
 /// <remarks>
-///     An attachment can be any document (image, video) related to a blog post.
-///     The attachment can be lazily stored as an URL or fully embedded in the body of the post by <i>base64</i> encoding.
-///     In both cases, the URL must be specified so that the implementor can figure out where to dump the attachment to.
+///     Any file a post refers to — an image, a video, a download. It travels either by reference or embedded
+///     in the document as base-64, and either way it needs a <see cref="Url"/>: that is the address the post
+///     body points at, and what an importer has to match against to rewrite the link once it has put the file
+///     somewhere of its own.
 /// </remarks>
+/// <seealso cref="BlogMLPost.Attachments"/>
 public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogMLAttachment>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
     /// <summary>
@@ -28,22 +30,23 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets content of this attachment.
     /// </summary>
-    /// <value>The content of this attachment resource.</value>
+    /// <value>The element's text — the file itself when embedded — or an <i>empty</i> string when the attachment is carried by reference.</value>
     /// <remarks>
-    ///     If <see cref="IsEmbedded"/> is <b>true</b>, the value of this property <b>must</b> be <i>base64</i> encoded.
-    ///     The attachment content <i>may</i> be an empty string if the <see cref="ExternalUri"/> or <see cref="Url"/> properties are specified.
+    ///     When <see cref="IsEmbedded"/> is <see langword="true"/> this must be base-64, and nothing here
+    ///     encodes, decodes or validates it: assigning raw bytes as text produces an attachment no importer can
+    ///     read. When the attachment is a reference, leave it empty and give <see cref="Url"/> or
+    ///     <see cref="ExternalUri"/> instead.
     /// </remarks>
     public string Content
     {
@@ -55,21 +58,21 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// <summary>
     /// Gets or sets a relative or fully qualified URL to this attachment.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a relative or fully qualified URL to this attachment resource.</value>
+    /// <value>The <c>external-uri</c> attribute — where the file should be fetched from or written to on import — or <see langword="null"/> if none was specified.</value>
     public Uri? ExternalUri { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if this attachment is embedded.
     /// </summary>
-    /// <value><b>true</b> if this attachment is embedded via <i>base64</i> encoding; Otherwise, <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Content"/> carries the file as base-64; otherwise, <see langword="false"/>, meaning the file lives at <see cref="Url"/> or <see cref="ExternalUri"/>. The default is <see langword="false"/>.</value>
     public bool IsEmbedded { get; set; }
 
     /// <summary>
     /// Gets or sets MIME content type of this attachment.
     /// </summary>
-    /// <value>The MIME content type of this attachment resource.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The <c>mime-type</c> attribute, such as <c>image/png</c>. The value is trimmed on assignment and is not validated as a media type.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string MimeType
     {
         get;
@@ -84,24 +87,28 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// <summary>
     /// Gets or sets the size of this attachment.
     /// </summary>
-    /// <value>The length of the attachment resource, in bytes. Default value is <see cref="Int64.MinValue"/>, which indicates that no size was specified.</value>
+    /// <value>The <c>size</c> attribute, in bytes. The default value is <see cref="Int64.MinValue"/>, which indicates that no size was specified.</value>
     public long Size { get; set; } = long.MinValue;
 
     /// <summary>
     /// Gets or sets the original URL of this attachment.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the original URL of this attachment.</value>
+    /// <value>The <c>url</c> attribute — where the file lived on the source blog — or <see langword="null"/> if none was specified.</value>
+    /// <remarks>
+    ///     This is the address to rewrite when importing: post bodies reference the attachment by this URL, so
+    ///     an importer that relocates the file has to substitute for it.
+    /// </remarks>
     public Uri? Url { get; set; }
 
     /// <summary>
     /// Loads this <see cref="BlogMLAttachment"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="BlogMLAttachment"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="BlogMLAttachment"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLAttachment"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -171,12 +178,12 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="BlogMLAttachment"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="BlogMLAttachment"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLAttachment"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -192,7 +199,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// Saves the current <see cref="BlogMLAttachment"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -260,7 +267,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// Determines whether the specified <see cref="BlogMLAttachment"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="BlogMLAttachment"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="BlogMLAttachment"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="BlogMLAttachment"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(BlogMLAttachment? other)
     {
         if (other is null)
@@ -275,7 +282,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is BlogMLAttachment other && this.Equals(other);
 
     /// <summary>
@@ -289,7 +296,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(BlogMLAttachment? first, BlogMLAttachment? second)
     {
         if (first is null) return second is null;
@@ -301,6 +308,6 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(BlogMLAttachment? first, BlogMLAttachment? second) => !(first == second);
 }

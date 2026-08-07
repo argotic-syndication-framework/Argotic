@@ -6,8 +6,28 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents a means of grouping of <see cref="YahooMediaContent"/> objects that are effectively the same content, yet different representations.
+/// Represents several renditions of one piece of content.
 /// </summary>
+/// <remarks>
+///     <para>
+///         <b>A <c>media:group</c> holds one piece of content, expressed several ways.</b> Its
+///         <see cref="YahooMediaContent"/> objects are alternatives — the specification's own example is one song
+///         published as both WAV and MP3 — differing in format, bitrate or language. The specification says the
+///         element must be used for nothing else.
+///     </para>
+///     <para>
+///         <b>The failure mode is duplication, and it is silent.</b> A consumer that flattens
+///         <see cref="Contents"/> into its list of media, or counts a group's contents as separate items, shows
+///         the same video once per rendition. Pick one: the rendition whose
+///         <see cref="YahooMediaContent.IsDefault"/> is <see langword="true"/>, of which the specification
+///         permits one per group, or the first, since document order is the publisher's order of presentation.
+///     </para>
+///     <para>
+///         A group carries its own copy of the shared metadata — thumbnails, ratings, credits and the rest — and
+///         those apply to every rendition in it. They are <i>not</i> copied down onto the contents;
+///         see <see cref="IYahooMediaCommonObjectEntities"/>.
+///     </para>
+/// </remarks>
 /// <seealso cref="YahooMediaContent"/>
 /// <seealso cref="IYahooMediaCommonObjectEntities"/>
 public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMediaGroup>, IYahooMediaCommonObjectEntities, IComparisonOperators
@@ -68,10 +88,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Gets a collection of media objects that are effectively the same content, yet different representations.
     /// </summary>
-    /// <value>
-    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaContent"/> objects that represent media objects that are effectively the same content, yet different representations. 
-    ///     The default value is an <i>empty</i> collection.
-    /// </value>
+    /// <value>The renditions, in the publisher's order of presentation. The default value is an <i>empty</i> collection.</value>
     public IList<YahooMediaContent> Contents
     {
         get
@@ -84,10 +101,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Gets a taxonomy that gives an indication of the type of content for this media group.
     /// </summary>
-    /// <value>
-    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this media group. 
-    ///     The default value is an <i>empty</i> collection.
-    /// </value>
+    /// <value>The categories declared on this <c>media:group</c>. The default value is an <i>empty</i> collection.</value>
     public IList<YahooMediaCategory> Categories
     {
         get
@@ -100,7 +114,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Gets or sets the copyright information for this media group.
     /// </summary>
-    /// <value>A <see cref="YahooMediaCopyright"/> that represents the copyright information for this media group.</value>
+    /// <value>The copyright information, or <see langword="null"/> if none was declared on this <c>media:group</c>.</value>
     /// <remarks>
     ///     If the media is operating under a <i>Creative Commons license</i>, a <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
     /// </remarks>
@@ -109,13 +123,10 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Gets the entities that contributed to the creation of this media group.
     /// </summary>
-    /// <value>
-    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this media group. 
-    ///     The default value is an <i>empty</i> collection.
-    /// </value>
+    /// <value>The contributing entities. The default value is an <i>empty</i> collection.</value>
     /// <remarks>
-    ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles, 
-    ///     and several entities can have the same role. These should appear as distinct <see cref="YahooMediaCredit"/> entities.
+    ///     An entity may be a person, a company or a place. One entity may hold several roles and one role may be
+    ///     held by several entities; each combination is a separate <see cref="YahooMediaCredit"/>.
     /// </remarks>
     public IList<YahooMediaCredit> Credits
     {
@@ -129,21 +140,16 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Gets or sets the description of this media group.
     /// </summary>
-    /// <value>A <see cref="YahooMediaTextConstruct"/> that represents a short description of this media group.</value>
-    /// <remarks>
-    ///     Media object descriptions are typically a sentence in length.
-    /// </remarks>
+    /// <value>A sentence or so of description, or <see langword="null"/> if none was declared on this <c>media:group</c>.</value>
     public YahooMediaTextConstruct? Description { get; set; }
 
     /// <summary>
     /// Gets the hash digests for this media group.
     /// </summary>
-    /// <value>
-    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this media group. 
-    ///     The default value is an <i>empty</i> collection.
-    /// </value>
+    /// <value>The hash digests. The default value is an <i>empty</i> collection.</value>
     /// <remarks>
-    ///     When assigning multiple hashes, each <see cref="YahooMediaHash"/> <b>must</b> have a different <see cref="YahooMediaHash.Algorithm"/>.
+    ///     The specification allows several only if each carries a different <see cref="YahooMediaHash.Algorithm"/>.
+    ///     Nothing here enforces that.
     /// </remarks>
     public IList<YahooMediaHash> Hashes
     {
@@ -157,12 +163,10 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Gets the relevant keywords that describe this media group.
     /// </summary>
-    /// <value>
-    ///     An <see cref="IList{T}"/> collection of <see cref="string"/> objects that represent the relevant keywords that describe this media group. 
-    ///     The default value is an <i>empty</i> collection.
-    /// </value>
+    /// <value>The keywords. The default value is an <i>empty</i> collection.</value>
     /// <remarks>
-    ///     Media objects are typically assigned maximum of ten keywords or phrases.
+    ///     One <c>media:keywords</c> element carries the lot, comma-separated; this collection is that list split
+    ///     apart, and is rejoined with commas on write. The specification suggests a maximum of ten.
     /// </remarks>
     public IList<string> Keywords
     {
@@ -176,19 +180,13 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Gets or sets a web browser media player console this media group can be accessed through.
     /// </summary>
-    /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this media group can be accessed through.</value>
+    /// <value>The player console, or <see langword="null"/> if none was declared on this <c>media:group</c>.</value>
     public YahooMediaPlayer? Player { get; set; }
 
     /// <summary>
     /// Gets the permissible audiences for this media group.
     /// </summary>
-    /// <value>
-    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this media group. 
-    ///     The default value is an <i>empty</i> collection.
-    /// </value>
-    /// <remarks>
-    ///     If there are no ratings specified, it can be assumed that no restrictions are necessary.
-    /// </remarks>
+    /// <value>The ratings. The default value is an <i>empty</i> collection, which means no audience restriction.</value>
     public IList<YahooMediaRating> Ratings
     {
         get
@@ -201,10 +199,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Gets the restrictions to be placed on aggregators that are rendering this media group.
     /// </summary>
-    /// <value>
-    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this media group. 
-    ///     The default value is an <i>empty</i> collection.
-    /// </value>
+    /// <value>The restrictions. The default value is an <i>empty</i> collection.</value>
     public IList<YahooMediaRestriction> Restrictions
     {
         get
@@ -217,14 +212,11 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Gets the text transcript, closed captioning, or lyrics for this media group.
     /// </summary>
-    /// <value>
-    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this media group. 
-    ///     The default value is an <i>empty</i> collection.
-    /// </value>
+    /// <value>The text fragments. The default value is an <i>empty</i> collection.</value>
     /// <remarks>
-    ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text. 
-    ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time. 
-    ///     <see cref="YahooMediaText"/> objects can have overlapping start and end times.
+    ///     Several of these together form a time series — captions, say. Grouping them by language and ordering
+    ///     them by start time is encouraged rather than required, and their time ranges are allowed to overlap,
+    ///     so a consumer must not assume either.
     /// </remarks>
     public IList<YahooMediaText> TextSeries
     {
@@ -238,12 +230,10 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Gets the representative images for this media group.
     /// </summary>
-    /// <value>
-    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this media group. 
-    ///     The default value is an <i>empty</i> collection.
-    /// </value>
+    /// <value>The thumbnails. The default value is an <i>empty</i> collection.</value>
     /// <remarks>
-    ///     If multiple thumbnails are included, and time coding is not at play, it is assumed that the images are in order of importance.
+    ///     Where several are given and none carries a <see cref="YahooMediaThumbnail.Time"/>, they are in order of
+    ///     importance, so the first is the one to show. These belong to the group, not to any one rendition in it.
     /// </remarks>
     public IList<YahooMediaThumbnail> Thumbnails
     {
@@ -257,18 +247,18 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Gets or sets the title of this media group.
     /// </summary>
-    /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of this media group.</value>
+    /// <value>The title, or <see langword="null"/> if none was declared on this <c>media:group</c>.</value>
     public YahooMediaTextConstruct? Title { get; set; }
 
     /// <summary>
     /// Loads this <see cref="YahooMediaGroup"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="YahooMediaGroup"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="YahooMediaGroup"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaGroup"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -311,7 +301,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Saves the current <see cref="YahooMediaGroup"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -331,10 +321,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaGroup"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaGroup"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -374,7 +361,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Determines whether the specified <see cref="YahooMediaGroup"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="YahooMediaGroup"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="YahooMediaGroup"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="YahooMediaGroup"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(YahooMediaGroup? other)
     {
         if (other is null)
@@ -389,7 +376,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is YahooMediaGroup other && this.Equals(other);
 
     /// <summary>
@@ -417,7 +404,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(YahooMediaGroup? first, YahooMediaGroup? second)
     {
         if (first is null) return second is null;
@@ -429,6 +416,6 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(YahooMediaGroup? first, YahooMediaGroup? second) => !(first == second);
 }

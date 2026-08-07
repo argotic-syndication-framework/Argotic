@@ -52,7 +52,7 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
     /// Gets or sets the <see cref="GeoRssSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
     /// <value>A <see cref="GeoRssSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public GeoRssSyndicationExtensionContext Context
     {
         get;
@@ -69,8 +69,8 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
     /// </summary>
     /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -80,9 +80,9 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="GeoRssSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the extension was initialized using the supplied <paramref name="source"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="GeoRssSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the extension was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public override bool Load(IXPathNavigable source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -98,9 +98,9 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="GeoRssSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the extension was initialized using the supplied <paramref name="reader"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="GeoRssSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the extension was initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -145,8 +145,8 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
     /// <summary>
     /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public override void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -198,14 +198,14 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
     /// Determines whether the specified <see cref="GeoRssSyndicationExtension"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="GeoRssSyndicationExtension"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if equal; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if equal; otherwise, <see langword="false"/>.</returns>
     public bool Equals(GeoRssSyndicationExtension? other) => other is not null && this.CompareTo(other) == 0;
 
     /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if equal; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if equal; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is GeoRssSyndicationExtension other && this.Equals(other);
 
     /// <summary>
@@ -235,7 +235,7 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(GeoRssSyndicationExtension? first, GeoRssSyndicationExtension? second)
     {
         if (first is null) return second is null;
@@ -247,6 +247,6 @@ public class GeoRssSyndicationExtension : SyndicationExtension, IComparable<GeoR
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(GeoRssSyndicationExtension? first, GeoRssSyndicationExtension? second) => !(first == second);
 }

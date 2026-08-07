@@ -7,6 +7,11 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.FeedHistory;
 
+/// <summary>
+/// Covers the Feed Paging and Archiving extension: the <c>fh:archive</c> and <c>fh:complete</c> flags,
+/// the link-relation names it maps to and from, its comparison and equality contract, and the trip an
+/// extension makes out to an RSS 2.0 item and back.
+/// </summary>
 [TestClass]
 public class FeedHistorySyndicationExtensionTest
 {
@@ -21,6 +26,7 @@ public class FeedHistorySyndicationExtensionTest
 
     #region Constructor Tests
 
+    /// <summary>The parameterless constructor yields a usable instance of the Feed History extension.</summary>
     [TestMethod]
     public void FeedHistorySyndicationExtension_DefaultConstructor_CreatesValidInstance()
     {
@@ -32,6 +38,7 @@ public class FeedHistorySyndicationExtensionTest
         target.ShouldBeOfType<FeedHistorySyndicationExtension>();
     }
 
+    /// <summary>A newly constructed extension declares the <c>fh</c> XML prefix.</summary>
     [TestMethod]
     public void FeedHistorySyndicationExtension_DefaultConstructor_SetsCorrectXmlPrefix()
     {
@@ -42,6 +49,7 @@ public class FeedHistorySyndicationExtensionTest
         target.XmlPrefix.ShouldBe("fh");
     }
 
+    /// <summary>A newly constructed extension declares the <c>http://purl.org/syndication/history/1.0</c> namespace.</summary>
     [TestMethod]
     public void FeedHistorySyndicationExtension_DefaultConstructor_SetsCorrectXmlNamespace()
     {
@@ -52,6 +60,7 @@ public class FeedHistorySyndicationExtensionTest
         target.XmlNamespace.ShouldBe("http://purl.org/syndication/history/1.0");
     }
 
+    /// <summary>A newly constructed extension reports version <c>1.0</c>.</summary>
     [TestMethod]
     public void FeedHistorySyndicationExtension_DefaultConstructor_SetsCorrectVersion()
     {
@@ -62,6 +71,7 @@ public class FeedHistorySyndicationExtensionTest
         target.Version.ShouldBe(new Version("1.0"));
     }
 
+    /// <summary>A newly constructed extension points its documentation at <c>http://www.ietf.org/rfc/rfc5005.txt</c>.</summary>
     [TestMethod]
     public void FeedHistorySyndicationExtension_DefaultConstructor_SetsCorrectDocumentation()
     {
@@ -72,6 +82,7 @@ public class FeedHistorySyndicationExtensionTest
         target.Documentation.ShouldBe(new Uri("http://www.ietf.org/rfc/rfc5005.txt"));
     }
 
+    /// <summary>A newly constructed extension names itself <c>Feed Paging and Archiving</c>.</summary>
     [TestMethod]
     public void FeedHistorySyndicationExtension_DefaultConstructor_SetsCorrectName()
     {
@@ -82,6 +93,7 @@ public class FeedHistorySyndicationExtensionTest
         target.Name.ShouldBe("Feed Paging and Archiving");
     }
 
+    /// <summary>A newly constructed extension has a context that is neither an archive nor complete, and that holds no link relations.</summary>
     [TestMethod]
     public void FeedHistorySyndicationExtension_DefaultConstructor_InitializesContextWithDefaultValues()
     {
@@ -100,6 +112,7 @@ public class FeedHistorySyndicationExtensionTest
 
     #region Context Property Tests
 
+    /// <summary>A context assigned wholesale replaces the default one, bringing its archive and complete flags with it.</summary>
     [TestMethod]
     public void Context_SetValidContext_UpdatesContext()
     {
@@ -119,6 +132,7 @@ public class FeedHistorySyndicationExtensionTest
         target.Context.IsComplete.ShouldBeTrue();
     }
 
+    /// <summary>Assigning <see langword="null"/> to the context throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void Context_SetNull_ThrowsArgumentNullException()
     {
@@ -129,6 +143,7 @@ public class FeedHistorySyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Context = null!);
     }
 
+    /// <summary>The archive flag reads back as <see langword="true"/> once set.</summary>
     [TestMethod]
     public void Context_IsArchive_CanBeSetToTrue()
     {
@@ -146,6 +161,7 @@ public class FeedHistorySyndicationExtensionTest
         target.Context.IsArchive.ShouldBeTrue();
     }
 
+    /// <summary>The archive flag can be cleared again after having been set.</summary>
     [TestMethod]
     public void Context_IsArchive_CanBeSetToFalse()
     {
@@ -162,6 +178,7 @@ public class FeedHistorySyndicationExtensionTest
         target.Context.IsArchive.ShouldBeFalse();
     }
 
+    /// <summary>The complete flag reads back as <see langword="true"/> once set.</summary>
     [TestMethod]
     public void Context_IsComplete_CanBeSetToTrue()
     {
@@ -179,6 +196,7 @@ public class FeedHistorySyndicationExtensionTest
         target.Context.IsComplete.ShouldBeTrue();
     }
 
+    /// <summary>The complete flag can be cleared again after having been set.</summary>
     [TestMethod]
     public void Context_IsComplete_CanBeSetToFalse()
     {
@@ -195,6 +213,7 @@ public class FeedHistorySyndicationExtensionTest
         target.Context.IsComplete.ShouldBeFalse();
     }
 
+    /// <summary>A link relation added to the context keeps both its relation type and its URI.</summary>
     [TestMethod]
     public void Context_Relations_CanAddRelation()
     {
@@ -211,6 +230,7 @@ public class FeedHistorySyndicationExtensionTest
         target.Context.Relations[0].Uri.ShouldBe(new Uri("http://example.com/prev"));
     }
 
+    /// <summary>The context accumulates link relations rather than replacing them, holding two after two additions.</summary>
     [TestMethod]
     public void Context_Relations_CanAddMultipleRelations()
     {
@@ -231,6 +251,10 @@ public class FeedHistorySyndicationExtensionTest
 
     #region XML Serialization Tests
 
+    /// <summary>
+    /// An extension flagged both archive and complete writes exactly an <c>archive</c> and a <c>complete</c> element, each carrying the
+    /// history namespace as its default.
+    /// </summary>
     [TestMethod]
     public void WriteTo_WithArchiveAndComplete_WritesCorrectXml()
     {
@@ -248,6 +272,7 @@ public class FeedHistorySyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>Link relations are written as <c>link</c> elements naming the relation, such as <c>prev-archive</c>, together with its URI.</summary>
     [TestMethod]
     public void WriteTo_WithRelations_WritesLinkElements()
     {
@@ -267,6 +292,7 @@ public class FeedHistorySyndicationExtensionTest
         output.ShouldContain("http://example.com/archive/prev");
     }
 
+    /// <summary>Writing to a <see langword="null"/> writer throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void WriteTo_NullWriter_ThrowsArgumentNullException()
     {
@@ -277,6 +303,7 @@ public class FeedHistorySyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.WriteTo(null!));
     }
 
+    /// <summary>The string form of an extension flagged archive and complete names both elements.</summary>
     [TestMethod]
     public void ToString_ReturnsXmlRepresentation()
     {
@@ -292,6 +319,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldContain("complete");
     }
 
+    /// <summary>Attaching the extension to a feed item and saving the feed emits both the <c>archive</c> and <c>complete</c> elements.</summary>
     [TestMethod]
     public void CreateXml_WithExtension_ProducesValidXml()
     {
@@ -311,6 +339,7 @@ public class FeedHistorySyndicationExtensionTest
 
     #region Round-trip XML Tests
 
+    /// <summary>An RSS 2.0 feed whose item carries <c>fh:archive</c> and <c>fh:complete</c> parses without error.</summary>
     [TestMethod]
     public void Load_ValidXml_ReturnsTrue()
     {
@@ -326,6 +355,7 @@ public class FeedHistorySyndicationExtensionTest
         feed.ShouldNotBeNull();
     }
 
+    /// <summary>An item carrying both <c>fh:archive</c> and <c>fh:complete</c> yields an extension with both flags set.</summary>
     [TestMethod]
     public void Load_ValidXmlWithArchiveAndComplete_ParsesCorrectly()
     {
@@ -345,6 +375,7 @@ public class FeedHistorySyndicationExtensionTest
         ext.Context.IsComplete.ShouldBeTrue();
     }
 
+    /// <summary>An item carrying only <c>fh:complete</c> yields an extension that is complete but not an archive.</summary>
     [TestMethod]
     public void Load_XmlWithoutArchive_SetsIsArchiveToFalse()
     {
@@ -364,6 +395,7 @@ public class FeedHistorySyndicationExtensionTest
         ext.Context.IsComplete.ShouldBeTrue();
     }
 
+    /// <summary>An item carrying only <c>fh:archive</c> yields an extension that is an archive but not complete.</summary>
     [TestMethod]
     public void Load_XmlWithoutComplete_SetsIsCompleteToFalse()
     {
@@ -383,6 +415,7 @@ public class FeedHistorySyndicationExtensionTest
         ext.Context.IsComplete.ShouldBeFalse();
     }
 
+    /// <summary>Saving an extension into a feed and reading that feed back preserves both the archive and complete flags.</summary>
     [TestMethod]
     public void RoundTrip_ArchiveAndComplete_PreservesValues()
     {
@@ -403,6 +436,10 @@ public class FeedHistorySyndicationExtensionTest
         loaded.Context.IsComplete.ShouldBe(original.Context.IsComplete);
     }
 
+    /// <summary>
+    /// A parsed item reports that it carries extensions, and the Feed History extension is retrievable both by generic type and through the
+    /// type predicate.
+    /// </summary>
     [TestMethod]
     public void FullTest_LoadAndFindExtension_WorksCorrectly()
     {
@@ -428,6 +465,7 @@ public class FeedHistorySyndicationExtensionTest
 
     #region MatchByType Tests
 
+    /// <summary>The type predicate accepts a Feed History extension reached through <see cref="ISyndicationExtension"/>.</summary>
     [TestMethod]
     public void MatchByType_WithMatchingExtension_ReturnsTrue()
     {
@@ -441,6 +479,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>The type predicate rejects an extension of another family, here <see cref="DublinCoreElementSetSyndicationExtension"/>.</summary>
     [TestMethod]
     public void MatchByType_WithNonMatchingExtension_ReturnsFalse()
     {
@@ -454,6 +493,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>Passing <see langword="null"/> to the type predicate throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void MatchByType_WithNullExtension_ThrowsArgumentNullException() =>
         // Act & Assert
@@ -463,6 +503,7 @@ public class FeedHistorySyndicationExtensionTest
 
     #region Comparison Operators Tests
 
+    /// <summary>Two extensions carrying the same archive and complete flags compare equal.</summary>
     [TestMethod]
     public void CompareTo_EqualExtensions_ReturnsZero()
     {
@@ -477,6 +518,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>Extensions carrying different archive and complete flags do not compare equal.</summary>
     [TestMethod]
     public void CompareTo_DifferentExtensions_ReturnsNonZero()
     {
@@ -491,6 +533,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldNotBe(0);
     }
 
+    /// <summary>An extension sorts after <see langword="null"/>, returning <c>1</c>.</summary>
     [TestMethod]
     public void CompareTo_NullObject_ReturnsOne()
     {
@@ -504,6 +547,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(1);
     }
 
+    /// <summary>An extension sorts after <see langword="null"/>, returning <c>1</c>.</summary>
     [TestMethod]
     public void CompareTo_NullReturnsPositive()
     {
@@ -517,6 +561,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>An extension equals a separately built instance carrying the same flags, compared through the <see cref="object"/> overload.</summary>
     [TestMethod]
     public void Equals_EqualExtensions_ReturnsTrue()
     {
@@ -531,6 +576,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>Extensions carrying different flags are not equal.</summary>
     [TestMethod]
     public void Equals_DifferentExtensions_ReturnsFalse()
     {
@@ -545,6 +591,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>An extension does not equal <see langword="null"/>.</summary>
     [TestMethod]
     public void Equals_NullObject_ReturnsFalse()
     {
@@ -558,6 +605,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>An extension does not equal a value of an unrelated type, such as a <see cref="string"/>.</summary>
     [TestMethod]
     public void Equals_WrongType_ReturnsFalse()
     {
@@ -572,6 +620,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>Hashing an extension flagged archive and complete yields a non-zero value.</summary>
     [TestMethod]
     public void GetHashCode_DoesNotThrow()
     {
@@ -585,6 +634,7 @@ public class FeedHistorySyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>The equality operator holds for two extensions carrying the same flags.</summary>
     [TestMethod]
     public void OperatorEquality_EqualExtensions_ReturnsTrue()
     {
@@ -599,6 +649,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>The equality operator is <see langword="false"/> for extensions carrying different flags.</summary>
     [TestMethod]
     public void OperatorEquality_DifferentExtensions_ReturnsFalse()
     {
@@ -613,6 +664,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>Two <see langword="null"/> references compare equal under the equality operator.</summary>
     [TestMethod]
     public void OperatorEquality_BothNull_ReturnsTrue()
     {
@@ -627,6 +679,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>A <see langword="null"/> left operand is not equal to a populated extension.</summary>
     [TestMethod]
     public void OperatorEquality_FirstNull_ReturnsFalse()
     {
@@ -641,6 +694,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>A populated extension is not equal to a <see langword="null"/> right operand.</summary>
     [TestMethod]
     public void OperatorEquality_SecondNull_ReturnsFalse()
     {
@@ -655,6 +709,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>The inequality operator is <see langword="false"/> for extensions carrying the same flags.</summary>
     [TestMethod]
     public void OperatorInequality_EqualExtensions_ReturnsFalse()
     {
@@ -669,6 +724,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>The inequality operator is <see langword="true"/> for extensions carrying different flags.</summary>
     [TestMethod]
     public void OperatorInequality_DifferentExtensions_ReturnsTrue()
     {
@@ -683,6 +739,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>The less-than operator evaluates on two extensions carrying different flags without throwing.</summary>
     [TestMethod]
     public void OperatorLessThan_VerifyOperatorWorks()
     {
@@ -697,6 +754,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>A <see langword="null"/> left operand sorts before a populated extension.</summary>
     [TestMethod]
     public void OperatorLessThan_FirstNull_ReturnsTrue()
     {
@@ -711,6 +769,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>A populated extension does not sort before a <see langword="null"/> right operand.</summary>
     [TestMethod]
     public void OperatorLessThan_SecondNull_ReturnsFalse()
     {
@@ -725,6 +784,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBeFalse();
     }
 
+    /// <summary>The greater-than operator evaluates on two extensions carrying different flags without throwing.</summary>
     [TestMethod]
     public void OperatorGreaterThan_VerifyOperatorWorks()
     {
@@ -739,6 +799,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>A <see langword="null"/> left operand never sorts after a populated extension.</summary>
     [TestMethod]
     public void OperatorGreaterThan_FirstNull_ReturnsFalse()
     {
@@ -753,6 +814,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBeFalse();
     }
 
+    /// <summary>Equal extensions satisfy the less-than-or-equal operator.</summary>
     [TestMethod]
     public void OperatorLessThanOrEqual_VerifyOperatorWorks()
     {
@@ -767,6 +829,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>A <see langword="null"/> left operand satisfies the less-than-or-equal operator against a populated extension.</summary>
     [TestMethod]
     public void OperatorLessThanOrEqual_FirstNull_ReturnsTrue()
     {
@@ -781,6 +844,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>Equal extensions satisfy the greater-than-or-equal operator.</summary>
     [TestMethod]
     public void OperatorGreaterThanOrEqual_VerifyOperatorWorks()
     {
@@ -795,6 +859,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>Two <see langword="null"/> references satisfy the greater-than-or-equal operator.</summary>
     [TestMethod]
     public void OperatorGreaterThanOrEqual_FirstNull_SecondNull_ReturnsTrue()
     {
@@ -809,6 +874,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>A <see langword="null"/> left operand does not satisfy the greater-than-or-equal operator against a populated extension.</summary>
     [TestMethod]
     public void OperatorGreaterThanOrEqual_FirstNull_SecondNotNull_ReturnsFalse()
     {
@@ -827,6 +893,7 @@ public class FeedHistorySyndicationExtensionTest
 
     #region FeedHistory-specific Functionality Tests
 
+    /// <summary>The <c>PreviousArchive</c> relation is spelled <c>prev-archive</c>, abbreviated where the plain <c>Previous</c> relation is not.</summary>
     [TestMethod]
     public void LinkRelationTypeAsString_PreviousArchive_ReturnsCorrectString()
     {
@@ -840,6 +907,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe("prev-archive");
     }
 
+    /// <summary>The <c>NextArchive</c> relation is spelled <c>next-archive</c>.</summary>
     [TestMethod]
     public void LinkRelationTypeAsString_NextArchive_ReturnsCorrectString()
     {
@@ -853,6 +921,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe("next-archive");
     }
 
+    /// <summary>The <c>Current</c> relation is spelled <c>current</c>.</summary>
     [TestMethod]
     public void LinkRelationTypeAsString_Current_ReturnsCorrectString()
     {
@@ -866,6 +935,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe("current");
     }
 
+    /// <summary>The <c>First</c> relation is spelled <c>first</c>.</summary>
     [TestMethod]
     public void LinkRelationTypeAsString_First_ReturnsCorrectString()
     {
@@ -879,6 +949,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe("first");
     }
 
+    /// <summary>The <c>Last</c> relation is spelled <c>last</c>.</summary>
     [TestMethod]
     public void LinkRelationTypeAsString_Last_ReturnsCorrectString()
     {
@@ -892,6 +963,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe("last");
     }
 
+    /// <summary>The <c>Next</c> relation is spelled <c>next</c>.</summary>
     [TestMethod]
     public void LinkRelationTypeAsString_Next_ReturnsCorrectString()
     {
@@ -905,6 +977,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe("next");
     }
 
+    /// <summary>The <c>Previous</c> relation is spelled <c>previous</c> in full, not abbreviated as the archive relations are.</summary>
     [TestMethod]
     public void LinkRelationTypeAsString_Previous_ReturnsCorrectString()
     {
@@ -918,6 +991,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe("previous");
     }
 
+    /// <summary>The <c>None</c> relation has no spelling and yields an empty string.</summary>
     [TestMethod]
     public void LinkRelationTypeAsString_None_ReturnsEmptyString()
     {
@@ -931,6 +1005,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe("");
     }
 
+    /// <summary>The name <c>prev-archive</c> parses to the <c>PreviousArchive</c> relation.</summary>
     [TestMethod]
     public void LinkRelationTypeByName_PrevArchive_ReturnsPreviousArchive()
     {
@@ -941,6 +1016,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(FeedHistoryLinkRelationType.PreviousArchive);
     }
 
+    /// <summary>The name <c>next-archive</c> parses to the <c>NextArchive</c> relation.</summary>
     [TestMethod]
     public void LinkRelationTypeByName_NextArchive_ReturnsNextArchive()
     {
@@ -951,6 +1027,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(FeedHistoryLinkRelationType.NextArchive);
     }
 
+    /// <summary>The name <c>current</c> parses to the <c>Current</c> relation.</summary>
     [TestMethod]
     public void LinkRelationTypeByName_Current_ReturnsCurrent()
     {
@@ -961,6 +1038,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(FeedHistoryLinkRelationType.Current);
     }
 
+    /// <summary>The name <c>first</c> parses to the <c>First</c> relation.</summary>
     [TestMethod]
     public void LinkRelationTypeByName_First_ReturnsFirst()
     {
@@ -971,6 +1049,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(FeedHistoryLinkRelationType.First);
     }
 
+    /// <summary>The name <c>last</c> parses to the <c>Last</c> relation.</summary>
     [TestMethod]
     public void LinkRelationTypeByName_Last_ReturnsLast()
     {
@@ -981,6 +1060,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(FeedHistoryLinkRelationType.Last);
     }
 
+    /// <summary>The name <c>next</c> parses to the <c>Next</c> relation.</summary>
     [TestMethod]
     public void LinkRelationTypeByName_Next_ReturnsNext()
     {
@@ -991,6 +1071,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(FeedHistoryLinkRelationType.Next);
     }
 
+    /// <summary>The name <c>previous</c> parses to the <c>Previous</c> relation.</summary>
     [TestMethod]
     public void LinkRelationTypeByName_Previous_ReturnsPrevious()
     {
@@ -1001,6 +1082,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(FeedHistoryLinkRelationType.Previous);
     }
 
+    /// <summary>An unrecognised relation name resolves to <c>None</c> rather than throwing.</summary>
     [TestMethod]
     public void LinkRelationTypeByName_UnknownName_ReturnsNone()
     {
@@ -1011,6 +1093,7 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(FeedHistoryLinkRelationType.None);
     }
 
+    /// <summary>Relation-name parsing ignores case, so <c>PREV-ARCHIVE</c> resolves as its lowercase spelling does.</summary>
     [TestMethod]
     public void LinkRelationTypeByName_CaseInsensitive_ReturnsCorrectType()
     {
@@ -1021,16 +1104,19 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(FeedHistoryLinkRelationType.PreviousArchive);
     }
 
+    /// <summary>A <see langword="null"/> relation name throws <see cref="ArgumentNullException"/> rather than resolving to <c>None</c>.</summary>
     [TestMethod]
     public void LinkRelationTypeByName_NullName_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => FeedHistorySyndicationExtension.LinkRelationTypeByName(null!));
 
+    /// <summary>An empty relation name throws <see cref="ArgumentException"/> rather than resolving to <c>None</c>.</summary>
     [TestMethod]
     public void LinkRelationTypeByName_EmptyName_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentException>(() => FeedHistorySyndicationExtension.LinkRelationTypeByName(""));
 
+    /// <summary>Two relation collections holding the same relations in the same order compare equal.</summary>
     [TestMethod]
     public void CompareSequence_EqualCollections_ReturnsZero()
     {
@@ -1053,6 +1139,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>A relation collection longer than its comparand returns <c>1</c>, element count being compared ahead of any element.</summary>
     [TestMethod]
     public void CompareSequence_SourceLarger_ReturnsPositive()
     {
@@ -1074,6 +1161,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>A relation collection shorter than its comparand returns <c>-1</c>.</summary>
     [TestMethod]
     public void CompareSequence_SourceSmaller_ReturnsNegative()
     {
@@ -1095,6 +1183,7 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBe(-1);
     }
 
+    /// <summary>Comparing a <see langword="null"/> source collection throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void CompareSequence_NullSource_ThrowsArgumentNullException()
     {
@@ -1105,6 +1194,7 @@ public class FeedHistorySyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence(null!, target));
     }
 
+    /// <summary>Comparing against a <see langword="null"/> target collection throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void CompareSequence_NullTarget_ThrowsArgumentNullException()
     {
@@ -1115,6 +1205,7 @@ public class FeedHistorySyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence(source, null!));
     }
 
+    /// <summary>Two empty relation collections compare equal.</summary>
     [TestMethod]
     public void CompareSequence_EmptyCollections_ReturnsZero()
     {
@@ -1133,6 +1224,7 @@ public class FeedHistorySyndicationExtensionTest
 
     #region Paging and Archiving Tests
 
+    /// <summary>A paged feed is expressed by carrying both a <c>Previous</c> and a <c>Next</c> link relation on one context.</summary>
     [TestMethod]
     public void PagedFeed_WithPreviousAndNextLinks_RepresentsPagedFeed()
     {
@@ -1147,6 +1239,7 @@ public class FeedHistorySyndicationExtensionTest
         ext.Context.Relations.ShouldContain(r => r.RelationType == FeedHistoryLinkRelationType.Next);
     }
 
+    /// <summary>An archived feed sets the archive flag and carries <c>Current</c> and <c>PreviousArchive</c> relations alongside it.</summary>
     [TestMethod]
     public void ArchivedFeed_WithArchiveFlag_RepresentsArchivedFeed()
     {
@@ -1167,6 +1260,7 @@ public class FeedHistorySyndicationExtensionTest
         ext.Context.Relations.ShouldContain(r => r.RelationType == FeedHistoryLinkRelationType.PreviousArchive);
     }
 
+    /// <summary>Setting the complete flag leaves the archive flag clear; the two are independent.</summary>
     [TestMethod]
     public void CompleteFeed_WithCompleteFlag_RepresentsCompleteFeed()
     {
@@ -1184,6 +1278,10 @@ public class FeedHistorySyndicationExtensionTest
         ext.Context.IsArchive.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An archive can carry <c>First</c>, <c>Last</c>, <c>PreviousArchive</c> and <c>NextArchive</c> relations at once, all four surviving
+    /// on the context.
+    /// </summary>
     [TestMethod]
     public void ArchiveNavigation_WithFirstAndLast_AllowsFullNavigation()
     {
@@ -1212,6 +1310,7 @@ public class FeedHistorySyndicationExtensionTest
 
     #region Load Tests
 
+    /// <summary>Loading from a <see langword="null"/> <c>IXPathNavigable</c> throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void Load_IXPathNavigable_NullSource_ThrowsArgumentNullException()
     {
@@ -1222,6 +1321,7 @@ public class FeedHistorySyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Load((System.Xml.XPath.IXPathNavigable)null!));
     }
 
+    /// <summary>Loading from a <see langword="null"/> <see cref="XmlReader"/> throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void Load_XmlReader_NullReader_ThrowsArgumentNullException()
     {

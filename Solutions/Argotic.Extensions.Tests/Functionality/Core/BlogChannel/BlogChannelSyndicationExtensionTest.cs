@@ -6,6 +6,10 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.BlogChannel;
 
+/// <summary>
+/// Covers <c>BlogChannelSyndicationExtension</c>, the blogChannel module that points a channel at its
+/// blogroll, its subscriptions, a promoted link and a changes feed.
+/// </summary>
 [TestClass]
 public class BlogChannelSyndicationExtensionTest
 {
@@ -23,6 +27,9 @@ public class BlogChannelSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor produces a non-null <c>BlogChannelSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void BlogChannelSyndicationExtensionConstructorTest()
     {
@@ -31,6 +38,9 @@ public class BlogChannelSyndicationExtensionTest
         target.ShouldBeOfType<BlogChannelSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions built from the same four URIs compare equal, so <c>CompareTo</c> returns <c>0</c>.
+    /// </summary>
     [TestMethod]
     public void BlogChannelCompareToTest()
     {
@@ -40,6 +50,10 @@ public class BlogChannelSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Two separately built extensions carrying the same four URIs are equal through the <c>object</c>
+    /// overload of <c>Equals</c>.
+    /// </summary>
     [TestMethod]
     public void BlogChannelEqualsTest()
     {
@@ -49,6 +63,14 @@ public class BlogChannelSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A populated extension hashes to something other than <c>0</c>.
+    /// </summary>
+    /// <remarks>
+    ///     Weaker than the contract its siblings assert — that equal objects agree on their hash code —
+    ///     and deliberately so: this pins only that hashing a populated extension completes and does not
+    ///     land on the default.
+    /// </remarks>
     [TestMethod]
     public void BlogChannelGetHashCodeTest()
     {
@@ -58,6 +80,13 @@ public class BlogChannelSyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// A feed carrying the four blogChannel elements parses without throwing.
+    /// </summary>
+    /// <remarks>
+    ///     Nothing about the parsed values is asserted here; <c>BlogChannelFullTest</c> is what checks
+    ///     that the extension was attached and <c>BlogChannelContextTest</c> what it holds.
+    /// </remarks>
     [TestMethod]
     public void BlogChannelLoadTest()
     {
@@ -68,6 +97,10 @@ public class BlogChannelSyndicationExtensionTest
         feed.Load(reader);
     }
 
+    /// <summary>
+    /// Saving a feed with the extension attached writes <c>blogRoll</c>, <c>mySubscriptions</c>,
+    /// <c>blink</c> and <c>changes</c> in that order under the <c>blogChannel</c> prefix.
+    /// </summary>
     [TestMethod]
     public void BlogChannelCreateXmlTest()
     {
@@ -78,6 +111,10 @@ public class BlogChannelSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// An item carrying the blogChannel elements is found again after the feed is parsed, by both the
+    /// generic lookup and the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void BlogChannelFullTest()
     {
@@ -96,6 +133,10 @@ public class BlogChannelSyndicationExtensionTest
             .ShouldBeOfType<BlogChannelSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts an <c>ISyndicationExtension</c> that is a
+    /// <c>BlogChannelSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void BlogChannelMatchByTypeTest()
     {
@@ -104,6 +145,10 @@ public class BlogChannelSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders the four elements one per line, each declaring the blogChannel namespace
+    /// as its default rather than carrying the prefix.
+    /// </summary>
     [TestMethod]
     public void BlogChannelToStringTest()
     {
@@ -112,6 +157,10 @@ public class BlogChannelSyndicationExtensionTest
         actual.ShouldBe(toStringText);
     }
 
+    /// <summary>
+    /// Writing to a non-indenting fragment <c>XmlWriter</c> emits the same four elements as
+    /// <c>ToString</c>, without the line breaks between them.
+    /// </summary>
     [TestMethod]
     public void BlogChannelWriteToTest()
     {
@@ -124,6 +173,9 @@ public class BlogChannelSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Two extensions pointing at different URIs are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void BlogChannelOpEqualityTestFailure()
     {
@@ -133,6 +185,9 @@ public class BlogChannelSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions pointing at the same four URIs are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void BlogChannelOpEqualityTestSuccess()
     {
@@ -142,6 +197,10 @@ public class BlogChannelSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension whose <c>blink</c> is <c>promoted</c> sorts above the one whose <c>blink</c> is
+    /// <c>other-promoted</c>, and the reverse comparison agrees.
+    /// </summary>
     [TestMethod]
     public void BlogChannelOpGreaterThanTest()
     {
@@ -153,6 +212,9 @@ public class BlogChannelSyndicationExtensionTest
         (second > first).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions pointing at different URIs are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void BlogChannelOpInequalityTest()
     {
@@ -162,6 +224,10 @@ public class BlogChannelSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&lt;</c> agrees with <c>&gt;</c>: the <c>other-promoted</c> extension is the lesser of the
+    /// two, in both directions.
+    /// </summary>
     [TestMethod]
     public void BlogChannelOpLessThanTest()
     {
@@ -171,6 +237,9 @@ public class BlogChannelSyndicationExtensionTest
         (second < first).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>Context</c> property hands back the four URIs the extension was built from.
+    /// </summary>
     [TestMethod]
     public void BlogChannelContextTest()
     {
@@ -184,6 +253,11 @@ public class BlogChannelSyndicationExtensionTest
         context.Changes.ShouldBe(new Uri("http://www.example.com/changes.xml"));
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the greater, whose <c>blink</c> is
+    /// <c>http://www.example.com/promoted</c>.
+    /// </summary>
+    /// <returns>An extension carrying all four blogChannel URIs.</returns>
     private static BlogChannelSyndicationExtension CreateExtension1()
     {
         BlogChannelSyndicationExtension ext = new()
@@ -200,6 +274,11 @@ public class BlogChannelSyndicationExtensionTest
         return ext;
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the lesser: the same four URIs, each prefixed
+    /// <c>other-</c>.
+    /// </summary>
+    /// <returns>An extension carrying all four blogChannel URIs.</returns>
     private static BlogChannelSyndicationExtension CreateExtension2()
     {
         BlogChannelSyndicationExtension ext = new()

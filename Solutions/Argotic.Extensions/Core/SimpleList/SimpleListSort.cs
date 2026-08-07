@@ -7,21 +7,22 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents information that enables the publisher to indicate to the client that the property to which it refers is one that is <i>sortable</i>, 
-/// meaning that the client should provide a user interface that allows the user to sort on that property.
+/// Declares that a property of the feed's items is one a client should offer to sort by.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         This informational entity makes reference to XML elements that are child-elements within the items of the same feed, using the supported extension mechanism of the feed format. 
-///         This entity can also be used to provide a label for the default sort that appears in the list.
+///     A pointer, not a value. <see cref="Element"/> names an element that appears inside each item of
+///     the same feed, and the client is expected to go and read it from every item to build the ordering.
 ///     </para>
 ///     <para>
-///         The value which is to be sorted <b>must be</b> the text content of the element itself (i.e. the character data contained in the element). 
-///         Values of attributes or nested elements <b>cannot</b> be used for sorting. The property referred to must have no child-elements. 
-///         In general, only one instance of a property should appear in each item. Clients are free to ignore repeated instances of properties.
+///     <b>Only an element's own text can be sorted on.</b> Attribute values and nested elements cannot,
+///     and the element referred to must have no children — so a sort declared over structured markup
+///     silently has nothing to sort by. A property should also appear at most once per item; a client is
+///     free to ignore repeats, which makes a feed that emits several an unpredictable one.
 ///     </para>
 /// </remarks>
 /// <seealso cref="SimpleListSyndicationExtensionContext.Sorting"/>
+/// <seealso cref="SimpleListGroup"/>
 public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleListSort>, IComparisonOperators
 {
     /// <summary>
@@ -46,9 +47,13 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <summary>
     /// Gets or sets the data-type of this sortable property.
     /// </summary>
-    /// <value>A <see cref="SimpleListDataType"/> enumeration value that represents the data-type of this sortable property. The default value is <see cref="SimpleListDataType.None"/>.</value>
+    /// <value>
+    ///     How the values should be compared. The default value is <see cref="SimpleListDataType.None"/>,
+    ///     which a client should read as <see cref="SimpleListDataType.Text"/>.
+    /// </value>
     /// <remarks>
-    ///     If the value of this property is <see cref="SimpleListDataType.None"/>, it <i>should</i> be assumed default data-type of this sortable property is <see cref="SimpleListDataType.Text"/>.
+    ///     The fallback is lexicographic, so leaving this unset on a numeric or date property yields an
+    ///     order that is wrong without looking wrong. Set it deliberately.
     /// </remarks>
     /// <seealso cref="DataTypeAsString(SimpleListDataType)"/>
     /// <seealso cref="DataTypeByName(string)"/>
@@ -57,10 +62,14 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <summary>
     /// Get or sets the name of this sortable property.
     /// </summary>
-    /// <value>The name of this sortable property. The default value is <see cref="String.Empty"/>.</value>
+    /// <value>
+    ///     The local name of an element carried by each item of the feed, trimmed. The default value is an
+    ///     <i>empty</i> string.
+    /// </value>
     /// <remarks>
-    ///     If this property is equal to <see cref="String.Empty"/>, it is assumed that the <see cref="Label"/> property is included
-    ///     and that this <see cref="SimpleListSort"/> refers to the default sort order.
+    ///     Left empty, this <see cref="SimpleListSort"/> describes the list's existing order rather than a
+    ///     property of it — in which case <see cref="Label"/> must be supplied, since there is no element
+    ///     name to fall back on for display.
     /// </remarks>
     public string Element
     {
@@ -71,22 +80,28 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <summary>
     /// Gets or sets a value indicating if this sortable property is the default sort order in the list.
     /// </summary>
-    /// <value><b>true</b> if this sortable property is the default sort order in the list; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
+    /// <value>
+    ///     <see langword="true"/> if the list already arrives in this order; otherwise,
+    ///     <see langword="false"/>. The default value is <see langword="false"/>.
+    /// </value>
     /// <remarks>
-    ///     The items in the list <b>must</b> be already be sorted by the element, meaning the client <b>should not</b> expect to have to resort by this field if it displaying content directly from the list.
-    ///     The client <i>should</i> respect only the first <see cref="SimpleListSort"/> that has a <see cref="IsDefault"/> property with a value of <b>true</b> that it encounters.
+    ///     It is a claim about the feed, not a request: marking a sort as the default asserts that the
+    ///     items are <i>already</i> in that order, so a client displaying them as they come needs no sort
+    ///     of its own. Marking it on a feed that is not sorted that way is a silent lie a client has no way
+    ///     to detect. Where several sorts claim it, only the first should be honoured.
     /// </remarks>
     public bool IsDefault { get; set; }
 
     /// <summary>
     /// Get or sets a human-readable name for this sortable property.
     /// </summary>
-    /// <value>A human-readable name for this sortable property. The default value is <see cref="String.Empty"/>.</value>
+    /// <value>
+    ///     The name to show a user, trimmed. The default value is an <i>empty</i> string, in which case a
+    ///     client should display <see cref="Element"/> instead.
+    /// </value>
     /// <remarks>
-    ///     <para>
-    ///         If this property is <see cref="String.Empty"/>, the client should use the value of the <see cref="Element"/> property as the human-readable name.
-    ///     </para>
-    ///     <para>The <see cref="Label"/> property is <b>required</b> if the <see cref="Element"/> property is an <i>empty string</i>.</para>
+    ///     Required when <see cref="Element"/> is empty, because then there is nothing else to display.
+    ///     Neither the setter nor <see cref="WriteTo"/> enforces that pairing.
     /// </remarks>
     public string Label
     {
@@ -97,9 +112,13 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <summary>
     /// Gets or sets the full namespace identifier used to qualify this <see cref="Element"/>.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the full namespace identifier used to qualify this <see cref="Element"/> property. The default value is <b>null</b>.</value>
+    /// <value>
+    ///     The namespace URI that qualifies <see cref="Element"/>, or <see langword="null"/> if the element
+    ///     is unqualified. The default value is <see langword="null"/>.
+    /// </value>
     /// <remarks>
-    ///     If the value of this property is <b>null</b>, it is assumed that the <see cref="Element"/> does not live in a namespace.
+    ///     Without it, <see cref="Element"/> is just a local name, and two extensions using the same local
+    ///     name in different namespaces are indistinguishable to a client resolving the reference.
     /// </remarks>
     public Uri? Namespace { get; set; }
 
@@ -107,17 +126,24 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// Returns the data type identifier for the supplied <see cref="SimpleListDataType"/>.
     /// </summary>
     /// <param name="type">The <see cref="SimpleListDataType"/> to get the data type identifier for.</param>
-    /// <returns>The data type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>
+    ///     The identifier written to the <c>data-type</c> attribute — <c>date</c>, <c>number</c> or
+    ///     <c>text</c> — or an <i>empty</i> string for <see cref="SimpleListDataType.None"/> and any
+    ///     unrecognised value.
+    /// </returns>
     public static string DataTypeAsString(SimpleListDataType type) => DataTypeToStringMapping.GetValueOrDefault(type, string.Empty);
 
     /// <summary>
     /// Returns the <see cref="SimpleListDataType"/> enumeration value that corresponds to the specified data type name.
     /// </summary>
     /// <param name="name">The name of the data type.</param>
-    /// <returns>A <see cref="SimpleListDataType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>SimpleListDataType.None</b>.</returns>
+    /// <returns>
+    ///     The matching <see cref="SimpleListDataType"/>, or <see cref="SimpleListDataType.None"/> if the
+    ///     name is not one the specification defines.
+    /// </returns>
     /// <remarks>This method disregards case of specified data type name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
     public static SimpleListDataType DataTypeByName(string name)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
@@ -129,11 +155,11 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// Loads this <see cref="SimpleListSort"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="SimpleListSort"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="SimpleListSort"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="SimpleListSort"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -199,7 +225,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// Saves the current <see cref="SimpleListSort"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -237,10 +263,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SimpleListSort"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SimpleListSort"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -282,7 +305,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// Determines whether the specified <see cref="SimpleListSort"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SimpleListSort"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SimpleListSort"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SimpleListSort"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SimpleListSort? other)
     {
         if (other is null)
@@ -297,7 +320,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SimpleListSort other && this.Equals(other);
 
     /// <summary>
@@ -311,7 +334,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(SimpleListSort? first, SimpleListSort? second)
     {
         if (first is null) return second is null;
@@ -323,7 +346,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(SimpleListSort? first, SimpleListSort? second) => !(first == second);
 
 }

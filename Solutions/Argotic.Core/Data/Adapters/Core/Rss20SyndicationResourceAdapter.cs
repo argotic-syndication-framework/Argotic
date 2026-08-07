@@ -12,11 +12,22 @@ namespace Argotic.Data.Adapters;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="Rss20SyndicationResourceAdapter"/> serves as a bridge between a <see cref="RssFeed"/> and an XML data source.
-///         The <see cref="Rss20SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(RssFeed)"/>, which changes the data
-///         in the <see cref="RssFeed"/> to match the data in the data source.
+///     Alone among the RSS adapters, this one parses nothing. It locates <c>/rss/channel</c> and hands that
+///     subtree to <see cref="RssChannel.Load(XPathNavigator, SyndicationResourceLoadSettings)"/>; the whole
+///     element walk, including items, lives in <see cref="RssChannel"/>. The 0.91 and 0.92 adapters walk the
+///     elements inline instead, so a change to RSS 2.0 parsing belongs in <see cref="RssChannel"/> and a
+///     change to legacy parsing belongs in the adapters — they are not one code path with version flags.
 ///     </para>
-///     <para>This syndication resource adapter is designed to fill <see cref="RssFeed"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSS 2.0 specification.</para>
+///     <para>
+///     RSS 2.0 elements bear no namespace, and the selectors here match only the no-namespace partition.
+///     A feed that qualifies <c>rss</c> or <c>channel</c> with a namespace is not read.
+///     </para>
+///     <para>
+///     A document with no <c>rss</c> child leaves the feed untouched and raises nothing — unlike the Atom
+///     adapters, which throw <see cref="FormatException"/> when the expected root is absent. By the time
+///     this runs, <see cref="SyndicationResourceAdapter"/> has already established that the document is
+///     RSS 2.0, so the silent arm is unreachable through the normal load path.
+///     </para>
 /// </remarks>
 public class Rss20SyndicationResourceAdapter : SyndicationResourceAdapter
 {
@@ -28,17 +39,25 @@ public class Rss20SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <remarks>
     ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="RssFeed"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public Rss20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
     /// <summary>
-    /// Modifies the <see cref="RssFeed"/> to match the data source.
+    /// Loads the channel from <c>/rss/channel</c> and attaches the feed-level syndication extensions found on <c>rss</c>.
     /// </summary>
     /// <param name="resource">The <see cref="RssFeed"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     Extension probing happens at every level, not just this one: this call probes <c>rss</c> for the
+    ///     feed, and <see cref="RssChannel"/> probes <c>channel</c>, every item, and every nested construct
+    ///     for theirs. The probe's first test is whether the extension's namespace is in scope, and a feed
+    ///     declares its namespaces once on <c>rss</c>, where they are in scope everywhere — so the probe
+    ///     passes at every level and it is the extension's own <c>Load</c> that decides whether anything is
+    ///     attached. That is why extension handling, not the object model, dominates the cost of a parse.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(RssFeed resource)
     {
         ArgumentNullException.ThrowIfNull(resource);

@@ -10,6 +10,25 @@ namespace Argotic.Data.Adapters;
 /// <summary>
 /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="ISyndicationResource"/>.
 /// </summary>
+/// <remarks>
+///     <para>
+///     This is the dispatcher, not a parser. <see cref="Fill(ISyndicationResource, SyndicationContentFormat)"/>
+///     sniffs the document with <see cref="SyndicationResourceMetadata"/>, refuses it when the format found is
+///     not the format the caller's resource type reads, and then hands the same navigator to the adapter for
+///     that format <i>and that version</i>. Every element walk happens in the derived adapter.
+///     </para>
+///     <para>
+///     Version routing is a chain of equality tests with no fallback arm, and that is observable behaviour:
+///     a document whose format matches but whose version no adapter claims — RSS 0.93, say, or APML 0.5 —
+///     fills nothing and raises nothing. The caller is handed an empty resource with no diagnostic.
+///     </para>
+///     <para>
+///     Two of the routes are deliberately many-to-one. OPML 1.0, 1.1 and 2.0 all reach
+///     <see cref="Opml20SyndicationResourceAdapter"/>, because the head/body shape did not change across
+///     them; an Atom feed document and a stand-alone Atom entry document both reach the adapter for their
+///     version, which then picks the overload by the resource's runtime type.
+///     </para>
+/// </remarks>
 public class SyndicationResourceAdapter
 {
 
@@ -18,8 +37,8 @@ public class SyndicationResourceAdapter
     /// </summary>
     /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the syndication resource information.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="ISyndicationResource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(navigator);
@@ -32,21 +51,25 @@ public class SyndicationResourceAdapter
     /// <summary>
     /// Gets the <see cref="XPathNavigator"/> used to fill a syndication resource.
     /// </summary>
-    /// <value>The <see cref="XPathNavigator"/> used to fill a syndication resource.</value>
+    /// <value>The navigator supplied to the constructor. Derived adapters expect it to be positioned on the document root, not on the format's root element.</value>
     public XPathNavigator Navigator { get; }
 
     /// <summary>
     /// Gets the <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of a syndication resource.
     /// </summary>
-    /// <value>The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of a syndication resource.</value>
     public SyndicationResourceLoadSettings Settings { get; } = new();
 
     /// <summary>
-    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// Verifies that the data source is the format the caller expects, then routes it to the adapter for that format and version.
     /// </summary>
     /// <param name="resource">The <see cref="ISyndicationResource"/> to be filled.</param>
     /// <param name="format">The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that the <paramref name="resource"/> is expected to conform to.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     The format check is the only validation performed here. Once past it, whether anything is read
+    ///     depends on the document's version matching one the routing recognises; an unrecognised version
+    ///     leaves <paramref name="resource"/> untouched and reports nothing.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="format"/> is equal to <see cref="SyndicationContentFormat.None"/>.</exception>
     /// <exception cref="FormatException">The <paramref name="resource"/> data does not conform to the specified <paramref name="format"/>.</exception>
     public void Fill(ISyndicationResource resource, SyndicationContentFormat format)
@@ -132,12 +155,12 @@ public class SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// Routes an Attention Profiling Markup Language (APML) document to <see cref="Apml06SyndicationResourceAdapter"/>.
     /// </summary>
     /// <param name="resource">The Attention Profiling Markup Language (APML) <see cref="ISyndicationResource"/> to be filled.</param>
     /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
     private void FillApmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -153,12 +176,17 @@ public class SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// Routes an Atom document to <see cref="Atom10SyndicationResourceAdapter"/> or <see cref="Atom03SyndicationResourceAdapter"/>, and to the feed or entry overload by the resource's runtime type.
     /// </summary>
     /// <param name="resource">The Atom <see cref="ISyndicationResource"/> to be filled.</param>
     /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
+    /// <remarks>
+    ///     Atom 1.0 and Atom 0.3 are not two versions of one grammar; they are different formats sharing a
+    ///     name, with different namespaces and different element vocabularies. That is why the version test
+    ///     selects between two whole adapters rather than a flag inside one.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
     private void FillAtomResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -196,18 +224,18 @@ public class SyndicationResourceAdapter
     /// </summary>
     /// <param name="expected">The format the resource type reads.</param>
     /// <param name="detected">The format the supplied document actually is.</param>
-    /// <returns><b>true</b> if the two are Atom's two document shapes; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the two are Atom's two document shapes; otherwise, <see langword="false"/>.</returns>
     private static bool IsAtomShapeMismatch(SyndicationContentFormat expected, SyndicationContentFormat detected) =>
         (expected == SyndicationContentFormat.Atom && detected == SyndicationContentFormat.AtomEntryDocument)
         || (expected == SyndicationContentFormat.AtomEntryDocument && detected == SyndicationContentFormat.Atom);
 
     /// <summary>
-    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// Routes an Atom Publishing Protocol service or category document to <see cref="AtomPublishing10SyndicationResourceAdapter"/>.
     /// </summary>
     /// <param name="resource">The Atom Publishing Protocol <see cref="ISyndicationResource"/> to be filled.</param>
     /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
     private void FillAtomPublishingResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -228,12 +256,12 @@ public class SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// Routes a BlogML document to <see cref="BlogML20SyndicationResourceAdapter"/>.
     /// </summary>
     /// <param name="resource">The BlogML <see cref="ISyndicationResource"/> to be filled.</param>
     /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
     private void FillBlogMLResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -249,12 +277,17 @@ public class SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// Routes an Outline Processor Markup Language (OPML) document of version 1.0, 1.1 or 2.0 to <see cref="Opml20SyndicationResourceAdapter"/>.
     /// </summary>
     /// <param name="resource">The Outline Processor Markup Language (OPML) <see cref="ISyndicationResource"/> to be filled.</param>
     /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
+    /// <remarks>
+    ///     Three arms, one destination. The head/body/outline shape is common to all three OPML versions,
+    ///     so the version is used only to decide that the document is OPML at all. The arms are kept apart
+    ///     rather than collapsed because a version-specific adapter would slot into one of them.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
     private void FillOpmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -280,12 +313,12 @@ public class SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// Routes a Really Simple Discovery (RSD) document to <see cref="Rsd10SyndicationResourceAdapter"/> or <see cref="Rsd06SyndicationResourceAdapter"/>.
     /// </summary>
     /// <param name="resource">The Really Simple Discovery (RSD) <see cref="ISyndicationResource"/> to be filled.</param>
     /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
     private void FillRsdResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -307,12 +340,18 @@ public class SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// Routes a Really Simple Syndication (RSS) feed to the adapter for its version, of which there are five.
     /// </summary>
     /// <param name="resource">The Really Simple Syndication (RSS) <see cref="ISyndicationResource"/> to be filled.</param>
     /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
+    /// <remarks>
+    ///     The five destinations do not form a version ladder. RSS 0.90 and RSS 1.0 are RDF documents rooted
+    ///     at <c>rdf:RDF</c>, in unrelated namespaces; RSS 0.91, 0.92 and 2.0 are plain XML rooted at
+    ///     <c>rss</c> with no namespace at all. They share a name and a target object model, and almost
+    ///     nothing else, which is why the adapters share no parsing code.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
     private void FillRssResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -352,12 +391,12 @@ public class SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// Routes a Sitemap document to <see cref="Sitemap09SyndicationResourceAdapter"/>.
     /// </summary>
     /// <param name="resource">The Sitemap <see cref="ISyndicationResource"/> to be filled.</param>
     /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
     private void FillSitemapResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -373,12 +412,12 @@ public class SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// Routes a Sitemap index document to the <see cref="SitemapIndex"/> overload of <see cref="Sitemap09SyndicationResourceAdapter"/>.
     /// </summary>
     /// <param name="resource">The Sitemap Index <see cref="ISyndicationResource"/> to be filled.</param>
     /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
     private void FillSitemapIndexResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
         ArgumentNullException.ThrowIfNull(resource);

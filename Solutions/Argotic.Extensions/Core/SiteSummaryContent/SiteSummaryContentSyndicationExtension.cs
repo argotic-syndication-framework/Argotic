@@ -6,21 +6,32 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Extends syndication specifications to provide a means of describing content, including its format and encoding.
+/// Extends syndication specifications to carry an item's full content, rather than a summary of it.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="SiteSummaryContentSyndicationExtension"/> extends syndicated content to specify the actual content of websites, in multiple formats. This syndication extension conforms to the
-///         <b>RDF Site Summary 1.0 Modules: Content</b> 1.0 specification, which can be found at <a href="http://web.resource.org/rss/1.0/modules/content/">http://web.resource.org/rss/1.0/modules/content/</a>.
+///     The RDF Site Summary 1.0 Content module, specified at
+///     <a href="https://web.resource.org/rss/1.0/modules/content/">https://web.resource.org/rss/1.0/modules/content/</a>.
+///     Of the three RSS 1.0 modules in this library it is by far the most alive: <c>content:encoded</c>
+///     is where WordPress and most other publishing systems put the full HTML of a post, and a consumer
+///     that reads only RSS's own <c>description</c> will get a truncated excerpt from feeds that have the
+///     whole article sitting in this element.
+///     </para>
+///     <para>
+///     <b>The module has two syntaxes and only one of them survived.</b>
+///     <see cref="SiteSummaryContentSyndicationExtensionContext.Encoded"/> is the one publishers use; the
+///     RDF-flavoured <see cref="SiteSummaryContentSyndicationExtensionContext.Items"/> collection, which
+///     modelled several encodings of the same content, is essentially unseen in the wild. Both are read
+///     and written here, because a parser has no say in what arrives.
+///     </para>
+///     <para>
+///     Note the split between the documentation URL and the namespace: the module is described at
+///     <c>web.resource.org</c> but its elements are qualified with
+///     <c>http://purl.org/rss/1.0/modules/content/</c>. Matching on the former finds nothing.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the SiteSummaryContentSyndicationExtension class.">
-///         <code
-///             source="..\..\Argotic.Examples\\Extensions\Core\SiteSummaryContentSyndicationExtensionExample.cs"
-///             region="SiteSummaryContentSyndicationExtension"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Extensions\Core\SiteSummaryContentSyndicationExtensionExample.cs" language="cs" title="The following code example demonstrates the usage of the SiteSummaryContentSyndicationExtension class." />
 /// </example>
 public class SiteSummaryContentSyndicationExtension : SyndicationExtension, IComparable<SiteSummaryContentSyndicationExtension>, IEquatable<SiteSummaryContentSyndicationExtension>, IComparisonOperators
 {
@@ -37,12 +48,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// Gets or sets the <see cref="SiteSummaryContentSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
     /// <value>A <see cref="SiteSummaryContentSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
-    /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
-    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
-    ///     are defined for the custom syndication extension.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public SiteSummaryContentSyndicationExtensionContext Context
     {
         get;
@@ -59,8 +65,8 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
     /// </summary>
     /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -70,9 +76,9 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="SiteSummaryContentSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="SiteSummaryContentSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="SiteSummaryContentSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="SiteSummaryContentSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public override bool Load(IXPathNavigable source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -88,9 +94,9 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="SiteSummaryContentSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="SiteSummaryContentSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="SiteSummaryContentSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="SiteSummaryContentSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -102,8 +108,8 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// <summary>
     /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public override void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -113,10 +119,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SiteSummaryContentSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SiteSummaryContentSyndicationExtension"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -155,7 +158,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// Determines whether the specified <see cref="SiteSummaryContentSyndicationExtension"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SiteSummaryContentSyndicationExtension"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SiteSummaryContentSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SiteSummaryContentSyndicationExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SiteSummaryContentSyndicationExtension? other)
     {
         if (other is null)
@@ -170,7 +173,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SiteSummaryContentSyndicationExtension other && this.Equals(other);
 
     /// <summary>
@@ -193,7 +196,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(SiteSummaryContentSyndicationExtension? first, SiteSummaryContentSyndicationExtension? second)
     {
         if (first is null) return second is null;
@@ -205,7 +208,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(SiteSummaryContentSyndicationExtension? first, SiteSummaryContentSyndicationExtension? second) => !(first == second);
 
 }

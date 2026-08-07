@@ -9,13 +9,15 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents information that describes a web log entry.
 /// </summary>
+/// <remarks>
+///     One post and everything hanging off it — its body, comments, trackbacks and attachments — which is
+///     what makes a <see cref="BlogMLDocument"/> a complete backup rather than a feed. Its authors and
+///     categories, by contrast, are stored as identifier references into the document's tables rather than
+///     inline.
+/// </remarks>
+/// <seealso cref="BlogMLDocument.Posts"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the BlogMLPost class.">
-///         <code 
-///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs" 
-///             region="BlogMLPost" 
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs" language="cs" title="The following code example demonstrates the usage of the BlogMLPost class." />
 /// </example>
 public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatable<BlogMLPost>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
@@ -31,8 +33,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Gets or sets the approval status of this web log entity.
     /// </summary>
     /// <value>
-    ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available.
-    ///     The default value is <see cref="BlogMLApprovalStatus.None"/>, which indicates that no approval status information was specified.
+    ///     The <c>approved</c> attribute, read and written as <c>true</c> or <c>false</c>.
+    ///     The default value is <see cref="BlogMLApprovalStatus.None"/>, which indicates that no approval status information was specified, and suppresses the attribute on save.
     /// </value>
     public BlogMLApprovalStatus ApprovalStatus { get; set; } = BlogMLApprovalStatus.None;
 
@@ -40,18 +42,22 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Gets or sets a date-time indicating when this web log entity was created.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates an instant in time associated with an event early in the life cycle of this web log entity.
-    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided.
+    ///     The <c>date-created</c> attribute.
+    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided, and suppresses the attribute on save.
     /// </value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     Supply this in Coordinated Universal Time; BlogML dates are written as RFC 3339. A value that is not
+    ///     RFC 3339 is retried under the invariant culture, which is how exports from engines that emitted
+    ///     ordinary .NET date strings still load. That retry does not adjust to universal time, so a
+    ///     non-conforming value carrying an offset comes back converted to the reading machine's local time —
+    ///     invisible on a UTC host, wrong everywhere else.
     /// </remarks>
     public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the unique identifier of this web log entity.
     /// </summary>
-    /// <value>An identification string for this web log entity. The default value is an <b>empty</b> string, which indicated that no identifier was specified.</value>
+    /// <value>An identification string for this web log entity, or an <i>empty</i> string if none was specified.</value>
     public string Id
     {
         get;
@@ -63,19 +69,19 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Gets or sets a date-time indicating when this web log entity was last modified.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant.
-    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no modification date-time was provided.
+    ///     The <c>date-modified</c> attribute — the last change the publisher considered significant.
+    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no modification date-time was provided, and suppresses the attribute on save.
     /// </value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     Supply this in Coordinated Universal Time; the parsing caveat on <c>date-created</c> applies here too.
     /// </remarks>
     public DateTime LastModifiedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the title of this web log entity.
     /// </summary>
-    /// <value>A <see cref="BlogMLTextConstruct"/> object that represents the title of this web log entity.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>title</c> element. Never <see langword="null"/> — a new instance starts with an empty text construct, and the setter rejects null.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public BlogMLTextConstruct Title
     {
         get;
@@ -90,50 +96,59 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets the attachments for this post.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="BlogMLAttachment"/> objects that represent the attachments for this post.</value>
+    /// <remarks>
+    ///     Files that belong to the post — images, media — either referenced by URL or carried inline as
+    ///     base-64. Inline attachments are what make a BlogML export self-contained, and what make it large.
+    /// </remarks>
     public IList<BlogMLAttachment> Attachments { get; } = [];
 
     /// <summary>
     /// Gets the authors of this post.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of strings that represent references to the authors of this post.</value>
+    /// <value><see cref="BlogMLAuthor.Id"/> strings, not author objects.</value>
     /// <remarks>
-    ///     The authors referenced by this collection <i>should</i> be located in the post's parent document <see cref="BlogMLDocument.Authors"/> collection.
+    ///     These are references into <see cref="BlogMLDocument.Authors"/>, resolved by the caller. Nothing
+    ///     checks that a referenced author exists in the parent document, and a post can be moved between
+    ///     documents leaving the references dangling.
     /// </remarks>
     public IList<string> Authors { get; } = [];
 
     /// <summary>
     /// Gets the categories for this post.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of strings that represent references to the categories for this post.</value>
+    /// <value><see cref="BlogMLCategory.Id"/> strings, not category objects.</value>
     /// <remarks>
-    ///     The categories referenced by this collection <i>should</i> be located in the post's parent document <see cref="BlogMLDocument.Categories"/> collection.
+    ///     References into <see cref="BlogMLDocument.Categories"/>, on the same terms as
+    ///     <see cref="Authors"/> and with the same absence of checking.
     /// </remarks>
     public IList<string> Categories { get; } = [];
 
     /// <summary>
     /// Gets the comments for this post.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="BlogMLComment"/> objects that represent the comments for this post.</value>
+    /// <remarks>
+    ///     Comments are stored in full inside the post, not referenced. A comment carries its own
+    ///     <see cref="BlogMLComment.ApprovalStatus"/>, so an export includes the moderation queue as well as
+    ///     what was published.
+    /// </remarks>
     public IList<BlogMLComment> Comments { get; } = [];
 
     /// <summary>
     /// Gets or sets the content of this post.
     /// </summary>
-    /// <value>A <see cref="BlogMLTextConstruct"/> that represents the content of this post.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>content</c> element — the post body. Never <see langword="null"/> — a new post starts with an empty text construct, and the setter rejects null.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public BlogMLTextConstruct Content
     {
         get;
@@ -148,46 +163,58 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <summary>
     /// Gets or sets the excerpt of this post.
     /// </summary>
-    /// <value>A <see cref="BlogMLTextConstruct"/> that represents an excerpt of this post.</value>
+    /// <value>The <c>excerpt</c> element, or <see langword="null"/> if the post has none.</value>
     public BlogMLTextConstruct? Excerpt { get; set; }
 
     /// <summary>
     /// Gets a value indicating if this post has an excerpt.
     /// </summary>
-    /// <value><b>true</b> if this post's <see cref="Excerpt"/> is not null; Otherwise, <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Excerpt"/> is not <see langword="null"/>; otherwise, <see langword="false"/>.</value>
+    /// <remarks>
+    ///     This is what the post's <c>hasexcerpt</c> attribute is written from, and it is written on every
+    ///     save, whether or not the post has one.
+    /// </remarks>
     public bool HasExcerpt => this.Excerpt is not null;
 
     /// <summary>
     /// Gets or sets the name of this post.
     /// </summary>
-    /// <value>A <see cref="BlogMLTextConstruct"/> that represents the name of this post.</value>
+    /// <value>The <c>post-name</c> element — the URL slug, as against the display <c>title</c> — or <see langword="null"/> if none was specified.</value>
     public BlogMLTextConstruct? Name { get; set; }
 
     /// <summary>
     /// Gets or sets the type of web log entry this post represents.
     /// </summary>
     /// <value>
-    ///     An <see cref="BlogMLPostType"/> enumeration value that represents the type of web log entry this post represents.
-    ///     The default value is <see cref="BlogMLPostType.None"/>.
+    ///     The <c>type</c> attribute, distinguishing a standing page (<see cref="BlogMLPostType.Article"/>)
+    ///     from a dated entry (<see cref="BlogMLPostType.Normal"/>).
+    ///     The default value is <see cref="BlogMLPostType.None"/>, which suppresses the attribute on save.
     /// </value>
     public BlogMLPostType PostType { get; set; } = BlogMLPostType.None;
 
     /// <summary>
     /// Gets the trackbacks for this post.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="BlogMLTrackback"/> objects that represent the trackbacks for this post.</value>
+    /// <remarks>
+    ///     Inbound links recorded by the trackback protocol, stored in full inside the post. Like comments,
+    ///     each carries its own approval status.
+    /// </remarks>
     public IList<BlogMLTrackback> Trackbacks { get; } = [];
 
     /// <summary>
     /// Gets or sets the URL of this post.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of this post.</value>
+    /// <value>The <c>post-url</c> attribute, which may be relative to <see cref="BlogMLDocument.RootUrl"/>, or <see langword="null"/> if none was specified.</value>
     public Uri? Url { get; set; }
 
     /// <summary>
     /// Gets or sets the views of this post.
     /// </summary>
-    /// <value>The views of this post.</value>
+    /// <value>The <c>views</c> attribute — a view count — or an <i>empty</i> string if none was specified.</value>
+    /// <remarks>
+    ///     A string rather than a number, because the attribute is not constrained to one and engines have put
+    ///     other things in it. Parse it yourself, and be ready for it not to parse.
+    /// </remarks>
     public string Views
     {
         get;
@@ -199,14 +226,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Returns the post type identifier for the supplied <see cref="BlogMLPostType"/>.
     /// </summary>
     /// <param name="type">The <see cref="BlogMLPostType"/> to get the post type identifier for.</param>
-    /// <returns>The post type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The identifier written to the <c>type</c> attribute, such as <c>article</c>; an <i>empty</i> string for <see cref="BlogMLPostType.None"/> or an undefined value.</returns>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the PostTypeAsString method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs"
-    ///             region="PostTypeAsString(BlogMLPostType type)"
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs" language="cs" title="The following code example demonstrates the usage of the PostTypeAsString method." />
     /// </example>
     public static string PostTypeAsString(BlogMLPostType type) =>
         EnumerationMetadataAttribute.GetAlternateValue(type);
@@ -214,18 +236,11 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <summary>
     /// Returns the <see cref="BlogMLPostType"/> enumeration value that corresponds to the specified post type name.
     /// </summary>
-    /// <param name="name">The name of the post type.</param>
-    /// <returns>A <see cref="BlogMLPostType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>BlogMLPostType.None</b>.</returns>
-    /// <remarks>This method disregards case of specified post type name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <param name="name">The name of the post type, as it appears in the <c>type</c> attribute.</param>
+    /// <returns>The matching <see cref="BlogMLPostType"/>, or <see cref="BlogMLPostType.None"/> if <paramref name="name"/> matches nothing.</returns>
+    /// <remarks>The comparison disregards case. An unrecognised name is not an error and is not preserved: it becomes <see cref="BlogMLPostType.None"/> and is dropped on save.</remarks>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the PostTypeByName method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs"
-    ///             region="PostTypeByName(string name)"
-    ///         />
-    ///     </code>
+    ///     <code source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs" language="cs" title="The following code example demonstrates the usage of the PostTypeByName method." />
     /// </example>
     public static BlogMLPostType PostTypeByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, BlogMLPostType.None);
@@ -234,11 +249,11 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Loads this <see cref="BlogMLPost"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="BlogMLPost"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="BlogMLPost"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLPost"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -326,16 +341,16 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     }
 
     /// <summary>
-    /// Loads this <see cref="ApmlApplication"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
+    /// Loads this <see cref="BlogMLPost"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="ApmlApplication"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="BlogMLPost"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ApmlApplication"/>.
+    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLPost"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -429,7 +444,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Saves the current <see cref="BlogMLPost"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -525,12 +540,13 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <param name="post">The <see cref="BlogMLPost"/> to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
+    /// <returns><see langword="true"/> if at least one category, comment, trackback, attachment or author reference was read; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLPost"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="post"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="post"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     private static bool FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -648,13 +664,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
+    /// <returns><see langword="true"/> if at least one category, comment, trackback, attachment or author reference was read; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLPost"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="post"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="post"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static bool FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -825,7 +842,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Determines whether the specified <see cref="BlogMLPost"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="BlogMLPost"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="BlogMLPost"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="BlogMLPost"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(BlogMLPost? other)
     {
         if (other is null)
@@ -840,7 +857,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is BlogMLPost other && this.Equals(other);
 
     /// <summary>
@@ -854,7 +871,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(BlogMLPost? first, BlogMLPost? second)
     {
         if (first is null) return second is null;
@@ -866,7 +883,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(BlogMLPost? first, BlogMLPost? second) => !(first == second);
 
 }

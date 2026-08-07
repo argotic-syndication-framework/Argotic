@@ -6,6 +6,10 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Pheed;
 
+/// <summary>
+/// Covers <c>PheedSyndicationExtension</c>, the Pheed photo module that pairs a full-size
+/// <c>photo:imgsrc</c> with a <c>photo:thumbnail</c>.
+/// </summary>
 [TestClass]
 public class PheedSyndicationExtensionTest
 {
@@ -18,6 +22,9 @@ public class PheedSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor produces a non-null <c>PheedSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void PheedSyndicationExtensionConstructorTest()
     {
@@ -26,6 +33,10 @@ public class PheedSyndicationExtensionTest
         target.ShouldBeOfType<PheedSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions built from the same source and thumbnail compare equal, so <c>CompareTo</c>
+    /// returns <c>0</c>.
+    /// </summary>
     [TestMethod]
     public void PheedCompareToTest()
     {
@@ -35,6 +46,10 @@ public class PheedSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Two separately built extensions carrying the same two URIs are equal through the <c>object</c>
+    /// overload of <c>Equals</c>.
+    /// </summary>
     [TestMethod]
     public void PheedEqualsTest()
     {
@@ -44,6 +59,9 @@ public class PheedSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The hash code is stable across repeated calls, and two equal extensions agree on it.
+    /// </summary>
     [TestMethod]
     public void PheedGetHashCodeTest()
     {
@@ -57,6 +75,11 @@ public class PheedSyndicationExtensionTest
         target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
+    /// <summary>
+    /// Saving a feed with the extension attached writes <c>photo:thumbnail</c> before
+    /// <c>photo:imgsrc</c>, and the source appears as <c>http://www.example.com/</c> because
+    /// <see cref="Uri"/> supplies the empty path.
+    /// </summary>
     [TestMethod]
     public void PheedCreateXmlTest()
     {
@@ -74,6 +97,10 @@ public class PheedSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// An item carrying the Pheed elements is found again after the feed is parsed, by both the generic
+    /// lookup and the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void PheedFullTest()
     {
@@ -91,6 +118,10 @@ public class PheedSyndicationExtensionTest
             .ShouldBeOfType<PheedSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts an <c>ISyndicationExtension</c> that is a
+    /// <c>PheedSyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void PheedMatchByTypeTest()
     {
@@ -99,6 +130,10 @@ public class PheedSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders <c>thumbnail</c> and then <c>imgsrc</c> on separate lines, each declaring
+    /// the Pheed namespace as its default rather than carrying the <c>photo</c> prefix.
+    /// </summary>
     [TestMethod]
     public void PheedToStringTest()
     {
@@ -107,6 +142,10 @@ public class PheedSyndicationExtensionTest
         actual.ShouldBe(nycText);
     }
 
+    /// <summary>
+    /// Writing to a non-indenting fragment <c>XmlWriter</c> emits the same two elements as
+    /// <c>ToString</c>, without the line break between them.
+    /// </summary>
     [TestMethod]
     public void PheedWriteToTest()
     {
@@ -119,6 +158,9 @@ public class PheedSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(nycText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Two extensions pointing at different images are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void PheedOpEqualityTestFailure()
     {
@@ -128,6 +170,9 @@ public class PheedSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions pointing at the same images are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void PheedOpEqualityTestSuccess()
     {
@@ -137,6 +182,10 @@ public class PheedSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension sourced from <c>example.com</c> does not sort above the one sourced from
+    /// <c>example.net</c> — the source is the first member that differs.
+    /// </summary>
     [TestMethod]
     public void PheedOpGreaterThanTest()
     {
@@ -146,6 +195,9 @@ public class PheedSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two extensions pointing at different images are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void PheedOpInequalityTest()
     {
@@ -155,6 +207,10 @@ public class PheedSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension sourced from <c>example.com</c> sorts below the one sourced from
+    /// <c>example.net</c>.
+    /// </summary>
     [TestMethod]
     public void PheedOpLessThanTest()
     {
@@ -164,6 +220,9 @@ public class PheedSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>Context</c> property hands back the source and thumbnail the extension was built from.
+    /// </summary>
     [TestMethod]
     public void PheedContextTest()
     {
@@ -175,6 +234,10 @@ public class PheedSyndicationExtensionTest
         context.Thumbnail.ShouldBe(new Uri("http://www.example.com/thumbnail.jpg"));
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the lesser, sourced from <c>example.com</c>.
+    /// </summary>
+    /// <returns>An extension carrying a source and a thumbnail.</returns>
     private static PheedSyndicationExtension CreateExtension1()
     {
         PheedSyndicationExtension nyc = new()
@@ -189,6 +252,10 @@ public class PheedSyndicationExtensionTest
         return nyc;
     }
 
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the greater, sourced from <c>example.net</c>.
+    /// </summary>
+    /// <returns>An extension carrying a source and a thumbnail.</returns>
     private static PheedSyndicationExtension CreateExtension2()
     {
         PheedSyndicationExtension nyc = new()
@@ -203,6 +270,11 @@ public class PheedSyndicationExtensionTest
         return nyc;
     }
 
+    /// <summary>
+    /// Builds a context carrying the <c>example.com</c> source and thumbnail, without an extension
+    /// around it.
+    /// </summary>
+    /// <returns>A context carrying a source and a thumbnail.</returns>
     public static PheedSyndicationExtensionContext CreateContext1()
     {
         PheedSyndicationExtensionContext nyc = new()

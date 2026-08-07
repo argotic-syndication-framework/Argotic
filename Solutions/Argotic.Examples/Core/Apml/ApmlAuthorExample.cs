@@ -3,16 +3,12 @@ using Argotic.Syndication.Specialized;
 namespace Argotic.Examples.Core.Apml;
 
 /// <summary>
-/// Contains the code examples for the <see cref="ApmlAuthor"/> class.
+/// Records who or what asserted a concept, using <see cref="ApmlAuthor"/>.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="ApmlAuthor"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class ApmlAuthorExample
 {
     /// <summary>
-    /// Provides example code for the ApmlAuthor class.
+    /// Builds the containing <see cref="ApmlDocument"/> and prints the <see cref="ApmlAuthor"/> it holds.
     /// </summary>
     public static void ClassExample()
     {

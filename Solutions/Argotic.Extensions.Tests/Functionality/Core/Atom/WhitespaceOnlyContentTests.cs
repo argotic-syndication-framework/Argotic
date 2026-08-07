@@ -19,9 +19,9 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Atom;
 ///     </para>
 ///     <para>
 ///     The cause is a guard and a setter disagreeing about what empty means. <c>Load</c> asks
-///     <c>IsNullOrEmpty</c>, which is <b>false</b> for <c>"  "</c>, so the element loads; the setter
+///     <c>IsNullOrEmpty</c>, which is <see langword="false"/> for <c>"  "</c>, so the element loads; the setter
 ///     then trims it to <c>""</c>. Saving writes <c>&lt;category&gt;&lt;/category&gt;</c>, and
-///     reloading <i>that</i> asks <c>IsNullOrEmpty</c> of <c>""</c> — now <b>true</b> — so nothing
+///     reloading <i>that</i> asks <c>IsNullOrEmpty</c> of <c>""</c> — now <see langword="true"/> — so nothing
 ///     loads and the element is dropped. One pass through the model deletes an element the previous
 ///     pass kept.
 ///     </para>

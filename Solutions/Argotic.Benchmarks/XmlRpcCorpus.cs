@@ -72,19 +72,24 @@ internal static class XmlRpcCorpus
     /// <remarks>
     ///     <para>
     ///     XML-RPC 1.0 is explicit: "If no type is indicated, the type is string." Real ping servers
-    ///     emit this for short strings, and <c>TryParseValue</c> cannot parse it — measured, not
-    ///     inferred. It returns <see langword="false"/> and a null value.
+    ///     emit this for short strings, and <c>TryParseValue</c> did not parse it — measured, not
+    ///     inferred. It returned <see langword="false"/> and a null value.
     ///     </para>
     ///     <para>
-    ///     The mechanism, because it also condemns a block of code as unreachable: text is a child
+    ///     The mechanism, because it also condemned a block of code as unreachable: text is a child
     ///     node in the XPath data model, so <c>source.HasChildren</c> is <see langword="true"/> for
-    ///     <c>&lt;value&gt;text&lt;/value&gt;</c>. Control therefore enters the <c>if</c>,
-    ///     <c>MoveToFirstChild</c> lands on the text node whose <c>Name</c> is the empty
-    ///     string, all nine name comparisons fail, and the method falls out through
+    ///     <c>&lt;value&gt;text&lt;/value&gt;</c>. Control therefore entered the <c>if</c>,
+    ///     <c>MoveToFirstChild</c> landed on the text node whose <c>Name</c> is the empty
+    ///     string, all nine name comparisons failed, and the method fell out through
     ///     <c>value = null; return false;</c>. The <c>else if (!string.IsNullOrEmpty(source.Value))</c>
-    ///     tail that was written to handle this shape is only reached when the element has no children
+    ///     tail that was written to handle this shape was reached only when the element had no children
     ///     at all — and an element with no children has an empty <c>Value</c>, so its own guard then
-    ///     fails too. That tail cannot execute for any input.
+    ///     failed too. No input could execute it.
+    ///     </para>
+    ///     <para>
+    ///     <c>MoveToChild(XPathNodeType.Element)</c> now stands where <c>MoveToFirstChild</c> did, so
+    ///     this shape skips the comparison chain and lands on the untyped tail. The generator stays
+    ///     because the arm over it is the regression guard for that fix.
     ///     </para>
     /// </remarks>
     public static string UntypedScalar(string text) => string.Concat("<value>", text, "</value>");

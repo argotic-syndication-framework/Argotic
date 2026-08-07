@@ -5,10 +5,14 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents the entity encoding utilized by textual content constructs.
 /// </summary>
+/// <remarks>
+///     A declaration about how to read a <see cref="BlogMLTextConstruct"/>'s text, not an instruction to this
+///     library: nothing here decodes base-64 or sanitises markup on the strength of it.
+/// </remarks>
 public enum BlogMLContentType
 {
     /// <summary>
-    /// No content type specified.
+    /// No content type specified. The consumer is left to guess how to read the text.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
     None = 0,

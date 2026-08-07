@@ -18,25 +18,35 @@ public class WellFormedWebCommentsSyndicationExtensionContext
     }
 
     /// <summary>
-    /// Gets or sets the URL that comment entries are to be posted to.
+    /// Gets or sets the endpoint a new comment is posted to.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URI that comment entries are to be posted to.</value>
+    /// <value>
+    ///     The <c>wfw:comment</c> URL, or <see langword="null"/> if none was specified. Write, not read —
+    ///     see <see cref="CommentsFeed"/> for fetching the existing comments.
+    /// </value>
     public Uri? Comments { get; set; }
 
     /// <summary>
-    /// Gets or sets the URL of the syndication feed for comment entries.
+    /// Gets or sets the location of the feed carrying this item's comments.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URI of the syndication feed for comment entries.</value>
+    /// <value>
+    ///     The <c>wfw:commentRss</c> URL, or <see langword="null"/> if none was specified.
+    /// </value>
+    /// <remarks>
+    ///     Populated from either spelling of the element, <c>commentRss</c> or the specification's
+    ///     original <c>commentRSS</c>, and always written back as <c>commentRss</c>. A feed using the old
+    ///     spelling therefore does not round-trip byte-for-byte.
+    /// </remarks>
     public Uri? CommentsFeed { get; set; }
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="WellFormedWebCommentsSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="WellFormedWebCommentsSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="WellFormedWebCommentsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="WellFormedWebCommentsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -75,11 +85,11 @@ public class WellFormedWebCommentsSyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);

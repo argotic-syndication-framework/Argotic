@@ -11,14 +11,11 @@ namespace Argotic.Syndication;
 /// Represents a URL entry in a Sitemap.
 /// </summary>
 /// <remarks>
-///     <para>
-///         This class represents a single URL entry in a Sitemap as defined in the
-///         <a href="https://www.sitemaps.org/protocol.html">Sitemaps Protocol</a>.
-///     </para>
-///     <para>
-///         A URL entry encapsulates all information about a specific URL, including its location,
-///         the date it was last modified, how frequently it changes, and its relative priority within the site.
-///     </para>
+///     A <c>&lt;url&gt;</c> entry as defined by the
+///     <a href="https://www.sitemaps.org/protocol.html">Sitemaps Protocol</a>. Only
+///     <see cref="Location"/> is required; <see cref="LastModified"/>, <see cref="ChangeFrequency"/> and
+///     <see cref="Priority"/> are optional, and "support for these optional tags may vary among search
+///     engines".
 /// </remarks>
 public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
@@ -34,7 +31,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// Initializes a new instance of the <see cref="SitemapUrl"/> class using the specified URL location.
     /// </summary>
     /// <param name="location">A <see cref="Uri"/> that represents the URL of the page.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is <see langword="null"/>.</exception>
     public SitemapUrl(Uri location)
     {
         ArgumentNullException.ThrowIfNull(location);
@@ -46,7 +43,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// </summary>
     /// <param name="location">A <see cref="Uri"/> that represents the URL of the page.</param>
     /// <param name="lastModified">A <see cref="DateTime"/> that indicates when the page was last modified.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is <see langword="null"/>.</exception>
     public SitemapUrl(Uri location, DateTime lastModified)
         : this(location)
     {
@@ -56,23 +53,27 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets the URL of the page.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the page. This URL must begin with the protocol (such as http) and end with a trailing slash, if your web server requires it.</value>
+    /// <value>An absolute URL, under 2,048 characters, or <see langword="null"/> if none was specified. Required by the protocol.</value>
     /// <remarks>
-    ///     <para>This value must be less than 2,048 characters.</para>
+    ///     Every URL in a sitemap must use the same scheme and reside on the same host as the sitemap
+    ///     document itself, and the sitemap's own directory bounds what it may list: a sitemap at
+    ///     <c>http://example.com/catalog/sitemap.xml</c> may list <c>http://example.com/catalog/…</c> but not
+    ///     <c>http://example.com/images/…</c>, and not <c>https://</c> anything. Out-of-scope URLs are not an
+    ///     error — they "are dropped from further consideration", silently. Nothing here enforces the rule;
+    ///     it is a property of the document as a whole, and only the publisher knows where it will be served.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Location
     {
         get;
@@ -86,20 +87,23 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// <summary>
     /// Gets or sets the date of last modification of the page.
     /// </summary>
-    /// <value>
-    ///     A <see cref="DateTime"/> that indicates when the page was last modified.
-    ///     The default value is <b>null</b>, which indicates that no last modified date was specified.
-    /// </value>
+    /// <value>The default value is <see langword="null"/>, meaning the entry carried no <c>lastmod</c>.</value>
     /// <remarks>
     ///     <para>
-    ///         This date should be in W3C Datetime format. This format allows you to omit the time portion, if desired, and use YYYY-MM-DD.
+    ///         This is when the <i>linked page</i> last changed, not when the sitemap was generated. Setting
+    ///         it to the generation time on every write is the commonest way to make a sitemap useless: it
+    ///         tells a crawler the whole site changed, every time.
     ///     </para>
     ///     <para>
-    ///         Note that the date must be set to the date the linked page was last modified, not when the sitemap is generated.
+    ///         The protocol asks for W3C Datetime, <i>not</i> RFC 3339: the shorter forms <c>YYYY</c>,
+    ///         <c>YYYY-MM</c> and <c>YYYY-MM-DD</c> are all legal <c>lastmod</c> values, and RFC 3339 permits
+    ///         none of them. Saving always writes a complete RFC 3339 date and time. That conforms, but it is
+    ///         narrower than the protocol allows, so a document that arrived carrying <c>2004-12-23</c> is
+    ///         written back as a full timestamp.
     ///     </para>
     ///     <para>
-    ///         Note also that this tag is separate from the If-Modified-Since (304) header the server can return,
-    ///         and search engines may use the information from both sources differently.
+    ///         It is also independent of the <c>If-Modified-Since</c> / 304 exchange, and search engines may
+    ///         weigh the two sources differently.
     ///     </para>
     /// </remarks>
     public DateTime? LastModified { get; set; }
@@ -107,43 +111,33 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// <summary>
     /// Gets or sets how frequently the page is likely to change.
     /// </summary>
-    /// <value>
-    ///     A <see cref="SitemapChangeFrequency"/> that indicates how frequently the page is likely to change.
-    ///     The default value is <b>null</b>, which indicates that no change frequency was specified.
-    /// </value>
+    /// <value>The default value is <see langword="null"/>, meaning the entry carried no <c>changefreq</c>.</value>
     /// <remarks>
-    ///     <para>
-    ///         This value provides general information to search engines and may not correlate exactly to how often they crawl the page.
-    ///     </para>
-    ///     <para>
-    ///         The value "always" should be used to describe documents that change each time they are accessed.
-    ///         The value "never" should be used to describe archived URLs.
-    ///     </para>
+    ///     A hint that crawlers are free to disregard in either direction. See
+    ///     <see cref="SitemapChangeFrequency"/>.
     /// </remarks>
     public SitemapChangeFrequency? ChangeFrequency { get; set; }
 
     /// <summary>
     /// Gets or sets the priority of this URL relative to other URLs on the site.
     /// </summary>
-    /// <value>
-    ///     A <see cref="decimal"/> that indicates the priority of this URL relative to other URLs on the site.
-    ///     Valid values range from 0.0 to 1.0. The default value is <b>null</b>, which is treated as 0.5.
-    /// </value>
+    /// <value><c>0.0</c> to <c>1.0</c> inclusive, or <see langword="null"/> if none was specified. An absent value is treated by crawlers as <c>0.5</c>.</value>
     /// <remarks>
     ///     <para>
-    ///         This priority lets search engines know which pages you deem most important for the crawlers.
+    ///         Priority is <i>relative to other URLs on your own site</i>. It "does not affect how your pages
+    ///         are compared to pages on other sites", and is "not likely to influence the position of your
+    ///         URLs in a search engine's result pages". It only helps a crawler choose among your pages.
     ///     </para>
     ///     <para>
-    ///         Please note that the priority you assign to a page is not likely to influence the position of your URLs in a search engine's result pages.
-    ///         Search engines may use this information when selecting between URLs on the same site,
-    ///         so you can use this tag to increase the likelihood that your most important pages are present in a search index.
+    ///         Because it is relative, marking every page <c>1.0</c> conveys exactly as much as marking every
+    ///         page <c>0.5</c>: nothing.
     ///     </para>
     ///     <para>
-    ///         Also, please note that assigning a high priority to all of the URLs on your site is not likely to help you.
-    ///         Since the priority is relative, it is only used to select between URLs on your site.
+    ///         Saving formats the value to one decimal place, so a priority carrying more precision than
+    ///         that — <c>0.12</c> is written as <c>0.1</c> — does not survive a round-trip.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than 0.0 or greater than 1.0.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than <c>0.0</c> or greater than <c>1.0</c>.</exception>
     public decimal? Priority
     {
         get;
@@ -162,11 +156,11 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// Loads this <see cref="SitemapUrl"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="SitemapUrl"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="SitemapUrl"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="SitemapUrl"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source) => this.Load(source, null);
 
     /// <summary>
@@ -174,11 +168,11 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="SitemapUrl"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="SitemapUrl"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="SitemapUrl"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
@@ -245,7 +239,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// Saves the current <see cref="SitemapUrl"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -325,7 +319,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// Determines whether the specified <see cref="SitemapUrl"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SitemapUrl"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SitemapUrl"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SitemapUrl"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SitemapUrl? other)
     {
         if (other is null)
@@ -340,7 +334,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SitemapUrl other && this.Equals(other);
 
     /// <summary>
@@ -354,7 +348,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(SitemapUrl? first, SitemapUrl? second)
     {
         if (first is null)
@@ -370,6 +364,6 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(SitemapUrl? first, SitemapUrl? second) => !(first == second);
 }

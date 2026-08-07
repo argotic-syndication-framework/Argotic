@@ -3,16 +3,12 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Rss;
 
 /// <summary>
-/// Contains the code examples for the <see cref="RssCategory"/> class.
+/// Categorises a channel and an item with <see cref="RssCategory"/>, with and without a taxonomy domain.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="RssCategory"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class RssCategoryExample
 {
     /// <summary>
-    /// Provides example code for the RssCategory class.
+    /// Builds the containing <see cref="RssFeed"/> and prints the <see cref="RssCategory"/> it holds.
     /// </summary>
     public static void ClassExample()
     {

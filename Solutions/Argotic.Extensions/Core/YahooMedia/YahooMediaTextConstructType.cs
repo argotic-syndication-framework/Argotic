@@ -3,13 +3,13 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents the entity encoding utilized by human-readable text constructs. 
+/// Represents the entity encoding utilized by human-readable text constructs.
 /// </summary>
 /// <seealso cref="YahooMediaTextConstruct"/>
 public enum YahooMediaTextConstructType
 {
     /// <summary>
-    /// No entity-encoding type specified.
+    /// No entity-encoding type specified. The specification's default when the attribute is absent is <see cref="Plain"/>.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
     None = 0,

@@ -6,6 +6,14 @@ namespace Argotic.Common;
 /// <summary>
 /// Represents metadata about a web log entry that allows clients to auto-discover the TrackBack ping URL for that entry.
 /// </summary>
+/// <remarks>
+///     Publishers embed this as an <c>rdf:RDF</c> island in the entry's HTML.
+///     <see cref="SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(string)"/> finds it by
+///     matching the island in the raw markup, so it is found whether or not the publisher hid it inside
+///     an HTML comment. <see cref="PingUrl"/> is what the structure exists to carry, and
+///     <see cref="Load(XPathNavigator)"/> treats its absence as the record not being a Trackback record
+///     at all.
+/// </remarks>
 public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata>, IEquatable<TrackbackDiscoveryMetadata>, IComparisonOperators
 {
     /// <summary>
@@ -34,7 +42,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// Initializes a new instance of the <see cref="TrackbackDiscoveryMetadata"/> class using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the Trackback auto-discovery meta-data from.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     public TrackbackDiscoveryMetadata(XPathNavigator navigator) : this()
     {
         ArgumentNullException.ThrowIfNull(navigator);
@@ -45,8 +53,8 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <summary>
     /// Gets or sets the Resource Description Framework (RDF) entity reference.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the Resource Description Framework (RDF) entity reference.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>rdf:about</c> of the description — the address of the entry being described — or <see langword="null"/> if none was specified. May be relative.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? About
     {
         get;
@@ -60,8 +68,8 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <summary>
     /// Gets or sets the unique identifier for the discoverable web log entry.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the unique identifier for the discoverable web log entry.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>dc:identifier</c> — the entry's permalink — or <see langword="null"/> if none was specified. May be relative.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Identifier
     {
         get;
@@ -75,8 +83,8 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <summary>
     /// Gets or sets the Trackback ping notification endpoint for the discoverable web log entry.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the Trackback ping URL for the discoverable web log entry.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>trackback:ping</c> endpoint, or <see langword="null"/> if none was specified. This is the one attribute <see cref="Load(XPathNavigator)"/> requires.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? PingUrl
     {
         get;
@@ -90,7 +98,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <summary>
     /// Gets or sets the title of the discoverable web log entry.
     /// </summary>
-    /// <value>The title of the discoverable web log entry.</value>
+    /// <value>The <c>dc:title</c>, trimmed, or an <i>empty</i> string if none was specified. The default value is an <i>empty</i> string.</value>
     public string Title
     {
         get;
@@ -101,11 +109,14 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// Loads this <see cref="TrackbackDiscoveryMetadata"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the Trackback auto-discovery meta-data from.</param>
-    /// <returns><b>true</b> if Trackback auto-discovery meta-data was extracted from the <paramref name="navigator"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if Trackback auto-discovery meta-data was extracted from the <paramref name="navigator"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    ///     Will return <b>false</b> if the <i>trackback:ping</i> attribute is not found on the <b>rdf:Description</b> element.
+    ///     A <c>trackback:ping</c> attribute on the <c>rdf:Description</c> element is required: without
+    ///     one this returns <see langword="false"/> having set nothing, whatever else the element
+    ///     carried. A record with no ping URL names no endpoint, so there is nothing a caller could do
+    ///     with the remaining fields.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator navigator)
     {
         bool wasLoaded = false;
@@ -172,7 +183,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// Saves the current <see cref="TrackbackDiscoveryMetadata"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -194,10 +205,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="TrackbackDiscoveryMetadata"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="TrackbackDiscoveryMetadata"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The <c>rdf:RDF</c> island for the current instance, indented and without an XML declaration.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -243,7 +251,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// Determines whether the specified <see cref="TrackbackDiscoveryMetadata"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="TrackbackDiscoveryMetadata"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="TrackbackDiscoveryMetadata"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="TrackbackDiscoveryMetadata"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(TrackbackDiscoveryMetadata? other)
     {
         if (other is null)
@@ -258,7 +266,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is TrackbackDiscoveryMetadata other && this.Equals(other);
 
     /// <summary>
@@ -272,7 +280,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(TrackbackDiscoveryMetadata? first, TrackbackDiscoveryMetadata? second)
     {
         if (first is null) return second is null;
@@ -284,6 +292,6 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(TrackbackDiscoveryMetadata? first, TrackbackDiscoveryMetadata? second) => !(first == second);
 }

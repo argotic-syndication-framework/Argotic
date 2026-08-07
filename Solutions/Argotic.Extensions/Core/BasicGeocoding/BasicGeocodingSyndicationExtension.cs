@@ -11,18 +11,30 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="BasicGeocodingSyndicationExtension"/> extends syndicated content to specify a basic RDF vocabulary that provides the Semantic Web community 
-///         with a namespace for representing latitude, longitude and other information about spatially-located things. This syndication extension conforms to the 
-///         Basic Geo (WGS84 lat/long) Vocabulary specification, which can be found at <a href="http://www.w3.org/2003/01/geo/">http://www.w3.org/2003/01/geo/</a>.
+///         The W3C <i>Basic Geo (WGS84 lat/long) vocabulary</i>, an RDF vocabulary published by the W3C
+///         Semantic Web Interest Group and unchanged since 2003, which can be found at
+///         <a href="https://www.w3.org/2003/01/geo/">https://www.w3.org/2003/01/geo/</a>. It defines two
+///         elements — <c>geo:lat</c> and <c>geo:long</c>, decimal degrees on the WGS84 datum — and this
+///         extension reads and writes exactly those. There are no shapes, no bounding boxes and no
+///         elevation here.
+///     </para>
+///     <para>
+///         It is older than, and unrelated to, <see cref="GeoRssSyndicationExtension"/>; the two are
+///         successive generations rather than alternatives. The canonical live source of geographic
+///         feeds, the USGS earthquake service, publishes <c>georss:</c> and emits no <c>geo:</c> at all.
+///         A feed may carry both, and this library will attach both extensions when it does. Read this
+///         one because older feeds still carry it; reach for GeoRSS when writing.
+///     </para>
+///     <para>
+///         Each coordinate is its own element, so there is no latitude-first ordering to get wrong. What
+///         there is instead is the half-populated case: a feed carrying <c>geo:lat</c> and omitting
+///         <c>geo:long</c> loads successfully, and
+///         <see cref="BasicGeocodingSyndicationExtensionContext.Longitude"/> is left at its
+///         <see cref="Decimal.MinValue"/> sentinel. Test both before treating the pair as a position.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the BasicGeocodingSyndicationExtension class.">
-///         <code 
-///             source="..\..\Argotic.Examples\\Extensions\Core\BasicGeocodingSyndicationExtensionExample.cs" 
-///             region="BasicGeocodingSyndicationExtension"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Extensions\Core\BasicGeocodingSyndicationExtensionExample.cs" language="cs" title="The following code example demonstrates the usage of the BasicGeocodingSyndicationExtension class." />
 /// </example>
 public class BasicGeocodingSyndicationExtension : SyndicationExtension, IComparable<BasicGeocodingSyndicationExtension>, IEquatable<BasicGeocodingSyndicationExtension>, IComparisonOperators
 {
@@ -37,13 +49,13 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <summary>
     /// Gets or sets the <see cref="BasicGeocodingSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
-    /// <value>A <see cref="BasicGeocodingSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
+    /// <value>The context. Never <see langword="null"/>: one is created with the extension, and the setter rejects <see langword="null"/>.</value>
     /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity.
+    ///     The <c>Context</c> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity.
     ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that
     ///     are defined for the custom syndication extension.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public BasicGeocodingSyndicationExtensionContext Context
     {
         get;
@@ -57,8 +69,15 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <summary>
     /// Converts the supplied decimal value to an equivalent degrees, minutes, seconds string representation.
     /// </summary>
-    /// <param name="value">A <see cref="Decimal"/> value that represents the degrees, minutes, and seconds of a spacial coordinate.</param>
-    /// <returns>A string in the format ###°##'##.##" that represents the decimal value.</returns>
+    /// <param name="value">A coordinate in decimal degrees. It must carry a fractional part — see the remarks.</param>
+    /// <returns>A string in the format <c>###°##'##.##"</c>.</returns>
+    /// <remarks>
+    ///     A convenience for display. Nothing in the extension calls it: the wire format is decimal
+    ///     degrees, and <see cref="BasicGeocodingSyndicationExtensionContext"/> reads and writes that.
+    ///     The whole conversion is driven off the fractional digits of
+    ///     <paramref name="value"/>, so a <see cref="Decimal"/> with a scale of zero — <c>36m</c> rather
+    ///     than <c>36.0m</c> — produces <c>°'"</c> with the degrees dropped.
+    /// </remarks>
     /// <seealso cref="ConvertDegreesMinutesSecondsToDecimal(string)"/>
     public static string ConvertDecimalToDegreesMinutesSeconds(decimal value)
     {
@@ -103,12 +122,19 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     }
 
     /// <summary>
-    /// Converts the supplied degrees, minutes, and seconds spacial coordinate string to its equivalent decimal value.
+    /// Converts the supplied degrees, minutes, and seconds spatial coordinate string to its equivalent decimal value.
     /// </summary>
-    /// <param name="degreesMinutesSeconds">A degrees, minutes, and seconds of a spacial coordinate in the format ###°##'##.##".</param>
-    /// <returns>A <see cref="Decimal"/> value that represents the supplied degrees, minutes, and seconds.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="degreesMinutesSeconds"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="degreesMinutesSeconds"/> is an empty string.</exception>
+    /// <param name="degreesMinutesSeconds">A coordinate in the format <c>###°##'##.##"</c>. All three delimiters must be present, in that order. A trailing <c>N</c>, <c>S</c>, <c>E</c> or <c>W</c> is tolerated on the seconds and discarded, so it does not set the sign.</param>
+    /// <returns>The equivalent value in decimal degrees.</returns>
+    /// <remarks>
+    ///     The three parts are summed, which means a negative coordinate is only correct when its
+    ///     minutes and seconds are zero: <c>-36°30'0.00"</c> reads as <c>-35.5</c>, not <c>-36.5</c>,
+    ///     because the sign is carried by the degrees alone and the minutes are added rather than
+    ///     subtracted. Southern and western coordinates written in this form do not round-trip.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="degreesMinutesSeconds"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="degreesMinutesSeconds"/> is an empty string.</exception>
+    /// <exception cref="FormatException">The <paramref name="degreesMinutesSeconds"/> is missing a delimiter, or one of its three parts is not a number.</exception>
     /// <seealso cref="ConvertDecimalToDegreesMinutesSeconds(decimal)"/>
     public static decimal ConvertDegreesMinutesSecondsToDecimal(string degreesMinutesSeconds)
     {
@@ -154,8 +180,8 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
     /// </summary>
     /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -165,9 +191,9 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="BasicGeocodingSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="BasicGeocodingSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="BasicGeocodingSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="BasicGeocodingSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public override bool Load(IXPathNavigable source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -183,9 +209,9 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="BasicGeocodingSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="BasicGeocodingSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="BasicGeocodingSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="BasicGeocodingSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -198,8 +224,8 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <summary>
     /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public override void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -258,7 +284,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// Determines whether the specified <see cref="BasicGeocodingSyndicationExtension"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="BasicGeocodingSyndicationExtension"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="BasicGeocodingSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="BasicGeocodingSyndicationExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(BasicGeocodingSyndicationExtension? other)
     {
         if (other is null)
@@ -273,7 +299,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is BasicGeocodingSyndicationExtension other && this.Equals(other);
 
     /// <summary>
@@ -287,7 +313,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(BasicGeocodingSyndicationExtension? first, BasicGeocodingSyndicationExtension? second)
     {
         if (first is null) return second is null;
@@ -299,7 +325,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(BasicGeocodingSyndicationExtension? first, BasicGeocodingSyndicationExtension? second) => !(first == second);
 
 }

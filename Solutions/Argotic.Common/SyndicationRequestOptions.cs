@@ -26,25 +26,31 @@ public sealed record SyndicationRequestOptions
     /// <summary>
     /// Gets the value of the Accept HTTP header.
     /// </summary>
-    /// <value>The MIME type(s) to accept, or <c>null</c> to use the default.</value>
+    /// <value>An <c>Accept</c> header value, such as <c>application/rss+xml, application/xml;q=0.9</c>, or <see langword="null"/> to send none. The default value is <see langword="null"/>.</value>
     public string? Accept { get; init; }
 
     /// <summary>
     /// Gets the value of the User-Agent HTTP header.
     /// </summary>
-    /// <value>The user agent string, or <c>null</c> to use the default.</value>
+    /// <value>The user agent to send, or <see langword="null"/> to keep the framework's own, <see cref="SyndicationDiscoveryUtility.FrameworkUserAgent"/>. Setting this replaces it rather than appending to it. The default value is <see langword="null"/>.</value>
     public string? UserAgent { get; init; }
 
     /// <summary>
     /// Gets the value of the Referer HTTP header.
     /// </summary>
-    /// <value>The referer URL, or <c>null</c> to not include a referer.</value>
+    /// <value>An absolute <c>http</c> or <c>https</c> URI, or <see langword="null"/> or an <i>empty</i> string to send no <c>Referer</c>. Anything else throws. The default value is <see langword="null"/>.</value>
     public string? Referer { get; init; }
 
     /// <summary>
     /// Gets custom headers to include in the request.
     /// </summary>
-    /// <value>A read-only dictionary of header name/value pairs, or <c>null</c> for no custom headers.</value>
+    /// <value>Request header name/value pairs, or <see langword="null"/> for none. The default value is <see langword="null"/>.</value>
+    /// <remarks>
+    ///     An entry naming a header the request already carries is skipped rather than overwriting it,
+    ///     so this cannot displace the <c>User-Agent</c> or the conditional-GET validators. An entry
+    ///     naming a <i>content</i> header — <c>Content-Type</c> and its kin — throws: those describe a
+    ///     request body, and a syndication fetch has none.
+    /// </remarks>
     public IReadOnlyDictionary<string, string>? CustomHeaders { get; init; }
 
     /// <summary>
@@ -53,7 +59,7 @@ public sealed record SyndicationRequestOptions
     /// <param name="request">The <see cref="HttpRequestMessage"/> to configure.</param>
     /// <remarks>
     ///     <para>
-    ///     <b>A value this method cannot send is an error, not a no-op.</b> Every setter here used to
+    ///     A value this method cannot send is an error, not a no-op. Every setter here used to
     ///     be a <c>Try</c> that discarded its result, so an <see cref="Accept"/> of <c>"@@@"</c> or a
     ///     <see cref="Referer"/> of <c>"example.com/x"</c> produced a request with the header simply
     ///     absent — and the caller learned about it, if at all, as a <c>406</c> from a server they had
@@ -70,7 +76,7 @@ public sealed record SyndicationRequestOptions
     ///     pinned.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="request"/> is <see langword="null"/>.</exception>
     /// <exception cref="FormatException">
     ///     A header value cannot be sent: <see cref="Accept"/> or <see cref="UserAgent"/> is not a
     ///     valid header value, <see cref="Referer"/> is not an absolute <c>http</c> or <c>https</c>

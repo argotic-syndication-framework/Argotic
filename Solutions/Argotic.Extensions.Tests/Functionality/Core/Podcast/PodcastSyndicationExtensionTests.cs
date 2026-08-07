@@ -85,6 +85,10 @@ public sealed class PodcastSyndicationExtensionTests
     ///     found the same way, and the rows below are taken from the counts rather than invented.
     ///     </para>
     /// </remarks>
+    /// <param name="spelling">The node value to write into <c>podcast:locked</c>; any casing of
+    /// <c>yes</c>, <c>no</c>, <c>true</c> or <c>false</c>.</param>
+    /// <param name="expected">Whether that spelling means the feed is locked.</param>
+    /// <param name="provenance">The value's count in the survey, quoted back as the failure message.</param>
     [TestMethod]
     [DataRow("yes", true, "126 in the survey")]
     [DataRow("no", false, "191 — the most common value")]
@@ -140,6 +144,8 @@ public sealed class PodcastSyndicationExtensionTests
     ///     <b>12.9%</b> of surveyed feeds and is how a podcast keeps one identity when its address
     ///     changes.
     /// </remarks>
+    /// <param name="identifier">The node value to write into <c>podcast:guid</c>; a UUID, and the
+    /// value expected back.</param>
     [TestMethod]
     [DataRow("917393e3-1b1e-5cef-ace4-edaa54e1f810")]
     [DataRow("9b024349-ccf0-5f69-a609-6b82873eab3c")]
@@ -160,6 +166,10 @@ public sealed class PodcastSyndicationExtensionTests
     ///     members, so these rows are what proves the suffix is actually split off and not just matched
     ///     as an unknown value.
     /// </remarks>
+    /// <param name="spelling">The node value to write into <c>podcast:medium</c>; one of the ten
+    /// defined mediums, optionally suffixed <c>L</c>.</param>
+    /// <param name="expected">The member of <c>PodcastMedium</c> that spelling names.</param>
+    /// <param name="isList">Whether the spelling carried the <c>L</c> suffix that marks a list.</param>
     [TestMethod]
     [DataRow("podcast", PodcastMedium.Podcast, false)]
     [DataRow("music", PodcastMedium.Music, false)]
@@ -192,6 +202,9 @@ public sealed class PodcastSyndicationExtensionTests
     ///     <see cref="PodcastMedium.None"/>'s own alternate value. Without a length guard that would
     ///     report a feed as having a medium of "list of nothing".
     /// </remarks>
+    /// <param name="spelling">The node value to write into <c>podcast:medium</c>; anything that is
+    /// not a defined medium.</param>
+    /// <param name="why">Why the value names nothing, quoted back as the failure message.</param>
     [TestMethod]
     [DataRow("L", "strips to the empty string, which None itself carries")]
     [DataRow("nonsense", "an unknown medium")]
@@ -330,6 +343,10 @@ public sealed class PodcastSyndicationExtensionTests
     ///     it as an integer would either refuse that feed or round it into a collision with an episode
     ///     that already exists.
     /// </remarks>
+    /// <param name="written">The node value to write into <c>podcast:episode</c>; a decimal number,
+    /// not necessarily whole.</param>
+    /// <param name="expected">The number it names, widened to <see cref="double"/> because an
+    /// attribute argument cannot be a <see cref="decimal"/>.</param>
     [TestMethod]
     [DataRow("42", 42)]
     [DataRow("3.5", 3.5)]

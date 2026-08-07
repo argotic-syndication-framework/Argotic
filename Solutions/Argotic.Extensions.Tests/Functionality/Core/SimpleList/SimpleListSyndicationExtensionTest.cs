@@ -7,6 +7,18 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.SimpleList;
 
+/// <summary>
+/// Covers the Microsoft Simple List Extensions: the extension type and the namespace, prefix, name,
+/// version and documentation address it declares; the sort and group declarations its context carries;
+/// the <c>SimpleListSort</c> and <c>SimpleListGroup</c> entities; and their round trip through
+/// <c>cf</c>-prefixed XML inside an RSS feed.
+/// </summary>
+/// <remarks>
+///     The relational operators exercised here (<c>&lt;</c>, <c>&gt;</c>, <c>&lt;=</c>, <c>&gt;=</c>) are
+///     the C# 14 extension operators imported by this file's <c>using static</c> of
+///     <c>ComparisonOperatorExtensions</c>; only <c>==</c> and <c>!=</c> are declared on the extension
+///     type itself.
+/// </remarks>
 [TestClass]
 public class SimpleListSyndicationExtensionTest
 {
@@ -22,6 +34,9 @@ public class SimpleListSyndicationExtensionTest
 
     #region Constructor Tests
 
+    /// <summary>
+    /// The parameterless constructor yields a usable Simple List extension instance.
+    /// </summary>
     [TestMethod]
     public void SimpleListSyndicationExtensionConstructorTest()
     {
@@ -33,6 +48,9 @@ public class SimpleListSyndicationExtensionTest
         target.ShouldBeOfType<SimpleListSyndicationExtension>();
     }
 
+    /// <summary>
+    /// The extension declares the XML prefix <c>cf</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListSyndicationExtension_Constructor_SetsCorrectXmlPrefix()
     {
@@ -43,6 +61,9 @@ public class SimpleListSyndicationExtensionTest
         target.XmlPrefix.ShouldBe("cf");
     }
 
+    /// <summary>
+    /// The extension declares the namespace <c>http://www.microsoft.com/schemas/rss/core/2005</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListSyndicationExtension_Constructor_SetsCorrectXmlNamespace()
     {
@@ -53,6 +74,9 @@ public class SimpleListSyndicationExtensionTest
         target.XmlNamespace.ShouldBe("http://www.microsoft.com/schemas/rss/core/2005");
     }
 
+    /// <summary>
+    /// The extension reports version <c>1.0</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListSyndicationExtension_Constructor_SetsCorrectVersion()
     {
@@ -63,6 +87,9 @@ public class SimpleListSyndicationExtensionTest
         target.Version.ShouldBe(new Version("1.0"));
     }
 
+    /// <summary>
+    /// The extension is named <c>Simple List</c>, two words.
+    /// </summary>
     [TestMethod]
     public void SimpleListSyndicationExtension_Constructor_SetsCorrectName()
     {
@@ -73,6 +100,9 @@ public class SimpleListSyndicationExtensionTest
         target.Name.ShouldBe("Simple List");
     }
 
+    /// <summary>
+    /// The extension points at <c>http://msdn2.microsoft.com/en-us/xml/bb190612.aspx</c> as its documentation.
+    /// </summary>
     [TestMethod]
     public void SimpleListSyndicationExtension_Constructor_SetsCorrectDocumentation()
     {
@@ -87,6 +117,9 @@ public class SimpleListSyndicationExtensionTest
 
     #region Context Tests
 
+    /// <summary>
+    /// An extension built for list treatment exposes a context whose <c>TreatAsList</c> flag is set.
+    /// </summary>
     [TestMethod]
     public void SimpleListContextTest()
     {
@@ -101,6 +134,9 @@ public class SimpleListSyndicationExtensionTest
         context.TreatAsList.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> to the context throws <c>ArgumentNullException</c> rather than clearing it.
+    /// </summary>
     [TestMethod]
     public void SimpleListContext_SetToNull_ThrowsArgumentNullException()
     {
@@ -111,6 +147,10 @@ public class SimpleListSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Context = null!);
     }
 
+    /// <summary>
+    /// A sort declaration survives on the context with its element, label, data type, default flag and
+    /// namespace all readable.
+    /// </summary>
     [TestMethod]
     public void SimpleListContext_WithSorting_ContainsSortElements()
     {
@@ -129,6 +169,9 @@ public class SimpleListSyndicationExtensionTest
         context.Sorting[0].Namespace.ShouldBe(new Uri("http://www.example.com/ns"));
     }
 
+    /// <summary>
+    /// A group declaration survives on the context with its element, label and namespace all readable.
+    /// </summary>
     [TestMethod]
     public void SimpleListContext_WithGrouping_ContainsGroupElements()
     {
@@ -145,6 +188,9 @@ public class SimpleListSyndicationExtensionTest
         context.Grouping[0].Namespace.ShouldBe(new Uri("http://www.example.com/ns"));
     }
 
+    /// <summary>
+    /// A new context is not a list, and its sorting and grouping collections are allocated but empty.
+    /// </summary>
     [TestMethod]
     public void SimpleListContext_DefaultValues_AreCorrect()
     {
@@ -163,6 +209,9 @@ public class SimpleListSyndicationExtensionTest
 
     #region Comparison and Equality Tests
 
+    /// <summary>
+    /// Two extensions holding identical context compare equal.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareToTest()
     {
@@ -177,6 +226,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// An extension sorts after <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareTo_WithNull_ReturnsPositive()
     {
@@ -190,6 +242,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Extensions differing in their <c>TreatAsList</c> flag do not compare as equal.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareTo_WithDifferentExtension_ReturnsNonZero()
     {
@@ -202,6 +257,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// An extension equals another built from the same context when compared as <c>object</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListEqualsTest()
     {
@@ -216,6 +274,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Extensions differing in their <c>TreatAsList</c> flag are not equal.
+    /// </summary>
     [TestMethod]
     public void SimpleListEquals_WithDifferentObject_ReturnsFalse()
     {
@@ -230,6 +291,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension is never equal to <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void SimpleListEquals_WithNull_ReturnsFalse()
     {
@@ -243,6 +307,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension is not equal to an object of an unrelated type, here a string.
+    /// </summary>
     [TestMethod]
     public void SimpleListEquals_WithWrongType_ReturnsFalse()
     {
@@ -256,6 +323,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension carrying a context produces a non-zero hash code.
+    /// </summary>
     [TestMethod]
     public void SimpleListGetHashCodeTest()
     {
@@ -269,6 +339,9 @@ public class SimpleListSyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// Equal extensions agree on their hash code, and repeated calls on one instance return the same value.
+    /// </summary>
     [TestMethod]
     public void SimpleListGetHashCode_EqualExtensions_ReturnSameValue()
     {
@@ -286,6 +359,9 @@ public class SimpleListSyndicationExtensionTest
 
     #region Operator Tests
 
+    /// <summary>
+    /// Two extensions holding identical context compare equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpEqualityTestSuccess()
     {
@@ -300,6 +376,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Extensions differing in their <c>TreatAsList</c> flag do not compare equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpEqualityTestFailure()
     {
@@ -314,6 +393,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> references compare equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpEquality_BothNull_ReturnsTrue()
     {
@@ -328,6 +410,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> left operand does not equal an instance.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpEquality_FirstNull_ReturnsFalse()
     {
@@ -342,6 +427,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Extensions holding different context compare unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpInequalityTest()
     {
@@ -356,6 +444,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>&gt;</c> operator evaluates over two extensions without throwing; which way they order is not asserted.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpGreaterThanTest()
     {
@@ -370,6 +461,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> left operand is never greater than an instance.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpGreaterThan_FirstNull_ReturnsFalse()
     {
@@ -384,6 +478,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The <c>&lt;</c> operator evaluates over two extensions without throwing; which way they order is not asserted.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpLessThanTest()
     {
@@ -398,6 +495,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> left operand is less than any instance.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpLessThan_FirstNull_ReturnsTrue()
     {
@@ -412,6 +512,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> references are not ordered by <c>&lt;</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpLessThan_BothNull_ReturnsFalse()
     {
@@ -426,6 +529,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Equal extensions satisfy <c>&gt;=</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpGreaterThanOrEqual_Test()
     {
@@ -440,6 +546,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Equal extensions satisfy <c>&lt;=</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListOpLessThanOrEqual_Test()
     {
@@ -458,6 +567,9 @@ public class SimpleListSyndicationExtensionTest
 
     #region MatchByType Tests
 
+    /// <summary>
+    /// The <c>MatchByType</c> predicate accepts a Simple List extension seen through <c>ISyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListMatchByTypeTest()
     {
@@ -471,6 +583,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>MatchByType</c> predicate returns <see langword="false"/> for an extension of another family, here a FeedSync one.
+    /// </summary>
     [TestMethod]
     public void SimpleListMatchByType_WithDifferentExtension_ReturnsFalse()
     {
@@ -484,6 +599,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The <c>MatchByType</c> predicate rejects a <see langword="null"/> extension with <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListMatchByType_WithNull_ThrowsArgumentNullException() =>
         // Act & Assert
@@ -493,6 +611,9 @@ public class SimpleListSyndicationExtensionTest
 
     #region CompareSequence Tests
 
+    /// <summary>
+    /// Two group sequences holding the same single declaration compare equal.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareSequence_Groups_EqualCollections_ReturnsZero()
     {
@@ -513,6 +634,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A group sequence with more elements than its target sorts after it, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareSequence_Groups_SourceLarger_ReturnsPositive()
     {
@@ -534,6 +658,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// A group sequence with fewer elements than its target sorts before it, returning <c>-1</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareSequence_Groups_TargetLarger_ReturnsNegative()
     {
@@ -555,6 +682,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(-1);
     }
 
+    /// <summary>
+    /// Comparing group sequences with a <see langword="null"/> source throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareSequence_Groups_NullSource_ThrowsArgumentNullException()
     {
@@ -565,6 +695,9 @@ public class SimpleListSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence((IList<SimpleListGroup>)null!, target));
     }
 
+    /// <summary>
+    /// Comparing group sequences with a <see langword="null"/> target throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareSequence_Groups_NullTarget_ThrowsArgumentNullException()
     {
@@ -575,6 +708,9 @@ public class SimpleListSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence(source, (IList<SimpleListGroup>)null!));
     }
 
+    /// <summary>
+    /// Two sort sequences holding the same single declaration compare equal.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareSequence_Sorts_EqualCollections_ReturnsZero()
     {
@@ -595,6 +731,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A sort sequence with more elements than its target sorts after it, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareSequence_Sorts_SourceLarger_ReturnsPositive()
     {
@@ -616,6 +755,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// A sort sequence with fewer elements than its target sorts before it, returning <c>-1</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareSequence_Sorts_TargetLarger_ReturnsNegative()
     {
@@ -637,6 +779,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(-1);
     }
 
+    /// <summary>
+    /// Comparing sort sequences with a <see langword="null"/> source throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareSequence_Sorts_NullSource_ThrowsArgumentNullException()
     {
@@ -647,6 +792,9 @@ public class SimpleListSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence((IList<SimpleListSort>)null!, target));
     }
 
+    /// <summary>
+    /// Comparing sort sequences with a <see langword="null"/> target throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListCompareSequence_Sorts_NullTarget_ThrowsArgumentNullException()
     {
@@ -661,6 +809,9 @@ public class SimpleListSyndicationExtensionTest
 
     #region ToString and WriteTo Tests
 
+    /// <summary>
+    /// Rendering an extension marked for list treatment emits a <c>treatAs</c> element carrying <c>list</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListToStringTest()
     {
@@ -676,6 +827,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldContain("list");
     }
 
+    /// <summary>
+    /// An extension carrying sort and group declarations renders them inside a <c>listinfo</c> element.
+    /// </summary>
     [TestMethod]
     public void SimpleListToString_WithSortAndGroup_ContainsListInfo()
     {
@@ -691,6 +845,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldContain("group");
     }
 
+    /// <summary>
+    /// Writing an extension to an XML fragment writer produces output; only its non-emptiness is asserted.
+    /// </summary>
     [TestMethod]
     public void SimpleListWriteToTest()
     {
@@ -708,6 +865,9 @@ public class SimpleListSyndicationExtensionTest
         output.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// Writing to a <see langword="null"/> writer throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListWriteTo_WithNull_ThrowsArgumentNullException()
     {
@@ -718,6 +878,10 @@ public class SimpleListSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.WriteTo(null!));
     }
 
+    /// <summary>
+    /// Writing an extension emits the <c>listinfo</c> wrapper, both child elements, and the <c>price</c> and
+    /// <c>category</c> element names the declarations point at.
+    /// </summary>
     [TestMethod]
     public void SimpleListWriteTo_WithSortAndGroup_ContainsSortAndGroupElements()
     {
@@ -743,6 +907,10 @@ public class SimpleListSyndicationExtensionTest
 
     #region Load and CreateXml Tests
 
+    /// <summary>
+    /// An RSS feed carrying <c>cf</c> elements on its only item loads and yields that item; the test stops
+    /// short of inspecting the extension itself.
+    /// </summary>
     [TestMethod]
     public void SimpleListLoadTest()
     {
@@ -759,6 +927,9 @@ public class SimpleListSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Loading from a <see langword="null"/> navigable source throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListLoad_WithNull_ThrowsArgumentNullException()
     {
@@ -769,6 +940,9 @@ public class SimpleListSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Load((System.Xml.XPath.IXPathNavigable)null!));
     }
 
+    /// <summary>
+    /// Loading from a <see langword="null"/> XML reader throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListLoad_WithNullReader_ThrowsArgumentNullException()
     {
@@ -779,6 +953,9 @@ public class SimpleListSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Load((XmlReader)null!));
     }
 
+    /// <summary>
+    /// An extension attached to an RSS item writes its <c>treatAs</c> element into the saved feed.
+    /// </summary>
     [TestMethod]
     public void SimpleListCreateXmlTest()
     {
@@ -793,6 +970,9 @@ public class SimpleListSyndicationExtensionTest
         actual.ShouldContain("treatAs");
     }
 
+    /// <summary>
+    /// An extension carrying sort and group declarations writes its <c>listinfo</c> element into the saved feed.
+    /// </summary>
     [TestMethod]
     public void SimpleListCreateXml_WithSortAndGroup_ContainsAllElements()
     {
@@ -811,6 +991,10 @@ public class SimpleListSyndicationExtensionTest
 
     #region SimpleListSort Tests
 
+    /// <summary>
+    /// The three named data types render as <c>text</c>, <c>number</c> and <c>date</c>, and <c>None</c> renders
+    /// as an empty string rather than a name.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeAsString_ReturnsCorrectValue()
     {
@@ -821,6 +1005,9 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSort.DataTypeAsString(SimpleListDataType.None).ShouldBe("");
     }
 
+    /// <summary>
+    /// Each of the three data type spellings parses back to its enumeration value.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeByName_ReturnsCorrectValue()
     {
@@ -830,6 +1017,9 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSort.DataTypeByName("date").ShouldBe(SimpleListDataType.Date);
     }
 
+    /// <summary>
+    /// Data type parsing ignores case, so <c>TEXT</c> and <c>Number</c> both resolve.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeByName_CaseInsensitive()
     {
@@ -838,16 +1028,25 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSort.DataTypeByName("Number").ShouldBe(SimpleListDataType.Number);
     }
 
+    /// <summary>
+    /// Parsing a <see langword="null"/> data type name throws <c>ArgumentException</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeByName_NullInput_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentException>(() => SimpleListSort.DataTypeByName(null!));
 
+    /// <summary>
+    /// Parsing an empty data type name throws <c>ArgumentException</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeByName_EmptyInput_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentException>(() => SimpleListSort.DataTypeByName(string.Empty));
 
+    /// <summary>
+    /// An unrecognised data type name resolves to <c>None</c> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeByName_UnknownValue_ReturnsNone()
     {
@@ -858,6 +1057,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(SimpleListDataType.None);
     }
 
+    /// <summary>
+    /// Rendering a sort declaration emits a <c>sort</c> element naming the element it sorts on.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_ToString_ReturnsXml()
     {
@@ -880,6 +1082,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldContain("price");
     }
 
+    /// <summary>
+    /// Two sort declarations sharing an element and data type compare equal.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_CompareTo_EqualObjects_ReturnsZero()
     {
@@ -894,6 +1099,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Sort equality follows the element name and the data type.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_Equals_EqualObjects_ReturnsTrue()
     {
@@ -905,6 +1113,9 @@ public class SimpleListSyndicationExtensionTest
         sort1.Equals(sort2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Sort declarations naming the same element compare equal under <c>==</c>, and <c>!=</c> agrees.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_OperatorEquals_Works()
     {
@@ -921,6 +1132,9 @@ public class SimpleListSyndicationExtensionTest
 
     #region SimpleListGroup Tests
 
+    /// <summary>
+    /// Rendering a group declaration emits a <c>group</c> element naming the element it groups on.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_ToString_ReturnsXml()
     {
@@ -941,6 +1155,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldContain("category");
     }
 
+    /// <summary>
+    /// Two group declarations sharing an element and label compare equal.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_CompareTo_EqualObjects_ReturnsZero()
     {
@@ -955,6 +1172,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Group equality follows the element name and the label.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_Equals_EqualObjects_ReturnsTrue()
     {
@@ -966,6 +1186,9 @@ public class SimpleListSyndicationExtensionTest
         group1.Equals(group2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Group declarations naming the same element compare equal under <c>==</c>, and <c>!=</c> agrees.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_OperatorEquals_Works()
     {
@@ -1043,6 +1266,10 @@ public class SimpleListSyndicationExtensionTest
 
     #region SimpleListSort Tests
 
+    /// <summary>
+    /// A new sort declaration has empty element and label strings, no data type, is not the default ordering
+    /// and has no namespace.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DefaultConstructor_CreatesEmptyInstance()
     {
@@ -1057,6 +1284,9 @@ public class SimpleListSyndicationExtensionTest
         sort.Namespace.ShouldBeNull();
     }
 
+    /// <summary>
+    /// The element a sort orders on reads back as it was written.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_Element_CanBeSet()
     {
@@ -1070,6 +1300,9 @@ public class SimpleListSyndicationExtensionTest
         sort.Element.ShouldBe("price");
     }
 
+    /// <summary>
+    /// Surrounding whitespace is stripped from the sorted element name on assignment.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_Element_TrimsWhitespace()
     {
@@ -1083,6 +1316,9 @@ public class SimpleListSyndicationExtensionTest
         sort.Element.ShouldBe("price");
     }
 
+    /// <summary>
+    /// The display label offered for a sort reads back as it was written.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_Label_CanBeSet()
     {
@@ -1096,6 +1332,9 @@ public class SimpleListSyndicationExtensionTest
         sort.Label.ShouldBe("Price");
     }
 
+    /// <summary>
+    /// The sort data type reads back as the <c>Number</c> it was set to.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataType_CanBeSetToNumber()
     {
@@ -1109,6 +1348,9 @@ public class SimpleListSyndicationExtensionTest
         sort.DataType.ShouldBe(SimpleListDataType.Number);
     }
 
+    /// <summary>
+    /// The sort data type reads back as the <c>Date</c> it was set to.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataType_CanBeSetToDate()
     {
@@ -1122,6 +1364,9 @@ public class SimpleListSyndicationExtensionTest
         sort.DataType.ShouldBe(SimpleListDataType.Date);
     }
 
+    /// <summary>
+    /// A sort declaration can be marked as the feed's default ordering.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_IsDefault_CanBeSet()
     {
@@ -1135,6 +1380,9 @@ public class SimpleListSyndicationExtensionTest
         sort.IsDefault.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The namespace qualifying the sorted element reads back as it was written.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_Namespace_CanBeSet()
     {
@@ -1149,6 +1397,9 @@ public class SimpleListSyndicationExtensionTest
         sort.Namespace.ShouldBe(ns);
     }
 
+    /// <summary>
+    /// The <c>Number</c> data type renders as <c>number</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeAsString_ReturnsCorrectValue_ForNumber()
     {
@@ -1159,6 +1410,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe("number");
     }
 
+    /// <summary>
+    /// The <c>Text</c> data type renders as <c>text</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeAsString_ReturnsCorrectValue_ForText()
     {
@@ -1169,6 +1423,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe("text");
     }
 
+    /// <summary>
+    /// The <c>Date</c> data type renders as <c>date</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeAsString_ReturnsCorrectValue_ForDate()
     {
@@ -1179,6 +1436,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe("date");
     }
 
+    /// <summary>
+    /// The name <c>number</c> parses back to the <c>Number</c> data type.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeByName_ReturnsCorrectEnum_ForNumber()
     {
@@ -1189,6 +1449,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(SimpleListDataType.Number);
     }
 
+    /// <summary>
+    /// The name <c>text</c> parses back to the <c>Text</c> data type.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeByName_ReturnsCorrectEnum_ForText()
     {
@@ -1199,6 +1462,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(SimpleListDataType.Text);
     }
 
+    /// <summary>
+    /// Data type parsing ignores case, so <c>NUMBER</c> yields <c>Number</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_DataTypeByName_IsCaseInsensitive()
     {
@@ -1209,6 +1475,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(SimpleListDataType.Number);
     }
 
+    /// <summary>
+    /// A sort declaration sorts after <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_CompareTo_WithNull_ReturnsPositive()
     {
@@ -1222,6 +1491,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Two sort declarations sharing element, label and data type compare equal.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_CompareTo_WithEqual_ReturnsZero()
     {
@@ -1246,6 +1518,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Sort declarations agreeing on element, label and data type are equal.
+    /// </summary>
     [TestMethod]
     public void SimpleListSort_Equals_WithEqual_ReturnsTrue()
     {
@@ -1271,6 +1546,9 @@ public class SimpleListSyndicationExtensionTest
 
     #region SimpleListGroup Tests
 
+    /// <summary>
+    /// A new group declaration has empty element and label strings and no namespace.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_DefaultConstructor_CreatesEmptyInstance()
     {
@@ -1283,6 +1561,9 @@ public class SimpleListSyndicationExtensionTest
         group.Namespace.ShouldBeNull();
     }
 
+    /// <summary>
+    /// The element a group is keyed on reads back as it was written.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_Element_CanBeSet()
     {
@@ -1296,6 +1577,9 @@ public class SimpleListSyndicationExtensionTest
         group.Element.ShouldBe("category");
     }
 
+    /// <summary>
+    /// Surrounding whitespace is stripped from the grouped element name on assignment.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_Element_TrimsWhitespace()
     {
@@ -1309,6 +1593,9 @@ public class SimpleListSyndicationExtensionTest
         group.Element.ShouldBe("category");
     }
 
+    /// <summary>
+    /// The display label offered for a group reads back as it was written.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_Label_CanBeSet()
     {
@@ -1322,6 +1609,9 @@ public class SimpleListSyndicationExtensionTest
         group.Label.ShouldBe("Category");
     }
 
+    /// <summary>
+    /// The namespace qualifying the grouped element reads back as it was written.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_Namespace_CanBeSet()
     {
@@ -1336,6 +1626,9 @@ public class SimpleListSyndicationExtensionTest
         group.Namespace.ShouldBe(ns);
     }
 
+    /// <summary>
+    /// A group declaration sorts after <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_CompareTo_WithNull_ReturnsPositive()
     {
@@ -1349,6 +1642,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Two group declarations sharing an element and label compare equal.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_CompareTo_WithEqual_ReturnsZero()
     {
@@ -1371,6 +1667,9 @@ public class SimpleListSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Group declarations agreeing on element and label are equal.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_Equals_WithEqual_ReturnsTrue()
     {
@@ -1390,6 +1689,9 @@ public class SimpleListSyndicationExtensionTest
         group1.Equals(group2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Group declarations agreeing on element and label compare equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void SimpleListGroup_EqualityOperator_WithEqual_ReturnsTrue()
     {

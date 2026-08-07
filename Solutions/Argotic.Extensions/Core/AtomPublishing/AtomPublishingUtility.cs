@@ -36,7 +36,7 @@ internal static class AtomPublishingUtility
     /// </summary>
     /// <param name="nameTable">The table of atomized string objects.</param>
     /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is <see langword="null"/>.</exception>
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);
@@ -77,9 +77,9 @@ internal static class AtomPublishingUtility
     /// </summary>
     /// <param name="target">The object that implements the <see cref="IAtomPublishingCommonObjectAttributes"/> interface to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract Atom common attribute information from.</param>
-    /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public static bool FillCommonObjectAttributes(IAtomPublishingCommonObjectAttributes target, XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -118,8 +118,8 @@ internal static class AtomPublishingUtility
     /// </summary>
     /// <param name="source">A object that implements the <see cref="IAtomPublishingCommonObjectAttributes"/> interface to extract Atom common attribute information from.</param>
     /// <param name="writer">The <see cref="XmlWriter"/> to which the <paramref name="source"/> information will be written.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public static void WriteCommonObjectAttributes(IAtomPublishingCommonObjectAttributes source, XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(source);

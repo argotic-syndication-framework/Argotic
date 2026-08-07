@@ -9,13 +9,15 @@ using BenchmarkDotNet.Attributes;
 namespace Argotic.Benchmarks.Loading;
 
 /// <summary>
-/// Decomposes the extension auto-detection path, to find which part of it costs the 54.7 MB that
-/// F1 attributes to auto-detection as a whole.
+/// Decomposes the extension auto-detection path, to find which part of it carries the cost the
+/// whole-load arms attribute to auto-detection as a whole.
 /// </summary>
 /// <remarks>
 /// <para>
-/// F1 established that auto-detection costs 3.87x allocation, but not which of its three
-/// sub-steps dominates. Those steps have very different fixes and very different risks:
+/// <c>ParsePipelineBenchmarks</c>'s f-against-g pair established that auto-detection was most of a
+/// feed load — at a thousand items, 66 MB against 16 MB with it switched off
+/// (<c>docs/build-warnings.md</c> §2.16) — but not which of its three sub-steps dominates. Those
+/// steps have very different fixes and very different risks:
 /// </para>
 /// <list type="number">
 ///   <item><description>the assembly reflection scan in the <c>FrameworkExtensions</c> property —

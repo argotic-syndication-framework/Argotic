@@ -5,15 +5,30 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>
-/// Async tests for <see cref="SyndicationDiscoveryUtility"/> methods that perform network operations.
+/// Covers the discovery methods that fetch a page before answering: what markup a feed, pingback or
+/// trackback endpoint has to be declared in to be found, and how an absent, missing or failed response
+/// is reported.
 /// </summary>
+/// <remarks>
+///     Every response here is served by <see cref="MockHttpMessageHandler"/>, so nothing leaves the
+///     machine. The convenience overloads that bind the shared client instead, which no mock can reach,
+///     are covered by <see cref="SharedClientDiscoveryTests"/>.
+/// </remarks>
 [TestClass]
 public class SyndicationDiscoveryUtilityAsyncTests
 {
+    /// <summary>
+    /// Gets or sets the test context, used for its cancellation token.
+    /// </summary>
     public TestContext TestContext { get; set; } = null!;
 
     #region LocateDiscoverableSyndicationEndpointsAsync Tests
 
+    /// <summary>
+    /// A page carrying one <c>link rel="alternate" type="application/rss+xml"</c> yields one endpoint,
+    /// with its href, type and title.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task LocateDiscoverableSyndicationEndpointsAsync_WithRssLink_ReturnsEndpoints()
     {
@@ -39,6 +54,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         endpoints[0].Title.ShouldBe("RSS Feed");
     }
 
+    /// <summary>
+    /// A page advertising no feed yields an empty collection rather than <see langword="null"/>.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task LocateDiscoverableSyndicationEndpointsAsync_NoLinks_ReturnsEmpty()
     {
@@ -70,6 +89,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         endpoints.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A page advertising both an RSS and an Atom feed yields both endpoints.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task LocateDiscoverableSyndicationEndpointsAsync_WithMultipleLinks_ReturnsAllEndpoints()
     {
@@ -104,6 +127,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         endpoints.ShouldContain(e => e.ContentType == "application/atom+xml");
     }
 
+    /// <summary>
+    /// A <see langword="null"/> address is refused before any request is made.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task LocateDiscoverableSyndicationEndpointsAsync_NullUri_ThrowsArgumentNullException()
     {
@@ -119,6 +146,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
                 TestContext.CancellationToken));
     }
 
+    /// <summary>
+    /// A <see langword="null"/> client is refused.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task LocateDiscoverableSyndicationEndpointsAsync_NullHttpClient_ThrowsArgumentNullException()
     {
@@ -137,6 +168,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
 
     #region SyndicationContentFormatGetAsync Tests
 
+    /// <summary>
+    /// A fetched document whose root element is <c>rss</c> is detected as RSS.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task SyndicationContentFormatGetAsync_ValidRssFeed_ReturnsRss()
     {
@@ -155,6 +190,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         format.ShouldBe(SyndicationContentFormat.Rss);
     }
 
+    /// <summary>
+    /// A fetched document whose root element is <c>feed</c> is detected as Atom.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task SyndicationContentFormatGetAsync_ValidAtomFeed_ReturnsAtom()
     {
@@ -173,6 +212,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         format.ShouldBe(SyndicationContentFormat.Atom);
     }
 
+    /// <summary>
+    /// A fetched document whose root element is <c>opml</c> is detected as OPML.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task SyndicationContentFormatGetAsync_ValidOpmlDocument_ReturnsOpml()
     {
@@ -191,6 +234,11 @@ public class SyndicationDiscoveryUtilityAsyncTests
         format.ShouldBe(SyndicationContentFormat.Opml);
     }
 
+    /// <summary>
+    /// A fetched document with an unrecognised root element yields
+    /// <see cref="SyndicationContentFormat.None"/>, which is in contract for "unable to determine".
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task SyndicationContentFormatGetAsync_UnknownFormat_ReturnsNone()
     {
@@ -215,6 +263,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         format.ShouldBe(SyndicationContentFormat.None);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> address is refused before any request is made.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task SyndicationContentFormatGetAsync_NullSource_ThrowsArgumentNullException()
     {
@@ -230,6 +282,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
                 TestContext.CancellationToken));
     }
 
+    /// <summary>
+    /// A <see langword="null"/> client is refused.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task SyndicationContentFormatGetAsync_NullHttpClient_ThrowsArgumentNullException()
     {
@@ -248,6 +304,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
 
     #region UriExistsAsync Tests
 
+    /// <summary>
+    /// An address answering with a successful response and a body exists.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task UriExistsAsync_ValidUri_ReturnsTrue()
     {
@@ -266,6 +326,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         exists.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// An address answering <c>404</c> does not exist.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task UriExistsAsync_NotFoundUri_ReturnsFalse()
     {
@@ -284,6 +348,11 @@ public class SyndicationDiscoveryUtilityAsyncTests
         exists.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> address is answered <see langword="false"/> rather than refused — alone
+    /// among the methods covered here.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task UriExistsAsync_NullUri_ReturnsFalse()
     {
@@ -301,6 +370,11 @@ public class SyndicationDiscoveryUtilityAsyncTests
         exists.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> client is still refused, even though a <see langword="null"/> address is
+    /// not.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task UriExistsAsync_NullHttpClient_ThrowsArgumentNullException()
     {
@@ -315,6 +389,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
                 TestContext.CancellationToken));
     }
 
+    /// <summary>
+    /// A connection that fails outright counts as not existing, rather than propagating the exception.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task UriExistsAsync_HttpRequestException_ReturnsFalse()
     {
@@ -337,6 +415,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
 
     #region SourceReferencesTargetAsync Tests
 
+    /// <summary>
+    /// A page whose body anchors point at the target is reported as referencing it.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task SourceReferencesTargetAsync_SourceContainsTarget_ReturnsTrue()
     {
@@ -359,6 +441,11 @@ public class SyndicationDiscoveryUtilityAsyncTests
         references.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A page linking elsewhere is not reported as referencing the target: the whole absolute URI has to
+    /// match, not the host.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task SourceReferencesTargetAsync_SourceDoesNotContainTarget_ReturnsFalse()
     {
@@ -381,6 +468,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         references.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> source page is refused.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task SourceReferencesTargetAsync_NullSource_ThrowsArgumentNullException()
     {
@@ -398,6 +489,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
                 TestContext.CancellationToken));
     }
 
+    /// <summary>
+    /// A <see langword="null"/> target is refused.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task SourceReferencesTargetAsync_NullTarget_ThrowsArgumentNullException()
     {
@@ -419,6 +514,11 @@ public class SyndicationDiscoveryUtilityAsyncTests
 
     #region IsPingbackEnabledAsync Tests
 
+    /// <summary>
+    /// A page carrying <c>link rel="pingback"</c> is pingback enabled, even with no <c>X-Pingback</c>
+    /// header on the response.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task IsPingbackEnabledAsync_WithPingbackLink_ReturnsTrue()
     {
@@ -439,6 +539,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         isPingbackEnabled.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A page with neither an <c>X-Pingback</c> header nor a pingback link is not pingback enabled.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task IsPingbackEnabledAsync_NoPingbackLink_ReturnsFalse()
     {
@@ -468,6 +572,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         isPingbackEnabled.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> address is refused before any request is made.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task IsPingbackEnabledAsync_NullUri_ThrowsArgumentNullException()
     {
@@ -487,6 +595,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
 
     #region LocatePingbackNotificationServerAsync Tests
 
+    /// <summary>
+    /// The href of a <c>link rel="pingback"</c> is returned as the XML-RPC server address.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task LocatePingbackNotificationServerAsync_WithPingbackLink_ReturnsServerUri()
     {
@@ -508,6 +620,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         pingbackServer.ShouldBe(new Uri("http://example.com/xmlrpc.php"));
     }
 
+    /// <summary>
+    /// A page declaring no pingback server yields <see langword="null"/>.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task LocatePingbackNotificationServerAsync_NoPingbackLink_ReturnsNull()
     {
@@ -541,6 +657,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
 
     #region IsTrackbackEnabledAsync Tests
 
+    /// <summary>
+    /// A page with no embedded <c>rdf:RDF</c> island is not trackback enabled.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task IsTrackbackEnabledAsync_NoTrackbackRdf_ReturnsFalse()
     {
@@ -570,6 +690,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         isTrackbackEnabled.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> address is refused before any request is made.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task IsTrackbackEnabledAsync_NullUri_ThrowsArgumentNullException()
     {
@@ -589,6 +713,11 @@ public class SyndicationDiscoveryUtilityAsyncTests
 
     #region LocateTrackbackNotificationServersAsync Tests
 
+    /// <summary>
+    /// A page with no embedded Trackback RDF yields an empty collection rather than
+    /// <see langword="null"/>.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task LocateTrackbackNotificationServersAsync_NoTrackback_ReturnsEmptyCollection()
     {
@@ -620,6 +749,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         metadata.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> address is refused before any request is made.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task LocateTrackbackNotificationServersAsync_NullUri_ThrowsArgumentNullException()
     {
@@ -639,6 +772,15 @@ public class SyndicationDiscoveryUtilityAsyncTests
 
     #region ConditionalGetAsync Tests
 
+    /// <summary>
+    /// A <c>304</c> is reported as unmodified, with the status code intact on the result.
+    /// </summary>
+    /// <remarks>
+    ///     The status assertion was <c>ShouldBeNull</c>. A <c>304</c> used to be reported by discarding
+    ///     everything about it, so the one status code a conditional GET most needs to distinguish was the
+    ///     one it could not.
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task ConditionalGetAsync_ContentNotModified_ReturnsNotModifiedResult()
     {
@@ -668,6 +810,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         result.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotModified);
     }
 
+    /// <summary>
+    /// A <c>200</c> carrying a body is reported as modified, with its status and content length.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task ConditionalGetAsync_ContentModified_ReturnsModifiedResult()
     {
@@ -700,6 +846,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
         result.ContentLength.ShouldBeGreaterThan(0);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> address is refused before any request is made.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task ConditionalGetAsync_NullSource_ThrowsArgumentNullException()
     {
@@ -717,6 +867,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
                 TestContext.CancellationToken));
     }
 
+    /// <summary>
+    /// A <see langword="null"/> client is refused.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task ConditionalGetAsync_NullHttpClient_ThrowsArgumentNullException()
     {

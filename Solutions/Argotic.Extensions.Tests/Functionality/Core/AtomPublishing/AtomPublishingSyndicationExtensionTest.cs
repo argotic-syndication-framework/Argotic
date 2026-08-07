@@ -8,10 +8,17 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 namespace Argotic.Extensions.Tests.Functionality.Core.AtomPublishing;
 
 /// <summary>
-/// Tests for the AtomPublishingEditedSyndicationExtension class.
-/// This test class covers the Atom Publishing Protocol (APP) "edited" element functionality.
-/// The APP namespace is: http://www.w3.org/2007/app
+/// Covers the Atom Publishing Protocol <c>app:edited</c> extension: what a new instance holds, the
+/// single RFC 3339 instant its context carries, how that instant reaches XML and comes back off a
+/// parsed item, and its comparison, equality and ordering contracts.
 /// </summary>
+/// <remarks>
+///     Despite the file name, the type under test throughout is
+///     <c>AtomPublishingEditedSyndicationExtension</c>; <c>app:control</c> is covered by
+///     <see cref="AtomPublishingControlSyndicationExtensionTest"/>. The two share a namespace, prefix,
+///     version and documentation URI, and the final region asserts exactly that — and that neither
+///     extension's <c>MatchByType</c> claims the other.
+/// </remarks>
 [TestClass]
 public class AtomPublishingSyndicationExtensionTest
 {
@@ -30,6 +37,9 @@ public class AtomPublishingSyndicationExtensionTest
 
     #region Constructor Tests
 
+    /// <summary>
+    /// The parameterless constructor yields an instance of the edited extension type.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_ShouldCreateValidInstance()
     {
@@ -41,6 +51,9 @@ public class AtomPublishingSyndicationExtensionTest
         target.ShouldBeOfType<AtomPublishingEditedSyndicationExtension>();
     }
 
+    /// <summary>
+    /// A new extension declares the Atom Publishing namespace <c>http://www.w3.org/2007/app</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_ShouldInitializeWithCorrectNamespace()
     {
@@ -51,6 +64,9 @@ public class AtomPublishingSyndicationExtensionTest
         target.XmlNamespace.ShouldBe(AppNamespace);
     }
 
+    /// <summary>
+    /// A new extension declares the prefix <c>app</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_ShouldInitializeWithCorrectPrefix()
     {
@@ -61,6 +77,9 @@ public class AtomPublishingSyndicationExtensionTest
         target.XmlPrefix.ShouldBe("app");
     }
 
+    /// <summary>
+    /// A new extension reports version <c>1.0</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_ShouldInitializeWithCorrectVersion()
     {
@@ -71,6 +90,9 @@ public class AtomPublishingSyndicationExtensionTest
         target.Version.ShouldBe(new Version("1.0"));
     }
 
+    /// <summary>
+    /// A new extension points its documentation at the RFC 5023 write-up on <c>bitworking.org</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_ShouldInitializeWithCorrectDocumentation()
     {
@@ -81,6 +103,9 @@ public class AtomPublishingSyndicationExtensionTest
         target.Documentation.ShouldBe(new Uri(DocumentationUri));
     }
 
+    /// <summary>
+    /// A new extension names itself <c>Atom Publishing Protocol Editing</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_ShouldInitializeWithCorrectName()
     {
@@ -91,6 +116,9 @@ public class AtomPublishingSyndicationExtensionTest
         target.Name.ShouldBe("Atom Publishing Protocol Editing");
     }
 
+    /// <summary>
+    /// A new extension carries no edit instant, which it represents as <see cref="DateTime.MinValue"/>.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_ShouldInitializeContextWithDefaultEditedDate()
     {
@@ -105,6 +133,9 @@ public class AtomPublishingSyndicationExtensionTest
 
     #region Context Property Tests
 
+    /// <summary>
+    /// A new extension already holds a context; reading it never gives <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void Context_Get_ShouldReturnNonNullContext()
     {
@@ -118,6 +149,9 @@ public class AtomPublishingSyndicationExtensionTest
         context.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// Assigning a whole context replaces the one the extension held, edit instant and all.
+    /// </summary>
     [TestMethod]
     public void Context_Set_ShouldUpdateContext()
     {
@@ -135,6 +169,9 @@ public class AtomPublishingSyndicationExtensionTest
         target.Context.EditedOn.ShouldBe(testEditedDate);
     }
 
+    /// <summary>
+    /// Assigning a <see langword="null"/> context throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void Context_SetNull_ShouldThrowArgumentNullException()
     {
@@ -145,6 +182,9 @@ public class AtomPublishingSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Context = null!);
     }
 
+    /// <summary>
+    /// An edit instant set through the context's object initializer is the one the context reports.
+    /// </summary>
     [TestMethod]
     public void Context_EditedOn_ShouldBeSettable()
     {
@@ -166,6 +206,9 @@ public class AtomPublishingSyndicationExtensionTest
 
     #region XML Serialization Tests
 
+    /// <summary>
+    /// Attaching the extension to an RSS item emits <c>app:edited</c> holding the RFC 3339 form of the edit instant.
+    /// </summary>
     [TestMethod]
     public void CreateXml_WithEditedDate_ShouldGenerateCorrectXml()
     {
@@ -180,6 +223,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBe(expectedXml.Trim());
     }
 
+    /// <summary>
+    /// Writing to an <see cref="XmlWriter"/> emits one <c>edited</c> element that declares the app namespace as its default and holds the RFC 3339 instant.
+    /// </summary>
     [TestMethod]
     public void WriteTo_WithValidWriter_ShouldWriteCorrectXml()
     {
@@ -202,6 +248,9 @@ public class AtomPublishingSyndicationExtensionTest
         output.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// Writing to a <see langword="null"/> writer throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void WriteTo_WithNullWriter_ShouldThrowArgumentNullException()
     {
@@ -212,6 +261,9 @@ public class AtomPublishingSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.WriteTo(null!));
     }
 
+    /// <summary>
+    /// An extension holding no edit instant writes nothing at all, not an empty element.
+    /// </summary>
     [TestMethod]
     public void WriteTo_WithNoEditedDate_ShouldWriteEmptyXml()
     {
@@ -233,6 +285,9 @@ public class AtomPublishingSyndicationExtensionTest
         output.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// <c>ToString</c> returns exactly the <c>edited</c> element that <c>WriteTo</c> produces.
+    /// </summary>
     [TestMethod]
     public void ToString_WithEditedDate_ShouldReturnCorrectXmlString()
     {
@@ -251,6 +306,9 @@ public class AtomPublishingSyndicationExtensionTest
 
     #region Round-Trip XML Tests
 
+    /// <summary>
+    /// An RSS 2.0 feed carrying <c>app:edited</c> parses into a channel with its single item.
+    /// </summary>
     [TestMethod]
     public void Load_WithValidXml_ShouldLoadSuccessfully()
     {
@@ -267,6 +325,9 @@ public class AtomPublishingSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// The item carrying <c>app:edited</c> reports that it has extensions.
+    /// </summary>
     [TestMethod]
     public void Load_WithValidXml_ShouldParseExtension()
     {
@@ -284,6 +345,9 @@ public class AtomPublishingSyndicationExtensionTest
         item.HasExtensions.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> retrieves the edited extension from the parsed item.
+    /// </summary>
     [TestMethod]
     public void Load_WithValidXml_ShouldFindExtensionByType()
     {
@@ -303,6 +367,9 @@ public class AtomPublishingSyndicationExtensionTest
         foundExtension.ShouldBeOfType<AtomPublishingEditedSyndicationExtension>();
     }
 
+    /// <summary>
+    /// The instant read back out of <c>app:edited</c> equals the one that was written into it.
+    /// </summary>
     [TestMethod]
     public void Load_WithValidXml_ShouldParseEditedDate()
     {
@@ -323,6 +390,9 @@ public class AtomPublishingSyndicationExtensionTest
         extension.Context.EditedOn.ShouldBe(testEditedDate);
     }
 
+    /// <summary>
+    /// An edit instant survives being written into a feed and parsed back off the item.
+    /// </summary>
     [TestMethod]
     public void RoundTrip_CreateAndReload_ShouldPreserveData()
     {
@@ -344,6 +414,9 @@ public class AtomPublishingSyndicationExtensionTest
         loadedExtension.Context.EditedOn.ShouldBe(testEditedDate);
     }
 
+    /// <summary>
+    /// Loading from a <see langword="null"/> <c>IXPathNavigable</c> throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void Load_WithNullSource_ShouldThrowArgumentNullException()
     {
@@ -354,6 +427,9 @@ public class AtomPublishingSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Load((System.Xml.XPath.IXPathNavigable)null!));
     }
 
+    /// <summary>
+    /// Loading from a <see langword="null"/> <see cref="XmlReader"/> throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void Load_WithNullReader_ShouldThrowArgumentNullException()
     {
@@ -368,6 +444,9 @@ public class AtomPublishingSyndicationExtensionTest
 
     #region MatchByType Tests
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts an instance of its own extension type.
+    /// </summary>
     [TestMethod]
     public void MatchByType_WithSameType_ShouldReturnTrue()
     {
@@ -381,6 +460,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> rejects the sibling <c>app:control</c> extension, which shares its namespace and prefix.
+    /// </summary>
     [TestMethod]
     public void MatchByType_WithDifferentType_ShouldReturnFalse()
     {
@@ -394,6 +476,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> throws <see cref="ArgumentNullException"/> rather than returning <see langword="false"/> for a <see langword="null"/> extension.
+    /// </summary>
     [TestMethod]
     public void MatchByType_WithNullExtension_ShouldThrowArgumentNullException() =>
         // Act & Assert
@@ -403,6 +488,9 @@ public class AtomPublishingSyndicationExtensionTest
 
     #region Comparison Operator Tests
 
+    /// <summary>
+    /// Two extensions holding the same edit instant compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithEqualExtensions_ShouldReturnZero()
     {
@@ -417,6 +505,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Comparing against <see langword="null"/> returns <c>1</c>, sorting every instance after nothing.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithNull_ShouldReturnOne()
     {
@@ -430,6 +521,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Comparing against <see langword="null"/> returns <c>1</c>, sorting every instance after nothing.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithNull_ShouldReturnPositive()
     {
@@ -443,6 +537,9 @@ public class AtomPublishingSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Extensions holding different edit instants do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithDifferentEditedDate_ShouldReturnNonZero()
     {
@@ -457,6 +554,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// An extension is equal to a separately constructed extension holding the same edit instant.
+    /// </summary>
     [TestMethod]
     public void Equals_WithEqualExtensions_ShouldReturnTrue()
     {
@@ -471,6 +571,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Extensions holding different edit instants are unequal.
+    /// </summary>
     [TestMethod]
     public void Equals_WithDifferentExtensions_ShouldReturnFalse()
     {
@@ -485,6 +588,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension is unequal to an object of an unrelated type, here a string.
+    /// </summary>
     [TestMethod]
     public void Equals_WithDifferentType_ShouldReturnFalse()
     {
@@ -499,6 +605,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension is unequal to <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void Equals_WithNull_ShouldReturnFalse()
     {
@@ -512,6 +621,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Equal extensions hash equally, and a hash code is stable across calls.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_EqualExtensions_ReturnSameValue()
     {
@@ -525,6 +637,9 @@ public class AtomPublishingSyndicationExtensionTest
         first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
+    /// <summary>
+    /// Extensions holding the same edit instant are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_WithEqualExtensions_ShouldReturnTrue()
     {
@@ -539,6 +654,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Extensions holding different edit instants are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_WithDifferentExtensions_ShouldReturnFalse()
     {
@@ -553,6 +671,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> references are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_WithBothNull_ShouldReturnTrue()
     {
@@ -567,6 +688,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> left operand is not equal to an instance.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_WithFirstNull_ShouldReturnFalse()
     {
@@ -581,6 +705,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An instance is not equal to a <see langword="null"/> right operand.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_WithSecondNull_ShouldReturnFalse()
     {
@@ -595,6 +722,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Extensions holding different edit instants are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void OperatorNotEquals_WithDifferentExtensions_ShouldReturnTrue()
     {
@@ -609,6 +739,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Extensions holding the same edit instant are not unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void OperatorNotEquals_WithEqualExtensions_ShouldReturnFalse()
     {
@@ -623,6 +756,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The extension edited in 2023 is less than the one edited in 2024.
+    /// </summary>
     [TestMethod]
     public void OperatorLessThan_WithEarlierDate_ShouldReturnTrue()
     {
@@ -637,6 +773,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension edited in 2024 is not less than the one edited in 2023.
+    /// </summary>
     [TestMethod]
     public void OperatorLessThan_WithLaterDate_ShouldReturnFalse()
     {
@@ -651,6 +790,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// <see langword="null"/> is less than any instance.
+    /// </summary>
     [TestMethod]
     public void OperatorLessThan_WithFirstNull_ShouldReturnTrue()
     {
@@ -665,6 +807,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <see langword="null"/> is not less than <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void OperatorLessThan_WithBothNull_ShouldReturnFalse()
     {
@@ -679,6 +824,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The extension edited in 2024 is greater than the one edited in 2023.
+    /// </summary>
     [TestMethod]
     public void OperatorGreaterThan_WithLaterDate_ShouldReturnTrue()
     {
@@ -693,6 +841,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension edited in 2023 is not greater than the one edited in 2024.
+    /// </summary>
     [TestMethod]
     public void OperatorGreaterThan_WithEarlierDate_ShouldReturnFalse()
     {
@@ -707,6 +858,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// <see langword="null"/> is not greater than any instance.
+    /// </summary>
     [TestMethod]
     public void OperatorGreaterThan_WithFirstNull_ShouldReturnFalse()
     {
@@ -721,6 +875,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Extensions holding the same edit instant satisfy <c>&lt;=</c>.
+    /// </summary>
     [TestMethod]
     public void OperatorLessThanOrEqual_WithEqualExtensions_ShouldReturnTrue()
     {
@@ -735,6 +892,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <see langword="null"/> is less than or equal to any instance.
+    /// </summary>
     [TestMethod]
     public void OperatorLessThanOrEqual_WithFirstNull_ShouldReturnTrue()
     {
@@ -749,6 +909,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Extensions holding the same edit instant satisfy <c>&gt;=</c>.
+    /// </summary>
     [TestMethod]
     public void OperatorGreaterThanOrEqual_WithEqualExtensions_ShouldReturnTrue()
     {
@@ -763,6 +926,9 @@ public class AtomPublishingSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <see langword="null"/> is greater than or equal to <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void OperatorGreaterThanOrEqual_WithBothNull_ShouldReturnTrue()
     {
@@ -781,6 +947,9 @@ public class AtomPublishingSyndicationExtensionTest
 
     #region AtomPublishing-Specific Functionality Tests (Edited)
 
+    /// <summary>
+    /// An unset edit instant reads as <see cref="DateTime.MinValue"/>, which is how the extension signals that the entry has never been edited.
+    /// </summary>
     [TestMethod]
     public void Context_EditedOn_WithMinValue_ShouldIndicateNoEditTime()
     {
@@ -791,6 +960,9 @@ public class AtomPublishingSyndicationExtensionTest
         target.Context.EditedOn.ShouldBe(DateTime.MinValue);
     }
 
+    /// <summary>
+    /// An edit instant assigned to the context comes back unchanged, kind included.
+    /// </summary>
     [TestMethod]
     public void Context_EditedOn_WithValidDate_ShouldStoreCorrectly()
     {
@@ -805,6 +977,9 @@ public class AtomPublishingSyndicationExtensionTest
         target.Context.EditedOn.ShouldBe(editedDate);
     }
 
+    /// <summary>
+    /// An extension left at the default edit instant writes no element, so an unedited entry gains no <c>app:edited</c>.
+    /// </summary>
     [TestMethod]
     public void WriteTo_WhenEditedOnIsMinValue_ShouldNotWriteElement()
     {
@@ -827,6 +1002,9 @@ public class AtomPublishingSyndicationExtensionTest
         output.ShouldBeEmpty();
     }
 
+    /// <summary>
+    /// A populated extension writes an <c>edited</c> element whose text is the RFC 3339 rendering of the instant.
+    /// </summary>
     [TestMethod]
     public void WriteTo_WhenEditedOnHasValue_ShouldWriteRfc3339Date()
     {
@@ -849,6 +1027,9 @@ public class AtomPublishingSyndicationExtensionTest
         output.ShouldContain(SyndicationDateTimeUtility.ToRfc3339DateTime(testEditedDate));
     }
 
+    /// <summary>
+    /// An RFC 3339 instant in <c>app:edited</c> parses back to the same <see cref="DateTime"/> it was written from.
+    /// </summary>
     [TestMethod]
     public void Load_WithRfc3339Date_ShouldParseCorrectly()
     {
@@ -870,6 +1051,9 @@ public class AtomPublishingSyndicationExtensionTest
         extension.Context.EditedOn.ShouldBe(expectedDate);
     }
 
+    /// <summary>
+    /// A context constructed on its own, outside any extension, also starts at <see cref="DateTime.MinValue"/>.
+    /// </summary>
     [TestMethod]
     public void Context_NewInstance_ShouldHaveDefaultValues()
     {
@@ -884,6 +1068,9 @@ public class AtomPublishingSyndicationExtensionTest
 
     #region Integration with Control Extension Tests
 
+    /// <summary>
+    /// The edited and control extensions agree on the app namespace.
+    /// </summary>
     [TestMethod]
     public void BothExtensions_ShouldHaveSameNamespace()
     {
@@ -896,6 +1083,9 @@ public class AtomPublishingSyndicationExtensionTest
         edited.XmlNamespace.ShouldBe(AppNamespace);
     }
 
+    /// <summary>
+    /// The edited and control extensions agree on the prefix <c>app</c>.
+    /// </summary>
     [TestMethod]
     public void BothExtensions_ShouldHaveSamePrefix()
     {
@@ -908,6 +1098,9 @@ public class AtomPublishingSyndicationExtensionTest
         edited.XmlPrefix.ShouldBe("app");
     }
 
+    /// <summary>
+    /// The edited and control extensions both report version <c>1.0</c>.
+    /// </summary>
     [TestMethod]
     public void BothExtensions_ShouldHaveSameVersion()
     {
@@ -920,6 +1113,9 @@ public class AtomPublishingSyndicationExtensionTest
         edited.Version.ShouldBe(new Version("1.0"));
     }
 
+    /// <summary>
+    /// The edited and control extensions cite the same documentation URI.
+    /// </summary>
     [TestMethod]
     public void BothExtensions_ShouldHaveSameDocumentation()
     {
@@ -931,6 +1127,9 @@ public class AtomPublishingSyndicationExtensionTest
         edited.Documentation.ShouldBe(control.Documentation);
     }
 
+    /// <summary>
+    /// The edited extension's <c>MatchByType</c> does not claim a control extension.
+    /// </summary>
     [TestMethod]
     public void MatchByType_EditedExtension_ShouldNotMatchControlExtension()
     {
@@ -944,6 +1143,9 @@ public class AtomPublishingSyndicationExtensionTest
         matchesEdited.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The control extension's <c>MatchByType</c> does not claim an edited extension.
+    /// </summary>
     [TestMethod]
     public void MatchByType_ControlExtension_ShouldNotMatchEditedExtension()
     {

@@ -6,14 +6,14 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents a publication source in a sitemap news extension.
+/// Represents the publication that originally carried a news article.
 /// </summary>
 /// <remarks>
-///     <para>
-///         The <see cref="SitemapNewsPublication"/> class contains information about the publication
-///         that originally published the news article, including the publication name and language.
-///     </para>
+///     Both members are required by the specification, and both are load-bearing for matching: the
+///     <see cref="Name"/> identifies the publication to Google and the <see cref="Language"/> tells it
+///     which edition it is reading.
 /// </remarks>
+/// <seealso cref="SitemapNewsExtension.Publication"/>
 /// <seealso href="https://www.google.com/schemas/sitemap-news/0.9/sitemap-news.xsd">News Sitemap 0.9 Schema</seealso>
 public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEquatable<SitemapNewsPublication>, IComparisonOperators
 {
@@ -37,10 +37,12 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// <summary>
     /// Initializes a new instance of the <see cref="SitemapNewsPublication"/> class with the specified name and language.
     /// </summary>
-    /// <param name="name">The name of the news publication.</param>
-    /// <param name="language">The language of the publication in ISO 639 format.</param>
-    /// <exception cref="ArgumentException">The <paramref name="name"/> is null or empty.</exception>
-    /// <exception cref="ArgumentException">The <paramref name="language"/> is null or empty.</exception>
+    /// <param name="name">The name of the news publication, as Google already shows it.</param>
+    /// <param name="language">An ISO 639 language code, optionally with an ISO 3166-1 alpha-2 region.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="language"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="language"/> is an empty string.</exception>
     public SitemapNewsPublication(string name, string language)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
@@ -53,11 +55,16 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// <summary>
     /// Gets or sets the name of the news publication.
     /// </summary>
-    /// <value>The name of the publication. This is a required property.</value>
+    /// <value>
+    ///     The publication name, trimmed. The default value is an <i>empty</i> string. Required by the
+    ///     specification.
+    /// </value>
     /// <remarks>
-    ///     The name must exactly match the name as it appears on your articles on news.google.com.
+    ///     It must match the name Google already shows against the publication's articles, exactly. A near
+    ///     miss is not corrected or fuzzily matched; it simply fails to associate.
     /// </remarks>
-    /// <exception cref="ArgumentException">The <paramref name="value"/> is null or empty.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Name
     {
         get => publicationName;
@@ -72,12 +79,14 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// <summary>
     /// Gets or sets the language of the publication.
     /// </summary>
-    /// <value>The language of the publication in ISO 639 format. This is a required property.</value>
-    /// <remarks>
-    ///     This should be an ISO 639 language code, optionally followed by a region suffix using ISO 3166-1 alpha-2.
-    ///     Examples: "en", "en-US", "zh-cn".
-    /// </remarks>
-    /// <exception cref="ArgumentException">The <paramref name="value"/> is null or empty.</exception>
+    /// <value>
+    ///     An ISO 639 language code, optionally followed by an ISO 3166-1 alpha-2 region — <c>en</c>,
+    ///     <c>en-US</c>, <c>zh-cn</c>. The default value is an <i>empty</i> string. Required by the
+    ///     specification.
+    /// </value>
+    /// <remarks>The value is trimmed and stored as written; it is not validated or case-normalised.</remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Language
     {
         get => publicationLanguage;
@@ -94,9 +103,9 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="SitemapNewsPublication"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed XML namespaces.</param>
-    /// <returns><b>true</b> if the <see cref="SitemapNewsPublication"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="SitemapNewsPublication"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -126,8 +135,9 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which the publication will be written.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed elements.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference or empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -169,7 +179,7 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// Determines whether the specified <see cref="SitemapNewsPublication"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SitemapNewsPublication"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SitemapNewsPublication"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SitemapNewsPublication"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SitemapNewsPublication? other)
     {
         if (other is null)
@@ -184,7 +194,7 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SitemapNewsPublication other && this.Equals(other);
 
     /// <summary>
@@ -204,7 +214,7 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(SitemapNewsPublication? first, SitemapNewsPublication? second)
     {
         if (first is null) return second is null;
@@ -216,7 +226,7 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(SitemapNewsPublication? first, SitemapNewsPublication? second) => !(first == second);
 
 }

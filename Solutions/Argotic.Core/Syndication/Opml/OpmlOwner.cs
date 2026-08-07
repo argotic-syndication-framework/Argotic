@@ -8,6 +8,13 @@ namespace Argotic.Syndication;
 /// <summary>
 /// Represents the owner of an <see cref="OpmlDocument"/>.
 /// </summary>
+/// <remarks>
+///     This is not an element of its own. OPML puts <c>ownerName</c>, <c>ownerEmail</c> and <c>ownerId</c>
+///     directly in the document <c>head</c>; grouping them into a type is this library's convenience, which is
+///     why <see cref="Load(XPathNavigator)"/> and <see cref="WriteTo(XmlWriter)"/> both work against the
+///     <c>head</c> element rather than an element of their own. All three parts are optional.
+/// </remarks>
+/// <seealso cref="OpmlHead.Owner"/>
 public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, IComparisonOperators, IXmlWritable
 {
 
@@ -55,7 +62,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// <summary>
     /// Gets or sets the email address of the owner of this document.
     /// </summary>
-    /// <value>The email address of the owner of this document.</value>
+    /// <value>The <c>ownerEmail</c> element, or an <i>empty</i> string if none was specified. The value is trimmed on assignment and is not validated as an address.</value>
     public string EmailAddress
     {
         get;
@@ -66,19 +73,19 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// <summary>
     /// Gets or sets the http address of a web page that contains information that allows a human reader to communicate with the author of the document via email or other means.
     /// </summary>
-    /// <value>
-    ///     A <see cref="Uri"/> that represents the http address of a web page that contains information
-    ///     that allows a human reader to communicate with the author of the document via email or other means.
-    /// </value>
+    /// <value>The <c>ownerId</c> element, or <see langword="null"/> if none was specified.</value>
     /// <remarks>
-    ///     The owner identifier may also may be used to identify the author. No two authors should have the same identifier.
+    ///     This doubles as the author's identity — OPML says no two authors have the same <c>ownerId</c> — so
+    ///     it is the field to key on rather than <see cref="Name"/> or <see cref="EmailAddress"/>. The page it
+    ///     addresses may itself carry <c>link</c> elements to further descriptions of the owner, such as a FOAF
+    ///     document or a feed.
     /// </remarks>
     public Uri? Id { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the owner of this document.
     /// </summary>
-    /// <value>The name of the owner of this document.</value>
+    /// <value>The <c>ownerName</c> element, or an <i>empty</i> string if none was specified. The value is trimmed on assignment.</value>
     public string Name
     {
         get;
@@ -90,11 +97,11 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// Loads this <see cref="OpmlOwner"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="OpmlOwner"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="OpmlOwner"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="OpmlHead"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -131,7 +138,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// Saves the current <see cref="OpmlOwner"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -183,7 +190,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// Determines whether the specified <see cref="OpmlOwner"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="OpmlOwner"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="OpmlOwner"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="OpmlOwner"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(OpmlOwner? other)
     {
         if (other is null)
@@ -198,7 +205,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is OpmlOwner other && this.Equals(other);
 
     /// <summary>
@@ -212,7 +219,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(OpmlOwner? first, OpmlOwner? second)
     {
         if (first is null) return second is null;
@@ -224,6 +231,6 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(OpmlOwner? first, OpmlOwner? second) => !(first == second);
 }

@@ -6,6 +6,11 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.SiteSummarySyndication;
 
+/// <summary>
+/// Covers the RSS syndication module, <c>http://purl.org/rss/1.0/modules/syndication/</c>: the update
+/// period, frequency and base its context carries, the period-name mapping in both directions, how the
+/// three elements are read from an RSS 2.0 item, and its comparison, equality and ordering contracts.
+/// </summary>
 [TestClass]
 public class SiteSummaryUpdateSyndicationExtensionTest
 {
@@ -17,6 +22,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor yields an instance of the syndication-module extension type.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateSyndicationExtensionConstructorTest()
     {
@@ -25,6 +33,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         target.ShouldBeOfType<SiteSummaryUpdateSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions holding identical context compare equal.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateCompareToTest()
     {
@@ -34,6 +45,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// An extension is equal to a separately constructed extension holding the same context.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateEqualsTest()
     {
@@ -43,6 +57,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Hashing a populated extension returns a non-zero value rather than throwing.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySyndicationGetHashCodeTest()
     {
@@ -53,6 +70,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// An RSS 2.0 feed whose item carries <c>sy:</c> elements loads without error.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateLoadTest()
     {
@@ -63,6 +83,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         feed.Load(reader);
     }
 
+    /// <summary>
+    /// Attaching the extension to an item and saving the feed produces non-empty XML.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateCreateXmlTest()
     {
@@ -72,6 +95,10 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// A loaded feed's single item reports that it has extensions, and the syndication-module one is found
+    /// both by type argument and through the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateFullTest()
     {
@@ -90,6 +117,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
             .ShouldBeOfType<SiteSummaryUpdateSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts a syndication-module extension.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateMatchByTypeTest()
     {
@@ -98,6 +128,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> returns a non-empty rendering of a populated extension.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateToStringTest()
     {
@@ -106,6 +139,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// <c>WriteTo</c> produces non-empty XML for a populated extension; the text itself is not asserted.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateWriteToTest()
     {
@@ -118,6 +154,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         output.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// Extensions holding different context are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateOpEqualityTestFailure()
     {
@@ -127,6 +166,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Extensions holding the same context are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateOpEqualityTestSuccess()
     {
@@ -136,6 +178,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The extension with the earlier <c>updateBase</c> is not greater than the other.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateOpGreaterThanTest()
     {
@@ -145,6 +190,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Extensions holding different context are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateOpInequalityTest()
     {
@@ -154,6 +202,10 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Ordering is decided by <c>updateBase</c> before frequency or period, so the extension based in 2010
+    /// is less than the one based in 2020 despite its shorter period.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateOpLessThanTest()
     {
@@ -163,6 +215,10 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The context of a populated extension carries the hourly period, the frequency and the update base
+    /// assigned to it.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateContextTest()
     {
@@ -175,6 +231,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         context.Base.ShouldBe(new DateTime(2010, 8, 1));
     }
 
+    /// <summary>
+    /// <c>Daily</c> renders as the element text <c>daily</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdatePeriodAsStringTest()
     {
@@ -184,6 +243,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// The name <c>weekly</c> maps onto <see cref="SiteSummaryUpdatePeriod.Weekly"/>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdatePeriodByNameTest()
     {
@@ -192,6 +254,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// Assigning a <see langword="null"/> context throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateContextSetterThrowsOnNull()
     {
@@ -202,6 +267,10 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Context = null!);
     }
 
+    /// <summary>
+    /// An RSS 2.0 item carrying <c>sy:updatePeriod</c>, <c>sy:updateFrequency</c> and an ISO 8601
+    /// <c>sy:updateBase</c> fills all three onto the extension found on that item.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateRoundTripTest()
     {
@@ -224,6 +293,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         itemExtension.Context.Base.Day.ShouldBe(1);
     }
 
+    /// <summary>
+    /// <c>&lt;=</c> holds between two extensions holding identical context.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateOpLessThanOrEqualTest()
     {
@@ -235,6 +307,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         (first <= second).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&gt;=</c> holds between two extensions holding identical context.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateOpGreaterThanOrEqualTest()
     {
@@ -246,6 +321,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         (first >= second).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> rejects an extension from another family.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateMatchByTypeReturnsFalseForDifferentType()
     {
@@ -259,6 +337,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension is not equal to a value of an unrelated type.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateEqualsReturnsFalseForDifferentType()
     {
@@ -269,6 +350,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         target.Equals("not an extension").ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension sorts after <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateCompareToNullReturnsPositive()
     {
@@ -282,6 +366,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Every period renders as its own lower-case name, and <c>None</c> as an <i>empty</i> string.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdatePeriodAsStringForAllPeriods()
     {
@@ -294,6 +381,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         SiteSummaryUpdateSyndicationExtension.PeriodAsString(SiteSummaryUpdatePeriod.None).ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// Every lower-case period name maps back onto its enumeration value.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdatePeriodByNameForAllPeriods()
     {
@@ -305,6 +395,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         SiteSummaryUpdateSyndicationExtension.PeriodByName("yearly").ShouldBe(SiteSummaryUpdatePeriod.Yearly);
     }
 
+    /// <summary>
+    /// A period name the module does not define maps to <c>None</c> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdatePeriodByNameReturnsNoneForUnknown()
     {
@@ -315,6 +408,10 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBe(SiteSummaryUpdatePeriod.None);
     }
 
+    /// <summary>
+    /// A frequency of <c>0</c> throws <c>ArgumentOutOfRangeException</c>: the module counts at least one
+    /// update per period.
+    /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateFrequencyThrowsOnInvalidValue()
     {

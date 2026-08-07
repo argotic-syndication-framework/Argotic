@@ -7,16 +7,23 @@ using Argotic.Extensions;
 namespace Argotic.Syndication;
 
 /// <summary>
-/// Represents a form to submit a text query to a <see cref="RssFeed">feed's</see> publisher over the Common Gateway Interface (CGI).
+/// Represents a single-field HTML form that a reader may render alongside a <see cref="RssFeed">feed</see>, submitting the query to a CGI script of the publisher's choosing.
 /// </summary>
+/// <remarks>
+///     <para>
+///         The RSS 2.0 specification is unusually candid about this element: "The purpose of the
+///         <c>&lt;textInput&gt;</c> element is something of a mystery. You can use it to specify a search
+///         engine box. Or to allow a reader to provide feedback. Most aggregators ignore it."
+///     </para>
+///     <para>
+///         Treat it as a round-trip concern rather than a feature. It is supported here so that a document
+///         carrying one survives being read and written back unchanged; there is very little reason to add
+///         one to a new feed.
+///     </para>
+/// </remarks>
 /// <seealso cref="RssChannel.TextInput"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the RssTextInput class.">
-///         <code 
-///             source="..\..\Argotic.Examples\Core\Rss\RssTextInputExample.cs" 
-///             region="RssTextInput" 
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Rss\RssTextInputExample.cs" language="cs" title="The following code example demonstrates the usage of the RssTextInput class." />
 /// </example>
 public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
@@ -36,13 +43,13 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <param name="link">A <see cref="Uri"/> that represents the URL of the CGI script that handles the query.</param>
     /// <param name="name">The name of the form component that contains the query.</param>
     /// <param name="title">A string value that labels the button used to submit the query.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="description"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="description"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="description"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="description"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="link"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="title"/> is an empty string.</exception>
     public RssTextInput(string description, Uri link, string name, string title)
     {
         this.Description = description;
@@ -54,21 +61,20 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
-    /// Gets or sets character data that provides a human-readable label explaining this form's purpose.
+    /// Gets or sets the text explaining what the form is for.
     /// </summary>
-    /// <value>Character data that provides a human-readable label explaining this form's purpose.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The <c>description</c> sub-element. Required by the specification. The default value is an <i>empty</i> string.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Description
     {
         get;
@@ -82,8 +88,8 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <summary>
     /// Gets or sets the URL of the CGI script that handles the query.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the CGI script that handles the query.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>link</c> sub-element, or <see langword="null"/> if none was specified. Required by the specification.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Link
     {
         get;
@@ -95,15 +101,16 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     }
 
     /// <summary>
-    /// Gets or sets the name of the form component that contains the query.
+    /// Gets or sets the name of the form field that carries the query.
     /// </summary>
-    /// <value>The name of the form component that contains the query.</value>
+    /// <value>The <c>name</c> sub-element — the HTML input name, not a label. Required by the specification. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     The value of this property <b>must</b> begin with a letter and contain only these characters: 
-    ///     the letters A to Z in either case, numeric digits, colons (":"), hyphens ("-"), periods (".") and underscores ("_").
+    ///     This becomes an HTML attribute name, so it must begin with a letter and contain only letters
+    ///     A to Z in either case, digits, colons, hyphens, periods and underscores. Nothing here validates
+    ///     that, and an invalid name produces a form the reader cannot submit rather than a load failure.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Name
     {
         get;
@@ -115,11 +122,11 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     } = string.Empty;
 
     /// <summary>
-    /// Gets or sets a value that labels the button used to submit the query.
+    /// Gets or sets the caption of the submit button.
     /// </summary>
-    /// <value>A string value that labels the button used to submit the query.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The <c>title</c> sub-element. Required by the specification. The default value is an <i>empty</i> string.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Title
     {
         get;
@@ -138,11 +145,11 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <see langword="true"/> if the object passed to it matches the conditions defined in the delegate.
     ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is <see langword="null"/>.</exception>
     public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
@@ -161,11 +168,11 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// Loads this <see cref="RssTextInput"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="RssTextInput"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssTextInput"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssTextInput"/>.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -217,12 +224,12 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="RssTextInput"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssTextInput"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssTextInput"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -238,7 +245,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// Saves the current <see cref="RssTextInput"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -286,7 +293,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// Determines whether the specified <see cref="RssTextInput"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="RssTextInput"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="RssTextInput"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="RssTextInput"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(RssTextInput? other)
     {
         if (other is null)
@@ -301,7 +308,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is RssTextInput other && this.Equals(other);
 
     /// <summary>
@@ -322,7 +329,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(RssTextInput? first, RssTextInput? second)
     {
         if (first is null) return second is null;
@@ -334,6 +341,6 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(RssTextInput? first, RssTextInput? second) => !(first == second);
 }

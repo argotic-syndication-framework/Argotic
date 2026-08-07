@@ -18,19 +18,29 @@ public class TrackbackSyndicationExtensionContext
     }
 
     /// <summary>
-    /// Gets the trackbacks that were pinged in reference.
+    /// Gets the addresses this item has already pinged.
     /// </summary>
     /// <value>
-    ///     A <see cref="IList{T}"/> collection of <see cref="Uri"/> objects that represent trackbacks that were pinged in reference.
-    ///     The default value is an <i>empty</i> collection.
+    ///     One <see cref="Uri"/> per <c>trackback:about</c> element, in document order. The default value
+    ///     is an <i>empty</i> collection.
     /// </value>
+    /// <remarks>
+    ///     A record of outbound notifications, and the inverse of <see cref="Ping"/>: that property says
+    ///     where others should ping this item, these say where this item pinged others.
+    /// </remarks>
     public IList<Uri> Abouts { get; } = [];
 
     /// <summary>
-    /// Gets or sets the TrackBack URL.
+    /// Gets or sets the address at which this item accepts Trackback pings.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the item's TrackBack URL.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>
+    ///     The <c>trackback:ping</c> URL, or <see langword="null"/> if none was specified.
+    /// </value>
+    /// <remarks>
+    ///     The element is written whether or not this is set — a <see langword="null"/> ping produces an
+    ///     empty <c>trackback:ping</c> rather than no element, so every serialized context carries one.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Ping
     {
         get;
@@ -45,11 +55,11 @@ public class TrackbackSyndicationExtensionContext
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="TrackbackSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="TrackbackSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="TrackbackSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="TrackbackSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -94,11 +104,11 @@ public class TrackbackSyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);

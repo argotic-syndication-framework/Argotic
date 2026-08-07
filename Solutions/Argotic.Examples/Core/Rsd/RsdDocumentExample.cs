@@ -6,16 +6,17 @@ using Argotic.Syndication.Specialized;
 namespace Argotic.Examples.Core.Rsd;
 
 /// <summary>
-/// Contains the code examples for the <see cref="RsdDocument"/> class.
+/// Demonstrates the whole <see cref="RsdDocument"/> surface: describing a blog's APIs by hand, then the <c>Load</c>, <c>LoadAsync</c>, <c>CreateAsync</c> and <c>Save</c> overloads.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="RsdDocument"/> class.
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
+///     Every resource type in the library exposes this same set of overloads, so what is shown here for
+///     <see cref="RsdDocument"/> reads across to the other formats unchanged. <c>CreateAsync</c> is the one-call
+///     form; <c>LoadAsync</c> on an instance is the form that lets you subscribe to <c>Loaded</c> first.
 /// </remarks>
 internal static class RsdDocumentExample
 {
     /// <summary>
-    /// Provides example code for the RsdDocument class.
+    /// Builds a complete <see cref="RsdDocument"/> by hand and prints it.
     /// </summary>
     public static void ClassExample()
     {
@@ -43,7 +44,7 @@ internal static class RsdDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the RsdDocument.CreateAsync(Uri) method
+    /// Creates an <see cref="RsdDocument"/> from a <see cref="Uri"/> in a single call.
     /// </summary>
     public static async Task CreateExampleAsync()
     {
@@ -65,7 +66,7 @@ internal static class RsdDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the LoadAsync(Uri) method with event notification
+    /// Subscribes to <c>Loaded</c> before loading, so the handler sees the resource the moment it is parsed.
     /// </summary>
     public static async Task LoadAsyncExampleAsync()
     {
@@ -95,7 +96,7 @@ internal static class RsdDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(IXPathNavigable) method
+    /// Loads an <see cref="RsdDocument"/> from an <see cref="IXPathNavigable"/>.
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
@@ -117,7 +118,7 @@ internal static class RsdDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(Stream) method
+    /// Loads an <see cref="RsdDocument"/> from a <see cref="Stream"/>.
     /// </summary>
     public static void LoadStreamExample()
     {
@@ -138,7 +139,7 @@ internal static class RsdDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(XmlReader) method
+    /// Loads an <see cref="RsdDocument"/> from an <see cref="XmlReader"/>.
     /// </summary>
     public static void LoadXmlReaderExample()
     {
@@ -166,7 +167,7 @@ internal static class RsdDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the LoadAsync(Uri, HttpClient) method
+    /// Loads an <see cref="RsdDocument"/> from a <see cref="Uri"/>, and shows where a caller-supplied <c>HttpClient</c> goes.
     /// </summary>
     public static async Task LoadUriExampleAsync()
     {
@@ -189,7 +190,7 @@ internal static class RsdDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the Save(Stream) method
+    /// Saves an <see cref="RsdDocument"/> to a <see cref="Stream"/>.
     /// </summary>
     public static void SaveStreamExample()
     {
@@ -203,7 +204,7 @@ internal static class RsdDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the Save(XmlWriter) method
+    /// Saves an <see cref="RsdDocument"/> through an <see cref="XmlWriter"/>, with indentation turned on.
     /// </summary>
     public static void SaveXmlWriterExample()
     {

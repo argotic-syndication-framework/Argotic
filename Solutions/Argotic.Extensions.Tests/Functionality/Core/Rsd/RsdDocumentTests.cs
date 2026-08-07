@@ -3,11 +3,18 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Rsd;
 
+/// <summary>
+/// Covers <see cref="RsdDocument"/> member by member: the service properties, the
+/// application interfaces a blog client chooses between, and a save followed by a load.
+/// </summary>
 [TestClass]
 public class RsdDocumentTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// A newly constructed document declares no application interfaces.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_CreatesEmptyDocument()
     {
@@ -17,6 +24,9 @@ public class RsdDocumentTests
         document.Interfaces.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// The engine name, the engine link and the homepage are read back exactly as assigned.
+    /// </summary>
     [TestMethod]
     public void Properties_CanBeSet()
     {
@@ -32,6 +42,9 @@ public class RsdDocumentTests
         document.Homepage.ShouldBe(new Uri("http://example.com/"));
     }
 
+    /// <summary>
+    /// An interface added to the document keeps its name, link, preferred flag and weblog identifier.
+    /// </summary>
     [TestMethod]
     public void Interfaces_Add_AddsInterfaceCorrectly()
     {
@@ -52,6 +65,9 @@ public class RsdDocumentTests
         addedApi.WeblogId.ShouldBe("123abc");
     }
 
+    /// <summary>
+    /// Documentation, notes and named settings can be attached to an interface after it is constructed.
+    /// </summary>
     [TestMethod]
     public void Interface_CanHaveOptionalProperties()
     {
@@ -71,6 +87,10 @@ public class RsdDocumentTests
         api.Settings["custom-setting"].ShouldBe("custom-value");
     }
 
+    /// <summary>
+    /// Saving writes an XML declaration and the <c>rsd</c>,
+    /// <c>service</c>, <c>engineName</c> and <c>api</c> elements.
+    /// </summary>
     [TestMethod]
     public void Save_ProducesValidXml()
     {
@@ -101,6 +121,9 @@ public class RsdDocumentTests
         xml.ShouldContain("<api");
     }
 
+    /// <summary>
+    /// A document saved to a stream and loaded back keeps its engine name and its interface count.
+    /// </summary>
     [TestMethod]
     public void RoundTrip_SaveAndLoad_PreservesData()
     {

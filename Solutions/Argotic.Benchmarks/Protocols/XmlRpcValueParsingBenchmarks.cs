@@ -278,16 +278,17 @@ public class XmlRpcValueParsingBenchmarks
     }
 
     /// <summary>
-    /// A spec-legal untyped <c>value</c>, which this library cannot parse: the whole chain, then failure.
+    /// A spec-legal untyped <c>value</c>, which now skips the comparison chain rather than walking it
+    /// to failure.
     /// </summary>
-    /// <returns>Whether the value parsed, which is <see langword="false"/>.</returns>
+    /// <returns>Whether the value parsed, which is <see langword="true"/>.</returns>
     /// <remarks>
     ///     <para>
     ///     XML-RPC 1.0 says "If no type is indicated, the type is string", and real ping servers emit
-    ///     it. <c>TryParseValue</c> returns <see langword="false"/> for it. That was measured against
+    ///     it. <c>TryParseValue</c> returned <see langword="false"/> for it. That was measured against
     ///     the shipped code, not inferred from reading it, and it is why this arm returns a
-    ///     <see cref="bool"/>: a <see langword="true"/> in the results table would mean the behaviour
-    ///     has changed and this remark is stale.
+    ///     <see cref="bool"/>: now that the defect below is fixed, a <see langword="false"/> in the
+    ///     results table would mean it has come back.
     ///     </para>
     ///     <para>
     ///     Why it used to fail, and why the code written to handle it was unreachable: text is a child
@@ -316,10 +317,11 @@ public class XmlRpcValueParsingBenchmarks
     /// <returns>Whether the value parsed, which must be <see langword="false"/>.</returns>
     /// <remarks>
     ///     The failure path of a <c>TryParse</c> is not free and is not the success path with a
-    ///     different return value: it falls out of the <c>i4</c> branch, past every remaining
+    ///     different return value: it falls out of the <c>i4</c> branch, skipping every remaining
     ///     comparison, to the shared <c>value = null; return false;</c> tail. A server that emits a
     ///     malformed integer costs its client this, and nothing has ever measured it. Against
-    ///     <see cref="ParseUntyped"/>, this fails after one comparison rather than nine.
+    ///     <see cref="ParseUntyped"/>, which never enters the chain at all, this enters it and fails
+    ///     at the first comparison.
     /// </remarks>
     [Benchmark(Description = "11. i4 with unparseable content (fails after 1 comparison)")]
     public bool ParseUnparseable() => XmlRpcClient.TryParseValue(this.unparseableValue, out _);

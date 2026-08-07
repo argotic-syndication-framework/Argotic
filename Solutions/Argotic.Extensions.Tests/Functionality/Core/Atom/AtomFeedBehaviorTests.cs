@@ -7,7 +7,8 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Atom;
 
 /// <summary>
-/// Behavior-driven tests for <see cref="AtomFeed"/> covering creation, parsing, and round-trip scenarios.
+/// Covers an Atom 1.0 feed end to end: building one in memory, parsing one, the text, person and link
+/// constructs it is made of, the round trips between the two, and loading one over HTTP.
 /// </summary>
 [TestClass]
 public class AtomFeedBehaviorTests
@@ -16,6 +17,9 @@ public class AtomFeedBehaviorTests
 
     #region Feed Creation Tests
 
+    /// <summary>
+    /// The three-argument constructor keeps the id, title and update time it was handed.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenCreatedWithRequiredProperties_ContainsCorrectValues()
     {
@@ -35,6 +39,9 @@ public class AtomFeedBehaviorTests
         feed.UpdatedOn.ShouldBe(updatedOn);
     }
 
+    /// <summary>
+    /// Entries are kept in the order they were added, each with its own title.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenEntriesAdded_ContainsAllEntries()
     {
@@ -63,6 +70,9 @@ public class AtomFeedBehaviorTests
         feed.Entries[1].Title!.Content.ShouldBe("Second Entry");
     }
 
+    /// <summary>
+    /// Authors are kept in order, each keeping its name, email address and uri.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenAuthorsAdded_ContainsAllAuthors()
     {
@@ -90,6 +100,9 @@ public class AtomFeedBehaviorTests
         feed.Authors[1].Uri.ShouldBe(new Uri("http://example.com/jane"));
     }
 
+    /// <summary>
+    /// Links are kept in order, each keeping its relation and its declared content type.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenLinksAdded_ContainsAllLinks()
     {
@@ -113,6 +126,9 @@ public class AtomFeedBehaviorTests
         feed.Links[1].ContentType.ShouldBe("text/html");
     }
 
+    /// <summary>
+    /// Categories are kept in order, with scheme and label preserved on the one that carries them.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenCategoriesAdded_ContainsAllCategories()
     {
@@ -141,6 +157,9 @@ public class AtomFeedBehaviorTests
 
     #region Feed Parsing Tests
 
+    /// <summary>
+    /// A well-formed Atom document read through an <see cref="XmlReader"/> yields its title and its id.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenLoadedFromValidXml_PopulatesProperties()
     {
@@ -159,6 +178,9 @@ public class AtomFeedBehaviorTests
         feed.Id.Uri.ShouldBe(new Uri("urn:uuid:12345678-1234-1234-1234-123456789012"));
     }
 
+    /// <summary>
+    /// Both entries in the document reach the entry collection, in document order.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenLoadedFromAtomWithEntries_PopulatesEntryCollection()
     {
@@ -179,6 +201,9 @@ public class AtomFeedBehaviorTests
         feed.Entries[1].Title!.Content.ShouldBe("Old Entry");
     }
 
+    /// <summary>
+    /// An entry's own <c>category</c> elements are parsed onto that entry, in document order.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenLoadedFromAtomWithEntries_PopulatesEntryCategories()
     {
@@ -197,6 +222,10 @@ public class AtomFeedBehaviorTests
         firstEntry.Categories[1].Term.ShouldBe("News");
     }
 
+    /// <summary>
+    /// A document with an unclosed element fails with <see cref="XmlException"/> rather than yielding a
+    /// half-filled feed.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenLoadedFromMalformedXml_ThrowsXmlException()
     {
@@ -212,6 +241,9 @@ public class AtomFeedBehaviorTests
         });
     }
 
+    /// <summary>
+    /// Loading from a stream gives the same title as loading through an <see cref="XmlReader"/>.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenLoadedFromStream_PopulatesProperties()
     {
@@ -232,6 +264,9 @@ public class AtomFeedBehaviorTests
 
     #region Round-Trip Tests
 
+    /// <summary>
+    /// Id, title, subtitle and rights all survive a save and a reload.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenSavedAndReloaded_PreservesBasicProperties()
     {
@@ -262,6 +297,9 @@ public class AtomFeedBehaviorTests
         loadedFeed.Rights.Content.ShouldBe(originalFeed.Rights.Content);
     }
 
+    /// <summary>
+    /// Every entry survives a round trip with its title and id, and none is added or lost.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenSavedAndReloaded_PreservesEntries()
     {
@@ -285,6 +323,9 @@ public class AtomFeedBehaviorTests
         }
     }
 
+    /// <summary>
+    /// An entry's summary survives a round trip verbatim.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenSavedAndReloaded_PreservesEntrySummary()
     {
@@ -317,6 +358,14 @@ public class AtomFeedBehaviorTests
         loadedFeed.Entries[0].Summary!.Content.ShouldBe("This is the entry summary text.");
     }
 
+    /// <summary>
+    /// A second round trip changes nothing a first one did not: title, entries, authors and categories
+    /// all still match the original.
+    /// </summary>
+    /// <remarks>
+    ///     Two cycles are the minimum that can see a compounding defect — one where each pass through
+    ///     the model alters the document a little further.
+    /// </remarks>
     [TestMethod]
     public void AtomFeed_WhenSavedAndReloadedTwice_MaintainsDataIntegrity()
     {
@@ -348,6 +397,9 @@ public class AtomFeedBehaviorTests
 
     #region AtomTextConstruct Type Tests
 
+    /// <summary>
+    /// A text construct declared as <c>text</c> keeps both its content and that declaration.
+    /// </summary>
     [TestMethod]
     public void AtomTextConstruct_WhenCreatedWithPlainText_HasCorrectType()
     {
@@ -362,6 +414,9 @@ public class AtomFeedBehaviorTests
         textConstruct.TextType.ShouldBe(AtomTextConstructType.Text);
     }
 
+    /// <summary>
+    /// A text construct declared as <c>html</c> holds the markup itself, unescaped, in memory.
+    /// </summary>
     [TestMethod]
     public void AtomTextConstruct_WhenCreatedWithHtml_HasCorrectType()
     {
@@ -376,6 +431,9 @@ public class AtomFeedBehaviorTests
         textConstruct.TextType.ShouldBe(AtomTextConstructType.Html);
     }
 
+    /// <summary>
+    /// A text construct declared as <c>xhtml</c> keeps that declaration.
+    /// </summary>
     [TestMethod]
     public void AtomTextConstruct_WhenCreatedWithXhtml_HasCorrectType()
     {
@@ -389,6 +447,10 @@ public class AtomFeedBehaviorTests
         textConstruct.TextType.ShouldBe(AtomTextConstructType.Xhtml);
     }
 
+    /// <summary>
+    /// A construct's <c>type</c> is written out and read back, so an <c>html</c> title does not return
+    /// as plain text.
+    /// </summary>
     [TestMethod]
     public void AtomTextConstruct_WhenSavedAndReloaded_PreservesTextType()
     {
@@ -414,6 +476,9 @@ public class AtomFeedBehaviorTests
         loadedFeed.Title!.TextType.ShouldBe(AtomTextConstructType.Html);
     }
 
+    /// <summary>
+    /// Each construct type spells itself on the wire in lower case: <c>html</c>, <c>text</c>, <c>xhtml</c>.
+    /// </summary>
     [TestMethod]
     public void AtomTextConstruct_TypeConversion_ReturnsCorrectString()
     {
@@ -423,6 +488,9 @@ public class AtomFeedBehaviorTests
         AtomTextConstruct.ConstructTypeAsString(AtomTextConstructType.Xhtml).ShouldBe("xhtml");
     }
 
+    /// <summary>
+    /// Reading a type back off the wire is case-insensitive, so <c>HTML</c> is recognised as <c>html</c>.
+    /// </summary>
     [TestMethod]
     public void AtomTextConstruct_TypeConversionByName_ReturnsCorrectEnum()
     {
@@ -437,6 +505,9 @@ public class AtomFeedBehaviorTests
 
     #region AtomPersonConstruct Tests
 
+    /// <summary>
+    /// A person construct keeps all three of its parts: name, email address and uri.
+    /// </summary>
     [TestMethod]
     public void AtomPersonConstruct_WhenCreatedWithAllProperties_ContainsCorrectValues()
     {
@@ -453,6 +524,10 @@ public class AtomFeedBehaviorTests
         person.Uri.ShouldBe(new Uri("http://example.com/john"));
     }
 
+    /// <summary>
+    /// Authors and contributors survive a round trip in their own collections, without one absorbing
+    /// the other.
+    /// </summary>
     [TestMethod]
     public void AtomPersonConstruct_WhenSavedAndReloaded_PreservesAllProperties()
     {
@@ -493,6 +568,9 @@ public class AtomFeedBehaviorTests
 
     #region AtomLink Tests
 
+    /// <summary>
+    /// A link keeps the uri and the relation it was constructed with.
+    /// </summary>
     [TestMethod]
     public void AtomLink_WhenCreatedWithRelAttribute_ContainsCorrectValues()
     {
@@ -504,6 +582,9 @@ public class AtomFeedBehaviorTests
         link.Relation.ShouldBe("alternate");
     }
 
+    /// <summary>
+    /// A link also carries its content type, title and length, the last as a number rather than text.
+    /// </summary>
     [TestMethod]
     public void AtomLink_WhenCreatedWithAllAttributes_ContainsCorrectValues()
     {
@@ -522,6 +603,10 @@ public class AtomFeedBehaviorTests
         link.Length.ShouldBe(1024);
     }
 
+    /// <summary>
+    /// Three links with distinct relations survive a round trip, each keeping its own content type, and
+    /// the enclosure keeping its five-million-byte length.
+    /// </summary>
     [TestMethod]
     public void AtomLink_WhenSavedAndReloaded_PreservesAllAttributes()
     {
@@ -569,6 +654,9 @@ public class AtomFeedBehaviorTests
         enclosureLink.Length.ShouldBe(5_000_000);
     }
 
+    /// <summary>
+    /// The <c>via</c> relation is stored as written, not normalised away to a better-known one.
+    /// </summary>
     [TestMethod]
     public void AtomLink_WithViaRelation_SetsCorrectly()
     {
@@ -579,6 +667,9 @@ public class AtomFeedBehaviorTests
         link.Relation.ShouldBe("via");
     }
 
+    /// <summary>
+    /// The <c>related</c> relation is likewise stored as written.
+    /// </summary>
     [TestMethod]
     public void AtomLink_WithRelatedRelation_SetsCorrectly()
     {
@@ -593,6 +684,9 @@ public class AtomFeedBehaviorTests
 
     #region Feed Optional Properties Tests
 
+    /// <summary>
+    /// A generator's name, uri and version all survive a round trip.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenGeneratorSet_SavesAndLoadsCorrectly()
     {
@@ -623,6 +717,9 @@ public class AtomFeedBehaviorTests
         loadedFeed.Generator.Version.ShouldBe("1.0.0");
     }
 
+    /// <summary>
+    /// Icon and logo survive a round trip without being confused for one another.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenIconAndLogoSet_SavesAndLoadsCorrectly()
     {
@@ -654,6 +751,9 @@ public class AtomFeedBehaviorTests
 
     #region Feed Format Tests
 
+    /// <summary>
+    /// A feed reports <c>Atom</c> as its format before anything has been loaded into it.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_Format_ReturnsAtom()
     {
@@ -664,6 +764,9 @@ public class AtomFeedBehaviorTests
         feed.Format.ShouldBe(Argotic.Common.SyndicationContentFormat.Atom);
     }
 
+    /// <summary>
+    /// A feed reports version 1.0 — the RFC 4287 format, not the 0.3 draft.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_Version_Returns1_0()
     {
@@ -678,6 +781,9 @@ public class AtomFeedBehaviorTests
 
     #region Loaded Event Tests
 
+    /// <summary>
+    /// Loading through an <see cref="XmlReader"/> raises the <c>Loaded</c> event.
+    /// </summary>
     [TestMethod]
     public void AtomFeed_WhenLoaded_RaisesLoadedEvent()
     {
@@ -699,6 +805,13 @@ public class AtomFeedBehaviorTests
 
     #region Async Operations Tests
 
+    /// <summary>
+    /// A feed fetched over HTTP is parsed into title and id, and raises <c>Loaded</c> as the synchronous
+    /// path does.
+    /// </summary>
+    /// <remarks>
+    ///     The response comes from a mock message handler, so nothing leaves the machine.
+    /// </remarks>
     [TestMethod]
     public async Task AtomFeed_LoadAsync_LoadsFeedCorrectly()
     {
@@ -723,6 +836,9 @@ public class AtomFeedBehaviorTests
         feed.Id.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// Entries fetched over HTTP arrive complete and in document order, as they do from a stream.
+    /// </summary>
     [TestMethod]
     public async Task AtomFeed_LoadAsync_WithEntries_LoadsAllEntries()
     {
@@ -744,6 +860,9 @@ public class AtomFeedBehaviorTests
         feed.Entries[1].Title!.Content.ShouldBe("Old Entry");
     }
 
+    /// <summary>
+    /// The static factory returns a feed already loaded from the uri, saving the caller a construct-then-load pair.
+    /// </summary>
     [TestMethod]
     public async Task AtomFeed_CreateAsync_CreatesAndLoadsNewFeed()
     {
@@ -763,6 +882,10 @@ public class AtomFeedBehaviorTests
         feed.Format.ShouldBe(Argotic.Common.SyndicationContentFormat.Atom);
     }
 
+    /// <summary>
+    /// Load settings reach the async path: with extension auto-detection on, a feed carrying a
+    /// <c>dc:creator</c> comes back reporting that it has extensions.
+    /// </summary>
     [TestMethod]
     public async Task AtomFeed_LoadAsync_WithSettings_AppliesSettings()
     {
@@ -798,6 +921,10 @@ public class AtomFeedBehaviorTests
         feed.HasExtensions.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>Loaded</c> event reports the uri the document was fetched from, so a handler watching
+    /// several feeds can tell which one arrived.
+    /// </summary>
     [TestMethod]
     public async Task AtomFeed_LoadAsync_IncludesSourceUriInEventArgs()
     {

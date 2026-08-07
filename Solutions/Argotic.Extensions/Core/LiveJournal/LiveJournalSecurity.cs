@@ -33,7 +33,7 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// Initializes a new instance of the <see cref="LiveJournalSecurity"/> class using the supplied <see cref="LiveJournalSecurityType"/>.
     /// </summary>
     /// <param name="accessType">A <see cref="LiveJournalSecurityType"/> enumeration value that represents the access type.</param>
-    /// <param name="mask">An integer indicating the friend-groups mask.</param>
+    /// <param name="mask">A bit field naming the friend groups the entry is visible to. Meaningful only when <paramref name="accessType"/> is <see cref="LiveJournalSecurityType.Friends"/>.</param>
     public LiveJournalSecurity(LiveJournalSecurityType accessType, int mask)
     {
         this.Accessibility = accessType;
@@ -49,10 +49,12 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// <summary>
     /// Gets or sets the friend-groups mask.
     /// </summary>
-    /// <value>An integer indicating the friend-groups mask used. The default value is <see cref="Int32.MinValue"/>, which indicates that no friend-groups mask was specified.</value>
+    /// <value>A bit field naming the friend groups the entry is visible to. The default value is <see cref="Int32.MinValue"/>, which indicates that no friend-groups mask was specified.</value>
     /// <remarks>
-    ///     This property only applies if the <see cref="Accessibility"/> property is <see cref="LiveJournalSecurityType.Friends">friends</see>
-    ///     and <b>only</b> if the author of the post is the same as the user who has authenticated the feed request.
+    ///     Applies only when <see cref="Accessibility"/> is <see cref="LiveJournalSecurityType.Friends">friends</see>,
+    ///     and LiveJournal emits it only when the author of the post is the same user who authenticated
+    ///     the feed request — so for anyone else it is always absent, whatever the entry's real
+    ///     visibility.
     /// </remarks>
     public int Mask { get; set; } = int.MinValue;
 
@@ -60,7 +62,7 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// Returns the access level identifier for the supplied <see cref="LiveJournalSecurityType"/>.
     /// </summary>
     /// <param name="level">The <see cref="LiveJournalSecurityType"/> to get the access level identifier for.</param>
-    /// <returns>The access level identifier for the supplied <paramref name="level"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The access level identifier for the supplied <paramref name="level"/>; otherwise, an empty string.</returns>
     public static string AccessibilityAsString(LiveJournalSecurityType level) =>
         EnumerationMetadataAttribute.GetAlternateValue(level);
 
@@ -68,10 +70,8 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// Returns the <see cref="LiveJournalSecurityType"/> enumeration value that corresponds to the specified access level name.
     /// </summary>
     /// <param name="name">The name of the access level.</param>
-    /// <returns>A <see cref="LiveJournalSecurityType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>LiveJournalSecurityType.None</b>.</returns>
+    /// <returns>A <see cref="LiveJournalSecurityType"/> enumeration value that corresponds to the specified string; otherwise, <see cref="LiveJournalSecurityType.None"/>.</returns>
     /// <remarks>This method disregards case of specified access level name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static LiveJournalSecurityType AccessibilityByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, LiveJournalSecurityType.None);
 
@@ -79,11 +79,11 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// Loads this <see cref="LiveJournalSecurity"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="LiveJournalSecurity"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="LiveJournalSecurity"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="LiveJournalSecurity"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -120,7 +120,7 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// Saves the current <see cref="LiveJournalSecurity"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -140,10 +140,7 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="LiveJournalSecurity"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="LiveJournalSecurity"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -181,7 +178,7 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// Determines whether the specified <see cref="LiveJournalSecurity"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="LiveJournalSecurity"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="LiveJournalSecurity"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="LiveJournalSecurity"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(LiveJournalSecurity? other)
     {
         if (other is null)
@@ -196,7 +193,7 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is LiveJournalSecurity other && this.Equals(other);
 
     /// <summary>
@@ -210,7 +207,7 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(LiveJournalSecurity? first, LiveJournalSecurity? second)
     {
         if (first is null) return second is null;
@@ -222,7 +219,7 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(LiveJournalSecurity? first, LiveJournalSecurity? second) => !(first == second);
 
 }

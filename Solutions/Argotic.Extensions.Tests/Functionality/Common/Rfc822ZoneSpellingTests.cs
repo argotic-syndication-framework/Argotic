@@ -13,7 +13,7 @@ namespace Argotic.Extensions.Tests.Functionality.Common;
 ///     <c>Mon, 03 Aug 2026 21:17:00 UTC</c>, and every one of them parsed to
 ///     <see cref="DateTime.MinValue"/>. RFC 822 §5.1 defines <c>UT</c>, not <c>UTC</c>, so the zone
 ///     table had no branch for it — and the near-miss is worse than an obvious gap, because
-///     <c>EndsWith(" UT")</c> is <b>false</b> for a string ending <c>" UTC"</c>, so it fell past every
+///     <c>EndsWith(" UT")</c> is <see langword="false"/> for a string ending <c>" UTC"</c>, so it fell past every
 ///     arm to the "no conversion needed" default and then failed to parse.
 ///     </para>
 ///     <para>
@@ -63,6 +63,9 @@ public sealed class Rfc822ZoneSpellingTests
     ///     The control. Without it the rows above are equally consistent with "every zone suffix is
     ///     now treated as UTC", which would silently shift every North American feed.
     /// </remarks>
+    /// <param name="value">The date, ending in a zone the RFC does define or a numeric offset.</param>
+    /// <param name="expectedHour">The hour the parsed value carries, after the zone has been applied.</param>
+    /// <param name="expectedMinute">The minute it carries; only the <c>+0530</c> row moves it.</param>
     [TestMethod]
     [DataRow("Mon, 03 Aug 2026 21:17:00 GMT", 21, 17)]
     [DataRow("Mon, 03 Aug 2026 21:17:00 EST", 2, 17)]

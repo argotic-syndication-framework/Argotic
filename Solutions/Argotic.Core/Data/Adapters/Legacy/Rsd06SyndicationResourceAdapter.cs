@@ -12,11 +12,19 @@ namespace Argotic.Data.Adapters;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="Rsd06SyndicationResourceAdapter"/> serves as a bridge between a <see cref="RsdDocument"/> and an XML data source.
-///         The <see cref="Rsd06SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(RsdDocument)"/>, which changes the data
-///         in the <see cref="RsdDocument"/> to match the data in the data source.
+///     RSD 0.6 and RSD 1.0 share a document shape and a namespace, and differ in one detail that matters:
+///     0.6 names the endpoint attribute on <c>api</c> <c>rpcLink</c>, where 1.0 names it <c>apiLink</c>.
+///     <see cref="RsdApplicationInterface"/> reads only <c>apiLink</c>, so this adapter reads <c>rpcLink</c>
+///     itself before delegating, and keeps the interface when <c>Load</c> reported nothing but a link was
+///     recovered. A 0.6 document whose <c>api</c> elements carry only <c>rpcLink</c> would otherwise load
+///     as a document with no interfaces at all.
 ///     </para>
-///     <para>This syndication resource adapter is designed to fill <see cref="RsdDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSD 0.6 specification.</para>
+///     <para>
+///     Everything else is the RSD 1.0 walk: <c>rsd/service</c> for the engine identity, <c>apis/api</c> for
+///     the interfaces, and the same <c>RsdUtility</c> selectors that retry without the <c>rsd:</c> prefix so
+///     that documents served with no namespace still read, plus the dasBlog case where <c>service</c> alone
+///     carries an empty default namespace.
+///     </para>
 /// </remarks>
 public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
 {
@@ -28,17 +36,23 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <remarks>
     ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="RsdDocument"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public Rsd06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
     /// <summary>
-    /// Modifies the <see cref="RsdDocument"/> to match the data source.
+    /// Reads the engine identity and the API list from <c>rsd/service</c>, recovering each interface's endpoint from the 0.6 <c>rpcLink</c> attribute, then attaches the syndication extensions found on <c>rsd</c>.
     /// </summary>
     /// <param name="resource">The <see cref="RsdDocument"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     <c>rpcLink</c> is read <i>before</i> <c>Load</c>, so an <c>apiLink</c> on the same element — read
+    ///     inside <c>Load</c> — overwrites it and the newer spelling wins where a document carries both. The
+    ///     interface is then kept on <c>api.Load(...) || api.Link is not null</c>, so an <c>api</c> whose
+    ///     only usable content was <c>rpcLink</c> survives a <c>Load</c> that reported nothing.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(RsdDocument resource)
     {
         ArgumentNullException.ThrowIfNull(resource);

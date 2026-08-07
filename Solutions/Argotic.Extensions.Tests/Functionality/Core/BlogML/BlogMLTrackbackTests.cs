@@ -18,6 +18,9 @@ public class BlogMLTrackbackTests
 {
     #region Constructor Tests
 
+    /// <summary>
+    /// A newly constructed trackback has an empty identifier, a non-null title, no approval status, and both timestamps at <c>DateTime.MinValue</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_CreatesValidInstance()
     {
@@ -39,6 +42,9 @@ public class BlogMLTrackbackTests
 
     #region Load Tests
 
+    /// <summary>
+    /// A fully attributed trackback element loads its identifier, URL, both timestamps, the title element, and <c>approved="true"</c> as <see cref="BlogMLApprovalStatus.Approved"/>.
+    /// </summary>
     [TestMethod]
     public void Load_ValidXml_PopulatesProperties()
     {
@@ -73,6 +79,9 @@ public class BlogMLTrackbackTests
         trackback.Title.Content.ShouldBe("Trackback Title");
     }
 
+    /// <summary>
+    /// A trackback element carrying nothing but <c>url</c> still loads, and the URL survives.
+    /// </summary>
     [TestMethod]
     public void Load_MinimalXml_PopulatesUrl()
     {
@@ -95,6 +104,9 @@ public class BlogMLTrackbackTests
         trackback.Url.ShouldBe(new Uri("http://example.com/trackback"));
     }
 
+    /// <summary>
+    /// The load overload taking <see cref="SyndicationResourceLoadSettings"/> reads the same attributes, and maps <c>approved="false"</c> to <see cref="BlogMLApprovalStatus.NotApproved"/>.
+    /// </summary>
     [TestMethod]
     public void Load_WithSettings_LoadsTrackback()
     {
@@ -126,6 +138,9 @@ public class BlogMLTrackbackTests
         trackback.Url.ShouldBe(new Uri("http://another.example.com/post"));
     }
 
+    /// <summary>
+    /// Loading from a <see langword="null"/> navigator throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void Load_NullSource_ThrowsArgumentNullException()
     {
@@ -136,6 +151,9 @@ public class BlogMLTrackbackTests
         Should.Throw<ArgumentNullException>(() => trackback.Load(null!));
     }
 
+    /// <summary>
+    /// <see langword="null"/> load settings throw <see cref="ArgumentNullException"/> even when the navigator is valid.
+    /// </summary>
     [TestMethod]
     public void Load_NullSettings_ThrowsArgumentNullException()
     {
@@ -158,6 +176,9 @@ public class BlogMLTrackbackTests
 
     #region WriteTo Tests
 
+    /// <summary>
+    /// Writing a trackback emits <c>id</c>, <c>url</c>, <c>date-created</c>, <c>approved="true"</c> and a nested title element.
+    /// </summary>
     [TestMethod]
     public void WriteTo_ValidTrackback_WritesCorrectXml()
     {
@@ -197,6 +218,9 @@ public class BlogMLTrackbackTests
         xml.ShouldContain("<title");
     }
 
+    /// <summary>
+    /// Writing to a <see langword="null"/> writer throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void WriteTo_NullWriter_ThrowsArgumentNullException()
     {
@@ -207,6 +231,9 @@ public class BlogMLTrackbackTests
         Should.Throw<ArgumentNullException>(() => trackback.WriteTo(null!));
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders the trackback as its XML element, carrying the <c>url</c> attribute.
+    /// </summary>
     [TestMethod]
     public void ToString_ReturnsXmlRepresentation()
     {
@@ -230,6 +257,9 @@ public class BlogMLTrackbackTests
 
     #region Comparison Tests
 
+    /// <summary>
+    /// Two trackbacks agreeing on identifier, URL, approval status and creation time compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_SameUrl_ReturnsZero()
     {
@@ -257,6 +287,9 @@ public class BlogMLTrackbackTests
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Trackbacks differing only in URL do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_DifferentUrls_ReturnsNonZero()
     {
@@ -278,6 +311,9 @@ public class BlogMLTrackbackTests
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// Comparing a trackback against <see langword="null"/> returns <c>1</c>, so <see langword="null"/> sorts first.
+    /// </summary>
     [TestMethod]
     public void CompareTo_NullObject_ReturnsPositive()
     {
@@ -294,6 +330,9 @@ public class BlogMLTrackbackTests
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Trackbacks differing in both identifier and URL do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_DifferentTrackback_ReturnsNonZero()
     {
@@ -320,6 +359,9 @@ public class BlogMLTrackbackTests
 
     #region Operators Comparison Tests
 
+    /// <summary>
+    /// <c>==</c>, <c>!=</c> and <c>Equals</c> agree on value equality, and <c>Equals</c> rejects both <see langword="null"/> and an unrelated type.
+    /// </summary>
     [TestMethod]
     public void Operators_Comparison_WorkCorrectly()
     {
@@ -356,6 +398,9 @@ public class BlogMLTrackbackTests
         trackback1.Equals("not a trackback").ShouldBeFalse();
     }
 
+    /// <summary>
+    /// <c>==</c> against a <see langword="null"/> left operand is <see langword="false"/>, and the <c>is null</c> pattern agrees with each reference's state.
+    /// </summary>
     [TestMethod]
     public void Operator_Equality_WithNulls_WorksCorrectly()
     {
@@ -369,6 +414,9 @@ public class BlogMLTrackbackTests
         (null == trackback).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// <c>&lt;</c> orders trackbacks by URL, so <c>/a</c> precedes <c>/z</c>, and <see langword="null"/> precedes any instance.
+    /// </summary>
     [TestMethod]
     public void Operator_LessThan_WorksCorrectly()
     {
@@ -382,6 +430,9 @@ public class BlogMLTrackbackTests
         (nullTrackback < trackback1).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&gt;</c> orders trackbacks by URL, so <c>/z</c> follows <c>/a</c>, and <see langword="null"/> is never greater than an instance.
+    /// </summary>
     [TestMethod]
     public void Operator_GreaterThan_WorksCorrectly()
     {
@@ -395,6 +446,9 @@ public class BlogMLTrackbackTests
         (nullTrackback > trackback1).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// <c>&lt;=</c> holds for two equal trackbacks and for <see langword="null"/> against an instance.
+    /// </summary>
     [TestMethod]
     public void Operator_LessThanOrEqual_WorksCorrectly()
     {
@@ -408,6 +462,9 @@ public class BlogMLTrackbackTests
         (nullTrackback <= trackback1).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&gt;=</c> holds for two equal trackbacks.
+    /// </summary>
     [TestMethod]
     public void Operator_GreaterThanOrEqual_WorksCorrectly()
     {
@@ -423,6 +480,9 @@ public class BlogMLTrackbackTests
 
     #region Property Tests
 
+    /// <summary>
+    /// Assigning an identifier trims the surrounding whitespace.
+    /// </summary>
     [TestMethod]
     public void Id_SetAndGet_WorksCorrectly()
     {
@@ -436,6 +496,9 @@ public class BlogMLTrackbackTests
         trackback.Id.ShouldBe("test-id");
     }
 
+    /// <summary>
+    /// Assigning a <see langword="null"/> identifier yields an empty string rather than throwing.
+    /// </summary>
     [TestMethod]
     public void Id_SetToNull_ReturnsEmptyString()
     {
@@ -449,6 +512,9 @@ public class BlogMLTrackbackTests
         trackback.Id.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// The URL is required: assigning <see langword="null"/> throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void Url_SetNull_ThrowsArgumentNullException()
     {
@@ -459,6 +525,9 @@ public class BlogMLTrackbackTests
         Should.Throw<ArgumentNullException>(() => trackback.Url = null!);
     }
 
+    /// <summary>
+    /// The title is required: assigning <see langword="null"/> throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void Title_SetNull_ThrowsArgumentNullException()
     {
@@ -469,6 +538,9 @@ public class BlogMLTrackbackTests
         Should.Throw<ArgumentNullException>(() => trackback.Title = null!);
     }
 
+    /// <summary>
+    /// An assigned <see cref="BlogMLTextConstruct"/> title keeps its content.
+    /// </summary>
     [TestMethod]
     public void Title_SetValidValue_WorksCorrectly()
     {
@@ -483,6 +555,9 @@ public class BlogMLTrackbackTests
         trackback.Title.Content.ShouldBe("Test Title");
     }
 
+    /// <summary>
+    /// A trackback with an identifier and a URL hashes to something other than <c>0</c>.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_ReturnsValue()
     {
@@ -504,6 +579,9 @@ public class BlogMLTrackbackTests
 
     #region FindExtension Tests
 
+    /// <summary>
+    /// Searching a trackback that carries no extensions returns <see langword="null"/> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void FindExtension_WithPredicate_ReturnsCorrectly()
     {
@@ -517,6 +595,9 @@ public class BlogMLTrackbackTests
         result.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> match predicate throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void FindExtension_NullPredicate_ThrowsArgumentNullException()
     {
@@ -531,6 +612,9 @@ public class BlogMLTrackbackTests
 
     #region Integration Tests with BlogML Document
 
+    /// <summary>
+    /// Loading a whole BlogML document reaches the trackbacks on its post, in document order, and keeps their approval status distinct.
+    /// </summary>
     [TestMethod]
     public void Load_FromBlogMLDocument_ParsesTrackbacks()
     {
@@ -564,6 +648,9 @@ public class BlogMLTrackbackTests
 
     #region IBlogMLCommonObject Tests
 
+    /// <summary>
+    /// The <c>IBlogMLCommonObject</c> approval status round-trips through the property.
+    /// </summary>
     [TestMethod]
     public void ApprovalStatus_SetAndGet_WorksCorrectly()
     {
@@ -577,6 +664,9 @@ public class BlogMLTrackbackTests
         trackback.ApprovalStatus.ShouldBe(BlogMLApprovalStatus.Approved);
     }
 
+    /// <summary>
+    /// The creation timestamp round-trips through the property with its <c>DateTimeKind</c> intact.
+    /// </summary>
     [TestMethod]
     public void CreatedOn_SetAndGet_WorksCorrectly()
     {
@@ -591,6 +681,9 @@ public class BlogMLTrackbackTests
         trackback.CreatedOn.ShouldBe(createdOn);
     }
 
+    /// <summary>
+    /// The last-modified timestamp round-trips through the property with its <c>DateTimeKind</c> intact.
+    /// </summary>
     [TestMethod]
     public void LastModifiedOn_SetAndGet_WorksCorrectly()
     {

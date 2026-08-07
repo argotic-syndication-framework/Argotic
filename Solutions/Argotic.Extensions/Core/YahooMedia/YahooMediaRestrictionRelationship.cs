@@ -15,13 +15,13 @@ public enum YahooMediaRestrictionRelationship
     None = 0,
 
     /// <summary>
-    /// Indicates that the type of relationship is permissive.
+    /// The entity list is the set that is permitted; everything else is denied.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Allow", AlternateValue = "allow")]
     Allow = 1,
 
     /// <summary>
-    /// Indicates that the type of relationship is restrictive.
+    /// The entity list is the set that is denied; everything else is permitted.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Deny", AlternateValue = "deny")]
     Deny = 2

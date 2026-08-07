@@ -10,18 +10,30 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="LiveJournalSyndicationExtension"/> extends syndicated content to specify <a href="http://community.livejournal.com/lj_dev/">LiveJournal</a> specific metadata for entries. 
-///         This syndication extension conforms to the <b>LiveJournal RSS Module</b> 2.0 specification, which can be currently found 
-///         at <a href="http://neugierig.org/drop/lj/rss/">http://neugierig.org/drop/lj/rss/</a>.
+///         The <see cref="LiveJournalSyndicationExtension"/> extends syndicated content to specify <a href="https://lj-dev.livejournal.com/">LiveJournal</a> specific metadata for entries.
+///         This syndication extension conforms to the <b>LiveJournal RSS Module</b> 2.0 specification, which can be currently found
+///         at <a href="https://web.archive.org/web/20080710121013/http://neugierig.org/drop/lj/rss/">https://web.archive.org/web/20080710121013/http://neugierig.org/drop/lj/rss/</a>.
+///     </para>
+///     <para>
+///     <b>This extension matches nothing.</b> It declares the namespace
+///     <c>http://livejournal.org/rss/lj/2.0/</c>; live LiveJournal RSS declares
+///     <c>http://www.livejournal.org/rss/lj/1.0/</c> — a different host <i>and</i> a different version
+///     — and LiveJournal's Atom feeds declare a third spelling again. Verified against three real
+///     documents. Extension selection keys on the namespace URI, so no real feed has ever attached
+///     this type.
+///     </para>
+///     <para>
+///     Correcting the URI would not be enough on its own. Real feeds use nine <c>lj:</c> elements —
+///     <c>journal</c>, <c>journalid</c>, <c>journaltype</c>, <c>mood</c>, <c>music</c>, <c>poster</c>,
+///     <c>posterid</c>, <c>reply-count</c> and <c>security</c> — of which this extension models three;
+///     it also models <c>preformatted</c> and <c>userpic</c>, which no observed document emits. Both
+///     halves are recorded as an open decision in §5.1 of <c>docs/build-warnings.md</c> rather than
+///     changed here, because an extension's namespace is its identity and moving it is a public
+///     behaviour change.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the LiveJournalSyndicationExtension class.">
-///         <code 
-///             source="..\..\Argotic.Examples\\Extensions\Core\LiveJournalSyndicationExtensionExample.cs" 
-///             region="LiveJournalSyndicationExtension"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Extensions\Core\LiveJournalSyndicationExtensionExample.cs" language="cs" title="The following code example demonstrates the usage of the LiveJournalSyndicationExtension class." />
 /// </example>
 public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable<LiveJournalSyndicationExtension>, IEquatable<LiveJournalSyndicationExtension>, IComparisonOperators
 {
@@ -37,12 +49,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// Gets or sets the <see cref="LiveJournalSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
     /// <value>A <see cref="LiveJournalSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
-    /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
-    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
-    ///     are defined for the custom syndication extension.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public LiveJournalSyndicationExtensionContext Context
     {
         get;
@@ -59,8 +66,8 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
     /// </summary>
     /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -70,9 +77,9 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="LiveJournalSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="LiveJournalSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="LiveJournalSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="LiveJournalSyndicationExtension"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public override bool Load(IXPathNavigable source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -88,9 +95,9 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="LiveJournalSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="LiveJournalSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="LiveJournalSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="LiveJournalSyndicationExtension"/> was initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -102,8 +109,8 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public override void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -113,10 +120,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="LiveJournalSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="LiveJournalSyndicationExtension"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -180,7 +184,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// Determines whether the specified <see cref="LiveJournalSyndicationExtension"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="LiveJournalSyndicationExtension"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="LiveJournalSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="LiveJournalSyndicationExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(LiveJournalSyndicationExtension? other)
     {
         if (other is null)
@@ -195,7 +199,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is LiveJournalSyndicationExtension other && this.Equals(other);
 
     /// <summary>
@@ -209,7 +213,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(LiveJournalSyndicationExtension? first, LiveJournalSyndicationExtension? second)
     {
         if (first is null) return second is null;
@@ -221,7 +225,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(LiveJournalSyndicationExtension? first, LiveJournalSyndicationExtension? second) => !(first == second);
 
 }

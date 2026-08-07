@@ -7,16 +7,17 @@ using Argotic.Extensions;
 namespace Argotic.Syndication;
 
 /// <summary>
-/// Represents the source feed that an <see cref="RssItem"/> was republished from.
+/// Represents the feed that an <see cref="RssItem"/> was republished from.
 /// </summary>
+/// <remarks>
+///     The element exists to propagate credit for links. Its content is the source channel's
+///     <see cref="Title"/> and its one required attribute, <c>url</c>, points at the source feed itself —
+///     the XML — not at the article. An aggregator forwarding an item to a weblog tool is expected to fill
+///     this in automatically.
+/// </remarks>
 /// <seealso cref="RssItem.Source"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the RssSource class.">
-///         <code 
-///             source="..\..\Argotic.Examples\Core\Rss\RssSourceExample.cs" 
-///             region="RssSource" 
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Rss\RssSourceExample.cs" language="cs" title="The following code example demonstrates the usage of the RssSource class." />
 /// </example>
 public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
@@ -32,7 +33,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// Initializes a new instance of the <see cref="RssSource"/> class using the supplied <see cref="Uri"/>.
     /// </summary>
     /// <param name="url">A <see cref="Uri"/> that represents the URL of the source feed.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is <see langword="null"/>.</exception>
     public RssSource(Uri url)
     {
         this.Url = url;
@@ -43,7 +44,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// </summary>
     /// <param name="url">A <see cref="Uri"/> that represents the URL of the source feed.</param>
     /// <param name="title">The title of the source feed.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is <see langword="null"/>.</exception>
     public RssSource(Uri url, string title) : this(url)
     {
         this.Title = title;
@@ -52,19 +53,18 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets the title of the source feed.
     /// </summary>
-    /// <value>The title of the source feed.</value>
+    /// <value>The source channel's own <c>title</c>. The default value is an <i>empty</i> string.</value>
     public string Title
     {
         get;
@@ -74,8 +74,8 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// <summary>
     /// Gets or sets the URL of the source feed.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the source feed.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The location of the source feed document, or <see langword="null"/> if none was specified. Required by the specification when the element is present.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Url
     {
         get;
@@ -94,11 +94,11 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <see langword="true"/> if the object passed to it matches the conditions defined in the delegate.
     ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is <see langword="null"/>.</exception>
     public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
@@ -117,11 +117,11 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// Loads this <see cref="RssSource"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="RssSource"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssSource"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssSource"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -154,12 +154,12 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="RssSource"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="RssSource"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssSource"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -175,7 +175,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// Saves the current <see cref="RssSource"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -223,7 +223,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// Determines whether the specified <see cref="RssSource"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="RssSource"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="RssSource"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="RssSource"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(RssSource? other)
     {
         if (other is null)
@@ -238,7 +238,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is RssSource other && this.Equals(other);
 
     /// <summary>
@@ -257,7 +257,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(RssSource? first, RssSource? second)
     {
         if (first is null) return second is null;
@@ -269,6 +269,6 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(RssSource? first, RssSource? second) => !(first == second);
 }

@@ -19,15 +19,29 @@ public class SiteSummarySlashSyndicationExtensionContext
     }
 
     /// <summary>
-    /// Gets or sets the number of comments.
+    /// Gets or sets the number of comments on the item.
     /// </summary>
-    /// <value>The number of comments. The default value is <see cref="Int32.MinValue"/>, which indicates that no comment count was specified.</value>
+    /// <value>
+    ///     The comment count. The default value is <see cref="int.MinValue"/>, which stands in for "absent"
+    ///     and is the one value <see cref="WriteTo"/> will not write.
+    /// </value>
+    /// <remarks>
+    ///     The most portable element in the module, because RSS has no comment count of its own. Nothing
+    ///     rejects a negative count other than the sentinel itself, so treat any value below zero as
+    ///     suspect rather than meaningful.
+    /// </remarks>
     public int Comments { get; set; } = int.MinValue;
 
     /// <summary>
-    /// Gets or sets the name of the department.
+    /// Gets or sets the department the item was filed under.
     /// </summary>
-    /// <value>The name of the department.</value>
+    /// <value>
+    ///     The department name, trimmed. The default value is an <i>empty</i> string.
+    /// </value>
+    /// <remarks>
+    ///     Slashdot's "from the department" tagline. Setting <see langword="null"/> or an empty string
+    ///     clears the value rather than throwing.
+    /// </remarks>
     public string Department
     {
         get;
@@ -49,15 +63,22 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// Gets the hit parade identifiers.
     /// </summary>
     /// <value>
-    ///     A <see cref="IList{T}"/> collection of <see cref="Int32"/> objects that represent the hit parade identifiers.
-    ///     The default value is an <i>empty</i> collection.
+    ///     The identifiers, in the order they appeared. The default value is an <i>empty</i> collection.
     /// </value>
+    /// <remarks>
+    ///     Serialized as one comma-delimited <c>slash:hit_parade</c> element, not as repeated elements, and
+    ///     split back apart on load. Entries that will not parse as an <see cref="int"/> are skipped
+    ///     silently, so a malformed list loads short rather than failing.
+    /// </remarks>
     public IList<int> HitParade { get; } = [];
 
     /// <summary>
-    /// Gets or sets the name of the section.
+    /// Gets or sets the section of the site the item belongs to.
     /// </summary>
-    /// <value>The name of the section.</value>
+    /// <value>The section name, trimmed. The default value is an <i>empty</i> string.</value>
+    /// <remarks>
+    ///     Setting <see langword="null"/> or an empty string clears the value rather than throwing.
+    /// </remarks>
     public string Section
     {
         get;
@@ -78,11 +99,11 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="SiteSummarySlashSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="SiteSummarySlashSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="SiteSummarySlashSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="SiteSummarySlashSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -150,11 +171,11 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);

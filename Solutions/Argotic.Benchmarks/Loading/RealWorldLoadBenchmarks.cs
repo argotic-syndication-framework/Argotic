@@ -20,9 +20,10 @@ namespace Argotic.Benchmarks.Loading;
 /// </para>
 /// <list type="bullet">
 ///   <item><description>A sitemap holding exactly 50,000 <c>&lt;url&gt;</c> elements — the
-///   ceiling the protocol defines and this library documents. The largest sitemap previously measured
-///   anywhere in the repository was 162,000 bytes; this is 7.7 MB, and nothing had ever established
-///   that the ceiling is even reachable.</description></item>
+///   ceiling the protocol defines and this library documents. <c>SitemapScaleBenchmarks</c> reaches
+///   that count with a generator; this is 7.7 MB of it from a real publisher, so it carries the
+///   encodings, date spellings and URL shapes a generator has no reason to
+///   produce.</description></item>
 ///   <item><description>A 13.2 MB Atom feed containing 112 elements — the inverse shape. Cost
 ///   here is buffer growth and decoding, not element dispatch, which is the axis every synthetic feed
 ///   in this harness holds constant by construction.</description></item>

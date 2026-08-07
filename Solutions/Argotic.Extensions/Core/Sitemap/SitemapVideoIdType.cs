@@ -1,14 +1,15 @@
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents the type of video identifier used in a sitemap video extension.
+/// Names the external system a <see cref="SitemapVideoId"/> draws its value from.
 /// </summary>
 /// <remarks>
-///     <para>
-///         This enumeration is used to specify the type of identifier for a video in a sitemap video extension.
-///         The identifier type indicates the source or format of the video ID.
-///     </para>
+///     These are the systems the 1.1 schema enumerates, and the set is closed: a <c>type</c> attribute
+///     naming anything else reads as <see cref="None"/> and is dropped rather than preserved. Because the
+///     schema fixes the list, a system added to the format later would need a new member here before this
+///     library could round-trip it.
 /// </remarks>
+/// <seealso cref="SitemapVideoId.Type"/>
 /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Google Video Sitemap 1.1 XSD Specification</seealso>
 public enum SitemapVideoIdType
 {

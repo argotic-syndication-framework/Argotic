@@ -10,9 +10,10 @@ namespace Argotic.Extensions.Core;
 /// Represents a means of allowing the media object to be accessed through a web browser media player console.
 /// </summary>
 /// <remarks>
-///     <para>
-///         This class is required only if a direct media <see cref="YahooMediaContent.Url"/> property is not specified in the <see cref="YahooMediaContent"/> class.
-///     </para>
+///     Required only when the <see cref="YahooMediaContent"/> has no <see cref="YahooMediaContent.Url"/> of its
+///     own — it is how a publisher offers media that can be watched but not fetched. <see cref="Url"/> is the
+///     one required attribute, and is written unconditionally: a player with a <see langword="null"/>
+///     <see cref="Url"/> saves as <c>url=""</c> rather than failing.
 /// </remarks>
 public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooMediaPlayer>, IComparisonOperators
 {
@@ -28,7 +29,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// Initializes a new instance of the <see cref="YahooMediaPlayer"/> class using the supplied <see cref="Uri"/>.
     /// </summary>
     /// <param name="url">A <see cref="Uri"/> that represents the URL of this player console.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is <see langword="null"/>.</exception>
     public YahooMediaPlayer(Uri url)
     {
         this.Url = url;
@@ -40,7 +41,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <param name="url">A <see cref="Uri"/> that represents the URL of this player console.</param>
     /// <param name="height">The height of the browser window that this player console should be opened in.</param>
     /// <param name="width">The width of the browser window that this player console should be opened in.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="url"/> is <see langword="null"/>.</exception>
     public YahooMediaPlayer(Uri url, int height, int width) : this(url)
     {
         this.Height = height;
@@ -50,14 +51,14 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <summary>
     /// Gets or sets the height of the browser window that this player console should be opened in.
     /// </summary>
-    /// <value>The height of the browser window that this player console should be opened in. The default value is <see cref="Int32.MinValue"/>, which indicates that no height was specified.</value>
+    /// <value>The height, in pixels, of the browser window to open the console in. The default value is <see cref="Int32.MinValue"/>, which indicates that no height was specified.</value>
     public int Height { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the location of this player console.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of this player console that plays the media.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The console's URL. The default value is <see langword="null"/>, which a set operation cannot restore.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Url
     {
         get;
@@ -72,18 +73,18 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <summary>
     /// Gets or sets the width of the browser window that this player console should be opened in.
     /// </summary>
-    /// <value>The width of the browser window that this player console should be opened in. The default value is <see cref="Int32.MinValue"/>, which indicates that no width was specified.</value>
+    /// <value>The width, in pixels, of the browser window to open the console in. The default value is <see cref="Int32.MinValue"/>, which indicates that no width was specified.</value>
     public int Width { get; set; } = int.MinValue;
 
     /// <summary>
     /// Loads this <see cref="YahooMediaPlayer"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="YahooMediaPlayer"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="YahooMediaPlayer"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaPlayer"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -129,7 +130,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// Saves the current <see cref="YahooMediaPlayer"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -154,10 +155,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaPlayer"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaPlayer"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -197,7 +195,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// Determines whether the specified <see cref="YahooMediaPlayer"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="YahooMediaPlayer"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="YahooMediaPlayer"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="YahooMediaPlayer"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(YahooMediaPlayer? other)
     {
         if (other is null)
@@ -212,7 +210,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is YahooMediaPlayer other && this.Equals(other);
 
     /// <summary>
@@ -226,7 +224,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(YahooMediaPlayer? first, YahooMediaPlayer? second)
     {
         if (first is null) return second is null;
@@ -238,6 +236,6 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(YahooMediaPlayer? first, YahooMediaPlayer? second) => !(first == second);
 }

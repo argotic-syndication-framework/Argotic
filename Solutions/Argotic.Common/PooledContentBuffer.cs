@@ -7,7 +7,7 @@ namespace Argotic.Common;
 /// </summary>
 /// <remarks>
 /// <para>
-/// <b>Why not a <c>byte[]</c>.</b> The point of draining a response before parsing it is to keep a
+/// Why not a <c>byte[]</c>? The point of draining a response before parsing it is to keep a
 /// synchronous reader off the socket, not to put the document back in memory — and Phase 3 had just
 /// finished removing exactly that copy from the load path. Returning a fresh array would have handed it
 /// straight back, and the polling benchmark would have measured no improvement at all while the commit

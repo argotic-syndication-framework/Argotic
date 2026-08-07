@@ -4,11 +4,19 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.GenericSyndicationFeed;
 
+/// <summary>
+/// Covers the title, summary, publication date and categories a generic item presents once an
+/// <c>AtomEntry</c> or an <c>RssItem</c> has been folded into it, together with its comparison,
+/// equality and string-form contracts.
+/// </summary>
 [TestClass]
 public class GenericSyndicationItemTests
 {
     #region Constructor Tests - AtomEntry
 
+    /// <summary>
+    /// An entry's title construct becomes the item's title.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomEntry_SetsTitleFromEntryTitle()
     {
@@ -24,6 +32,9 @@ public class GenericSyndicationItemTests
         item.Title.ShouldBe("Test Entry Title");
     }
 
+    /// <summary>
+    /// An entry's <c>summary</c> becomes the item's summary.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomEntry_SetsSummaryFromEntrySummary()
     {
@@ -40,6 +51,10 @@ public class GenericSyndicationItemTests
         item.Summary.ShouldBe("This is the summary");
     }
 
+    /// <summary>
+    /// An entry with content but no summary yields the content as the item's summary, so an entry that
+    /// carries only a body is not summarised as blank.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomEntry_FallsBackToContentWhenNoSummary()
     {
@@ -56,6 +71,9 @@ public class GenericSyndicationItemTests
         item.Summary.ShouldBe("This is the content");
     }
 
+    /// <summary>
+    /// When an entry carries both, the summary wins and the content is not used.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomEntry_PrefersSummaryOverContent()
     {
@@ -73,6 +91,9 @@ public class GenericSyndicationItemTests
         item.Summary.ShouldBe("This is the summary");
     }
 
+    /// <summary>
+    /// An entry's publication date becomes the item's publication date, instant for instant.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomEntry_SetsPublishedOnFromEntryPublishedOn()
     {
@@ -90,6 +111,10 @@ public class GenericSyndicationItemTests
         item.PublishedOn.ShouldBe(publishDate);
     }
 
+    /// <summary>
+    /// An entry with no publication date falls back to its update date, which RFC 4287 requires every
+    /// entry to carry, rather than reporting no date at all.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomEntry_FallsBackToUpdatedOnWhenNoPublishedOn()
     {
@@ -107,6 +132,9 @@ public class GenericSyndicationItemTests
         item.PublishedOn.ShouldBe(updateDate);
     }
 
+    /// <summary>
+    /// When an entry carries both dates, the publication date wins over the later update date.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomEntry_PrefsersPublishedOnOverUpdatedOn()
     {
@@ -126,6 +154,9 @@ public class GenericSyndicationItemTests
         item.PublishedOn.ShouldBe(publishDate);
     }
 
+    /// <summary>
+    /// Every category on an entry reaches the item in document order, scheme included where present.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomEntry_PopulatesCategoriesFromEntry()
     {
@@ -146,6 +177,9 @@ public class GenericSyndicationItemTests
         item.Categories[1].Term.ShouldBe("news");
     }
 
+    /// <summary>
+    /// Whitespace around an entry title is trimmed off on the way into the item.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithAtomEntry_TrimsWhitespaceFromTitle()
     {
@@ -162,6 +196,9 @@ public class GenericSyndicationItemTests
         item.Title.ShouldBe("Test Title");
     }
 
+    /// <summary>
+    /// A <see langword="null"/> entry is refused rather than producing an empty item.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullAtomEntry_ThrowsArgumentNullException() =>
         // Act & Assert
@@ -171,6 +208,9 @@ public class GenericSyndicationItemTests
 
     #region Constructor Tests - RssItem
 
+    /// <summary>
+    /// An RSS item's title becomes the item's title.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithRssItem_SetsTitleFromItem()
     {
@@ -186,6 +226,10 @@ public class GenericSyndicationItemTests
         item.Title.ShouldBe("RSS Item Title");
     }
 
+    /// <summary>
+    /// An RSS item's <c>description</c> is what fills the summary, which is Atom's <c>summary</c> by
+    /// another name.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithRssItem_SetsSummaryFromDescription()
     {
@@ -202,6 +246,9 @@ public class GenericSyndicationItemTests
         item.Summary.ShouldBe("RSS item description");
     }
 
+    /// <summary>
+    /// An RSS item's <c>pubDate</c> becomes the item's publication date.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithRssItem_SetsPublishedOnFromPublicationDate()
     {
@@ -219,6 +266,9 @@ public class GenericSyndicationItemTests
         item.PublishedOn.ShouldBe(pubDate);
     }
 
+    /// <summary>
+    /// Every category on an RSS item reaches the item in order, its <c>domain</c> becoming the scheme.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithRssItem_PopulatesCategoriesFromItem()
     {
@@ -239,6 +289,9 @@ public class GenericSyndicationItemTests
         item.Categories[1].Term.ShouldBe("sports");
     }
 
+    /// <summary>
+    /// Whitespace around an RSS item title is trimmed off, matching the Atom side.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithRssItem_TrimsWhitespaceFromTitle()
     {
@@ -256,6 +309,9 @@ public class GenericSyndicationItemTests
         item.Title.ShouldBe("RSS Title");
     }
 
+    /// <summary>
+    /// A <see langword="null"/> RSS item is refused rather than producing an empty item.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullRssItem_ThrowsArgumentNullException() =>
         // Act & Assert
@@ -265,6 +321,10 @@ public class GenericSyndicationItemTests
 
     #region Default Values Tests
 
+    /// <summary>
+    /// An entry with neither date reports <see cref="DateTime.MinValue"/> — the only way a
+    /// non-nullable date can say "absent".
+    /// </summary>
     [TestMethod]
     public void Constructor_WithMinimalAtomEntry_DefaultsPublishedOnToMinValue()
     {
@@ -280,6 +340,9 @@ public class GenericSyndicationItemTests
         item.PublishedOn.ShouldBe(DateTime.MinValue);
     }
 
+    /// <summary>
+    /// An RSS item with no <c>pubDate</c> reports <see cref="DateTime.MinValue"/>, matching the Atom side.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithMinimalRssItem_DefaultsPublishedOnToMinValue()
     {
@@ -293,6 +356,9 @@ public class GenericSyndicationItemTests
         item.PublishedOn.ShouldBe(DateTime.MinValue);
     }
 
+    /// <summary>
+    /// An entry with neither summary nor content yields an empty summary, not <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithMinimalAtomEntry_DefaultsSummaryToEmpty()
     {
@@ -308,6 +374,9 @@ public class GenericSyndicationItemTests
         item.Summary.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// An RSS item with no description yields an empty summary, not <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithMinimalRssItem_DefaultsSummaryToEmpty()
     {
@@ -325,6 +394,10 @@ public class GenericSyndicationItemTests
 
     #region ToString Tests
 
+    /// <summary>
+    /// The string form names the type and spells out the title and summary, so an item is legible in a
+    /// debugger and in an assertion failure.
+    /// </summary>
     [TestMethod]
     public void ToString_ReturnsFormattedString()
     {
@@ -346,6 +419,10 @@ public class GenericSyndicationItemTests
         result.ShouldContain("Summary = Test Summary");
     }
 
+    /// <summary>
+    /// An item with no publication date still renders the <c>PublishedOn</c> field rather than throwing
+    /// or omitting it.
+    /// </summary>
     [TestMethod]
     public void ToString_WithNoPublicationDate_ShowsEmptyDate()
     {
@@ -366,6 +443,9 @@ public class GenericSyndicationItemTests
 
     #region CompareTo Tests
 
+    /// <summary>
+    /// Comparing against <see langword="null"/> yields <c>1</c>, so a null sorts before every item.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithNull_ReturnsPositive()
     {
@@ -380,6 +460,9 @@ public class GenericSyndicationItemTests
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Two items built from separate entries with the same title and summary compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithEqualItem_ReturnsZero()
     {
@@ -402,6 +485,9 @@ public class GenericSyndicationItemTests
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// The title participates in ordering: two items differing only in it do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithDifferentTitle_ReturnsNonZero()
     {
@@ -418,6 +504,9 @@ public class GenericSyndicationItemTests
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// The summary participates in ordering too, so two items sharing a title stay distinct.
+    /// </summary>
     [TestMethod]
     public void CompareTo_WithDifferentSummary_ReturnsNonZero()
     {
@@ -444,6 +533,9 @@ public class GenericSyndicationItemTests
 
     #region Equals Tests
 
+    /// <summary>
+    /// Equality is by value: two items built from separate but identical entries are equal.
+    /// </summary>
     [TestMethod]
     public void Equals_WithEqualItem_ReturnsTrue()
     {
@@ -463,6 +555,9 @@ public class GenericSyndicationItemTests
         item1.Equals(item2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Items differing only in their title are not equal.
+    /// </summary>
     [TestMethod]
     public void Equals_WithDifferentItem_ReturnsFalse()
     {
@@ -476,6 +571,9 @@ public class GenericSyndicationItemTests
         item1.Equals(item2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Nothing equals <see langword="null"/>, and asking does not throw.
+    /// </summary>
     [TestMethod]
     public void Equals_WithNull_ReturnsFalse()
     {
@@ -487,6 +585,9 @@ public class GenericSyndicationItemTests
         item.Equals(null).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An object of an unrelated type is not equal to an item, and asking does not throw.
+    /// </summary>
     [TestMethod]
     public void Equals_WithWrongType_ReturnsFalse()
     {
@@ -502,6 +603,9 @@ public class GenericSyndicationItemTests
 
     #region GetHashCode Tests
 
+    /// <summary>
+    /// Asking an item for its hash code returns a value rather than throwing.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_ReturnsIntegerValue()
     {
@@ -520,6 +624,9 @@ public class GenericSyndicationItemTests
 
     #region Equality Operator Tests
 
+    /// <summary>
+    /// The <c>==</c> operator agrees with <c>Equals</c> for two equal items.
+    /// </summary>
     [TestMethod]
     public void EqualityOperator_WithEqualItems_ReturnsTrue()
     {
@@ -533,6 +640,9 @@ public class GenericSyndicationItemTests
         (item1 == item2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>==</c> operator separates two items with different titles.
+    /// </summary>
     [TestMethod]
     public void EqualityOperator_WithDifferentItems_ReturnsFalse()
     {
@@ -546,6 +656,9 @@ public class GenericSyndicationItemTests
         (item1 == item2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> references compare equal instead of dereferencing either one.
+    /// </summary>
     [TestMethod]
     public void EqualityOperator_WithBothNull_ReturnsTrue()
     {
@@ -557,6 +670,9 @@ public class GenericSyndicationItemTests
         (item1 == item2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> left operand is unequal to a real item rather than throwing.
+    /// </summary>
     [TestMethod]
     public void EqualityOperator_WithFirstNull_ReturnsFalse()
     {
@@ -569,6 +685,9 @@ public class GenericSyndicationItemTests
         (item1 == item2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> right operand is unequal to a real item, symmetrically.
+    /// </summary>
     [TestMethod]
     public void EqualityOperator_WithSecondNull_ReturnsFalse()
     {
@@ -585,6 +704,9 @@ public class GenericSyndicationItemTests
 
     #region Inequality Operator Tests
 
+    /// <summary>
+    /// The <c>!=</c> operator is the negation of <c>==</c> for two equal items.
+    /// </summary>
     [TestMethod]
     public void InequalityOperator_WithEqualItems_ReturnsFalse()
     {
@@ -598,6 +720,9 @@ public class GenericSyndicationItemTests
         (item1 != item2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The <c>!=</c> operator is the negation of <c>==</c> for two differing items.
+    /// </summary>
     [TestMethod]
     public void InequalityOperator_WithDifferentItems_ReturnsTrue()
     {
@@ -615,6 +740,10 @@ public class GenericSyndicationItemTests
 
     #region Categories Property Tests
 
+    /// <summary>
+    /// An uncategorised entry yields an empty categories collection, never <see langword="null"/>, so a
+    /// caller can enumerate without guarding.
+    /// </summary>
     [TestMethod]
     public void Categories_WhenEmpty_ReturnsEmptyCollection()
     {
@@ -627,6 +756,9 @@ public class GenericSyndicationItemTests
         item.Categories.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Atom categories become generic ones, whether or not they carry a scheme and a label.
+    /// </summary>
     [TestMethod]
     public void Categories_ConvertsAtomCategoriesToGenericCategories()
     {
@@ -646,6 +778,9 @@ public class GenericSyndicationItemTests
         item.Categories[1].Term.ShouldBe("category2");
     }
 
+    /// <summary>
+    /// RSS categories become generic ones, the <c>domain</c> arriving as the scheme where present.
+    /// </summary>
     [TestMethod]
     public void Categories_ConvertsRssCategoriesToGenericCategories()
     {

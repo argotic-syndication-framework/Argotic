@@ -10,7 +10,8 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Rss;
 
 /// <summary>
-/// Behavior tests for <see cref="RssFeed"/> that verify the public API.
+/// Covers <see cref="RssFeed"/> end to end: building a channel, parsing RSS 2.0,
+/// extension auto-detection, the asynchronous loads, and what survives a save and reload.
 /// </summary>
 [TestClass]
 public class RssFeedBehaviorTests
@@ -19,6 +20,9 @@ public class RssFeedBehaviorTests
 
     #region Feed Creation Tests
 
+    /// <summary>
+    /// A feed built through the object model saves as an <c>rss</c> root element declaring <c>version="2.0"</c>.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WhenCreatedProgrammatically_ProducesValidXml()
     {
@@ -43,6 +47,9 @@ public class RssFeedBehaviorTests
         xml.Root.Attribute("version")?.Value.ShouldBe("2.0");
     }
 
+    /// <summary>
+    /// The link and title given to the constructor land on the channel.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WhenCreatedWithLinkAndTitle_SetsChannelProperties()
     {
@@ -54,6 +61,9 @@ public class RssFeedBehaviorTests
         feed.Channel.Title.ShouldBe("Test Feed");
     }
 
+    /// <summary>
+    /// The single-argument constructor takes a channel description.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WhenCreatedWithDescription_SetsChannelDescription()
     {
@@ -64,6 +74,10 @@ public class RssFeedBehaviorTests
         feed.Channel.Description.ShouldBe("Test Description");
     }
 
+    /// <summary>
+    /// A default-constructed feed has a channel whose title and
+    /// description are empty strings, not null, and no items.
+    /// </summary>
     [TestMethod]
     public void RssFeed_WhenCreatedWithDefaultConstructor_HasEmptyChannel()
     {
@@ -77,6 +91,9 @@ public class RssFeedBehaviorTests
         feed.Channel.Items.ShouldBeEmpty();
     }
 
+    /// <summary>
+    /// Items are held in the order they were added.
+    /// </summary>
     [TestMethod]
     public void RssFeed_AddingItemsToChannel_WorksCorrectly()
     {
@@ -113,6 +130,10 @@ public class RssFeedBehaviorTests
         feed.Channel.Items[1].Title.ShouldBe("Second Item");
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> to the channel throws
+    /// <see cref="ArgumentNullException"/> rather than leaving the feed channelless.
+    /// </summary>
     [TestMethod]
     public void RssFeed_SetChannelToNull_ThrowsArgumentNullException()
     {
@@ -131,6 +152,15 @@ public class RssFeedBehaviorTests
     // suite - they were only ever set through the object model, so the two SelectSingleNode calls
     // that read them were executed by no test. Added before those lines were rewritten.
 
+    /// <summary>
+    /// A <c>guid</c> element loads with its text and with
+    /// <c>isPermaLink="false"</c> read as a false permanent-link flag.
+    /// </summary>
+    /// <remarks>
+    ///     The element appeared in no fixture anywhere in the suite: it was only ever
+    ///     set through the object model, so the line that reads it during a parse was
+    ///     executed by no test. This test was added before that line was rewritten.
+    /// </remarks>
     [TestMethod]
     public void RssFeed_LoadingItemWithGuid_PopulatesGuid()
     {
@@ -162,6 +192,14 @@ public class RssFeedBehaviorTests
         item.Guid.IsPermanentLink.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <c>ttl</c> element loads as the channel time to live, in minutes.
+    /// </summary>
+    /// <remarks>
+    ///     The element appeared in no fixture anywhere in the suite: it was only ever
+    ///     set through the object model, so the line that reads it during a parse was
+    ///     executed by no test. This test was added before that line was rewritten.
+    /// </remarks>
     [TestMethod]
     public void RssFeed_LoadingChannelWithTimeToLive_PopulatesTimeToLive()
     {
@@ -187,6 +225,10 @@ public class RssFeedBehaviorTests
         feed.Channel.TimeToLive.ShouldBe(60);
     }
 
+    /// <summary>
+    /// Loading a minimal RSS 2.0 stream populates the channel
+    /// title, link and description, and the feed reports RSS 2.0.
+    /// </summary>
     [TestMethod]
     public void RssFeed_LoadingValidRssXml_PopulatesAllProperties()
     {
@@ -206,6 +248,9 @@ public class RssFeedBehaviorTests
         feed.Version.Minor.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Items load in document order, each with its title, link, description and every one of its categories.
+    /// </summary>
     [TestMethod]
     public void RssFeed_LoadingRssWithItems_PopulatesItemCollection()
     {
@@ -234,6 +279,9 @@ public class RssFeedBehaviorTests
         secondItem.Categories[0].Value.ShouldBe("Archive");
     }
 
+    /// <summary>
+    /// An unclosed element surfaces as <see cref="XmlException"/> rather than as a partly populated feed.
+    /// </summary>
     [TestMethod]
     public void RssFeed_LoadingMalformedXml_ThrowsXmlException()
     {
@@ -245,6 +293,9 @@ public class RssFeedBehaviorTests
         Should.Throw<XmlException>(() => feed.Load(stream));
     }
 
+    /// <summary>
+    /// Loading raises <c>Loaded</c>, and the handler receives event arguments rather than <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void RssFeed_LoadingValidRss_RaisesLoadedEvent()
     {
@@ -269,6 +320,9 @@ public class RssFeedBehaviorTests
         eventArgs.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// With extension auto-detection on, a <c>dc:creator</c> element leaves the channel reporting an extension.
+    /// </summary>
     [TestMethod]
     public void RssFeed_LoadingWithAutoDetectExtensions_DiscoversExtensions()
     {
@@ -306,6 +360,9 @@ public class RssFeedBehaviorTests
         feed.Channel.HasExtensions.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A <c>category</c> element on the channel loads separately from the categories on the items.
+    /// </summary>
     [TestMethod]
     public void RssFeed_LoadingChannelCategories_PopulatesCategories()
     {
@@ -325,6 +382,10 @@ public class RssFeedBehaviorTests
 
     #region Round-Trip Serialization Tests
 
+    /// <summary>
+    /// Title, link, description, copyright, managing editor,
+    /// webmaster and time to live all survive a save and reload.
+    /// </summary>
     [TestMethod]
     public void RssFeed_RoundTrip_PreservesChannelProperties()
     {
@@ -360,6 +421,9 @@ public class RssFeedBehaviorTests
         loadedFeed.Channel.TimeToLive.ShouldBe(originalFeed.Channel.TimeToLive);
     }
 
+    /// <summary>
+    /// An item survives a save and reload with its author and both categories, the domain of the second included.
+    /// </summary>
     [TestMethod]
     public void RssFeed_RoundTrip_PreservesItems()
     {
@@ -405,6 +469,9 @@ public class RssFeedBehaviorTests
         loadedItem.Categories[1].Domain.ShouldBe("domain");
     }
 
+    /// <summary>
+    /// Five items survive a save and reload in the order they were added.
+    /// </summary>
     [TestMethod]
     public void RssFeed_RoundTrip_PreservesMultipleItems()
     {
@@ -445,6 +512,9 @@ public class RssFeedBehaviorTests
         }
     }
 
+    /// <summary>
+    /// An enclosure survives a save and reload with its length, content type and URL.
+    /// </summary>
     [TestMethod]
     public void RssFeed_RoundTrip_PreservesEnclosures()
     {
@@ -485,6 +555,10 @@ public class RssFeedBehaviorTests
         enclosure.Url.ShouldBe(new Uri("http://example.com/episode.mp3"));
     }
 
+    /// <summary>
+    /// A Dublin Core element read from a feed is written back out
+    /// and read again, leaving the extension count unchanged.
+    /// </summary>
     [TestMethod]
     public void RssFeed_RoundTrip_PreservesExtensions()
     {
@@ -530,6 +604,9 @@ public class RssFeedBehaviorTests
         reloadedFeed.Channel.Extensions.Count.ShouldBe(originalExtensionCount);
     }
 
+    /// <summary>
+    /// Parsing, serialising and parsing again gives the same channel properties and the same items, title by title.
+    /// </summary>
     [TestMethod]
     public void RssFeed_ParseSerializeParse_ProducesSameFeed()
     {
@@ -566,6 +643,9 @@ public class RssFeedBehaviorTests
 
     #region Async Operations Tests
 
+    /// <summary>
+    /// Loading over a caller-supplied client populates the channel and raises <c>Loaded</c>.
+    /// </summary>
     [TestMethod]
     public async Task RssFeed_LoadAsync_LoadsFeedCorrectly()
     {
@@ -590,6 +670,9 @@ public class RssFeedBehaviorTests
         feed.Channel.Description.ShouldBe("A test feed");
     }
 
+    /// <summary>
+    /// Loading over HTTP preserves the document order of the items, as loading from a stream does.
+    /// </summary>
     [TestMethod]
     public async Task RssFeed_LoadAsync_WithItems_LoadsAllItems()
     {
@@ -611,6 +694,9 @@ public class RssFeedBehaviorTests
         feed.Channel.Items[1].Title.ShouldBe("Old Item");
     }
 
+    /// <summary>
+    /// The static create returns a feed already populated from the response body.
+    /// </summary>
     [TestMethod]
     public async Task RssFeed_CreateAsync_CreatesAndLoadsNewFeed()
     {
@@ -630,6 +716,10 @@ public class RssFeedBehaviorTests
         feed.Format.ShouldBe(SyndicationContentFormat.Rss);
     }
 
+    /// <summary>
+    /// Load settings reach the asynchronous path: with auto-detection
+    /// on, the fetched channel reports its Dublin Core extension.
+    /// </summary>
     [TestMethod]
     public async Task RssFeed_LoadAsync_WithSettings_AppliesSettings()
     {
@@ -667,6 +757,9 @@ public class RssFeedBehaviorTests
         feed.Channel.HasExtensions.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>Loaded</c> event reports the URI the feed was fetched from.
+    /// </summary>
     [TestMethod]
     public async Task RssFeed_LoadAsync_IncludesSourceUriInEventArgs()
     {
@@ -694,6 +787,9 @@ public class RssFeedBehaviorTests
 
     #region Additional Behavior Tests
 
+    /// <summary>
+    /// The navigator a feed creates is rooted on an <c>rss</c> element.
+    /// </summary>
     [TestMethod]
     public void RssFeed_CreateNavigator_ReturnsValidNavigator()
     {
@@ -720,6 +816,9 @@ public class RssFeedBehaviorTests
         navigator.LocalName.ShouldBe("rss");
     }
 
+    /// <summary>
+    /// A channel extension can be found by its XML namespace, here the Dublin Core element set.
+    /// </summary>
     [TestMethod]
     public void RssFeed_FindExtension_ReturnsMatchingExtension()
     {
@@ -752,6 +851,9 @@ public class RssFeedBehaviorTests
         dublinCoreExtension.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A feed carrying no extensions says so.
+    /// </summary>
     [TestMethod]
     public void RssFeed_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
@@ -768,6 +870,9 @@ public class RssFeedBehaviorTests
         feed.HasExtensions.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A feed reports <c>SyndicationContentFormat.Rss</c> as the format it implements.
+    /// </summary>
     [TestMethod]
     public void RssFeed_Format_ReturnsRss()
     {
@@ -778,6 +883,9 @@ public class RssFeedBehaviorTests
         feed.Format.ShouldBe(SyndicationContentFormat.Rss);
     }
 
+    /// <summary>
+    /// A feed reports version <c>2.0</c>, which is the version it writes rather than one it was told.
+    /// </summary>
     [TestMethod]
     public void RssFeed_Version_Returns2Point0()
     {

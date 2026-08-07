@@ -73,6 +73,8 @@ public sealed class XmlRpcScalarValueLoadTests
     /// <summary>
     /// A typed value still loads through its declared type.
     /// </summary>
+    /// <param name="xml">A <c>value</c> element wrapping one of the type elements XML-RPC 1.0 defines.</param>
+    /// <param name="expected">The <c>XmlRpcScalarValueType</c> that spelling must parse to.</param>
     /// <remarks>
     ///     The controls. Each asserts the parsed <see cref="XmlRpcScalarValueType"/> as well as the
     ///     value, because a value that fell through to the untyped path would still carry the right
@@ -120,6 +122,7 @@ public sealed class XmlRpcScalarValueLoadTests
     /// <summary>
     /// An empty value does not load.
     /// </summary>
+    /// <param name="xml">An empty <c>value</c> element, in each of the two ways XML lets it be written.</param>
     /// <remarks>
     ///     The boundary control, matching <c>XmlRpcClient.TryParseValue</c>: an empty element is not a
     ///     successfully loaded empty string.

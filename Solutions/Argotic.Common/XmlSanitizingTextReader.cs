@@ -12,7 +12,7 @@ namespace Argotic.Common;
 /// is never held twice.
 /// </para>
 /// <para>
-/// <b>The load-bearing invariant is that a read never reports zero characters while input remains.</b>
+/// The load-bearing invariant is that a read never reports zero characters while input remains.
 /// <see cref="TextReader.Read(char[], int, int)"/> documents zero as meaning no characters are left, and
 /// <c>XmlTextReaderImpl</c> treats it that way. A chunk consisting entirely of dropped characters — a
 /// corrupt feed carrying a long run of NULs, which is not hypothetical — must therefore make this reader
@@ -20,7 +20,7 @@ namespace Argotic.Common;
 /// the document silently, with no error anywhere.
 /// </para>
 /// <para>
-/// <b>Two pending slots, not one.</b> There are two different reasons to hold a character back and
+/// Two pending slots, not one. There are two different reasons to hold a character back and
 /// conflating them corrupts a surrogate pair at a chunk boundary. One is a character that has been
 /// <i>classified and accepted</i> and is waiting for room in the caller's buffer — the low half of a
 /// valid astral character, whose validity was decided when its high half was examined. The other is a
@@ -58,7 +58,7 @@ internal sealed class XmlSanitizingTextReader(TextReader inner, bool leaveOpen =
     /// <inheritdoc/>
     /// <remarks>
     ///     <para>
-    ///     <b>Cold, and not therefore removable.</b> The only consumer of this reader is
+    ///     Cold, and not therefore removable. The only consumer of this reader is
     ///     <see cref="System.Xml.XmlReader"/>, which reads in blocks, so neither this nor
     ///     <see cref="Read()"/> has ever executed — and a coverage report says so plainly enough to
     ///     invite deleting both.

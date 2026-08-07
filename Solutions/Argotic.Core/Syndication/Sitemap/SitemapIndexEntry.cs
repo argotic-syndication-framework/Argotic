@@ -10,14 +10,11 @@ namespace Argotic.Syndication;
 /// Represents an entry in a Sitemap index file.
 /// </summary>
 /// <remarks>
-///     <para>
-///         This class represents a single sitemap entry in a Sitemap index file as defined in the
-///         <a href="https://www.sitemaps.org/protocol.html">Sitemaps Protocol</a>.
-///     </para>
-///     <para>
-///         A Sitemap index entry encapsulates the location of a sitemap and optionally when it was last modified.
-///     </para>
+///     A <c>&lt;sitemap&gt;</c> entry in a <c>&lt;sitemapindex&gt;</c>, as defined by the
+///     <a href="https://www.sitemaps.org/protocol.html">Sitemaps Protocol</a>. It points at another sitemap
+///     document rather than at a page; <see cref="SitemapUrl"/> is the entry type that points at pages.
 /// </remarks>
+/// <seealso cref="SitemapIndex.Sitemaps"/>
 public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<SitemapIndexEntry>, IComparisonOperators, IXmlWritable
 {
 
@@ -32,7 +29,7 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     /// Initializes a new instance of the <see cref="SitemapIndexEntry"/> class using the specified location.
     /// </summary>
     /// <param name="location">A <see cref="Uri"/> that represents the location of the sitemap.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is <see langword="null"/>.</exception>
     public SitemapIndexEntry(Uri location)
     {
         ArgumentNullException.ThrowIfNull(location);
@@ -44,7 +41,7 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     /// </summary>
     /// <param name="location">A <see cref="Uri"/> that represents the location of the sitemap.</param>
     /// <param name="lastModified">A <see cref="DateTime"/> that indicates when the sitemap was last modified.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is <see langword="null"/>.</exception>
     public SitemapIndexEntry(Uri location, DateTime lastModified)
         : this(location)
     {
@@ -54,13 +51,15 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     /// <summary>
     /// Gets or sets the location of the sitemap.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the location of the sitemap.</value>
+    /// <value>The absolute URL of the referenced sitemap document, or <see langword="null"/> if none was specified. Required by the protocol.</value>
     /// <remarks>
-    ///     <para>
-    ///         This URL is where the sitemap can be found. It must be a valid URL that conforms to RFC 2396.
-    ///     </para>
+    ///     The protocol asks that URLs follow <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986</a>
+    ///     for URIs and <a href="https://www.rfc-editor.org/rfc/rfc3987.html">RFC 3987</a> for IRIs. It also
+    ///     confines an index to its own site: "A Sitemap index file can only specify Sitemaps that are found
+    ///     on the same site as the Sitemap index file." Nothing here checks that, because the check needs the
+    ///     address the index will itself be served from, which this object does not know.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Location
     {
         get;
@@ -74,14 +73,11 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     /// <summary>
     /// Gets or sets the date of last modification of the sitemap.
     /// </summary>
-    /// <value>
-    ///     A <see cref="DateTime"/> that indicates when the sitemap was last modified.
-    ///     The default value is <b>null</b>, which indicates that no last modified date was specified.
-    /// </value>
+    /// <value>The default value is <see langword="null"/>, meaning the entry carried no <c>lastmod</c>.</value>
     /// <remarks>
-    ///     <para>
-    ///         This date should be in W3C Datetime format. This format allows you to omit the time portion, if desired, and use YYYY-MM-DD.
-    ///     </para>
+    ///     When the <i>referenced sitemap</i> last changed — not this index. The protocol asks for W3C
+    ///     Datetime, so <c>YYYY</c>, <c>YYYY-MM</c> and <c>YYYY-MM-DD</c> are all legal on the wire; saving
+    ///     always writes a full RFC 3339 timestamp.
     /// </remarks>
     public DateTime? LastModified { get; set; }
 
@@ -89,11 +85,11 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     /// Loads this <see cref="SitemapIndexEntry"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="SitemapIndexEntry"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="SitemapIndexEntry"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="SitemapIndexEntry"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -134,7 +130,7 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     /// Saves the current <see cref="SitemapIndexEntry"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -190,7 +186,7 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     /// Determines whether the specified <see cref="SitemapIndexEntry"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SitemapIndexEntry"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SitemapIndexEntry"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SitemapIndexEntry"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SitemapIndexEntry? other)
     {
         if (other is null)
@@ -205,7 +201,7 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SitemapIndexEntry other && this.Equals(other);
 
     /// <summary>
@@ -219,7 +215,7 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(SitemapIndexEntry? first, SitemapIndexEntry? second)
     {
         if (first is null)
@@ -235,6 +231,6 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(SitemapIndexEntry? first, SitemapIndexEntry? second) => !(first == second);
 }

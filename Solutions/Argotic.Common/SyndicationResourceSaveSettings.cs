@@ -28,11 +28,11 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// Gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
     /// </summary>
     /// <value>
-    ///     <b>true</b> if the syndication extensions supported by the save operation are automatically determined based on the syndication extensions added to the syndication resource and its child entities; Otherwise, <b>false</b>.
-    ///     The default value is <b>true</b>.
+    ///     <see langword="true"/> if the syndication extensions supported by the save operation are automatically determined based on the syndication extensions added to the syndication resource and its child entities; otherwise, <see langword="false"/>.
+    ///     The default value is <see langword="true"/>.
     /// </value>
     /// <remarks>
-    ///     Automatic detection of supported syndication extensions will <b>not</b> remove any syndication extensions already added
+    ///     Automatic detection of supported syndication extensions will <i>not</i> remove any syndication extensions already added
     ///     to the <see cref="SupportedExtensions"/> collection prior to the save operation execution.
     /// </remarks>
     public bool AutoDetectExtensions { get; set; } = true;
@@ -40,8 +40,14 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <summary>
     /// Gets or sets the character encoding to use when persisting a syndication resource.
     /// </summary>
-    /// <value>A <see cref="Encoding"/> object that indicates the character encoding to use when persisting a syndication resource. The default value is <see cref="Encoding.UTF8"/>.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The encoding to write with. The default value is <see cref="Encoding.UTF8"/>.</value>
+    /// <remarks>
+    ///     This is what the document's XML declaration will name, so it must be an encoding the readers
+    ///     of the feed can decode. It is unrelated to
+    ///     <see cref="SyndicationResourceLoadSettings.CharacterEncoding"/>, which is nullable because
+    ///     reading has a "detect it" option that writing does not.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Encoding CharacterEncoding
     {
         get;
@@ -55,7 +61,13 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <summary>
     /// Gets or sets a value indicating if syndication resource persist operations should attempt to minimize the physical size of the resulting output.
     /// </summary>
-    /// <value><b>true</b> if output size should be as small as possible; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
+    /// <value><see langword="true"/> if output size should be as small as possible; otherwise, <see langword="false"/>. The default value is <see langword="false"/>.</value>
+    /// <remarks>
+    ///     What it actually controls is indentation: every <c>Save</c> implementation sets
+    ///     <see cref="System.Xml.XmlWriterSettings.Indent"/> to the negation of this. The document is
+    ///     equally well-formed and carries the same information either way, so the only observable
+    ///     difference is its length.
+    /// </remarks>
     public bool MinimizeOutputSize { get; set; }
 
     /// <summary>
@@ -73,10 +85,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.</returns>
-    /// <remarks>
-    ///     This method returns a human-readable string for the current instance.
-    /// </remarks>
+    /// <returns>The settings, with <see cref="SupportedExtensions"/> reduced to its hash code rather than enumerated.</returns>
     public override string ToString() => $"[SyndicationResourceSaveSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", MinimizeOutputSize = \"{this.MinimizeOutputSize}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
 
     /// <summary>
@@ -103,7 +112,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// Determines whether the specified <see cref="SyndicationResourceSaveSettings"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SyndicationResourceSaveSettings"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SyndicationResourceSaveSettings"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SyndicationResourceSaveSettings"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SyndicationResourceSaveSettings? other)
     {
         if (other is null)
@@ -118,7 +127,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SyndicationResourceSaveSettings other && this.Equals(other);
 
     /// <summary>
@@ -149,7 +158,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(SyndicationResourceSaveSettings? first, SyndicationResourceSaveSettings? second)
     {
         if (first is null) return second is null;
@@ -161,6 +170,6 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(SyndicationResourceSaveSettings? first, SyndicationResourceSaveSettings? second) => !(first == second);
 }

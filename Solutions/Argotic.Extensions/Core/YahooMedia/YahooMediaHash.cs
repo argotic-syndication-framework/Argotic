@@ -12,7 +12,14 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         This entity can be associated multiple times to a media object as long as each <see cref="YahooMediaHash"/> instance has a different <see cref="Algorithm"/>.
+///         A media object may carry several hashes so long as each uses a different <see cref="Algorithm"/>.
+///     </para>
+///     <para>
+///         <b>The specification never says how the digest is encoded</b>, and its own example is a
+///         32-character hexadecimal MD5, whereas <see cref="GenerateHash"/> returns base64.
+///         <see cref="Value"/> is an opaque string and nothing converts between the two, so comparing a digest
+///         produced here against one read from a feed compares two spellings of the same bytes and reports them
+///         different.
 ///     </para>
 /// </remarks>
 public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMediaHash>, IComparisonOperators
@@ -40,8 +47,8 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// Initializes a new instance of the <see cref="YahooMediaHash"/> class using the supplied hash digest value.
     /// </summary>
     /// <param name="value">The value of this hash.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="value"/> is an empty string.</exception>
     public YahooMediaHash(string value)
     {
         this.Value = value;
@@ -51,20 +58,18 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// Gets or sets the algorithm used to create this hash.
     /// </summary>
     /// <value>
-    ///     A <see cref="YahooMediaHashAlgorithm"/> enumeration value that indicates the algorithm used to create this hash.
-    ///     The default value is <see cref="YahooMediaHashAlgorithm.None"/>, which indicates that no hash algorithm was specified.
+    ///     The algorithm. The default value is <see cref="YahooMediaHashAlgorithm.None"/>, which indicates that
+    ///     the <c>algo</c> attribute was absent and the specification's default,
+    ///     <see cref="YahooMediaHashAlgorithm.MD5"/>, applies.
     /// </value>
-    /// <remarks>
-    ///     If no algorithm is specified, it can be assumed that <see cref="YahooMediaHashAlgorithm.MD5"/> was used to create this hash.
-    /// </remarks>
     public YahooMediaHashAlgorithm Algorithm { get; set; } = YahooMediaHashAlgorithm.None;
 
     /// <summary>
     /// Gets or sets the value of this hash.
     /// </summary>
-    /// <value>The value of this hash.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <value>The digest, exactly as read or as supplied — no trimming and no re-encoding. The default value is an <i>empty</i> string, which is the one value a set operation cannot produce.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Value
     {
         get;
@@ -78,10 +83,10 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// <summary>
     /// Computes the hash value for the supplied <see cref="Stream"/> using the specified <see cref="YahooMediaHashAlgorithm"/>.
     /// </summary>
-    /// <param name="stream">The input to compute the hash code for.</param>
-    /// <param name="algorithm">A <see cref="YahooMediaHashAlgorithm"/> enumeration value that indicates the algorithm to use.</param>
-    /// <returns>The <b>base64</b> encoded result of the computed hash code.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <param name="stream">The input to compute the hash code for. It is read to the end from its current position.</param>
+    /// <param name="algorithm">The algorithm to use. <see cref="YahooMediaHashAlgorithm.None"/> is rejected rather than defaulted.</param>
+    /// <returns>The digest, base64 encoded — not the hexadecimal form the specification's example shows.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="algorithm"/> is equal to <see cref="YahooMediaHashAlgorithm.None"/>.</exception>
     public static string GenerateHash(Stream stream, YahooMediaHashAlgorithm algorithm)
     {
@@ -116,17 +121,28 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// Returns the hash algorithm identifier for the supplied <see cref="YahooMediaHashAlgorithm"/>.
     /// </summary>
     /// <param name="algorithm">The <see cref="YahooMediaHashAlgorithm"/> to get the hash algorithm identifier for.</param>
-    /// <returns>The hash algorithm identifier for the supplied <paramref name="algorithm"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>
+    ///     The <c>algo</c> attribute value, <c>md5</c> or <c>sha-1</c>.
+    ///     <see cref="YahooMediaHashAlgorithm.None"/> maps to an empty string, which is what keeps it out of the
+    ///     written feed.
+    /// </returns>
     public static string HashAlgorithmAsString(YahooMediaHashAlgorithm algorithm) => AlgorithmToStringMapping.GetValueOrDefault(algorithm, string.Empty);
 
     /// <summary>
     /// Returns the <see cref="YahooMediaHashAlgorithm"/> enumeration value that corresponds to the specified hash algorithm name.
     /// </summary>
-    /// <param name="name">The name of the hash algorithm.</param>
-    /// <returns>A <see cref="YahooMediaHashAlgorithm"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>YahooMediaHashAlgorithm.None</b>.</returns>
-    /// <remarks>This method disregards case of specified hash algorithm name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <param name="name">The name of the hash algorithm. Matched without regard to case.</param>
+    /// <returns>
+    ///     The matching <see cref="YahooMediaHashAlgorithm"/>, or <see cref="YahooMediaHashAlgorithm.None"/>
+    ///     when <paramref name="name"/> is neither <c>md5</c> nor <c>sha-1</c>.
+    /// </returns>
+    /// <remarks>
+    ///     Unlike the other <c>ByName</c> helpers in this family, this one rejects an empty or
+    ///     <see langword="null"/> name rather than folding it into
+    ///     <see cref="YahooMediaHashAlgorithm.None"/>.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
     public static YahooMediaHashAlgorithm HashAlgorithmByName(string name)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
@@ -138,11 +154,11 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// Loads this <see cref="YahooMediaHash"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="YahooMediaHash"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="YahooMediaHash"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaHash"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -174,7 +190,7 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// Saves the current <see cref="YahooMediaHash"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -197,10 +213,7 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaHash"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaHash"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -239,7 +252,7 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// Determines whether the specified <see cref="YahooMediaHash"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="YahooMediaHash"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="YahooMediaHash"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="YahooMediaHash"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(YahooMediaHash? other)
     {
         if (other is null)
@@ -254,7 +267,7 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is YahooMediaHash other && this.Equals(other);
 
     /// <summary>
@@ -268,7 +281,7 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(YahooMediaHash? first, YahooMediaHash? second)
     {
         if (first is null) return second is null;
@@ -280,6 +293,6 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(YahooMediaHash? first, YahooMediaHash? second) => !(first == second);
 }

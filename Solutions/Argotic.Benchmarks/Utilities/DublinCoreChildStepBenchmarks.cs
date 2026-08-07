@@ -135,7 +135,7 @@ public class DublinCoreChildStepBenchmarks
 {
     /// <summary>
     /// The namespace the <c>dcterms</c> prefix binds to, as declared at
-    /// <c>DublinCoreMetadataTermsSyndicationExtension.cs:34</c>.
+    /// <c>DublinCoreMetadataTermsSyndicationExtension.cs:29</c>.
     /// </summary>
     private const string DublinCoreTermsNamespace = "http://purl.org/dc/terms/";
 

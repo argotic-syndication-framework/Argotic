@@ -4,11 +4,17 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Configuration;
 
+/// <summary>
+/// Covers the defaults <c>TrackbackClientOptions</c> starts from and the values a caller can put in their place.
+/// </summary>
 [TestClass]
 public class TrackbackClientOptionsTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// A fresh options object waits 15 seconds and names neither a user agent nor a host.
+    /// </summary>
     [TestMethod]
     public void DefaultValues_AreCorrect()
     {
@@ -21,6 +27,9 @@ public class TrackbackClientOptionsTests
         options.Host.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A timeout set on the options is read back unchanged.
+    /// </summary>
     [TestMethod]
     public void Timeout_SetProperty_RetainsValue()
     {
@@ -35,6 +44,9 @@ public class TrackbackClientOptionsTests
         options.Timeout.ShouldBe(expectedTimeout);
     }
 
+    /// <summary>
+    /// A user agent set on the options is read back unchanged.
+    /// </summary>
     [TestMethod]
     public void UserAgent_SetProperty_RetainsValue()
     {
@@ -49,6 +61,9 @@ public class TrackbackClientOptionsTests
         options.UserAgent.ShouldBe(expectedUserAgent);
     }
 
+    /// <summary>
+    /// A host set on the options is read back unchanged.
+    /// </summary>
     [TestMethod]
     public void Host_SetProperty_RetainsValue()
     {
@@ -63,6 +78,9 @@ public class TrackbackClientOptionsTests
         options.Host.ShouldBe(expectedHost);
     }
 
+    /// <summary>
+    /// All three properties can be set together through an object initialiser without one disturbing another.
+    /// </summary>
     [TestMethod]
     public void SetAllProperties_RetainValues()
     {
@@ -85,6 +103,9 @@ public class TrackbackClientOptionsTests
         options.Host.ShouldBe(expectedHost);
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> clears a user agent that was already set, rather than being ignored.
+    /// </summary>
     [TestMethod]
     public void UserAgent_SetToNull_ReturnsNull()
     {
@@ -101,6 +122,9 @@ public class TrackbackClientOptionsTests
         options.UserAgent.ShouldBeNull();
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> clears a host that was already set, rather than being ignored.
+    /// </summary>
     [TestMethod]
     public void Host_SetToNull_ReturnsNull()
     {
@@ -118,11 +142,17 @@ public class TrackbackClientOptionsTests
     }
 }
 
+/// <summary>
+/// Covers the defaults <c>XmlRpcClientOptions</c> starts from, the values a caller can put in their place, and the timeouts it declines to police.
+/// </summary>
 [TestClass]
 public class XmlRpcClientOptionsTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// A fresh options object waits 15 seconds and names neither a user agent nor a host.
+    /// </summary>
     [TestMethod]
     public void DefaultValues_AreCorrect()
     {
@@ -135,6 +165,9 @@ public class XmlRpcClientOptionsTests
         options.Host.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A timeout set on the options is read back unchanged.
+    /// </summary>
     [TestMethod]
     public void Timeout_SetProperty_RetainsValue()
     {
@@ -149,6 +182,9 @@ public class XmlRpcClientOptionsTests
         options.Timeout.ShouldBe(expectedTimeout);
     }
 
+    /// <summary>
+    /// A user agent set on the options is read back unchanged.
+    /// </summary>
     [TestMethod]
     public void UserAgent_SetProperty_RetainsValue()
     {
@@ -163,6 +199,9 @@ public class XmlRpcClientOptionsTests
         options.UserAgent.ShouldBe(expectedUserAgent);
     }
 
+    /// <summary>
+    /// A host set on the options is read back unchanged.
+    /// </summary>
     [TestMethod]
     public void Host_SetProperty_RetainsValue()
     {
@@ -177,6 +216,9 @@ public class XmlRpcClientOptionsTests
         options.Host.ShouldBe(expectedHost);
     }
 
+    /// <summary>
+    /// All three properties can be set together through an object initialiser without one disturbing another.
+    /// </summary>
     [TestMethod]
     public void SetAllProperties_RetainValues()
     {
@@ -199,6 +241,9 @@ public class XmlRpcClientOptionsTests
         options.Host.ShouldBe(expectedHost);
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> clears a user agent that was already set, rather than being ignored.
+    /// </summary>
     [TestMethod]
     public void UserAgent_SetToNull_ReturnsNull()
     {
@@ -215,6 +260,9 @@ public class XmlRpcClientOptionsTests
         options.UserAgent.ShouldBeNull();
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> clears a host that was already set, rather than being ignored.
+    /// </summary>
     [TestMethod]
     public void Host_SetToNull_ReturnsNull()
     {
@@ -231,6 +279,9 @@ public class XmlRpcClientOptionsTests
         options.Host.ShouldBeNull();
     }
 
+    /// <summary>
+    /// <c>TimeSpan.Zero</c> is accepted as a timeout and stored as given.
+    /// </summary>
     [TestMethod]
     public void Timeout_ZeroValue_IsAllowed()
     {
@@ -244,6 +295,13 @@ public class XmlRpcClientOptionsTests
         options.Timeout.ShouldBe(TimeSpan.Zero);
     }
 
+    /// <summary>
+    /// A negative timeout is accepted and stored as given.
+    /// </summary>
+    /// <remarks>
+    ///     Recorded rather than fixed: as the comment in the body says, the options object does not
+    ///     validate, so a client that cares has to check the value for itself.
+    /// </remarks>
     [TestMethod]
     public void Timeout_NegativeValue_IsAllowed()
     {

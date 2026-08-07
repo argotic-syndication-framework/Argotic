@@ -1,8 +1,29 @@
 namespace Argotic.Extensions.Tests.TestDoubles;
 
 /// <summary>
-/// Provides test data for feed loading tests.
+/// The suite's sample documents, held as C# raw string literals.
 /// </summary>
+/// <remarks>
+///     <para>
+///     <b>There is no resources folder and nothing here is read from the file system.</b> A fixture is
+///     a <c>const string</c> in this file, so it is visible at the point of use, cannot drift from the
+///     test that depends on it, and needs no copy-to-output step to exist at run time. Add a new
+///     fixture here rather than adding a file.
+///     </para>
+///     <para>
+///     Covers every format the library reads and most of the versions: RSS 0.90 through 2.0, Atom 0.3
+///     and 1.0, OPML, RSD, BlogML, sitemaps and sitemap indexes with each Google extension, XML-RPC and
+///     Trackback payloads, and HTML pages carrying the link elements the discovery utilities look for.
+///     Several are deliberately degenerate — <see cref="MalformedXml"/>, <see cref="EmptySitemap"/> —
+///     because the interesting question is usually what happens to a document that is not well behaved.
+///     </para>
+///     <para>
+///     <b>Reach for <see cref="SampleFeeds"/> instead when the realism is the point.</b> These literals
+///     are small and declare almost no extension namespaces; the linked sample documents are real files,
+///     an order of magnitude larger, and carry the <c>itunes:</c>, <c>media:</c>, <c>content:</c> and
+///     <c>dc:</c> elements a live feed does. That class records the measured difference.
+///     </para>
+/// </remarks>
 public static class FeedTestData
 {
     /// <summary>
@@ -71,7 +92,7 @@ public static class FeedTestData
                                        """;
 
     /// <summary>
-    /// HTML page with RSS link for auto-discovery tests.
+    /// An HTML page advertising a feed through the <c>link rel="alternate"</c> element that autodiscovery looks for.
     /// </summary>
     public const string HtmlWithRssLink = """
                                           <!DOCTYPE html>
@@ -87,7 +108,7 @@ public static class FeedTestData
                                           """;
 
     /// <summary>
-    /// HTML page with pingback link for pingback discovery tests.
+    /// An HTML page advertising a Pingback endpoint through <c>link rel="pingback"</c>.
     /// </summary>
     public const string HtmlWithPingbackLink = """
                                                <!DOCTYPE html>
@@ -103,8 +124,13 @@ public static class FeedTestData
                                                """;
 
     /// <summary>
-    /// HTML page with embedded trackback RDF for trackback discovery tests.
+    /// An HTML page carrying Trackback RDF inside a comment, which is where the specification puts it.
     /// </summary>
+    /// <remarks>
+    ///     The metadata is deliberately commented out. Trackback autodiscovery has to find RDF that is
+    ///     invisible to an HTML parser, so a fixture that placed it in the document body would exercise
+    ///     the wrong code path.
+    /// </remarks>
     public const string HtmlWithTrackbackRdf = """
                                                <!DOCTYPE html>
                                                <html>
@@ -129,8 +155,12 @@ public static class FeedTestData
                                                """;
 
     /// <summary>
-    /// HTML page containing a link to a target URL for SourceReferencesTarget tests.
+    /// An HTML page whose body links to <c>http://example.com/target</c> from ordinary prose.
     /// </summary>
+    /// <remarks>
+    ///     The link is an <c>a href</c> in the body rather than a <c>link</c> in the head: this is the
+    ///     fixture for asking whether one page references another, not for autodiscovery.
+    /// </remarks>
     public const string HtmlWithTargetLink = """
                                              <!DOCTYPE html>
                                              <html>
@@ -144,8 +174,14 @@ public static class FeedTestData
                                              """;
 
     /// <summary>
-    /// RSS feed with items for GenericSyndicationFeed tests.
+    /// An RSS 2.0 feed with a channel category and two categorised items, one recent and one a year older.
     /// </summary>
+    /// <remarks>
+    ///     The RSS half of a matched pair with <see cref="AtomWithEntries"/>: same titles, same
+    ///     categories, same two dates, in the two formats. A format-agnostic reader must give the same
+    ///     answer for both, and that comparison is only meaningful because the documents were written to
+    ///     line up.
+    /// </remarks>
     public const string RssWithItems = """
                                        <?xml version="1.0" encoding="UTF-8"?>
                                        <rss version="2.0">
@@ -174,7 +210,7 @@ public static class FeedTestData
                                        """;
 
     /// <summary>
-    /// Atom feed with entries for GenericSyndicationFeed tests.
+    /// An Atom 1.0 feed carrying the same two entries, categories and dates as <see cref="RssWithItems"/>.
     /// </summary>
     public const string AtomWithEntries = """
                                           <?xml version="1.0" encoding="UTF-8"?>

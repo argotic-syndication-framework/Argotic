@@ -12,24 +12,23 @@ namespace Argotic.Syndication;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         If an <see cref="AtomEntry"/> is copied from one feed into another feed, then the source feed's metadata (all child elements of feed other than the entry elements) <i>may</i> be preserved
-///         within the copied entry by specifying an <see cref="AtomSource"/>, if it is not already present in the entry, and including some or all the source feed's meta-data elements as the
-///         source's children. Such metadata <i>should</i> be preserved if the source <see cref="AtomFeed">feed</see> contains any of the child elements author, contributor, rights, or category
-///         and those child elements are not present in the source <see cref="AtomEntry">entry</see>.
+///         An aggregator that copies an entry from one feed into another <i>may</i> preserve the origin feed's metadata — every child of <c>feed</c>
+///         except the entries — inside the copied entry as an <c>atom:source</c>, when the entry does not already carry one. RFC 4287 §4.2.11 says it
+///         <i>should</i> do so whenever the origin feed has an author, contributor, rights or category the entry itself lacks.
 ///     </para>
 ///     <para>
-///         The <see cref="AtomSource"/> is designed to allow the aggregation of entries from different feeds while retaining information about an entry's source feed.
-///         For this reason, Atom Processors that are performing such aggregation <i>should</i> include at least the required feed-level meta-data elements
-///         (<see cref="AtomFeed.Id">id</see>, <see cref="AtomFeed.Title">title</see>, and <see cref="AtomFeed.UpdatedOn">updated</see>) in the <see cref="AtomSource"/>.
+///         <b>That is not a nicety; it is what stops attribution from being rewritten.</b> §4.1.1 lets an entry inherit its author from the containing
+///         feed. Copy such an entry into a different feed without an <c>atom:source</c> and it silently inherits the <i>new</i> feed's author instead.
+///         An aggregator should therefore carry over at least the required feed-level members — <see cref="Id"/>, <see cref="Title"/> and
+///         <see cref="UpdatedOn"/> — plus any authorship the entry does not state for itself.
+///     </para>
+///     <para>
+///         Every member is optional here: <c>atom:source</c> may hold any subset of the feed metadata, so nothing in this class is required and nothing
+///         is enforced.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the AtomSource class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Atom\AtomSourceExample.cs"
-///             region="AtomSource"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Atom\AtomSourceExample.cs" language="cs" title="The following code example demonstrates the usage of the AtomSource class." />
 /// </example>
 public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, IEquatable<AtomSource>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
@@ -57,23 +56,32 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     }
 
     /// <summary>
-    /// Gets or sets the base URI other than the base URI of the document or external entity.
+    /// Gets or sets the base against which relative references inside this element are resolved.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>xml:base</c> in effect for this element, or <see langword="null"/> when none is. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-    ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+    ///         RFC 4287 §2 gives <c>xml:base</c> the function described in section 5.1.1 of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a> — it establishes the base URI,
+    ///         or IRI, for every relative reference in the attribute's effective scope. The value itself is a URI reference after processing according to
+    ///         <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.
+    ///     </para>
+    ///     <para>
+    ///         Loading resolves inheritance: an element without an <c>xml:base</c> of its own reports the nearest ancestor's, so the value here is the
+    ///         <i>effective</i> base a consumer can resolve an href against, not the literal attribute.
+    ///     </para>
     /// </remarks>
     public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>The language declared by <c>xml:lang</c>, or <see langword="null"/> when none is in scope. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         RFC 4287 defines <c>atomLanguageTag</c> as a language identifier per
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>, or its successor. A tag this runtime cannot turn
+    ///         into a <see cref="CultureInfo"/> is traced and dropped rather than failing the load.
     ///     </para>
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -81,43 +89,39 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Extensions"/> holds at least one <see cref="ISyndicationExtension"/>; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets the authors of this source.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the authors of this source.</value>
     public IList<AtomPersonConstruct> Authors { get; } = [];
 
     /// <summary>
     /// Gets the categories associated with this source.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomCategory"/> objects that represent the categories associated with this source.</value>
     public IList<AtomCategory> Categories { get; } = [];
 
     /// <summary>
     /// Gets the entities who contributed to this source.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the entities who contributed to this source.</value>
     public IList<AtomPersonConstruct> Contributors { get; } = [];
 
     /// <summary>
     /// Gets or sets the agent used to generate this source.
     /// </summary>
-    /// <value>A <see cref="AtomGenerator"/> object that represents the agent used to generate this source. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>atom:generator</c>, or <see langword="null"/> when the source feed named no agent. The default value is <see langword="null"/>.</value>
     public AtomGenerator? Generator { get; set; }
 
     /// <summary>
     /// Gets or sets an image that provides iconic visual identification for this source.
     /// </summary>
-    /// <value>A <see cref="AtomIcon"/> object that represents an image that provides iconic visual identification for this source. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>atom:icon</c>, or <see langword="null"/> when the source feed had none. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     The image <i>should</i> have an aspect ratio of one (horizontal) to one (vertical) and <i>should</i> be suitable for presentation at a small size.
     /// </remarks>
@@ -126,19 +130,17 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <summary>
     /// Gets or sets a permanent, universally unique identifier for this source.
     /// </summary>
-    /// <value>A <see cref="AtomId"/> object that represents a permanent, universally unique identifier for this source.</value>
     public AtomId? Id { get; set; }
 
     /// <summary>
     /// Gets references from this source to one or more Web resources.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomLink"/> objects that represent references from this source to one or more Web resources.</value>
     public IList<AtomLink> Links { get; } = [];
 
     /// <summary>
     /// Gets or sets an image that provides visual identification for this source.
     /// </summary>
-    /// <value>A <see cref="AtomLogo"/> object that represents an image that provides visual identification for this source. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>atom:logo</c>, or <see langword="null"/> when the source feed had none. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     The image <i>should</i> have an aspect ratio of 2 (horizontal) to 1 (vertical).
     /// </remarks>
@@ -147,7 +149,6 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <summary>
     /// Gets or sets information about rights held in and over this source.
     /// </summary>
-    /// <value>A <see cref="AtomTextConstruct"/> object that represents information about rights held in and over this source.</value>
     /// <remarks>
     ///     The <see cref="Rights"/> property <i>should not</i> be used to convey machine-readable licensing information.
     /// </remarks>
@@ -156,24 +157,23 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <summary>
     /// Gets or sets information that conveys a human-readable description or subtitle for this source.
     /// </summary>
-    /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable description or subtitle for this source.</value>
     public AtomTextConstruct? Subtitle { get; set; }
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable title for this source.
     /// </summary>
-    /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this source.</value>
     public AtomTextConstruct? Title { get; set; }
 
     /// <summary>
     /// Gets or sets a date-time indicating the most recent instant in time when this source was modified in a way the publisher considers significant.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this source was modified in a way the publisher considers significant.
-    ///     Publishers <i>may</i> change the value of this element over time. The default value is <see cref="DateTime.MinValue"/>, which indicates that no update time was provided.
+    ///     The source feed's <c>atom:updated</c>. The default value is <see cref="DateTime.MinValue"/>, which means none was carried across — and no
+    ///     <c>atom:updated</c> is written when it is left there.
     /// </value>
     /// <remarks>
-    ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
+    ///     This is the <i>source feed's</i> update time, not the containing entry's. Supply it in UTC. Unlike <see cref="AtomFeed.UpdatedOn"/> it is
+    ///     optional: <c>atom:source</c> may carry any subset of the feed metadata, so nothing here is required.
     /// </remarks>
     public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
 
@@ -181,11 +181,11 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// Loads this <see cref="AtomSource"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="AtomSource"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomSource"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomSource"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -244,12 +244,12 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="AtomSource"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomSource"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomSource"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -265,7 +265,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// Saves the current <see cref="AtomSource"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -431,7 +431,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// Determines whether the specified <see cref="AtomSource"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="AtomSource"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="AtomSource"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="AtomSource"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(AtomSource? other)
     {
         if (other is null)
@@ -446,7 +446,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is AtomSource other && this.Equals(other);
 
     /// <summary>
@@ -460,7 +460,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(AtomSource? first, AtomSource? second)
     {
         if (first is null) return second is null;
@@ -472,7 +472,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are not equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(AtomSource? first, AtomSource? second) => !(first == second);
 
     /// <summary>
@@ -480,12 +480,12 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
-    /// <returns><b>true</b> if the <see cref="AtomSource"/> collection entities were initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomSource"/> collection entities were initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomSource"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     private bool LoadCollections(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -580,12 +580,12 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
-    /// <returns><b>true</b> if the <see cref="AtomSource"/> optional entities were initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomSource"/> optional entities were initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomSource"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;

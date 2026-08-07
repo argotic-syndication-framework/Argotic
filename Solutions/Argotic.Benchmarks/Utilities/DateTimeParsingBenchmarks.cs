@@ -20,12 +20,12 @@ namespace Argotic.Benchmarks.Utilities;
 /// <list type="bullet">
 ///   <item><description>Named zone versus numeric offset. A named zone goes through
 ///   <c>ReplaceRfc822TimeZoneWithOffset</c>, which rebuilds the string; a numeric offset returns the
-///   original instance untouched. Measured on a probe, 168 B against 0 B. An arm of only one of them
+///   original instance untouched and allocates nothing. An arm of only one of them
 ///   would price the rewrite at either all or nothing.</description></item>
 ///   <item><description>Where the matching pattern sits in the table.
 ///   <see cref="DateTime.TryParseExact(string, string[], IFormatProvider, System.Globalization.DateTimeStyles, out DateTime)"/>
 ///   walks the array in order, so the index of the first match is the number of attempts. The
-///   dominant RSS shape matches at index 7 - the eight leading patterns all carry fractional seconds,
+///   dominant RSS shape matches at index 7 - the seven leading patterns all carry fractional seconds,
 ///   which RSS dates essentially never have - and a single-digit day matches at index 23. Both are
 ///   measured, because reordering the table helps them by different amounts.</description></item>
 ///   <item><description>The fallback path. A shape the table cannot match walks all 36

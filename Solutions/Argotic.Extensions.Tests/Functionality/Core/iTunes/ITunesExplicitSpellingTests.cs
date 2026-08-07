@@ -69,6 +69,10 @@ public sealed class ITunesExplicitSpellingTests
     ///     three legacy rows are the controls, and they must keep working because 1,830 corpus values
     ///     still use them.
     /// </remarks>
+    /// <param name="spelling">The node value to write into <c>itunes:explicit</c>; one of the five
+    /// spellings the corpus contains.</param>
+    /// <param name="expected">The member of <c>ITunesExplicitMaterial</c> that spelling names.</param>
+    /// <param name="provenance">Where the row came from, quoted back as the failure message.</param>
     [TestMethod]
     [DataRow("false", ITunesExplicitMaterial.No, "current spelling, 2,722 in the corpus")]
     [DataRow("true", ITunesExplicitMaterial.Yes, "current spelling, 218 in the corpus")]
@@ -90,6 +94,8 @@ public sealed class ITunesExplicitSpellingTests
     ///     The existing lookup is case-insensitive, and the new spellings must not be stricter than the
     ///     ones they join.
     /// </remarks>
+    /// <param name="spelling">A recognised spelling written in a casing no publisher would use.</param>
+    /// <param name="expected">The member of <c>ITunesExplicitMaterial</c> that spelling names.</param>
     [TestMethod]
     [DataRow("FALSE", ITunesExplicitMaterial.No)]
     [DataRow("True", ITunesExplicitMaterial.Yes)]
@@ -135,6 +141,13 @@ public sealed class ITunesExplicitSpellingTests
     ///     are written that way — more than are written <c>MM:SS</c> by a factor of forty.
     ///     </para>
     /// </remarks>
+    /// <param name="duration">The node value to write into <c>itunes:duration</c>; either
+    /// colon-separated or a bare count of seconds.</param>
+    /// <param name="hours">The hours component of the duration it names.</param>
+    /// <param name="minutes">The minutes component of the duration it names.</param>
+    /// <param name="seconds">The seconds component of the duration it names.</param>
+    /// <param name="provenance">The format's name and its count in the corpus, quoted back as the
+    /// failure message.</param>
     [TestMethod]
     [DataRow("01:23:45", 1, 23, 45, "HH:MM:SS — 2,942 in the corpus")]
     [DataRow("3600", 1, 0, 0, "bare seconds — 2,615")]

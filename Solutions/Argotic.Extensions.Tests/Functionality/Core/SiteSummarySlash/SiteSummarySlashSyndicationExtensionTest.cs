@@ -7,6 +7,11 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.SiteSummarySlash;
 
+/// <summary>
+/// Covers the Slashdot slash module, <c>http://purl.org/rss/1.0/modules/slash/</c>: the comment count,
+/// section, department and comma-separated <c>hit_parade</c> its context carries, how they are read from
+/// an RSS 2.0 item, and its comparison, equality and ordering contracts.
+/// </summary>
 [TestClass]
 public class SiteSummarySlashSyndicationExtensionTest
 {
@@ -19,6 +24,9 @@ public class SiteSummarySlashSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor yields an instance of the slash-module extension type.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashSyndicationExtensionConstructorTest()
     {
@@ -27,6 +35,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         target.ShouldBeOfType<SiteSummarySlashSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions holding identical context compare equal.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashCompareToTest()
     {
@@ -36,6 +47,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// An extension is equal to a separately constructed extension holding the same context.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashEqualsTest()
     {
@@ -45,6 +59,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Hashing a populated extension returns a non-zero value rather than throwing.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashGetHashCodeTest()
     {
@@ -55,6 +72,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// An RSS 2.0 feed whose item carries <c>slash:</c> elements loads without error.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashLoadTest()
     {
@@ -65,6 +85,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         feed.Load(reader);
     }
 
+    /// <summary>
+    /// Attaching the extension to an item and saving the feed produces non-empty XML.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashCreateXmlTest()
     {
@@ -73,6 +96,10 @@ public class SiteSummarySlashSyndicationExtensionTest
         actual.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// A loaded feed's single item reports that it has extensions, and the slash-module one is found both
+    /// by type argument and through the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashFullTest()
     {
@@ -91,6 +118,9 @@ public class SiteSummarySlashSyndicationExtensionTest
             .ShouldBeOfType<SiteSummarySlashSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts a slash-module extension.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashMatchByTypeTest()
     {
@@ -99,6 +129,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> returns a non-empty rendering of a populated extension.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashToStringTest()
     {
@@ -107,6 +140,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         actual.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// <c>WriteTo</c> produces non-empty XML for a populated extension; the text itself is not asserted.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashWriteToTest()
     {
@@ -119,6 +155,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         output.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// Extensions holding different context are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashOpEqualityTestFailure()
     {
@@ -128,6 +167,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Extensions holding the same context are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashOpEqualityTestSuccess()
     {
@@ -137,6 +179,10 @@ public class SiteSummarySlashSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&gt;</c> yields a boolean for two differing extensions without throwing; the direction is not
+    /// asserted.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashOpGreaterThanTest()
     {
@@ -147,6 +193,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>
+    /// Extensions holding different context are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashOpInequalityTest()
     {
@@ -156,6 +205,10 @@ public class SiteSummarySlashSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&lt;</c> yields a boolean for two differing extensions without throwing; the direction is not
+    /// asserted.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashOpLessThanTest()
     {
@@ -166,6 +219,10 @@ public class SiteSummarySlashSyndicationExtensionTest
         result.ShouldBeOneOf(true, false);
     }
 
+    /// <summary>
+    /// The context of a populated extension carries the comment count, the section, the department and the
+    /// hit parade in the order its entries were added.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashContextTest()
     {
@@ -182,6 +239,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         context.HitParade[2].ShouldBe(300);
     }
 
+    /// <summary>
+    /// Assigning a <see langword="null"/> context throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashContextSetterThrowsOnNull()
     {
@@ -192,6 +252,11 @@ public class SiteSummarySlashSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Context = null!);
     }
 
+    /// <summary>
+    /// An RSS 2.0 item carrying <c>slash:comments</c>, a CDATA <c>slash:section</c> and
+    /// <c>slash:department</c>, and a comma-separated <c>slash:hit_parade</c>, fills all four — the hit
+    /// parade split into its three integers, and the section and department read as written.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashRoundTripTest()
     {
@@ -216,6 +281,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         itemExtension.Context.HitParade.ShouldContain(300);
     }
 
+    /// <summary>
+    /// <c>&lt;=</c> holds between two extensions holding identical context.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashOpLessThanOrEqualTest()
     {
@@ -227,6 +295,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         (first <= second).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&gt;=</c> holds between two extensions holding identical context.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashOpGreaterThanOrEqualTest()
     {
@@ -238,6 +309,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         (first >= second).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> rejects an extension from another family.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashMatchByTypeReturnsFalseForDifferentType()
     {
@@ -251,6 +325,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension is not equal to a value of an unrelated type.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashEqualsReturnsFalseForDifferentType()
     {
@@ -261,6 +338,9 @@ public class SiteSummarySlashSyndicationExtensionTest
         target.Equals("not an extension").ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An extension sorts after <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void SiteSummarySlashCompareToNullReturnsPositive()
     {

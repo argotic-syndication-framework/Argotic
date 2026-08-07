@@ -3,11 +3,19 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
+/// <summary>
+/// Covers the two date grammars <c>SyndicationDateTimeUtility</c> reads and writes — RFC 3339, which
+/// Atom requires, and RFC 822, which RSS and OPML require — across named zones, numeric offsets,
+/// fractional seconds, two-digit years, and the round trip between parsing and formatting.
+/// </summary>
 [TestClass]
 public class SyndicationDateTimeUtilityTests
 {
     #region TryParseRfc3339DateTime Tests
 
+    /// <summary>
+    /// <c>2024-01-15T10:30:00Z</c> parses to that date and time, component for component.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithUtcTimestamp_ParsesCorrectly()
     {
@@ -27,6 +35,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Second.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A three-digit fraction survives the parse: <c>10:30:00.123Z</c> yields a millisecond of <c>123</c>.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithMilliseconds_ParsesCorrectly()
     {
@@ -47,6 +58,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Millisecond.ShouldBe(123);
     }
 
+    /// <summary>
+    /// An eastern offset is rebased to UTC: <c>10:30+05:00</c> parses to <c>05:30</c>.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithPositiveTimezoneOffset_ParsesAndConvertsToUtc()
     {
@@ -63,6 +77,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Minute.ShouldBe(30);
     }
 
+    /// <summary>
+    /// A western offset is rebased to UTC: <c>10:30-08:00</c> parses to <c>18:30</c>.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithNegativeTimezoneOffset_ParsesAndConvertsToUtc()
     {
@@ -79,6 +96,10 @@ public class SyndicationDateTimeUtilityTests
         parsed.Minute.ShouldBe(30);
     }
 
+    /// <summary>
+    /// A value carrying both a fraction and an offset — <c>10:30:00.456-05:00</c> — parses and rebases
+    /// to <c>15:30</c> UTC.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithMillisecondsAndTimezoneOffset_ParsesCorrectly()
     {
@@ -95,6 +116,10 @@ public class SyndicationDateTimeUtilityTests
         parsed.Minute.ShouldBe(30);
     }
 
+    /// <summary>
+    /// A string that is not a date returns <see langword="false"/> and leaves the result at
+    /// <see cref="DateTime.MinValue"/>.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithInvalidString_ReturnsFalse()
     {
@@ -109,6 +134,10 @@ public class SyndicationDateTimeUtilityTests
         parsed.ShouldBe(DateTime.MinValue);
     }
 
+    /// <summary>
+    /// An empty string returns <see langword="false"/> and leaves the result at
+    /// <see cref="DateTime.MinValue"/> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithEmptyString_ReturnsFalse()
     {
@@ -123,6 +152,10 @@ public class SyndicationDateTimeUtilityTests
         parsed.ShouldBe(DateTime.MinValue);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> string returns <see langword="false"/> and leaves the result at
+    /// <see cref="DateTime.MinValue"/> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithNullString_ReturnsFalse()
     {
@@ -137,6 +170,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.ShouldBe(DateTime.MinValue);
     }
 
+    /// <summary>
+    /// Six fractional-second digits are accepted rather than rejected as over-precise.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithSixDigitFractionalSeconds_ParsesCorrectly()
     {
@@ -151,6 +187,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Year.ShouldBe(2024);
     }
 
+    /// <summary>
+    /// Two fractional-second digits are accepted.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithTwoDigitFractionalSeconds_ParsesCorrectly()
     {
@@ -167,6 +206,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Day.ShouldBe(15);
     }
 
+    /// <summary>
+    /// Five fractional-second digits are accepted.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithFiveDigitFractionalSeconds_ParsesCorrectly()
     {
@@ -181,6 +223,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Year.ShouldBe(2024);
     }
 
+    /// <summary>
+    /// A single fractional-second digit is accepted.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithSingleDigitFractionalSeconds_ParsesCorrectly()
     {
@@ -199,6 +244,9 @@ public class SyndicationDateTimeUtilityTests
 
     #region ParseRfc3339DateTime Tests
 
+    /// <summary>
+    /// The throwing overload returns <c>2024-01-15T10:30:00Z</c> as its component parts.
+    /// </summary>
     [TestMethod]
     public void ParseRfc3339DateTime_WithValidUtcTimestamp_ReturnsDateTime()
     {
@@ -216,6 +264,10 @@ public class SyndicationDateTimeUtilityTests
         result.Minute.ShouldBe(30);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> value throws <see cref="ArgumentNullException"/>, not the plain
+    /// <see cref="ArgumentException"/> the empty case raises.
+    /// </summary>
     [TestMethod]
     public void ParseRfc3339DateTime_WithNullString_ThrowsArgumentException()
     {
@@ -226,6 +278,9 @@ public class SyndicationDateTimeUtilityTests
         Should.Throw<ArgumentNullException>(() => SyndicationDateTimeUtility.ParseRfc3339DateTime(input!));
     }
 
+    /// <summary>
+    /// An empty string throws <see cref="ArgumentException"/>.
+    /// </summary>
     [TestMethod]
     public void ParseRfc3339DateTime_WithEmptyString_ThrowsArgumentException()
     {
@@ -236,6 +291,10 @@ public class SyndicationDateTimeUtilityTests
         Should.Throw<ArgumentException>(() => SyndicationDateTimeUtility.ParseRfc3339DateTime(input));
     }
 
+    /// <summary>
+    /// A string that is not a date throws <see cref="FormatException"/> rather than returning a
+    /// sentinel.
+    /// </summary>
     [TestMethod]
     public void ParseRfc3339DateTime_WithInvalidFormat_ThrowsFormatException()
     {
@@ -246,6 +305,9 @@ public class SyndicationDateTimeUtilityTests
         Should.Throw<FormatException>(() => SyndicationDateTimeUtility.ParseRfc3339DateTime(input));
     }
 
+    /// <summary>
+    /// The throwing overload rebases an offset-bearing value too: <c>10:30+05:00</c> returns hour <c>5</c>.
+    /// </summary>
     [TestMethod]
     public void ParseRfc3339DateTime_WithTimezoneOffset_ReturnsConvertedDateTime()
     {
@@ -260,6 +322,9 @@ public class SyndicationDateTimeUtilityTests
         result.Hour.ShouldBe(5);
     }
 
+    /// <summary>
+    /// <c>10:30:00.500Z</c> returns a millisecond of <c>500</c>.
+    /// </summary>
     [TestMethod]
     public void ParseRfc3339DateTime_WithMilliseconds_ReturnsDateTime()
     {
@@ -278,6 +343,9 @@ public class SyndicationDateTimeUtilityTests
 
     #region TryParseRfc822DateTime Tests
 
+    /// <summary>
+    /// The named zone <c>CET</c> is read as <c>+01:00</c>, so <c>10:30 CET</c> parses to <c>09:30</c> UTC.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithCetTimezone_ParsesAndConvertsToUtc()
     {
@@ -297,6 +365,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Minute.ShouldBe(30);
     }
 
+    /// <summary>
+    /// The named zone <c>CEST</c> is read as <c>+02:00</c>, so <c>10:30 CEST</c> parses to <c>08:30</c> UTC.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithCestTimezone_ParsesAndConvertsToUtc()
     {
@@ -313,6 +384,10 @@ public class SyndicationDateTimeUtilityTests
         parsed.Minute.ShouldBe(30);
     }
 
+    /// <summary>
+    /// A string that is not a date returns <see langword="false"/> and leaves the result at
+    /// <see cref="DateTime.MinValue"/>.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithInvalidString_ReturnsFalse()
     {
@@ -327,6 +402,10 @@ public class SyndicationDateTimeUtilityTests
         parsed.ShouldBe(DateTime.MinValue);
     }
 
+    /// <summary>
+    /// An empty string returns <see langword="false"/> and leaves the result at
+    /// <see cref="DateTime.MinValue"/> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithEmptyString_ReturnsFalse()
     {
@@ -341,6 +420,10 @@ public class SyndicationDateTimeUtilityTests
         parsed.ShouldBe(DateTime.MinValue);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> string returns <see langword="false"/> and leaves the result at
+    /// <see cref="DateTime.MinValue"/> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithNullString_ReturnsFalse()
     {
@@ -355,6 +438,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.ShouldBe(DateTime.MinValue);
     }
 
+    /// <summary>
+    /// An unpadded day of month parses alongside a named zone: <c>Fri, 5 Jan 2024</c> yields day <c>5</c>.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithSingleDigitDayAndCet_ParsesCorrectly()
     {
@@ -369,6 +455,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Day.ShouldBe(5);
     }
 
+    /// <summary>
+    /// A two-digit year parses alongside a named zone, <c>24</c> expanding to <c>2024</c>.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithTwoDigitYearAndCet_ParsesCorrectly()
     {
@@ -383,6 +472,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Year.ShouldBe(2024);
     }
 
+    /// <summary>
+    /// A fractional second parses alongside a named zone.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithFractionalSecondsAndCet_ParsesCorrectly()
     {
@@ -397,6 +489,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Year.ShouldBe(2024);
     }
 
+    /// <summary>
+    /// Seven fractional-second digits — a whole tick of resolution — parse alongside a named zone.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithSevenDigitFractionalSecondsAndCet_ParsesCorrectly()
     {
@@ -415,6 +510,10 @@ public class SyndicationDateTimeUtilityTests
 
     #region ParseRfc822DateTime Tests
 
+    /// <summary>
+    /// The throwing overload converts a named zone too: <c>10:30 CET</c> returns <c>09:30</c> UTC on
+    /// 15 January 2024.
+    /// </summary>
     [TestMethod]
     public void ParseRfc822DateTime_WithCetTimezone_ReturnsConvertedDateTime()
     {
@@ -432,6 +531,10 @@ public class SyndicationDateTimeUtilityTests
         result.Hour.ShouldBe(9);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> value throws <see cref="ArgumentNullException"/>, not the plain
+    /// <see cref="ArgumentException"/> the empty case raises.
+    /// </summary>
     [TestMethod]
     public void ParseRfc822DateTime_WithNullString_ThrowsArgumentException()
     {
@@ -442,6 +545,9 @@ public class SyndicationDateTimeUtilityTests
         Should.Throw<ArgumentNullException>(() => SyndicationDateTimeUtility.ParseRfc822DateTime(input!));
     }
 
+    /// <summary>
+    /// An empty string throws <see cref="ArgumentException"/>.
+    /// </summary>
     [TestMethod]
     public void ParseRfc822DateTime_WithEmptyString_ThrowsArgumentException()
     {
@@ -452,6 +558,10 @@ public class SyndicationDateTimeUtilityTests
         Should.Throw<ArgumentException>(() => SyndicationDateTimeUtility.ParseRfc822DateTime(input));
     }
 
+    /// <summary>
+    /// A string that is not a date throws <see cref="FormatException"/> rather than returning a
+    /// sentinel.
+    /// </summary>
     [TestMethod]
     public void ParseRfc822DateTime_WithInvalidFormat_ThrowsFormatException()
     {
@@ -462,6 +572,9 @@ public class SyndicationDateTimeUtilityTests
         Should.Throw<FormatException>(() => SyndicationDateTimeUtility.ParseRfc822DateTime(input));
     }
 
+    /// <summary>
+    /// The throwing overload reads <c>CEST</c> as <c>+02:00</c>, returning <c>08:30</c> UTC.
+    /// </summary>
     [TestMethod]
     public void ParseRfc822DateTime_WithCestTimezone_ReturnsConvertedDateTime()
     {
@@ -480,6 +593,9 @@ public class SyndicationDateTimeUtilityTests
 
     #region ToRfc3339DateTime Tests
 
+    /// <summary>
+    /// A <see cref="DateTimeKind.Utc"/> value is written with a trailing <c>Z</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc3339DateTime_WithUtcDateTime_FormatsWithZSuffix()
     {
@@ -494,6 +610,9 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldEndWith("Z");
     }
 
+    /// <summary>
+    /// A <see cref="DateTimeKind.Local"/> value is written with a numeric offset instead of <c>Z</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc3339DateTime_WithLocalDateTime_FormatsWithTimezoneOffset()
     {
@@ -511,6 +630,10 @@ public class SyndicationDateTimeUtilityTests
         (result.Contains('+', StringComparison.Ordinal) || result.Contains('-', StringComparison.Ordinal)).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A <see cref="DateTimeKind.Unspecified"/> value is written with <c>Z</c> — the writer states UTC
+    /// rather than guessing the machine's offset.
+    /// </summary>
     [TestMethod]
     public void ToRfc3339DateTime_WithUnspecifiedKind_FormatsWithZSuffix()
     {
@@ -525,6 +648,9 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldEndWith("Z");
     }
 
+    /// <summary>
+    /// The written value opens with the date and time it was given, <c>2024-12-31T23:59:59</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc3339DateTime_PreservesDateComponents()
     {
@@ -538,6 +664,9 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldStartWith("2024-12-31T23:59:59");
     }
 
+    /// <summary>
+    /// A sub-second component is written: 123 milliseconds appears as the hundredths <c>.12</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc3339DateTime_IncludesFractionalSeconds()
     {
@@ -551,6 +680,9 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldContain(".12");
     }
 
+    /// <summary>
+    /// Midnight is written in full as <c>2024-01-15T00:00:00</c> rather than elided to a date.
+    /// </summary>
     [TestMethod]
     public void ToRfc3339DateTime_WithMidnight_FormatsCorrectly()
     {
@@ -564,6 +696,9 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldContain("2024-01-15T00:00:00");
     }
 
+    /// <summary>
+    /// The last second of a day is written as <c>2024-01-15T23:59:59</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc3339DateTime_WithEndOfDay_FormatsCorrectly()
     {
@@ -577,6 +712,9 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldContain("2024-01-15T23:59:59");
     }
 
+    /// <summary>
+    /// A February date is written with its two-digit month, <c>2024-02-28T12:00:00</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc3339DateTime_WithFebruaryDate_FormatsCorrectly()
     {
@@ -594,6 +732,10 @@ public class SyndicationDateTimeUtilityTests
 
     #region ToRfc822DateTime Tests
 
+    /// <summary>
+    /// 15 January 2024 at 10:30 is written with each of its parts — <c>Mon</c>, <c>15</c>, <c>Jan</c>,
+    /// <c>2024</c> and <c>10:30:00</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc822DateTime_FormatsCorrectly()
     {
@@ -611,6 +753,9 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldContain("10:30:00");
     }
 
+    /// <summary>
+    /// The whole string is the RFC 1123 form, <c>Mon, 15 Jan 2024 10:30:00 GMT</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc822DateTime_FollowsRfc1123Pattern()
     {
@@ -625,6 +770,10 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldBe("Mon, 15 Jan 2024 10:30:00 GMT");
     }
 
+    /// <summary>
+    /// 31 December 2024 at 23:59:59 is written as <c>Tue</c>, <c>31</c> <c>Dec</c> <c>2024</c>
+    /// <c>23:59:59</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc822DateTime_PreservesDateComponents()
     {
@@ -642,6 +791,9 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldContain("23:59:59");
     }
 
+    /// <summary>
+    /// 14 February 2024 carries its own weekday, <c>Wed</c>, rather than a fixed one.
+    /// </summary>
     [TestMethod]
     public void ToRfc822DateTime_WithDifferentDaysOfWeek_FormatsCorrectly()
     {
@@ -657,6 +809,9 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldContain("Feb");
     }
 
+    /// <summary>
+    /// Midnight is written as <c>00:00:00</c> rather than omitted.
+    /// </summary>
     [TestMethod]
     public void ToRfc822DateTime_WithMidnight_FormatsCorrectly()
     {
@@ -670,6 +825,9 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldContain("00:00:00");
     }
 
+    /// <summary>
+    /// Every value is written under the literal <c>GMT</c> suffix RFC 1123 ends with.
+    /// </summary>
     [TestMethod]
     public void ToRfc822DateTime_EndsWithGmt()
     {
@@ -683,6 +841,9 @@ public class SyndicationDateTimeUtilityTests
         result.ShouldEndWith("GMT");
     }
 
+    /// <summary>
+    /// A single-digit day is zero-padded: 5 January is written as <c>05</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc822DateTime_WithSingleDigitDay_PadsDayCorrectly()
     {
@@ -701,6 +862,9 @@ public class SyndicationDateTimeUtilityTests
 
     #region Round-Trip Tests
 
+    /// <summary>
+    /// A UTC value written to RFC 3339 and parsed back returns the same components down to the second.
+    /// </summary>
     [TestMethod]
     public void Rfc3339_RoundTrip_PreservesDateTime()
     {
@@ -721,6 +885,10 @@ public class SyndicationDateTimeUtilityTests
         parsed.Second.ShouldBe(original.Second);
     }
 
+    /// <summary>
+    /// A <see cref="DateTimeKind.Local"/> value written to RFC 3339 and parsed back returns the date of
+    /// its UTC equivalent, the offset having been applied rather than discarded.
+    /// </summary>
     [TestMethod]
     public void Rfc3339_RoundTrip_WithLocalTime_PreservesEquivalentTime()
     {
@@ -740,6 +908,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Day.ShouldBe(expectedUtc.Day);
     }
 
+    /// <summary>
+    /// <c>Mon, 15 Jan 2024 10:30:00 CET</c> parses to <c>09:30</c> UTC on 15 January 2024.
+    /// </summary>
     [TestMethod]
     public void Rfc822_RoundTrip_WithCetTimezone_PreservesDateTime()
     {
@@ -763,6 +934,9 @@ public class SyndicationDateTimeUtilityTests
 
     #region Edge Case Tests
 
+    /// <summary>
+    /// 29 February 2024 parses as the real date it is, rather than failing validation.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithLeapYear_ParsesCorrectly()
     {
@@ -779,6 +953,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Day.ShouldBe(29);
     }
 
+    /// <summary>
+    /// The last second of 2024, <c>2024-12-31T23:59:59Z</c>, parses component for component.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithYearBoundary_ParsesCorrectly()
     {
@@ -798,6 +975,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Second.ShouldBe(59);
     }
 
+    /// <summary>
+    /// The first instant of 2024, <c>2024-01-01T00:00:00Z</c>, parses component for component.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithNewYearStart_ParsesCorrectly()
     {
@@ -817,6 +997,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Second.ShouldBe(0);
     }
 
+    /// <summary>
+    /// 29 February 2024 parses under a named zone.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithLeapYearAndCet_ParsesCorrectly()
     {
@@ -833,6 +1016,10 @@ public class SyndicationDateTimeUtilityTests
         parsed.Day.ShouldBe(29);
     }
 
+    /// <summary>
+    /// All twelve months are written with their invariant English abbreviations, <c>Jan</c> through
+    /// <c>Dec</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc822DateTime_AllMonths_FormatsCorrectly()
     {
@@ -847,6 +1034,10 @@ public class SyndicationDateTimeUtilityTests
         }
     }
 
+    /// <summary>
+    /// All seven weekdays are written with their invariant English abbreviations — the first seven days
+    /// of January 2024 run <c>Mon</c> through <c>Sun</c>.
+    /// </summary>
     [TestMethod]
     public void ToRfc822DateTime_AllDaysOfWeek_FormatsCorrectly()
     {
@@ -862,6 +1053,10 @@ public class SyndicationDateTimeUtilityTests
         }
     }
 
+    /// <summary>
+    /// An offset that moves the value into the previous day is applied to the date as well as the time:
+    /// <c>02:00+08:00</c> on 16 January parses to <c>18:00</c> UTC on the 15th.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithTimezoneOffsetCrossingDateBoundary_ParsesCorrectly()
     {
@@ -878,6 +1073,14 @@ public class SyndicationDateTimeUtilityTests
         parsed.Hour.ShouldBe(18);
     }
 
+    /// <summary>
+    /// Where <c>+14:00</c>, the largest offset in civil use, is accepted, it rebases to <c>20:30</c> UTC
+    /// on the previous day.
+    /// </summary>
+    /// <remarks>
+    ///     The assertion is guarded by the parse having succeeded, so this test records the behaviour
+    ///     rather than requiring it: it passes whether or not the offset is supported.
+    /// </remarks>
     [TestMethod]
     public void TryParseRfc3339DateTime_WithMaxTimezoneOffset_ParsesCorrectly()
     {
@@ -929,6 +1132,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Minute.ShouldBe(0);
     }
 
+    /// <summary>
+    /// An eastern numeric offset is rebased: <c>15:30 +05:00</c> parses to <c>10:30</c> UTC.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithPositiveNumericOffset_ParsesAndConvertsToUtc()
     {
@@ -946,6 +1152,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Minute.ShouldBe(30);
     }
 
+    /// <summary>
+    /// A western numeric offset is rebased: <c>04:00 -08:00</c> parses to <c>12:00</c> UTC.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithNegativeNumericOffset_ParsesAndConvertsToUtc()
     {
@@ -963,6 +1172,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Minute.ShouldBe(0);
     }
 
+    /// <summary>
+    /// The compact offset spelling <c>+0000</c>, which some feeds emit in place of <c>+00:00</c>, parses.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithNumericOffsetWithoutColon_ParsesCorrectly()
     {
@@ -979,6 +1191,10 @@ public class SyndicationDateTimeUtilityTests
         parsed.Day.ShouldBe(20);
     }
 
+    /// <summary>
+    /// A numeric offset that moves the value into the previous day is applied to the date as well:
+    /// <c>02:00 +10:00</c> on 21 January parses to <c>16:00</c> UTC on the 20th.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithNumericOffsetCrossingDateBoundary_ParsesCorrectly()
     {
@@ -995,6 +1211,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Hour.ShouldBe(16);
     }
 
+    /// <summary>
+    /// An unpadded day of month parses alongside a numeric offset, yielding 3 January 2025.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithSingleDigitDayAndNumericOffset_ParsesCorrectly()
     {
@@ -1011,6 +1230,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Year.ShouldBe(2025);
     }
 
+    /// <summary>
+    /// A two-digit year parses alongside a numeric offset, <c>25</c> expanding to <c>2025</c>.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithTwoDigitYearAndNumericOffset_ParsesCorrectly()
     {
@@ -1025,6 +1247,9 @@ public class SyndicationDateTimeUtilityTests
         parsed.Year.ShouldBe(2025);
     }
 
+    /// <summary>
+    /// A fractional second parses alongside a numeric offset, the whole seconds still reading <c>45</c>.
+    /// </summary>
     [TestMethod]
     public void TryParseRfc822DateTime_WithFractionalSecondsAndNumericOffset_ParsesCorrectly()
     {
@@ -1039,6 +1264,10 @@ public class SyndicationDateTimeUtilityTests
         parsed.Second.ShouldBe(45);
     }
 
+    /// <summary>
+    /// The throwing overload accepts a numeric offset, returning 20 January 2025 rather than raising
+    /// <see cref="FormatException"/>.
+    /// </summary>
     [TestMethod]
     public void ParseRfc822DateTime_WithNumericOffset_DoesNotThrow()
     {
@@ -1054,6 +1283,10 @@ public class SyndicationDateTimeUtilityTests
         result.Day.ShouldBe(20);
     }
 
+    /// <summary>
+    /// A date parsed from a numeric offset, written back out and parsed again holds the same instant to
+    /// the minute.
+    /// </summary>
     [TestMethod]
     public void Rfc822_RoundTrip_WithNumericOffset_PreservesDateTime()
     {

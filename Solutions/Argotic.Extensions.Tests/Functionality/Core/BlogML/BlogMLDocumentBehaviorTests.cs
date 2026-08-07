@@ -176,6 +176,9 @@ public class BlogMLDocumentBehaviorTests
 
     #region Document Creation Tests
 
+    /// <summary>
+    /// A document returns the absolute root URL it was given.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenCreatedWithRootUrl_ContainsCorrectRootUrl()
     {
@@ -189,6 +192,9 @@ public class BlogMLDocumentBehaviorTests
         document.RootUrl.ShouldBe(new Uri("http://example.com"));
     }
 
+    /// <summary>
+    /// A title assigned as a <see cref="BlogMLTextConstruct"/> keeps its content.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenCreatedWithTitle_ContainsCorrectTitle()
     {
@@ -203,6 +209,9 @@ public class BlogMLDocumentBehaviorTests
         document.Title.Content.ShouldBe("My Blog");
     }
 
+    /// <summary>
+    /// A subtitle assigned as a <see cref="BlogMLTextConstruct"/> keeps its content.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenCreatedWithSubtitle_ContainsCorrectSubtitle()
     {
@@ -217,6 +226,9 @@ public class BlogMLDocumentBehaviorTests
         document.Subtitle.Content.ShouldBe("A test blog about testing");
     }
 
+    /// <summary>
+    /// The generation date round-trips through the property with its UTC <c>DateTimeKind</c> intact.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenCreatedWithGeneratedOn_ContainsCorrectDate()
     {
@@ -233,6 +245,9 @@ public class BlogMLDocumentBehaviorTests
         document.GeneratedOn.ShouldBe(generatedOn);
     }
 
+    /// <summary>
+    /// Posts added to a document are kept in the order they were added.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenPostsAdded_ContainsAllPosts()
     {
@@ -263,6 +278,9 @@ public class BlogMLDocumentBehaviorTests
         document.Posts[1].Title.Content.ShouldBe("Second Post");
     }
 
+    /// <summary>
+    /// Post content declared as <see cref="BlogMLContentType.Html"/> keeps both its content type and its markup unescaped in the object model.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenPostWithContentAdded_PreservesContentType()
     {
@@ -283,6 +301,9 @@ public class BlogMLDocumentBehaviorTests
         document.Posts[0].Content.Content.ShouldBe("<p>HTML <b>formatted</b> content</p>");
     }
 
+    /// <summary>
+    /// Categories added to a document are kept in the order they were added, with their identifiers and titles.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenCategoriesAdded_ContainsAllCategories()
     {
@@ -313,6 +334,9 @@ public class BlogMLDocumentBehaviorTests
         document.Categories[1].Title.Content.ShouldBe("Science");
     }
 
+    /// <summary>
+    /// Authors added to a document are kept in the order they were added, with their identifiers and email addresses.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenAuthorsAdded_ContainsAllAuthors()
     {
@@ -345,6 +369,9 @@ public class BlogMLDocumentBehaviorTests
         document.Authors[1].EmailAddress.ShouldBe("writer@example.com");
     }
 
+    /// <summary>
+    /// Comments added to a post survive the post being added to the document, in order, and a comment needs no email address.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenPostWithCommentsAdded_ContainsAllComments()
     {
@@ -390,6 +417,9 @@ public class BlogMLDocumentBehaviorTests
 
     #region Document Parsing Tests
 
+    /// <summary>
+    /// A document with nothing but a root URL, a title and a subtitle loads all three.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenLoadedFromMinimalXml_PopulatesBasicProperties()
     {
@@ -408,6 +438,9 @@ public class BlogMLDocumentBehaviorTests
         document.Subtitle.Content.ShouldBe("A test blog");
     }
 
+    /// <summary>
+    /// A loaded post carries its identifier, title, CDATA content, <see cref="BlogMLContentType.Html"/> content type, approval status and post type.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenLoadedFromXmlWithPost_PopulatesPost()
     {
@@ -428,6 +461,9 @@ public class BlogMLDocumentBehaviorTests
         document.Posts[0].PostType.ShouldBe(BlogMLPostType.Normal);
     }
 
+    /// <summary>
+    /// Comments load in document order with their identifier, user name and content, and a comment without <c>user-email</c> still loads.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenLoadedFromXmlWithComments_PopulatesComments()
     {
@@ -454,6 +490,9 @@ public class BlogMLDocumentBehaviorTests
         secondComment.Content.Content.ShouldBe("I agree!");
     }
 
+    /// <summary>
+    /// Categories load with their <c>parentref</c> as the parent identifier, and a post's <c>category ref</c> becomes an identifier in its category list.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenLoadedFromXmlWithCategories_PopulatesCategories()
     {
@@ -477,6 +516,9 @@ public class BlogMLDocumentBehaviorTests
         document.Posts[0].Categories[0].ShouldBe("cat2");
     }
 
+    /// <summary>
+    /// Authors load with their titles and email addresses, and a post's <c>author ref</c> becomes an identifier in its author list.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenLoadedFromXmlWithAuthors_PopulatesAuthors()
     {
@@ -500,6 +542,9 @@ public class BlogMLDocumentBehaviorTests
         document.Posts[0].Authors[0].ShouldBe("author1");
     }
 
+    /// <summary>
+    /// A document carrying every BlogML element loads all of them at once, down to the post's view count, excerpt, post name and comment.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenLoadedFromCompleteBlogML_PopulatesAllProperties()
     {
@@ -530,6 +575,9 @@ public class BlogMLDocumentBehaviorTests
         post.Comments.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// A synchronous stream load raises <c>Loaded</c> once, with event arguments attached.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenLoadedFromStream_RaisesLoadedEvent()
     {
@@ -553,6 +601,9 @@ public class BlogMLDocumentBehaviorTests
         eventArgs.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// Loading from an <see cref="XmlReader"/> populates the same properties as loading from a stream.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenLoadedFromXmlReader_PopulatesProperties()
     {
@@ -568,6 +619,9 @@ public class BlogMLDocumentBehaviorTests
         document.RootUrl.ShouldBe(new Uri("http://example.com"));
     }
 
+    /// <summary>
+    /// An unclosed element surfaces as an <see cref="XmlException"/> rather than a silently empty document.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenLoadedFromMalformedXml_ThrowsXmlException()
     {
@@ -590,6 +644,9 @@ public class BlogMLDocumentBehaviorTests
 
     #region Round-Trip Tests
 
+    /// <summary>
+    /// A saved and reloaded document keeps its root URL, title and subtitle.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenSavedAndReloaded_PreservesBasicProperties()
     {
@@ -618,6 +675,9 @@ public class BlogMLDocumentBehaviorTests
         loadedDocument.Subtitle.Content.ShouldBe(originalDocument.Subtitle.Content);
     }
 
+    /// <summary>
+    /// Every post survives a save and reload with its identifier, title, content and content type, and the posts stay in order.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenSavedAndReloaded_PreservesPosts()
     {
@@ -644,6 +704,9 @@ public class BlogMLDocumentBehaviorTests
         }
     }
 
+    /// <summary>
+    /// A comment survives a save and reload with its identifier, title, content, user name and email address.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenSavedAndReloaded_PreservesPostsWithComments()
     {
@@ -697,6 +760,9 @@ public class BlogMLDocumentBehaviorTests
         loadedComment.UserEmailAddress.ShouldBe("commenter@example.com");
     }
 
+    /// <summary>
+    /// Categories survive a save and reload with their parent identifiers, and so do the post's references to them.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenSavedAndReloaded_PreservesCategories()
     {
@@ -758,6 +824,9 @@ public class BlogMLDocumentBehaviorTests
         loadedDocument.Posts[0].Categories.ShouldContain("cat2");
     }
 
+    /// <summary>
+    /// Authors survive a save and reload with their titles and email addresses, and so does the post's reference to them.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenSavedAndReloaded_PreservesAuthors()
     {
@@ -807,6 +876,9 @@ public class BlogMLDocumentBehaviorTests
         loadedDocument.Posts[0].Authors[0].ShouldBe("auth1");
     }
 
+    /// <summary>
+    /// Extended properties survive a save and reload, retrievable by the same names.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenSavedAndReloaded_PreservesExtendedProperties()
     {
@@ -835,6 +907,9 @@ public class BlogMLDocumentBehaviorTests
         loadedDocument.ExtendedProperties["Property2"].ShouldBe("Value2");
     }
 
+    /// <summary>
+    /// Parsing a document, writing it out and parsing it again yields the same root URL, title, subtitle, collection sizes and per-post detail.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_ParseSerializeParse_ProducesSameDocument()
     {
@@ -871,6 +946,9 @@ public class BlogMLDocumentBehaviorTests
         }
     }
 
+    /// <summary>
+    /// Two successive save-and-reload cycles lose nothing that one does not, down to the comment count on the post.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_WhenSavedAndReloadedTwice_MaintainsDataIntegrity()
     {
@@ -903,6 +981,9 @@ public class BlogMLDocumentBehaviorTests
 
     #region Format and Version Tests
 
+    /// <summary>
+    /// A document reports its format as <see cref="SyndicationContentFormat.BlogML"/>.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_Format_ReturnsBlogML()
     {
@@ -913,6 +994,9 @@ public class BlogMLDocumentBehaviorTests
         document.Format.ShouldBe(SyndicationContentFormat.BlogML);
     }
 
+    /// <summary>
+    /// A document reports version <c>2.0</c>, the BlogML specification it implements.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_Version_Returns2Point0()
     {
@@ -928,6 +1012,10 @@ public class BlogMLDocumentBehaviorTests
 
     #region Async Operations Tests
 
+    /// <summary>
+    /// An asynchronous fetch populates the document and raises <c>Loaded</c>, just as the synchronous path does.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task BlogMLDocument_LoadAsync_LoadsDocumentCorrectly()
     {
@@ -951,6 +1039,10 @@ public class BlogMLDocumentBehaviorTests
         document.RootUrl.ShouldBe(new Uri("http://example.com"));
     }
 
+    /// <summary>
+    /// The static factory returns a document already populated from the response, reporting <see cref="SyndicationContentFormat.BlogML"/>.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task BlogMLDocument_CreateAsync_CreatesAndLoadsNewDocument()
     {
@@ -971,6 +1063,10 @@ public class BlogMLDocumentBehaviorTests
         document.Format.ShouldBe(SyndicationContentFormat.BlogML);
     }
 
+    /// <summary>
+    /// The <c>Loaded</c> event reports the requested URI as its source, so a handler can tell which fetch it is looking at.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task BlogMLDocument_LoadAsync_IncludesSourceUriInEventArgs()
     {
@@ -998,6 +1094,9 @@ public class BlogMLDocumentBehaviorTests
 
     #region Additional Behavior Tests
 
+    /// <summary>
+    /// A navigator created over a constructed document is rooted on a <c>blog</c> element.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_CreateNavigator_ReturnsValidNavigator()
     {
@@ -1028,6 +1127,9 @@ public class BlogMLDocumentBehaviorTests
         navigator.LocalName.ShouldBe("blog");
     }
 
+    /// <summary>
+    /// A document with no syndication extensions reports <c>HasExtensions</c> as <see langword="false"/>.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
@@ -1041,6 +1143,9 @@ public class BlogMLDocumentBehaviorTests
         document.HasExtensions.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Searching a document that carries no extensions returns <see langword="null"/> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_FindExtension_ReturnsNullWhenNoMatch()
     {
@@ -1057,6 +1162,9 @@ public class BlogMLDocumentBehaviorTests
         extension.ShouldBeNull();
     }
 
+    /// <summary>
+    /// The title is required: assigning <see langword="null"/> throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_SetTitleToNull_ThrowsArgumentNullException()
     {
@@ -1067,6 +1175,9 @@ public class BlogMLDocumentBehaviorTests
         Should.Throw<ArgumentNullException>(() => document.Title = null!);
     }
 
+    /// <summary>
+    /// Saving emits an XML declaration and a <c>blog</c> root in the <c>http://www.blogml.com/2006/09/BlogML</c> namespace, carrying the title, post and comment elements.
+    /// </summary>
     [TestMethod]
     public void BlogMLDocument_Save_ProducesValidXml()
     {

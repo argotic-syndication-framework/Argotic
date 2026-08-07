@@ -24,7 +24,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// Initializes a new instance of the <see cref="FeedSynchronizationHistory"/> class using the supplied sequence number.
     /// </summary>
     /// <param name="sequence">An integer that is used in the sequencing of individual updates for the purposes of conflict detection.</param>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="sequence"/> is less than <b>1</b>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="sequence"/> is less than <c>1</c>.</exception>
     public FeedSynchronizationHistory(int sequence)
     {
         this.Sequence = sequence;
@@ -36,7 +36,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// <param name="sequence">An integer that is used in the sequencing of individual updates for the purposes of conflict detection.</param>
     /// <param name="utcWhen">A <see cref="DateTime"/> that represents the date-time for the device that performed the item modification.</param>
     /// <param name="by">A text value that uniquely identifies the endpoint that made the modification.</param>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="sequence"/> is less than <b>1</b>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="sequence"/> is less than <c>1</c>.</exception>
     public FeedSynchronizationHistory(int sequence, DateTime utcWhen, string by) : this(sequence)
     {
         this.When = utcWhen;
@@ -46,7 +46,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// <summary>
     /// Gets or sets the text value that uniquely identifies the endpoint that made the modification.
     /// </summary>
-    /// <value>A text value that uniquely identifies the endpoint that made the modification.</value>
+    /// <value>The endpoint identifier. The default value is an <i>empty</i> string.</value>
     /// <remarks>
     ///     <para>
     ///         Either or both of the <see cref="When"/> or <see cref="By"/> properties <b>must</b> be present; it is invalid to have neither.
@@ -67,12 +67,12 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// <summary>
     /// Gets or sets the sequencing number used for the purpose of conflict detection.
     /// </summary>
-    /// <value>An integer that is used in the sequencing of individual updates for the purposes of conflict detection. The default value is <b>1</b>.</value>
+    /// <value>An integer that is used in the sequencing of individual updates for the purposes of conflict detection. The default value is <c>1</c>.</value>
     /// <remarks>
     ///     The sequence number is typically assigned by copying the <see cref="FeedSynchronizationItem.Updates"/> value on <see cref="FeedSynchronizationItem"/>,
     ///     after it has been incremented at the time of an update.
     /// </remarks>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <b>1</b>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than <c>1</c>.</exception>
     public int Sequence
     {
         get;
@@ -104,11 +104,11 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// Loads this <see cref="FeedSynchronizationHistory"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="FeedSynchronizationHistory"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="FeedSynchronizationHistory"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="FeedSynchronizationHistory"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -151,7 +151,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// Saves the current <see cref="FeedSynchronizationHistory"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -219,7 +219,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// Determines whether the specified <see cref="FeedSynchronizationHistory"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="FeedSynchronizationHistory"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="FeedSynchronizationHistory"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="FeedSynchronizationHistory"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(FeedSynchronizationHistory? other)
     {
         if (other is null)
@@ -234,7 +234,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is FeedSynchronizationHistory other && this.Equals(other);
 
     /// <summary>
@@ -248,7 +248,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(FeedSynchronizationHistory? first, FeedSynchronizationHistory? second)
     {
         if (first is null) return second is null;
@@ -260,7 +260,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(FeedSynchronizationHistory? first, FeedSynchronizationHistory? second) => !(first == second);
 
 }

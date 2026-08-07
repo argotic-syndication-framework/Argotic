@@ -4,11 +4,19 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Async;
 
 /// <summary>
-/// Tests for LoadAsync cancellation via CancellationToken.
+/// Covers what the <c>LoadAsync(Uri, CancellationToken)</c> overloads do before they do any work: an
+/// already-cancelled token, and a null source.
 /// </summary>
+/// <remarks>
+///     Neither guard lets a request out, so every URI here is inert and no handler is needed.
+/// </remarks>
 [TestClass]
 public class LoadAsyncCancellationTests
 {
+    /// <summary>
+    /// A token cancelled before the call aborts an RSS load with an <c>OperationCanceledException</c>, without a request reaching the network.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task RssFeed_LoadAsync_ThrowsWhenCancelled()
     {
@@ -25,6 +33,10 @@ public class LoadAsyncCancellationTests
         ex.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A token cancelled before the call aborts an Atom load with an <c>OperationCanceledException</c>, without a request reaching the network.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task AtomFeed_LoadAsync_ThrowsWhenCancelled()
     {
@@ -41,6 +53,10 @@ public class LoadAsyncCancellationTests
         ex.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A token cancelled before the call aborts an OPML load with an <c>OperationCanceledException</c>, without a request reaching the network.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task OpmlDocument_LoadAsync_ThrowsWhenCancelled()
     {
@@ -57,6 +73,10 @@ public class LoadAsyncCancellationTests
         ex.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A token cancelled before the call aborts a format-agnostic load with an <c>OperationCanceledException</c>, without a request reaching the network.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task GenericSyndicationFeed_LoadAsync_ThrowsWhenCancelled()
     {
@@ -73,6 +93,10 @@ public class LoadAsyncCancellationTests
         ex.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A null source URI is refused with an <c>ArgumentNullException</c> before an RSS load begins.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task RssFeed_LoadAsync_WithNullSource_ThrowsArgumentNullException()
     {
@@ -87,6 +111,10 @@ public class LoadAsyncCancellationTests
         ex.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A null source URI is refused with an <c>ArgumentNullException</c> before an Atom load begins.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task AtomFeed_LoadAsync_WithNullSource_ThrowsArgumentNullException()
     {
@@ -101,6 +129,10 @@ public class LoadAsyncCancellationTests
         ex.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A null source URI is refused with an <c>ArgumentNullException</c> before an OPML load begins.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task OpmlDocument_LoadAsync_WithNullSource_ThrowsArgumentNullException()
     {

@@ -7,9 +7,21 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
+/// <summary>
+/// Covers what <c>ConditionalGetResult</c> projects from a response, and what it does once disposed.
+/// </summary>
+/// <remarks>
+///     Both arms of the type are exercised through one reflective helper: a result built over a
+///     response, which is what a <c>200</c> produces, and a result built over none, which is the shape
+///     the caller sees for a <c>304</c>. The constructors are internal and this assembly has no
+///     <c>InternalsVisibleTo</c> — see the remarks on <c>CreateResult</c> for what that costs.
+/// </remarks>
 [TestClass]
 public class ConditionalGetResultTests
 {
+    /// <summary>
+    /// A result built over a response reports the resource as modified.
+    /// </summary>
     [TestMethod]
     public void WasModified_WhenResourceModified_ReturnsTrue()
     {
@@ -22,6 +34,9 @@ public class ConditionalGetResultTests
         result.WasModified.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A result built with no response reports the resource as unchanged.
+    /// </summary>
     [TestMethod]
     public void WasModified_WhenNotModified_ReturnsFalse()
     {
@@ -30,6 +45,9 @@ public class ConditionalGetResultTests
         result.WasModified.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The status the origin sent is carried through to the caller rather than inferred.
+    /// </summary>
     [TestMethod]
     public void StatusCode_ReflectsHttpResponse()
     {
@@ -42,6 +60,9 @@ public class ConditionalGetResultTests
         result.StatusCode.ShouldBe(HttpStatusCode.OK);
     }
 
+    /// <summary>
+    /// A result built with no response reports <see langword="null"/> for the status code.
+    /// </summary>
     [TestMethod]
     public void StatusCode_WhenNotModified_ReturnsDefault()
     {
@@ -50,6 +71,9 @@ public class ConditionalGetResultTests
         result.StatusCode.ShouldBe(default);
     }
 
+    /// <summary>
+    /// The <c>Last-Modified</c> the origin sent is surfaced with its offset intact.
+    /// </summary>
     [TestMethod]
     public void LastModified_ExtractsFromHeaders()
     {
@@ -64,6 +88,9 @@ public class ConditionalGetResultTests
         result.LastModified.ShouldBe(lastModified);
     }
 
+    /// <summary>
+    /// A response carrying no <c>Last-Modified</c> reports <see langword="null"/>, not a sentinel date.
+    /// </summary>
     [TestMethod]
     public void LastModified_WhenNotPresent_ReturnsNull()
     {
@@ -76,6 +103,9 @@ public class ConditionalGetResultTests
         result.LastModified.ShouldBeNull();
     }
 
+    /// <summary>
+    /// The entity tag is reported with its quotes intact, which is how it has to be sent back.
+    /// </summary>
     [TestMethod]
     public void ETag_ExtractsFromHeaders()
     {
@@ -89,6 +119,9 @@ public class ConditionalGetResultTests
         result.ETag.ShouldBe("\"abc123\"");
     }
 
+    /// <summary>
+    /// A response carrying no <c>ETag</c> reports <see langword="null"/> rather than an empty tag.
+    /// </summary>
     [TestMethod]
     public void ETag_WhenNotPresent_ReturnsNull()
     {
@@ -101,6 +134,9 @@ public class ConditionalGetResultTests
         result.ETag.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A response that declares a length reports it.
+    /// </summary>
     [TestMethod]
     public void ContentLength_ExtractsFromHeaders()
     {
@@ -113,6 +149,14 @@ public class ConditionalGetResultTests
         result.ContentLength.ShouldBeGreaterThan(0);
     }
 
+    /// <summary>
+    /// A result built with no response reports a content length of <c>0</c>.
+    /// </summary>
+    /// <remarks>
+    ///     Worth pinning because it is the one place the property is not the origin's answer: with no
+    ///     response the constructor never assigns it, so this is the field default rather than the
+    ///     <c>-1</c> that a real response declaring no length reports.
+    /// </remarks>
     [TestMethod]
     public void ContentLength_WhenNullResponse_ReturnsDefault()
     {
@@ -122,6 +166,9 @@ public class ConditionalGetResultTests
         result.ContentLength.ShouldBe(0);
     }
 
+    /// <summary>
+    /// The media type is reported on its own, without the <c>charset</c> parameter beside it.
+    /// </summary>
     [TestMethod]
     public void ContentType_ExtractsFromHeaders()
     {
@@ -134,6 +181,9 @@ public class ConditionalGetResultTests
         result.ContentType.ShouldBe("application/xml");
     }
 
+    /// <summary>
+    /// A response carrying no <c>Content-Type</c> reports <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void ContentType_WhenNotPresent_ReturnsNull()
     {
@@ -146,6 +196,9 @@ public class ConditionalGetResultTests
         result.ContentType.ShouldBeNull();
     }
 
+    /// <summary>
+    /// The body accessor hands back a stream over the response content, byte for byte.
+    /// </summary>
     [TestMethod]
     public void GetResponseStream_ReturnsContent()
     {
@@ -163,6 +216,9 @@ public class ConditionalGetResultTests
         content.ShouldBe(expectedContent);
     }
 
+    /// <summary>
+    /// The asynchronous body accessor delivers the same content as the synchronous one.
+    /// </summary>
     [TestMethod]
     public async Task GetResponseStreamAsync_ReturnsContent()
     {
@@ -180,6 +236,9 @@ public class ConditionalGetResultTests
         content.ShouldBe(expectedContent);
     }
 
+    /// <summary>
+    /// A result with no response hands back <c>Stream.Null</c> rather than <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void GetResponseStream_WhenNotModified_ReturnsStreamNull()
     {
@@ -190,6 +249,9 @@ public class ConditionalGetResultTests
         stream.ShouldBe(Stream.Null);
     }
 
+    /// <summary>
+    /// The asynchronous accessor also hands back <c>Stream.Null</c> when there is no response.
+    /// </summary>
     [TestMethod]
     public async Task GetResponseStreamAsync_WhenNotModified_ReturnsStreamNull()
     {
@@ -200,6 +262,9 @@ public class ConditionalGetResultTests
         stream.ShouldBe(Stream.Null);
     }
 
+    /// <summary>
+    /// Disposing a result that owns a response is idempotent: a second call is a no-op, not a throw.
+    /// </summary>
     [TestMethod]
     public void Dispose_DisposesUnderlyingResponse()
     {
@@ -218,6 +283,9 @@ public class ConditionalGetResultTests
         result.Dispose();
     }
 
+    /// <summary>
+    /// Reaching for the body after disposal throws rather than handing out a dead stream.
+    /// </summary>
     [TestMethod]
     public void GetResponseStream_AfterDispose_ThrowsObjectDisposedException()
     {
@@ -231,6 +299,9 @@ public class ConditionalGetResultTests
         Should.Throw<ObjectDisposedException>(() => result.GetResponseStream());
     }
 
+    /// <summary>
+    /// The asynchronous dispose closes the object just as firmly as the synchronous one.
+    /// </summary>
     [TestMethod]
     public async Task GetResponseStreamAsync_AfterDispose_ThrowsObjectDisposedException()
     {
@@ -276,5 +347,8 @@ public class ConditionalGetResultTests
         return (ConditionalGetResult)constructor.Invoke([response, wasModified]);
     }
 
+    /// <summary>
+    /// Gets or sets the test context, used for its cancellation token.
+    /// </summary>
     public TestContext TestContext { get; set; }
 }

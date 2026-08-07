@@ -6,9 +6,19 @@ namespace Argotic.Common;
 /// Provides methods for generating and parsing date-time information exposed by syndicated content. This class cannot be inherited.
 /// </summary>
 /// <remarks>
-///     See <a href="http://www.ietf.org/rfc/rfc0822.txt">RFC #822: Standard for ARPA Internet Text Messages (Date and Time Specification)</a>
-///     and <a href="http://www.ietf.org/rfc/rfc3339.txt">RFC #3339: Date and Time on the Internet (Timestamps)</a> for further information about
-///     the date-time formats implemented in the <see cref="SyndicationDateTimeUtility"/> class.
+///     <para>
+///     Two date grammars, because the formats pin two.
+///     <a href="https://www.rfc-editor.org/rfc/rfc822.html">RFC 822</a> §5 is what RSS 2.0 and OPML 2.0
+///     require of <c>pubDate</c> and friends, and
+///     <a href="https://www.rfc-editor.org/rfc/rfc3339.html">RFC 3339</a> is what Atom (RFC 4287 §3.3)
+///     requires. Neither is a superset of the other, so writing an Atom timestamp into an RSS feed
+///     produces a document no RSS reader is obliged to parse.
+///     </para>
+///     <para>
+///     RFC 822 is Internet Standard STD 11 and remains the citation, not the later
+///     <a href="https://www.rfc-editor.org/rfc/rfc5322.html">RFC 5322</a>: RSS explicitly permits the
+///     two-digit years that RFC 5322's <c>date-time</c> forbids, and this class parses them.
+///     </para>
 /// </remarks>
 public static class SyndicationDateTimeUtility
 {
@@ -37,7 +47,7 @@ public static class SyndicationDateTimeUtility
     /// The RFC 822 date-time patterns <see cref="TryParseRfc822DateTime"/> accepts.
     /// </summary>
     /// <remarks>
-    ///     <b>Thirty-six of them, and the array was allocated on every call</b> — once per
+    ///     Thirty-six of them, and the array was allocated on every call — once per
     ///     <c>pubDate</c>, which is once per item of every RSS feed the library reads. Roughly 600
     ///     bytes of pure ceremony per date parsed, measured at 6% of the allocation of loading a
     ///     ten-item feed.
@@ -92,9 +102,9 @@ public static class SyndicationDateTimeUtility
     /// </summary>
     /// <param name="value">A string containing an RFC-3339 formatted date to convert.</param>
     /// <returns>A <see cref="DateTime"/> equivalent to the RFC-3339 formatted date contained in <paramref name="value"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
-    /// <exception cref="FormatException">The <paramref name="value"/> is not a recognized as a RFC-3339 formatted date.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="FormatException">The <paramref name="value"/> is not recognized as an RFC-3339 formatted date.</exception>
     public static DateTime ParseRfc3339DateTime(string value)
     {
         ArgumentException.ThrowIfNullOrEmpty(value);
@@ -143,10 +153,10 @@ public static class SyndicationDateTimeUtility
     /// <param name="value">A string containing an RFC-3339 formatted date to convert.</param>
     /// <param name="result">
     ///     When this method returns, contains the <see cref="DateTime"/> value equivalent to the date and time contained in <paramref name="value"/>, if the conversion succeeded, or <see cref="DateTime.MinValue">MinValue</see> if the conversion failed.
-    ///     The conversion fails if the <paramref name="value"/> parameter is a <b>null</b> or empty string, or does not contain a valid string representation of an RFC-3339 formatted date.
+    ///     The conversion fails if the <paramref name="value"/> parameter is a <see langword="null"/> or empty string, or does not contain a valid string representation of an RFC-3339 formatted date.
     ///     This parameter is passed uninitialized.
     /// </param>
-    /// <returns><b>true</b> if the <paramref name="value"/> parameter was converted successfully; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <paramref name="value"/> parameter was converted successfully; otherwise, <see langword="false"/>.</returns>
     public static bool TryParseRfc3339DateTime(string value, out DateTime result)
     {
         DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
@@ -171,9 +181,14 @@ public static class SyndicationDateTimeUtility
     /// Replaces the RFC-822 time-zone component with its offset equivalent.
     /// </summary>
     /// <param name="value">A string containing an RFC-822 formatted date to convert.</param>
-    /// <returns>A string containing an RFC-822 formatted date, with the <i>zone</i> component converted to its offset equivalent.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <returns>An RFC-822 formatted date with its <i>zone</i> component rewritten as a numeric offset, or the <paramref name="value"/> unchanged when its zone is already numeric or unrecognised.</returns>
+    /// <remarks>
+    ///     The zone names RFC 822 §5.1 defines are not offsets, and
+    ///     <see cref="DateTime.TryParseExact(string, string[], IFormatProvider, DateTimeStyles, out DateTime)"/>
+    ///     will not read them. Rewriting them here is what lets one table of numeric-offset patterns
+    ///     cover every spelling.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is <see langword="null"/> or an empty string.</exception>
     /// <seealso cref="TryParseRfc822DateTime(string, out DateTime)"/>
     private static string ReplaceRfc822TimeZoneWithOffset(string value)
     {
@@ -285,9 +300,9 @@ public static class SyndicationDateTimeUtility
     /// </summary>
     /// <param name="value">A string containing an RFC-822 formatted date to convert.</param>
     /// <returns>A <see cref="DateTime"/> equivalent to the RFC-822 formatted date contained in <paramref name="value"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
-    /// <exception cref="FormatException">The <paramref name="value"/> is not a recognized as an RFC-822 formatted date.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="FormatException">The <paramref name="value"/> is not recognized as an RFC-822 formatted date.</exception>
     public static DateTime ParseRfc822DateTime(string value)
     {
         ArgumentException.ThrowIfNullOrEmpty(value);
@@ -305,8 +320,18 @@ public static class SyndicationDateTimeUtility
     /// <summary>
     /// Converts the value of the supplied <see cref="DateTime"/> object to its equivalent RFC-822 date string representation.
     /// </summary>
-    /// <param name="dateTime">The <see cref="DateTime"/> object to convert.</param>
-    /// <returns>A string that contains the RFC-822 date string representation of the supplied <see cref="DateTime"/> object.</returns>
+    /// <param name="dateTime">The <see cref="DateTime"/> object to convert. Its components are published as read, so it must already be UTC.</param>
+    /// <returns>A string that contains the RFC-822 date string representation of the supplied <see cref="DateTime"/> object, always ending in the literal <c>GMT</c>.</returns>
+    /// <remarks>
+    ///     Formats with <see cref="DateTimeFormatInfo.RFC1123Pattern"/>, which ends in a literal
+    ///     <c>GMT</c> and converts nothing. <see cref="DateTime.Kind"/> is not consulted: a
+    ///     <see cref="DateTimeKind.Local"/> or <see cref="DateTimeKind.Unspecified"/> value has its wall
+    ///     clock published verbatim under a <c>GMT</c> label, so a value five hours behind UTC is
+    ///     republished as an instant five hours earlier than the one meant. Call
+    ///     <see cref="DateTime.ToUniversalTime"/> first, or pass what
+    ///     <see cref="TryParseRfc822DateTime"/> produced — it is always
+    ///     <see cref="DateTimeKind.Utc"/>, so a parsed value round-trips exactly.
+    /// </remarks>
     public static string ToRfc822DateTime(DateTime dateTime)
     {
         DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
@@ -320,10 +345,10 @@ public static class SyndicationDateTimeUtility
     /// <param name="value">A string containing an RFC-822 formatted date to convert.</param>
     /// <param name="result">
     ///     When this method returns, contains the <see cref="DateTime"/> value equivalent to the date and time contained in <paramref name="value"/>, if the conversion succeeded, or <see cref="DateTime.MinValue">MinValue</see> if the conversion failed.
-    ///     The conversion fails if the <paramref name="value"/> parameter is a <b>null</b> or empty string, or does not contain a valid string representation of an RFC-822 formatted date.
+    ///     The conversion fails if the <paramref name="value"/> parameter is a <see langword="null"/> or empty string, or does not contain a valid string representation of an RFC-822 formatted date.
     ///     This parameter is passed uninitialized.
     /// </param>
-    /// <returns><b>true</b> if the <paramref name="value"/> parameter was converted successfully; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <paramref name="value"/> parameter was converted successfully; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>
     ///     Both attempts parse under the invariant culture and <see cref="DateTimeStyles.AdjustToUniversal"/>,
@@ -331,7 +356,7 @@ public static class SyndicationDateTimeUtility
     ///     <see cref="DateTimeKind.Utc"/>, on every machine.
     ///     </para>
     ///     <para>
-    ///     <b>The fallback used to do neither.</b> It called
+    ///     The fallback used to do neither. It called
     ///     <c>DateTime.TryParse(value, out result)</c> — no format provider, so the <i>current
     ///     culture</i>, and no styles, so an offset-bearing value was rebased onto the machine's local
     ///     time and returned as <see cref="DateTimeKind.Local"/>. <see cref="ToRfc822DateTime"/> then

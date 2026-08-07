@@ -6,11 +6,24 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Async;
 
 /// <summary>
-/// Tests for HTTP error scenarios during LoadAsync operations.
+/// Covers what a load does with a response that is not a feed: an error status, a transport failure, a
+/// cancellation, and a body that is not well-formed XML.
 /// </summary>
+/// <remarks>
+///     Every request is served by a <c>MockHttpMessageHandler</c>, so each failure is produced on
+///     demand rather than waited for, and nothing here leaves the machine.
+/// </remarks>
 [TestClass]
 public class LoadAsyncHttpTests
 {
+    /// <summary>
+    /// A <c>404</c> aborts an RSS load with an <c>HttpRequestException</c> rather than parsing the error body.
+    /// </summary>
+    /// <remarks>
+    ///     The comment in the body states the failure mode: a server that answers a 4xx or 5xx with
+    ///     well-formed XML would otherwise load as an empty feed.
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task RssFeed_LoadAsync_WithNotFoundResponse_ThrowsHttpRequestException()
     {
@@ -27,6 +40,10 @@ public class LoadAsyncHttpTests
             async () => await feed.LoadAsync(new Uri("http://example.com/notfound.xml"), httpClient, cancellationToken: TestContext.CancellationToken));
     }
 
+    /// <summary>
+    /// A <c>404</c> aborts an Atom load with an <c>HttpRequestException</c> rather than parsing the error body.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task AtomFeed_LoadAsync_WithNotFoundResponse_ThrowsHttpRequestException()
     {
@@ -41,6 +58,10 @@ public class LoadAsyncHttpTests
             async () => await feed.LoadAsync(new Uri("http://example.com/notfound.xml"), httpClient, cancellationToken: TestContext.CancellationToken));
     }
 
+    /// <summary>
+    /// A <c>404</c> aborts a format-agnostic load with an <c>HttpRequestException</c> rather than parsing the error body.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task GenericSyndicationFeed_LoadAsync_WithNotFoundResponse_ThrowsHttpRequestException()
     {
@@ -55,6 +76,10 @@ public class LoadAsyncHttpTests
             async () => await feed.LoadAsync(new Uri("http://example.com/notfound.xml"), httpClient, cancellationToken: TestContext.CancellationToken));
     }
 
+    /// <summary>
+    /// A transport failure raised by the handler reaches the caller as the <c>HttpRequestException</c> it was, unwrapped.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task RssFeed_LoadAsync_WithNetworkError_ThrowsHttpRequestException()
     {
@@ -69,6 +94,10 @@ public class LoadAsyncHttpTests
             async () => await feed.LoadAsync(new Uri("http://example.com/feed.xml"), httpClient, cancellationToken: TestContext.CancellationToken));
     }
 
+    /// <summary>
+    /// The same holds for an Atom load: a transport failure reaches the caller as an <c>HttpRequestException</c>.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task AtomFeed_LoadAsync_WithNetworkError_ThrowsHttpRequestException()
     {
@@ -83,6 +112,10 @@ public class LoadAsyncHttpTests
             async () => await feed.LoadAsync(new Uri("http://example.com/feed.xml"), httpClient, cancellationToken: TestContext.CancellationToken));
     }
 
+    /// <summary>
+    /// A token cancelled before an RSS load aborts it with an <c>OperationCanceledException</c>, without waiting out the ten-second delay the handler was given.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task RssFeed_LoadAsync_WithCancellation_ThrowsOperationCanceledException()
     {
@@ -101,6 +134,10 @@ public class LoadAsyncHttpTests
             async () => await feed.LoadAsync(new Uri("http://example.com/feed.xml"), httpClient, cancellationToken: cts.Token));
     }
 
+    /// <summary>
+    /// A token cancelled before an Atom load aborts it with an <c>OperationCanceledException</c>, without waiting out the ten-second delay the handler was given.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task AtomFeed_LoadAsync_WithCancellation_ThrowsOperationCanceledException()
     {
@@ -119,6 +156,10 @@ public class LoadAsyncHttpTests
             async () => await feed.LoadAsync(new Uri("http://example.com/feed.xml"), httpClient, cancellationToken: cts.Token));
     }
 
+    /// <summary>
+    /// A response that arrives 50 milliseconds late still loads, raising <c>Loaded</c> and parsing the channel title.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task RssFeed_LoadAsync_WithDelayedContent_LoadsSuccessfully()
     {
@@ -138,6 +179,10 @@ public class LoadAsyncHttpTests
         feed.Channel.Title.ShouldBe("Test Feed");
     }
 
+    /// <summary>
+    /// A body that is not well-formed XML surfaces as an <c>XmlException</c>, not as an empty feed.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task RssFeed_LoadAsync_WithMalformedXml_ThrowsXmlException()
     {

@@ -8,11 +8,14 @@ namespace Argotic.Benchmarks;
 /// </summary>
 /// <remarks>
 /// Run everything:
-/// <code>dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --job Short</code>
+/// <code>dotnet run -c Release --project Solutions/Argotic.Benchmarks</code>
 /// Run one class:
-/// <code>dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --filter *FeedLoad* --job Short</code>
+/// <code>dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --filter *FeedLoad*</code>
 /// Run one category:
-/// <code>dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --anyCategories fidelity --job Short</code>
+/// <code>dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --anyCategories fidelity</code>
+/// None of these names a job, deliberately. <see cref="BenchmarkConfig"/> pins <c>MediumRun</c>, and
+/// <c>--job Short</c> overrides it — which is fine for reading the allocation column and not fine for
+/// reading a time, because short-job error bars on this hardware equal or exceed their means.
 /// Benchmarks must be run in Release; BenchmarkDotNet rejects an unoptimised assembly, correctly.
 /// </remarks>
 internal static class Program

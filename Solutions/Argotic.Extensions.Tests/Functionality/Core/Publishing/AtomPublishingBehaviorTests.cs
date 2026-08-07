@@ -8,11 +8,20 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Publishing;
 
+/// <summary>
+/// Covers the Atom Publishing Protocol object model — <see cref="AtomAcceptedMediaRange"/>,
+/// <see cref="AtomWorkspace"/>, <see cref="AtomMemberResources"/>, <see cref="AtomServiceDocument"/>,
+/// <see cref="AtomCategoryDocument"/> and <see cref="AtomEntryResource"/> — both as constructed in code
+/// and as parsed from XML.
+/// </summary>
 [TestClass]
 public class AtomPublishingBehaviorTests
 {
     #region AtomAcceptedMediaRange Tests
 
+    /// <summary>
+    /// A newly constructed media range has an empty range and neither a base URI nor a language.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_DefaultConstructor_CreatesEmptyInstance()
     {
@@ -25,6 +34,9 @@ public class AtomPublishingBehaviorTests
         mediaRange.Language.ShouldBeNull();
     }
 
+    /// <summary>
+    /// The range passed to the constructor is the range the instance reports.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_Constructor_WithMediaRange_SetsProperty()
     {
@@ -38,6 +50,9 @@ public class AtomPublishingBehaviorTests
         mediaRange.MediaRange.ShouldBe(range);
     }
 
+    /// <summary>
+    /// Assigning a range trims the surrounding whitespace, so an indented <c>accept</c> element does not yield an unusable media type.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_MediaRange_TrimsWhitespace()
     {
@@ -51,6 +66,9 @@ public class AtomPublishingBehaviorTests
         mediaRange.MediaRange.ShouldBe("application/json");
     }
 
+    /// <summary>
+    /// The entry media range is spelled <c>application/atom+xml;type=entry</c> — no space, and the parameter lower-case.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_AtomEntryMediaRange_ReturnsCorrectValue()
     {
@@ -61,6 +79,9 @@ public class AtomPublishingBehaviorTests
         range.ShouldBe("application/atom+xml;type=entry");
     }
 
+    /// <summary>
+    /// The feed media range is spelled <c>application/atom+xml;type=feed</c> — no space, and the parameter lower-case.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_AtomFeedMediaRange_ReturnsCorrectValue()
     {
@@ -71,6 +92,9 @@ public class AtomPublishingBehaviorTests
         range.ShouldBe("application/atom+xml;type=feed");
     }
 
+    /// <summary>
+    /// The text content of an <c>app:accept</c> element becomes the media range.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_Load_LoadsFromXml()
     {
@@ -89,6 +113,9 @@ public class AtomPublishingBehaviorTests
         mediaRange.MediaRange.ShouldBe("image/png");
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders the media range as an <c>accept</c> element wrapping the range as text.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_WriteTo_WritesXml()
     {
@@ -104,6 +131,9 @@ public class AtomPublishingBehaviorTests
         xml.ShouldContain("</accept>");
     }
 
+    /// <summary>
+    /// Comparing a media range against <see langword="null"/> returns <c>1</c>, so <see langword="null"/> sorts first.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_CompareTo_WithNull_ReturnsPositive()
     {
@@ -117,6 +147,9 @@ public class AtomPublishingBehaviorTests
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Two media ranges carrying the same range compare equal.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_CompareTo_WithEqual_ReturnsZero()
     {
@@ -131,6 +164,9 @@ public class AtomPublishingBehaviorTests
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Media ranges compare by value, not by reference, under <c>Equals</c>.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_Equals_WithSameRange_ReturnsTrue()
     {
@@ -142,6 +178,9 @@ public class AtomPublishingBehaviorTests
         range1.Equals(range2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>==</c> agrees with <c>Equals</c> for two media ranges carrying the same range.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_EqualityOperator_Works()
     {
@@ -153,6 +192,9 @@ public class AtomPublishingBehaviorTests
         (range1 == range2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>!=</c> separates media ranges carrying different ranges.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_InequalityOperator_Works()
     {
@@ -164,6 +206,9 @@ public class AtomPublishingBehaviorTests
         (range1 != range2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A media range with no syndication extensions reports <c>HasExtensions</c> as <see langword="false"/>.
+    /// </summary>
     [TestMethod]
     public void AtomAcceptedMediaRange_HasExtensions_WhenEmpty_ReturnsFalse()
     {
@@ -178,6 +223,9 @@ public class AtomPublishingBehaviorTests
 
     #region AtomWorkspace Tests
 
+    /// <summary>
+    /// A newly constructed workspace has a non-null title and an empty, non-null collection list.
+    /// </summary>
     [TestMethod]
     public void AtomWorkspace_DefaultConstructor_CreatesEmptyInstance()
     {
@@ -190,6 +238,9 @@ public class AtomPublishingBehaviorTests
         workspace.Collections.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// The <see cref="AtomTextConstruct"/> passed to the constructor becomes the workspace title.
+    /// </summary>
     [TestMethod]
     public void AtomWorkspace_Constructor_WithTitle_SetsTitle()
     {
@@ -203,6 +254,9 @@ public class AtomPublishingBehaviorTests
         workspace.Title.Content.ShouldBe("My Workspace");
     }
 
+    /// <summary>
+    /// The two-argument constructor takes the collections as well as the title, and the collections keep their URIs.
+    /// </summary>
     [TestMethod]
     public void AtomWorkspace_Constructor_WithTitleAndCollections_SetsBoth()
     {
@@ -224,6 +278,9 @@ public class AtomPublishingBehaviorTests
         workspace.Collections[0].Uri.ShouldBe(new Uri("http://example.com/posts"));
     }
 
+    /// <summary>
+    /// The workspace indexer reads through to the collection at that position.
+    /// </summary>
     [TestMethod]
     public void AtomWorkspace_Indexer_GetsCollection()
     {
@@ -242,6 +299,9 @@ public class AtomPublishingBehaviorTests
         collection.Uri.ShouldBe(new Uri("http://example.com/collection"));
     }
 
+    /// <summary>
+    /// The workspace indexer writes through, replacing the collection at that position.
+    /// </summary>
     [TestMethod]
     public void AtomWorkspace_Indexer_SetsCollection()
     {
@@ -265,6 +325,9 @@ public class AtomPublishingBehaviorTests
         workspace[0].Uri.ShouldBe(new Uri("http://example.com/new"));
     }
 
+    /// <summary>
+    /// A workspace element reads its title from the Atom-namespaced <c>atom:title</c> child, not an app-namespaced one.
+    /// </summary>
     [TestMethod]
     public void AtomWorkspace_Load_LoadsFromXml()
     {
@@ -286,6 +349,9 @@ public class AtomPublishingBehaviorTests
         workspace.Title.Content.ShouldBe("Main Workspace");
     }
 
+    /// <summary>
+    /// Comparing a workspace against <see langword="null"/> returns <c>1</c>, so <see langword="null"/> sorts first.
+    /// </summary>
     [TestMethod]
     public void AtomWorkspace_CompareTo_WithNull_ReturnsPositive()
     {
@@ -299,6 +365,9 @@ public class AtomPublishingBehaviorTests
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Workspaces compare by value, so two built from the same title are equal.
+    /// </summary>
     [TestMethod]
     public void AtomWorkspace_Equals_WithEqual_ReturnsTrue()
     {
@@ -314,6 +383,9 @@ public class AtomPublishingBehaviorTests
 
     #region AtomServiceDocument Tests
 
+    /// <summary>
+    /// A newly constructed service document has an empty, non-null workspace list.
+    /// </summary>
     [TestMethod]
     public void AtomServiceDocument_DefaultConstructor_CreatesEmptyInstance()
     {
@@ -325,6 +397,9 @@ public class AtomPublishingBehaviorTests
         doc.Workspaces.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// The workspaces passed to the constructor are the workspaces the document reports.
+    /// </summary>
     [TestMethod]
     public void AtomServiceDocument_Constructor_WithWorkspaces_SetsWorkspaces()
     {
@@ -340,6 +415,9 @@ public class AtomPublishingBehaviorTests
         doc.Workspaces[0].Title.Content.ShouldBe("Main");
     }
 
+    /// <summary>
+    /// An <i>empty</i> workspace list throws <see cref="ArgumentOutOfRangeException"/>: a service document must carry at least one workspace.
+    /// </summary>
     [TestMethod]
     public void AtomServiceDocument_Constructor_WithEmptyWorkspaces_ThrowsException()
     {
@@ -350,6 +428,9 @@ public class AtomPublishingBehaviorTests
         Should.Throw<ArgumentOutOfRangeException>(() => new AtomServiceDocument(workspaces));
     }
 
+    /// <summary>
+    /// The service document indexer reads through to the workspace at that position.
+    /// </summary>
     [TestMethod]
     public void AtomServiceDocument_Indexer_GetsWorkspace()
     {
@@ -364,6 +445,9 @@ public class AtomPublishingBehaviorTests
         result.Title.Content.ShouldBe("Blog");
     }
 
+    /// <summary>
+    /// A service document reports its format as <see cref="SyndicationContentFormat.AtomServiceDocument"/>.
+    /// </summary>
     [TestMethod]
     public void AtomServiceDocument_Format_ReturnsAtomServiceDocument()
     {
@@ -377,6 +461,9 @@ public class AtomPublishingBehaviorTests
         format.ShouldBe(SyndicationContentFormat.AtomServiceDocument);
     }
 
+    /// <summary>
+    /// A service document reports version <c>1.0</c>.
+    /// </summary>
     [TestMethod]
     public void AtomServiceDocument_Version_ReturnsOneZero()
     {
@@ -391,6 +478,9 @@ public class AtomPublishingBehaviorTests
         version.Minor.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Loading a service document reaches its workspace, that workspace's collection, and the collection's own title.
+    /// </summary>
     [TestMethod]
     public void AtomServiceDocument_Load_ParsesServiceDocument()
     {
@@ -424,6 +514,9 @@ public class AtomPublishingBehaviorTests
 
     #region AtomMemberResources Tests
 
+    /// <summary>
+    /// A newly constructed collection has no URI, but a non-null title and non-null accept and category lists.
+    /// </summary>
     [TestMethod]
     public void AtomMemberResources_DefaultConstructor_CreatesEmptyInstance()
     {
@@ -437,6 +530,9 @@ public class AtomPublishingBehaviorTests
         resources.Categories.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// The URI and title passed to the constructor are the ones the collection reports.
+    /// </summary>
     [TestMethod]
     public void AtomMemberResources_Constructor_WithUriAndTitle_SetsBoth()
     {
@@ -452,6 +548,9 @@ public class AtomPublishingBehaviorTests
         resources.Title.Content.ShouldBe("My Collection");
     }
 
+    /// <summary>
+    /// A collection's accept list takes media ranges, and the well-known entry range arrives as <c>application/atom+xml;type=entry</c>.
+    /// </summary>
     [TestMethod]
     public void AtomMemberResources_Accepts_CanAddMediaRanges()
     {
@@ -468,6 +567,9 @@ public class AtomPublishingBehaviorTests
         resources.Accepts[0].MediaRange.ShouldBe("application/atom+xml;type=entry");
     }
 
+    /// <summary>
+    /// Encoding a title containing spaces and punctuation for a <c>Slug</c> header yields a non-empty value.
+    /// </summary>
     [TestMethod]
     public void AtomMemberResources_SlugEncode_ReturnsEncodedString()
     {
@@ -482,6 +584,9 @@ public class AtomPublishingBehaviorTests
         encoded.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// Decoding a <c>Slug</c> header turns its percent-escapes back into the characters they stand for, so <c>%20</c> becomes a space.
+    /// </summary>
     [TestMethod]
     public void AtomMemberResources_SlugDecode_DecodesString()
     {
@@ -495,6 +600,9 @@ public class AtomPublishingBehaviorTests
         decoded.ShouldBe("My First Blog Post");
     }
 
+    /// <summary>
+    /// A collection element loads its <c>href</c> as the URI, its <c>atom:title</c>, and its <c>accept</c> children.
+    /// </summary>
     [TestMethod]
     public void AtomMemberResources_Load_LoadsFromXml()
     {
@@ -519,6 +627,9 @@ public class AtomPublishingBehaviorTests
         resources.Accepts.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Comparing a collection against <see langword="null"/> returns <c>1</c>, so <see langword="null"/> sorts first.
+    /// </summary>
     [TestMethod]
     public void AtomMemberResources_CompareTo_WithNull_ReturnsPositive()
     {
@@ -538,6 +649,9 @@ public class AtomPublishingBehaviorTests
 
     #region AtomCategoryDocument Tests
 
+    /// <summary>
+    /// A newly constructed category document has no categories, is not fixed, and has no scheme.
+    /// </summary>
     [TestMethod]
     public void AtomCategoryDocument_DefaultConstructor_CreatesEmptyInstance()
     {
@@ -551,6 +665,9 @@ public class AtomPublishingBehaviorTests
         doc.Scheme.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A category added to the document keeps its term.
+    /// </summary>
     [TestMethod]
     public void AtomCategoryDocument_AddCategory_AddsToCollection()
     {
@@ -566,6 +683,9 @@ public class AtomPublishingBehaviorTests
         doc.Categories[0].Term.ShouldBe("tech");
     }
 
+    /// <summary>
+    /// The fixed flag — whether the listed categories are the only permitted ones — is settable and readable.
+    /// </summary>
     [TestMethod]
     public void AtomCategoryDocument_IsFixed_CanBeSet()
     {
@@ -579,6 +699,9 @@ public class AtomPublishingBehaviorTests
         doc.IsFixed.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The default scheme, which categories without one inherit, round-trips through the property.
+    /// </summary>
     [TestMethod]
     public void AtomCategoryDocument_Scheme_CanBeSet()
     {
@@ -593,6 +716,9 @@ public class AtomPublishingBehaviorTests
         doc.Scheme.ShouldBe(scheme);
     }
 
+    /// <summary>
+    /// A category document loads <c>fixed="yes"</c> as <see langword="true"/>, its <c>scheme</c> as a URI, and both <c>atom:category</c> children.
+    /// </summary>
     [TestMethod]
     public void AtomCategoryDocument_Load_ParsesCategoryDocument()
     {
@@ -616,6 +742,9 @@ public class AtomPublishingBehaviorTests
         doc.Categories.Count.ShouldBe(2);
     }
 
+    /// <summary>
+    /// A category document reports its format as <see cref="SyndicationContentFormat.AtomCategoryDocument"/>.
+    /// </summary>
     [TestMethod]
     public void AtomCategoryDocument_Format_ReturnsAtomCategoryDocument()
     {
@@ -629,6 +758,9 @@ public class AtomPublishingBehaviorTests
         format.ShouldBe(SyndicationContentFormat.AtomCategoryDocument);
     }
 
+    /// <summary>
+    /// Comparing a category document against <see langword="null"/> returns <c>1</c>, so <see langword="null"/> sorts first.
+    /// </summary>
     [TestMethod]
     public void AtomCategoryDocument_CompareTo_WithNull_ReturnsPositive()
     {
@@ -646,6 +778,9 @@ public class AtomPublishingBehaviorTests
 
     #region AtomEntryResource Tests
 
+    /// <summary>
+    /// A newly constructed entry resource has no edit timestamp and is not a draft.
+    /// </summary>
     [TestMethod]
     public void AtomEntryResource_DefaultConstructor_CreatesEmptyInstance()
     {
@@ -657,6 +792,9 @@ public class AtomPublishingBehaviorTests
         resource.IsDraft.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The identifier, title and update timestamp passed to the constructor reach the inherited Atom entry members.
+    /// </summary>
     [TestMethod]
     public void AtomEntryResource_Constructor_WithParameters_SetsProperties()
     {
@@ -673,6 +811,9 @@ public class AtomPublishingBehaviorTests
         resource.UpdatedOn.ShouldBe(updatedOn);
     }
 
+    /// <summary>
+    /// The <c>app:edited</c> timestamp round-trips through the property.
+    /// </summary>
     [TestMethod]
     public void AtomEntryResource_EditedOn_CanBeSet()
     {
@@ -687,6 +828,9 @@ public class AtomPublishingBehaviorTests
         resource.EditedOn.ShouldBe(editTime);
     }
 
+    /// <summary>
+    /// The <c>app:control/app:draft</c> flag round-trips through the property.
+    /// </summary>
     [TestMethod]
     public void AtomEntryResource_IsDraft_CanBeSet()
     {
@@ -700,6 +844,14 @@ public class AtomPublishingBehaviorTests
         resource.IsDraft.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// An entry resource reports its format as <see cref="SyndicationContentFormat.AtomEntryDocument"/>, not as a feed.
+    /// </summary>
+    /// <remarks>
+    ///     This was <c>Atom</c>. An <see cref="AtomEntryResource"/> is an Atom Publishing member resource
+    ///     — a stand-alone entry document — and reporting the same format as a feed is what let the two be
+    ///     confused.
+    /// </remarks>
     [TestMethod]
     public void AtomEntryResource_Format_ReturnsAtomEntryDocument()
     {
@@ -719,6 +871,9 @@ public class AtomPublishingBehaviorTests
 
     #region Roundtrip Tests
 
+    /// <summary>
+    /// A service document written to a stream and read back keeps its workspace title and its collection's title.
+    /// </summary>
     [TestMethod]
     public void AtomServiceDocument_RoundTrip_PreservesData()
     {
@@ -745,6 +900,9 @@ public class AtomPublishingBehaviorTests
         loadedDoc.Workspaces[0].Collections[0].Title.Content.ShouldBe("Blog Posts");
     }
 
+    /// <summary>
+    /// A category document written to a stream and read back keeps its fixed flag, its scheme and both categories.
+    /// </summary>
     [TestMethod]
     public void AtomCategoryDocument_RoundTrip_PreservesData()
     {

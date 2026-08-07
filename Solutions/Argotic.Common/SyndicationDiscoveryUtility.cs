@@ -33,17 +33,24 @@ public static partial class SyndicationDiscoveryUtility
     /// <summary>
     /// Gets the raw user agent string used by the framework when sending web requests.
     /// </summary>
-    /// <value>A string that represents information such as the client application name, version, host operating system, and language.</value>
+    /// <value>
+    ///     <c>Argotic-Syndication-Framework/</c> followed by this assembly's four-part version, or
+    ///     <c>unknown</c> in the version's place where reflection cannot supply one — a single-file or
+    ///     trimmed deployment, for instance.
+    /// </value>
+    /// <remarks>
+    ///     Set on every request this framework makes. A caller wanting a different one supplies
+    ///     <see cref="SyndicationRequestOptions.UserAgent"/>, which replaces this rather than appending
+    ///     to it — some origins rate-limit or block on the agent string, and identifying as the library
+    ///     rather than as the application is often the wrong side of that rule.
+    /// </remarks>
     public static string FrameworkUserAgent { get; } = CreateFrameworkUserAgent();
 
     /// <summary>
     /// Returns the <see cref="SyndicationContentFormat"/> enumeration value that corresponds to the specified format name.
     /// </summary>
-    /// <param name="name">The name of the syndication content format.</param>
-    /// <returns>A <see cref="SyndicationContentFormat"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>SyndicationContentFormat.None</b>.</returns>
-    /// <remarks>This method disregards case of specified format name.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <param name="name">The format's alternate value — which for this enumeration is a document's root element name, such as <c>rss</c> or <c>feed</c>. Matched without regard to case.</param>
+    /// <returns>The matching <see cref="SyndicationContentFormat"/>; otherwise, <see cref="SyndicationContentFormat.None"/>, which is also the answer for a <see langword="null"/> or empty name.</returns>
     public static SyndicationContentFormat SyndicationContentFormatByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, SyndicationContentFormat.None);
 
@@ -56,7 +63,7 @@ public static partial class SyndicationDiscoveryUtility
     ///     A task that represents the asynchronous operation. The task result contains a <see cref="SyndicationContentFormat"/>
     ///     enumeration value indicating the format of the syndicated resource. If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
     /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<SyndicationContentFormat> SyndicationContentFormatGetAsync(
         Uri source,
@@ -86,12 +93,21 @@ public static partial class SyndicationDiscoveryUtility
     ///     enumeration value indicating the format of the syndicated resource. If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
     /// </returns>
     /// <remarks>
-    ///     This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
-    ///     and configure handler-level settings (credentials, proxy, cookies) on the client.
-    ///     This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     <para>
+    ///         Only the first 64 KiB of the response is read, because the answer is the document's root
+    ///         element name and nothing after it can change that. A document whose prolog alone exceeds
+    ///         that window — the shape a DTD bomb takes — is truncated mid-declaration and reported as
+    ///         <see cref="SyndicationContentFormat.None"/>, which is in contract: <c>None</c> means
+    ///         "unable to determine".
+    ///     </para>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///         and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<SyndicationContentFormat> SyndicationContentFormatGetAsync(
         Uri source,
@@ -135,7 +151,7 @@ public static partial class SyndicationDiscoveryUtility
     ///     A <see cref="SyndicationContentFormat"/> enumeration value indicating the format of the syndicated resource.
     ///     If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
     /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     public static SyndicationContentFormat SyndicationContentFormatGet(Stream stream)
     {
         ArgumentNullException.ThrowIfNull(stream);
@@ -156,7 +172,7 @@ public static partial class SyndicationDiscoveryUtility
     ///     A <see cref="SyndicationContentFormat"/> enumeration value indicating the format of the syndicated resource.
     ///     If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
     /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public static SyndicationContentFormat SyndicationContentFormatGet(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -181,7 +197,7 @@ public static partial class SyndicationDiscoveryUtility
     ///     A <see cref="SyndicationContentFormat"/> enumeration value indicating the format of the syndicated resource.
     ///     If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
     /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     public static SyndicationContentFormat SyndicationContentFormatGet(XPathNavigator navigator)
     {
         ArgumentNullException.ThrowIfNull(navigator);
@@ -204,8 +220,8 @@ public static partial class SyndicationDiscoveryUtility
     /// </summary>
     /// <param name="content">The HTML content to parse.</param>
     /// <returns>A <see cref="Dictionary{TKey, TValue}"/> of the HTML attribute name/value pairs extracted the supplied <paramref name="content"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
     private static Dictionary<string, string> ExtractHtmlAttributes(string content)
     {
         ArgumentException.ThrowIfNullOrEmpty(content);
@@ -243,9 +259,14 @@ public static partial class SyndicationDiscoveryUtility
     /// Returns a collection of <see cref="Uri"/> instances that represent HTML header links and/or anchor tags in the supplied HTML markup.
     /// </summary>
     /// <param name="content">The HTML markup to parse.</param>
-    /// <returns>A collection of <see cref="Uri"/> instances that represent HTML anchor elements and header links in the supplied HTML markup.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
+    /// <returns>Every <c>href</c> found, in document order within each group: the <c>link</c> elements first, then the anchors.</returns>
+    /// <remarks>
+    ///     A relative <c>href</c> is returned relative — nothing here knows the address the markup came
+    ///     from — and duplicates are not removed, so the same target appearing in both a <c>link</c> and
+    ///     an anchor appears twice.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
     public static IList<Uri> ExtractUrls(string content)
     {
         ArgumentException.ThrowIfNullOrEmpty(content);
@@ -291,11 +312,11 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="target">A <see cref="Uri"/> that represents the target web resource being searched for.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="source"/>
-    ///     contains at least one link to the <paramref name="target"/>, otherwise <b>false</b>.
+    ///     A task that represents the asynchronous operation. The task result is <see langword="true"/> if the <paramref name="source"/>
+    ///     contains at least one link to the <paramref name="target"/>; otherwise, <see langword="false"/>.
     /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<bool> SourceReferencesTargetAsync(
         Uri source,
@@ -315,17 +336,17 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="source"/>
-    ///     contains at least one link to the <paramref name="target"/>, otherwise <b>false</b>.
+    ///     A task that represents the asynchronous operation. The task result is <see langword="true"/> if the <paramref name="source"/>
+    ///     contains at least one link to the <paramref name="target"/>; otherwise, <see langword="false"/>.
     /// </returns>
     /// <remarks>
     ///     This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
     ///     and configure handler-level settings (credentials, proxy, cookies) on the client.
     ///     This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<bool> SourceReferencesTargetAsync(
         Uri source,
@@ -366,10 +387,10 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="uri">The <see cref="Uri"/> to validate.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/> exists, otherwise <b>false</b>.
+    ///     A task that represents the asynchronous operation. The task result is <see langword="true"/> if the <paramref name="uri"/> exists; otherwise, <see langword="false"/>.
     /// </returns>
     /// <remarks>
-    ///     This method will return <b>false</b> if the <paramref name="uri"/> is a null reference or the <paramref name="uri"/> is otherwise inaccessible.
+    ///     This method will return <see langword="false"/> if the <paramref name="uri"/> is <see langword="null"/> or the <paramref name="uri"/> is otherwise inaccessible.
     ///     Requests are subject to a 100-second default time-out; a timed-out request is treated as inaccessible.
     /// </remarks>
     public static async Task<bool> UriExistsAsync(
@@ -396,11 +417,17 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/> exists, otherwise <b>false</b>.
+    ///     A task that represents the asynchronous operation. The task result is <see langword="true"/> if the <paramref name="uri"/> exists; otherwise, <see langword="false"/>.
     /// </returns>
     /// <remarks>
     ///     <para>
-    ///         This method will return <b>false</b> if the <paramref name="uri"/> is a null reference or the <paramref name="uri"/> is otherwise inaccessible.
+    ///         This method will return <see langword="false"/> if the <paramref name="uri"/> is <see langword="null"/> or the <paramref name="uri"/> is otherwise inaccessible.
+    ///     </para>
+    ///     <para>
+    ///         The request is a <c>GET</c> that completes on the headers, so the body is never read.
+    ///         Success plus a declared <c>Content-Length</c> that is not exactly zero counts as existing;
+    ///         a response declaring no length at all — every chunked and every decompressed one — counts
+    ///         as existing too, because absence of a declaration says nothing about the body.
     ///     </para>
     ///     <para>
     ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
@@ -408,7 +435,7 @@ public static partial class SyndicationDiscoveryUtility
     ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     public static async Task<bool> UriExistsAsync(
         Uri uri,
         HttpClient httpClient,
@@ -449,7 +476,7 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="ConditionalGetResult"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public static async Task<ConditionalGetResult> ConditionalGetAsync(
         Uri source,
         DateTime lastModified,
@@ -465,18 +492,28 @@ public static partial class SyndicationDiscoveryUtility
     /// Asynchronously performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag, and <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
-    /// <param name="lastModified">A <see cref="DateTime"/> object that represents the date and time at which the <paramref name="source"/> was last known to be modified.</param>
-    /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
+    /// <param name="lastModified">The <c>Last-Modified</c> the origin last reported, sent as <c>If-Modified-Since</c>. A <see cref="DateTimeKind.Unspecified"/> value is read as UTC, which is what HTTP validator times are.</param>
+    /// <param name="entityTag">The entity tag the origin last reported, sent as <c>If-None-Match</c>. Pass it exactly as received, quotes included, or <see langword="null"/> to send none.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
-    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="ConditionalGetResult"/>.</returns>
+    /// <returns>A task whose result reports whether the origin sent a body, and carries the validators to send next time.</returns>
     /// <remarks>
-    ///     This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
-    ///     and configure handler-level settings (credentials, proxy, cookies) on the client.
-    ///     This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     <para>
+    ///         A <c>304</c> arrives as a result rather than as an exception, which is what distinguishes
+    ///         this from every other fetch in the library. Prefer the
+    ///         <see cref="ConditionalGetAsync(Uri, SyndicationValidators, HttpClient, SyndicationRequestOptions, CancellationToken)"/>
+    ///         overload: it can carry request options, and a <see cref="SyndicationValidators"/> lets a
+    ///         resource never yet fetched say so, rather than needing a <see cref="DateTime"/> invented
+    ///         for it.
+    ///     </para>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///         and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="HttpRequestException">The response status code does not indicate success or a lack of modification.</exception>
     public static Task<ConditionalGetResult> ConditionalGetAsync(
         Uri source,
@@ -501,7 +538,7 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
     /// <param name="validators">The cache validators held for the <paramref name="source"/>.</param>
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
-    /// <param name="requestOptions">Request-level options — Accept, User-Agent, Referer, custom headers. This value can be <b>null</b>.</param>
+    /// <param name="requestOptions">Request-level options — Accept, User-Agent, Referer, custom headers. This value can be <see langword="null"/>.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="ConditionalGetResult"/>.</returns>
     /// <remarks>
@@ -519,9 +556,9 @@ public static partial class SyndicationDiscoveryUtility
     ///     <see cref="DateTime"/> to be invented.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="validators"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="validators"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="HttpRequestException">The response status code does not indicate success or a lack of modification.</exception>
     public static async Task<ConditionalGetResult> ConditionalGetAsync(
         Uri source,
@@ -593,11 +630,23 @@ public static partial class SyndicationDiscoveryUtility
     ///     A collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints contained within the <paramref name="content"/>.
     /// </returns>
     /// <remarks>
-    ///     See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
-    ///     further information about the auto-discovery of syndicated content.
+    ///     <para>
+    ///         A <c>link</c> qualifies only when it carries <c>href</c>, <c>rel</c> and <c>type</c>, and
+    ///         its <c>rel</c> is <c>alternate</c>. Requiring <c>type</c> is what keeps a
+    ///         <c>rel="alternate"</c> that is a translation rather than a feed out of the results; the
+    ///         cost is that a feed link omitting <c>type</c> is missed.
+    ///     </para>
+    ///     <para>
+    ///         A relative <c>href</c> is stored as it appears and cannot be fetched. Prefer
+    ///         <see cref="ExtractDiscoverableSyndicationEndpoints(string, Uri?)"/>, which resolves one.
+    ///     </para>
+    ///     <para>
+    ///         See <a href="https://www.rssboard.org/rss-autodiscovery">https://www.rssboard.org/rss-autodiscovery</a> for
+    ///         further information about the auto-discovery of syndicated content.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
     public static IList<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
         => ExtractDiscoverableSyndicationEndpoints(content, baseUri: null);
 
@@ -622,7 +671,7 @@ public static partial class SyndicationDiscoveryUtility
     ///     already hold has no address to resolve against and did not necessarily want one invented.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
     public static IList<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content, Uri? baseUri)
     {
@@ -679,10 +728,10 @@ public static partial class SyndicationDiscoveryUtility
     ///     A collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints contained within the <paramref name="stream"/>.
     /// </returns>
     /// <remarks>
-    ///     See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
+    ///     See <a href="https://www.rssboard.org/rss-autodiscovery">https://www.rssboard.org/rss-autodiscovery</a> for
     ///     further information about the auto-discovery of syndicated content.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     public static IList<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(Stream stream)
     {
         ArgumentNullException.ThrowIfNull(stream);
@@ -701,10 +750,10 @@ public static partial class SyndicationDiscoveryUtility
     ///     objects that represent auto-discoverable syndicated content endpoints for the web resource located at the <paramref name="uri"/>.
     /// </returns>
     /// <remarks>
-    ///     See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
+    ///     See <a href="https://www.rssboard.org/rss-autodiscovery">https://www.rssboard.org/rss-autodiscovery</a> for
     ///     further information about the auto-discovery of syndicated content.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<IList<DiscoverableSyndicationEndpoint>> LocateDiscoverableSyndicationEndpointsAsync(
         Uri uri,
@@ -727,7 +776,7 @@ public static partial class SyndicationDiscoveryUtility
     /// </returns>
     /// <remarks>
     ///     <para>
-    ///         See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
+    ///         See <a href="https://www.rssboard.org/rss-autodiscovery">https://www.rssboard.org/rss-autodiscovery</a> for
     ///         further information about the auto-discovery of syndicated content.
     ///     </para>
     ///     <para>
@@ -736,8 +785,8 @@ public static partial class SyndicationDiscoveryUtility
     ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<IList<DiscoverableSyndicationEndpoint>> LocateDiscoverableSyndicationEndpointsAsync(
         Uri uri,
@@ -771,26 +820,28 @@ public static partial class SyndicationDiscoveryUtility
     /// </summary>
     /// <param name="content">The HTML markup to parse.</param>
     /// <returns>
-    ///     A <see cref="HtmlAnchor"/> that represents the pingback auto-discovery link extracted from the <paramref name="content"/>.
-    ///     If no pingback auto-discovery link was found, returns <b>null</b>.
+    ///     The pingback auto-discovery link, or <see langword="null"/> if the markup carried none.
+    ///     Where the markup carries several, the last one wins.
     /// </returns>
     /// <remarks>
     ///     <para>
     ///         Pingback enabled resources that utilize the link mechanism will contain a
     ///         &lt;link rel="pingback" href="{Absolute URI of the pingback XML-RPC server}" /&gt; element.
+    ///         The <c>href</c> must be absolute: a relative one is skipped rather than resolved, because
+    ///         a pingback server address is one the publisher states outright.
     ///     </para>
     ///     <para>
-    ///         The <see cref="HtmlAnchor"/> that is returned will have a <i>Href</i> property that points to the
-    ///         absolute URI of the pingback XML-RPC server, and a <i>rel</i> attribute of pingback.
-    ///         The <i>Title</i> property and <i>type</i> attribute will also be extracted if available.
+    ///         The <see cref="HtmlAnchor"/> that is returned will have an <see cref="HtmlAnchor.HRef"/> that points to the
+    ///         absolute URI of the pingback XML-RPC server, and a <c>rel</c> entry of <c>pingback</c>.
+    ///         <see cref="HtmlAnchor.Title"/> and a <c>type</c> entry are filled in when the markup supplied them.
     ///     </para>
     ///     <para>
-    ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>
+    ///         See <a href="https://www.hixie.ch/specs/pingback/pingback">https://www.hixie.ch/specs/pingback/pingback</a>
     ///         for more information about the pingback notification mechanism.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
     public static HtmlAnchor? ExtractPingbackNotificationServer(string content)
     {
         HtmlAnchor? pingbackAnchor = null;
@@ -837,22 +888,22 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="uri">The <see cref="Uri"/> to validate.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/>
-    ///     is pingback enabled, otherwise <b>false</b>.
+    ///     A task that represents the asynchronous operation. The task result is <see langword="true"/> if the <paramref name="uri"/>
+    ///     is pingback enabled; otherwise, <see langword="false"/>.
     /// </returns>
     /// <remarks>
     ///     <para>
     ///         There are two mechanisms used when determining if a web resource is pingback enabled;
-    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <i>rel</i> attribute value of <b>pingback</b>
-    ///         <u>or</u> an HTTP header named <b>X-Pingback</b>. A web resource is considered pingback enabled if it utilizes
+    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <c>rel</c> attribute value of <c>pingback</c>
+    ///         or an HTTP header named <c>X-Pingback</c>. A web resource is considered pingback enabled if it utilizes
     ///         either or both of these mechanisms.
     ///     </para>
     ///     <para>
-    ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>
+    ///         See <a href="https://www.hixie.ch/specs/pingback/pingback">https://www.hixie.ch/specs/pingback/pingback</a>
     ///         for more information about the pingback notification mechanism.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<bool> IsPingbackEnabledAsync(
         Uri uri,
@@ -870,18 +921,23 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/>
-    ///     is pingback enabled, otherwise <b>false</b>.
+    ///     A task that represents the asynchronous operation. The task result is <see langword="true"/> if the <paramref name="uri"/>
+    ///     is pingback enabled; otherwise, <see langword="false"/>.
     /// </returns>
     /// <remarks>
     ///     <para>
     ///         There are two mechanisms used when determining if a web resource is pingback enabled;
-    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <i>rel</i> attribute value of <b>pingback</b>
-    ///         <u>or</u> an HTTP header named <b>X-Pingback</b>. A web resource is considered pingback enabled if it utilizes
+    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <c>rel</c> attribute value of <c>pingback</c>
+    ///         or an HTTP header named <c>X-Pingback</c>. A web resource is considered pingback enabled if it utilizes
     ///         either or both of these mechanisms.
     ///     </para>
     ///     <para>
-    ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>
+    ///         The header is checked first and the body is downloaded only if it is absent, so a
+    ///         header-advertising origin costs one round trip and no page. The body, when it is read, is
+    ///         bounded by <see cref="SyndicationContentLengthLimits.Discovery"/>.
+    ///     </para>
+    ///     <para>
+    ///         See <a href="https://www.hixie.ch/specs/pingback/pingback">https://www.hixie.ch/specs/pingback/pingback</a>
     ///         for more information about the pingback notification mechanism.
     ///     </para>
     ///     <para>
@@ -890,8 +946,8 @@ public static partial class SyndicationDiscoveryUtility
     ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<bool> IsPingbackEnabledAsync(
         Uri uri,
@@ -934,20 +990,20 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
     ///     A task that represents the asynchronous operation. The task result contains a <see cref="Uri"/> that represents
-    ///     the absolute URI of the pingback XML-RPC server. If pingback server auto-discovery fails, returns <b>null</b>.
+    ///     the absolute URI of the pingback XML-RPC server. If pingback server auto-discovery fails, returns <see langword="null"/>.
     /// </returns>
     /// <remarks>
     ///     <para>
     ///         There are two mechanisms used when determining if a web resource is pingback enabled;
-    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <i>rel</i> attribute value of <b>pingback</b>
-    ///         <u>or</u> an HTTP header named <b>X-Pingback</b>.
+    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <c>rel</c> attribute value of <c>pingback</c>
+    ///         or an HTTP header named <c>X-Pingback</c>.
     ///     </para>
     ///     <para>
-    ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>
+    ///         See <a href="https://www.hixie.ch/specs/pingback/pingback">https://www.hixie.ch/specs/pingback/pingback</a>
     ///         for more information about the pingback notification mechanism.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<Uri?> LocatePingbackNotificationServerAsync(
         Uri uri,
@@ -966,16 +1022,17 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
     ///     A task that represents the asynchronous operation. The task result contains a <see cref="Uri"/> that represents
-    ///     the absolute URI of the pingback XML-RPC server. If pingback server auto-discovery fails, returns <b>null</b>.
+    ///     the absolute URI of the pingback XML-RPC server. If pingback server auto-discovery fails, returns <see langword="null"/>.
     /// </returns>
     /// <remarks>
     ///     <para>
     ///         There are two mechanisms used when determining if a web resource is pingback enabled;
-    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <i>rel</i> attribute value of <b>pingback</b>
-    ///         <u>or</u> an HTTP header named <b>X-Pingback</b>.
+    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <c>rel</c> attribute value of <c>pingback</c>
+    ///         or an HTTP header named <c>X-Pingback</c>. The header is preferred: it is checked first,
+    ///         and the page is downloaded only if it is absent.
     ///     </para>
     ///     <para>
-    ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>
+    ///         See <a href="https://www.hixie.ch/specs/pingback/pingback">https://www.hixie.ch/specs/pingback/pingback</a>
     ///         for more information about the pingback notification mechanism.
     ///     </para>
     ///     <para>
@@ -984,8 +1041,8 @@ public static partial class SyndicationDiscoveryUtility
     ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<Uri?> LocatePingbackNotificationServerAsync(
         Uri uri,
@@ -1031,14 +1088,18 @@ public static partial class SyndicationDiscoveryUtility
     /// </summary>
     /// <param name="content">The HTML markup to parse.</param>
     /// <returns>
-    ///     A collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent embedded Trackback ping URLs contained within the <paramref name="content"/>.
+    ///     One entry per embedded <c>rdf:RDF</c> island that named a <c>trackback:ping</c>. Islands that
+    ///     named none are dropped, so the collection can be shorter than the number of islands present,
+    ///     and every <see cref="TrackbackDiscoveryMetadata.PingUrl"/> in it is populated.
     /// </returns>
     /// <remarks>
-    ///     See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
+    ///     Islands are matched in the raw markup rather than in a parsed document, so one hidden inside
+    ///     an HTML comment is found just the same.
+    ///     See <a href="https://www.rssboard.org/trackback">https://www.rssboard.org/trackback</a> for
     ///     further information about the auto-discovery of Trackback ping URLs.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
     public static IList<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
     {
         List<TrackbackDiscoveryMetadata> results = [];
@@ -1077,10 +1138,10 @@ public static partial class SyndicationDiscoveryUtility
     ///     A collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent embedded Trackback ping URLs contained within the <paramref name="stream"/>.
     /// </returns>
     /// <remarks>
-    ///     See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
+    ///     See <a href="https://www.rssboard.org/trackback">https://www.rssboard.org/trackback</a> for
     ///     further information about the auto-discovery of Trackback ping URLs.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
     public static IList<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(Stream stream)
     {
         ArgumentNullException.ThrowIfNull(stream);
@@ -1095,19 +1156,19 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="uri">The <see cref="Uri"/> to validate.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/>
-    ///     is trackback enabled, otherwise <b>false</b>.
+    ///     A task that represents the asynchronous operation. The task result is <see langword="true"/> if the <paramref name="uri"/>
+    ///     is trackback enabled; otherwise, <see langword="false"/>.
     /// </returns>
     /// <remarks>
     ///     <para>
     ///         The auto-discovery mechanism for trackback utilizes embedded RDF meta-data elements within the web resource.
     ///     </para>
     ///     <para>
-    ///         See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
+    ///         See <a href="https://www.rssboard.org/trackback">https://www.rssboard.org/trackback</a> for
     ///         further information about the auto-discovery of Trackback ping URLs.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<bool> IsTrackbackEnabledAsync(
         Uri uri,
@@ -1126,15 +1187,15 @@ public static partial class SyndicationDiscoveryUtility
     /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/>
-    ///     is trackback enabled, otherwise <b>false</b>.
+    ///     A task that represents the asynchronous operation. The task result is <see langword="true"/> if the <paramref name="uri"/>
+    ///     is trackback enabled; otherwise, <see langword="false"/>.
     /// </returns>
     /// <remarks>
     ///     <para>
     ///         The auto-discovery mechanism for trackback utilizes embedded RDF meta-data elements within the web resource.
     ///     </para>
     ///     <para>
-    ///         See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
+    ///         See <a href="https://www.rssboard.org/trackback">https://www.rssboard.org/trackback</a> for
     ///         further information about the auto-discovery of Trackback ping URLs.
     ///     </para>
     ///     <para>
@@ -1143,8 +1204,8 @@ public static partial class SyndicationDiscoveryUtility
     ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<bool> IsTrackbackEnabledAsync(
         Uri uri,
@@ -1168,10 +1229,10 @@ public static partial class SyndicationDiscoveryUtility
     ///     objects that represent embedded Trackback ping URLs for the web resource located at the <paramref name="uri"/>.
     /// </returns>
     /// <remarks>
-    ///     See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
+    ///     See <a href="https://www.rssboard.org/trackback">https://www.rssboard.org/trackback</a> for
     ///     further information about the auto-discovery of Trackback ping URLs.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<IList<TrackbackDiscoveryMetadata>> LocateTrackbackNotificationServersAsync(
         Uri uri,
@@ -1194,7 +1255,7 @@ public static partial class SyndicationDiscoveryUtility
     /// </returns>
     /// <remarks>
     ///     <para>
-    ///         See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
+    ///         See <a href="https://www.rssboard.org/trackback">https://www.rssboard.org/trackback</a> for
     ///         further information about the auto-discovery of Trackback ping URLs.
     ///     </para>
     ///     <para>
@@ -1203,8 +1264,8 @@ public static partial class SyndicationDiscoveryUtility
     ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<IList<TrackbackDiscoveryMetadata>> LocateTrackbackNotificationServersAsync(
         Uri uri,

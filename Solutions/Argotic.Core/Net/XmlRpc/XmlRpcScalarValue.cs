@@ -9,6 +9,12 @@ namespace Argotic.Net;
 /// <summary>
 /// Represents a scalar remote procedure parameter value.
 /// </summary>
+/// <remarks>
+///     The leaf of the value tree: one of the seven types <see cref="XmlRpcScalarValueType"/> names, or
+///     an untyped string. <see cref="Value"/> is <see cref="object"/> and <see cref="ValueType"/> is set
+///     independently of it, so the pair can be made inconsistent; the typed constructors set both
+///     together and are the way to avoid it.
+/// </remarks>
 /// <seealso cref="XmlRpcMessage.Parameters"/>
 /// <seealso cref="IXmlRpcValue"/>
 public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, IEquatable<XmlRpcScalarValue>, IComparisonOperators
@@ -28,7 +34,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.Base64"/>,
     ///     and sets the <see cref="Value"/> property using the supplied <paramref name="value"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is <see langword="null"/>.</exception>
     public XmlRpcScalarValue(byte[] value)
     {
         ArgumentNullException.ThrowIfNull(value);
@@ -54,10 +60,13 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class using the specified instance in time.
     /// </summary>
-    /// <param name="value">A <see cref="DateTime"/>, provided in Coordinated Universal Time (UTC).</param>
+    /// <param name="value">The instant. Give it a <see cref="DateTimeKind"/> you mean: a <see cref="DateTimeKind.Local"/> value is written with its numeric offset, and anything else — <see cref="DateTimeKind.Utc"/> and <see cref="DateTimeKind.Unspecified"/> alike — is written with a <c>Z</c>. An <see cref="DateTimeKind.Unspecified"/> local time is therefore published as UTC, silently.</param>
     /// <remarks>
     ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.DateTime"/>,
     ///     and sets the <see cref="Value"/> property using the supplied <paramref name="value"/>.
+    ///     Despite the element being named <c>dateTime.iso8601</c>, what is written is
+    ///     <a href="https://www.rfc-editor.org/rfc/rfc3339.html">RFC 3339</a> — a deliberate departure,
+    ///     because that is what live servers emit despite the name, and it is what the reader tries first.
     /// </remarks>
     public XmlRpcScalarValue(DateTime value)
     {
@@ -110,11 +119,17 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <summary>
     /// Gets or sets the value of this parameter.
     /// </summary>
-    /// <value>A <see cref="object"/> that represents the value of this parameter.</value>
+    /// <value>
+    ///     The value, boxed. The default value is <see langword="null"/>; the setter refuses to restore
+    ///     it, so <see langword="null"/> means only "never set".
+    /// </value>
     /// <remarks>
-    ///     <para>The <paramref name="value"/> should represent a <see cref="Type"/> that is appropriate for this parameter's <see cref="ValueType"/>.</para>
+    ///     The runtime type is not checked against <see cref="ValueType"/> here — it is checked when the
+    ///     value is written, by <see cref="Convert"/>, and a mismatch surfaces there as an
+    ///     <see cref="InvalidCastException"/> or <see cref="FormatException"/> from
+    ///     <see cref="WriteTo(XmlWriter)"/> rather than from the assignment that caused it.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public object? Value
     {
         get;
@@ -130,11 +145,16 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// Gets or sets the type of scalar value this parameter represents.
     /// </summary>
     /// <value>
-    ///     A <see cref="XmlRpcScalarValueType"/> enumeration value that indicates the type of scalar value this parameter represents.
-    ///     The default value is <see cref="XmlRpcScalarValueType.None"/>, which indicates that no type was specified.
+    ///     The scalar type. The default value is <see cref="XmlRpcScalarValueType.None"/>, meaning the
+    ///     element carried no type designator.
     /// </value>
     /// <remarks>
-    ///     <para>If no type is indicated, the type is assumed to be <see cref="XmlRpcScalarValueType.String"/>.</para>
+    ///     <see cref="XmlRpcScalarValueType.None"/> is not the same as
+    ///     <see cref="XmlRpcScalarValueType.String"/>, even though the specification says an untyped
+    ///     value is a string. <see cref="WriteTo(XmlWriter)"/> writes a bare
+    ///     <c>&lt;value&gt;text&lt;/value&gt;</c> for <c>None</c> and wraps the text in
+    ///     <c>&lt;string&gt;</c> otherwise, so keeping the distinction is what lets an untyped value
+    ///     round-trip as the untyped value it arrived as.
     /// </remarks>
     /// <seealso cref="XmlRpcClient.ScalarTypeAsString(XmlRpcScalarValueType)"/>
     /// <seealso cref="XmlRpcClient.ScalarTypeByName(string)"/>
@@ -144,11 +164,11 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// Loads this <see cref="XmlRpcScalarValue"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="XmlRpcScalarValue"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="XmlRpcScalarValue"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="XmlRpcScalarValue"/>.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -201,7 +221,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// Saves the current <see cref="XmlRpcScalarValue"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -225,9 +245,10 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcScalarValue"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcScalarValue"/>.</returns>
+    /// <returns>The <c>&lt;value&gt;</c> XML for the current instance, written as a fragment — no XML declaration.</returns>
     /// <remarks>
-    ///     This method returns the XML representation for the current instance.
+    ///     This is also the basis of equality and ordering for the type: <see cref="CompareTo"/> works
+    ///     from this string, so a value's declared type is part of what makes it equal to another.
     /// </remarks>
     public override string ToString()
     {
@@ -266,7 +287,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// Determines whether the specified <see cref="XmlRpcScalarValue"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="XmlRpcScalarValue"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="XmlRpcScalarValue"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="XmlRpcScalarValue"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(XmlRpcScalarValue? other)
     {
         if (other is null)
@@ -281,7 +302,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is XmlRpcScalarValue other && this.Equals(other);
 
     /// <summary>
@@ -295,7 +316,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(XmlRpcScalarValue? first, XmlRpcScalarValue? second)
     {
         if (first is null) return second is null;
@@ -307,7 +328,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(XmlRpcScalarValue? first, XmlRpcScalarValue? second) => !(first == second);
 
     /// <summary>
@@ -316,8 +337,8 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <param name="type">The <see cref="XmlRpcScalarValueType"/> that indicates the expected data type for the scalar value.</param>
     /// <param name="scalar">The string representation of the scalar value.</param>
     /// <returns>An <see cref="object"/> that represents the converted value for the specified <paramref name="type"/> and <paramref name="scalar"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="scalar"/> is an empty string.</exception>
     private static object StringAsValue(XmlRpcScalarValueType type, string scalar)
     {
         ArgumentException.ThrowIfNullOrEmpty(scalar);

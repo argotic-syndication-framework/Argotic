@@ -12,13 +12,30 @@ namespace Argotic.Data.Adapters;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="Atom03SyndicationResourceAdapter"/> serves as a bridge between an <see cref="AtomFeed"/> or <see cref="AtomEntry"/> and an XML data source.
-///         The <see cref="Atom03SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(AtomFeed)"/> or <see cref="Fill(AtomEntry)"/>, which changes the data
-///         in the <see cref="AtomFeed"/> or <see cref="AtomEntry"/> to match the data in the data source.
+///     <b>Atom 0.3 is not an earlier draft of Atom 1.0; it is a different format that lost.</b> It is an
+///     IETF-era snapshot that never became an RFC, in namespace <c>http://purl.org/atom/ns#</c>, and
+///     RFC 4287 renamed much of it. The renames are the whole reason this adapter exists:
 ///     </para>
 ///     <para>
-///         This syndication resource adapter is designed to fill <see cref="AtomFeed"/> or <see cref="AtomEntry"/> objects using
-///         a <see cref="XPathNavigator"/> that represents XML data that conforms to the Atom 0.3 specification.</para>
+///     <c>modified</c> became <c>updated</c>; <c>issued</c> became <c>published</c>; <c>tagline</c> became
+///     <c>subtitle</c>; <c>copyright</c> became <c>rights</c>; and a person's <c>url</c> became <c>uri</c>.
+///     None of these are read by <see cref="Atom10SyndicationResourceAdapter"/>, and none of the 1.0 names
+///     are read here. Atom 0.3 also has no <c>category</c>, no <c>icon</c> and no <c>logo</c> — which is why
+///     the collection walk below reads three element types where the 1.0 one reads five.
+///     </para>
+///     <para>
+///     <b>Text is typed by <c>mode</c>, not by <c>type</c>.</b> Atom 1.0 says <c>type="text|html|xhtml"</c>;
+///     0.3 says <c>mode="xml|escaped|base64"</c> with a separate MIME <c>type</c> beside it.
+///     <c>CreateTextContent</c> maps <c>escaped</c> to <see cref="AtomTextConstructType.Html"/>, <c>xml</c>
+///     to <see cref="AtomTextConstructType.Xhtml"/>, and everything else — including <c>base64</c> — to
+///     <see cref="AtomTextConstructType.Text"/>. <b>Base64 content is not decoded</b>: it is stored exactly
+///     as the document spelled it, and a caller that wants the bytes must decode them.
+///     </para>
+///     <para>
+///     Because 0.3 predates RFC 4287's stricter model, the walk is written to salvage rather than to
+///     validate: an <c>xml</c>-mode construct falls back to the element's own text when no <c>xhtml:div</c>
+///     is found, a date that will not parse leaves the property at its default, and no element is required.
+///     </para>
 /// </remarks>
 public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 {
@@ -30,18 +47,32 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <remarks>
     ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="AtomFeed"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public Atom03SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
     /// <summary>
-    /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
+    /// Creates a namespace manager binding <c>atom</c> to the Atom 0.3 namespace and <c>xhtml</c> to XHTML.
     /// </summary>
     /// <param name="nameTable">The table of atomized string objects.</param>
-    /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
+    /// <returns>A manager resolving <c>atom</c> to <c>http://purl.org/atom/ns#</c> and <c>xhtml</c> to the XHTML namespace.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     This exists because <c>AtomUtility.CreateNamespaceManager</c> binds <c>atom</c> to the Atom
+    ///     <i>1.0</i> namespace. Selection matches on the resolved namespace URI, so a manager built there
+    ///     resolves nothing in an Atom 0.3 document.
+    ///     </para>
+    ///     <para>
+    ///     The <c>DefaultNamespace</c> ternary is inherited from the 1.0 helper and never takes its first
+    ///     branch: a <see cref="XmlNamespaceManager"/> built from a name table alone has no default
+    ///     namespace, and the property is documented to return an empty string when there is none. The
+    ///     constant is what binds, which is the behaviour that is wanted — binding whatever the document
+    ///     declared would make a feed in some other namespace parse as though it were Atom 0.3.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is <see langword="null"/>.</exception>
     protected static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);
@@ -54,10 +85,17 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="AtomEntry"/> to match the data source.
+    /// Fills the entry from the <c>entry</c> root of a stand-alone entry document.
     /// </summary>
     /// <param name="resource">The <see cref="AtomEntry"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     The <c>entry</c> elements <i>inside</i> a feed document take the same private walk, reached from
+    ///     <see cref="Fill(AtomFeed)"/>. Note that the namespace manager here is built by
+    ///     <c>AtomUtility</c> and not by this class's own <see cref="CreateNamespaceManager"/>, so the
+    ///     prefix it binds is not the one <see cref="Fill(AtomFeed)"/> binds.
+    /// </remarks>
+    /// <exception cref="FormatException">No <c>entry</c> root was found in the namespace the manager binds.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(AtomEntry resource)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -75,10 +113,16 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="AtomFeed"/> to match the data source.
+    /// Fills the feed from the <c>feed</c> root: its common attributes, its <c>id</c>, <c>title</c> and <c>modified</c>, then its optional elements, its collections including every entry, and its syndication extensions.
     /// </summary>
     /// <param name="resource">The <see cref="AtomFeed"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     <c>modified</c>, not <c>updated</c> — Atom 0.3's spelling — read into
+    ///     <see cref="AtomFeed.UpdatedOn"/> because that is the property RFC 4287's name maps to. Its value
+    ///     is parsed as RFC 3339, which Atom 0.3 already required.
+    /// </remarks>
+    /// <exception cref="FormatException">The document has no <c>feed</c> root — most often because it is a stand-alone entry document.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(AtomFeed resource)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -125,18 +169,28 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Creates a <see cref="AtomContent"/> using the supplied <see cref="XPathNavigator"/>.
+    /// Reads an Atom 0.3 <c>content</c> element into an <see cref="AtomContent"/>, unwrapping the <c>xhtml:div</c> when the element is in <c>xml</c> mode.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill operation.</param>
     /// <returns>A <see cref="AtomContent"/> instance initialized using the supplied <paramref name="source"/>.</returns>
     /// <remarks>
+    ///     <para>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a Atom 0.3 Content construct.
+    ///     </para>
+    ///     <para>
+    ///     Atom 0.3 carries two attributes where Atom 1.0 carries one: <c>type</c> is a MIME media type and
+    ///     goes to <see cref="AtomContent.ContentType"/>, while <c>mode</c> says how the payload is encoded
+    ///     and is used only to decide how to read it. In <c>xml</c> mode the content is the text of the
+    ///     <c>xhtml:div</c> wrapper, with the element's own text as the fallback when there is no wrapper —
+    ///     0.3-era publishers did not reliably emit one. In any other mode, including <c>base64</c>, the
+    ///     element's text is taken verbatim and <b>not decoded</b>.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static AtomContent CreateContent(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         AtomContent content = new();
@@ -183,18 +237,24 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Creates a <see cref="AtomGenerator"/> using the supplied <see cref="XPathNavigator"/>.
+    /// Reads an Atom 0.3 <c>generator</c> element — its <c>url</c> and <c>version</c> attributes and its text — into an <see cref="AtomGenerator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill operation.</param>
     /// <returns>A <see cref="AtomGenerator"/> instance initialized using the supplied <paramref name="source"/>.</returns>
     /// <remarks>
+    ///     <para>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a Atom 0.3 generator element.
+    ///     </para>
+    ///     <para>
+    ///     The attribute is <c>url</c>; RFC 4287 renamed it <c>uri</c>. Both land on
+    ///     <see cref="AtomGenerator.Uri"/>, so the difference is invisible downstream and visible only here.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static AtomGenerator CreateGenerator(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         AtomGenerator generator = new();
@@ -236,18 +296,24 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Creates a <see cref="AtomPersonConstruct"/> using the supplied <see cref="XPathNavigator"/>.
+    /// Reads an Atom 0.3 Person construct — <c>name</c>, <c>url</c> and <c>email</c> — into an <see cref="AtomPersonConstruct"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill operation.</param>
     /// <returns>A <see cref="AtomPersonConstruct"/> instance initialized using the supplied <paramref name="source"/>.</returns>
     /// <remarks>
+    ///     <para>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a Atom 0.3 Person construct.
+    ///     </para>
+    ///     <para>
+    ///     The child is <c>url</c>, which RFC 4287 renamed <c>uri</c>. Nothing else in the construct changed,
+    ///     which is why the whole method exists to read one differently-spelled element.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static AtomPersonConstruct CreatePerson(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         AtomPersonConstruct person = new();
@@ -287,18 +353,30 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Creates a <see cref="AtomTextConstruct"/> using the supplied <see cref="XPathNavigator"/>.
+    /// Reads an Atom 0.3 Text construct, mapping its <c>mode</c> attribute onto <see cref="AtomTextConstructType"/> and unwrapping the <c>xhtml:div</c> where there is one.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill operation.</param>
     /// <returns>A <see cref="AtomTextConstruct"/> instance initialized using the supplied <paramref name="source"/>.</returns>
     /// <remarks>
+    ///     <para>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a Atom 0.3 Content construct.
+    ///     </para>
+    ///     <para>
+    ///     The mapping is <c>escaped</c> to <see cref="AtomTextConstructType.Html"/>, <c>xml</c> to
+    ///     <see cref="AtomTextConstructType.Xhtml"/>, and anything else — <c>base64</c>, an unrecognised
+    ///     value, or no <c>mode</c> at all — to <see cref="AtomTextConstructType.Text"/>. Base64 payloads are
+    ///     therefore labelled as plain text and left encoded, which is lossless but not what the label says.
+    ///     </para>
+    ///     <para>
+    ///     Only the <c>xhtml</c> mapping changes how the value is read: it takes the <c>xhtml:div</c>'s text,
+    ///     falling back to the element's own text when the wrapper is missing.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static AtomTextConstruct CreateTextContent(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         AtomTextConstruct content = new();
@@ -357,7 +435,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="AtomEntry"/> to match the supplied <see cref="XPathNavigator"/> data source.
+    /// Reads one Atom 0.3 <c>entry</c> subtree in full: common attributes, <c>id</c>, <c>title</c>, <c>modified</c>, the optional elements, the collections, and the entry's own syndication extensions.
     /// </summary>
     /// <param name="entry">The <see cref="AtomEntry"/> to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
@@ -366,10 +444,10 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents an Atom 0.3 element.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static void FillEntry(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(entry);
@@ -410,19 +488,26 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="AtomEntry"/> collection entities to match the supplied <see cref="XPathNavigator"/> data source.
+    /// Reads the repeatable children of an Atom 0.3 <c>entry</c> — <c>author</c>, <c>contributor</c> and <c>link</c>.
     /// </summary>
     /// <param name="entry">The <see cref="AtomEntry"/> to be filled.</param>
+    /// <remarks>
+    ///     Three, where the Atom 1.0 walk reads four: 0.3 has no <c>category</c> element, so
+    ///     <see cref="AtomEntry.Categories"/> is always empty on this path. Persons go through
+    ///     <c>CreatePerson</c> and are added unconditionally, while links go through
+    ///     <see cref="AtomLink"/>'s own loader and are added only when it reports success — a difference in
+    ///     strictness between two adjacent loops in the same method.
+    /// </remarks>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill operation.</param>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents an Atom 0.3 element.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static void FillEntryCollections(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(entry);
@@ -484,7 +569,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="AtomEntry"/> optional entities to match the supplied <see cref="XPathNavigator"/> data source.
+    /// Reads the single-valued optional children of an Atom 0.3 <c>entry</c> — <c>content</c>, <c>summary</c>, and the publication date from <c>issued</c> or, failing that, <c>created</c>.
     /// </summary>
     /// <param name="entry">The <see cref="AtomEntry"/> to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
@@ -493,10 +578,10 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents an Atom 0.3 element.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static void FillEntryOptionals(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(entry);
@@ -537,19 +622,29 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="AtomFeed"/> collection entities to match the supplied <see cref="XPathNavigator"/> data source.
+    /// Reads the repeatable children of an Atom 0.3 <c>feed</c> — <c>author</c>, <c>contributor</c>, <c>link</c> and <c>entry</c> — recursing into each entry's own subtree and extensions.
     /// </summary>
     /// <param name="feed">The <see cref="AtomFeed"/> to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill operation.</param>
     /// <remarks>
+    ///     <para>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomFeed"/>.
+    ///     </para>
+    ///     <para>
+    ///     No <c>category</c>: Atom 0.3 has none, and subject terms in 0.3-era feeds arrive instead through
+    ///     Dublin Core, as syndication extensions.
+    ///     </para>
+    ///     <para>
+    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested after <c>FillEntry</c> has
+    ///     run, so the entry that trips the limit is parsed in full and then discarded.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static void FillFeedCollections(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(feed);
@@ -637,19 +732,27 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="AtomFeed"/> optional entities to match the supplied <see cref="XPathNavigator"/> data source.
+    /// Reads the three optional feed-level elements Atom 0.3 defines — <c>generator</c>, <c>copyright</c> and <c>tagline</c>.
     /// </summary>
     /// <param name="feed">The <see cref="AtomFeed"/> to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill operation.</param>
     /// <remarks>
+    ///     <para>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomFeed"/>.
+    ///     </para>
+    ///     <para>
+    ///     Two of the three are renames rather than new properties: <c>copyright</c> fills
+    ///     <see cref="AtomFeed.Rights"/> and <c>tagline</c> fills <see cref="AtomFeed.Subtitle"/>, which are
+    ///     the RFC 4287 names for the same things. There is no <c>icon</c> and no <c>logo</c> in Atom 0.3,
+    ///     so those properties stay null on this path.
+    ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     private static void FillFeedOptionals(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(feed);

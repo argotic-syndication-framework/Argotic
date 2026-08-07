@@ -3,16 +3,12 @@ using Argotic.Syndication.Specialized;
 namespace Argotic.Examples.Core.Apml;
 
 /// <summary>
-/// Contains the code examples for the <see cref="ApmlApplication"/> class.
+/// Attaches opaque, application-specific data to an APML profile through <see cref="ApmlApplication"/>.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="ApmlApplication"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class ApmlApplicationExample
 {
     /// <summary>
-    /// Provides example code for the ApmlApplication class.
+    /// Builds the containing <see cref="ApmlDocument"/> and prints the <see cref="ApmlApplication"/> it holds.
     /// </summary>
     public static void ClassExample()
     {

@@ -3,11 +3,22 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
+/// <summary>
+/// Covers <see cref="DiscoverableSyndicationEndpoint"/>: the record an autodiscovery <c>link</c>
+/// element becomes, the guards on its properties, the content type to format mapping, and its
+/// ordering and equality.
+/// </summary>
 [TestClass]
 public class DiscoverableSyndicationEndpointTests
 {
+    /// <summary>
+    /// Gets or sets the test context supplied by MSTest.
+    /// </summary>
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// A default-constructed endpoint has an empty title and content type, and no source.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_CreatesInstance()
     {
@@ -21,6 +32,9 @@ public class DiscoverableSyndicationEndpointTests
         endpoint.Source.ShouldBeNull();
     }
 
+    /// <summary>
+    /// Constructing with a source and a content type leaves the title an empty string.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithSourceAndContentType_SetsProperties()
     {
@@ -37,6 +51,9 @@ public class DiscoverableSyndicationEndpointTests
         endpoint.Title.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// Constructing with a title carries all three values through unchanged.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithSourceContentTypeAndTitle_SetsProperties()
     {
@@ -54,11 +71,17 @@ public class DiscoverableSyndicationEndpointTests
         endpoint.Title.ShouldBe(title);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> source is refused at construction.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullSource_ThrowsArgumentNullException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentNullException>(() => new DiscoverableSyndicationEndpoint(null!, "application/rss+xml"));
 
+    /// <summary>
+    /// A <see langword="null"/> content type is refused at construction.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullContentType_ThrowsArgumentException()
     {
@@ -69,6 +92,9 @@ public class DiscoverableSyndicationEndpointTests
         Should.Throw<ArgumentException>(() => new DiscoverableSyndicationEndpoint(source, null!));
     }
 
+    /// <summary>
+    /// An empty content type is refused at construction.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithEmptyContentType_ThrowsArgumentException()
     {
@@ -79,6 +105,9 @@ public class DiscoverableSyndicationEndpointTests
         Should.Throw<ArgumentException>(() => new DiscoverableSyndicationEndpoint(source, string.Empty));
     }
 
+    /// <summary>
+    /// The content type can be replaced after construction.
+    /// </summary>
     [TestMethod]
     public void ContentType_Set_SetsValue()
     {
@@ -92,6 +121,9 @@ public class DiscoverableSyndicationEndpointTests
         endpoint.ContentType.ShouldBe("application/atom+xml");
     }
 
+    /// <summary>
+    /// Surrounding whitespace is trimmed from an assigned content type.
+    /// </summary>
     [TestMethod]
     public void ContentType_SetWithWhitespace_TrimsValue()
     {
@@ -105,6 +137,9 @@ public class DiscoverableSyndicationEndpointTests
         endpoint.ContentType.ShouldBe("application/atom+xml");
     }
 
+    /// <summary>
+    /// A <see langword="null"/> content type is refused by the setter.
+    /// </summary>
     [TestMethod]
     public void ContentType_SetNull_ThrowsArgumentException()
     {
@@ -115,6 +150,9 @@ public class DiscoverableSyndicationEndpointTests
         Should.Throw<ArgumentException>(() => endpoint.ContentType = null!);
     }
 
+    /// <summary>
+    /// An empty content type is refused by the setter.
+    /// </summary>
     [TestMethod]
     public void ContentType_SetEmpty_ThrowsArgumentException()
     {
@@ -125,6 +163,9 @@ public class DiscoverableSyndicationEndpointTests
         Should.Throw<ArgumentException>(() => endpoint.ContentType = string.Empty);
     }
 
+    /// <summary>
+    /// The endpoint address can be assigned after construction.
+    /// </summary>
     [TestMethod]
     public void Source_Set_SetsValue()
     {
@@ -139,6 +180,9 @@ public class DiscoverableSyndicationEndpointTests
         endpoint.Source.ShouldBe(source);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> source is refused by the setter rather than clearing the address.
+    /// </summary>
     [TestMethod]
     public void Source_SetNull_ThrowsArgumentNullException()
     {
@@ -149,6 +193,9 @@ public class DiscoverableSyndicationEndpointTests
         Should.Throw<ArgumentNullException>(() => endpoint.Source = null!);
     }
 
+    /// <summary>
+    /// The title can be assigned after construction.
+    /// </summary>
     [TestMethod]
     public void Title_Set_SetsValue()
     {
@@ -162,6 +209,9 @@ public class DiscoverableSyndicationEndpointTests
         endpoint.Title.ShouldBe("Test Feed");
     }
 
+    /// <summary>
+    /// Surrounding whitespace is trimmed from an assigned title.
+    /// </summary>
     [TestMethod]
     public void Title_SetWithWhitespace_TrimsValue()
     {
@@ -175,6 +225,10 @@ public class DiscoverableSyndicationEndpointTests
         endpoint.Title.ShouldBe("Test Feed");
     }
 
+    /// <summary>
+    /// A <see langword="null"/> title clears the title to an empty string rather than throwing, unlike
+    /// the content type.
+    /// </summary>
     [TestMethod]
     public void Title_SetNull_SetsEmpty()
     {
@@ -189,6 +243,9 @@ public class DiscoverableSyndicationEndpointTests
         endpoint.Title.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// An empty title clears whatever title was there.
+    /// </summary>
     [TestMethod]
     public void Title_SetEmpty_SetsEmpty()
     {
@@ -203,6 +260,9 @@ public class DiscoverableSyndicationEndpointTests
         endpoint.Title.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// <c>application/rss+xml</c> resolves to <see cref="SyndicationContentFormat.Rss"/>.
+    /// </summary>
     [TestMethod]
     public void ContentFormat_RssContentType_ReturnsRss()
     {
@@ -218,6 +278,9 @@ public class DiscoverableSyndicationEndpointTests
         format.ShouldBe(SyndicationContentFormat.Rss);
     }
 
+    /// <summary>
+    /// <c>application/atom+xml</c> resolves to <see cref="SyndicationContentFormat.Atom"/>.
+    /// </summary>
     [TestMethod]
     public void ContentFormat_AtomContentType_ReturnsAtom()
     {
@@ -233,6 +296,10 @@ public class DiscoverableSyndicationEndpointTests
         format.ShouldBe(SyndicationContentFormat.Atom);
     }
 
+    /// <summary>
+    /// An unregistered content type resolves to <see cref="SyndicationContentFormat.None"/> rather than
+    /// throwing.
+    /// </summary>
     [TestMethod]
     public void ContentFormat_UnknownContentType_ReturnsNone()
     {
@@ -248,6 +315,10 @@ public class DiscoverableSyndicationEndpointTests
         format.ShouldBe(SyndicationContentFormat.None);
     }
 
+    /// <summary>
+    /// An endpoint with no content type set at all resolves to
+    /// <see cref="SyndicationContentFormat.None"/>.
+    /// </summary>
     [TestMethod]
     public void ContentFormat_EmptyContentType_ReturnsNone()
     {
@@ -261,6 +332,9 @@ public class DiscoverableSyndicationEndpointTests
         format.ShouldBe(SyndicationContentFormat.None);
     }
 
+    /// <summary>
+    /// <c>text/x-opml</c> resolves to <see cref="SyndicationContentFormat.Opml"/>.
+    /// </summary>
     [TestMethod]
     public void ContentFormat_OpmlContentType_ReturnsOpml()
     {
@@ -276,6 +350,10 @@ public class DiscoverableSyndicationEndpointTests
         format.ShouldBe(SyndicationContentFormat.Opml);
     }
 
+    /// <summary>
+    /// An endpoint renders as the XHTML <c>link</c> element that would declare it, always with
+    /// <c>rel="alternate"</c> and carrying the type, title and href.
+    /// </summary>
     [TestMethod]
     public void ToString_ReturnsXhtmlRepresentation()
     {
@@ -296,6 +374,9 @@ public class DiscoverableSyndicationEndpointTests
         result.ShouldContain("href=\"http://example.com/feed.rss\"");
     }
 
+    /// <summary>
+    /// Two endpoints agreeing on content type, source and title compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_EqualEndpoints_ReturnsZero()
     {
@@ -317,6 +398,9 @@ public class DiscoverableSyndicationEndpointTests
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Every endpoint sorts after <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void CompareTo_Null_ReturnsOne()
     {
@@ -332,6 +416,9 @@ public class DiscoverableSyndicationEndpointTests
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Endpoints differing in content type and source do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_DifferentEndpoint_ReturnsNonZero()
     {
@@ -350,6 +437,9 @@ public class DiscoverableSyndicationEndpointTests
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// Equality is by value across content type, source and title, not by reference.
+    /// </summary>
     [TestMethod]
     public void Equals_SameEndpoint_ReturnsTrue()
     {
@@ -368,6 +458,9 @@ public class DiscoverableSyndicationEndpointTests
         endpoint1.Equals(endpoint2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Endpoints differing only in their source are not equal.
+    /// </summary>
     [TestMethod]
     public void Equals_DifferentEndpoint_ReturnsFalse()
     {
@@ -384,6 +477,9 @@ public class DiscoverableSyndicationEndpointTests
         endpoint1.Equals(endpoint2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Comparing against an unrelated type answers <see langword="false"/> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void Equals_NonDiscoverableSyndicationEndpoint_ReturnsFalse()
     {
@@ -396,6 +492,9 @@ public class DiscoverableSyndicationEndpointTests
         endpoint.Equals("not an endpoint").ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Equal endpoints hash alike, and the hash is stable across repeated calls within a process.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_EqualEndpoints_ReturnSameValue()
     {
@@ -409,6 +508,9 @@ public class DiscoverableSyndicationEndpointTests
         first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
+    /// <summary>
+    /// <c>==</c> follows value equality.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_EqualEndpoints_ReturnsTrue()
     {
@@ -425,6 +527,9 @@ public class DiscoverableSyndicationEndpointTests
         (endpoint1 == endpoint2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> operands are equal under <c>==</c>, with neither dereferenced.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_NullOperands_ReturnsTrue()
     {
@@ -436,6 +541,9 @@ public class DiscoverableSyndicationEndpointTests
         (endpoint1 == endpoint2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>!=</c> is the negation of <c>==</c> for two differing endpoints.
+    /// </summary>
     [TestMethod]
     public void OperatorNotEquals_DifferentEndpoints_ReturnsTrue()
     {
@@ -452,6 +560,9 @@ public class DiscoverableSyndicationEndpointTests
         (endpoint1 != endpoint2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <see langword="null"/> sorts before any endpoint under <c>&lt;</c>.
+    /// </summary>
     [TestMethod]
     public void OperatorLessThan_NullFirst_ReturnsTrue()
     {
@@ -465,6 +576,9 @@ public class DiscoverableSyndicationEndpointTests
         (endpoint1 < endpoint2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <see langword="null"/> is not greater than an endpoint.
+    /// </summary>
     [TestMethod]
     public void OperatorGreaterThan_NullFirst_ReturnsFalse()
     {
@@ -478,6 +592,9 @@ public class DiscoverableSyndicationEndpointTests
         (endpoint1 > endpoint2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// <see langword="null"/> satisfies <c>&lt;=</c> against any endpoint.
+    /// </summary>
     [TestMethod]
     public void OperatorLessThanOrEqual_NullFirst_ReturnsTrue()
     {
@@ -491,6 +608,9 @@ public class DiscoverableSyndicationEndpointTests
         (endpoint1 <= endpoint2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> operands satisfy <c>&gt;=</c>.
+    /// </summary>
     [TestMethod]
     public void OperatorGreaterThanOrEqual_NullBoth_ReturnsTrue()
     {
@@ -502,6 +622,10 @@ public class DiscoverableSyndicationEndpointTests
         (endpoint1 >= endpoint2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// An endpoint with no source refuses to build a navigator rather than issuing a request.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task CreateNavigatorAsync_WithNullSource_ThrowsArgumentNullException()
     {
@@ -512,6 +636,10 @@ public class DiscoverableSyndicationEndpointTests
         await Should.ThrowAsync<ArgumentNullException>(() => endpoint.CreateNavigatorAsync());
     }
 
+    /// <summary>
+    /// A <see langword="null"/> client is refused by the overload that takes one.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task CreateNavigatorAsync_WithNullHttpClient_ThrowsArgumentNullException()
     {
@@ -589,6 +717,8 @@ public class DiscoverableSyndicationEndpointTests
     /// <summary>
     /// Every non-colliding content type still resolves to its own format.
     /// </summary>
+    /// <param name="contentType">The registered MIME content type to resolve.</param>
+    /// <param name="expected">The single format that content type is claimed by.</param>
     /// <remarks>
     ///     The guard on the tie-break. Making one of two colliding entries win deliberately is only
     ///     correct if it leaves the other thirteen mappings alone, and a change to how the table is built

@@ -9,7 +9,7 @@ namespace Argotic.Benchmarks;
 /// <remarks>
 /// <para>
 /// Two provenances, deliberately. Synthetic documents are the only way to get a scaling curve —
-/// the repository's real sample documents are all small (15 files, 59.8 KiB total) and cannot show
+/// the repository's real sample documents are all small (15 files, 60.3 KiB total) and cannot show
 /// how cost grows with feed size. Real documents are the only way to know the synthetic ones are
 /// not a fiction.
 /// </para>

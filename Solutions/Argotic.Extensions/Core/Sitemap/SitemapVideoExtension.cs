@@ -6,27 +6,22 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Extends syndication specifications to provide a means of describing videos in sitemaps.
+/// Extends a sitemap entry to describe the videos hosted on the page.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="SitemapVideoExtension"/> extends sitemap content to include video information
-///         that helps search engines discover and understand video content on your site. This syndication extension
-///         conforms to the Google Video Sitemap extension specification, which can be found at
-///         <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps">https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps</a>.
+///     Google's video sitemap extension, version 1.1, specified at
+///     <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps">https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps</a>.
+///     A page may hold several videos, and each <c>video:video</c> becomes one <see cref="SitemapVideo"/>.
 ///     </para>
 ///     <para>
-///         <b>Deprecated Elements (May 2022):</b><br/>
-///         The following elements were deprecated by Google and are intentionally not implemented:
-///         <list type="bullet">
-///             <item><c>video:price</c> - Video purchase/rental pricing</item>
-///             <item><c>video:category</c> - Video category (max 256 chars)</item>
-///             <item><c>video:gallery_loc</c> - Gallery URL with title attribute</item>
-///             <item><c>video:tvshow</c> - TV show metadata</item>
-///             <item><c>player_loc/@allow_embed</c> - Embed permission attribute</item>
-///             <item><c>player_loc/@autoplay</c> - Autoplay parameter attribute</item>
-///         </list>
-///         See <see href="https://developers.google.com/search/blog/2022/05/spring-cleaning-sitemap-extensions">Google's announcement</see>.
+///     Google withdrew a handful of the 1.1 elements on 6 August 2022; <see cref="SitemapVideo"/> names
+///     them and explains why none of them appear on it. The rest of the format is intact and current.
+///     </para>
+///     <para>
+///     The prefix is bound to <c>http://www.google.com/schemas/sitemap-video/1.1</c>, an identifier
+///     rather than an address. It stays <c>http</c>, and a sitemap declaring the <c>https</c> spelling
+///     names a different namespace that will not match.
 ///     </para>
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
@@ -49,8 +44,8 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     /// Gets the collection of videos associated with this extension.
     /// </summary>
     /// <value>
-    ///     An <see cref="IList{T}"/> collection of <see cref="SitemapVideo"/> objects that represent videos
-    ///     associated with the sitemap URL. The default value is an <i>empty</i> collection.
+    ///     A collection of <see cref="SitemapVideo"/> objects, one per video on the page. The default value
+    ///     is an <i>empty</i> collection.
     /// </value>
     public IList<SitemapVideo> Videos => extensionVideos;
 
@@ -59,8 +54,8 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
     /// </summary>
     /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -70,9 +65,9 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="SitemapVideoExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="SitemapVideoExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="SitemapVideoExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="SitemapVideoExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public override bool Load(IXPathNavigable source)
     {
         bool wasLoaded = false;
@@ -112,9 +107,9 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="SitemapVideoExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="SitemapVideoExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="SitemapVideoExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="SitemapVideoExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -126,8 +121,8 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     /// <summary>
     /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public override void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -141,10 +136,7 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SitemapVideoExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapVideoExtension"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -181,7 +173,7 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     /// Determines whether the specified <see cref="SitemapVideoExtension"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="SitemapVideoExtension"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SitemapVideoExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="SitemapVideoExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(SitemapVideoExtension? other)
     {
         if (other is null)
@@ -196,7 +188,7 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is SitemapVideoExtension other && this.Equals(other);
 
     /// <summary>
@@ -219,7 +211,7 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(SitemapVideoExtension? first, SitemapVideoExtension? second)
     {
         if (first is null) return second is null;
@@ -231,7 +223,7 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(SitemapVideoExtension? first, SitemapVideoExtension? second) => !(first == second);
 
 }

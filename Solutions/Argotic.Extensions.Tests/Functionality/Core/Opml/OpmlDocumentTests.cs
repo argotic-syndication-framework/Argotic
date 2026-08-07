@@ -4,11 +4,17 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Opml;
 
+/// <summary>
+/// Covers <see cref="OpmlDocument"/> member by member: the head, the outline tree, and a save followed by a load.
+/// </summary>
 [TestClass]
 public class OpmlDocumentTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// A newly constructed document has an outline collection, and that collection is empty.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_CreatesEmptyDocument()
     {
@@ -19,6 +25,9 @@ public class OpmlDocumentTests
         document.Outlines.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A title assigned to the head through the document initialiser is read back unchanged.
+    /// </summary>
     [TestMethod]
     public void Head_CanSetTitle()
     {
@@ -33,6 +42,9 @@ public class OpmlDocumentTests
         document.Head.Title.ShouldBe("Test OPML Document");
     }
 
+    /// <summary>
+    /// The head keeps both the creation date and the modification date it is given.
+    /// </summary>
     [TestMethod]
     public void Head_CanSetDates()
     {
@@ -52,6 +64,9 @@ public class OpmlDocumentTests
         document.Head.ModifiedOn.ShouldBe(modifiedOn);
     }
 
+    /// <summary>
+    /// An owner constructed from a name and an email address exposes both through the head.
+    /// </summary>
     [TestMethod]
     public void Head_CanSetOwner()
     {
@@ -67,6 +82,9 @@ public class OpmlDocumentTests
         document.Head.Owner.EmailAddress.ShouldBe("john@example.com");
     }
 
+    /// <summary>
+    /// An outline added to the document appears in the outline collection with its text intact.
+    /// </summary>
     [TestMethod]
     public void AddOutline_AddsOutlineCorrectly()
     {
@@ -79,6 +97,9 @@ public class OpmlDocumentTests
         document.Outlines.First().Text.ShouldBe("Test Outline");
     }
 
+    /// <summary>
+    /// An outline holds its child outlines in the order they were added.
+    /// </summary>
     [TestMethod]
     public void Outline_CanHaveNestedOutlines()
     {
@@ -94,6 +115,9 @@ public class OpmlDocumentTests
         document.Outlines.First().Outlines[1].Text.ShouldBe("Child 2");
     }
 
+    /// <summary>
+    /// An outline built from a feed address carries the text it was given and reports itself as a subscription list.
+    /// </summary>
     [TestMethod]
     public void CreateSubscriptionListOutline_CreatesCorrectOutline()
     {
@@ -106,6 +130,9 @@ public class OpmlDocumentTests
         outline.IsSubscriptionListOutline.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Loading a minimal OPML 2.0 stream populates the head title and the single outline in the body.
+    /// </summary>
     [TestMethod]
     public void Load_MinimalOpml_LoadsCorrectly()
     {
@@ -118,6 +145,10 @@ public class OpmlDocumentTests
         document.Outlines.First().Text.ShouldBe("Test Outline");
     }
 
+    /// <summary>
+    /// Saving writes an XML declaration and the <c>opml</c>, <c>head</c>,
+    /// <c>title</c>, <c>body</c> and <c>outline</c> elements.
+    /// </summary>
     [TestMethod]
     public void Save_ProducesValidXml()
     {
@@ -146,6 +177,9 @@ public class OpmlDocumentTests
         xml.ShouldContain("<outline");
     }
 
+    /// <summary>
+    /// A document saved to a stream and loaded back keeps its head title and its outline count.
+    /// </summary>
     [TestMethod]
     public void RoundTrip_SaveAndLoad_PreservesData()
     {

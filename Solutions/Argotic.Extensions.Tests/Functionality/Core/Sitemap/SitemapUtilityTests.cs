@@ -5,13 +5,18 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 
 /// <summary>
-/// Unit tests for <see cref="SitemapUtility"/>.
+/// Covers <see cref="SitemapUtility"/>: the change-frequency vocabulary in both directions, priority
+/// parsing and its range check, the namespace every sitemap XPath query resolves against, and the
+/// numbering of <see cref="SitemapChangeFrequency"/>.
 /// </summary>
 [TestClass]
 public class SitemapUtilityTests
 {
     #region ChangeFrequencyAsString Tests
 
+    /// <summary>
+    /// <see cref="SitemapChangeFrequency.Always"/> writes as the token <c>always</c>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyAsString_Always_ReturnsAlways()
     {
@@ -22,6 +27,9 @@ public class SitemapUtilityTests
         result.ShouldBe("always");
     }
 
+    /// <summary>
+    /// <see cref="SitemapChangeFrequency.Hourly"/> writes as the token <c>hourly</c>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyAsString_Hourly_ReturnsHourly()
     {
@@ -32,6 +40,9 @@ public class SitemapUtilityTests
         result.ShouldBe("hourly");
     }
 
+    /// <summary>
+    /// <see cref="SitemapChangeFrequency.Daily"/> writes as the token <c>daily</c>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyAsString_Daily_ReturnsDaily()
     {
@@ -42,6 +53,9 @@ public class SitemapUtilityTests
         result.ShouldBe("daily");
     }
 
+    /// <summary>
+    /// <see cref="SitemapChangeFrequency.Weekly"/> writes as the token <c>weekly</c>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyAsString_Weekly_ReturnsWeekly()
     {
@@ -52,6 +66,9 @@ public class SitemapUtilityTests
         result.ShouldBe("weekly");
     }
 
+    /// <summary>
+    /// <see cref="SitemapChangeFrequency.Monthly"/> writes as the token <c>monthly</c>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyAsString_Monthly_ReturnsMonthly()
     {
@@ -62,6 +79,9 @@ public class SitemapUtilityTests
         result.ShouldBe("monthly");
     }
 
+    /// <summary>
+    /// <see cref="SitemapChangeFrequency.Yearly"/> writes as the token <c>yearly</c>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyAsString_Yearly_ReturnsYearly()
     {
@@ -72,6 +92,9 @@ public class SitemapUtilityTests
         result.ShouldBe("yearly");
     }
 
+    /// <summary>
+    /// <see cref="SitemapChangeFrequency.Never"/> writes as the token <c>never</c>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyAsString_Never_ReturnsNever()
     {
@@ -82,6 +105,14 @@ public class SitemapUtilityTests
         result.ShouldBe("never");
     }
 
+    /// <summary>
+    /// A value outside the defined set — only an out-of-range cast can produce one — writes as an
+    /// <i>empty</i> string.
+    /// </summary>
+    /// <remarks>
+    ///     The alternative would be to write the number, which would put a token in the document that the
+    ///     protocol does not define and that no consumer could read back.
+    /// </remarks>
     [TestMethod]
     public void ChangeFrequencyAsString_InvalidValue_ReturnsEmptyString()
     {
@@ -96,6 +127,9 @@ public class SitemapUtilityTests
 
     #region ChangeFrequencyByName Tests
 
+    /// <summary>
+    /// The token <c>always</c> reads back as <see cref="SitemapChangeFrequency.Always"/>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyByName_Always_ReturnsAlways()
     {
@@ -106,6 +140,9 @@ public class SitemapUtilityTests
         result.ShouldBe(SitemapChangeFrequency.Always);
     }
 
+    /// <summary>
+    /// The token <c>hourly</c> reads back as <see cref="SitemapChangeFrequency.Hourly"/>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyByName_Hourly_ReturnsHourly()
     {
@@ -116,6 +153,9 @@ public class SitemapUtilityTests
         result.ShouldBe(SitemapChangeFrequency.Hourly);
     }
 
+    /// <summary>
+    /// The token <c>daily</c> reads back as <see cref="SitemapChangeFrequency.Daily"/>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyByName_Daily_ReturnsDaily()
     {
@@ -126,6 +166,9 @@ public class SitemapUtilityTests
         result.ShouldBe(SitemapChangeFrequency.Daily);
     }
 
+    /// <summary>
+    /// The token <c>weekly</c> reads back as <see cref="SitemapChangeFrequency.Weekly"/>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyByName_Weekly_ReturnsWeekly()
     {
@@ -136,6 +179,9 @@ public class SitemapUtilityTests
         result.ShouldBe(SitemapChangeFrequency.Weekly);
     }
 
+    /// <summary>
+    /// The token <c>monthly</c> reads back as <see cref="SitemapChangeFrequency.Monthly"/>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyByName_Monthly_ReturnsMonthly()
     {
@@ -146,6 +192,9 @@ public class SitemapUtilityTests
         result.ShouldBe(SitemapChangeFrequency.Monthly);
     }
 
+    /// <summary>
+    /// The token <c>yearly</c> reads back as <see cref="SitemapChangeFrequency.Yearly"/>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyByName_Yearly_ReturnsYearly()
     {
@@ -156,6 +205,9 @@ public class SitemapUtilityTests
         result.ShouldBe(SitemapChangeFrequency.Yearly);
     }
 
+    /// <summary>
+    /// The token <c>never</c> reads back as <see cref="SitemapChangeFrequency.Never"/>.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyByName_Never_ReturnsNever()
     {
@@ -166,6 +218,9 @@ public class SitemapUtilityTests
         result.ShouldBe(SitemapChangeFrequency.Never);
     }
 
+    /// <summary>
+    /// Casing is irrelevant: <c>ALWAYS</c>, <c>Daily</c> and <c>WEEKLY</c> all resolve.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyByName_CaseInsensitive_ReturnsCorrectValue()
     {
@@ -175,6 +230,9 @@ public class SitemapUtilityTests
         SitemapUtility.ChangeFrequencyByName("WEEKLY").ShouldBe(SitemapChangeFrequency.Weekly);
     }
 
+    /// <summary>
+    /// Surrounding whitespace is trimmed before the token is matched.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyByName_WithWhitespace_TrimsAndReturnsCorrectValue()
     {
@@ -185,6 +243,14 @@ public class SitemapUtilityTests
         result.ShouldBe(SitemapChangeFrequency.Daily);
     }
 
+    /// <summary>
+    /// An unrecognised token falls back to <see cref="SitemapChangeFrequency.Daily"/>.
+    /// </summary>
+    /// <remarks>
+    ///     The fallback is indistinguishable from a genuine <c>daily</c>, which is why
+    ///     <c>TryParseChangeFrequency</c> exists: this overload cannot tell a caller that the input was
+    ///     not a protocol token.
+    /// </remarks>
     [TestMethod]
     public void ChangeFrequencyByName_InvalidValue_ReturnsDaily()
     {
@@ -195,11 +261,19 @@ public class SitemapUtilityTests
         result.ShouldBe(SitemapChangeFrequency.Daily);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> name is rejected rather than falling back; the guard is
+    /// <c>ArgumentException.ThrowIfNullOrEmpty</c>, so what surfaces is its
+    /// <see cref="ArgumentNullException"/> branch.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyByName_NullValue_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentException>(() => SitemapUtility.ChangeFrequencyByName(null!));
 
+    /// <summary>
+    /// An <i>empty</i> name throws <see cref="ArgumentException"/> rather than falling back.
+    /// </summary>
     [TestMethod]
     public void ChangeFrequencyByName_EmptyValue_ThrowsArgumentException() =>
         // Act & Assert
@@ -209,6 +283,10 @@ public class SitemapUtilityTests
 
     #region TryParseChangeFrequency Tests
 
+    /// <summary>
+    /// <c>daily</c> parses, reporting <see langword="true"/> and yielding
+    /// <see cref="SitemapChangeFrequency.Daily"/>.
+    /// </summary>
     [TestMethod]
     public void TryParseChangeFrequency_ValidValue_ReturnsTrueAndParsesCorrectly()
     {
@@ -220,6 +298,9 @@ public class SitemapUtilityTests
         frequency.ShouldBe(SitemapChangeFrequency.Daily);
     }
 
+    /// <summary>
+    /// All seven tokens the protocol defines parse to their matching member.
+    /// </summary>
     [TestMethod]
     public void TryParseChangeFrequency_AllValidValues_ReturnsTrueForEach()
     {
@@ -246,6 +327,10 @@ public class SitemapUtilityTests
         }
     }
 
+    /// <summary>
+    /// A <see langword="null"/> token reports <see langword="false"/> and leaves the out parameter at
+    /// <see cref="SitemapChangeFrequency.Daily"/>, the documented failure value.
+    /// </summary>
     [TestMethod]
     public void TryParseChangeFrequency_NullValue_ReturnsFalse()
     {
@@ -257,6 +342,9 @@ public class SitemapUtilityTests
         frequency.ShouldBe(SitemapChangeFrequency.Daily);
     }
 
+    /// <summary>
+    /// An <i>empty</i> token reports <see langword="false"/> and leaves the same <c>daily</c> failure value.
+    /// </summary>
     [TestMethod]
     public void TryParseChangeFrequency_EmptyValue_ReturnsFalse()
     {
@@ -268,6 +356,10 @@ public class SitemapUtilityTests
         frequency.ShouldBe(SitemapChangeFrequency.Daily);
     }
 
+    /// <summary>
+    /// <c>biweekly</c> is not a protocol token: it reports <see langword="false"/> and leaves the
+    /// <c>daily</c> failure value.
+    /// </summary>
     [TestMethod]
     public void TryParseChangeFrequency_InvalidValue_ReturnsFalse()
     {
@@ -279,6 +371,9 @@ public class SitemapUtilityTests
         frequency.ShouldBe(SitemapChangeFrequency.Daily);
     }
 
+    /// <summary>
+    /// <c>MONTHLY</c> in upper case parses to <see cref="SitemapChangeFrequency.Monthly"/>.
+    /// </summary>
     [TestMethod]
     public void TryParseChangeFrequency_CaseInsensitive_ReturnsTrueAndParsesCorrectly()
     {
@@ -294,6 +389,9 @@ public class SitemapUtilityTests
 
     #region TryParsePriority Tests
 
+    /// <summary>
+    /// <c>0.8</c> parses to <c>0.8</c>.
+    /// </summary>
     [TestMethod]
     public void TryParsePriority_ValidValue_ReturnsTrueAndParsesCorrectly()
     {
@@ -305,6 +403,9 @@ public class SitemapUtilityTests
         priority.ShouldBe(0.8m);
     }
 
+    /// <summary>
+    /// <c>0.0</c> parses; the low end of the permitted range is inclusive.
+    /// </summary>
     [TestMethod]
     public void TryParsePriority_ZeroValue_ReturnsTrueAndParsesCorrectly()
     {
@@ -316,6 +417,9 @@ public class SitemapUtilityTests
         priority.ShouldBe(0.0m);
     }
 
+    /// <summary>
+    /// <c>1.0</c> parses; the high end of the permitted range is inclusive.
+    /// </summary>
     [TestMethod]
     public void TryParsePriority_OneValue_ReturnsTrueAndParsesCorrectly()
     {
@@ -327,6 +431,9 @@ public class SitemapUtilityTests
         priority.ShouldBe(1.0m);
     }
 
+    /// <summary>
+    /// <c>0</c> written without a decimal point parses to zero.
+    /// </summary>
     [TestMethod]
     public void TryParsePriority_MinimumBoundary_ReturnsTrueAndParsesCorrectly()
     {
@@ -338,6 +445,9 @@ public class SitemapUtilityTests
         priority.ShouldBe(0m);
     }
 
+    /// <summary>
+    /// <c>1</c> written without a decimal point parses to one.
+    /// </summary>
     [TestMethod]
     public void TryParsePriority_MaximumBoundary_ReturnsTrueAndParsesCorrectly()
     {
@@ -349,6 +459,15 @@ public class SitemapUtilityTests
         priority.ShouldBe(1m);
     }
 
+    /// <summary>
+    /// <c>1.1</c> is rejected, and the out parameter is left at <c>0.5</c> rather than at the number
+    /// that was read.
+    /// </summary>
+    /// <remarks>
+    ///     <c>0.5</c> is the priority the protocol assigns a page that declares none, so a caller that
+    ///     ignores the boolean still writes a legal document — which is exactly why the boolean has to be
+    ///     read.
+    /// </remarks>
     [TestMethod]
     public void TryParsePriority_ValueAboveOne_ReturnsFalse()
     {
@@ -360,6 +479,9 @@ public class SitemapUtilityTests
         priority.ShouldBe(0.5m);
     }
 
+    /// <summary>
+    /// <c>-0.1</c> is rejected and leaves the <c>0.5</c> failure value.
+    /// </summary>
     [TestMethod]
     public void TryParsePriority_NegativeValue_ReturnsFalse()
     {
@@ -371,6 +493,10 @@ public class SitemapUtilityTests
         priority.ShouldBe(0.5m);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> string is rejected and leaves the <c>0.5</c> failure value rather than
+    /// throwing.
+    /// </summary>
     [TestMethod]
     public void TryParsePriority_NullValue_ReturnsFalse()
     {
@@ -382,6 +508,9 @@ public class SitemapUtilityTests
         priority.ShouldBe(0.5m);
     }
 
+    /// <summary>
+    /// An <i>empty</i> string is rejected and leaves the <c>0.5</c> failure value.
+    /// </summary>
     [TestMethod]
     public void TryParsePriority_EmptyValue_ReturnsFalse()
     {
@@ -393,6 +522,9 @@ public class SitemapUtilityTests
         priority.ShouldBe(0.5m);
     }
 
+    /// <summary>
+    /// <c>high</c> is not a number: it is rejected and leaves the <c>0.5</c> failure value.
+    /// </summary>
     [TestMethod]
     public void TryParsePriority_NonNumericValue_ReturnsFalse()
     {
@@ -404,6 +536,9 @@ public class SitemapUtilityTests
         priority.ShouldBe(0.5m);
     }
 
+    /// <summary>
+    /// Every tenth from <c>0.1</c> to <c>0.9</c> parses to itself.
+    /// </summary>
     [TestMethod]
     public void TryParsePriority_ValidDecimalValues_ParseCorrectly()
     {
@@ -436,6 +571,10 @@ public class SitemapUtilityTests
 
     #region CreateNamespaceManager Tests
 
+    /// <summary>
+    /// The manager binds the prefix <c>sm</c> to the sitemap namespace, which is what every <c>sm:</c>
+    /// XPath query in this suite resolves against.
+    /// </summary>
     [TestMethod]
     public void CreateNamespaceManager_ValidNameTable_ReturnsManagerWithSitemapNamespace()
     {
@@ -450,11 +589,22 @@ public class SitemapUtilityTests
         manager.LookupNamespace("sm").ShouldBe(SitemapUtility.SitemapNamespace);
     }
 
+    /// <summary>
+    /// A <see langword="null"/> name table throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void CreateNamespaceManager_NullNameTable_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => SitemapUtility.CreateNamespaceManager(null!));
 
+    /// <summary>
+    /// The namespace is exactly <c>http://www.sitemaps.org/schemas/sitemap/0.9</c>.
+    /// </summary>
+    /// <remarks>
+    ///     0.9 is the only version the protocol has ever had; the number in the URI is part of the fixed
+    ///     namespace name rather than a version to negotiate. Changing a character of it would stop every
+    ///     sitemap parsing, silently.
+    /// </remarks>
     [TestMethod]
     public void SitemapNamespace_ReturnsCorrectValue() =>
         // Assert
@@ -464,6 +614,9 @@ public class SitemapUtilityTests
 
     #region SitemapChangeFrequency Enum Tests
 
+    /// <summary>
+    /// The seven members are numbered <c>0</c> through <c>6</c>, from <c>Always</c> to <c>Never</c>.
+    /// </summary>
     [TestMethod]
     public void SitemapChangeFrequency_HasExpectedValues()
     {
@@ -477,6 +630,10 @@ public class SitemapUtilityTests
         ((int)SitemapChangeFrequency.Never).ShouldBe(6);
     }
 
+    /// <summary>
+    /// Every member writes to a token that parses back to the same member, so no value is unwritable or
+    /// unreadable.
+    /// </summary>
     [TestMethod]
     public void SitemapChangeFrequency_AllValuesCanRoundTrip()
     {
@@ -531,6 +688,8 @@ public class SitemapUtilityTests
     /// <summary>
     /// Surrounding whitespace is trimmed, and casing is irrelevant.
     /// </summary>
+    /// <param name="value">One of the protocol's seven change-frequency tokens, in any casing and with any surrounding whitespace.</param>
+    /// <param name="expected">The <see cref="SitemapChangeFrequency"/> member <paramref name="value"/> names.</param>
     [TestMethod]
     [DataRow("  daily  ", SitemapChangeFrequency.Daily)]
     [DataRow("WEEKLY", SitemapChangeFrequency.Weekly)]

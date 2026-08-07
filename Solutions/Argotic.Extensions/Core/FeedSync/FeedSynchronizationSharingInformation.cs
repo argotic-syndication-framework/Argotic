@@ -69,7 +69,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// <summary>
     /// Gets or sets a lower bound of items contained within the feed.
     /// </summary>
-    /// <value>A lower bound of items contained within the feed.</value>
+    /// <value>The lower bound, as written in the feed. The default value is an <i>empty</i> string, and no date parsing is applied.</value>
     /// <remarks>
     ///     <para>If this property is defined, the <see cref="Until"/> property <b>must</b> also be specified.</para>
     ///     <para>
@@ -82,7 +82,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     ///         ability for the latter feed to reference the complete feed.
     ///     </para>
     ///     <para>
-    ///         Subscribers <i>may</i> optionally use the <b>since</b> and <b>until</b> properties of <see cref="FeedSynchronizationSharingInformation"/> to ensure
+    ///         Subscribers <i>may</i> optionally use the <see cref="Since"/> and <see cref="Until"/> properties of <see cref="FeedSynchronizationSharingInformation"/> to ensure
     ///         that all item updates are synchronized, even if the publisher periodically purges items from its feed.
     ///     </para>
     /// </remarks>
@@ -95,7 +95,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// <summary>
     /// Gets or sets an upper bound of items contained within the feed.
     /// </summary>
-    /// <value>An upper bound of items contained within the feed.</value>
+    /// <value>The upper bound, as written in the feed. The default value is an <i>empty</i> string, and no date parsing is applied.</value>
     /// <remarks>
     ///     <para>If this property is defined, the <see cref="Since"/> property <b>must</b> also be specified.</para>
     ///     <para>
@@ -108,7 +108,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     ///         ability for the latter feed to reference the complete feed.
     ///     </para>
     ///     <para>
-    ///         Subscribers <i>may</i> optionally use the <b>since</b> and <b>until</b> properties of <see cref="FeedSynchronizationSharingInformation"/> to ensure
+    ///         Subscribers <i>may</i> optionally use the <see cref="Since"/> and <see cref="Until"/> properties of <see cref="FeedSynchronizationSharingInformation"/> to ensure
     ///         that all item updates are synchronized, even if the publisher periodically purges items from its feed.
     ///     </para>
     /// </remarks>
@@ -129,14 +129,14 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <c>1</c>.
     ///     </para>
     ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
+    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <c>-1</c>.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<FeedSynchronizationRelatedInformation> source, IList<FeedSynchronizationRelatedInformation> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -144,11 +144,11 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// Loads this <see cref="FeedSynchronizationSharingInformation"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="FeedSynchronizationSharingInformation"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="FeedSynchronizationSharingInformation"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="FeedSynchronizationSharingInformation"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -214,7 +214,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// Saves the current <see cref="FeedSynchronizationSharingInformation"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -291,7 +291,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// Determines whether the specified <see cref="FeedSynchronizationSharingInformation"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="FeedSynchronizationSharingInformation"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="FeedSynchronizationSharingInformation"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="FeedSynchronizationSharingInformation"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(FeedSynchronizationSharingInformation? other)
     {
         if (other is null)
@@ -306,7 +306,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is FeedSynchronizationSharingInformation other && this.Equals(other);
 
     /// <summary>
@@ -320,7 +320,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(FeedSynchronizationSharingInformation? first, FeedSynchronizationSharingInformation? second)
     {
         if (first is null) return second is null;
@@ -332,7 +332,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(FeedSynchronizationSharingInformation? first, FeedSynchronizationSharingInformation? second) => !(first == second);
 
 }

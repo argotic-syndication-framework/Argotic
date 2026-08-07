@@ -11,13 +11,19 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Data.Adapters;
 
 /// <summary>
-/// Unit tests for <see cref="Rss10SyndicationResourceAdapter"/> that verify RSS 1.0 parsing.
+/// Covers <see cref="Rss10SyndicationResourceAdapter"/>. RSS 1.0 is RDF Site Summary, an RDF document in
+/// <c>http://purl.org/rss/1.0/</c> whose <c>channel</c>, <c>image</c>, <c>textinput</c> and <c>item</c>
+/// elements are siblings under <c>rdf:RDF</c> rather than nested; these tests state what is re-parented
+/// onto the <see cref="RssFeed"/>'s channel, along with the retrieval limit and the argument guards.
 /// </summary>
 [TestClass]
 public class Rss10SyndicationResourceAdapterTests
 {
     #region Fill Channel Tests
 
+    /// <summary>
+    /// A minimal RSS 1.0 document fills the channel's title, link and description.
+    /// </summary>
     [TestMethod]
     public void Fill_MinimalRss10_PopulatesChannel()
     {
@@ -38,6 +44,15 @@ public class Rss10SyndicationResourceAdapterTests
         feed.Channel.Description.ShouldBe("A test RSS 1.0 feed");
     }
 
+    /// <summary>
+    /// The <c>item</c> elements sitting beside <c>channel</c> fill the channel's items in document order,
+    /// each with the title, link and description RSS 1.0 defines.
+    /// </summary>
+    /// <remarks>
+    ///     The document also carries the <c>channel/items/rdf:Seq</c> manifest that RSS 1.0 uses to declare a
+    ///     channel's membership and ordering. The adapter ignores it and takes every <c>item</c> element in
+    ///     document order, which is what the expected order here states.
+    /// </remarks>
     [TestMethod]
     public void Fill_WithItems_PopulatesItems()
     {
@@ -62,6 +77,9 @@ public class Rss10SyndicationResourceAdapterTests
         feed.Channel.Items[1].Description.ShouldBe("Second item description");
     }
 
+    /// <summary>
+    /// The sibling <c>image</c> element fills the channel's image with its title, URL and link.
+    /// </summary>
     [TestMethod]
     public void Fill_WithImage_PopulatesImage()
     {
@@ -83,6 +101,10 @@ public class Rss10SyndicationResourceAdapterTests
         feed.Channel.Image.Link.ShouldBe(new Uri("http://example.com"));
     }
 
+    /// <summary>
+    /// The sibling <c>textinput</c> element fills the channel's text input with its title, description, name
+    /// and link.
+    /// </summary>
     [TestMethod]
     public void Fill_WithTextInput_PopulatesTextInput()
     {
@@ -109,6 +131,9 @@ public class Rss10SyndicationResourceAdapterTests
 
     #region Error Handling Tests
 
+    /// <summary>
+    /// Filling a <see langword="null"/> feed throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Fill_NullResource_ThrowsArgumentNullException()
     {
@@ -123,6 +148,9 @@ public class Rss10SyndicationResourceAdapterTests
         Should.Throw<ArgumentNullException>(() => adapter.Fill(null!));
     }
 
+    /// <summary>
+    /// Constructing the adapter without a navigator throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_NullNavigator_ThrowsArgumentNullException()
     {
@@ -133,6 +161,9 @@ public class Rss10SyndicationResourceAdapterTests
         Should.Throw<ArgumentNullException>(() => new Rss10SyndicationResourceAdapter(null!, settings));
     }
 
+    /// <summary>
+    /// Constructing the adapter without load settings throws <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_NullSettings_ThrowsArgumentNullException()
     {
@@ -149,6 +180,9 @@ public class Rss10SyndicationResourceAdapterTests
 
     #region Retrieval Limit Tests
 
+    /// <summary>
+    /// A retrieval limit of <c>1</c> keeps only the first item in document order.
+    /// </summary>
     [TestMethod]
     public void Fill_WithRetrievalLimit_RespectsLimit()
     {
@@ -175,6 +209,10 @@ public class Rss10SyndicationResourceAdapterTests
 
     #region Channel Properties Tests
 
+    /// <summary>
+    /// A document carrying every RSS 1.0 element fills the channel's own title, link and description as
+    /// well as its items, image and text input.
+    /// </summary>
     [TestMethod]
     public void Fill_ChannelWithAllElements_PopulatesAllProperties()
     {

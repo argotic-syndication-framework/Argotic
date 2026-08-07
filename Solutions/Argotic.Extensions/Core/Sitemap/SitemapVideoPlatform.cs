@@ -1,34 +1,35 @@
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents the platforms on which a video can be played.
+/// The platforms named by a <c>video:platform</c> element.
 /// </summary>
 /// <remarks>
-///     <para>
-///         This enumeration is used to specify which platforms are allowed or denied for video playback
-///         in a sitemap video extension. Multiple platforms can be combined using bitwise operations.
-///     </para>
+///     A set, not a single choice: <c>video:platform</c> holds a space-delimited list, which maps onto
+///     these flags. The set on its own says nothing — <see cref="SitemapVideo.PlatformRelationship"/>
+///     decides whether it is the list of platforms permitted or the list blocked, and reading one without
+///     the other inverts the meaning.
 /// </remarks>
+/// <seealso cref="SitemapVideo.Platform"/>
 [Flags]
 public enum SitemapVideoPlatform
 {
     /// <summary>
-    /// No platform specified.
+    /// No platform. Set when the element was present but named nothing recognisable; suppresses the element on write.
     /// </summary>
     None = 0,
 
     /// <summary>
-    /// The video can be played on traditional desktop and laptop computers.
+    /// Desktop and laptop browsers. Written as <c>web</c>.
     /// </summary>
     Web = 1,
 
     /// <summary>
-    /// The video can be played on mobile devices such as phones and tablets.
+    /// Phones and tablets. Written as <c>mobile</c>.
     /// </summary>
     Mobile = 2,
 
     /// <summary>
-    /// The video can be played on TV platforms.
+    /// Television devices. Written as <c>tv</c>.
     /// </summary>
     Tv = 4
 }

@@ -6,7 +6,9 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 
 /// <summary>
-/// Unit tests for <see cref="SitemapImage"/>.
+/// Covers <see cref="SitemapImage"/>: constructing one, the guards on its location, reading an
+/// <c>image:image</c> element off a navigator, writing one back, and the equality, ordering, hashing
+/// and rendering contracts.
 /// </summary>
 [TestClass]
 public class SitemapImageTests
@@ -15,6 +17,9 @@ public class SitemapImageTests
 
     #region Constructor Tests
 
+    /// <summary>
+    /// An image can be constructed with no location, ready to be filled in by a load or by the setter.
+    /// </summary>
     [TestMethod]
     public void SitemapImage_DefaultConstructor_CreatesInstance()
     {
@@ -25,6 +30,9 @@ public class SitemapImageTests
         image.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// The URI given to the constructor is the location the image reports back.
+    /// </summary>
     [TestMethod]
     public void SitemapImage_ConstructorWithLocation_SetsLocation()
     {
@@ -38,6 +46,10 @@ public class SitemapImageTests
         image.Location.ShouldBe(location);
     }
 
+    /// <summary>
+    /// Constructing an image without a location throws <see cref="ArgumentNullException"/> rather than
+    /// yielding a half-built element.
+    /// </summary>
     [TestMethod]
     public void SitemapImage_ConstructorWithNullLocation_ThrowsArgumentNullException() =>
         // Act & Assert
@@ -47,6 +59,9 @@ public class SitemapImageTests
 
     #region Location Property Tests
 
+    /// <summary>
+    /// An absolute URI assigned to the location is stored unchanged.
+    /// </summary>
     [TestMethod]
     public void Location_SetValidUri_StoresValue()
     {
@@ -61,6 +76,10 @@ public class SitemapImageTests
         image.Location.ShouldBe(location);
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> over an existing location throws
+    /// <see cref="ArgumentNullException"/>, so an image that has a location cannot lose it.
+    /// </summary>
     [TestMethod]
     public void Location_SetNullUri_ThrowsArgumentNullException()
     {
@@ -71,6 +90,9 @@ public class SitemapImageTests
         Should.Throw<ArgumentNullException>(() => image.Location = null!);
     }
 
+    /// <summary>
+    /// A relative URI is accepted as an image location and stored unchanged.
+    /// </summary>
     [TestMethod]
     public void Location_SetRelativeUri_StoresValue()
     {
@@ -89,6 +111,10 @@ public class SitemapImageTests
 
     #region Load Tests
 
+    /// <summary>
+    /// An <c>image</c> element carrying a <c>loc</c> loads, reporting <see langword="true"/> and taking
+    /// its location from that child.
+    /// </summary>
     [TestMethod]
     public void Load_ValidImageElement_ReturnsTrue()
     {
@@ -111,6 +137,10 @@ public class SitemapImageTests
         image.Location.ShouldBe(new Uri("https://example.com/image.jpg"));
     }
 
+    /// <summary>
+    /// An <c>image</c> whose <c>loc</c> is present but empty reports <see langword="false"/>, so no
+    /// image with no address is added.
+    /// </summary>
     [TestMethod]
     public void Load_EmptyLocElement_ReturnsFalse()
     {
@@ -132,6 +162,9 @@ public class SitemapImageTests
         result.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An <c>image</c> with no <c>loc</c> child at all reports <see langword="false"/>.
+    /// </summary>
     [TestMethod]
     public void Load_MissingLocElement_ReturnsFalse()
     {
@@ -152,6 +185,10 @@ public class SitemapImageTests
         result.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A <c>loc</c> holding a relative path loads, and the location keeps the relative form
+    /// <c>/images/photo.jpg</c> rather than being resolved against a base.
+    /// </summary>
     [TestMethod]
     public void Load_RelativeUri_LoadsSuccessfully()
     {
@@ -174,6 +211,9 @@ public class SitemapImageTests
         image.Location!.ToString().ShouldBe("/images/photo.jpg");
     }
 
+    /// <summary>
+    /// Loading from a <see langword="null"/> navigator throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void Load_NullSource_ThrowsArgumentNullException()
     {
@@ -185,6 +225,10 @@ public class SitemapImageTests
         Should.Throw<ArgumentNullException>(() => image.Load(null!, manager));
     }
 
+    /// <summary>
+    /// Loading with a <see langword="null"/> namespace manager throws
+    /// <see cref="ArgumentNullException"/>, even when the navigator is sound.
+    /// </summary>
     [TestMethod]
     public void Load_NullManager_ThrowsArgumentNullException()
     {
@@ -206,6 +250,9 @@ public class SitemapImageTests
 
     #region WriteTo Tests
 
+    /// <summary>
+    /// Writing an image emits an <c>image</c> element wrapping a <c>loc</c> that holds the location.
+    /// </summary>
     [TestMethod]
     public void WriteTo_ValidImage_WritesCorrectXml()
     {
@@ -231,6 +278,9 @@ public class SitemapImageTests
         result.ShouldContain("</image>");
     }
 
+    /// <summary>
+    /// Writing to a <see langword="null"/> writer throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void WriteTo_NullWriter_ThrowsArgumentNullException()
     {
@@ -241,6 +291,10 @@ public class SitemapImageTests
         Should.Throw<ArgumentNullException>(() => image.WriteTo(null!, ImageNamespace));
     }
 
+    /// <summary>
+    /// Writing with a <see langword="null"/> namespace throws <see cref="ArgumentNullException"/> — the
+    /// guard is <c>ArgumentException.ThrowIfNullOrEmpty</c>, whose null branch is the more specific type.
+    /// </summary>
     [TestMethod]
     public void WriteTo_NullNamespace_ThrowsArgumentException()
     {
@@ -254,6 +308,9 @@ public class SitemapImageTests
         Should.Throw<ArgumentNullException>(() => image.WriteTo(writer, null!));
     }
 
+    /// <summary>
+    /// Writing with an <i>empty</i> namespace throws <see cref="ArgumentException"/>.
+    /// </summary>
     [TestMethod]
     public void WriteTo_EmptyNamespace_ThrowsArgumentException()
     {
@@ -271,6 +328,9 @@ public class SitemapImageTests
 
     #region CompareTo Tests
 
+    /// <summary>
+    /// Two images built from the same location compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_SameLocation_ReturnsZero()
     {
@@ -285,6 +345,9 @@ public class SitemapImageTests
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Images with different locations do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_DifferentLocation_ReturnsNonZero()
     {
@@ -299,6 +362,9 @@ public class SitemapImageTests
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// An image compares greater than <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void CompareTo_NullObject_ReturnsPositive()
     {
@@ -312,6 +378,10 @@ public class SitemapImageTests
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Comparing against <see langword="null"/> returns <c>1</c> when the call is asserted directly
+    /// rather than through a local.
+    /// </summary>
     [TestMethod]
     public void CompareTo_Null_ReturnsPositive()
     {
@@ -326,6 +396,9 @@ public class SitemapImageTests
 
     #region Equals Tests
 
+    /// <summary>
+    /// Two images built from the same location are equal.
+    /// </summary>
     [TestMethod]
     public void Equals_SameLocation_ReturnsTrue()
     {
@@ -340,6 +413,9 @@ public class SitemapImageTests
         result.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Images with different locations are not equal.
+    /// </summary>
     [TestMethod]
     public void Equals_DifferentLocation_ReturnsFalse()
     {
@@ -354,6 +430,9 @@ public class SitemapImageTests
         result.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An image is never equal to <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void Equals_NullObject_ReturnsFalse()
     {
@@ -367,6 +446,9 @@ public class SitemapImageTests
         result.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An image is never equal to an object of another type, here a <see cref="string"/>.
+    /// </summary>
     [TestMethod]
     public void Equals_DifferentType_ReturnsFalse()
     {
@@ -384,6 +466,9 @@ public class SitemapImageTests
 
     #region GetHashCode Tests
 
+    /// <summary>
+    /// Equal images hash equally, which is the contract a hash set relies on.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_SameLocation_ReturnsSameHash()
     {
@@ -395,6 +480,9 @@ public class SitemapImageTests
         image1.GetHashCode().ShouldBe(image2.GetHashCode());
     }
 
+    /// <summary>
+    /// An image's hash does not change between calls on the same unmodified instance.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_Consistency_ReturnsSameHashOnMultipleCalls()
     {
@@ -413,6 +501,9 @@ public class SitemapImageTests
 
     #region ToString Tests
 
+    /// <summary>
+    /// An image renders as its location alone, with no element name or punctuation around it.
+    /// </summary>
     [TestMethod]
     public void ToString_WithLocation_ReturnsLocationString()
     {
@@ -426,6 +517,9 @@ public class SitemapImageTests
         result.ShouldBe("https://example.com/image.jpg");
     }
 
+    /// <summary>
+    /// An image with no location renders as an <i>empty</i> string rather than throwing or naming the type.
+    /// </summary>
     [TestMethod]
     public void ToString_WithoutLocation_ReturnsEmptyString()
     {
@@ -443,6 +537,9 @@ public class SitemapImageTests
 
     #region Operator Tests
 
+    /// <summary>
+    /// The equality operator agrees with <c>Equals</c> for two images sharing a location.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_SameLocation_ReturnsTrue()
     {
@@ -454,6 +551,9 @@ public class SitemapImageTests
         (image1 == image2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The equality operator separates images with different locations.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_DifferentLocation_ReturnsFalse()
     {
@@ -465,6 +565,9 @@ public class SitemapImageTests
         (image1 == image2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> references compare equal under the operator rather than dereferencing.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_BothNull_ReturnsTrue()
     {
@@ -476,6 +579,10 @@ public class SitemapImageTests
         (image1 == image2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// An image compared against a <see langword="null"/> reference is not equal, and the operator does
+    /// not throw.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_OneNull_ReturnsFalse()
     {
@@ -487,6 +594,9 @@ public class SitemapImageTests
         (image1 == image2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The inequality operator is the negation of the equality operator for two images sharing a location.
+    /// </summary>
     [TestMethod]
     public void OperatorNotEquals_SameLocation_ReturnsFalse()
     {
@@ -498,6 +608,9 @@ public class SitemapImageTests
         (image1 != image2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// The inequality operator reports images with different locations as different.
+    /// </summary>
     [TestMethod]
     public void OperatorNotEquals_DifferentLocation_ReturnsTrue()
     {
@@ -513,6 +626,10 @@ public class SitemapImageTests
 
     #region Round-Trip Tests
 
+    /// <summary>
+    /// An image written inside a <c>url</c> element and read back out of the resulting XML carries the
+    /// location it started with.
+    /// </summary>
     [TestMethod]
     public void RoundTrip_WriteAndLoad_PreservesLocation()
     {

@@ -32,7 +32,7 @@ internal sealed class MyCustomSyndicationExtension
     /// <summary>
     /// Gets or sets the value of the extension attribute.
     /// </summary>
-    /// <value>The value of the extension attribute.</value>
+    /// <value>The attribute value, or an <i>empty</i> string if none was specified.</value>
     public string MyAttribute
     {
         get;
@@ -51,12 +51,12 @@ internal sealed class MyCustomSyndicationExtension
     } = string.Empty;
 
     /// <summary>
-    /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
+    /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/>
     /// represents the same <see cref="Type"/> as this <see cref="MyCustomSyndicationExtension"/>.
     /// </summary>
     /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="MyCustomSyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="MyCustomSyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -67,9 +67,9 @@ internal sealed class MyCustomSyndicationExtension
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="MyCustomSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="MyCustomSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="MyCustomSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="MyCustomSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public override bool Load(IXPathNavigable source)
     {
         bool wasLoaded = false;
@@ -95,9 +95,9 @@ internal sealed class MyCustomSyndicationExtension
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="MyCustomSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="MyCustomSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="MyCustomSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="MyCustomSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -110,8 +110,8 @@ internal sealed class MyCustomSyndicationExtension
     /// <summary>
     /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public override void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -129,10 +129,7 @@ internal sealed class MyCustomSyndicationExtension
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="MyCustomSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="MyCustomSyndicationExtension"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -179,7 +176,7 @@ internal sealed class MyCustomSyndicationExtension
     /// Determines whether the specified <see cref="MyCustomSyndicationExtension"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="MyCustomSyndicationExtension"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="MyCustomSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="MyCustomSyndicationExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(MyCustomSyndicationExtension? other)
     {
         if (other is null)
@@ -194,7 +191,7 @@ internal sealed class MyCustomSyndicationExtension
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is MyCustomSyndicationExtension other && this.Equals(other);
 
     /// <summary>
@@ -220,7 +217,7 @@ internal sealed class MyCustomSyndicationExtension
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
     {
         if (first is null) return second is null;
@@ -232,7 +229,7 @@ internal sealed class MyCustomSyndicationExtension
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="true"/> if the operands differ; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second) => !(first == second);
 
     // <, >, <= and >= are not declared here. Implementing IComparisonOperators alongside

@@ -11,18 +11,35 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="FeedSynchronizationSyndicationExtension"/> extends syndicated content to specify the <i>minimum</i> extensions necessary 
-///         to enable loosely-cooperating applications to use Atom and RSS feeds as the basis for item sharing. This syndication extension conforms to the 
-///         <b>FeedSync for Atom and RSS</b> 1.0 specification, which can be found at <a href="http://dev.live.com/feedsync/spec/">http://dev.live.com/feedsync/spec/</a>.
+///         FeedSync for Atom and RSS 1.0 — Microsoft's Simple Sharing Extensions under its later name,
+///         in the <c>http://feedsync.org/2007/feedsync</c> namespace under the prefix <c>sx</c>. The
+///         specification was published at
+///         <a href="https://web.archive.org/web/20080705204645/http://dev.live.com/feedsync/spec/">https://web.archive.org/web/20080705204645/http://dev.live.com/feedsync/spec/</a>.
+///     </para>
+///     <para>
+///         It turns a feed from a one-way broadcast into a replication channel. Two applications
+///         cross-subscribed to each other's feeds converge on the same set of items without either
+///         being a server: each item carries
+///         <see cref="FeedSynchronizationSyndicationExtensionContext.Synchronization"/> — a
+///         <c>sx:sync</c> element with an identifier, an update count and a per-endpoint history — and
+///         the merge rule reads those rather than the feed order. The feed itself may carry
+///         <see cref="FeedSynchronizationSyndicationExtensionContext.Sharing"/>, describing the window
+///         of time its items cover, so a subscriber that fell behind knows it must fetch a complete
+///         feed rather than resume.
+///     </para>
+///     <para>
+///         An item without <c>sx:sync</c> simply does not participate; a feed may mix the two. Deletion
+///         is expressed as a tombstone rather than an absence, because absence from a partial feed
+///         means nothing.
+///     </para>
+///     <para>
+///         Identifiers are pinned to the Namespace Specific String production of
+///         <a href="https://www.rfc-editor.org/rfc/rfc2141.html">RFC 2141</a>. Cite that RFC and not
+///         RFC 8141, which widens the grammar to admit characters FeedSync ids may not contain.
 ///     </para>
 /// </remarks>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the FeedSynchronizationSyndicationExtension class.">
-///         <code 
-///             source="..\..\Argotic.Examples\\Extensions\Core\FeedSynchronizationSyndicationExtensionExample.cs" 
-///             region="FeedSynchronizationSyndicationExtension"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Extensions\Core\FeedSynchronizationSyndicationExtensionExample.cs" language="cs" title="The following code example demonstrates the usage of the FeedSynchronizationSyndicationExtension class." />
 /// </example>
 public class FeedSynchronizationSyndicationExtension : SyndicationExtension, IComparable<FeedSynchronizationSyndicationExtension>, IEquatable<FeedSynchronizationSyndicationExtension>, IComparisonOperators
 {
@@ -38,13 +55,13 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// <summary>
     /// Gets or sets the <see cref="FeedSynchronizationSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
-    /// <value>A <see cref="FeedSynchronizationSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
+    /// <value>The context. Never <see langword="null"/>: one is created with the extension, and the setter rejects <see langword="null"/>.</value>
     /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
+    ///     The <c>Context</c> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
     ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
     ///     are defined for the custom syndication extension.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public FeedSynchronizationSyndicationExtensionContext Context
     {
         get;
@@ -61,8 +78,8 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
     /// </summary>
     /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -72,9 +89,9 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
-    /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="FeedSynchronizationSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="FeedSynchronizationSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="FeedSynchronizationSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="FeedSynchronizationSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public override bool Load(IXPathNavigable source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -90,9 +107,9 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="FeedSynchronizationSyndicationExtension"/>.</param>
-    /// <returns><b>true</b> if the <see cref="FeedSynchronizationSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="FeedSynchronizationSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="FeedSynchronizationSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -104,8 +121,8 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// <summary>
     /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public override void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -183,7 +200,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// Determines whether the specified <see cref="FeedSynchronizationSyndicationExtension"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="FeedSynchronizationSyndicationExtension"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="FeedSynchronizationSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="FeedSynchronizationSyndicationExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(FeedSynchronizationSyndicationExtension? other)
     {
         if (other is null)
@@ -198,7 +215,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is FeedSynchronizationSyndicationExtension other && this.Equals(other);
 
     /// <summary>
@@ -212,7 +229,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(FeedSynchronizationSyndicationExtension? first, FeedSynchronizationSyndicationExtension? second)
     {
         if (first is null) return second is null;
@@ -224,7 +241,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(FeedSynchronizationSyndicationExtension? first, FeedSynchronizationSyndicationExtension? second) => !(first == second);
 
 }

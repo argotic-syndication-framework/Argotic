@@ -8,7 +8,8 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Rsd;
 
 /// <summary>
-/// Behavior-driven tests for <see cref="RsdDocument"/> covering creation, parsing, and round-trip scenarios.
+/// Covers <see cref="RsdDocument"/> end to end: declaring application interfaces, parsing an RSD
+/// 1.0 document, and what survives a save and reload — including the settings block that does not.
 /// </summary>
 [TestClass]
 public class RsdDocumentBehaviorTests
@@ -73,6 +74,10 @@ public class RsdDocumentBehaviorTests
 
     #region Document Creation Tests
 
+    /// <summary>
+    /// A default-constructed document has an interface collection
+    /// and an extension collection, both empty rather than null.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenCreatedWithDefaultConstructor_HasEmptyCollections()
     {
@@ -86,6 +91,9 @@ public class RsdDocumentBehaviorTests
         document.Extensions.ShouldBeEmpty();
     }
 
+    /// <summary>
+    /// The engine name, the engine link and the homepage are read back exactly as assigned.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenServicePropertiesSet_ContainsCorrectValues()
     {
@@ -103,6 +111,9 @@ public class RsdDocumentBehaviorTests
         document.Homepage.ShouldBe(new Uri("http://www.userdomain.com/"));
     }
 
+    /// <summary>
+    /// An interface added to the document appears in the collection with its name and preferred flag.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenApiInterfaceAdded_ContainsInterface()
     {
@@ -123,6 +134,9 @@ public class RsdDocumentBehaviorTests
         document.Interfaces[0].IsPreferred.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Interfaces are held in the order they were added.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenMultipleApisAdded_ContainsAllApis()
     {
@@ -146,6 +160,9 @@ public class RsdDocumentBehaviorTests
         document.Interfaces[2].Name.ShouldBe("Atom");
     }
 
+    /// <summary>
+    /// The document indexer reads the interface at a position in the collection.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenIndexerUsed_ReturnsCorrectInterface()
     {
@@ -163,6 +180,10 @@ public class RsdDocumentBehaviorTests
         secondApi.Name.ShouldBe("Blogger");
     }
 
+    /// <summary>
+    /// An interface carries its four constructor arguments alongside
+    /// the documentation, notes and named settings set afterwards.
+    /// </summary>
     [TestMethod]
     public void RsdApplicationInterface_WhenCreatedWithOptionalProperties_ContainsAllProperties()
     {
@@ -191,6 +212,10 @@ public class RsdDocumentBehaviorTests
 
     #region Document Parsing Tests
 
+    /// <summary>
+    /// Loading an RSD 1.0 document populates the engine name, the
+    /// engine link and the homepage from the <c>service</c> element.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenLoadedFromXml_PopulatesServiceProperties()
     {
@@ -207,6 +232,10 @@ public class RsdDocumentBehaviorTests
         document.Homepage.ShouldBe(new Uri("http://example.com/blog"));
     }
 
+    /// <summary>
+    /// An <c>api</c> element loads with its name, its <c>preferred</c>
+    /// flag, its <c>apiLink</c> and its <c>blogID</c>.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenLoadedFromXml_PopulatesApiInterface()
     {
@@ -226,6 +255,9 @@ public class RsdDocumentBehaviorTests
         api.WeblogId.ShouldBe("1");
     }
 
+    /// <summary>
+    /// Every <c>api</c> element under <c>apis</c> loads, in document order, each with its own preferred flag.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenLoadedFromXmlWithMultipleApis_PopulatesAllInterfaces()
     {
@@ -246,6 +278,16 @@ public class RsdDocumentBehaviorTests
         document.Interfaces[2].IsPreferred.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An <c>api</c> element carrying a <c>settings</c> block loads
+    /// its name, preferred flag and link, and loses the settings.
+    /// </summary>
+    /// <remarks>
+    ///     <c>RsdApplicationInterface.Load</c> selects the settings with the XPath <c>rsd:api/rsd:settings</c>,
+    ///     from a navigator already positioned on the <c>api</c> element. That asks for an <c>api</c> nested
+    ///     inside an <c>api</c>, which no RSD document contains, so <c>docs</c>, <c>notes</c> and <c>setting</c>
+    ///     are never read. The assertions below record what the loader does today, not what RSD 1.0 asks of it.
+    /// </remarks>
     [TestMethod]
     public void RsdDocument_WhenLoadedFromXmlWithApiSettings_ParsesBasicApiProperties()
     {
@@ -274,6 +316,9 @@ public class RsdDocumentBehaviorTests
         api.Settings.ShouldBeEmpty();
     }
 
+    /// <summary>
+    /// Loading from a stream yields the same engine name and interfaces as loading from a reader.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenLoadedFromStream_PopulatesProperties()
     {
@@ -289,6 +334,9 @@ public class RsdDocumentBehaviorTests
         document.Interfaces.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Loading raises <c>Loaded</c>, and the handler receives event arguments rather than <see langword="null"/>.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenLoaded_RaisesLoadedEvent()
     {
@@ -311,6 +359,9 @@ public class RsdDocumentBehaviorTests
         eventArgs.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// The one interface marked <c>preferred="true"</c> is the one a search of the collection finds.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenPreferredApiRequested_CanBeFoundInCollection()
     {
@@ -331,6 +382,9 @@ public class RsdDocumentBehaviorTests
 
     #region Round-Trip Tests
 
+    /// <summary>
+    /// The engine name, the engine link and the homepage survive a save and reload.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenSavedAndReloaded_PreservesServiceProperties()
     {
@@ -356,6 +410,9 @@ public class RsdDocumentBehaviorTests
         loadedDocument.Homepage.ShouldBe(originalDocument.Homepage);
     }
 
+    /// <summary>
+    /// Both interfaces survive a save and reload, each with its name, link, preferred flag and weblog identifier.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenSavedAndReloaded_PreservesApiInterfaces()
     {
@@ -388,6 +445,16 @@ public class RsdDocumentBehaviorTests
         }
     }
 
+    /// <summary>
+    /// An interface survives a save and reload with its four core properties,
+    /// and arrives without the documentation, notes or settings it was given.
+    /// </summary>
+    /// <remarks>
+    ///     <c>RsdApplicationInterface.Load</c> selects the settings with the XPath <c>rsd:api/rsd:settings</c>,
+    ///     from a navigator already positioned on the <c>api</c> element. That asks for an <c>api</c> nested
+    ///     inside an <c>api</c>, which no RSD document contains, so <c>docs</c>, <c>notes</c> and <c>setting</c>
+    ///     are never read. The assertions below record what the loader does today, not what RSD 1.0 asks of it.
+    /// </remarks>
     [TestMethod]
     public void RsdDocument_WhenSavedAndReloaded_PreservesBasicApiProperties()
     {
@@ -433,6 +500,9 @@ public class RsdDocumentBehaviorTests
         loadedApi.Settings.ShouldBeEmpty();
     }
 
+    /// <summary>
+    /// A second save and reload leaves the service properties and the interface count where the first one left them.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenSavedAndReloadedTwice_MaintainsDataIntegrity()
     {
@@ -460,6 +530,10 @@ public class RsdDocumentBehaviorTests
         document2.Interfaces.Count.ShouldBe(originalDocument.Interfaces.Count);
     }
 
+    /// <summary>
+    /// A parsed document that is written out and read back keeps its
+    /// engine name and every interface, preferred flag included.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_WhenParsedFromXmlAndReserialized_MaintainsStructure()
     {
@@ -487,6 +561,14 @@ public class RsdDocumentBehaviorTests
 
     #region Format and Version Tests
 
+    /// <summary>
+    /// A document reports <c>SyndicationContentFormat.Opml</c> as its format, which is the wrong answer.
+    /// </summary>
+    /// <remarks>
+    ///     <c>SyndicationContentFormat</c> has an <c>Rsd</c> member, and <c>RsdDocument</c> does not return
+    ///     it: the type hard-codes <c>SyndicationContentFormat.Opml</c> (<c>RsdDocument.cs:35</c>). The test
+    ///     pins the shipped behaviour so that correcting it is a visible change rather than a silent one.
+    /// </remarks>
     [TestMethod]
     public void RsdDocument_Format_ReturnsOpml()
     {
@@ -498,6 +580,9 @@ public class RsdDocumentBehaviorTests
         document.Format.ShouldBe(SyndicationContentFormat.Opml);
     }
 
+    /// <summary>
+    /// A document reports version <c>1.0</c>, which is the version it writes rather than one it was told.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_Version_Returns1_0()
     {
@@ -512,6 +597,9 @@ public class RsdDocumentBehaviorTests
 
     #region Navigator Tests
 
+    /// <summary>
+    /// A document exposes a navigator over its own XML, rooted on a node that has children.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_CreateNavigator_ReturnsValidNavigator()
     {
@@ -537,6 +625,9 @@ public class RsdDocumentBehaviorTests
 
     #region Extension Tests
 
+    /// <summary>
+    /// A document carrying no extensions says so.
+    /// </summary>
     [TestMethod]
     public void RsdDocument_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
@@ -547,6 +638,9 @@ public class RsdDocumentBehaviorTests
         document.HasExtensions.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// An interface carrying no extensions says so.
+    /// </summary>
     [TestMethod]
     public void RsdApplicationInterface_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
@@ -561,6 +655,10 @@ public class RsdDocumentBehaviorTests
 
     #region Async Operations Tests
 
+    /// <summary>
+    /// Loading over a caller-supplied client populates the service
+    /// properties and the interfaces, and raises <c>Loaded</c>.
+    /// </summary>
     [TestMethod]
     public async Task RsdDocument_LoadAsync_LoadsDocumentCorrectly()
     {
@@ -586,6 +684,9 @@ public class RsdDocumentBehaviorTests
         document.Interfaces.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// The static create returns a document already populated from the response body, all three interfaces included.
+    /// </summary>
     [TestMethod]
     public async Task RsdDocument_CreateAsync_CreatesAndLoadsNewDocument()
     {
@@ -605,6 +706,9 @@ public class RsdDocumentBehaviorTests
         document.Interfaces.Count.ShouldBe(3);
     }
 
+    /// <summary>
+    /// Loading over HTTP preserves the document order of the interfaces, as loading from a reader does.
+    /// </summary>
     [TestMethod]
     public async Task RsdDocument_LoadAsync_WithMultipleApis_LoadsAllInterfaces()
     {
@@ -628,6 +732,9 @@ public class RsdDocumentBehaviorTests
         document.Interfaces[2].Name.ShouldBe("Atom");
     }
 
+    /// <summary>
+    /// The <c>Loaded</c> event reports the URI the document was fetched from.
+    /// </summary>
     [TestMethod]
     public async Task RsdDocument_LoadAsync_IncludesSourceUriInEventArgs()
     {
@@ -651,6 +758,9 @@ public class RsdDocumentBehaviorTests
         sourceFromEvent.ShouldBe(requestUri);
     }
 
+    /// <summary>
+    /// Passing load settings to the asynchronous load still yields a fully populated document.
+    /// </summary>
     [TestMethod]
     public async Task RsdDocument_LoadAsync_WithSettings_AppliesSettings()
     {

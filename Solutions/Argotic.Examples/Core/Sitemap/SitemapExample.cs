@@ -4,16 +4,12 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Sitemap;
 
 /// <summary>
-/// Contains the code examples for the <see cref="Syndication.Sitemap"/> class.
+/// Demonstrates the <see cref="Syndication.Sitemap"/> surface: listing URLs by hand, then the <c>Load</c>, <c>CreateAsync</c> and <c>Save</c> overloads.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="Syndication.Sitemap"/> class.
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class SitemapExample
 {
     /// <summary>
-    /// Provides example code for the Sitemap class.
+    /// Builds a <see cref="Syndication.Sitemap"/> listing two URLs and prints it.
     /// </summary>
     public static void ClassExample()
     {
@@ -36,7 +32,7 @@ internal static class SitemapExample
     }
 
     /// <summary>
-    /// Provides example code for the Sitemap.CreateAsync(Uri) method.
+    /// Creates a <see cref="Syndication.Sitemap"/> from a <see cref="Uri"/> in a single call.
     /// </summary>
     [RequiresNetwork]
     public static async Task LoadUriExampleAsync()
@@ -50,7 +46,7 @@ internal static class SitemapExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(Stream) method.
+    /// Loads a <see cref="Syndication.Sitemap"/> from a <see cref="Stream"/>.
     /// </summary>
     public static void LoadStreamExample()
     {
@@ -61,7 +57,7 @@ internal static class SitemapExample
     }
 
     /// <summary>
-    /// Provides example code for the Save(Stream) method.
+    /// Saves a <see cref="Syndication.Sitemap"/> to a <see cref="Stream"/>.
     /// </summary>
     public static void SaveStreamExample()
     {
@@ -168,7 +164,7 @@ internal static class SitemapExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(XmlReader) method.
+    /// Loads a <see cref="Syndication.Sitemap"/> from an <see cref="XmlReader"/>.
     /// </summary>
     public static void LoadXmlReaderExample()
     {
@@ -195,7 +191,7 @@ internal static class SitemapExample
     }
 
     /// <summary>
-    /// Provides example code for saving with XmlWriter.
+    /// Saves a <see cref="Syndication.Sitemap"/> through an <see cref="XmlWriter"/>.
     /// </summary>
     public static void SaveXmlWriterExample()
     {

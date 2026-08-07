@@ -26,7 +26,7 @@ public readonly record struct GeoRssBox(GeoRssPosition LowerLeft, GeoRssPosition
     /// <summary>
     /// Gets a value indicating whether the corners are the right way round in latitude.
     /// </summary>
-    /// <value><b>true</b> if <see cref="LowerLeft"/> is no further north than <see cref="UpperRight"/>; otherwise, <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="LowerLeft"/> is no further north than <see cref="UpperRight"/>; otherwise, <see langword="false"/>.</value>
     /// <remarks>
     ///     <para>
     ///     Reported rather than enforced, and reported rather than repaired. A publisher who writes the
@@ -67,7 +67,7 @@ public readonly record struct GeoRssBox(GeoRssPosition LowerLeft, GeoRssPosition
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if <paramref name="first"/> sorts before <paramref name="second"/>; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if <paramref name="first"/> sorts before <paramref name="second"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <(GeoRssBox first, GeoRssBox second) => first.CompareTo(second) < 0;
 
     /// <summary>
@@ -75,7 +75,7 @@ public readonly record struct GeoRssBox(GeoRssPosition LowerLeft, GeoRssPosition
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if <paramref name="first"/> sorts after <paramref name="second"/>; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if <paramref name="first"/> sorts after <paramref name="second"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >(GeoRssBox first, GeoRssBox second) => first.CompareTo(second) > 0;
 
     /// <summary>
@@ -83,7 +83,7 @@ public readonly record struct GeoRssBox(GeoRssPosition LowerLeft, GeoRssPosition
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if <paramref name="first"/> does not sort after <paramref name="second"/>; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if <paramref name="first"/> does not sort after <paramref name="second"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator <=(GeoRssBox first, GeoRssBox second) => first.CompareTo(second) <= 0;
 
     /// <summary>
@@ -91,6 +91,6 @@ public readonly record struct GeoRssBox(GeoRssPosition LowerLeft, GeoRssPosition
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if <paramref name="first"/> does not sort before <paramref name="second"/>; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if <paramref name="first"/> does not sort before <paramref name="second"/>; otherwise, <see langword="false"/>.</returns>
     public static bool operator >=(GeoRssBox first, GeoRssBox second) => first.CompareTo(second) >= 0;
 }

@@ -24,11 +24,14 @@ namespace Argotic.Benchmarks.Loading;
 /// is the measurement that would say so.
 /// </para>
 /// <para>
-/// Every arm passes a non-null settings object, including the unlimited one.
-/// <c>RssFeed.Load(Stream, settings)</c> takes a different branch when settings are null - it skips
-/// the encoding sniff - so comparing a limited load against
-/// <c>Load(stream)</c> would measure the limit and the encoding sniff together. That is exactly the
-/// confound this harness carried in <see cref="ParsePipelineBenchmarks"/>.
+/// Every arm passes a non-null settings object, including the unlimited one, so the arms differ in
+/// the retrieval limit and in nothing else. That used to be load-bearing:
+/// <c>RssFeed.Load(Stream, settings)</c> skipped the encoding sniff whenever a settings object was
+/// supplied at all, so comparing a limited load against <c>Load(stream)</c> would have measured the
+/// limit and the sniff together — the confound <see cref="ParsePipelineBenchmarks"/> records. It now
+/// branches on whether the caller named an encoding, and a default settings object names none, so
+/// both paths sniff. The uniformity stays because it costs nothing and keeps these arms comparable
+/// if that branch is ever reintroduced.
 /// </para>
 /// </remarks>
 [BenchmarkCategory("load", "rss", "settings")]

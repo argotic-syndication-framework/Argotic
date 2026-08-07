@@ -13,12 +13,7 @@ namespace Argotic.Syndication;
 /// <seealso cref="AtomEntry.Links"/>
 /// <seealso cref="AtomFeed.Links"/>
 /// <example>
-///     <code lang="cs" title="The following code example demonstrates the usage of the AtomLink class.">
-///         <code
-///             source="..\..\Argotic.Examples\Core\Atom\AtomLinkExample.cs"
-///             region="AtomLink"
-///         />
-///     </code>
+///     <code source="..\..\Argotic.Examples\Core\Atom\AtomLinkExample.cs" language="cs" title="The following code example demonstrates the usage of the AtomLink class." />
 /// </example>
 public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEquatable<AtomLink>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
@@ -33,7 +28,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// Initializes a new instance of the <see cref="AtomLink"/> class using the supplied <see cref="Uri"/>.
     /// </summary>
     /// <param name="href">A <see cref="Uri"/> that represents an IRI that identifies the location of this Web resource.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is <see langword="null"/>.</exception>
     public AtomLink(Uri href)
     {
         this.Uri = href;
@@ -81,30 +76,39 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     ///         </list>
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is <see langword="null"/>.</exception>
     public AtomLink(Uri href, string relation) : this(href)
     {
         this.Relation = relation;
     }
 
     /// <summary>
-    /// Gets or sets the base URI other than the base URI of the document or external entity.
+    /// Gets or sets the base against which relative references inside this element are resolved.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>xml:base</c> in effect for this element, or <see langword="null"/> when none is. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-    ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+    ///         RFC 4287 §2 gives <c>xml:base</c> the function described in section 5.1.1 of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a> — it establishes the base URI,
+    ///         or IRI, for every relative reference in the attribute's effective scope. The value itself is a URI reference after processing according to
+    ///         <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.
+    ///     </para>
+    ///     <para>
+    ///         Loading resolves inheritance: an element without an <c>xml:base</c> of its own reports the nearest ancestor's, so the value here is the
+    ///         <i>effective</i> base a consumer can resolve an href against, not the literal attribute.
+    ///     </para>
     /// </remarks>
     public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>The language declared by <c>xml:lang</c>, or <see langword="null"/> when none is in scope. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         RFC 4287 defines <c>atomLanguageTag</c> as a language identifier per
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>, or its successor. A tag this runtime cannot turn
+    ///         into a <see cref="CultureInfo"/> is traced and dropped rather than failing the load.
     ///     </para>
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -112,22 +116,24 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Extensions"/> holds at least one <see cref="ISyndicationExtension"/>; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets or sets the natural or formal language in which this Web resource content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which this resource content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>hreflang</c> attribute, or <see langword="null"/> when it is absent. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         This is the language of the <i>linked</i> resource, and it is advisory — distinct from <see cref="Language"/>, which is the <c>xml:lang</c>
+    ///         governing the link element itself. RFC 4287 §4.2.7.4 pins the tag to
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>. A tag this runtime cannot turn into a
+    ///         <see cref="CultureInfo"/> is traced and dropped, so an exotic-but-legal BCP 47 tag can be silently lost on a round trip.
     ///     </para>
     /// </remarks>
     public CultureInfo? ContentLanguage { get; set; }
@@ -135,10 +141,11 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// <summary>
     /// Gets or sets an advisory media type for this Web resource.
     /// </summary>
-    /// <value>An advisory MIME media type that provides a hint about the type of the representation that is expected to be returned by the Web resource.</value>
+    /// <value>The <c>type</c> attribute, such as <c>application/atom+xml</c>. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     The advisory media type <b>does not</b> override the actual media type returned with the representation.
-    ///     The value <b>must</b> conform to the syntax of a MIME media type as specified by <a href="http://www.ietf.org/rfc/rfc4288.txt">RFC 4288: Media Type Specifications and Registration Procedures</a>.
+    ///     A hint only: it does not override the media type the server actually returns, and a client that trusts it over the response header will
+    ///     eventually be wrong. RFC 4287 §4.2.7.3 requires the syntax of a MIME media type as specified by
+    ///     <a href="https://www.rfc-editor.org/rfc/rfc4288.html">BCP 13 (RFC 4288, now RFC 6838)</a>; nothing here checks that.
     /// </remarks>
     public string ContentType
     {
@@ -149,11 +156,13 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// <summary>
     /// Gets or sets an advisory length for this Web resource content in octets.
     /// </summary>
-    /// <value>An advisory length for this Web resource content in octets. The default value is <see cref="Int64.MinValue"/>, which indicates that no advisory length was specified.</value>
+    /// <value>The <c>length</c> attribute in octets. The default value is <see cref="Int64.MinValue"/>, which means no length was specified and none is written on save.</value>
     /// <remarks>
-    ///     The <see cref="Length"/> does not override the actual content length of the representation as reported by the underlying protocol.
+    ///     Advisory, like <see cref="ContentType"/>: it does not override the content length the underlying protocol reports. Note the sentinel — the
+    ///     "absent" value is <see cref="Int64.MinValue"/>, not <c>0</c>, because <c>0</c> is a legal advertised length. Test for the sentinel, not for
+    ///     falsiness.
     /// </remarks>
-    /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <i>zero</i>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than <c>0</c>.</exception>
     public long Length
     {
         get;
@@ -167,14 +176,18 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// <summary>
     /// Gets or sets a value that indicates the link relation type of this Web resource.
     /// </summary>
-    /// <value>A value that indicates the link relation type.</value>
+    /// <value>The <c>rel</c> attribute exactly as written. The default value is an <i>empty</i> string, meaning the attribute was absent — see <see cref="EffectiveRelation"/> for the interpreted value.</value>
     /// <remarks>
-    ///     <para>If the <see cref="Relation"/> property is not specified, the <see cref="AtomLink"/> <b>must</b> be interpreted as if the link relation type is <i>alternate</i>.</para>
     ///     <para>
-    ///         The value of the <see cref="Relation"/> property <b>must</b> be a string that is non-empty and matches either the <i>isegment-nz-nc</i> or 
-    ///         the <i>IRI</i> production in <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers (IRIs)</a>. 
-    ///         Note that use of a relative reference other than a simple name is not allowed. If a name is given, implementations <b>must</b> consider the link relation type equivalent 
-    ///         to the same name registered within the IANA Registry of Link Relations (<a href="http://www.atomenabled.org/developers/syndication/atom-format-spec.php#IANA">Section 7</a>), 
+    ///         This property is the attribute, not its meaning. RFC 4287 §4.2.7.2 makes an absent <c>rel</c> mean <c>alternate</c>, but the emptiness is
+    ///         kept here so that saving does not invent an attribute the publisher never wrote. Read <see cref="EffectiveRelation"/> when you want the
+    ///         relation a processor should act on.
+    ///     </para>
+    ///     <para>
+    ///         When present the value must be non-empty and match either the <i>isegment-nz-nc</i> or
+    ///         the <i>IRI</i> production in <a href="https://www.rfc-editor.org/rfc/rfc3987.html">RFC 3987: Internationalized Resource Identifiers (IRIs)</a>.
+    ///         Note that use of a relative reference other than a simple name is not allowed. If a name is given, implementations must consider the link relation type equivalent 
+    ///         to the same name registered within the IANA Registry of Link Relations (<a href="https://www.rfc-editor.org/rfc/rfc4287.html">Section 7</a>), 
     ///         and thus to the IRI that would be obtained by appending the value of the rel attribute to the string "<i>http://www.iana.org/assignments/relation/</i>". 
     ///         The value of <see cref="Relation"/> property describes the meaning of the link, but does not impose any behavioral requirements on Atom Processors.
     ///     </para>
@@ -235,10 +248,10 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// <summary>
     /// Gets or sets human-readable information about this Web resource.
     /// </summary>
-    /// <value>Human-readable information about this Web resource.</value>
+    /// <value>The <c>title</c> attribute. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     The <see cref="Title"/> property is <i>language-sensitive</i>, with the natural language of the value being specified by the <see cref="Language"/> property.
-    ///     Entities represent their corresponding characters, not markup.
+    ///     Language-sensitive: the natural language of the value is whatever <see cref="Language"/> reports. It is plain text — entities represent their
+    ///     corresponding characters, never markup — so a title containing <c>&lt;em&gt;</c> is those five characters, not emphasis.
     /// </remarks>
     public string Title
     {
@@ -249,12 +262,17 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// <summary>
     /// Gets or sets an IRI that identifies the location of this Web resource.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the location of this Web resource.</value>
+    /// <value>The <c>href</c> attribute. The default value is <see langword="null"/>, and an empty <c>href</c> is written if the link is saved that way.</value>
     /// <remarks>
-    ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
-    ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
+    ///     <para>
+    ///         RFC 4287 §4.2.7.1 requires the attribute and makes its value an IRI <i>reference</i>
+    ///         (<a href="https://www.rfc-editor.org/rfc/rfc3987.html">RFC 3987</a>) — so, unlike <see cref="AtomId"/>, a relative value is legal and is
+    ///         resolved against <see cref="BaseUri"/>. Loading accepts relative and absolute alike; a caller that assumes
+    ///         <see cref="System.Uri.IsAbsoluteUri"/> will be surprised by real feeds.
+    ///     </para>
+    ///     <para>See <see cref="Uri"/> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Uri
     {
         get;
@@ -269,11 +287,11 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// Loads this <see cref="AtomLink"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="AtomLink"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomLink"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomLink"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -350,12 +368,12 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="AtomLink"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomLink"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomLink"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -371,7 +389,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// Saves the current <see cref="AtomLink"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -460,7 +478,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// Determines whether the specified <see cref="AtomLink"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="AtomLink"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="AtomLink"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="AtomLink"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(AtomLink? other)
     {
         if (other is null)
@@ -475,7 +493,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is AtomLink other && this.Equals(other);
 
     /// <summary>
@@ -489,7 +507,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(AtomLink? first, AtomLink? second)
     {
         if (first is null) return second is null;
@@ -501,7 +519,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are not equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(AtomLink? first, AtomLink? second) => !(first == second);
 
 }

@@ -6,6 +6,12 @@ namespace Argotic.Common;
 /// <summary>
 /// Associates enumeration field description information with a target element. This class cannot be inherited.
 /// </summary>
+/// <remarks>
+///     The <see cref="AlternateValue"/> is the wire form: for <see cref="SyndicationContentFormat"/> it is
+///     the document's root element name, which is how a format is recognised from a parsed document. The
+///     lookups are built once per enumeration type and cached in a <see cref="System.Collections.Frozen.FrozenDictionary{TKey, TValue}"/>,
+///     so reflection runs on first use and never again.
+/// </remarks>
 [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
 public sealed class EnumerationMetadataAttribute : Attribute, IComparable<EnumerationMetadataAttribute>, IEquatable<EnumerationMetadataAttribute>, IComparisonOperators
 {
@@ -19,7 +25,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <summary>
     /// Gets or sets the alternate textual value for the attributed field.
     /// </summary>
-    /// <value>The alternate textual value for the attributed field.</value>
+    /// <value>The alternate textual value, trimmed, or an <i>empty</i> string if none was specified. The default value is an <i>empty</i> string.</value>
     public string AlternateValue
     {
         get;
@@ -29,7 +35,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <summary>
     /// Gets or sets the display name for the attributed field.
     /// </summary>
-    /// <value>The display name for the attributed field.</value>
+    /// <value>The display name, trimmed, or an <i>empty</i> string if none was specified. The default value is an <i>empty</i> string.</value>
     public string DisplayName
     {
         get;
@@ -39,10 +45,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="EnumerationMetadataAttribute"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="EnumerationMetadataAttribute"/>.</returns>
-    /// <remarks>
-    ///     This method returns a human-readable string for the current instance.
-    /// </remarks>
+    /// <returns>The attribute written out as it would appear in source.</returns>
     public override string ToString() => $"""[EnumerationMetadata(DisplayName = "{this.DisplayName}", AlternateValue="{this.AlternateValue}")]""";
 
     /// <summary>
@@ -67,7 +70,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// Determines whether the specified <see cref="EnumerationMetadataAttribute"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="EnumerationMetadataAttribute"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="EnumerationMetadataAttribute"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="EnumerationMetadataAttribute"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(EnumerationMetadataAttribute? other)
     {
         if (other is null)
@@ -82,7 +85,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is EnumerationMetadataAttribute other && this.Equals(other);
 
     /// <summary>
@@ -96,7 +99,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(EnumerationMetadataAttribute? first, EnumerationMetadataAttribute? second)
     {
         if (first is null) return second is null;
@@ -108,7 +111,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
     public static bool operator !=(EnumerationMetadataAttribute? first, EnumerationMetadataAttribute? second) => !(first == second);
 
     /// <summary>
@@ -116,16 +119,16 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// </summary>
     /// <typeparam name="TEnum">The enum type.</typeparam>
     /// <param name="value">The enum value to get the alternate value for.</param>
-    /// <returns>The alternate value if found, otherwise an empty string.</returns>
+    /// <returns>The alternate value; otherwise, an <i>empty</i> string, both for a member carrying no <see cref="EnumerationMetadataAttribute"/> and for one whose attribute names no alternate value.</returns>
     public static string GetAlternateValue<TEnum>(TEnum value) where TEnum : struct, Enum => EnumMetadataCache<TEnum>.EnumToAlternateValue.GetValueOrDefault(value, string.Empty);
 
     /// <summary>
     /// Gets the enum value that corresponds to the specified alternate value name.
     /// </summary>
     /// <typeparam name="TEnum">The enum type.</typeparam>
-    /// <param name="name">The alternate value name to search for.</param>
-    /// <param name="defaultValue">The default value to return if not found.</param>
-    /// <returns>The enum value if found, otherwise the default value.</returns>
+    /// <param name="name">The alternate value name to search for. Matched without regard to case.</param>
+    /// <param name="defaultValue">The value to return when <paramref name="name"/> matches nothing, or is <see langword="null"/> or empty.</param>
+    /// <returns>The matching enum value; otherwise, <paramref name="defaultValue"/>.</returns>
     public static TEnum GetEnumByAlternateValue<TEnum>(string name, TEnum defaultValue) where TEnum : struct, Enum
     {
         if (string.IsNullOrEmpty(name))
@@ -140,14 +143,14 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// Gets the cached mapping from enum values to their alternate value strings.
     /// </summary>
     /// <typeparam name="TEnum">The enum type.</typeparam>
-    /// <returns>A FrozenDictionary mapping enum values to alternate value strings.</returns>
+    /// <returns>The cached mapping. Members carrying no <see cref="EnumerationMetadataAttribute"/> are absent from it.</returns>
     public static FrozenDictionary<TEnum, string> GetAlternateValueMapping<TEnum>() where TEnum : struct, Enum => EnumMetadataCache<TEnum>.EnumToAlternateValue;
 
     /// <summary>
-    /// Gets the cached mapping from alternate value strings to enum values (case-insensitive).
+    /// Gets the cached mapping from alternate value strings to enum values, keyed without regard to case.
     /// </summary>
     /// <typeparam name="TEnum">The enum type.</typeparam>
-    /// <returns>A FrozenDictionary mapping alternate value strings to enum values.</returns>
+    /// <returns>The cached mapping. Members whose alternate value is empty are absent from it, so it is not the exact inverse of <see cref="GetAlternateValueMapping{TEnum}"/>.</returns>
     public static FrozenDictionary<string, TEnum> GetEnumByAlternateValueMapping<TEnum>() where TEnum : struct, Enum => EnumMetadataCache<TEnum>.AlternateValueToEnum;
 
     /// <summary>

@@ -139,6 +139,8 @@ public sealed class EnumerationMetadataContractTests
     ///     this one names the tokens the Media RSS specification defines, so a change that renames them
     ///     to something self-consistent but wrong still fails.
     /// </remarks>
+    /// <param name="token">The <c>expression</c> attribute value as Media RSS spells it.</param>
+    /// <param name="expected">The member <paramref name="token"/> must resolve to, and write back out as.</param>
     [TestMethod]
     [DataRow("full", Argotic.Extensions.Core.YahooMediaExpression.Full)]
     [DataRow("sample", Argotic.Extensions.Core.YahooMediaExpression.Sample)]

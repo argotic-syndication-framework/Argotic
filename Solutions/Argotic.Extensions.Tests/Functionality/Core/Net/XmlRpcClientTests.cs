@@ -4,11 +4,17 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Net;
 
+/// <summary>
+/// Covers what an <c>XmlRpcClient</c> carries once constructed, and what of that a caller can change.
+/// </summary>
 [TestClass]
 public class XmlRpcClientTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// A client built without a host has none, rather than a placeholder.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_CreatesInstance()
     {
@@ -18,6 +24,9 @@ public class XmlRpcClientTests
         client.Host.ShouldBeNull();
     }
 
+    /// <summary>
+    /// The URI a client is constructed with becomes its host.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithHost_SetsHost()
     {
@@ -27,6 +36,9 @@ public class XmlRpcClientTests
         client.Host.ShouldBe(host);
     }
 
+    /// <summary>
+    /// The host can be replaced after construction.
+    /// </summary>
     [TestMethod]
     public void Host_CanBeSet()
     {
@@ -38,6 +50,9 @@ public class XmlRpcClientTests
         client.Host.ShouldBe(host);
     }
 
+    /// <summary>
+    /// A client identifies itself as <c>Argotic-Syndication-Framework/</c> and a version, without being asked to.
+    /// </summary>
     [TestMethod]
     public void UserAgent_IsNotEmpty()
     {
@@ -47,6 +62,9 @@ public class XmlRpcClientTests
         client.UserAgent.ShouldStartWith("Argotic-Syndication-Framework/");
     }
 
+    /// <summary>
+    /// A client waits 15 seconds unless told otherwise.
+    /// </summary>
     [TestMethod]
     public void Timeout_DefaultValue_Is15Seconds()
     {
@@ -55,6 +73,9 @@ public class XmlRpcClientTests
         client.Timeout.ShouldBe(TimeSpan.FromSeconds(15));
     }
 
+    /// <summary>
+    /// The timeout can be replaced after construction.
+    /// </summary>
     [TestMethod]
     public void Timeout_CanBeSet()
     {
@@ -67,11 +88,17 @@ public class XmlRpcClientTests
     }
 }
 
+/// <summary>
+/// Covers the method name, parameters and encoding an <c>XmlRpcMessage</c> carries.
+/// </summary>
 [TestClass]
 public class XmlRpcMessageTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The method name a message is constructed with is the one it carries.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithMethodName_SetsMethodName()
     {
@@ -80,6 +107,9 @@ public class XmlRpcMessageTests
         message.MethodName.ShouldBe("pingback.ping");
     }
 
+    /// <summary>
+    /// Scalar parameters of three different types can be added to one message, and all three are kept.
+    /// </summary>
     [TestMethod]
     public void Parameters_CanAddScalarValues()
     {
@@ -91,6 +121,9 @@ public class XmlRpcMessageTests
         message.Parameters.Count.ShouldBe(3);
     }
 
+    /// <summary>
+    /// A message is encoded as UTF-8 unless another encoding is set.
+    /// </summary>
     [TestMethod]
     public void Encoding_DefaultValue_IsUtf8()
     {
@@ -99,6 +132,9 @@ public class XmlRpcMessageTests
         message.Encoding.ShouldBe(Encoding.UTF8);
     }
 
+    /// <summary>
+    /// The encoding can be chosen through an object initialiser, here ASCII.
+    /// </summary>
     [TestMethod]
     public void Encoding_CanBeSet()
     {
@@ -111,11 +147,17 @@ public class XmlRpcMessageTests
     }
 }
 
+/// <summary>
+/// Covers the CLR value and the <c>XmlRpcScalarValueType</c> each constructor overload infers.
+/// </summary>
 [TestClass]
 public class XmlRpcScalarValueTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// A string argument is kept verbatim and typed <c>String</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithString_SetsValue()
     {
@@ -125,6 +167,9 @@ public class XmlRpcScalarValueTests
         value.ValueType.ShouldBe(XmlRpcScalarValueType.String);
     }
 
+    /// <summary>
+    /// An <c>int</c> argument is kept verbatim and typed <c>Integer</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithInteger_SetsValue()
     {
@@ -134,6 +179,9 @@ public class XmlRpcScalarValueTests
         value.ValueType.ShouldBe(XmlRpcScalarValueType.Integer);
     }
 
+    /// <summary>
+    /// A <c>bool</c> argument is kept verbatim and typed <c>Boolean</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithBoolean_SetsValue()
     {
@@ -143,6 +191,9 @@ public class XmlRpcScalarValueTests
         value.ValueType.ShouldBe(XmlRpcScalarValueType.Boolean);
     }
 
+    /// <summary>
+    /// A <c>double</c> argument is kept verbatim and typed <c>Double</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithDouble_SetsValue()
     {
@@ -152,6 +203,9 @@ public class XmlRpcScalarValueTests
         value.ValueType.ShouldBe(XmlRpcScalarValueType.Double);
     }
 
+    /// <summary>
+    /// A <c>DateTime</c> argument is kept verbatim and typed <c>DateTime</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithDateTime_SetsValue()
     {
@@ -162,6 +216,9 @@ public class XmlRpcScalarValueTests
         value.ValueType.ShouldBe(XmlRpcScalarValueType.DateTime);
     }
 
+    /// <summary>
+    /// A byte array is kept verbatim and typed <c>Base64</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithBase64_SetsValue()
     {
@@ -173,11 +230,17 @@ public class XmlRpcScalarValueTests
     }
 }
 
+/// <summary>
+/// Covers the default state, equality and ordering contracts of <c>XmlRpcResponse</c>.
+/// </summary>
 [TestClass]
 public class XmlRpcResponseTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// A default-constructed response carries no fault.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_CreatesFaultlessResponse()
     {
@@ -186,6 +249,9 @@ public class XmlRpcResponseTests
         response.Fault.ShouldBeNull();
     }
 
+    /// <summary>
+    /// Two default-constructed responses are equal.
+    /// </summary>
     [TestMethod]
     public void Equals_SameResponse_ReturnsTrue()
     {
@@ -195,6 +261,9 @@ public class XmlRpcResponseTests
         response1.Equals(response2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A default-constructed response hashes to a non-zero value.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_DoesNotThrow()
     {
@@ -205,6 +274,9 @@ public class XmlRpcResponseTests
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// Two default-constructed responses compare as <c>0</c>.
+    /// </summary>
     [TestMethod]
     public void CompareTo_SameResponse_ReturnsZero()
     {

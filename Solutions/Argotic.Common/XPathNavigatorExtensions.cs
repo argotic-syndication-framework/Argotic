@@ -33,7 +33,7 @@ internal static class XPathNavigatorExtensions
         /// Returns the first child element with the supplied local name and no namespace.
         /// </summary>
         /// <param name="localName">The local name of the child element to select.</param>
-        /// <returns>The first matching child element, or <b>null</b> if there is none.</returns>
+        /// <returns>The first matching child element, or <see langword="null"/> if there is none.</returns>
         /// <remarks>
         ///     <para>
         ///     Equivalent to <c>SelectSingleNode(localName, manager)</c> for an unprefixed name: under
@@ -44,7 +44,7 @@ internal static class XPathNavigatorExtensions
         ///     A clone moved onto the child, not an iterator over the children. <c>SelectChildren</c>
         ///     allocates the iterator <i>and</i> the navigator it yields, and this wants only the
         ///     navigator: measured over the fifteen lookups a Dublin Core context performs,
-        ///     <b>1440 B</b> through the iterator against <b>720 B</b> through the clone, for the
+        ///     1440 B through the iterator against 720 B through the clone, for the
         ///     same answer on all fifteen names.
         ///     </para>
         /// </remarks>
@@ -61,7 +61,7 @@ internal static class XPathNavigatorExtensions
         /// <param name="prefix">The namespace prefix to resolve.</param>
         /// <param name="localName">The local name of the child element to select.</param>
         /// <param name="resolver">The resolver supplying the prefix's namespace.</param>
-        /// <returns>The first matching child element, or <b>null</b> if there is none.</returns>
+        /// <returns>The first matching child element, or <see langword="null"/> if there is none.</returns>
         /// <exception cref="XPathException">The <paramref name="prefix"/> is not defined by the <paramref name="resolver"/>.</exception>
         /// <remarks>
         ///     The throw is deliberate. Evaluating an XPath naming an unregistered prefix raises
@@ -82,18 +82,18 @@ internal static class XPathNavigatorExtensions
         /// Returns every child element with the given name, in no namespace.
         /// </summary>
         /// <param name="localName">The local name of the child elements to select.</param>
-        /// <returns>An iterator over the matching child elements. Never <b>null</b>.</returns>
+        /// <returns>An iterator over the matching child elements. Never <see langword="null"/>.</returns>
         /// <remarks>
         ///     <para>
         ///     The plural of <c>SelectChildElement(string)</c>, and the reason it exists is
-        ///     cost. <c>XPathNavigator.Select("name", manager)</c> <b>compiles an XPath expression on
-        ///     every call</b>, and the call sites this replaces are per-item: <c>category</c> and
+        ///     cost. <c>XPathNavigator.Select("name", manager)</c> compiles an XPath expression on
+        ///     every call, and the call sites this replaces are per-item: <c>category</c> and
         ///     <c>enclosure</c> run once per RSS item, <c>entry</c> once per Atom entry.
         ///     </para>
         ///     <para>
         ///     Measured over a hundred-item feed, walking every item's <c>category</c> and
-        ///     <c>enclosure</c> children: <b>147.6 KB and 130 µs</b> through <c>Select</c>, <b>18.8 KB
-        ///     and 23 µs</b> through this — 7.9× the allocation and 5.7× the time, for a selection
+        ///     <c>enclosure</c> children: 147.6 KB and 130 µs through <c>Select</c>, 18.8 KB
+        ///     and 23 µs through this — 7.9× the allocation and 5.7× the time, for a selection
         ///     that never needed an expression evaluator. A pre-compiled <see cref="XPathExpression"/>
         ///     lands in between at 73.8 KB, so the win is not merely the compilation.
         ///     </para>
@@ -107,7 +107,7 @@ internal static class XPathNavigatorExtensions
         /// <param name="prefix">The namespace prefix to resolve.</param>
         /// <param name="localName">The local name of the child elements to select.</param>
         /// <param name="resolver">The resolver supplying the prefix's namespace.</param>
-        /// <returns>An iterator over the matching child elements. Never <b>null</b>.</returns>
+        /// <returns>An iterator over the matching child elements. Never <see langword="null"/>.</returns>
         /// <remarks>
         ///     Throws for an unregistered prefix for the same reason the singular overload does:
         ///     resolving to the empty namespace would silently select from the no-namespace partition

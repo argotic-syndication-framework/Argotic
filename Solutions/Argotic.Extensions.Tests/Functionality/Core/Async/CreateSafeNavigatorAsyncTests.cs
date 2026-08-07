@@ -6,11 +6,16 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Async;
 
 /// <summary>
-/// Tests for SyndicationEncodingUtility.CreateSafeNavigatorAsync.
+/// Covers the navigator factories on <c>SyndicationEncodingUtility</c>: the guards that stop the
+/// asynchronous URI overload before it reaches the network, and the synchronous stream overloads.
 /// </summary>
 [TestClass]
 public class CreateSafeNavigatorAsyncTests
 {
+    /// <summary>
+    /// A null source URI is refused with an <c>ArgumentNullException</c> before any request is made.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task CreateSafeNavigatorAsync_WithNullSource_ThrowsArgumentNullException()
     {
@@ -22,6 +27,10 @@ public class CreateSafeNavigatorAsyncTests
         ex.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A token cancelled before the call aborts it with an <c>OperationCanceledException</c> rather than reaching the network.
+    /// </summary>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     public async Task CreateSafeNavigatorAsync_WithCancelledToken_ThrowsOperationCanceledException()
     {
@@ -40,6 +49,9 @@ public class CreateSafeNavigatorAsyncTests
         ex.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// A navigator built from a stream is positioned at the document root, so <c>rss</c> is reachable as its child.
+    /// </summary>
     [TestMethod]
     public void CreateSafeNavigator_FromStream_ReturnsValidNavigator()
     {
@@ -54,6 +66,9 @@ public class CreateSafeNavigatorAsyncTests
         navigator.MoveToChild("rss", "").ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Naming the encoding explicitly gives the same navigator as letting it be detected.
+    /// </summary>
     [TestMethod]
     public void CreateSafeNavigator_FromStreamWithEncoding_ReturnsValidNavigator()
     {
@@ -68,6 +83,9 @@ public class CreateSafeNavigatorAsyncTests
         navigator.MoveToChild("rss", "").ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A well-formed document yields a navigator.
+    /// </summary>
     [TestMethod]
     public void CreateSafeNavigator_WithValidXml_ReturnsValidNavigator()
     {

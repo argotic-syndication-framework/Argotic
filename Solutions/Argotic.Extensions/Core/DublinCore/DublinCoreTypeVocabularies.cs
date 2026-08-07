@@ -8,7 +8,7 @@ namespace Argotic.Extensions.Core;
 /// <seealso cref="DublinCoreElementSetSyndicationExtension"/>
 /// <seealso cref="DublinCoreMetadataTermsSyndicationExtension"/>
 /// <remarks>
-///     For more information about the DCMI Type Vocabulary, see <a href="http://dublincore.org/documents/dcmi-type-vocabulary/">http://dublincore.org/documents/dcmi-type-vocabulary/</a>.
+///     For more information about the DCMI Type Vocabulary, see <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/">https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/</a>.
 /// </remarks>
 [Flags]
 public enum DublinCoreTypeVocabularies

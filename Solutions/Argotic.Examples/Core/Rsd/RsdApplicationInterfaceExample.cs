@@ -3,16 +3,12 @@ using Argotic.Syndication.Specialized;
 namespace Argotic.Examples.Core.Rsd;
 
 /// <summary>
-/// Contains the code examples for the <see cref="RsdApplicationInterface"/> class.
+/// Advertises a blogging API endpoint with <see cref="RsdApplicationInterface"/>.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="RsdApplicationInterface"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class RsdApplicationInterfaceExample
 {
     /// <summary>
-    /// Provides example code for the RsdApplicationInterface class.
+    /// Builds the containing <see cref="RsdDocument"/> and prints the <see cref="RsdApplicationInterface"/> it holds.
     /// </summary>
     public static void ClassExample()
     {

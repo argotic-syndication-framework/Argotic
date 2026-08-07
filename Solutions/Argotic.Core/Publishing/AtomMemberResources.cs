@@ -13,14 +13,14 @@ namespace Argotic.Publishing;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="AtomMemberResources"/> class implements the <i>app:collection</i> element of the <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a>.
+///         The <see cref="AtomMemberResources"/> class implements the <i>app:collection</i> element of the <a href="https://www.rfc-editor.org/rfc/rfc5023.html">Atom Publishing Protocol</a>.
 ///     </para>
 ///     <para>
-///         The <see cref="AtomMemberResources"/> describes a <see cref="AtomFeed"/>. The <see cref="AtomMemberResources"/> <b>must</b> specify a <see cref="Title"/> and <see cref="AtomMemberResources.Uri"/>.
+///         The <see cref="AtomMemberResources"/> describes a <see cref="AtomFeed"/>. The <see cref="AtomMemberResources"/> must specify a <see cref="Title"/> and <see cref="AtomMemberResources.Uri"/>.
 ///     </para>
 ///     <para>
 ///         The <see cref="AtomMemberResources"/> <i>may</i> contain any number of <see cref="AtomAcceptedMediaRange">accept</see> entities,
-///         indicating the types of representations accepted by the <see cref="AtomMemberResources">collection</see>. The order of such elements is <u>not</u> significant.
+///         indicating the types of representations accepted by the <see cref="AtomMemberResources">collection</see>. The order of such elements is <i>not</i> significant.
 ///         Additionally, the <see cref="AtomMemberResources">collection</see> <i>may</i> contain any number of <see cref="AtomCategoryDocument">categories</see>.
 ///     </para>
 ///     <para>
@@ -45,8 +45,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// </summary>
     /// <param name="href">A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the location of the collection.</param>
     /// <param name="title">A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for the collection.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="title"/> is <see langword="null"/>.</exception>
     public AtomMemberResources(Uri href, AtomTextConstruct title) : this()
     {
         this.Uri = href;
@@ -54,23 +54,32 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     }
 
     /// <summary>
-    /// Gets or sets the base URI other than the base URI of the document or external entity.
+    /// Gets or sets the base against which relative references inside this element are resolved.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>xml:base</c> in effect for this element, or <see langword="null"/> when none is. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-    ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+    ///         RFC 4287 §2 gives <c>xml:base</c> the function described in section 5.1.1 of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a> — it establishes the base URI,
+    ///         or IRI, for every relative reference in the attribute's effective scope. The value itself is a URI reference after processing according to
+    ///         <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.
+    ///     </para>
+    ///     <para>
+    ///         Loading resolves inheritance: an element without an <c>xml:base</c> of its own reports the nearest ancestor's, so the value here is the
+    ///         <i>effective</i> base a consumer can resolve an href against, not the literal attribute.
+    ///     </para>
     /// </remarks>
     public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>The language declared by <c>xml:lang</c>, or <see langword="null"/> when none is in scope. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         RFC 4287 defines <c>atomLanguageTag</c> as a language identifier per
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>, or its successor. A tag this runtime cannot turn
+    ///         into a <see cref="CultureInfo"/> is traced and dropped rather than failing the load.
     ///     </para>
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -78,30 +87,26 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Extensions"/> holds at least one <see cref="ISyndicationExtension"/>; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Gets a list of media ranges that are accepted by this collection.
     /// </summary>
-    /// <value>A <see cref="IList{AtomAcceptedMediaRange}"/> of <see cref="AtomAcceptedMediaRange"/> objects that represent a list of media ranges that this collection will accept from clients.</value>
     /// <remarks>
     ///     <para>
-    ///         A value of <b>application/atom+xml;type=entry</b> <i>may</i> appear in any <see cref="AtomAcceptedMediaRange">accept</see> list of media ranges
-    ///         and indicates that <see cref="AtomEntry">Atom Entry Documents</see> can be added to the <see cref="AtomMemberResources"/>.
-    ///         If no <see cref="AtomAcceptedMediaRange"/> is present, clients <i>should</i> treat this as equivalent to an <see cref="AtomAcceptedMediaRange"/> with the content <b>application/atom+xml;type=entry</b>.
-    ///         The <see cref="AtomAcceptedMediaRange"/> class exposes a static string property named <see cref="AtomAcceptedMediaRange.AtomEntryMediaRange"/> that can be used to assign the
-    ///         <b>application/atom+xml;type=entry</b> media range value.
+    ///         <b>Empty and absent mean opposite things.</b> An empty collection here — no <c>app:accept</c> element at all — means the collection accepts
+    ///         Atom entries, because RFC 5023 §8.3.4 makes that the default. A single <see cref="AtomAcceptedMediaRange"/> whose
+    ///         <see cref="AtomAcceptedMediaRange.MediaRange"/> is an empty string means the opposite: the collection accepts nothing and does not support
+    ///         creating members at all. Testing <c>Accepts.Count == 0</c> for "cannot post here" gets it exactly backwards.
     ///     </para>
     ///     <para>
-    ///         If one <see cref="AtomAcceptedMediaRange"/> exists and is empty, clients <i>should</i> assume
-    ///         that the <see cref="AtomMemberResources"/> <b>does not</b> support the creation of new <see cref="AtomFeed.Entries"/>.
+    ///         <see cref="AtomAcceptedMediaRange.AtomEntryMediaRange"/> is the constant for the entry range, so that value need not be typed out.
     ///     </para>
     /// </remarks>
     public IList<AtomAcceptedMediaRange> Accepts { get; } = [];
@@ -109,23 +114,19 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <summary>
     /// Gets a list of categories that can be applied to members of this collection.
     /// </summary>
-    /// <value>A <see cref="IList{AtomCategoryDocument}"/> of <see cref="AtomCategoryDocument"/> objects that represent a list of categories that can be applied to members of this collection.</value>
     /// <remarks>
-    ///     The server <i>may</i> reject attempts to create or store members whose categories are not present in its categories list.
-    ///     A <see cref="AtomMemberResources"/> that indicates the category set is open <b>should not</b> reject Otherwise, acceptable members whose categories are not in its categories list.
-    ///     The absence of <see cref="Categories"/> means that the category handling of the <see cref="AtomMemberResources"/> is unspecified.
-    ///     A <see cref="AtomCategoryDocument.IsFixed">fixed</see> category list that contains zero categories indicates the <see cref="AtomMemberResources"/> does not accept category data.
+    ///     Three states, and they are not a spectrum. RFC 5023 §8.3.6: an empty collection here says nothing at all — category handling is simply
+    ///     unspecified. A <see cref="AtomCategoryDocument.IsFixed">fixed</see> list is exhaustive, and the server <i>may</i> reject members using a
+    ///     category outside it; a fixed list holding zero categories says the collection accepts no category data. An open list is advisory, and the
+    ///     server <i>should not</i> reject otherwise-acceptable members for straying from it.
     /// </remarks>
     public IList<AtomCategoryDocument> Categories { get; } = [];
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable title for this collection.
     /// </summary>
-    /// <value>
-    ///     A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this collection.
-    ///     The default value is an empty <see cref="AtomTextConstruct"/>.
-    /// </value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <value>The <c>atom:title</c>. The default value is an empty <see cref="AtomTextConstruct"/>, never <see langword="null"/>; RFC 5023 §8.3.3 requires the element.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public AtomTextConstruct Title
     {
         get;
@@ -140,12 +141,12 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <summary>
     /// Gets or sets an IRI that identifies the location of this <see cref="AtomMemberResources"/>.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the location of this <see cref="AtomMemberResources"/>.</value>
+    /// <value>The <c>href</c> attribute — an IRI reference locating the collection. The default value is <see langword="null"/>.</value>
     /// <remarks>
-    ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
-    ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
+    ///     <para>See <a href="https://www.rfc-editor.org/rfc/rfc3987.html">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
+    ///     <para>See <see cref="Uri"/> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
     public Uri? Uri
     {
         get;
@@ -164,12 +165,12 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <returns>A <see cref="AtomLink"/> object that can be used to retrieve, update, and delete the Resource represented by an editable <see cref="AtomEntry"/>.</returns>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit</b>. The value of <i>edit</i> specifies
+    ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <c>edit</c>. The value of <i>edit</i> specifies
     ///         that the value of the <paramref name="href"/> attribute is the IRI of an editable <see cref="AtomEntry"/>.
     ///     </para>
-    ///     <para>An <see cref="AtomEntry"/> <b>must not</b> contain more than one <i>edit</i> link relation.</para>
+    ///     <para>An <see cref="AtomEntry"/> must not contain more than one <i>edit</i> link relation.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is <see langword="null"/>.</exception>
     public static AtomLink CreateEditLink(Uri href)
     {
         ArgumentNullException.ThrowIfNull(href);
@@ -184,12 +185,12 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <returns>A <see cref="AtomLink"/> object that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies
+    ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <c>edit-media</c>. The value of <i>edit-media</i> specifies
     ///         that the value of the <paramref name="href"/> attribute is an IRI that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.
     ///     </para>
     ///     <para>
     ///         An <see cref="AtomEntry"/> <i>may</i> contain zero or more <i>edit-media</i> link relations.
-    ///         An <see cref="AtomEntry"/> <b>must not</b> contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i>
+    ///         An <see cref="AtomEntry"/> must not contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i>
     ///         that has the same <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> values.
     ///         All <i>edit-media</i> link relations in the same <see cref="AtomEntry"/> reference the same Resource.
     ///         If a client encounters multiple <i>edit-media</i> link relations in an <see cref="AtomEntry"/> then it <i>should</i> choose a link based on the client
@@ -198,7 +199,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     ///         client <i>should</i> pick the first <i>edit-media</i> link relation in document order.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is <see langword="null"/>.</exception>
     public static AtomLink CreateEditMediaLink(Uri href)
     {
         ArgumentNullException.ThrowIfNull(href);
@@ -214,12 +215,12 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <returns>A <see cref="AtomLink"/> object that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies
+    ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <c>edit-media</c>. The value of <i>edit-media</i> specifies
     ///         that the value of the <paramref name="href"/> attribute is an IRI that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.
     ///     </para>
     ///     <para>
     ///         An <see cref="AtomEntry"/> <i>may</i> contain zero or more <i>edit-media</i> link relations.
-    ///         An <see cref="AtomEntry"/> <b>must not</b> contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i>
+    ///         An <see cref="AtomEntry"/> must not contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i>
     ///         that has the same <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> values.
     ///         All <i>edit-media</i> link relations in the same <see cref="AtomEntry"/> reference the same Resource.
     ///         If a client encounters multiple <i>edit-media</i> link relations in an <see cref="AtomEntry"/> then it <i>should</i> choose a link based on the client
@@ -228,7 +229,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     ///         client <i>should</i> pick the first <i>edit-media</i> link relation in document order.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is <see langword="null"/>.</exception>
     public static AtomLink CreateEditMediaLink(Uri href, string contentType)
     {
         AtomLink link = AtomMemberResources.CreateEditMediaLink(href);
@@ -245,12 +246,12 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <returns>A <see cref="AtomLink"/> object that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies
+    ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <c>edit-media</c>. The value of <i>edit-media</i> specifies
     ///         that the value of the <paramref name="href"/> attribute is an IRI that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.
     ///     </para>
     ///     <para>
     ///         An <see cref="AtomEntry"/> <i>may</i> contain zero or more <i>edit-media</i> link relations.
-    ///         An <see cref="AtomEntry"/> <b>must not</b> contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i>
+    ///         An <see cref="AtomEntry"/> must not contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> value of <i>edit-media</i>
     ///         that has the same <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> values.
     ///         All <i>edit-media</i> link relations in the same <see cref="AtomEntry"/> reference the same Resource.
     ///         If a client encounters multiple <i>edit-media</i> link relations in an <see cref="AtomEntry"/> then it <i>should</i> choose a link based on the client
@@ -259,7 +260,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     ///         client <i>should</i> pick the first <i>edit-media</i> link relation in document order.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="href"/> is <see langword="null"/>.</exception>
     [SuppressMessage(
         "Globalization",
         "CA1304:Specify CultureInfo",
@@ -276,8 +277,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
     /// </summary>
     /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
@@ -307,8 +308,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     ///         For instance, a server might filter out some characters or replace accented letters with non-accented ones, replace spaces with underscores, change case, and so on.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="characterSequence"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="characterSequence"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="characterSequence"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="characterSequence"/> is an empty string.</exception>
     public static string SlugEncode(string characterSequence)
     {
         ArgumentException.ThrowIfNullOrEmpty(characterSequence);
@@ -336,8 +337,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     ///         For instance, a server might filter out some characters or replace accented letters with non-accented ones, replace spaces with underscores, change case, and so on.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="slug"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="slug"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="slug"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="slug"/> is an empty string.</exception>
     public static string SlugDecode(string slug)
     {
         ArgumentException.ThrowIfNullOrEmpty(slug);
@@ -349,11 +350,11 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// Loads this <see cref="AtomMemberResources"/> using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
     /// <param name="source">The <see cref="IXPathNavigable"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomMemberResources"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomMemberResources"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public override bool Load(IXPathNavigable source)
     {
         bool wasLoaded = false;
@@ -447,12 +448,12 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomMemberResources"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomMemberResources"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -469,9 +470,9 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <summary>
     /// Loads this <see cref="AtomMemberResources"/> using the supplied <see cref="XmlReader"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="AtomMemberResources"/>.</param>
-    /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="AtomMemberResources"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="AtomMemberResources"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -482,10 +483,10 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <summary>
     /// Loads this <see cref="AtomMemberResources"/> using the supplied <see cref="XmlReader"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="AtomMemberResources"/>.</param>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="AtomMemberResources"/>.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="AtomMemberResources"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
     public bool Load(XmlReader reader, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(reader);
@@ -500,7 +501,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// Saves the current <see cref="AtomMemberResources"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public override void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -574,7 +575,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// Determines whether the specified <see cref="AtomMemberResources"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="AtomMemberResources"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="AtomMemberResources"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="AtomMemberResources"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(AtomMemberResources? other)
     {
         if (other is null)
@@ -589,7 +590,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is AtomMemberResources other && this.Equals(other);
 
     /// <summary>
@@ -603,7 +604,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(AtomMemberResources? first, AtomMemberResources? second)
     {
         if (first is null) return second is null;
@@ -615,7 +616,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are not equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(AtomMemberResources? first, AtomMemberResources? second) => !(first == second);
 
 }

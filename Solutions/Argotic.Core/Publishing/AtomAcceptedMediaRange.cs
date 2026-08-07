@@ -8,23 +8,25 @@ using Argotic.Syndication;
 namespace Argotic.Publishing;
 
 /// <summary>
-/// Represents a media range as defined in <a href="http://tools.ietf.org/html/rfc2616">RFC 2616: Hypertext Transfer Protocol</a> that
+/// Represents a media range as defined in <a href="https://www.rfc-editor.org/rfc/rfc2616.html">RFC 2616: Hypertext Transfer Protocol</a> that
 /// specifies a type of representation that can be added to a <see cref="AtomMemberResources"/>.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="AtomAcceptedMediaRange"/> class implements the <i>app:accept</i> element of the <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a>.
+///         The <see cref="AtomAcceptedMediaRange"/> class implements the <i>app:accept</i> element of the <a href="https://www.rfc-editor.org/rfc/rfc5023.html">Atom Publishing Protocol</a>.
 ///     </para>
 ///     <para>
-///         The content value of the <see cref="MediaRange"/> property for an <see cref="AtomAcceptedMediaRange"/> is a media range as defined in <a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a>.
-///         The media range specifies a type of representation that can be added to a <see cref="AtomMemberResources">collection</see> via a POST operation.
+///         <see cref="MediaRange"/> holds a media range, and RFC 5023 §8.3.4 pins its grammar to section 14.1 of
+///         <a href="https://www.rfc-editor.org/rfc/rfc2616.html">RFC 2616</a> — the citation the protocol makes, so that is the one kept here. RFC 2616
+///         has since been split into three documents; the corresponding clause is <b>§12.5.1 of RFC 9110</b>, not §14.1 of it. The range names a type of
+///         representation that may be added to a <see cref="AtomMemberResources">collection</see> by POST.
 ///     </para>
 ///     <para>
-///         The <see cref="AtomAcceptedMediaRange"/> is similar to the HTTP Accept request-header [<a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a>].
-///         Media type parameters are allowed within <see cref="AtomAcceptedMediaRange"/>, but <see cref="AtomAcceptedMediaRange"/> has no notion of preference e.g. <i>accept-params</i> or <i>q</i> arguments,
-///         as specified in section 14.1 of <a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a> are not significant.
+///         It is <i>similar</i> to an HTTP <c>Accept</c> request-header, and the difference is the trap: media type parameters are allowed, but this
+///         element has no notion of preference. The <i>accept-params</i> and <i>q</i> arguments RFC 2616 §14.1 permits are not significant here, so a
+///         server writing <c>image/png;q=0.8</c> expresses nothing a client is entitled to act on.
 ///     </para>
-///     <para>See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.</para>
+///     <para>See <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a> for a listing of the registered IANA MIME media types and subtypes.</para>
 /// </remarks>
 /// <seealso cref="AtomMemberResources.Accepts"/>
 /// <seealso cref="AtomMemberResources"/>
@@ -47,23 +49,32 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     }
 
     /// <summary>
-    /// Gets or sets the base URI other than the base URI of the document or external entity.
+    /// Gets or sets the base against which relative references inside this element are resolved.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
+    /// <value>The <c>xml:base</c> in effect for this element, or <see langword="null"/> when none is. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-    ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
+    ///         RFC 4287 §2 gives <c>xml:base</c> the function described in section 5.1.1 of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a> — it establishes the base URI,
+    ///         or IRI, for every relative reference in the attribute's effective scope. The value itself is a URI reference after processing according to
+    ///         <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.
+    ///     </para>
+    ///     <para>
+    ///         Loading resolves inheritance: an element without an <c>xml:base</c> of its own reports the nearest ancestor's, so the value here is the
+    ///         <i>effective</i> base a consumer can resolve an href against, not the literal attribute.
+    ///     </para>
     /// </remarks>
     public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
+    /// <value>The language declared by <c>xml:lang</c>, or <see langword="null"/> when none is in scope. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
+    ///         RFC 4287 defines <c>atomLanguageTag</c> as a language identifier per
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>, or its successor. A tag this runtime cannot turn
+    ///         into a <see cref="CultureInfo"/> is traced and dropped rather than failing the load.
     ///     </para>
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -71,39 +82,41 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
     public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
-    /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
+    /// <value><see langword="true"/> if <see cref="Extensions"/> holds at least one <see cref="ISyndicationExtension"/>; otherwise, <see langword="false"/>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
-    /// Gets a <see cref="MediaRange"/> that indicates that <see cref="AtomEntry">Atom Entry Documents</see> can be added to a <see cref="AtomMemberResources"/>.
+    /// Gets the media range meaning "<see cref="AtomEntry">Atom Entry Documents</see> may be added to this collection".
     /// </summary>
-    /// <value>A <see cref="MediaRange"/> value that indicates that <see cref="AtomEntry">Atom Entry Documents</see> can be added to a <see cref="AtomMemberResources"/>.</value>
+    /// <value><c>application/atom+xml;type=entry</c>.</value>
+    /// <remarks>
+    ///     RFC 5023 §8.3.4 makes this the assumed range when a collection carries no <c>app:accept</c> at all. Its <i>presence</i> is therefore not what
+    ///     distinguishes an entry collection; its <i>absence</i> alongside some other range is.
+    /// </remarks>
     public static string AtomEntryMediaRange => "application/atom+xml;type=entry";
 
     /// <summary>
-    /// Gets a <see cref="MediaRange"/> that indicates that <see cref="AtomFeed">Atom Feed Documents</see> can be added to a <see cref="AtomMemberResources"/>.
+    /// Gets the media range meaning "<see cref="AtomFeed">Atom Feed Documents</see> may be added to this collection".
     /// </summary>
-    /// <value>A <see cref="MediaRange"/> value that indicates that <see cref="AtomFeed">Atom Feed Documents</see> can be added to a <see cref="AtomMemberResources"/>.</value>
+    /// <value><c>application/atom+xml;type=feed</c>.</value>
     public static string AtomFeedMediaRange => "application/atom+xml;type=feed";
 
     /// <summary>
     /// Gets or sets the value of this accepted media range.
     /// </summary>
-    /// <value>The value of this accepted media range.</value>
+    /// <value>A media range such as <c>image/*</c> or <c>application/atom+xml;type=entry</c>. The default value is an <i>empty</i> string, which means the collection accepts nothing.</value>
     /// <remarks>
     ///     <para>
-    ///         See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.
+    ///         See <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a> for a listing of the registered IANA MIME media types and subtypes.
     ///     </para>
     ///     <para>
-    ///         The <see cref="AtomAcceptedMediaRange"/> is similar to the HTTP Accept request-header [<a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a>].
-    ///         Media type parameters are allowed within <see cref="AtomAcceptedMediaRange"/>, but <see cref="AtomAcceptedMediaRange"/> has no notion of preference e.g. <i>accept-params</i> or <i>q</i> arguments,
-    ///         as specified in section 14.1 of [<a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a>] are not significant.
+    ///         Media type parameters are allowed, but this element has no notion of preference: the <i>accept-params</i> and <i>q</i> arguments of an HTTP
+    ///         <c>Accept</c> header (RFC 2616 §14.1, now <a href="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110</a> §12.5.1) are not significant.
     ///     </para>
     /// </remarks>
     /// <seealso cref="AtomAcceptedMediaRange.AtomEntryMediaRange"/>
@@ -128,11 +141,11 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// Loads this <see cref="AtomAcceptedMediaRange"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="AtomAcceptedMediaRange"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomAcceptedMediaRange"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomAcceptedMediaRange"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -151,12 +164,12 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-    /// <returns><b>true</b> if the <see cref="AtomAcceptedMediaRange"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="AtomAcceptedMediaRange"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomAcceptedMediaRange"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -174,7 +187,7 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// Saves the current <see cref="AtomAcceptedMediaRange"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -237,7 +250,7 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// Determines whether the specified <see cref="AtomAcceptedMediaRange"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="AtomAcceptedMediaRange"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="AtomAcceptedMediaRange"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="AtomAcceptedMediaRange"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(AtomAcceptedMediaRange? other)
     {
         if (other is null)
@@ -252,7 +265,7 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is AtomAcceptedMediaRange other && this.Equals(other);
 
     /// <summary>
@@ -266,7 +279,7 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator ==(AtomAcceptedMediaRange? first, AtomAcceptedMediaRange? second)
     {
         if (first is null) return second is null;
@@ -278,6 +291,6 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="true"/> if the operands are not equal; otherwise, <see langword="false"/>.</returns>
     public static bool operator !=(AtomAcceptedMediaRange? first, AtomAcceptedMediaRange? second) => !(first == second);
 }

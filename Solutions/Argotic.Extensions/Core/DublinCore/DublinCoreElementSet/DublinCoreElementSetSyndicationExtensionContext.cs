@@ -9,6 +9,15 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="DublinCoreElementSetSyndicationExtension"/>.
 /// </summary>
+/// <remarks>
+///     The fifteen elements of the Element Set, one property each. Every element is optional, and this
+///     is how absence is spelled: the string properties default to an <i>empty</i> string and are
+///     trimmed on set — they are never <see langword="null"/> — while
+///     <see cref="Date"/> defaults to <see cref="DateTime.MinValue"/>,
+///     <see cref="Language"/> to <see langword="null"/>, and <see cref="TypeVocabulary"/> to
+///     <see cref="DublinCoreTypeVocabularies.None"/>. Only properties holding something other than
+///     their default are written.
+/// </remarks>
 public class DublinCoreElementSetSyndicationExtensionContext
 {
 
@@ -22,7 +31,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the entity responsible for making contributions to the resource.
     /// </summary>
-    /// <value>The entity responsible for making contributions to the resource.</value>
     /// <remarks>
     ///     Examples of a Contributor include a person, an organization, or a service. Typically, the name of a <see cref="Contributor"/> should be used to indicate the entity.
     /// </remarks>
@@ -46,7 +54,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
     /// </summary>
-    /// <value>The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.</value>
     /// <remarks>
     ///     <para>
     ///         Spatial topic and spatial applicability may be a named place or a location specified by its geographic coordinates. 
@@ -54,7 +61,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     ///         A jurisdiction may be a named administrative entity or a geographic place to which the resource applies.
     ///     </para>
     ///     <para>
-    ///         Recommended best practice is to use a controlled vocabulary such as the <a href="http://www.getty.edu/research/tools/vocabulary/tgn/index.html">Thesaurus of Geographic Names</a>. 
+    ///         Recommended best practice is to use a controlled vocabulary such as the <a href="https://www.getty.edu/research/tools/vocabularies/tgn/index.html">Thesaurus of Geographic Names</a>. 
     ///         Where appropriate, named places or time periods can be used in preference to numeric identifiers such as sets of coordinates or date ranges.
     ///     </para>
     /// </remarks>
@@ -78,7 +85,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the entity primarily responsible for making the resource.
     /// </summary>
-    /// <value>The entity primarily responsible for making the resource.</value>
     /// <remarks>
     ///     Examples of a <see cref="Creator"/> include a person, an organization, or a service. Typically, the name of a <see cref="Creator"/> should be used to indicate the entity.
     /// </remarks>
@@ -114,7 +120,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets an account of the resource.
     /// </summary>
-    /// <value>An account of the resource.</value>
     /// <remarks>
     ///     <see cref="Description"/> may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource.
     /// </remarks>
@@ -138,10 +143,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the file format, physical medium, or dimensions of the resource.
     /// </summary>
-    /// <value>The file format, physical medium, or dimensions of the resource.</value>
     /// <remarks>
     ///     Examples of dimensions include size and duration. 
-    ///     Recommended best practice is to use a controlled vocabulary such as the list of <a href="http://www.iana.org/assignments/media-types/">Internet Media Types</a>.
+    ///     Recommended best practice is to use a controlled vocabulary such as the list of <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">Internet Media Types</a>.
     /// </remarks>
     public string Format
     {
@@ -163,7 +167,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets an unambiguous reference to the resource within a given context.
     /// </summary>
-    /// <value>An unambiguous reference to the resource within a given context.</value>
     /// <remarks>
     ///     Recommended best practice is to identify the resource by means of a string conforming to a formal identification system.
     /// </remarks>
@@ -187,9 +190,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the language of the resource.
     /// </summary>
-    /// <value>A <see cref="CultureInfo"/> object that represents the language of the resource. The default value is a <b>null</b> reference, which indicates that no language was specified.</value>
+    /// <value>A <see cref="CultureInfo"/> object that represents the language of the resource. The default value is a <see langword="null"/> reference, which indicates that no language was specified.</value>
     /// <remarks>
-    ///     Recommended best practice is to use a controlled vocabulary such as <a href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646</a>.
+    ///     Recommended best practice is to use a controlled vocabulary such as IETF BCP 47, currently <a href="https://www.rfc-editor.org/rfc/rfc5646.html">RFC 5646</a>.
     ///     This framework conforms to this best practice by utilizing the <see cref="CultureInfo"/> class to represent the language of a resource.
     /// </remarks>
     public CultureInfo? Language { get; set; }
@@ -197,7 +200,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the entity responsible for making the resource available.
     /// </summary>
-    /// <value>The entity responsible for making the resource available.</value>
     /// <remarks>
     ///     Examples of a <see cref="Publisher"/> include a person, an organization, or a service. Typically, the name of a <see cref="Publisher"/> should be used to indicate the entity.
     /// </remarks>
@@ -221,7 +223,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets a related resource.
     /// </summary>
-    /// <value>A related resource.</value>
     /// <remarks>
     ///     Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.
     /// </remarks>
@@ -245,7 +246,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets information about rights held in and over the resource.
     /// </summary>
-    /// <value>Information about rights held in and over the resource.</value>
     /// <remarks>
     ///     Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights.
     /// </remarks>
@@ -269,7 +269,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets a related resource from which the described resource is derived.
     /// </summary>
-    /// <value>A related resource from which the described resource is derived.</value>
     /// <remarks>
     ///     The described resource may be derived from the related resource in whole or in part. 
     ///     Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system.
@@ -294,7 +293,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the topic of the resource.
     /// </summary>
-    /// <value>The topic of the resource.</value>
     /// <remarks>
     ///     Typically, the subject will be represented using keywords, key phrases, or classification codes. 
     ///     Recommended best practice is to use a controlled vocabulary. 
@@ -320,7 +318,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Gets or sets the name given to the resource.
     /// </summary>
-    /// <value>The name given to the resource.</value>
     /// <remarks>
     ///     Typically, a <see cref="Title"/> will be a name by which the resource is formally known.
     /// </remarks>
@@ -350,7 +347,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </value>
     /// <remarks>
     ///     <para>
-    ///         Recommended best practice is to use a controlled vocabulary such as the <a href="http://dublincore.org/documents/dcmi-type-vocabulary/">DCMI Type Vocabulary</a>.
+    ///         Recommended best practice is to use a controlled vocabulary such as the <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/">DCMI Type Vocabulary</a>.
     ///         This framework conforms to this best practice by providing the <see cref="DublinCoreTypeVocabularies"/> enumeration for specifiying the nature or genre of a resource.
     ///     </para>
     ///     <para>To describe the file format, physical medium, or dimensions of the resource, use <see cref="Format"/>.</para>
@@ -360,11 +357,11 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="DublinCoreElementSetSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="DublinCoreElementSetSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -382,11 +379,11 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Writes the current context to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -470,11 +467,11 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Initializes the syndication extension context common elements using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="DublinCoreElementSetSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="DublinCoreElementSetSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     private bool LoadCommon(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -554,11 +551,11 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Initializes the syndication extension context optional elements using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="DublinCoreElementSetSyndicationExtensionContext"/>.</param>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="DublinCoreElementSetSyndicationExtensionContext"/>.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-    /// <returns><b>true</b> if the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;

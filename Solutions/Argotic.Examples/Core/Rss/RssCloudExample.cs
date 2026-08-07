@@ -3,16 +3,12 @@ using Argotic.Syndication;
 namespace Argotic.Examples.Core.Rss;
 
 /// <summary>
-/// Contains the code examples for the <see cref="RssCloud"/> class.
+/// Advertises a publish-subscribe endpoint with <see cref="RssCloud"/>, and converts between <c>RssCloudProtocol</c> and the string that appears in the XML.
 /// </summary>
-/// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="RssCloud"/> class. 
-///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-/// </remarks>
 internal static class RssCloudExample
 {
     /// <summary>
-    /// Provides example code for the RssCloud class.
+    /// Builds the containing <see cref="RssFeed"/> and prints the <see cref="RssCloud"/> it holds.
     /// </summary>
     public static void ClassExample()
     {
@@ -31,7 +27,7 @@ internal static class RssCloudExample
     }
 
     /// <summary>
-    /// Provides example code for the RssCloud.CloudProtocolAsString(RssCloudProtocol) method
+    /// Converts an <c>RssCloudProtocol</c> to the string that appears in the XML.
     /// </summary>
     public static void ProtocolAsStringExample()
     {
@@ -43,7 +39,7 @@ internal static class RssCloudExample
     }
 
     /// <summary>
-    /// Provides example code for the RssCloud.CloudProtocolByName(string) method
+    /// Converts the string that appears in the XML back to an <c>RssCloudProtocol</c>.
     /// </summary>
     public static void ProtocolByNameExample()
     {

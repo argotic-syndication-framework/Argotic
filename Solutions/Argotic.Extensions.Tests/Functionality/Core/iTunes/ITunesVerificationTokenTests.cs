@@ -65,6 +65,9 @@ public sealed class ITunesVerificationTokenTests
     ///     silently discard <b>19%</b> of the tokens in use, and discarding a verification token is
     ///     indistinguishable from never having had one.
     /// </remarks>
+    /// <param name="token">A verification token taken verbatim from a live feed — a UUID or a
+    /// numeric code.</param>
+    /// <param name="provenance">Which shape the row stands for, quoted back as the failure message.</param>
     [TestMethod]
     [DataRow("657bc6db-cc95-4ae2-b257-e32553e76cdd", "a UUID — 21 of the 26 live tokens look like this")]
     [DataRow("668b25d0-3e5a-11f1-a5f6-473c059f121e", "a UUID from a different provider")]

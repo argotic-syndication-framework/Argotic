@@ -7,8 +7,34 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Argotic.Configuration;
 
 /// <summary>
-/// Extension methods for configuring Argotic services in an <see cref="IServiceCollection"/>.
+/// Registers Argotic's network clients, and the <see cref="HttpClient"/> its syndication types fetch with,
+/// against an <see cref="IServiceCollection"/>.
 /// </summary>
+/// <remarks>
+///     <para>
+///     There are two registrations here and they are shaped differently, because the things they serve
+///     are shaped differently. <see cref="XmlRpcClient"/> and <see cref="TrackbackClient"/> are services:
+///     you resolve one and it arrives configured, so they are registered as <i>typed</i> clients.
+///     The syndication resource types are not services — a caller constructs an <c>RssFeed</c>, they do
+///     not resolve one — so <see cref="AddArgoticSyndicationClient"/> registers a <i>named</i> client
+///     under <see cref="ArgoticHttpClients.Syndication"/> that the caller hands to <c>LoadAsync</c>.
+///     </para>
+///     <para>
+///     None of this is required. Every client and every <c>LoadAsync</c> overload has a parameterless
+///     form that binds <see cref="SyndicationEncodingUtility.SharedHttpClient"/>, a process-wide
+///     singleton over a <see cref="SocketsHttpHandler"/>. Registering here buys what a singleton
+///     structurally cannot give: a handler the factory rotates on a schedule, and one the consumer can
+///     extend with a proxy, a client certificate or a delegating handler for retries.
+///     </para>
+///     <para>
+///     Every client registered here is given <see cref="System.Threading.Timeout.InfiniteTimeSpan"/>,
+///     replacing the factory's own 100-second default. That is not an absence of a deadline. Every
+///     deadline in this library is imposed by <see cref="CancellationTokenSource.CancelAfter(TimeSpan)"/>
+///     on a token linked to the caller's, so a client-level timeout could only cut short a longer one
+///     the caller had asked for — and it would surface as a <see cref="TaskCanceledException"/> naming
+///     nothing.
+///     </para>
+/// </remarks>
 public static class ServiceCollectionExtensions
 {
     /// <summary>
@@ -35,8 +61,10 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
     /// <param name="configuration">The <see cref="IConfiguration"/> to bind options from.</param>
-    /// <param name="sectionName">The configuration section name. Defaults to "Argotic:XmlRpc".</param>
+    /// <param name="sectionName">The configuration section to bind. The default is <c>Argotic:XmlRpc</c>. A section that is absent binds nothing, leaving every option at its default.</param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="services"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="configuration"/> is <see langword="null"/>.</exception>
     public static IServiceCollection AddXmlRpcClient(
         this IServiceCollection services,
         IConfiguration configuration,
@@ -74,8 +102,10 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
     /// <param name="configuration">The <see cref="IConfiguration"/> to bind options from.</param>
-    /// <param name="sectionName">The configuration section name. Defaults to "Argotic:Trackback".</param>
+    /// <param name="sectionName">The configuration section to bind. The default is <c>Argotic:Trackback</c>. A section that is absent binds nothing, leaving every option at its default.</param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="services"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="configuration"/> is <see langword="null"/>.</exception>
     public static IServiceCollection AddTrackbackClient(
         this IServiceCollection services,
         IConfiguration configuration,
@@ -106,14 +136,14 @@ public static class ServiceCollectionExtensions
     ///     delegating handler for retries — none of which is possible on a process-wide singleton.
     ///     </para>
     ///     <para>
-    ///     <b>The default <c>User-Agent</c> set here does not appear on Argotic's own requests.</b>
+    ///     The default <c>User-Agent</c> set here <i>does not</i> appear on Argotic's own requests.
     ///     <see cref="SyndicationEncodingUtility.CreateHttpRequestMessage"/> sets one per request, and
     ///     a request-level header wins over a client-level default. It is set for the caller who uses
     ///     the resolved client directly, and is the reason to assert on
     ///     <see cref="HttpClient.DefaultRequestHeaders"/> rather than on what crosses the wire.
     ///     </para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="services"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="services"/> is <see langword="null"/>.</exception>
     public static IServiceCollection AddArgoticSyndicationClient(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
@@ -148,7 +178,7 @@ public static class ServiceCollectionExtensions
     ///     while the singleton does not.
     ///     </para>
     ///     <para>
-    ///     Pooling policy is deliberately <b>not</b> shared. A static client has to rotate its own
+    ///     Pooling policy is deliberately <i>not</i> shared. A static client has to rotate its own
     ///     connections, which is why the singleton sets <c>PooledConnectionLifetime</c>; a
     ///     factory-built one has its whole handler rotated for it, so setting a lifetime here would
     ///     duplicate the mechanism it exists to replace.

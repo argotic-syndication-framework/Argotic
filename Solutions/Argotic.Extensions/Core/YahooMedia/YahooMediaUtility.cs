@@ -6,9 +6,14 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Provides methods that comprise common utility features shared across the Yahoo media syndication entities. This class cannot be inherited.
+/// Reads, writes and compares the metadata elements shared by the three Media RSS levels.
 /// </summary>
-/// <remarks>This utility class is not intended for use outside the Yahoo media syndication entities within the framework.</remarks>
+/// <remarks>
+///     <see cref="YahooMediaContent"/>, <see cref="YahooMediaGroup"/> and
+///     <see cref="YahooMediaSyndicationExtensionContext"/> all carry the same optional elements, and this class is
+///     the single implementation of reading and writing them, reached through
+///     <see cref="IYahooMediaCommonObjectEntities"/>. It is internal to the framework.
+/// </remarks>
 internal static class YahooMediaUtility
 {
     /// <summary>
@@ -40,20 +45,13 @@ internal static class YahooMediaUtility
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <returns>
+    ///     <c>1</c> if <paramref name="source"/> is the longer collection, <c>-1</c> if it is the shorter, and
+    ///     otherwise the first non-zero element-wise comparison, or <c>0</c> if every element matches. Length
+    ///     dominates: a longer collection sorts after a shorter one whatever the elements say.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<YahooMediaCategory> source, IList<YahooMediaCategory> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -62,20 +60,13 @@ internal static class YahooMediaUtility
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <returns>
+    ///     <c>1</c> if <paramref name="source"/> is the longer collection, <c>-1</c> if it is the shorter, and
+    ///     otherwise the first non-zero element-wise comparison, or <c>0</c> if every element matches. Length
+    ///     dominates: a longer collection sorts after a shorter one whatever the elements say.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<YahooMediaContent> source, IList<YahooMediaContent> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -84,20 +75,13 @@ internal static class YahooMediaUtility
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <returns>
+    ///     <c>1</c> if <paramref name="source"/> is the longer collection, <c>-1</c> if it is the shorter, and
+    ///     otherwise the first non-zero element-wise comparison, or <c>0</c> if every element matches. Length
+    ///     dominates: a longer collection sorts after a shorter one whatever the elements say.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<YahooMediaCredit> source, IList<YahooMediaCredit> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -106,20 +90,13 @@ internal static class YahooMediaUtility
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <returns>
+    ///     <c>1</c> if <paramref name="source"/> is the longer collection, <c>-1</c> if it is the shorter, and
+    ///     otherwise the first non-zero element-wise comparison, or <c>0</c> if every element matches. Length
+    ///     dominates: a longer collection sorts after a shorter one whatever the elements say.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<YahooMediaGroup> source, IList<YahooMediaGroup> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -128,20 +105,13 @@ internal static class YahooMediaUtility
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <returns>
+    ///     <c>1</c> if <paramref name="source"/> is the longer collection, <c>-1</c> if it is the shorter, and
+    ///     otherwise the first non-zero element-wise comparison, or <c>0</c> if every element matches. Length
+    ///     dominates: a longer collection sorts after a shorter one whatever the elements say.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<YahooMediaHash> source, IList<YahooMediaHash> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -150,20 +120,13 @@ internal static class YahooMediaUtility
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <returns>
+    ///     <c>1</c> if <paramref name="source"/> is the longer collection, <c>-1</c> if it is the shorter, and
+    ///     otherwise the first non-zero element-wise comparison, or <c>0</c> if every element matches. Length
+    ///     dominates: a longer collection sorts after a shorter one whatever the elements say.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<YahooMediaRating> source, IList<YahooMediaRating> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -172,20 +135,13 @@ internal static class YahooMediaUtility
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <returns>
+    ///     <c>1</c> if <paramref name="source"/> is the longer collection, <c>-1</c> if it is the shorter, and
+    ///     otherwise the first non-zero element-wise comparison, or <c>0</c> if every element matches. Length
+    ///     dominates: a longer collection sorts after a shorter one whatever the elements say.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<YahooMediaRestriction> source, IList<YahooMediaRestriction> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -194,20 +150,13 @@ internal static class YahooMediaUtility
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <returns>
+    ///     <c>1</c> if <paramref name="source"/> is the longer collection, <c>-1</c> if it is the shorter, and
+    ///     otherwise the first non-zero element-wise comparison, or <c>0</c> if every element matches. Length
+    ///     dominates: a longer collection sorts after a shorter one whatever the elements say.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<YahooMediaText> source, IList<YahooMediaText> target)
         => ComparisonUtility.CompareSequence(source, target);
 
@@ -216,31 +165,29 @@ internal static class YahooMediaUtility
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+    /// <returns>
+    ///     <c>1</c> if <paramref name="source"/> is the longer collection, <c>-1</c> if it is the shorter, and
+    ///     otherwise the first non-zero element-wise comparison, or <c>0</c> if every element matches. Length
+    ///     dominates: a longer collection sorts after a shorter one whatever the elements say.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<YahooMediaThumbnail> source, IList<YahooMediaThumbnail> target)
         => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
-    /// Modifies the <see cref="IYahooMediaCommonObjectEntities"/> to match the data source.
+    /// Fills the shared metadata members of <paramref name="target"/> from one level of the document.
     /// </summary>
     /// <param name="target">The object that implements the <see cref="IYahooMediaCommonObjectEntities"/> interface to be filled.</param>
-    /// <param name="source">The <see cref="XPathNavigator"/> to extract Yahoo media common entity information from.</param>
-    /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <param name="source">The <see cref="XPathNavigator"/> positioned on the element whose <i>direct</i> <c>media:</c> children are to be read.</param>
+    /// <returns><see langword="true"/> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     Only direct children are read, which is what keeps the three levels separate: an element inside a
+    ///     nested <c>media:group</c> or <c>media:content</c> belongs to that object, not to this one, and is
+    ///     never copied up or down. Nothing here applies the specification's override order.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public static bool FillCommonObjectEntities(IYahooMediaCommonObjectEntities target, XPathNavigator source)
     {
         ArgumentNullException.ThrowIfNull(target);
@@ -263,12 +210,16 @@ internal static class YahooMediaUtility
     }
 
     /// <summary>
-    /// Saves the current <see cref="IYahooMediaCommonObjectEntities"/> to the specified <see cref="XmlWriter"/>.
+    /// Writes the shared metadata members of <paramref name="source"/> as children of the element in progress.
     /// </summary>
     /// <param name="source">A object that implements the <see cref="IYahooMediaCommonObjectEntities"/> interface to extract Yahoo media common entity information from.</param>
-    /// <param name="writer">The <see cref="XmlWriter"/> to which the <paramref name="source"/> information will be written.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which the <paramref name="source"/> information will be written, with its containing start element already written.</param>
+    /// <remarks>
+    ///     Elements are emitted in a fixed order rather than the order they were read in, so a document that
+    ///     interleaved them differently does not round-trip byte for byte.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public static void WriteCommonObjectEntities(IYahooMediaCommonObjectEntities source, XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -407,10 +358,10 @@ internal static class YahooMediaUtility
     /// <param name="target">The object that implements the <see cref="IYahooMediaCommonObjectEntities"/> interface to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract Yahoo media common entity information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed Yahoo media elements and attributes.</param>
-    /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     private static bool FillCommonObjectEntityClasses(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -496,10 +447,10 @@ internal static class YahooMediaUtility
     /// <param name="target">The object that implements the <see cref="IYahooMediaCommonObjectEntities"/> interface to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract Yahoo media common entity information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed Yahoo media elements and attributes.</param>
-    /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     private static bool FillCommonObjectEntityCollectionsPrimary(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
@@ -600,10 +551,10 @@ internal static class YahooMediaUtility
     /// <param name="target">The object that implements the <see cref="IYahooMediaCommonObjectEntities"/> interface to be filled.</param>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract Yahoo media common entity information from.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed Yahoo media elements and attributes.</param>
-    /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    /// <returns><see langword="true"/> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
     private static bool FillCommonObjectEntityCollectionsSecondary(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;

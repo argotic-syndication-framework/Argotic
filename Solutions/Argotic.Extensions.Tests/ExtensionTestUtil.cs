@@ -5,8 +5,41 @@ using Argotic.Syndication;
 
 namespace Argotic.Extensions.Tests;
 
+/// <summary>
+/// The shared harness for the extension family tests: writes an extension into a feed, and states what
+/// the resulting document should be.
+/// </summary>
+/// <remarks>
+///     <para>
+///     The two halves are meant to be used together. <see cref="AddExtensionToXml"/> is the
+///     <i>actual</i> — it attaches an extension to a real <see cref="RssItem"/> and serialises the feed
+///     through the library's own save path. <see cref="GetWrappedXml"/> is the <i>expected</i> — the
+///     same document written out by hand, with the caller supplying only the namespace declarations and
+///     the extension elements. Comparing the two is how nearly every <c>WriteTo</c> test in the suite is
+///     phrased, across 76 call sites.
+///     </para>
+///     <para>
+///     The wrapper interpolates the running assembly's version into the <c>generator</c> element rather
+///     than hard-coding one, because the library writes its own version there. A literal would make
+///     every one of those tests fail on the next version bump, for no reason connected to the extension
+///     under test.
+///     </para>
+/// </remarks>
 internal static class ExtensionTestUtil
 {
+    /// <summary>
+    /// Attaches an extension to a one-item RSS 2.0 feed and returns what the library serialises.
+    /// </summary>
+    /// <param name="ext">The extension to attach to the item.</param>
+    /// <returns>
+    ///     The feed as an XML fragment. The declaration is omitted so that the result lines up with
+    ///     <see cref="GetWrappedXml"/>. Most call sites compare it verbatim; two trim it first, so a
+    ///     comparison that fails on whitespace alone is worth checking against both.
+    /// </returns>
+    /// <remarks>
+    ///     The channel and the item are fixed, and their values are the ones
+    ///     <see cref="GetWrappedXml"/> writes: change one and the other has to change with it.
+    /// </remarks>
     internal static string AddExtensionToXml(SyndicationExtension ext)
     {
         RssFeed feed = new(new Uri("http://www.example.com"), "Argotic - Extension Test")
@@ -46,6 +79,20 @@ internal static class ExtensionTestUtil
 
     private static readonly CompositeFormat FullXmlFormat = CompositeFormat.Parse(strFullXml1);
 
+    /// <summary>
+    /// Wraps extension elements in the RSS 2.0 feed that <see cref="AddExtensionToXml"/> produces.
+    /// </summary>
+    /// <param name="namespc">
+    ///     The namespace declarations to place on the <c>rss</c> element, as they would be written in the
+    ///     document — for example <c>xmlns:dc="http://purl.org/dc/elements/1.1/"</c>.
+    /// </param>
+    /// <param name="strExt">The extension elements to place inside the item.</param>
+    /// <returns>An RSS 2.0 document, with no XML declaration, carrying the supplied extension elements.</returns>
+    /// <remarks>
+    ///     Serves both directions. As the expected value it is compared against
+    ///     <see cref="AddExtensionToXml"/>; as an input it is the document a load test parses, which is
+    ///     why the extension elements are a parameter rather than a fixture.
+    /// </remarks>
     internal static string GetWrappedXml(string namespc, string strExt) => string.Format(CultureInfo.InvariantCulture, FullXmlFormat, namespc, typeof(ExtensionTestUtil).Assembly.GetName().Version?.ToString() ?? "0.0.0.0", strExt);
 
     private const string strFullAtomXml = @"<?xml version=""1.0"" encoding=""utf-8""?><feed xmlns=""http://www.w3.org/2005/Atom"" {0}><id>urn:example:feed</id><title>Argotic - Extension Test</title><updated>2010-08-01T00:00:01Z</updated><entry><id>urn:example:entry:1</id><title>Item #1</title><updated>2010-08-01T00:00:01Z</updated><summary>text for First Item</summary>{1}</entry></feed>";

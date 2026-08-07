@@ -6,6 +6,9 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Net.XmlRpc;
 
+/// <summary>
+/// Covers <c>XmlRpcStructureMember</c>: its name and value guards, reading a <c>member</c> element, writing one back, and its equality and ordering contracts.
+/// </summary>
 [TestClass]
 public class XmlRpcStructureMemberTests
 {
@@ -25,6 +28,9 @@ public class XmlRpcStructureMemberTests
         </member>
         """;
 
+    /// <summary>
+    /// A default-constructed member has an empty name rather than a null one.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_CreatesInstance()
     {
@@ -36,6 +42,9 @@ public class XmlRpcStructureMemberTests
         member.Name.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// The name and value a member is constructed with are the ones it carries.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNameAndValue_SetsProperties()
     {
@@ -51,6 +60,9 @@ public class XmlRpcStructureMemberTests
         member.Value.ShouldBe(value);
     }
 
+    /// <summary>
+    /// A null name is refused by the constructor with an <c>ArgumentException</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullName_ThrowsArgumentException()
     {
@@ -61,6 +73,9 @@ public class XmlRpcStructureMemberTests
         Should.Throw<ArgumentException>(() => new XmlRpcStructureMember(null!, value));
     }
 
+    /// <summary>
+    /// An empty name is refused by the constructor with an <c>ArgumentException</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithEmptyName_ThrowsArgumentException()
     {
@@ -71,11 +86,17 @@ public class XmlRpcStructureMemberTests
         Should.Throw<ArgumentException>(() => new XmlRpcStructureMember(string.Empty, value));
     }
 
+    /// <summary>
+    /// A null value is refused by the constructor with an <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_WithNullValue_ThrowsArgumentNullException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentNullException>(() => new XmlRpcStructureMember("name", null!));
 
+    /// <summary>
+    /// Setting a name strips the whitespace around it.
+    /// </summary>
     [TestMethod]
     public void Name_Set_TrimsValue()
     {
@@ -89,6 +110,9 @@ public class XmlRpcStructureMemberTests
         member.Name.ShouldBe("testName");
     }
 
+    /// <summary>
+    /// Setting the name to <see langword="null"/> throws an <c>ArgumentException</c>.
+    /// </summary>
     [TestMethod]
     public void Name_SetNull_ThrowsArgumentException()
     {
@@ -99,6 +123,9 @@ public class XmlRpcStructureMemberTests
         Should.Throw<ArgumentException>(() => member.Name = null!);
     }
 
+    /// <summary>
+    /// Setting the name to an empty string throws an <c>ArgumentException</c>.
+    /// </summary>
     [TestMethod]
     public void Name_SetEmpty_ThrowsArgumentException()
     {
@@ -109,6 +136,9 @@ public class XmlRpcStructureMemberTests
         Should.Throw<ArgumentException>(() => member.Name = string.Empty);
     }
 
+    /// <summary>
+    /// Setting the value to <see langword="null"/> throws an <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Value_SetNull_ThrowsArgumentNullException()
     {
@@ -119,6 +149,9 @@ public class XmlRpcStructureMemberTests
         Should.Throw<ArgumentNullException>(() => member.Value = null!);
     }
 
+    /// <summary>
+    /// A member carrying a typed string loads as the name <c>title</c> and a scalar holding <c>Test Title</c>.
+    /// </summary>
     [TestMethod]
     public void Load_ValidMemberXml_PopulatesNameAndValue()
     {
@@ -141,6 +174,9 @@ public class XmlRpcStructureMemberTests
         ((XmlRpcScalarValue)member.Value).Value.ShouldBe("Test Title");
     }
 
+    /// <summary>
+    /// A member carrying <c>i4</c> loads as a scalar holding the <c>int</c> <c>42</c>, not the string.
+    /// </summary>
     [TestMethod]
     public void Load_MemberWithIntegerValue_PopulatesCorrectly()
     {
@@ -163,6 +199,9 @@ public class XmlRpcStructureMemberTests
         ((XmlRpcScalarValue)member.Value).Value.ShouldBe(42);
     }
 
+    /// <summary>
+    /// A null navigator is refused with an <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void Load_NullSource_ThrowsArgumentNullException()
     {
@@ -173,6 +212,9 @@ public class XmlRpcStructureMemberTests
         Should.Throw<ArgumentNullException>(() => member.Load(null!));
     }
 
+    /// <summary>
+    /// A <c>member</c> with neither a name nor a value does not load.
+    /// </summary>
     [TestMethod]
     public void Load_EmptyMember_ReturnsFalse()
     {
@@ -192,6 +234,9 @@ public class XmlRpcStructureMemberTests
         loaded.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Writing a member emits its name and its value under its own type element.
+    /// </summary>
     [TestMethod]
     public void WriteTo_ValidMember_WritesCorrectXml()
     {
@@ -223,6 +268,13 @@ public class XmlRpcStructureMemberTests
         result.ShouldContain("</member>");
     }
 
+    /// <summary>
+    /// A member whose value was never set still writes a well-formed <c>member</c>, with an empty <c>value</c> element.
+    /// </summary>
+    /// <remarks>
+    ///     The assertion accepts either spelling, <c>&lt;value /&gt;</c> or <c>&lt;value&gt;&lt;/value&gt;</c>,
+    ///     because which one the writer emits is not something the member decides.
+    /// </remarks>
     [TestMethod]
     public void WriteTo_MemberWithNullValue_WritesEmptyValue()
     {
@@ -261,6 +313,9 @@ public class XmlRpcStructureMemberTests
         (result.Contains("<value />", StringComparison.Ordinal) || result.Contains("<value></value>", StringComparison.Ordinal)).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A null writer is refused with an <c>ArgumentNullException</c>.
+    /// </summary>
     [TestMethod]
     public void WriteTo_NullWriter_ThrowsArgumentNullException()
     {
@@ -271,6 +326,9 @@ public class XmlRpcStructureMemberTests
         Should.Throw<ArgumentNullException>(() => member.WriteTo(null!));
     }
 
+    /// <summary>
+    /// <c>ToString</c> returns the member as XML, its <c>name</c> element included.
+    /// </summary>
     [TestMethod]
     public void ToString_ReturnsXmlRepresentation()
     {
@@ -286,6 +344,9 @@ public class XmlRpcStructureMemberTests
         result.ShouldContain("42");
     }
 
+    /// <summary>
+    /// Two members with the same name and the same value compare as <c>0</c>.
+    /// </summary>
     [TestMethod]
     public void CompareTo_SameName_ReturnsZero()
     {
@@ -300,6 +361,9 @@ public class XmlRpcStructureMemberTests
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Members that differ only by name compare as non-zero.
+    /// </summary>
     [TestMethod]
     public void CompareTo_DifferentName_ReturnsNonZero()
     {
@@ -314,6 +378,9 @@ public class XmlRpcStructureMemberTests
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// Any member sorts after <see langword="null"/>, comparing as <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void CompareTo_Null_ReturnsOne()
     {
@@ -327,6 +394,9 @@ public class XmlRpcStructureMemberTests
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Members that differ in both name and value compare as non-zero.
+    /// </summary>
     [TestMethod]
     public void CompareTo_DifferentMember_ReturnsNonZero()
     {
@@ -341,6 +411,9 @@ public class XmlRpcStructureMemberTests
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// Members are equal by value, not by reference.
+    /// </summary>
     [TestMethod]
     public void Equals_SameMember_ReturnsTrue()
     {
@@ -352,6 +425,9 @@ public class XmlRpcStructureMemberTests
         member1.Equals(member2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Members whose names differ are not equal, even when their values match.
+    /// </summary>
     [TestMethod]
     public void Equals_DifferentMember_ReturnsFalse()
     {
@@ -363,6 +439,9 @@ public class XmlRpcStructureMemberTests
         member1.Equals(member2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A member is not equal to an object of an unrelated type.
+    /// </summary>
     [TestMethod]
     public void Equals_NonXmlRpcStructureMember_ReturnsFalse()
     {
@@ -373,6 +452,9 @@ public class XmlRpcStructureMemberTests
         member.Equals("not a member").ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Equal members hash alike, and one member hashes the same on every call.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_EqualMembers_ReturnSameValue()
     {
@@ -386,6 +468,9 @@ public class XmlRpcStructureMemberTests
         first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
+    /// <summary>
+    /// <c>==</c> compares by value.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_EqualMembers_ReturnsTrue()
     {
@@ -397,6 +482,9 @@ public class XmlRpcStructureMemberTests
         (member1 == member2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Two <see langword="null"/> operands are equal under <c>==</c> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void OperatorEquals_NullOperands_ReturnsTrue()
     {
@@ -408,6 +496,9 @@ public class XmlRpcStructureMemberTests
         (member1 == member2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>!=</c> is <see langword="true"/> for members whose names differ.
+    /// </summary>
     [TestMethod]
     public void OperatorNotEquals_DifferentMembers_ReturnsTrue()
     {

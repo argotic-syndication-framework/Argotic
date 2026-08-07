@@ -116,7 +116,8 @@ public sealed class SendAndReceiveTrackbacks : IDisposable
     }
 
     /// <summary>
-    /// The receiving side populates a message from request parameters.
+    /// The receiving side reads all four Trackback fields from a form post, and ignores a parameter it
+    /// does not recognise rather than failing on it.
     /// </summary>
     [TestMethod]
     public void Load_FromRequestParameters_PopulatesEveryRecognisedField()

@@ -62,6 +62,10 @@ public sealed class GeoRssComparisonCoversEveryMemberTests
     /// <summary>
     /// Changing any single member makes the two extensions unequal.
     /// </summary>
+    /// <param name="member">The name of the member the row mutates, quoted back as the failure
+    /// message.</param>
+    /// <param name="mutate">An action that changes exactly one member of the context it is
+    /// handed.</param>
     [TestMethod]
     [DynamicData(nameof(SingleMemberMutations))]
     public void ChangingASingleMember_MakesTheExtensionsUnequal(string member, Action<GeoRssSyndicationExtensionContext> mutate)
@@ -81,6 +85,10 @@ public sealed class GeoRssComparisonCoversEveryMemberTests
     /// <summary>
     /// Changing any single member changes the hash code.
     /// </summary>
+    /// <param name="member">The name of the member the row mutates, quoted back as the failure
+    /// message.</param>
+    /// <param name="mutate">An action that changes exactly one member of the context it is
+    /// handed.</param>
     [TestMethod]
     [DynamicData(nameof(SingleMemberMutations))]
     public void ChangingASingleMember_ChangesTheHashCode(string member, Action<GeoRssSyndicationExtensionContext> mutate)

@@ -6,6 +6,13 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.YahooMedia;
 
+/// <summary>
+/// Covers the Yahoo Media RSS extension: the extension type and its static medium mapping, the
+/// entities it carries (<c>YahooMediaContent</c>, <c>YahooMediaGroup</c>, <c>YahooMediaThumbnail</c>,
+/// <c>YahooMediaRating</c>, <c>YahooMediaCredit</c>, <c>YahooMediaCategory</c>, <c>YahooMediaCopyright</c>,
+/// <c>YahooMediaPlayer</c>, <c>YahooMediaRestriction</c>, <c>YahooMediaHash</c> and <c>YahooMediaText</c>),
+/// and their round trip through <c>media</c>-prefixed XML inside an RSS feed.
+/// </summary>
 [TestClass]
 public class YahooMediaSyndicationExtensionTest
 {
@@ -15,6 +22,9 @@ public class YahooMediaSyndicationExtensionTest
 
     #region Basic Extension Tests
 
+    /// <summary>
+    /// The parameterless constructor yields a usable Yahoo Media extension instance.
+    /// </summary>
     [TestMethod]
     public void YahooMediaSyndicationExtensionConstructorTest()
     {
@@ -26,6 +36,9 @@ public class YahooMediaSyndicationExtensionTest
         target.ShouldBeOfType<YahooMediaSyndicationExtension>();
     }
 
+    /// <summary>
+    /// The <c>MatchByType</c> predicate accepts a Yahoo Media extension seen through <c>ISyndicationExtension</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaMatchByTypeTest()
     {
@@ -39,6 +52,9 @@ public class YahooMediaSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>MatchByType</c> predicate returns <see langword="false"/> for an extension of another family, here an iTunes one.
+    /// </summary>
     [TestMethod]
     public void YahooMediaMatchByType_WithDifferentExtension_ReturnsFalse()
     {
@@ -52,6 +68,9 @@ public class YahooMediaSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A default-constructed extension produces a non-zero hash code.
+    /// </summary>
     [TestMethod]
     public void YahooMediaGetHashCodeTest()
     {
@@ -65,6 +84,9 @@ public class YahooMediaSyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// A new extension exposes a context whose content and group collections are already allocated.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContextTest()
     {
@@ -80,6 +102,9 @@ public class YahooMediaSyndicationExtensionTest
         context.Groups.ShouldNotBeNull();
     }
 
+    /// <summary>
+    /// The <c>Video</c> medium renders as <c>video</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaMediumAsStringTest()
     {
@@ -94,6 +119,9 @@ public class YahooMediaSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// The name <c>image</c> parses back to the <c>Image</c> medium.
+    /// </summary>
     [TestMethod]
     public void YahooMediaMediumByNameTest()
     {
@@ -107,6 +135,9 @@ public class YahooMediaSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// Every named medium renders in lower case: <c>audio</c>, <c>document</c>, <c>executable</c>, <c>image</c> and <c>video</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaMediumAsString_AllMediums_ReturnsCorrectValues()
     {
@@ -118,6 +149,9 @@ public class YahooMediaSyndicationExtensionTest
         YahooMediaSyndicationExtension.MediumAsString(YahooMediaMedium.Video).ShouldBe("video");
     }
 
+    /// <summary>
+    /// Each of the five medium spellings parses back to its enumeration value.
+    /// </summary>
     [TestMethod]
     public void YahooMediaMediumByName_AllMediums_ReturnsCorrectEnumValues()
     {
@@ -129,6 +163,9 @@ public class YahooMediaSyndicationExtensionTest
         YahooMediaSyndicationExtension.MediumByName("video").ShouldBe(YahooMediaMedium.Video);
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> to the context throws <c>ArgumentNullException</c> rather than clearing it.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContext_SetNull_ThrowsArgumentNullException()
     {
@@ -143,6 +180,10 @@ public class YahooMediaSyndicationExtensionTest
 
     #region YahooMediaContent Tests
 
+    /// <summary>
+    /// A new content entity starts with the <c>MinValue</c> sentinel for every numeric attribute, an empty
+    /// content type, no URL and no language.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_DefaultConstructor_InitializesWithDefaults()
     {
@@ -167,6 +208,9 @@ public class YahooMediaSyndicationExtensionTest
         content.Width.ShouldBe(int.MinValue);
     }
 
+    /// <summary>
+    /// The URL constructor stores the address it was given.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_ConstructorWithUrl_SetsUrl()
     {
@@ -180,6 +224,9 @@ public class YahooMediaSyndicationExtensionTest
         content.Url.ShouldBe(url);
     }
 
+    /// <summary>
+    /// The player constructor stores the player it was given.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_ConstructorWithPlayer_SetsPlayer()
     {
@@ -193,6 +240,10 @@ public class YahooMediaSyndicationExtensionTest
         content.Player.ShouldBe(player);
     }
 
+    /// <summary>
+    /// Every content attribute reads back as it was written, the language surviving as the culture
+    /// <c>en-US</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_SetAllProperties_PropertiesAreSet()
     {
@@ -233,6 +284,9 @@ public class YahooMediaSyndicationExtensionTest
         content.Language.Name.ShouldBe("en-US");
     }
 
+    /// <summary>
+    /// Rendering a content entity emits a <c>content</c> element carrying its URL and content type.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_WriteTo_GeneratesValidXml()
     {
@@ -249,6 +303,10 @@ public class YahooMediaSyndicationExtensionTest
         xml.ShouldContain("video/mp4");
     }
 
+    /// <summary>
+    /// Loading a fully attributed <c>content</c> element recovers every attribute, a bare <c>duration</c> of
+    /// <c>120</c> being read as two minutes and <c>samplingrate</c> as the decimal <c>44.1</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_LoadFromXml_ParsesCorrectly()
     {
@@ -297,6 +355,9 @@ public class YahooMediaSyndicationExtensionTest
         content.Language!.Name.ShouldBe("en-US");
     }
 
+    /// <summary>
+    /// Two content entities built from identical values compare equal under <c>==</c>, and <c>!=</c> agrees.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_EqualityOperator_ReturnsTrueForEqualObjects()
     {
@@ -309,6 +370,9 @@ public class YahooMediaSyndicationExtensionTest
         (content1 != content2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Content entities differing in their URL do not compare equal.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_EqualityOperator_ReturnsFalseForDifferentObjects()
     {
@@ -321,6 +385,9 @@ public class YahooMediaSyndicationExtensionTest
         (content1 != content2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// Comparing two content entities holding identical values yields zero.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_CompareTo_ReturnsCorrectOrder()
     {
@@ -335,6 +402,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A content entity sorts after <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_CompareTo_Null_ReturnsOne()
     {
@@ -348,6 +418,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Content entities pointing at different URLs do not compare as equal.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_CompareTo_DifferentContent_ReturnsNonZero()
     {
@@ -370,6 +443,9 @@ public class YahooMediaSyndicationExtensionTest
 
     #region YahooMediaGroup Tests
 
+    /// <summary>
+    /// A new group starts with an allocated but empty content collection.
+    /// </summary>
     [TestMethod]
     public void YahooMediaGroup_DefaultConstructor_InitializesWithDefaults()
     {
@@ -382,6 +458,9 @@ public class YahooMediaSyndicationExtensionTest
         group.Contents.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// A group keeps its contents in the order they were added, the 720-pixel rendition ahead of the 480-pixel one.
+    /// </summary>
     [TestMethod]
     public void YahooMediaGroup_AddMultipleContents_ContentsAreStored()
     {
@@ -413,6 +492,9 @@ public class YahooMediaSyndicationExtensionTest
         group.Contents[1].Height.ShouldBe(480);
     }
 
+    /// <summary>
+    /// The one content in a group flagged <c>IsDefault</c> can be picked back out of the collection.
+    /// </summary>
     [TestMethod]
     public void YahooMediaGroup_WithDefaultContent_IdentifiesDefault()
     {
@@ -429,6 +511,9 @@ public class YahooMediaSyndicationExtensionTest
         group.Contents!.First(c => c.IsDefault).Url!.ToString().ShouldBe("http://example.com/hd.mp4");
     }
 
+    /// <summary>
+    /// Rendering a group emits a <c>group</c> element wrapping its <c>content</c> children.
+    /// </summary>
     [TestMethod]
     public void YahooMediaGroup_WriteTo_GeneratesValidXml()
     {
@@ -444,6 +529,9 @@ public class YahooMediaSyndicationExtensionTest
         xml.ShouldContain("content");
     }
 
+    /// <summary>
+    /// Loading a <c>group</c> element recovers both contents and preserves which one carried <c>isDefault</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaGroup_LoadFromXml_ParsesCorrectly()
     {
@@ -472,6 +560,9 @@ public class YahooMediaSyndicationExtensionTest
         group.Contents[1].IsDefault.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Two groups holding the same contents compare equal.
+    /// </summary>
     [TestMethod]
     public void YahooMediaGroup_EqualityOperator_WorksCorrectly()
     {
@@ -487,6 +578,9 @@ public class YahooMediaSyndicationExtensionTest
 
     #region YahooMediaThumbnail Tests
 
+    /// <summary>
+    /// A new thumbnail starts with the <c>MinValue</c> sentinel for its height, width and time offset.
+    /// </summary>
     [TestMethod]
     public void YahooMediaThumbnail_DefaultConstructor_InitializesWithDefaults()
     {
@@ -499,6 +593,9 @@ public class YahooMediaSyndicationExtensionTest
         thumbnail.Time.ShouldBe(TimeSpan.MinValue);
     }
 
+    /// <summary>
+    /// The URL constructor stores the address it was given.
+    /// </summary>
     [TestMethod]
     public void YahooMediaThumbnail_ConstructorWithUrl_SetsUrl()
     {
@@ -512,6 +609,9 @@ public class YahooMediaSyndicationExtensionTest
         thumbnail.Url.ShouldBe(url);
     }
 
+    /// <summary>
+    /// The three-argument constructor takes the dimensions height first and width second.
+    /// </summary>
     [TestMethod]
     public void YahooMediaThumbnail_ConstructorWithDimensions_SetsAllValues()
     {
@@ -527,6 +627,9 @@ public class YahooMediaSyndicationExtensionTest
         thumbnail.Width.ShouldBe(200);
     }
 
+    /// <summary>
+    /// Rendering a thumbnail emits its URL and both dimensions.
+    /// </summary>
     [TestMethod]
     public void YahooMediaThumbnail_WriteTo_GeneratesValidXml()
     {
@@ -547,6 +650,9 @@ public class YahooMediaSyndicationExtensionTest
         xml.ShouldContain("200");
     }
 
+    /// <summary>
+    /// Loading a <c>thumbnail</c> element recovers the URL, both dimensions and a <c>time</c> of <c>00:00:30</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaThumbnail_LoadFromXml_ParsesCorrectly()
     {
@@ -577,6 +683,9 @@ public class YahooMediaSyndicationExtensionTest
         thumbnail.Time.ShouldBe(TimeSpan.FromSeconds(30));
     }
 
+    /// <summary>
+    /// Two thumbnails sharing a URL and dimensions compare equal under <c>==</c>, and <c>!=</c> agrees.
+    /// </summary>
     [TestMethod]
     public void YahooMediaThumbnail_EqualityOperator_WorksCorrectly()
     {
@@ -589,6 +698,9 @@ public class YahooMediaSyndicationExtensionTest
         (thumb1 != thumb2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Both thumbnails attached to a content entity appear in its rendered XML.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_WithThumbnails_SerializesCorrectly()
     {
@@ -610,6 +722,9 @@ public class YahooMediaSyndicationExtensionTest
 
     #region YahooMediaRating Tests
 
+    /// <summary>
+    /// A new rating carries empty content and no scheme.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRating_DefaultConstructor_InitializesWithDefaults()
     {
@@ -621,6 +736,9 @@ public class YahooMediaSyndicationExtensionTest
         rating.Scheme.ShouldBeNull();
     }
 
+    /// <summary>
+    /// The single-argument constructor stores the audience string as the rating content.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRating_ConstructorWithAudience_SetsContent()
     {
@@ -631,6 +749,9 @@ public class YahooMediaSyndicationExtensionTest
         rating.Content.ShouldBe("adult");
     }
 
+    /// <summary>
+    /// The simple rating scheme is the URN <c>urn:simple</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRating_SimpleScheme_ReturnsCorrectUri()
     {
@@ -641,6 +762,9 @@ public class YahooMediaSyndicationExtensionTest
         scheme.ToString().ShouldBe("urn:simple");
     }
 
+    /// <summary>
+    /// The two simple-scheme ratings are spelled <c>adult</c> and <c>nonadult</c>, the latter unhyphenated.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRating_SimpleRatings_ReturnCorrectValues()
     {
@@ -649,6 +773,9 @@ public class YahooMediaSyndicationExtensionTest
         YahooMediaRating.SimpleNonAdultRating.ShouldBe("nonadult");
     }
 
+    /// <summary>
+    /// Rendering a rating emits both the audience value and the scheme it was rated against.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRating_WriteTo_GeneratesValidXml()
     {
@@ -668,6 +795,9 @@ public class YahooMediaSyndicationExtensionTest
         xml.ShouldContain("urn:simple");
     }
 
+    /// <summary>
+    /// Loading a <c>rating</c> element recovers its text content and its <c>scheme</c> attribute.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRating_LoadFromXml_ParsesCorrectly()
     {
@@ -692,6 +822,9 @@ public class YahooMediaSyndicationExtensionTest
         rating.Scheme!.ToString().ShouldBe("urn:simple");
     }
 
+    /// <summary>
+    /// Two ratings sharing content and scheme compare equal under <c>==</c>, and <c>!=</c> agrees.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRating_EqualityOperator_WorksCorrectly()
     {
@@ -704,6 +837,9 @@ public class YahooMediaSyndicationExtensionTest
         (rating1 != rating2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// A rating attached to a content entity appears in its rendered XML.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_WithRatings_SerializesCorrectly()
     {
@@ -723,6 +859,9 @@ public class YahooMediaSyndicationExtensionTest
 
     #region YahooMediaCredit Tests
 
+    /// <summary>
+    /// A new credit carries an empty entity and role, and no scheme.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCredit_DefaultConstructor_InitializesWithDefaults()
     {
@@ -735,6 +874,9 @@ public class YahooMediaSyndicationExtensionTest
         credit.Scheme.ShouldBeNull();
     }
 
+    /// <summary>
+    /// The single-argument constructor stores the credited entity.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCredit_ConstructorWithEntity_SetsEntity()
     {
@@ -745,6 +887,9 @@ public class YahooMediaSyndicationExtensionTest
         credit.Entity.ShouldBe("John Doe");
     }
 
+    /// <summary>
+    /// The European Broadcasting Union role scheme is the URN <c>urn:ebu</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCredit_EuropeanBroadcastingUnionRoleScheme_ReturnsCorrectUri()
     {
@@ -755,6 +900,9 @@ public class YahooMediaSyndicationExtensionTest
         scheme.ToString().ShouldBe("urn:ebu");
     }
 
+    /// <summary>
+    /// A role is lower-cased on assignment, so <c>DIRECTOR</c> is stored as <c>director</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCredit_RoleIsNormalized_ToLowercase()
     {
@@ -769,6 +917,9 @@ public class YahooMediaSyndicationExtensionTest
         credit.Role.ShouldBe("director");
     }
 
+    /// <summary>
+    /// Rendering a credit emits the credited entity and its role.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCredit_WriteTo_GeneratesValidXml()
     {
@@ -789,6 +940,9 @@ public class YahooMediaSyndicationExtensionTest
         xml.ShouldContain("director");
     }
 
+    /// <summary>
+    /// Loading a <c>credit</c> element recovers the entity, the role and the scheme.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCredit_LoadFromXml_ParsesCorrectly()
     {
@@ -814,6 +968,9 @@ public class YahooMediaSyndicationExtensionTest
         credit.Scheme!.ToString().ShouldBe("urn:ebu");
     }
 
+    /// <summary>
+    /// Two credits sharing entity and role compare equal under <c>==</c>, and <c>!=</c> agrees.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCredit_EqualityOperator_WorksCorrectly()
     {
@@ -826,6 +983,9 @@ public class YahooMediaSyndicationExtensionTest
         (credit1 != credit2).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// All three credits attached to a content entity appear in its rendered XML.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_WithMultipleCredits_SerializesCorrectly()
     {
@@ -849,6 +1009,10 @@ public class YahooMediaSyndicationExtensionTest
 
     #region Complex Nested Media Structure Tests
 
+    /// <summary>
+    /// A fully populated content entity renders its title, description, thumbnail, credit, rating, category
+    /// and copyright.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_WithAllCommonEntities_SerializesCorrectly()
     {
@@ -870,6 +1034,9 @@ public class YahooMediaSyndicationExtensionTest
         xml.ShouldContain("copyright");
     }
 
+    /// <summary>
+    /// A fully populated group renders its own title and description alongside its contents.
+    /// </summary>
     [TestMethod]
     public void YahooMediaGroup_WithCommonEntities_SerializesCorrectly()
     {
@@ -887,6 +1054,9 @@ public class YahooMediaSyndicationExtensionTest
         xml.ShouldContain("description");
     }
 
+    /// <summary>
+    /// Rendering the extension emits the context's content, group, title and description together.
+    /// </summary>
     [TestMethod]
     public void YahooMediaSyndicationExtensionContext_WithMultipleGroupsAndContents_SerializesCorrectly()
     {
@@ -908,6 +1078,9 @@ public class YahooMediaSyndicationExtensionTest
         xml.ShouldContain("description");
     }
 
+    /// <summary>
+    /// Rendering a category emits both its taxonomy value and its human-readable label.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCategory_WithSchemeAndLabel_SerializesCorrectly()
     {
@@ -927,6 +1100,10 @@ public class YahooMediaSyndicationExtensionTest
         xml.ShouldContain("Rock Music");
     }
 
+    /// <summary>
+    /// HTML-typed text is escaped on the way out, so <c>&amp;lt;p&amp;gt;</c> reaches the feed as character data
+    /// rather than as a live element, and the type is written as <c>html</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaTextConstruct_WithHtmlType_SerializesCorrectly()
     {
@@ -941,6 +1118,9 @@ public class YahooMediaSyndicationExtensionTest
         xml.ShouldContain("html");
     }
 
+    /// <summary>
+    /// Rendering a copyright emits both its text and the terms URL.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCopyright_WithUrlAndText_SerializesCorrectly()
     {
@@ -959,6 +1139,9 @@ public class YahooMediaSyndicationExtensionTest
         xml.ShouldContain("http://example.com/terms");
     }
 
+    /// <summary>
+    /// Rendering a player emits its URL and both dimensions.
+    /// </summary>
     [TestMethod]
     public void YahooMediaPlayer_WithDimensions_SerializesCorrectly()
     {
@@ -979,6 +1162,10 @@ public class YahooMediaSyndicationExtensionTest
 
     #region Round-Trip Tests
 
+    /// <summary>
+    /// A fully populated content entity survives being rendered and read back with its URL, file size,
+    /// content type, medium and dimensions intact.
+    /// </summary>
     [TestMethod]
     public void YahooMediaContent_RoundTrip_PreservesAllData()
     {
@@ -1006,6 +1193,9 @@ public class YahooMediaSyndicationExtensionTest
         loaded.Width.ShouldBe(original.Width);
     }
 
+    /// <summary>
+    /// A group survives being rendered and read back with the same number of contents.
+    /// </summary>
     [TestMethod]
     public void YahooMediaGroup_RoundTrip_PreservesAllData()
     {
@@ -1028,6 +1218,9 @@ public class YahooMediaSyndicationExtensionTest
         loaded.Contents.Count.ShouldBe(original.Contents.Count);
     }
 
+    /// <summary>
+    /// A thumbnail survives being rendered and read back with its URL, dimensions and time offset intact.
+    /// </summary>
     [TestMethod]
     public void YahooMediaThumbnail_RoundTrip_PreservesAllData()
     {
@@ -1056,6 +1249,9 @@ public class YahooMediaSyndicationExtensionTest
         loaded.Time.ShouldBe(original.Time);
     }
 
+    /// <summary>
+    /// A rating survives being rendered and read back with its content and scheme intact.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRating_RoundTrip_PreservesAllData()
     {
@@ -1079,6 +1275,9 @@ public class YahooMediaSyndicationExtensionTest
         loaded.Scheme.ShouldBe(original.Scheme);
     }
 
+    /// <summary>
+    /// A credit survives being rendered and read back with its entity, role and scheme intact.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCredit_RoundTrip_PreservesAllData()
     {
@@ -1107,6 +1306,9 @@ public class YahooMediaSyndicationExtensionTest
         loaded.Scheme.ShouldBe(original.Scheme);
     }
 
+    /// <summary>
+    /// A category survives being rendered and read back with its value, label and scheme intact.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCategory_RoundTrip_PreservesAllData()
     {
@@ -1135,6 +1337,9 @@ public class YahooMediaSyndicationExtensionTest
         loaded.Scheme.ShouldBe(original.Scheme);
     }
 
+    /// <summary>
+    /// A copyright survives being rendered and read back with its text and URL intact.
+    /// </summary>
     [TestMethod]
     public void YahooMediaCopyright_RoundTrip_PreservesAllData()
     {
@@ -1161,6 +1366,9 @@ public class YahooMediaSyndicationExtensionTest
         loaded.Url.ShouldBe(original.Url);
     }
 
+    /// <summary>
+    /// A player survives being rendered and read back with its URL and dimensions intact.
+    /// </summary>
     [TestMethod]
     public void YahooMediaPlayer_RoundTrip_PreservesAllData()
     {
@@ -1189,6 +1397,10 @@ public class YahooMediaSyndicationExtensionTest
 
     #region RSS Feed Integration Tests
 
+    /// <summary>
+    /// A <c>media:content</c> element on an RSS item is recognised as a Yahoo Media extension, and its
+    /// attributes and nested title, description and thumbnail are all parsed onto the content entity.
+    /// </summary>
     [TestMethod]
     public void YahooMediaExtension_InRssFeed_LoadsCorrectly()
     {
@@ -1229,6 +1441,10 @@ public class YahooMediaSyndicationExtensionTest
         content.Thumbnails.Count.ShouldBe(1);
     }
 
+    /// <summary>
+    /// A <c>media:group</c> on an RSS item yields both renditions in document order, with the high-definition
+    /// one flagged default and the group title parsed.
+    /// </summary>
     [TestMethod]
     public void YahooMediaExtension_WithGroup_InRssFeed_LoadsCorrectly()
     {
@@ -1265,6 +1481,9 @@ public class YahooMediaSyndicationExtensionTest
         group.Title!.Content.ShouldBe("Video Group");
     }
 
+    /// <summary>
+    /// An item's Yahoo Media extension is reachable through <c>FindExtension</c> given the <c>MatchByType</c> predicate.
+    /// </summary>
     [TestMethod]
     public void YahooMediaExtension_MatchByType_FindsExtension()
     {
@@ -1286,6 +1505,9 @@ public class YahooMediaSyndicationExtensionTest
         extension.ShouldBeOfType<YahooMediaSyndicationExtension>();
     }
 
+    /// <summary>
+    /// An extension attached to an RSS item writes its elements under the <c>media</c> prefix when the feed is saved.
+    /// </summary>
     [TestMethod]
     public void YahooMediaExtension_AddedToFeed_SerializesCorrectly()
     {
@@ -1405,6 +1627,9 @@ public class YahooMediaSyndicationExtensionTest
 
     #region YahooMediaRestriction Tests
 
+    /// <summary>
+    /// A new restriction has no relationship, no entity type and an allocated but empty entity list.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_DefaultConstructor_CreatesEmptyInstance()
     {
@@ -1418,6 +1643,9 @@ public class YahooMediaSyndicationExtensionTest
         restriction.Entities.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// The restriction relationship reads back as the <c>Allow</c> it was set to.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_Relationship_CanBeSet()
     {
@@ -1431,6 +1659,9 @@ public class YahooMediaSyndicationExtensionTest
         restriction.Relationship.ShouldBe(YahooMediaRestrictionRelationship.Allow);
     }
 
+    /// <summary>
+    /// The restricted entity type reads back as the <c>Country</c> it was set to.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_EntityType_CanBeSet()
     {
@@ -1444,6 +1675,9 @@ public class YahooMediaSyndicationExtensionTest
         restriction.EntityType.ShouldBe(YahooMediaRestrictionType.Country);
     }
 
+    /// <summary>
+    /// The entity collection keeps every country code added to it.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_Entities_CanAddCountries()
     {
@@ -1466,6 +1700,9 @@ public class YahooMediaSyndicationExtensionTest
         restriction.Entities.ShouldContain("CA");
     }
 
+    /// <summary>
+    /// The <c>Allow</c> relationship renders as <c>allow</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_RelationshipAsString_ReturnsCorrectValue_ForAllow()
     {
@@ -1476,6 +1713,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe("allow");
     }
 
+    /// <summary>
+    /// The <c>Deny</c> relationship renders as <c>deny</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_RelationshipAsString_ReturnsCorrectValue_ForDeny()
     {
@@ -1486,6 +1726,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe("deny");
     }
 
+    /// <summary>
+    /// The name <c>allow</c> parses back to the <c>Allow</c> relationship.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_RelationshipByName_ReturnsCorrectEnum_ForAllow()
     {
@@ -1496,6 +1739,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(YahooMediaRestrictionRelationship.Allow);
     }
 
+    /// <summary>
+    /// The name <c>deny</c> parses back to the <c>Deny</c> relationship.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_RelationshipByName_ReturnsCorrectEnum_ForDeny()
     {
@@ -1506,6 +1752,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(YahooMediaRestrictionRelationship.Deny);
     }
 
+    /// <summary>
+    /// Relationship parsing ignores case, so <c>ALLOW</c> also yields <c>Allow</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_RelationshipByName_IsCaseInsensitive()
     {
@@ -1516,6 +1765,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(YahooMediaRestrictionRelationship.Allow);
     }
 
+    /// <summary>
+    /// The <c>Country</c> restriction type renders as <c>country</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_RestrictionTypeAsString_ReturnsCorrectValue_ForCountry()
     {
@@ -1526,6 +1778,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe("country");
     }
 
+    /// <summary>
+    /// The <c>Uri</c> restriction type renders as <c>uri</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_RestrictionTypeAsString_ReturnsCorrectValue_ForUri()
     {
@@ -1536,6 +1791,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe("uri");
     }
 
+    /// <summary>
+    /// The name <c>country</c> parses back to the <c>Country</c> restriction type.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_RestrictionTypeByName_ReturnsCorrectEnum_ForCountry()
     {
@@ -1546,6 +1804,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(YahooMediaRestrictionType.Country);
     }
 
+    /// <summary>
+    /// A restriction sorts after <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_CompareTo_WithNull_ReturnsPositive()
     {
@@ -1563,6 +1824,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Two restrictions sharing a relationship and entity type compare equal.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_CompareTo_WithEqual_ReturnsZero()
     {
@@ -1585,6 +1849,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Restriction equality follows the relationship and the entity type.
+    /// </summary>
     [TestMethod]
     public void YahooMediaRestriction_Equals_WithEqual_ReturnsTrue()
     {
@@ -1608,6 +1875,9 @@ public class YahooMediaSyndicationExtensionTest
 
     #region YahooMediaHash Tests
 
+    /// <summary>
+    /// A new hash has no algorithm and an empty value.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_DefaultConstructor_CreatesEmptyInstance()
     {
@@ -1619,6 +1889,9 @@ public class YahooMediaSyndicationExtensionTest
         hash.Value.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// The single-argument constructor stores the digest it was given.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_Constructor_WithValue_SetsValue()
     {
@@ -1632,6 +1905,9 @@ public class YahooMediaSyndicationExtensionTest
         hash.Value.ShouldBe(hashValue);
     }
 
+    /// <summary>
+    /// The hash algorithm reads back as the <c>MD5</c> it was set to.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_Algorithm_CanBeSet()
     {
@@ -1645,6 +1921,9 @@ public class YahooMediaSyndicationExtensionTest
         hash.Algorithm.ShouldBe(YahooMediaHashAlgorithm.MD5);
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> to a hash value is rejected with an <c>ArgumentException</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_Value_ThrowsOnNull()
     {
@@ -1655,6 +1934,9 @@ public class YahooMediaSyndicationExtensionTest
         Should.Throw<ArgumentException>(() => hash.Value = null!);
     }
 
+    /// <summary>
+    /// Assigning an empty string to a hash value is rejected with an <c>ArgumentException</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_Value_ThrowsOnEmpty()
     {
@@ -1665,6 +1947,9 @@ public class YahooMediaSyndicationExtensionTest
         Should.Throw<ArgumentException>(() => hash.Value = string.Empty);
     }
 
+    /// <summary>
+    /// The <c>MD5</c> algorithm renders as <c>md5</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_HashAlgorithmAsString_ReturnsCorrectValue_ForMD5()
     {
@@ -1675,6 +1960,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe("md5");
     }
 
+    /// <summary>
+    /// The <c>Sha1</c> algorithm renders as <c>sha-1</c>, hyphen included.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_HashAlgorithmAsString_ReturnsCorrectValue_ForSha1()
     {
@@ -1685,6 +1973,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe("sha-1");
     }
 
+    /// <summary>
+    /// The name <c>md5</c> parses back to the <c>MD5</c> algorithm.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_HashAlgorithmByName_ReturnsCorrectEnum_ForMD5()
     {
@@ -1695,6 +1986,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(YahooMediaHashAlgorithm.MD5);
     }
 
+    /// <summary>
+    /// The name <c>sha-1</c> parses back to the <c>Sha1</c> algorithm.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_HashAlgorithmByName_ReturnsCorrectEnum_ForSha1()
     {
@@ -1705,6 +1999,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(YahooMediaHashAlgorithm.Sha1);
     }
 
+    /// <summary>
+    /// Algorithm parsing ignores case, so <c>MD5</c> also yields the <c>MD5</c> algorithm.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_HashAlgorithmByName_IsCaseInsensitive()
     {
@@ -1715,6 +2012,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(YahooMediaHashAlgorithm.MD5);
     }
 
+    /// <summary>
+    /// Hashing a stream under <c>MD5</c> produces a non-empty digest.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_GenerateHash_ComputesMD5Hash()
     {
@@ -1728,6 +2028,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// Hashing a stream under <c>Sha1</c> produces a non-empty digest.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_GenerateHash_ComputesSha1Hash()
     {
@@ -1741,6 +2044,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldNotBeNullOrEmpty();
     }
 
+    /// <summary>
+    /// Asking for a hash with no algorithm selected throws <c>ArgumentException</c> instead of returning an empty digest.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_GenerateHash_ThrowsOnNoneAlgorithm()
     {
@@ -1752,6 +2058,9 @@ public class YahooMediaSyndicationExtensionTest
             YahooMediaHash.GenerateHash(stream, YahooMediaHashAlgorithm.None));
     }
 
+    /// <summary>
+    /// A hash sorts after <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_CompareTo_WithNull_ReturnsPositive()
     {
@@ -1765,6 +2074,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Two hashes sharing an algorithm and digest compare equal.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_CompareTo_WithEqual_ReturnsZero()
     {
@@ -1779,6 +2091,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Hash equality follows the algorithm and the digest value.
+    /// </summary>
     [TestMethod]
     public void YahooMediaHash_Equals_WithEqual_ReturnsTrue()
     {
@@ -1794,6 +2109,9 @@ public class YahooMediaSyndicationExtensionTest
 
     #region YahooMediaText Tests
 
+    /// <summary>
+    /// A new text entity has no text type and empty content.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_DefaultConstructor_CreatesEmptyInstance()
     {
@@ -1805,6 +2123,9 @@ public class YahooMediaSyndicationExtensionTest
         text.Content.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// The single-argument constructor stores the caption text it was given.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_Constructor_WithContent_SetsContent()
     {
@@ -1818,6 +2139,9 @@ public class YahooMediaSyndicationExtensionTest
         text.Content.ShouldBe(content);
     }
 
+    /// <summary>
+    /// The text type reads back as the <c>Plain</c> it was set to.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_TextType_CanBeSetToPlain()
     {
@@ -1831,6 +2155,9 @@ public class YahooMediaSyndicationExtensionTest
         text.TextType.ShouldBe(YahooMediaTextConstructType.Plain);
     }
 
+    /// <summary>
+    /// The text type reads back as the <c>Html</c> it was set to.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_TextType_CanBeSetToHtml()
     {
@@ -1844,6 +2171,9 @@ public class YahooMediaSyndicationExtensionTest
         text.TextType.ShouldBe(YahooMediaTextConstructType.Html);
     }
 
+    /// <summary>
+    /// A text entity carries the offset into the media timeline at which it starts.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_Start_CanBeSet()
     {
@@ -1858,6 +2188,9 @@ public class YahooMediaSyndicationExtensionTest
         text.Start.ShouldBe(startTime);
     }
 
+    /// <summary>
+    /// A text entity carries the offset into the media timeline at which it ends.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_End_CanBeSet()
     {
@@ -1872,6 +2205,9 @@ public class YahooMediaSyndicationExtensionTest
         text.End.ShouldBe(endTime);
     }
 
+    /// <summary>
+    /// A text entity carries the culture its content is written in.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_Language_CanBeSet()
     {
@@ -1886,6 +2222,9 @@ public class YahooMediaSyndicationExtensionTest
         text.Language.ShouldBe(language);
     }
 
+    /// <summary>
+    /// A text entity sorts after <see langword="null"/>, returning <c>1</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_CompareTo_WithNull_ReturnsPositive()
     {
@@ -1899,6 +2238,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Two text entities sharing content and text type compare equal.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_CompareTo_WithEqual_ReturnsZero()
     {
@@ -1913,6 +2255,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Text equality follows the content and the text type.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_Equals_WithEqual_ReturnsTrue()
     {
@@ -1924,6 +2269,9 @@ public class YahooMediaSyndicationExtensionTest
         text1.Equals(text2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The <c>Plain</c> text type renders as <c>plain</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_TextTypeAsString_ReturnsCorrectValue_ForPlain()
     {
@@ -1934,6 +2282,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe("plain");
     }
 
+    /// <summary>
+    /// The <c>Html</c> text type renders as <c>html</c>.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_TextTypeAsString_ReturnsCorrectValue_ForHtml()
     {
@@ -1944,6 +2295,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe("html");
     }
 
+    /// <summary>
+    /// The name <c>plain</c> parses back to the <c>Plain</c> text type.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_TextTypeByName_ReturnsCorrectEnum_ForPlain()
     {
@@ -1954,6 +2308,9 @@ public class YahooMediaSyndicationExtensionTest
         result.ShouldBe(YahooMediaTextConstructType.Plain);
     }
 
+    /// <summary>
+    /// The name <c>html</c> parses back to the <c>Html</c> text type.
+    /// </summary>
     [TestMethod]
     public void YahooMediaText_TextTypeByName_ReturnsCorrectEnum_ForHtml()
     {

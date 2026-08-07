@@ -7,6 +7,11 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.DublinCoreElementSet;
 
+/// <summary>
+/// Covers the Dublin Core Element Set extension — the fifteen legacy <c>dc:</c> elements under
+/// <c>http://purl.org/dc/elements/1.1/</c> — from the context that holds them, through the XML
+/// <c>WriteTo</c> and <c>ToString</c> produce, to the comparison and equality contracts.
+/// </summary>
 [TestClass]
 public class DublinCoreElementSetSyndicationExtensionTest
 {
@@ -46,6 +51,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
 
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// The parameterless constructor yields an instance of the Dublin Core element set extension type.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetSyndicationExtensionConstructorTest()
     {
@@ -54,6 +62,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         target.ShouldBeOfType<DublinCoreElementSetSyndicationExtension>();
     }
 
+    /// <summary>
+    /// Two extensions holding identical context compare equal.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetCompareToTest()
     {
@@ -63,6 +74,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>
+    /// The <c>MovingImage</c> vocabulary term renders as the string <c>MovingImage</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreTypeVocabularyAsString()
     {
@@ -72,6 +86,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// The name <c>MovingImage</c> resolves back to the <c>MovingImage</c> vocabulary term.
+    /// </summary>
     [TestMethod]
     public void DublinCoreTypeVocabularyByName()
     {
@@ -80,6 +97,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// An extension is equal to a separately constructed extension holding the same context.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetEqualsTest()
     {
@@ -89,6 +109,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// A hash code is stable across calls, and equal extensions hash equally.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetGetHashCodeTest()
     {
@@ -102,6 +125,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
+    /// <summary>
+    /// An RSS 2.0 feed carrying all fifteen <c>dc:</c> elements parses without throwing.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetLoadTest()
     {
@@ -112,6 +138,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         feed.Load(reader);
     }
 
+    /// <summary>
+    /// Attaching the extension to an RSS item emits every populated element under the <c>dc</c> prefix, in the order the fixture spells them.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetCreateXmlTest()
     {
@@ -122,6 +151,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    /// <summary>
+    /// An item parsed from a feed carrying the <c>dc:</c> elements exposes the extension both by generic lookup and through <c>MatchByType</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetFullTest()
     {
@@ -140,6 +172,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
             .ShouldBeOfType<DublinCoreElementSetSyndicationExtension>();
     }
 
+    /// <summary>
+    /// <c>MatchByType</c> accepts an instance of its own extension type.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetMatchByTypeTest()
     {
@@ -148,6 +183,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders each populated element on its own line, every one redeclaring the Dublin Core namespace as its default.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetToStringTest()
     {
@@ -156,6 +194,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBe(nycText);
     }
 
+    /// <summary>
+    /// Writing to an <see cref="XmlWriter"/> emits the same elements as <c>ToString</c>, once line breaks are discounted.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetWriteToTest()
     {
@@ -168,6 +209,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(nycText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// Extensions built from different Dublin Core values are not equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetOpEqualityTestFailure()
     {
@@ -177,6 +221,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Extensions holding identical context are equal under <c>==</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetOpEqualityTestSuccess()
     {
@@ -186,6 +233,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// An extension whose first differing context value sorts earlier is not greater than the other.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetOpGreaterThanTest()
     {
@@ -195,6 +245,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Extensions holding different context are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetOpInequalityTest()
     {
@@ -204,6 +257,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// An extension whose first differing context value sorts earlier — contributor <c>Helper</c> ahead of <c>Helper-er</c> — is less than the other.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetOpLessThanTest()
     {
@@ -213,6 +269,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>
+    /// The context reports all fifteen Dublin Core values it was given, down to the <c>PhysicalObject</c> type vocabulary.
+    /// </summary>
     [TestMethod]
     public void DublinCoreElementSetContextTest()
     {

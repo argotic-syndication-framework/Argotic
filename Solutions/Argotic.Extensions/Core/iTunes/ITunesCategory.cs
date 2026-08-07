@@ -6,9 +6,23 @@ using Argotic.Common;
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents a categorization taxonomy that can be applied to a podcast.
+/// Represents one entry from the taxonomy Apple categorises podcasts by.
 /// </summary>
-/// <seealso cref="ITunesSyndicationExtensionContext"/>
+/// <remarks>
+///     <para>
+///     <see cref="Text"/> is not free prose. Apple publishes a closed list of categories and
+///     subcategories, and a show that spells one of them differently is categorised as nothing at all
+///     — Apple's own example of the trap is casing: <c>&lt;itunes:category text="Kids &amp;amp;
+///     Family" /&gt;</c> is correct and <c>"Kids &amp;amp; family"</c> is not.
+///     </para>
+///     <para>
+///     A subcategory is a nested <c>itunes:category</c>, not an attribute and not a sibling, which is
+///     why this type contains a collection of itself. Apple's guidance is that <i>"You can choose up
+///     to two categories per show — primary and secondary — plus subcategories for each, if
+///     available."</i> Nothing here enforces either the taxonomy or that limit.
+///     </para>
+/// </remarks>
+/// <seealso cref="ITunesSyndicationExtensionContext.Categories"/>
 public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCategory>, IComparisonOperators
 {
 
@@ -23,9 +37,9 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesCategory"/> class using the supplied text.
     /// </summary>
-    /// <param name="text"></param>
-    /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
+    /// <param name="text">The category name, spelled exactly as Apple's taxonomy spells it.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="text"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="text"/> is an empty string.</exception>
     public ITunesCategory(string text)
     {
         this.Text = text;
@@ -37,6 +51,11 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// <value>
     ///     A <see cref="IList{T}"/> collection of <see cref="ITunesCategory"/> objects that represent the sub-categories of this category. The default value is an <i>empty</i> collection.
     /// </value>
+    /// <remarks>
+    ///     Apple's taxonomy nests one level: a category has subcategories, a subcategory has none.
+    ///     Both the loader and the writer recurse without limit, so a deeper tree round-trips rather
+    ///     than being truncated — it is simply not something Apple will read.
+    /// </remarks>
 #pragma warning disable CA5362 // iTunes specification requires categories to contain subcategories
     public IList<ITunesCategory> Categories { get; } = [];
 #pragma warning restore CA5362
@@ -44,12 +63,16 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// <summary>
     /// Gets or sets the name of this category.
     /// </summary>
-    /// <value>The name of this category.</value>
+    /// <value>The category name, matched against Apple's taxonomy character for character. The default value is an <i>empty</i> string.</value>
     /// <remarks>
-    ///     The category text <i>may</i> be entity encoded.
+    ///     Several category names contain an ampersand — <c>Kids &amp; Family</c>,
+    ///     <c>Health &amp; Fitness</c>, <c>Society &amp; Culture</c>. Set this property to the
+    ///     <i>decoded</i> text, with a literal <c>&amp;</c>; the writer escapes it. Storing the
+    ///     already-escaped form produces <c>&amp;amp;amp;</c> in the feed and a category that matches
+    ///     nothing.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
     public string Text
     {
         get;
@@ -65,11 +88,11 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// Loads this <see cref="ITunesCategory"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="ITunesCategory"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the <see cref="ITunesCategory"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ITunesCategory"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
@@ -117,7 +140,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// Saves the current <see cref="ITunesCategory"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
@@ -140,10 +163,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="ITunesCategory"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="ITunesCategory"/>.</returns>
-    /// <remarks>
-    ///     This method returns the XML representation for the current instance.
-    /// </remarks>
+    /// <returns>The XML representation for the current instance.</returns>
     public override string ToString()
     {
         using MemoryStream stream = new();
@@ -182,7 +202,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// Determines whether the specified <see cref="ITunesCategory"/> is equal to the current instance.
     /// </summary>
     /// <param name="other">The <see cref="ITunesCategory"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="ITunesCategory"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="ITunesCategory"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public bool Equals(ITunesCategory? other)
     {
         if (other is null)
@@ -197,7 +217,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
     public override bool Equals(object? obj) => obj is ITunesCategory other && this.Equals(other);
 
     /// <summary>
@@ -211,7 +231,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
     public static bool operator ==(ITunesCategory? first, ITunesCategory? second)
     {
         if (first is null) return second is null;
@@ -223,7 +243,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// </summary>
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
     public static bool operator !=(ITunesCategory? first, ITunesCategory? second) => !(first == second);
 
 }

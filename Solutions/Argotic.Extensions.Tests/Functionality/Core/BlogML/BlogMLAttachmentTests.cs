@@ -18,6 +18,9 @@ public class BlogMLAttachmentTests
 {
     #region Constructor Tests
 
+    /// <summary>
+    /// A newly constructed attachment has empty content and media type, is not embedded, has no URL, and reports its size as <c>long.MinValue</c>.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_CreatesValidInstance()
     {
@@ -40,6 +43,9 @@ public class BlogMLAttachmentTests
 
     #region Load Tests
 
+    /// <summary>
+    /// Loading an embedded attachment reads <c>embedded</c>, <c>mime-type</c>, <c>size</c> and <c>url</c>, and keeps the base64 element body as the content.
+    /// </summary>
     [TestMethod]
     public void Load_EmbeddedContent_ParsesProperties()
     {
@@ -70,6 +76,9 @@ public class BlogMLAttachmentTests
         attachment.Content.ShouldBe("SGVsbG8gV29ybGQ=");
     }
 
+    /// <summary>
+    /// Loading an attachment that is not embedded reads <c>external-uri</c> into <c>ExternalUri</c> alongside <c>Url</c>.
+    /// </summary>
     [TestMethod]
     public void Load_ExternalUri_SetsExternalUri()
     {
@@ -98,6 +107,9 @@ public class BlogMLAttachmentTests
         attachment.Url.ShouldBe(new Uri("http://example.com/doc.pdf"));
     }
 
+    /// <summary>
+    /// An attachment element carrying only <c>mime-type</c> and <c>url</c> loads, and the media type survives verbatim.
+    /// </summary>
     [TestMethod]
     public void Load_WithMimeType_SetsMimeType()
     {
@@ -122,6 +134,9 @@ public class BlogMLAttachmentTests
         attachment.MimeType.ShouldBe("video/mp4");
     }
 
+    /// <summary>
+    /// The load overload taking <see cref="SyndicationResourceLoadSettings"/> reads the same attributes and content as the overload without.
+    /// </summary>
     [TestMethod]
     public void Load_WithSettings_LoadsAttachment()
     {
@@ -151,6 +166,9 @@ public class BlogMLAttachmentTests
         attachment.Content.ShouldBe("Base64Content");
     }
 
+    /// <summary>
+    /// Loading from a <see langword="null"/> navigator throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void Load_NullSource_ThrowsArgumentNullException()
     {
@@ -161,6 +179,9 @@ public class BlogMLAttachmentTests
         Should.Throw<ArgumentNullException>(() => attachment.Load(null!));
     }
 
+    /// <summary>
+    /// <see langword="null"/> load settings throw <see cref="ArgumentNullException"/> even when the navigator is valid.
+    /// </summary>
     [TestMethod]
     public void Load_NullSettings_ThrowsArgumentNullException()
     {
@@ -183,6 +204,9 @@ public class BlogMLAttachmentTests
 
     #region WriteTo Tests
 
+    /// <summary>
+    /// Writing an embedded attachment emits the <c>embedded</c>, <c>mime-type</c>, <c>size</c> and <c>url</c> attributes and the content as the element body.
+    /// </summary>
     [TestMethod]
     public void WriteTo_EmbeddedContent_WritesCorrectXml()
     {
@@ -222,6 +246,9 @@ public class BlogMLAttachmentTests
         xml.ShouldContain("SGVsbG8gV29ybGQ=");
     }
 
+    /// <summary>
+    /// An attachment holding an external URI writes it as the <c>external-uri</c> attribute.
+    /// </summary>
     [TestMethod]
     public void WriteTo_ExternalUri_WritesExternalUriAttribute()
     {
@@ -249,6 +276,9 @@ public class BlogMLAttachmentTests
         xml.ShouldContain("external-uri=\"http://example.com/doc.pdf\"");
     }
 
+    /// <summary>
+    /// Writing to a <see langword="null"/> writer throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void WriteTo_NullWriter_ThrowsArgumentNullException()
     {
@@ -259,6 +289,9 @@ public class BlogMLAttachmentTests
         Should.Throw<ArgumentNullException>(() => attachment.WriteTo(null!));
     }
 
+    /// <summary>
+    /// <c>ToString</c> renders the attachment as its XML element, carrying the <c>mime-type</c> attribute.
+    /// </summary>
     [TestMethod]
     public void ToString_ReturnsXmlRepresentation()
     {
@@ -283,6 +316,9 @@ public class BlogMLAttachmentTests
 
     #region Comparison Tests
 
+    /// <summary>
+    /// Two attachments agreeing on embedding, media type, size, URL and content compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_EqualAttachments_ReturnsZero()
     {
@@ -312,6 +348,9 @@ public class BlogMLAttachmentTests
         result.ShouldBe(0);
     }
 
+    /// <summary>
+    /// Attachments differing in media type and URL do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_DifferentAttachments_ReturnsNonZero()
     {
@@ -335,6 +374,9 @@ public class BlogMLAttachmentTests
         result.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// Comparing an attachment against <see langword="null"/> returns <c>1</c>, so <see langword="null"/> sorts first.
+    /// </summary>
     [TestMethod]
     public void CompareTo_NullObject_ReturnsPositive()
     {
@@ -351,6 +393,9 @@ public class BlogMLAttachmentTests
         result.ShouldBe(1);
     }
 
+    /// <summary>
+    /// Attachments differing in media type, URL and size do not compare equal.
+    /// </summary>
     [TestMethod]
     public void CompareTo_DifferentAttachment_ReturnsNonZero()
     {
@@ -379,6 +424,9 @@ public class BlogMLAttachmentTests
 
     #region Equality Operators Tests
 
+    /// <summary>
+    /// <c>==</c>, <c>!=</c> and <c>Equals</c> agree on value equality, and <c>Equals</c> rejects both <see langword="null"/> and an unrelated type.
+    /// </summary>
     [TestMethod]
     public void Operators_EqualityAndComparison_WorkCorrectly()
     {
@@ -415,6 +463,9 @@ public class BlogMLAttachmentTests
         attachment1.Equals("not an attachment").ShouldBeFalse();
     }
 
+    /// <summary>
+    /// <c>==</c> against a <see langword="null"/> left operand is <see langword="false"/>, and the <c>is null</c> pattern agrees with each reference's state.
+    /// </summary>
     [TestMethod]
     public void Operator_Equality_WithNulls_WorksCorrectly()
     {
@@ -428,6 +479,9 @@ public class BlogMLAttachmentTests
         (null == attachment).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// Attachments with different media types are unequal under <c>!=</c>.
+    /// </summary>
     [TestMethod]
     public void Operator_Inequality_WorksCorrectly()
     {
@@ -439,6 +493,9 @@ public class BlogMLAttachmentTests
         (attachment1 != attachment2).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&lt;</c> orders the smaller of two otherwise identical attachments first, and puts <see langword="null"/> ahead of any instance.
+    /// </summary>
     [TestMethod]
     public void Operator_LessThan_WorksCorrectly()
     {
@@ -452,6 +509,9 @@ public class BlogMLAttachmentTests
         (nullAttachment < attachment1).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&gt;</c> orders the larger of two otherwise identical attachments first, and <see langword="null"/> is never greater than an instance.
+    /// </summary>
     [TestMethod]
     public void Operator_GreaterThan_WorksCorrectly()
     {
@@ -465,6 +525,9 @@ public class BlogMLAttachmentTests
         (nullAttachment > attachment1).ShouldBeFalse();
     }
 
+    /// <summary>
+    /// <c>&lt;=</c> holds for two equal attachments and for <see langword="null"/> against an instance.
+    /// </summary>
     [TestMethod]
     public void Operator_LessThanOrEqual_WorksCorrectly()
     {
@@ -478,6 +541,9 @@ public class BlogMLAttachmentTests
         (nullAttachment <= attachment1).ShouldBeTrue();
     }
 
+    /// <summary>
+    /// <c>&gt;=</c> holds for two equal attachments.
+    /// </summary>
     [TestMethod]
     public void Operator_GreaterThanOrEqual_WorksCorrectly()
     {
@@ -493,6 +559,9 @@ public class BlogMLAttachmentTests
 
     #region FindExtension Tests
 
+    /// <summary>
+    /// Searching an attachment that carries no extensions returns <see langword="null"/> rather than throwing.
+    /// </summary>
     [TestMethod]
     public void FindExtension_WithPredicate_ReturnsCorrectly()
     {
@@ -506,6 +575,9 @@ public class BlogMLAttachmentTests
         result.ShouldBeNull();
     }
 
+    /// <summary>
+    /// A <see langword="null"/> match predicate throws <see cref="ArgumentNullException"/>.
+    /// </summary>
     [TestMethod]
     public void FindExtension_NullPredicate_ThrowsArgumentNullException()
     {
@@ -520,6 +592,9 @@ public class BlogMLAttachmentTests
 
     #region Property Tests
 
+    /// <summary>
+    /// Assigning content trims the surrounding whitespace.
+    /// </summary>
     [TestMethod]
     public void Content_SetAndGet_WorksCorrectly()
     {
@@ -533,6 +608,9 @@ public class BlogMLAttachmentTests
         attachment.Content.ShouldBe("test content");
     }
 
+    /// <summary>
+    /// Assigning <see langword="null"/> content yields an empty string rather than throwing.
+    /// </summary>
     [TestMethod]
     public void Content_SetToNull_ReturnsEmptyString()
     {
@@ -546,6 +624,9 @@ public class BlogMLAttachmentTests
         attachment.Content.ShouldBe(string.Empty);
     }
 
+    /// <summary>
+    /// Assigning a <see langword="null"/> media type throws <see cref="ArgumentException"/>.
+    /// </summary>
     [TestMethod]
     public void MimeType_SetNull_ThrowsArgumentException()
     {
@@ -556,6 +637,9 @@ public class BlogMLAttachmentTests
         Should.Throw<ArgumentException>(() => attachment.MimeType = null!);
     }
 
+    /// <summary>
+    /// Assigning an <i>empty</i> media type throws <see cref="ArgumentException"/>.
+    /// </summary>
     [TestMethod]
     public void MimeType_SetEmpty_ThrowsArgumentException()
     {
@@ -566,6 +650,9 @@ public class BlogMLAttachmentTests
         Should.Throw<ArgumentException>(() => attachment.MimeType = string.Empty);
     }
 
+    /// <summary>
+    /// Assigning a media type trims the surrounding whitespace.
+    /// </summary>
     [TestMethod]
     public void MimeType_SetValidValue_TrimsWhitespace()
     {
@@ -579,6 +666,9 @@ public class BlogMLAttachmentTests
         attachment.MimeType.ShouldBe("image/png");
     }
 
+    /// <summary>
+    /// An attachment with a media type and a URL hashes to something other than <c>0</c>.
+    /// </summary>
     [TestMethod]
     public void GetHashCode_ReturnsValue()
     {
@@ -600,6 +690,9 @@ public class BlogMLAttachmentTests
 
     #region Integration Tests with BlogML Document
 
+    /// <summary>
+    /// Loading a whole BlogML document reaches the attachments on its post, in document order, and keeps the embedded and external forms distinct.
+    /// </summary>
     [TestMethod]
     public void Load_FromBlogMLDocument_ParsesAttachments()
     {

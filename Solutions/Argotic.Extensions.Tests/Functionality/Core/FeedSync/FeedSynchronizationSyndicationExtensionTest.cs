@@ -6,6 +6,14 @@ using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.FeedSync;
 
+/// <summary>
+/// Covers the FeedSync extension and the four types its context is assembled from -
+/// <see cref="FeedSynchronizationSharingInformation"/>, <see cref="FeedSynchronizationItem"/>,
+/// <see cref="FeedSynchronizationHistory"/> and <see cref="FeedSynchronizationRelatedInformation"/> -
+/// exercising their construction defaults, property guards, the attribute spellings their enumerations
+/// map to and from, their comparison and equality contracts, and the XML each writes under the
+/// <c>sx</c> prefix.
+/// </summary>
 [TestClass]
 public class FeedSynchronizationSyndicationExtensionTest
 {
@@ -17,6 +25,7 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #region Constructor Tests
 
+    /// <summary>The parameterless constructor yields a usable instance of the FeedSync extension.</summary>
     [TestMethod]
     public void FeedSynchronizationSyndicationExtensionConstructorTest()
     {
@@ -28,6 +37,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         target.ShouldBeOfType<FeedSynchronizationSyndicationExtension>();
     }
 
+    /// <summary>A newly constructed extension declares the <c>sx</c> XML prefix.</summary>
     [TestMethod]
     public void FeedSynchronizationSyndicationExtension_Constructor_SetsCorrectXmlPrefix()
     {
@@ -38,6 +48,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         target.XmlPrefix.ShouldBe("sx");
     }
 
+    /// <summary>A newly constructed extension declares the <c>http://feedsync.org/2007/feedsync</c> namespace.</summary>
     [TestMethod]
     public void FeedSynchronizationSyndicationExtension_Constructor_SetsCorrectXmlNamespace()
     {
@@ -48,6 +59,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         target.XmlNamespace.ShouldBe("http://feedsync.org/2007/feedsync");
     }
 
+    /// <summary>A newly constructed extension reports version <c>1.0</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationSyndicationExtension_Constructor_SetsCorrectVersion()
     {
@@ -58,6 +70,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         target.Version.ShouldBe(new Version("1.0"));
     }
 
+    /// <summary>A newly constructed extension names itself <c>FeedSync</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationSyndicationExtension_Constructor_SetsCorrectName()
     {
@@ -68,6 +81,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         target.Name.ShouldBe("FeedSync");
     }
 
+    /// <summary>A newly constructed extension points its documentation at <c>http://dev.live.com/feedsync/spec/</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationSyndicationExtension_Constructor_SetsCorrectDocumentation()
     {
@@ -82,6 +96,7 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #region Context Tests
 
+    /// <summary>An extension built with sharing information exposes a context carrying that sharing block.</summary>
     [TestMethod]
     public void FeedSynchronizationContextTest()
     {
@@ -96,6 +111,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         context.Sharing.ShouldNotBeNull();
     }
 
+    /// <summary>Assigning <see langword="null"/> to the context throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationContext_SetToNull_ThrowsArgumentNullException()
     {
@@ -106,6 +122,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Context = null!);
     }
 
+    /// <summary>A newly constructed extension has a context whose sharing and synchronization blocks are both <see langword="null"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationContext_DefaultValues_AreCorrect()
     {
@@ -118,6 +135,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         target.Context.Synchronization.ShouldBeNull();
     }
 
+    /// <summary>The context returns the sharing window and expiry date it was given, unaltered.</summary>
     [TestMethod]
     public void FeedSynchronizationContext_WithSharing_ContainsSharingInfo()
     {
@@ -134,6 +152,10 @@ public class FeedSynchronizationSyndicationExtensionTest
         context.Sharing.ExpiresOn.ShouldBe(new DateTime(2011, 1, 1));
     }
 
+    /// <summary>
+    /// The context returns the synchronization item it was given, including its identifier, update count, tombstone status and
+    /// conflict-preservation directive.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationContext_WithSynchronization_ContainsSyncItem()
     {
@@ -155,6 +177,7 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #region Comparison and Equality Tests
 
+    /// <summary>Two extensions holding identical sharing information compare equal.</summary>
     [TestMethod]
     public void FeedSynchronizationCompareToTest()
     {
@@ -169,6 +192,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
+    /// <summary>An extension sorts after <see langword="null"/>, returning <c>1</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationCompareTo_WithNull_ReturnsPositive()
     {
@@ -182,6 +206,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBe(1);
     }
 
+    /// <summary>Extensions holding different sharing windows do not compare equal.</summary>
     [TestMethod]
     public void FeedSynchronizationCompareTo_WithDifferentExtension_ReturnsNonZero()
     {
@@ -196,6 +221,10 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldNotBe(0);
     }
 
+    /// <summary>
+    /// An extension equals a separately built instance carrying the same sharing information, compared through the <see cref="object"/>
+    /// overload.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationEqualsTest()
     {
@@ -210,6 +239,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>Extensions holding different sharing windows are not equal.</summary>
     [TestMethod]
     public void FeedSynchronizationEquals_WithDifferentObject_ReturnsFalse()
     {
@@ -224,6 +254,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>An extension does not equal <see langword="null"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationEquals_WithNull_ReturnsFalse()
     {
@@ -237,6 +268,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>An extension does not equal a value of an unrelated type, such as a <see cref="string"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationEquals_WithWrongType_ReturnsFalse()
     {
@@ -250,6 +282,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>Hashing an extension carrying sharing information yields a non-zero value.</summary>
     [TestMethod]
     public void FeedSyncGetHashCodeTest()
     {
@@ -263,6 +296,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         hash.ShouldNotBe(0);
     }
 
+    /// <summary>Equal extensions hash alike, and repeated calls on one instance return the same value.</summary>
     [TestMethod]
     public void FeedSyncGetHashCode_EqualExtensions_ReturnSameValue()
     {
@@ -280,6 +314,7 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #region Operator Tests
 
+    /// <summary>The equality operator holds for two extensions carrying the same sharing information.</summary>
     [TestMethod]
     public void FeedSynchronizationOpEqualityTestSuccess()
     {
@@ -294,6 +329,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>The equality operator is <see langword="false"/> for extensions carrying different sharing windows.</summary>
     [TestMethod]
     public void FeedSynchronizationOpEqualityTestFailure()
     {
@@ -308,6 +344,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>Two <see langword="null"/> references compare equal under the equality operator.</summary>
     [TestMethod]
     public void FeedSynchronizationOpEquality_BothNull_ReturnsTrue()
     {
@@ -322,6 +359,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>A <see langword="null"/> left operand is not equal to a populated extension.</summary>
     [TestMethod]
     public void FeedSynchronizationOpEquality_FirstNull_ReturnsFalse()
     {
@@ -336,6 +374,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>The inequality operator is <see langword="true"/> for extensions carrying different sharing windows.</summary>
     [TestMethod]
     public void FeedSynchronizationOpInequalityTest()
     {
@@ -350,6 +389,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>An extension whose sharing window opens in 2010 does not sort after one opening in 2020.</summary>
     [TestMethod]
     public void FeedSynchronizationOpGreaterThanTest()
     {
@@ -364,6 +404,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>A <see langword="null"/> left operand never sorts after a populated extension.</summary>
     [TestMethod]
     public void FeedSynchronizationOpGreaterThan_FirstNull_ReturnsFalse()
     {
@@ -378,6 +419,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBeFalse();
     }
 
+    /// <summary>An extension whose sharing window opens in 2010 sorts before one opening in 2020.</summary>
     [TestMethod]
     public void FeedSynchronizationOpLessThanTest()
     {
@@ -392,6 +434,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>A <see langword="null"/> left operand sorts before a populated extension.</summary>
     [TestMethod]
     public void FeedSynchronizationOpLessThan_FirstNull_ReturnsTrue()
     {
@@ -406,6 +449,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>Two <see langword="null"/> references do not sort strictly before one another.</summary>
     [TestMethod]
     public void FeedSynchronizationOpLessThan_BothNull_ReturnsFalse()
     {
@@ -420,6 +464,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBeFalse();
     }
 
+    /// <summary>Equal extensions satisfy the greater-than-or-equal operator.</summary>
     [TestMethod]
     public void FeedSynchronizationOpGreaterThanOrEqual_EqualObjects_ReturnsTrue()
     {
@@ -434,6 +479,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>Equal extensions satisfy the less-than-or-equal operator.</summary>
     [TestMethod]
     public void FeedSynchronizationOpLessThanOrEqual_EqualObjects_ReturnsTrue()
     {
@@ -448,6 +494,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>Two <see langword="null"/> references satisfy the greater-than-or-equal operator.</summary>
     [TestMethod]
     public void FeedSynchronizationOpGreaterThanOrEqual_FirstNull_SecondNull_ReturnsTrue()
     {
@@ -462,6 +509,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBeTrue();
     }
 
+    /// <summary>A <see langword="null"/> left operand satisfies the less-than-or-equal operator against a populated extension.</summary>
     [TestMethod]
     public void FeedSynchronizationOpLessThanOrEqual_FirstNull_ReturnsTrue()
     {
@@ -480,6 +528,7 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #region MatchByType Tests
 
+    /// <summary>The type predicate accepts a FeedSync extension reached through <see cref="ISyndicationExtension"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationMatchByTypeTest()
     {
@@ -493,6 +542,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
+    /// <summary>The type predicate rejects an extension of another family, here <see cref="SimpleListSyndicationExtension"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationMatchByType_WithDifferentExtension_ReturnsFalse()
     {
@@ -506,6 +556,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
+    /// <summary>Passing <see langword="null"/> to the type predicate throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationMatchByType_WithNull_ThrowsArgumentNullException() =>
         // Act & Assert
@@ -515,6 +566,7 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #region ToString and WriteTo Tests
 
+    /// <summary>The string form of an extension carrying sharing information names the <c>sharing</c> element.</summary>
     [TestMethod]
     public void FeedSynchronizationToStringTest()
     {
@@ -529,6 +581,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldContain("sharing");
     }
 
+    /// <summary>The string form of an extension carrying a synchronization item names the <c>sync</c> element and the identifier <c>item-123</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationToString_WithSync_ContainsSyncElement()
     {
@@ -543,6 +596,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldContain("item-123");
     }
 
+    /// <summary>Writing an extension carrying sharing information to a fragment <see cref="XmlWriter"/> completes without throwing.</summary>
     [TestMethod]
     public void FeedSynchronizationWriteToTest()
     {
@@ -560,6 +614,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         output.ShouldNotBeNull();
     }
 
+    /// <summary>Writing to a <see langword="null"/> writer throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationWriteTo_WithNull_ThrowsArgumentNullException()
     {
@@ -570,6 +625,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.WriteTo(null!));
     }
 
+    /// <summary>Writing an extension carrying sharing information emits a <c>sharing</c> element bearing <c>since</c> and <c>until</c> attributes.</summary>
     [TestMethod]
     public void FeedSynchronizationWriteTo_WithSharing_ContainsSharingElement()
     {
@@ -589,6 +645,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         output.ShouldContain("until");
     }
 
+    /// <summary>Writing an extension carrying a synchronization item emits a <c>sync</c> element bearing the identifier <c>item-123</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationWriteTo_WithSync_ContainsSyncElement()
     {
@@ -611,6 +668,7 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #region Load and CreateXml Tests
 
+    /// <summary>An RSS 2.0 feed whose item carries an <c>sx:sharing</c> element parses to a channel holding one item.</summary>
     [TestMethod]
     public void FeedSynchronizationLoadTest()
     {
@@ -627,6 +685,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
     }
 
+    /// <summary>Loading from a <see langword="null"/> <c>IXPathNavigable</c> throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationLoad_WithNull_ThrowsArgumentNullException()
     {
@@ -637,6 +696,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Load((System.Xml.XPath.IXPathNavigable)null!));
     }
 
+    /// <summary>Loading from a <see langword="null"/> <see cref="XmlReader"/> throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationLoad_WithNullReader_ThrowsArgumentNullException()
     {
@@ -647,6 +707,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Load((XmlReader)null!));
     }
 
+    /// <summary>Attaching an extension carrying sharing information to a feed item and saving the feed emits the <c>sharing</c> element.</summary>
     [TestMethod]
     public void FeedSynchronizationCreateXmlTest()
     {
@@ -661,6 +722,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldContain("sharing");
     }
 
+    /// <summary>Attaching an extension carrying a synchronization item to a feed item and saving the feed emits the <c>sync</c> element.</summary>
     [TestMethod]
     public void FeedSynchronizationCreateXml_WithSync_ContainsSyncElement()
     {
@@ -679,6 +741,10 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #region FeedSynchronizationSharingInformation Tests
 
+    /// <summary>
+    /// A default-constructed sharing block has empty since and until strings, an expiry of <see cref="DateTime.MinValue"/>, and no
+    /// relations.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationSharingInformation_DefaultConstructor_SetsDefaults()
     {
@@ -693,6 +759,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         sharing.Relations.Count.ShouldBe(0);
     }
 
+    /// <summary>The two-argument constructor stores the since and until bounds of the sharing window.</summary>
     [TestMethod]
     public void FeedSynchronizationSharingInformation_ParameterizedConstructor_SetsValues()
     {
@@ -704,6 +771,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         sharing.Until.ShouldBe("2010-12-31");
     }
 
+    /// <summary>The three-argument constructor stores the sharing window together with its expiry date.</summary>
     [TestMethod]
     public void FeedSynchronizationSharingInformation_FullConstructor_SetsAllValues()
     {
@@ -719,6 +787,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         sharing.ExpiresOn.ShouldBe(expiresOn);
     }
 
+    /// <summary>The string form of a sharing block is non-empty and names the <c>sharing</c> element.</summary>
     [TestMethod]
     public void FeedSynchronizationSharingInformation_ToString_ReturnsXml()
     {
@@ -733,6 +802,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldContain("sharing");
     }
 
+    /// <summary>Two sharing blocks holding the same window compare equal.</summary>
     [TestMethod]
     public void FeedSynchronizationSharingInformation_CompareTo_EqualObjects_ReturnsZero()
     {
@@ -747,6 +817,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>Two sharing blocks holding the same window are equal.</summary>
     [TestMethod]
     public void FeedSynchronizationSharingInformation_Equals_Works()
     {
@@ -758,6 +829,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         sharing1.Equals(sharing2).ShouldBeTrue();
     }
 
+    /// <summary>The equality operator holds and the inequality operator fails for two sharing blocks holding the same window.</summary>
     [TestMethod]
     public void FeedSynchronizationSharingInformation_OperatorEquals_Works()
     {
@@ -770,6 +842,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         (sharing1 != sharing2).ShouldBeFalse();
     }
 
+    /// <summary>Two empty relation collections compare equal.</summary>
     [TestMethod]
     public void FeedSynchronizationSharingInformation_CompareSequence_EqualCollections_ReturnsZero()
     {
@@ -784,6 +857,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>A relation collection longer than its comparand returns <c>1</c>, element count being compared ahead of any element.</summary>
     [TestMethod]
     public void FeedSynchronizationSharingInformation_CompareSequence_SourceLarger_ReturnsPositive()
     {
@@ -801,6 +875,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>Comparing a <see langword="null"/> source collection throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationSharingInformation_CompareSequence_NullSource_ThrowsArgumentNullException()
     {
@@ -815,6 +890,10 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #region FeedSynchronizationItem Tests
 
+    /// <summary>
+    /// A default-constructed item has an empty identifier, an update count of <c>1</c>, no tombstone status, no conflict-preservation
+    /// directive, and empty history and conflict collections.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationItem_DefaultConstructor_SetsDefaults()
     {
@@ -832,6 +911,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         item.Conflicts.Count.ShouldBe(0);
     }
 
+    /// <summary>The two-argument constructor stores the item identifier and update count.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_ParameterizedConstructor_SetsValues()
     {
@@ -843,6 +923,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         item.Updates.ShouldBe(5);
     }
 
+    /// <summary>The three-argument constructor stores the identifier and update count, and seeds the history collection with the supplied entry.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_FullConstructor_SetsAllValues()
     {
@@ -858,6 +939,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         item.Histories.Count.ShouldBe(1);
     }
 
+    /// <summary>Assigning <see langword="null"/> to the item identifier is rejected with an <see cref="ArgumentException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_IdNull_ThrowsArgumentException()
     {
@@ -868,6 +950,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentException>(() => item.Id = null!);
     }
 
+    /// <summary>Assigning an empty string to the item identifier is rejected with an <see cref="ArgumentException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_IdEmpty_ThrowsArgumentException()
     {
@@ -878,6 +961,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentException>(() => item.Id = string.Empty);
     }
 
+    /// <summary>An update count below <c>1</c> is rejected with an <see cref="ArgumentOutOfRangeException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_UpdatesLessThanOne_ThrowsArgumentOutOfRangeException()
     {
@@ -888,6 +972,10 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentOutOfRangeException>(() => item.Updates = 0);
     }
 
+    /// <summary>
+    /// Tombstone status is written as the <c>deleted</c> attribute would read it: <c>Deleted</c> becomes <c>true</c>, <c>Present</c>
+    /// becomes <c>false</c>, and <c>None</c> becomes an empty string.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationItem_TombstoneStatusAsString_ReturnsCorrectValue()
     {
@@ -897,6 +985,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationItem.TombstoneStatusAsString(FeedSynchronizationTombstoneStatus.None).ShouldBe("");
     }
 
+    /// <summary>The attribute values <c>true</c> and <c>false</c> parse back to <c>Deleted</c> and <c>Present</c> respectively.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_TombstoneStatusByName_ReturnsCorrectValue()
     {
@@ -905,6 +994,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationItem.TombstoneStatusByName("false").ShouldBe(FeedSynchronizationTombstoneStatus.Present);
     }
 
+    /// <summary>Tombstone parsing ignores case, so <c>TRUE</c> and <c>False</c> resolve as their lowercase spellings do.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_TombstoneStatusByName_CaseInsensitive()
     {
@@ -913,11 +1003,16 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationItem.TombstoneStatusByName("False").ShouldBe(FeedSynchronizationTombstoneStatus.Present);
     }
 
+    /// <summary>A <see langword="null"/> tombstone name resolves to <c>None</c> rather than throwing.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_TombstoneStatusByName_NullInput_ReturnsNone() =>
         // Act & Assert
         FeedSynchronizationItem.TombstoneStatusByName(null!).ShouldBe(FeedSynchronizationTombstoneStatus.None);
 
+    /// <summary>
+    /// Conflict preservation is written as the <c>noconflicts</c> attribute would read it: <c>Ignore</c> becomes <c>true</c>,
+    /// <c>Perform</c> becomes <c>false</c>, and <c>None</c> becomes an empty string.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationItem_ConflictPreservationAsString_ReturnsCorrectValue()
     {
@@ -927,6 +1022,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationItem.ConflictPreservationAsString(FeedSynchronizationConflictPreservationDirective.None).ShouldBe("");
     }
 
+    /// <summary>The attribute values <c>true</c> and <c>false</c> parse back to <c>Ignore</c> and <c>Perform</c> respectively.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_ConflictPreservationByName_ReturnsCorrectValue()
     {
@@ -935,11 +1031,13 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationItem.ConflictPreservationByName("false").ShouldBe(FeedSynchronizationConflictPreservationDirective.Perform);
     }
 
+    /// <summary>A <see langword="null"/> conflict-preservation name resolves to <c>None</c> rather than throwing.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_ConflictPreservationByName_NullInput_ReturnsNone() =>
         // Act & Assert
         FeedSynchronizationItem.ConflictPreservationByName(null!).ShouldBe(FeedSynchronizationConflictPreservationDirective.None);
 
+    /// <summary>The string form of an item names the <c>sync</c> element and carries the identifier <c>item-123</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_ToString_ReturnsXml()
     {
@@ -955,6 +1053,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldContain("item-123");
     }
 
+    /// <summary>Two items holding the same identifier and update count compare equal.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_CompareTo_EqualObjects_ReturnsZero()
     {
@@ -969,6 +1068,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>Two items holding the same identifier and update count are equal.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_Equals_Works()
     {
@@ -980,6 +1080,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         item1.Equals(item2).ShouldBeTrue();
     }
 
+    /// <summary>The equality operator holds and the inequality operator fails for two items holding the same identifier and update count.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_OperatorEquals_Works()
     {
@@ -992,6 +1093,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         (item1 != item2).ShouldBeFalse();
     }
 
+    /// <summary>Two history collections of equal length holding matching entries compare equal.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_CompareSequence_EqualCollections_ReturnsZero()
     {
@@ -1006,6 +1108,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>A history collection longer than its comparand returns <c>1</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_CompareSequence_SourceLarger_ReturnsPositive()
     {
@@ -1020,6 +1123,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>A history collection shorter than its comparand returns <c>-1</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_CompareSequence_TargetLarger_ReturnsNegative()
     {
@@ -1034,6 +1138,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(-1);
     }
 
+    /// <summary>Comparing a <see langword="null"/> source history collection throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationItem_CompareSequence_NullSource_ThrowsArgumentNullException()
     {
@@ -1048,6 +1153,10 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #region FeedSynchronizationHistory Tests
 
+    /// <summary>
+    /// A default-constructed history entry has sequence <c>1</c>, a timestamp of <see cref="DateTime.MinValue"/>, and an empty endpoint
+    /// identifier.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationHistory_DefaultConstructor_SetsDefaults()
     {
@@ -1060,6 +1169,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         history.By.ShouldBe(string.Empty);
     }
 
+    /// <summary>The one-argument constructor stores the sequence number.</summary>
     [TestMethod]
     public void FeedSynchronizationHistory_ParameterizedConstructor_SetsSequence()
     {
@@ -1070,6 +1180,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         history.Sequence.ShouldBe(5);
     }
 
+    /// <summary>The three-argument constructor stores the sequence number, timestamp and endpoint identifier.</summary>
     [TestMethod]
     public void FeedSynchronizationHistory_FullConstructor_SetsAllValues()
     {
@@ -1085,6 +1196,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         history.By.ShouldBe("endpoint-1");
     }
 
+    /// <summary>A sequence number below <c>1</c> is rejected with an <see cref="ArgumentOutOfRangeException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationHistory_SequenceLessThanOne_ThrowsArgumentOutOfRangeException()
     {
@@ -1095,6 +1207,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentOutOfRangeException>(() => history.Sequence = 0);
     }
 
+    /// <summary>The string form of a history entry is non-empty and names the <c>history</c> element.</summary>
     [TestMethod]
     public void FeedSynchronizationHistory_ToString_ReturnsXml()
     {
@@ -1110,6 +1223,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldContain("history");
     }
 
+    /// <summary>Two history entries holding the same sequence, timestamp and endpoint compare equal.</summary>
     [TestMethod]
     public void FeedSynchronizationHistory_CompareTo_EqualObjects_ReturnsZero()
     {
@@ -1125,6 +1239,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>Two history entries holding the same sequence, timestamp and endpoint are equal.</summary>
     [TestMethod]
     public void FeedSynchronizationHistory_Equals_Works()
     {
@@ -1137,6 +1252,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         history1.Equals(history2).ShouldBeTrue();
     }
 
+    /// <summary>The equality operator holds and the inequality operator fails for two history entries sharing a sequence number.</summary>
     [TestMethod]
     public void FeedSynchronizationHistory_OperatorEquals_Works()
     {
@@ -1153,6 +1269,7 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #region FeedSynchronizationRelatedInformation Tests
 
+    /// <summary>A default-constructed related-information block has a <see langword="null"/> link, an empty title, and no relation type.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_DefaultConstructor_SetsDefaults()
     {
@@ -1165,6 +1282,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         info.RelationType.ShouldBe(FeedSynchronizationRelatedInformationType.None);
     }
 
+    /// <summary>The two-argument constructor stores the link and its relation type.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_ParameterizedConstructor_SetsLinkAndType()
     {
@@ -1179,6 +1297,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         info.RelationType.ShouldBe(FeedSynchronizationRelatedInformationType.Complete);
     }
 
+    /// <summary>The three-argument constructor stores the link, its relation type and the title.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_FullConstructor_SetsAllValues()
     {
@@ -1194,6 +1313,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         info.Title.ShouldBe("Related Feed");
     }
 
+    /// <summary>Assigning <see langword="null"/> to the link throws <see cref="ArgumentNullException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_LinkNull_ThrowsArgumentNullException()
     {
@@ -1204,6 +1324,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => info.Link = null!);
     }
 
+    /// <summary>Assigning the <c>None</c> relation type is rejected with an <see cref="ArgumentException"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_RelationTypeNone_ThrowsArgumentException()
     {
@@ -1214,6 +1335,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentException>(() => info.RelationType = FeedSynchronizationRelatedInformationType.None);
     }
 
+    /// <summary>Assigning <see langword="null"/> to the title stores an empty string rather than throwing.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_TitleNull_SetsEmpty()
     {
@@ -1227,6 +1349,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         info.Title.ShouldBe(string.Empty);
     }
 
+    /// <summary>Surrounding whitespace is trimmed from the title on assignment.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_TitleWhitespace_TrimsValue()
     {
@@ -1240,6 +1363,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         info.Title.ShouldBe("My Feed Title");
     }
 
+    /// <summary>The <c>Complete</c> relation type is spelled <c>complete</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_RelationTypeAsString_Complete_ReturnsCorrect()
     {
@@ -1250,6 +1374,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe("complete");
     }
 
+    /// <summary>The <c>Aggregated</c> relation type is spelled <c>aggregated</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_RelationTypeAsString_Aggregated_ReturnsCorrect()
     {
@@ -1260,6 +1385,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe("aggregated");
     }
 
+    /// <summary>The <c>None</c> relation type has no spelling and yields an empty string.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_RelationTypeAsString_None_ReturnsEmpty()
     {
@@ -1270,6 +1396,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(string.Empty);
     }
 
+    /// <summary>The name <c>complete</c> parses to the <c>Complete</c> relation type.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_RelationTypeByName_Complete_ReturnsCorrect()
     {
@@ -1280,6 +1407,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(FeedSynchronizationRelatedInformationType.Complete);
     }
 
+    /// <summary>The name <c>aggregated</c> parses to the <c>Aggregated</c> relation type.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_RelationTypeByName_Aggregated_ReturnsCorrect()
     {
@@ -1290,6 +1418,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(FeedSynchronizationRelatedInformationType.Aggregated);
     }
 
+    /// <summary>Relation-type parsing ignores case, so <c>COMPLETE</c> and <c>Aggregated</c> resolve as their lowercase spellings do.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_RelationTypeByName_CaseInsensitive()
     {
@@ -1298,6 +1427,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationRelatedInformation.RelationTypeByName("Aggregated").ShouldBe(FeedSynchronizationRelatedInformationType.Aggregated);
     }
 
+    /// <summary>An unrecognised relation name resolves to <c>None</c> rather than throwing.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_RelationTypeByName_Unknown_ReturnsNone()
     {
@@ -1308,16 +1438,22 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(FeedSynchronizationRelatedInformationType.None);
     }
 
+    /// <summary>A <see langword="null"/> relation name resolves to <c>None</c> rather than throwing.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_RelationTypeByName_Null_ReturnsNone() =>
         // Act & Assert
         FeedSynchronizationRelatedInformation.RelationTypeByName(null!).ShouldBe(FeedSynchronizationRelatedInformationType.None);
 
+    /// <summary>An empty relation name resolves to <c>None</c> rather than throwing.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_RelationTypeByName_Empty_ReturnsNone() =>
         // Act & Assert
         FeedSynchronizationRelatedInformation.RelationTypeByName(string.Empty).ShouldBe(FeedSynchronizationRelatedInformationType.None);
 
+    /// <summary>
+    /// The string form of a related-information block names the <c>related</c> element and carries both the link and the <c>complete</c>
+    /// relation spelling.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_ToString_ReturnsXml()
     {
@@ -1337,6 +1473,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldContain("complete");
     }
 
+    /// <summary>A related-information block sorts after <see langword="null"/>, returning <c>1</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_CompareTo_Null_ReturnsPositive()
     {
@@ -1352,6 +1489,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(1);
     }
 
+    /// <summary>Two related-information blocks holding the same link, relation type and title compare equal.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_CompareTo_EqualObjects_ReturnsZero()
     {
@@ -1372,6 +1510,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
+    /// <summary>Related-information blocks holding different links and relation types do not compare equal.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_CompareTo_WrongType_ThrowsArgumentException()
     {
@@ -1390,6 +1529,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldNotBe(0);
     }
 
+    /// <summary>Two related-information blocks holding the same link and relation type are equal.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_Equals_EqualObjects_ReturnsTrue()
     {
@@ -1405,6 +1545,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         info1.Equals(info2).ShouldBeTrue();
     }
 
+    /// <summary>Related-information blocks holding different links and relation types are not equal.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_Equals_DifferentObjects_ReturnsFalse()
     {
@@ -1420,6 +1561,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         info1.Equals(info2).ShouldBeFalse();
     }
 
+    /// <summary>A related-information block does not equal <see langword="null"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_Equals_Null_ReturnsFalse()
     {
@@ -1432,6 +1574,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         info.Equals(null).ShouldBeFalse();
     }
 
+    /// <summary>A related-information block does not equal a value of an unrelated type, such as a <see cref="string"/>.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_Equals_WrongType_ReturnsFalse()
     {
@@ -1444,6 +1587,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         info.Equals("wrong type").ShouldBeFalse();
     }
 
+    /// <summary>Hashing a related-information block does not throw.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_GetHashCode_DoesNotThrow()
     {
@@ -1456,6 +1600,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.NotThrow(() => info.GetHashCode());
     }
 
+    /// <summary>The equality operator holds for two related-information blocks sharing a link and relation type.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_OperatorEquals_EqualObjects_ReturnsTrue()
     {
@@ -1471,6 +1616,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         (info1 == info2).ShouldBeTrue();
     }
 
+    /// <summary>Two <see langword="null"/> references compare equal under the equality operator.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_OperatorEquals_BothNull_ReturnsTrue()
     {
@@ -1482,6 +1628,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         (info1 == info2).ShouldBeTrue();
     }
 
+    /// <summary>A <see langword="null"/> left operand is not equal to a populated related-information block.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_OperatorEquals_FirstNull_ReturnsFalse()
     {
@@ -1495,6 +1642,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         (info1 == info2).ShouldBeFalse();
     }
 
+    /// <summary>The inequality operator is <see langword="true"/> for related-information blocks holding different links and relation types.</summary>
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_OperatorNotEquals_DifferentObjects_ReturnsTrue()
     {

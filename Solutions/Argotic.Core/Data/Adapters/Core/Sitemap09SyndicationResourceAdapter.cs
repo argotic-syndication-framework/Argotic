@@ -12,13 +12,21 @@ namespace Argotic.Data.Adapters;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="Sitemap09SyndicationResourceAdapter"/> serves as a bridge between a <see cref="Sitemap"/> or <see cref="SitemapIndex"/> and an XML data source.
-///         The <see cref="Sitemap09SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(Sitemap)"/> or <see cref="Fill(SitemapIndex)"/>, which changes the data
-///         in the <see cref="Sitemap"/> or <see cref="SitemapIndex"/> to match the data in the data source.
+///     One adapter, two documents. The sitemaps.org protocol defines a URL set rooted at <c>urlset</c> and
+///     an index of sitemaps rooted at <c>sitemapindex</c>, in the same
+///     <c>http://www.sitemaps.org/schemas/sitemap/0.9</c> namespace and distinguished only by that root
+///     name. Each overload looks for its own root and does nothing if it is not there, so handing an index
+///     to <see cref="Fill(Sitemap)"/> yields an empty sitemap rather than an error.
 ///     </para>
 ///     <para>
-///         This syndication resource adapter is designed to fill <see cref="Sitemap"/> or <see cref="SitemapIndex"/> objects using
-///         a <see cref="XPathNavigator"/> that represents XML data that conforms to the Sitemap 0.9 specification.
+///     The namespace is bound from <c>SitemapUtility</c>'s constant, never from what the document declares.
+///     A sitemap in some other namespace is a different format and is not read as though it were this one.
+///     </para>
+///     <para>
+///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested <i>before</i> the entry is
+///     parsed here, so the work stops at the limit. The Atom and BlogML adapters test after parsing and
+///     throw one parsed item away; on a sitemap, where a single file may legitimately carry 50,000 URLs,
+///     that difference is the difference between reading the file and reading a prefix of it.
 ///     </para>
 /// </remarks>
 public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
@@ -31,18 +39,24 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <remarks>
     ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="Sitemap"/> or <see cref="SitemapIndex"/>.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
     public Sitemap09SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings)
         : base(navigator, settings)
     {
     }
 
     /// <summary>
-    /// Modifies the <see cref="Sitemap"/> to match the data source.
+    /// Enumerates the <c>url</c> children of <c>urlset</c>, then attaches the syndication extensions found on <c>urlset</c>.
     /// </summary>
     /// <param name="resource">The <see cref="Sitemap"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     A <c>url</c> whose <c>Load</c> returns <see langword="false"/> is dropped but still counts against
+    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/>, because the counter advances before
+    ///     the parse. Google's news, image, video and hreflang extensions are attached per URL by
+    ///     <see cref="SitemapUrl"/>, not here; this call attaches only what is declared at document level.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(Sitemap resource)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -87,10 +101,16 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
     }
 
     /// <summary>
-    /// Modifies the <see cref="SitemapIndex"/> to match the data source.
+    /// Enumerates the <c>sitemap</c> children of <c>sitemapindex</c>, then attaches the syndication extensions found on <c>sitemapindex</c>.
     /// </summary>
     /// <param name="resource">The <see cref="SitemapIndex"/> to be filled.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <remarks>
+    ///     <see cref="SitemapIndexEntry"/> is loaded without <see cref="SyndicationResourceAdapter.Settings"/>
+    ///     and takes no overload that would accept them, because unlike <see cref="SitemapUrl"/> it is not an
+    ///     extensible object: an index entry is a location and a last-modified date, with nowhere for an
+    ///     extension to attach. The settings still govern how many entries are read.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(SitemapIndex resource)
     {
         ArgumentNullException.ThrowIfNull(resource);

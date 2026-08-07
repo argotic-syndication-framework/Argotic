@@ -3,11 +3,18 @@ using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Apml;
 
+/// <summary>
+/// Covers <see cref="ApmlDocument"/> member by member: head metadata, profiles and
+/// the concepts, sources and authors they hold, and a save followed by a load.
+/// </summary>
 [TestClass]
 public class ApmlDocumentTests
 {
     public TestContext? TestContext { get; set; }
 
+    /// <summary>
+    /// A newly constructed document holds no profiles.
+    /// </summary>
     [TestMethod]
     public void Constructor_Default_CreatesEmptyDocument()
     {
@@ -17,6 +24,9 @@ public class ApmlDocumentTests
         document.Profiles.Count.ShouldBe(0);
     }
 
+    /// <summary>
+    /// The head keeps the title, generator, email address and creation date it is given.
+    /// </summary>
     [TestMethod]
     public void Head_CanSetProperties()
     {
@@ -38,6 +48,9 @@ public class ApmlDocumentTests
         document.Head.CreatedOn.ShouldBe(createdOn);
     }
 
+    /// <summary>
+    /// The name of the default profile is read back exactly as assigned.
+    /// </summary>
     [TestMethod]
     public void DefaultProfileName_CanBeSet()
     {
@@ -49,6 +62,9 @@ public class ApmlDocumentTests
         document.DefaultProfileName.ShouldBe("Work");
     }
 
+    /// <summary>
+    /// A profile added to the document appears in the profile collection under its own name.
+    /// </summary>
     [TestMethod]
     public void AddProfile_AddsProfileCorrectly()
     {
@@ -64,6 +80,9 @@ public class ApmlDocumentTests
         document.Profiles.First().Name.ShouldBe("Home");
     }
 
+    /// <summary>
+    /// An implicit concept keeps the key and the weight it was constructed from, here <c>0.99</c>.
+    /// </summary>
     [TestMethod]
     public void Profile_CanHaveImplicitConcepts()
     {
@@ -83,6 +102,9 @@ public class ApmlDocumentTests
         profile.ImplicitConcepts[0].Value.ShouldBe(0.99m);
     }
 
+    /// <summary>
+    /// An explicit concept keeps the key and the weight it was constructed from, here <c>0.99</c>.
+    /// </summary>
     [TestMethod]
     public void Profile_CanHaveExplicitConcepts()
     {
@@ -98,6 +120,9 @@ public class ApmlDocumentTests
         profile.ExplicitConcepts[0].Value.ShouldBe(0.99m);
     }
 
+    /// <summary>
+    /// A source keeps its key and name, and holds the authors added to it.
+    /// </summary>
     [TestMethod]
     public void Source_CanHaveAuthors()
     {
@@ -116,6 +141,10 @@ public class ApmlDocumentTests
         source.Authors[0].Key.ShouldBe("Test Author");
     }
 
+    /// <summary>
+    /// Saving writes the element names in the capitalisation APML 0.6
+    /// defines: <c>APML</c>, <c>Head</c>, <c>Title</c> and <c>Body</c>.
+    /// </summary>
     [TestMethod]
     public void Save_ProducesValidXml()
     {
@@ -146,6 +175,9 @@ public class ApmlDocumentTests
         xml.ShouldContain("<Body");
     }
 
+    /// <summary>
+    /// A document saved to a stream and loaded back keeps its head title and its profile count.
+    /// </summary>
     [TestMethod]
     public void RoundTrip_SaveAndLoad_PreservesData()
     {

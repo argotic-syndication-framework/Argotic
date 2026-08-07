@@ -498,4 +498,97 @@ public class Atom03SyndicationResourceAdapterTests
     }
 
     #endregion
+
+    #region Entry Document Tests
+
+    /// <summary>
+    /// A stand-alone Atom 0.3 entry document fills its title, its <c>id</c> and its <c>modified</c> date.
+    /// </summary>
+    /// <remarks>
+    ///     The overload used to build its namespace manager with <c>AtomUtility</c>, which binds
+    ///     <c>atom</c> to the Atom <i>1.0</i> namespace. Selection resolves a prefix to a namespace URI and
+    ///     matches on the URI, so that manager could never match an element in
+    ///     <c>http://purl.org/atom/ns#</c>: the overload threw for every input it exists to handle, with a
+    ///     message saying the document was not entry-rooted when it was.
+    /// </remarks>
+    [TestMethod]
+    public void Fill_Atom03EntryDocument_PopulatesEntry()
+    {
+        // Arrange
+        AtomEntry entry = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03Entry));
+        XPathDocument doc = new(stream);
+        XPathNavigator navigator = doc.CreateNavigator();
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
+
+        // Act
+        adapter.Fill(entry);
+
+        // Assert
+        entry.Title.ShouldNotBeNull();
+        entry.Title.Content.ShouldBe("Test Entry");
+        entry.Id.ShouldNotBeNull();
+        entry.Id.Uri.ShouldBe(new Uri("urn:uuid:entry-1"));
+        entry.UpdatedOn.Year.ShouldBe(2025);
+        entry.Links.Count.ShouldBe(1);
+    }
+
+    /// <summary>
+    /// A feed document handed to the entry overload still throws, and says which root it wanted.
+    /// </summary>
+    [TestMethod]
+    public void Fill_Atom03FeedDocumentAsAnEntry_Throws()
+    {
+        // Arrange
+        AtomEntry entry = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03Feed));
+        XPathDocument doc = new(stream);
+        XPathNavigator navigator = doc.CreateNavigator();
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
+
+        // Act & Assert
+        Should.Throw<FormatException>(() => adapter.Fill(entry));
+        entry.Title.ShouldBeNull();
+        entry.Id.ShouldBeNull();
+    }
+
+    /// <summary>
+    /// A feed-shaped document in some namespace other than Atom 0.3 fills nothing.
+    /// </summary>
+    /// <remarks>
+    ///     A guard for the invariant behind the adapter's own namespace manager: <c>atom</c> is bound to
+    ///     the constant <c>http://purl.org/atom/ns#</c> and never to whatever default namespace the
+    ///     document declares. Binding the document's own default would make any feed-shaped document parse
+    ///     as though it were Atom 0.3. Green before and after the dead ternary that expressed the other
+    ///     intention is removed.
+    /// </remarks>
+    [TestMethod]
+    public void Fill_FeedInAnotherDefaultNamespace_FillsNothing()
+    {
+        // Arrange
+        const string foreignFeed = """
+            <?xml version="1.0" encoding="UTF-8"?>
+            <feed version="0.3" xmlns="http://example.com/not-atom">
+                <title>Not An Atom 0.3 Feed</title>
+                <id>urn:uuid:not-atom</id>
+                <modified>2025-01-20T12:00:00Z</modified>
+            </feed>
+            """;
+
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(foreignFeed));
+        XPathDocument doc = new(stream);
+        XPathNavigator navigator = doc.CreateNavigator();
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
+
+        // Act & Assert
+        Should.Throw<FormatException>(() => adapter.Fill(feed));
+        feed.Title.ShouldBeNull();
+        feed.Id.ShouldBeNull();
+    }
+
+    #endregion
 }

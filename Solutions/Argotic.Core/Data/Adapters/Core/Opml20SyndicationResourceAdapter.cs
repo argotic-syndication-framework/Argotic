@@ -49,10 +49,10 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </summary>
     /// <param name="resource">The <see cref="OpmlDocument"/> to be filled.</param>
     /// <remarks>
-    ///     The counter that <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested against
-    ///     advances for every <c>outline</c> element encountered, but the test itself sits inside the branch
-    ///     taken only when the outline loaded. A body whose first outlines fail to load therefore yields
-    ///     fewer than the limit — the limit counts elements seen, not outlines kept.
+    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> counts outlines <i>kept</i>, and is
+    ///     tested at the top of the loop. A body whose first outlines fail to load still yields the limit,
+    ///     and the outline that would trip it is never parsed — which on OPML means never descending its
+    ///     subtree either.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(OpmlDocument resource)
@@ -73,9 +73,14 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
             XPathNodeIterator outlineIterator = documentNavigator.Select("body/outline", manager);
             if (outlineIterator is { Count: > 0 })
             {
-                int counter = 0;
+                int added = 0;
                 while (outlineIterator.MoveNext())
                 {
+                    if (this.Settings.RetrievalLimit != 0 && added >= this.Settings.RetrievalLimit)
+                    {
+                        break;
+                    }
+
                     XPathNavigator? outlineNode = outlineIterator.Current;
                     if (outlineNode is null)
                     {
@@ -83,16 +88,10 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
                     }
 
                     OpmlOutline outline = new();
-                    counter++;
-
                     if (outline.Load(outlineNode, this.Settings))
                     {
-                        if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                        {
-                            break;
-                        }
-
                         resource.Outlines.Add(outline);
+                        added++;
                     }
                 }
             }

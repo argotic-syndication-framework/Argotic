@@ -181,8 +181,17 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
     ///     </para>
     ///     <para>
     ///     Each <c>hour</c> has one subtracted to reach the 0-based range the object model stores, which is
-    ///     why a feed's <c>1</c> arrives as <c>0</c>. A value outside the resulting 0–23 range is traced and
-    ///     dropped, and the trace prints the converted number, not the one in the document.
+    ///     why a feed's <c>1</c> arrives as <c>0</c>, and a value that lands outside 0–23 is traced and
+    ///     dropped. The trace reports the number the document wrote, not the converted one.
+    ///     </para>
+    ///     <para>
+    ///     <b>The specifications disagree, and the renumbering picks one of them.</b> Userland's RSS 0.91
+    ///     says an <c>hour</c> is <i>a number between 1 and 24</i>; Netscape's RSS 0.91 says <i>an integer
+    ///     value between 0 and 23</i>; RSS 2.0 says <i>the hour beginning at midnight is hour zero</i>. The
+    ///     <c>version</c> attribute this adapter is selected by names Userland's, so 1–24 is what is
+    ///     assumed, and a document written to the Netscape or 2.0 convention is read an hour early with its
+    ///     <c>0</c> dropped. Guessing per document would turn a visible warning into a silent
+    ///     transposition, so the ambiguity is recorded here rather than resolved.
     ///     </para>
     /// </remarks>
     /// <param name="navigator">The <see cref="XPathNavigator"/> used to navigate the channel XML data.</param>
@@ -243,15 +252,15 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 
                 if (int.TryParse(skipHoursNode.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
-                    hour -= 1; // Convert to zero-based range
+                    int zeroBasedHour = hour - 1;
 
-                    if (!channel.SkipHours.Contains(hour) && hour is >= 0 and <= 23)
+                    if (zeroBasedHour is >= 0 and <= 23 && !channel.SkipHours.Contains(zeroBasedHour))
                     {
-                        channel.SkipHours.Add(hour);
+                        channel.SkipHours.Add(zeroBasedHour);
                     }
                     else
                     {
-                        System.Diagnostics.Trace.TraceWarning("Rss091SyndicationResourceAdapter unable to add duplicate or out-of-range skip hour with a value of {0}.", hour);
+                        System.Diagnostics.Trace.TraceWarning("Rss091SyndicationResourceAdapter unable to add duplicate or out-of-range skip hour with a value of {0}. Userland RSS 0.91 numbers the hours 1 through 24.", hour);
                     }
                 }
             }
@@ -259,9 +268,14 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (itemIterator is { Count: > 0 })
         {
-            int counter = 0;
+            int added = 0;
             while (itemIterator.MoveNext())
             {
+                if (settings.RetrievalLimit != 0 && added >= settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? itemNode = itemIterator.Current;
                 if (itemNode is null)
                 {
@@ -269,12 +283,6 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
 
                 RssItem item = new();
-                counter++;
-
-                if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
-                {
-                    break;
-                }
 
                 XPathNavigator? titleNavigator = itemNode.SelectChildElement("title");
                 XPathNavigator? linkNavigator = itemNode.SelectChildElement("link");
@@ -302,6 +310,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
                 adapter.Fill(item);
 
                 channel.Items.Add(item);
+                added++;
             }
         }
     }

@@ -65,11 +65,9 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     ///     resolves nothing in an Atom 0.3 document.
     ///     </para>
     ///     <para>
-    ///     The <c>DefaultNamespace</c> ternary is inherited from the 1.0 helper and never takes its first
-    ///     branch: a <see cref="XmlNamespaceManager"/> built from a name table alone has no default
-    ///     namespace, and the property is documented to return an empty string when there is none. The
-    ///     constant is what binds, which is the behaviour that is wanted — binding whatever the document
-    ///     declared would make a feed in some other namespace parse as though it were Atom 0.3.
+    ///     <c>atom</c> is bound to the constant and never to whatever default namespace the document
+    ///     declares. That is the invariant, not an omission: binding the document's own default would make
+    ///     a feed in some unrelated namespace parse as though it were Atom 0.3.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is <see langword="null"/>.</exception>
@@ -78,7 +76,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(nameTable);
 
         XmlNamespaceManager manager = new(nameTable);
-        manager.AddNamespace("atom", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : "http://purl.org/atom/ns#");
+        manager.AddNamespace("atom", "http://purl.org/atom/ns#");
         manager.AddNamespace("xhtml", AtomUtility.XhtmlNamespace);
 
         return manager;
@@ -90,17 +88,19 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <param name="resource">The <see cref="AtomEntry"/> to be filled.</param>
     /// <remarks>
     ///     The <c>entry</c> elements <i>inside</i> a feed document take the same private walk, reached from
-    ///     <see cref="Fill(AtomFeed)"/>. Note that the namespace manager here is built by
-    ///     <c>AtomUtility</c> and not by this class's own <see cref="CreateNamespaceManager"/>, so the
-    ///     prefix it binds is not the one <see cref="Fill(AtomFeed)"/> binds.
+    ///     <see cref="Fill(AtomFeed)"/>. The namespace manager is this class's own
+    ///     <see cref="CreateNamespaceManager"/>, the one <see cref="Fill(AtomFeed)"/> uses. It has to be:
+    ///     selection matches on the resolved namespace URI, so the manager <c>AtomUtility</c> builds —
+    ///     which binds <c>atom</c> to the Atom <i>1.0</i> namespace — cannot match an element of an Atom
+    ///     0.3 document, and this overload threw for every input it exists to handle.
     /// </remarks>
-    /// <exception cref="FormatException">No <c>entry</c> root was found in the namespace the manager binds.</exception>
+    /// <exception cref="FormatException">No <c>entry</c> root was found in the Atom 0.3 namespace — most often because the document is a feed document.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(AtomEntry resource)
     {
         ArgumentNullException.ThrowIfNull(resource);
 
-        XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = Atom03SyndicationResourceAdapter.CreateNamespaceManager(this.Navigator.NameTable);
 
         XPathNavigator? entryNavigator = this.Navigator.SelectChildElement("atom", "entry", manager);
 
@@ -637,8 +637,9 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     ///     Dublin Core, as syndication extensions.
     ///     </para>
     ///     <para>
-    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested after <c>FillEntry</c> has
-    ///     run, so the entry that trips the limit is parsed in full and then discarded.
+    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested at the top of the entry
+    ///     loop, against the number of entries <i>kept</i>, so the entry that would trip the limit is never
+    ///     parsed.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is <see langword="null"/>.</exception>
@@ -689,9 +690,14 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (entryIterator is { Count: > 0 })
         {
-            int counter = 0;
+            int added = 0;
             while (entryIterator.MoveNext())
             {
+                if (settings.RetrievalLimit != 0 && added >= settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? entryNode = entryIterator.Current;
                 if (entryNode is null)
                 {
@@ -699,16 +705,10 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
 
                 AtomEntry entry = new();
-                counter++;
-
                 Atom03SyndicationResourceAdapter.FillEntry(entry, entryNode, manager, settings);
 
-                if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
-                {
-                    break;
-                }
-
                 feed.Entries.Add(entry);
+                added++;
             }
         }
 

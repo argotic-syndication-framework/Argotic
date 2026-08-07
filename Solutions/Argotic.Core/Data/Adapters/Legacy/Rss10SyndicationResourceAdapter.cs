@@ -64,8 +64,8 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
     ///     Each item is probed for extensions individually, which on RSS 1.0 is the substance of the parse
     ///     rather than an addition to it: the format's own item vocabulary is three elements, and everything
     ///     else a real RSS 1.0 feed carries — dates, authors, subjects, content — is a module.
-    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested before the item is read, so
-    ///     the work stops at the limit.
+    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> counts items kept and is tested
+    ///     before the item is read, so the work stops at the limit.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(RssFeed resource)
@@ -99,9 +99,14 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNodeIterator itemIterator = this.Navigator.Select("rdf:RDF/rss:item", manager);
         if (itemIterator is { Count: > 0 })
         {
-            int counter = 0;
+            int added = 0;
             while (itemIterator.MoveNext())
             {
+                if (this.Settings.RetrievalLimit != 0 && added >= this.Settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? itemNode = itemIterator.Current;
                 if (itemNode is null)
                 {
@@ -109,12 +114,6 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
 
                 RssItem item = new();
-                counter++;
-
-                if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                {
-                    break;
-                }
 
                 XPathNavigator? itemTitleNavigator = itemNode.SelectChildElement("rss", "title", manager);
                 XPathNavigator? itemLinkNavigator = itemNode.SelectChildElement("rss", "link", manager);
@@ -142,6 +141,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
                 itemExtensionAdapter.Fill(item, manager);
 
                 resource.Channel.Items.Add(item);
+                added++;
             }
         }
 

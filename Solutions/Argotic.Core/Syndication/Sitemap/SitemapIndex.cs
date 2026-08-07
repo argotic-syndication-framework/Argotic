@@ -389,7 +389,14 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="SitemapIndex"/>.</param>
     /// <param name="eventData">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data used when raising the <see cref="SitemapIndex.Loaded"/> event.</param>
     /// <remarks>
+    ///     <para>
     ///     After the load operation has successfully completed, the <see cref="SitemapIndex.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
+    ///     </para>
+    ///     <para>
+    ///     This walk, not <see cref="Argotic.Data.Adapters.Sitemap09SyndicationResourceAdapter"/>, is what
+    ///     every public <c>Load</c> on this type reaches. <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/>
+    ///     is a budget of entries <i>kept</i>, so a <c>sitemap</c> that fails to load costs nothing against it.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
@@ -407,25 +414,25 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
 
         if (sitemapIterator is { Count: > 0 })
         {
-            int counter = 0;
+            int added = 0;
             while (sitemapIterator.MoveNext())
             {
+                if (settings.RetrievalLimit != 0 && added >= settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? sitemapNode = sitemapIterator.Current;
                 if (sitemapNode is null)
                 {
                     continue;
                 }
 
-                counter++;
-                if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
-                {
-                    break;
-                }
-
                 SitemapIndexEntry entry = new();
                 if (entry.Load(sitemapNode))
                 {
                     this.Sitemaps.Add(entry);
+                    added++;
                 }
             }
         }

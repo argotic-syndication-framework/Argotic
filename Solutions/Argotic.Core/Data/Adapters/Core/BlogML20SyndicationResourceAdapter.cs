@@ -15,9 +15,10 @@ namespace Argotic.Data.Adapters;
 ///     BlogML is a blog <i>export</i> format, not a syndication feed: a single <c>blog</c> root in
 ///     <c>http://www.blogml.com/2006/09/BlogML</c> carrying the whole site — every author, category and
 ///     post, and inside each post its comments, trackbacks and attachments — rather than a recent window of
-///     it. The consequence shows up here as scale: <c>blog:posts/blog:post</c> is the only collection
-///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> caps, and authors, categories and
-///     extended properties are always read in full however long the export is.
+///     it. The consequence shows up here as scale, which is why
+///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> caps authors and categories as well as
+///     posts, each against its own budget. Extended properties are a dictionary rather than a collection of
+///     entities and are still read in full.
 ///     </para>
 ///     <para>
 ///     Element names use hyphens where the rest of the library uses camel case — <c>sub-title</c>,
@@ -131,9 +132,10 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
     ///     with an empty string for the value.
     ///     </para>
     ///     <para>
-    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested after <c>post.Load</c> and
-    ///     inside its success branch, so the post that trips the limit is parsed in full — comments and all
-    ///     — and then discarded.
+    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested at the top of each of the
+    ///     three entity loops, against the number of entities that loop has <i>kept</i>. A post that fails to
+    ///     load therefore costs nothing against the budget, and the post that would trip it is never parsed —
+    ///     which on this format means never walking its comments, trackbacks and attachments either.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="document"/> is <see langword="null"/>.</exception>
@@ -154,8 +156,14 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (authorsIterator is { Count: > 0 })
         {
+            int addedAuthors = 0;
             while (authorsIterator.MoveNext())
             {
+                if (settings.RetrievalLimit != 0 && addedAuthors >= settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? authorsNode = authorsIterator.Current;
                 if (authorsNode is null)
                 {
@@ -166,6 +174,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
                 if (author.Load(authorsNode, settings))
                 {
                     document.Authors.Add(author);
+                    addedAuthors++;
                 }
             }
         }
@@ -195,8 +204,14 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (categoriesIterator is { Count: > 0 })
         {
+            int addedCategories = 0;
             while (categoriesIterator.MoveNext())
             {
+                if (settings.RetrievalLimit != 0 && addedCategories >= settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? categoriesNode = categoriesIterator.Current;
                 if (categoriesNode is null)
                 {
@@ -207,15 +222,21 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
                 if (category.Load(categoriesNode, settings))
                 {
                     document.Categories.Add(category);
+                    addedCategories++;
                 }
             }
         }
 
         if (postsIterator is { Count: > 0 })
         {
-            int counter = 0;
+            int addedPosts = 0;
             while (postsIterator.MoveNext())
             {
+                if (settings.RetrievalLimit != 0 && addedPosts >= settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? postsNode = postsIterator.Current;
                 if (postsNode is null)
                 {
@@ -223,16 +244,10 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
 
                 BlogMLPost post = new();
-                counter++;
-
                 if (post.Load(postsNode, settings))
                 {
-                    if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
-                    {
-                        break;
-                    }
-
                     document.Posts.Add(post);
+                    addedPosts++;
                 }
             }
         }

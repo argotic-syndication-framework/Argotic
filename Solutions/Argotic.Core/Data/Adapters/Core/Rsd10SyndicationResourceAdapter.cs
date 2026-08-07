@@ -96,9 +96,14 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (apiIterator is { Count: > 0 })
             {
-                int counter = 0;
+                int added = 0;
                 while (apiIterator.MoveNext())
                 {
+                    if (this.Settings.RetrievalLimit != 0 && added >= this.Settings.RetrievalLimit)
+                    {
+                        break;
+                    }
+
                     XPathNavigator? apiNode = apiIterator.Current;
                     if (apiNode is null)
                     {
@@ -106,16 +111,10 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
                     }
 
                     RsdApplicationInterface api = new();
-                    counter++;
-
                     if (api.Load(apiNode, this.Settings))
                     {
-                        if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                        {
-                            break;
-                        }
-
                         resource.Interfaces.Add(api);
+                        added++;
                     }
                 }
             }

@@ -508,7 +508,8 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///         This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssChannel"/>.
     ///     </para>
     ///     <para>
-    ///         The number of <see cref="RssChannel.Items"/> that are loaded is limited based on the <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/>.
+    ///         The number of <see cref="RssChannel.Items"/> that are loaded is limited based on the <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/>,
+    ///         which is a budget of items <i>kept</i>: an <c>item</c> that fails to load costs nothing against it, and the item that would trip it is never parsed.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
@@ -600,9 +601,14 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
 
         if (itemIterator is { Count: > 0 })
         {
-            int counter = 0;
+            int added = 0;
             while (itemIterator.MoveNext())
             {
+                if (settings.RetrievalLimit != 0 && added >= settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? itemNode = itemIterator.Current;
                 if (itemNode is null)
                 {
@@ -610,16 +616,10 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
                 }
 
                 RssItem item = new();
-                counter++;
-
                 if (item.Load(itemNode, settings))
                 {
-                    if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
-                    {
-                        break;
-                    }
-
                     this.Items.Add(item);
+                    added++;
                     wasLoaded = true;
                 }
             }

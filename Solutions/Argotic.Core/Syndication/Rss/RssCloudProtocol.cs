@@ -7,15 +7,22 @@ namespace Argotic.Syndication;
 /// </summary>
 /// <seealso cref="RssCloud.Protocol"/>
 /// <remarks>
+///     <para>
 ///     The RssCloud interface defines three transports, identified in the <c>protocol</c> attribute as
-///     <c>xml-rpc</c>, <c>soap</c> and <c>http-post</c>. This enumeration covers the first two only; there
-///     is no member for REST-style HTTP POST. The interface is specified at
+///     <c>xml-rpc</c>, <c>soap</c> and <c>http-post</c>, and all three are modelled here. The interface is
+///     specified at
 ///     <a href="https://www.rssboard.org/rsscloud-interface">https://www.rssboard.org/rsscloud-interface</a>.
+///     </para>
+///     <para>
+///     A <c>protocol</c> value outside those three still resolves to <see cref="None"/> and is lost, because
+///     the transport is modelled as an enumeration and <see cref="RssCloud.Protocol"/> refuses
+///     <see cref="None"/>. Preserving an unknown transport would need a member that carries the string.
+///     </para>
 /// </remarks>
 public enum RssCloudProtocol
 {
     /// <summary>
-    /// No cloud protocol specified. Also the result of parsing a <c>protocol</c> attribute this enumeration does not model, such as <c>http-post</c>.
+    /// No cloud protocol specified. Also the result of parsing a <c>protocol</c> attribute this enumeration does not model.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
     None = 0,
@@ -30,5 +37,11 @@ public enum RssCloudProtocol
     /// The cloud notification web service exchanges XML-RPC messages. Written as <c>protocol="xml-rpc"</c>.
     /// </summary>
     [EnumerationMetadata(DisplayName = "XML-RPC", AlternateValue = "xml-rpc")]
-    XmlRpc = 2
+    XmlRpc = 2,
+
+    /// <summary>
+    /// The cloud notification web service is called with a REST-style HTTP POST. Written as <c>protocol="http-post"</c>.
+    /// </summary>
+    [EnumerationMetadata(DisplayName = "HTTP POST", AlternateValue = "http-post")]
+    HttpPost = 3
 }

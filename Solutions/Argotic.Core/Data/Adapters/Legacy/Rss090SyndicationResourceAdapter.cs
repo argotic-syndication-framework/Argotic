@@ -60,8 +60,8 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <remarks>
     ///     Items are taken in document order, and each one is probed for extensions in turn — which is where
     ///     an RSS 0.90 parse spends nearly all of its time, since the item vocabulary itself is two elements.
-    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested before the item is read, so
-    ///     the work genuinely stops at the limit.
+    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> counts items kept and is tested
+    ///     before the item is read, so the work genuinely stops at the limit.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(RssFeed resource)
@@ -95,9 +95,14 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNodeIterator itemIterator = this.Navigator.Select("rdf:RDF/rss:item", manager);
         if (itemIterator is { Count: > 0 })
         {
-            int counter = 0;
+            int added = 0;
             while (itemIterator.MoveNext())
             {
+                if (this.Settings.RetrievalLimit != 0 && added >= this.Settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? itemNode = itemIterator.Current;
                 if (itemNode is null)
                 {
@@ -105,12 +110,6 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
 
                 RssItem item = new();
-                counter++;
-
-                if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                {
-                    break;
-                }
 
                 XPathNavigator? titleNavigator = itemNode.SelectChildElement("rss", "title", manager);
                 XPathNavigator? linkNavigator = itemNode.SelectChildElement("rss", "link", manager);
@@ -131,6 +130,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
                 itemExtensionAdapter.Fill(item, manager);
 
                 resource.Channel.Items.Add(item);
+                added++;
             }
         }
 

@@ -18,9 +18,11 @@ namespace Argotic.Extensions.Core;
 ///     <para>
 ///     <b>It is dead.</b> The reader it was built for is gone, and effectively nothing consumes these
 ///     elements today. It is implemented here so that archived feeds parse and round-trip; do not reach
-///     for it when designing a new feed. The specification link below points at
-///     <c>msdn2.microsoft.com</c>, a hostname retired over a decade ago, which is itself a fair summary
-///     of the extension's standing.
+///     for it when designing a new feed. The specification was cited for years at
+///     <c>msdn2.microsoft.com</c>, a hostname retired over a decade ago that now redirects to the
+///     <c>System.Xml</c> API reference rather than to anything about lists — which is itself a fair
+///     summary of the extension's standing. The document survives under <c>previous-versions</c> on
+///     <c>learn.microsoft.com</c>, which is where the link below goes.
 ///     </para>
 ///     <para>
 ///     The prefix is <c>cf</c> — for "common feed", after the Windows Common Feed List — bound to
@@ -42,7 +44,7 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
     /// Initializes a new instance of the <see cref="SimpleListSyndicationExtension"/> class.
     /// </summary>
     public SimpleListSyndicationExtension()
-        : base("cf", "http://www.microsoft.com/schemas/rss/core/2005", new Version("1.0"), new Uri("http://msdn2.microsoft.com/en-us/xml/bb190612.aspx"), "Simple List", "Extends syndication feeds to provide a means of exposing ordered lists of items easier and more accessible to users.")
+        : base("cf", "http://www.microsoft.com/schemas/rss/core/2005", new Version("1.0"), new Uri("https://learn.microsoft.com/en-us/previous-versions/bb190612(v=msdn.10)"), "Simple List", "Extends syndication feeds to provide a means of exposing ordered lists of items easier and more accessible to users.")
     {
     }
 

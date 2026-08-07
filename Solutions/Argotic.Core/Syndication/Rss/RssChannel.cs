@@ -111,11 +111,18 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </summary>
     /// <value>The RSS 2.0 specification at rssboard.org. Fixed, and written on every save.</value>
     /// <remarks>
+    ///     <para>
     ///     <c>&lt;docs&gt;</c> points a human who has stumbled onto the raw XML at an explanation of the
     ///     format. It describes the format, not this feed, which is why it is a constant rather than a
     ///     settable property.
+    ///     </para>
+    ///     <para>
+    ///     The scheme moved from <c>http</c> to <c>https</c>, which changes the text of <b>every</b>
+    ///     document this framework saves. That is the point: an <c>http</c> link shipped in a syndicated
+    ///     document is one lapsed redirect away from pointing somewhere else entirely.
+    ///     </para>
     /// </remarks>
-    public static Uri Documentation { get; } = new("http://www.rssboard.org/rss-specification");
+    public static Uri Documentation { get; } = new("https://www.rssboard.org/rss-specification");
 
     /// <summary>
     /// Gets or sets a value that credits the software that created this feed.

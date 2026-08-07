@@ -35,7 +35,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// Initializes a new instance of the <see cref="AtomPublishingEditedSyndicationExtension"/> class.
     /// </summary>
     public AtomPublishingEditedSyndicationExtension()
-        : base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Editing", "Extends syndication resource memebers to provide a means of specifying a date construct whose content indicates the last time a resource was edited.")
+        : base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("https://www.rfc-editor.org/rfc/rfc5023.html"), "Atom Publishing Protocol Editing", "Extends syndication resource memebers to provide a means of specifying a date construct whose content indicates the last time a resource was edited.")
     {
     }
 

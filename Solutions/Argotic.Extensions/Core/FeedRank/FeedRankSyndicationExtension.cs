@@ -35,7 +35,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
     /// Initializes a new instance of the <see cref="FeedRankSyndicationExtension"/> class.
     /// </summary>
     public FeedRankSyndicationExtension()
-        : base("re", "http://purl.org/atompub/rank/1.0", new Version("1.0"), new Uri("http://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt"), "Feed Ranking", "Extends syndication feeds to provide a means feed publishers to convey one or more numeric rankings for entries contained within feeds, each of which can be used, independently or in conjunction with the others, to establish a sorting order.")
+        : base("re", "http://purl.org/atompub/rank/1.0", new Version("1.0"), new Uri("https://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt"), "Feed Ranking", "Extends syndication feeds to provide a means feed publishers to convey one or more numeric rankings for entries contained within feeds, each of which can be used, independently or in conjunction with the others, to establish a sorting order.")
     {
     }
 

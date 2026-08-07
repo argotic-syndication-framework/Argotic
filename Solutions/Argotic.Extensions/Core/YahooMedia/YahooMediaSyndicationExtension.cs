@@ -44,7 +44,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
     /// Initializes a new instance of the <see cref="YahooMediaSyndicationExtension"/> class.
     /// </summary>
     public YahooMediaSyndicationExtension()
-        : base("media", "http://search.yahoo.com/mrss/", new Version("1.1.1"), new Uri("http://search.yahoo.com/mrss"), "Yahoo! Media", "Extends syndication feeds to provide a means of supplementing the enclosure capabilities of feeds.")
+        : base("media", "http://search.yahoo.com/mrss/", new Version("1.1.1"), new Uri("https://www.rssboard.org/media-rss"), "Yahoo! Media", "Extends syndication feeds to provide a means of supplementing the enclosure capabilities of feeds.")
     {
     }
 

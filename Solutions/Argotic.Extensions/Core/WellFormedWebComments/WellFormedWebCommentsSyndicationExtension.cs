@@ -39,7 +39,7 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
     /// Initializes a new instance of the <see cref="WellFormedWebCommentsSyndicationExtension"/> class.
     /// </summary>
     public WellFormedWebCommentsSyndicationExtension()
-        : base("wfw", "http://wellformedweb.org/CommentAPI/", new Version("1.0"), new Uri("http://wellformedweb.org/news/wfw_namespace_elements/"), "Well-Formed Web Comments", "Extends syndication feeds to provide a means exposing comments made against feed content.")
+        : base("wfw", "http://wellformedweb.org/CommentAPI/", new Version("1.0"), new Uri("https://www.rssboard.org/comment-api"), "Well-Formed Web Comments", "Extends syndication feeds to provide a means exposing comments made against feed content.")
     {
     }
 

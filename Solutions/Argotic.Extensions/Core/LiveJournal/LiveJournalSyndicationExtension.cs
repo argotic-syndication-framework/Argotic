@@ -41,7 +41,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="LiveJournalSyndicationExtension"/> class.
     /// </summary>
     public LiveJournalSyndicationExtension()
-        : base("lj", "http://livejournal.org/rss/lj/2.0/", new Version("2.0"), new Uri("http://neugierig.org/drop/lj/rss/"), "LiveJournal", "Extends syndication feeds to provide LiveJournal specific meta-data.")
+        : base("lj", "http://livejournal.org/rss/lj/2.0/", new Version("2.0"), new Uri("https://web.archive.org/web/20080710121013/http://neugierig.org/drop/lj/rss/"), "LiveJournal", "Extends syndication feeds to provide LiveJournal specific meta-data.")
     {
     }
 

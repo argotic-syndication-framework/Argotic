@@ -40,7 +40,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// Initializes a new instance of the <see cref="SiteSummaryContentSyndicationExtension"/> class.
     /// </summary>
     public SiteSummaryContentSyndicationExtension()
-        : base("content", "http://purl.org/rss/1.0/modules/content/", new Version("1.0"), new Uri("http://web.resource.org/rss/1.0/modules/content/"), "RDF Site Summary (Content)", "Extends syndication feeds to provide a means of describing content, including its format and encoding.")
+        : base("content", "http://purl.org/rss/1.0/modules/content/", new Version("1.0"), new Uri("https://web.resource.org/rss/1.0/modules/content/"), "RDF Site Summary (Content)", "Extends syndication feeds to provide a means of describing content, including its format and encoding.")
     {
     }
 

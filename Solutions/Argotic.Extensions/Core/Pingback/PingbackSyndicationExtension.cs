@@ -38,7 +38,7 @@ public class PingbackSyndicationExtension : SyndicationExtension, IComparable<Pi
     /// Initializes a new instance of the <see cref="PingbackSyndicationExtension"/> class.
     /// </summary>
     public PingbackSyndicationExtension()
-        : base("pingback", "http://madskills.com/public/xml/rss/module/pingback/", new Version("1.0"), new Uri("http://madskills.com/public/xml/rss/module/pingback/"), "Pingback Notification", "Extends syndication feeds to provide a means for publishers to request notification when an entity links to their content.")
+        : base("pingback", "http://madskills.com/public/xml/rss/module/pingback/", new Version("1.0"), new Uri("https://web.archive.org/web/20091111093504/http://madskills.com/public/xml/rss/module/pingback/"), "Pingback Notification", "Extends syndication feeds to provide a means for publishers to request notification when an entity links to their content.")
     {
     }
 

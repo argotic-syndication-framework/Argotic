@@ -30,7 +30,7 @@ public class PheedSyndicationExtension : SyndicationExtension, IComparable<Pheed
     /// Initializes a new instance of the <see cref="PheedSyndicationExtension"/> class.
     /// </summary>
     public PheedSyndicationExtension()
-        : base("photo", "http://www.pheed.com/pheed/", new Version("1.0"), new Uri("http://www.pheed.com/pheed/"), "Pheed Photography", "Extends syndication feeds to provide a means of describing a collection of photographs as both thumbnail and full size images.")
+        : base("photo", "http://www.pheed.com/pheed/", new Version("1.0"), new Uri("https://web.archive.org/web/20061231170212/http://www.pheed.com/pheed/"), "Pheed Photography", "Extends syndication feeds to provide a means of describing a collection of photographs as both thumbnail and full size images.")
     {
     }
 

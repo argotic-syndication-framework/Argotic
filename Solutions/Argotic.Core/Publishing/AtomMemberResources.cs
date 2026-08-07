@@ -36,7 +36,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// Initializes a new instance of the <see cref="AtomMemberResources"/> class.
     /// </summary>
     public AtomMemberResources()
-        : base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Collection", "Extends syndication resource memebers to provide a means of specifying a collection by which new entries may be added to a feed.")
+        : base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("https://www.rfc-editor.org/rfc/rfc5023.html"), "Atom Publishing Protocol Collection", "Extends syndication resource memebers to provide a means of specifying a collection by which new entries may be added to a feed.")
     {
     }
 

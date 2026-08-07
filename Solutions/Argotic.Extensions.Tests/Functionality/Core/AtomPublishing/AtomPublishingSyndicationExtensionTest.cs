@@ -24,7 +24,7 @@ public class AtomPublishingSyndicationExtensionTest
 {
     private const string Namespace = @"xmlns:app=""http://www.w3.org/2007/app""";
     private const string AppNamespace = "http://www.w3.org/2007/app";
-    private const string DocumentationUri = "http://bitworking.org/projects/atom/rfc5023.html";
+    private const string DocumentationUri = "https://www.rfc-editor.org/rfc/rfc5023.html";
 
     private readonly DateTime testEditedDate = new(2023, 6, 15, 10, 30, 0, DateTimeKind.Utc);
     private readonly DateTime testEditedDate2 = new(2024, 1, 20, 14, 45, 0, DateTimeKind.Utc);
@@ -91,7 +91,7 @@ public class AtomPublishingSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A new extension points its documentation at the RFC 5023 write-up on <c>bitworking.org</c>.
+    /// A new extension points its documentation at RFC 5023 itself, at <c>rfc-editor.org</c>.
     /// </summary>
     [TestMethod]
     public void Constructor_Default_ShouldInitializeWithCorrectDocumentation()

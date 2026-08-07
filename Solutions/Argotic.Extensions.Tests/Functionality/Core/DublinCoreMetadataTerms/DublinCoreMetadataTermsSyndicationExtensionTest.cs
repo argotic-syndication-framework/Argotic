@@ -189,7 +189,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A new extension points its documentation at <c>http://dublincore.org/documents/dcmi-terms/</c>.
+    /// A new extension points its documentation at <c>https://www.dublincore.org/specifications/dublin-core/dcmi-terms/</c>.
     /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsSyndicationExtensionConstructorSetsCorrectDocumentation()
@@ -198,7 +198,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension target = new();
 
         // Assert
-        target.Documentation.ShouldBe(new Uri("http://dublincore.org/documents/dcmi-terms/"));
+        target.Documentation.ShouldBe(new Uri("https://www.dublincore.org/specifications/dublin-core/dcmi-terms/"));
     }
 
     /// <summary>

@@ -34,7 +34,7 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="BlogChannelSyndicationExtension"/> class.
     /// </summary>
     public BlogChannelSyndicationExtension()
-        : base("blogChannel", "http://backend.userland.com/blogChannelModule", new Version("1.0"), new Uri("http://backend.userland.com/blogChannelModule"), "Blog Channel", "Extends syndication feeds to provide meta-data common to weblogs.")
+        : base("blogChannel", "http://backend.userland.com/blogChannelModule", new Version("1.0"), new Uri("https://web.archive.org/web/20090902125603/http://backend.userland.com/blogChannelModule"), "Blog Channel", "Extends syndication feeds to provide meta-data common to weblogs.")
     {
     }
 

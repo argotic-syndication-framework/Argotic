@@ -41,7 +41,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// Initializes a new instance of the <see cref="DublinCoreMetadataTermsSyndicationExtension"/> class.
     /// </summary>
     public DublinCoreMetadataTermsSyndicationExtension()
-        : base("dcterms", "http://purl.org/dc/terms/", new Version("1.0"), new Uri("http://dublincore.org/documents/dcmi-terms/"), "Dublin Core Metadata Terms", "Extends syndication feeds to provide a meta-data term resource description vocabulary.")
+        : base("dcterms", "http://purl.org/dc/terms/", new Version("1.0"), new Uri("https://www.dublincore.org/specifications/dublin-core/dcmi-terms/"), "Dublin Core Metadata Terms", "Extends syndication feeds to provide a meta-data term resource description vocabulary.")
     {
     }
 

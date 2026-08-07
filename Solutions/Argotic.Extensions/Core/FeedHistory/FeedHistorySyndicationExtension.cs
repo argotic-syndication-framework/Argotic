@@ -54,7 +54,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="FeedHistorySyndicationExtension"/> class.
     /// </summary>
     public FeedHistorySyndicationExtension()
-        : base("fh", "http://purl.org/syndication/history/1.0", new Version("1.0"), new Uri("http://www.ietf.org/rfc/rfc5005.txt"), "Feed Paging and Archiving", "Extends syndication feeds to provide a means of publishing of entries across one or more feed documents.")
+        : base("fh", "http://purl.org/syndication/history/1.0", new Version("1.0"), new Uri("https://www.rfc-editor.org/rfc/rfc5005.html"), "Feed Paging and Archiving", "Extends syndication feeds to provide a means of publishing of entries across one or more feed documents.")
     {
     }
 

@@ -39,7 +39,7 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     /// Initializes a new instance of the <see cref="SiteSummarySlashSyndicationExtension"/> class.
     /// </summary>
     public SiteSummarySlashSyndicationExtension()
-        : base("slash", "http://purl.org/rss/1.0/modules/slash/", new Version("1.0"), new Uri("http://web.resource.org/rss/1.0/modules/slash/"), "RDF Site Summary (Slash)", "Extends syndication feeds to provide a means of describing Slash-based site meta-data.")
+        : base("slash", "http://purl.org/rss/1.0/modules/slash/", new Version("1.0"), new Uri("https://web.resource.org/rss/1.0/modules/slash/"), "RDF Site Summary (Slash)", "Extends syndication feeds to provide a means of describing Slash-based site meta-data.")
     {
     }
 

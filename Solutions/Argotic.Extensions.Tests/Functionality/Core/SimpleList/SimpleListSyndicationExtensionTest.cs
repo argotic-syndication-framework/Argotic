@@ -101,7 +101,7 @@ public class SimpleListSyndicationExtensionTest
     }
 
     /// <summary>
-    /// The extension points at <c>http://msdn2.microsoft.com/en-us/xml/bb190612.aspx</c> as its documentation.
+    /// The extension points at <c>https://learn.microsoft.com/en-us/previous-versions/bb190612(v=msdn.10)</c> as its documentation.
     /// </summary>
     [TestMethod]
     public void SimpleListSyndicationExtension_Constructor_SetsCorrectDocumentation()
@@ -110,7 +110,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension target = new();
 
         // Assert
-        target.Documentation.ShouldBe(new Uri("http://msdn2.microsoft.com/en-us/xml/bb190612.aspx"));
+        target.Documentation.ShouldBe(new Uri("https://learn.microsoft.com/en-us/previous-versions/bb190612(v=msdn.10)"));
     }
 
     #endregion

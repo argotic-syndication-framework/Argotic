@@ -933,7 +933,7 @@ public class OpmlDocumentBehaviorTests
     }
 
     /// <summary>
-    /// The head points by default at the OPML 2.0 specification, at <c>http://www.opml.org/spec2</c>.
+    /// The head points by default at the OPML 2.0 specification, at <c>https://opml.org/spec2.opml</c>.
     /// </summary>
     [TestMethod]
     public void OpmlHead_Documentation_ReturnsOpmlSpecUrl()
@@ -942,7 +942,7 @@ public class OpmlDocumentBehaviorTests
         OpmlDocument document = new();
 
         // Assert
-        document.Head.Documentation.ShouldBe(new Uri("http://www.opml.org/spec2"));
+        document.Head.Documentation.ShouldBe(new Uri("https://opml.org/spec2.opml"));
     }
 
     #endregion

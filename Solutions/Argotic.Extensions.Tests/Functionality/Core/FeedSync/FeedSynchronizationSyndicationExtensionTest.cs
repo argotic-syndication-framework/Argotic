@@ -81,7 +81,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         target.Name.ShouldBe("FeedSync");
     }
 
-    /// <summary>A newly constructed extension points its documentation at <c>http://dev.live.com/feedsync/spec/</c>.</summary>
+    /// <summary>A newly constructed extension points its documentation at an archived snapshot of <c>http://dev.live.com/feedsync/spec/</c>.</summary>
     [TestMethod]
     public void FeedSynchronizationSyndicationExtension_Constructor_SetsCorrectDocumentation()
     {
@@ -89,7 +89,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension target = new();
 
         // Assert
-        target.Documentation.ShouldBe(new Uri("http://dev.live.com/feedsync/spec/"));
+        target.Documentation.ShouldBe(new Uri("https://web.archive.org/web/20080705204645/http://dev.live.com/feedsync/spec/"));
     }
 
     #endregion

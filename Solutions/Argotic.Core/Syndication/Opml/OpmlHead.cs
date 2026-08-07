@@ -55,13 +55,21 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <summary>
     /// Gets the http address of the documentation that this OPML document conforms to.
     /// </summary>
-    /// <value>Always <c>http://www.opml.org/spec2</c>. This is a constant, not a parsed value: it is not settable and a <c>docs</c> element in a loaded document does not change it.</value>
+    /// <value>Always <c>https://opml.org/spec2.opml</c>. This is a constant, not a parsed value: it is not settable and a <c>docs</c> element in a loaded document does not change it.</value>
     /// <remarks>
+    ///     <para>
     ///     OPML's <c>docs</c> element exists for the reader who finds the file on a web server years later and
     ///     wants to know what it is. Because this implementation is always OPML 2.0, the answer is always the
     ///     same.
+    ///     </para>
+    ///     <para>
+    ///     It was <c>http://www.opml.org/spec2</c>, which answers 404 — so every OPML document this
+    ///     framework has ever saved carries a dead link in the one element whose only job is to be
+    ///     followed. <c>opml.org</c> serves the OPML 2.0 specification at <c>spec2.opml</c>, as
+    ///     <c>text/html</c>; <c>spec2.html</c> redirects there, so the redirect target is cited directly.
+    ///     </para>
     /// </remarks>
-    public Uri Documentation { get; } = new("http://www.opml.org/spec2");
+    public Uri Documentation { get; } = new("https://opml.org/spec2.opml");
 
     /// <summary>
     /// Gets a collection of line numbers that are expanded within the outline.

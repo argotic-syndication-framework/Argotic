@@ -71,7 +71,7 @@ public class FeedHistorySyndicationExtensionTest
         target.Version.ShouldBe(new Version("1.0"));
     }
 
-    /// <summary>A newly constructed extension points its documentation at <c>http://www.ietf.org/rfc/rfc5005.txt</c>.</summary>
+    /// <summary>A newly constructed extension points its documentation at <c>https://www.rfc-editor.org/rfc/rfc5005.html</c>.</summary>
     [TestMethod]
     public void FeedHistorySyndicationExtension_DefaultConstructor_SetsCorrectDocumentation()
     {
@@ -79,7 +79,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension target = new();
 
         // Assert
-        target.Documentation.ShouldBe(new Uri("http://www.ietf.org/rfc/rfc5005.txt"));
+        target.Documentation.ShouldBe(new Uri("https://www.rfc-editor.org/rfc/rfc5005.html"));
     }
 
     /// <summary>A newly constructed extension names itself <c>Feed Paging and Archiving</c>.</summary>

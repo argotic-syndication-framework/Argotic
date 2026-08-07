@@ -53,10 +53,19 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
     /// </summary>
     /// <param name="resource">The <see cref="AtomCategoryDocument"/> to be filled.</param>
     /// <remarks>
+    ///     <para>
     ///     <c>fixed</c> is read as the literal <c>yes</c> or <c>no</c> RFC 5023 specifies, case-insensitively;
     ///     any other value leaves <see cref="AtomCategoryDocument.IsFixed"/> alone rather than guessing. Since
     ///     that property is a plain <see cref="bool"/> defaulting to <see langword="false"/>, an absent or
     ///     unreadable attribute is indistinguishable from <c>fixed="no"</c> once the load has finished.
+    ///     </para>
+    ///     <para>
+    ///     <c>scheme</c> is inherited, as RFC 5023 §7.2.1 requires: a child that declares none is given the
+    ///     parent's. The inheritance is materialised onto each <see cref="AtomCategory"/> rather than left
+    ///     implicit, so it survives into anything the document is later saved as — at the cost of the saved
+    ///     document restating the scheme on every child. That is the same trade the <c>xml:base</c> handling
+    ///     makes, and it says the same thing the source document said.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(AtomCategoryDocument resource)
@@ -130,6 +139,12 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                         AtomCategory category = new();
                         if (category.Load(categoryNode, this.Settings))
                         {
+                            // RFC 5023 section 7.2.1: an atom:category child with no scheme attribute
+                            // inherits its app:categories parent's. AtomCategory.Load reads only the
+                            // attribute in front of it, so the inheritance has to be applied here -- and
+                            // without it a bare term arrives with no vocabulary to be a term in.
+                            category.Scheme ??= resource.Scheme;
+
                             resource.Categories.Add(category);
                         }
                     }

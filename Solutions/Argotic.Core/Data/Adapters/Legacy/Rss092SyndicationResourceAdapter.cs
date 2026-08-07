@@ -266,9 +266,18 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </summary>
     /// <param name="channel">The <see cref="RssChannel"/> to be filled.</param>
     /// <remarks>
-    ///     Skip hours carry the same one-subtracted renumbering as in RSS 0.91: the document counts from 1,
-    ///     the object model stores from 0, and the trace warning for an out-of-range value prints the
-    ///     converted number rather than the one in the feed.
+    ///     <para>
+    ///     Skip hours carry the same one-subtracted renumbering as in RSS 0.91: the document counts from 1
+    ///     and the object model stores from 0. The trace warning for a duplicate or out-of-range value
+    ///     reports the number the document wrote, not the converted one.
+    ///     </para>
+    ///     <para>
+    ///     RSS 0.92 itself says <b>nothing</b> about <c>skipHours</c>, so the range is inherited from
+    ///     Userland's RSS 0.91 — <i>a number between 1 and 24</i> — which is what 0.92 was published as an
+    ///     extension of. Netscape's RSS 0.91 and RSS 2.0 both count from 0 instead, so a 0.92 document
+    ///     written to that convention is read an hour early with its <c>0</c> dropped and warned about.
+    ///     Choosing per document would be a guess, and a wrong guess here is silent.
+    ///     </para>
     /// </remarks>
     /// <param name="navigator">The <see cref="XPathNavigator"/> used to navigate the channel XML data.</param>
     /// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve XML namespace prefixes.</param>
@@ -328,15 +337,15 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
 
                 if (int.TryParse(skipHoursNode.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
-                    hour -= 1; // Convert to zero-based range
+                    int zeroBasedHour = hour - 1;
 
-                    if (!channel.SkipHours.Contains(hour) && hour is >= 0 and <= 23)
+                    if (zeroBasedHour is >= 0 and <= 23 && !channel.SkipHours.Contains(zeroBasedHour))
                     {
-                        channel.SkipHours.Add(hour);
+                        channel.SkipHours.Add(zeroBasedHour);
                     }
                     else
                     {
-                        System.Diagnostics.Trace.TraceWarning("Rss092SyndicationResourceAdapter unable to add duplicate or out-of-range skip hour with a value of {0}.", hour);
+                        System.Diagnostics.Trace.TraceWarning("Rss092SyndicationResourceAdapter unable to add duplicate or out-of-range skip hour with a value of {0}. RSS 0.92 says nothing about skipHours, so the RSS 0.91 range of 1 through 24 is assumed.", hour);
                     }
                 }
             }
@@ -344,9 +353,14 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (itemIterator is { Count: > 0 })
         {
-            int counter = 0;
+            int added = 0;
             while (itemIterator.MoveNext())
             {
+                if (settings.RetrievalLimit != 0 && added >= settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? itemNode = itemIterator.Current;
                 if (itemNode is null)
                 {
@@ -354,16 +368,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
 
                 RssItem item = new();
-                counter++;
-
-                if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
-                {
-                    break;
-                }
-
                 Rss092SyndicationResourceAdapter.FillItem(item, itemNode, manager, settings);
 
                 channel.Items.Add(item);
+                added++;
             }
         }
     }

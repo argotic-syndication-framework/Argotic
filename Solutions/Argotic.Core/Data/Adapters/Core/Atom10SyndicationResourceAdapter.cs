@@ -357,9 +357,9 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
     ///     </para>
     ///     <para>
     ///     This is where a parse spends its time: every entry is walked in full and probed for every
-    ///     supported extension. <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested
-    ///     <i>after</i> <c>FillEntry</c> has run, so the entry that trips the limit is parsed in full and
-    ///     then discarded. Capping a 500-entry feed at 10 costs 11 entry parses, not 10.
+    ///     supported extension. <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested at
+    ///     the top of the loop, against the number of entries <i>kept</i>, so capping a 500-entry feed at
+    ///     10 costs 10 entry parses.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is <see langword="null"/>.</exception>
@@ -435,9 +435,14 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (entryIterator is { Count: > 0 })
         {
-            int counter = 0;
+            int added = 0;
             while (entryIterator.MoveNext())
             {
+                if (settings.RetrievalLimit != 0 && added >= settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? entryNode = entryIterator.Current;
                 if (entryNode is null)
                 {
@@ -445,16 +450,10 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
 
                 AtomEntry entry = new();
-                counter++;
-
                 Atom10SyndicationResourceAdapter.FillEntry(entry, entryNode, manager, settings);
 
-                if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
-                {
-                    break;
-                }
-
                 feed.Entries.Add(entry);
+                added++;
             }
         }
 

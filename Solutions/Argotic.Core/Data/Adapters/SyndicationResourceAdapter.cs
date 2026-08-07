@@ -57,7 +57,8 @@ public class SyndicationResourceAdapter
     /// <summary>
     /// Gets the <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of a syndication resource.
     /// </summary>
-    public SyndicationResourceLoadSettings Settings { get; } = new();
+    /// <value>The settings supplied to the constructor. Never a default: the constructor rejects a null argument rather than substituting one.</value>
+    public SyndicationResourceLoadSettings Settings { get; }
 
     /// <summary>
     /// Verifies that the data source is the format the caller expects, then routes it to the adapter for that format and version.

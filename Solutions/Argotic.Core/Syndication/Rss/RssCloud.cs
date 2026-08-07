@@ -134,11 +134,10 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <value>The default value is <see cref="RssCloudProtocol.XmlRpc"/>.</value>
     /// <remarks>
     ///     The RssCloud interface defines three transports and three corresponding attribute values:
-    ///     <c>xml-rpc</c>, <c>soap</c> and <c>http-post</c>. <see cref="RssCloudProtocol"/> models only the
-    ///     first two. A feed declaring <c>protocol="http-post"</c> therefore loads with this property left
-    ///     at its default and the declared transport lost, because
-    ///     <see cref="CloudProtocolByName(string)"/> returns <see cref="RssCloudProtocol.None"/> for it and
-    ///     the load skips the assignment.
+    ///     <c>xml-rpc</c>, <c>soap</c> and <c>http-post</c>, and <see cref="RssCloudProtocol"/> models all
+    ///     three. A <c>protocol</c> value outside those three is a different matter: it resolves to
+    ///     <see cref="RssCloudProtocol.None"/>, the load skips the assignment, and this property keeps its
+    ///     default — so a feed offering an unknown transport is re-saved offering XML-RPC.
     /// </remarks>
     /// <exception cref="ArgumentException">The value specified for a set operation is equivalent to <see cref="RssCloudProtocol.None"/>.</exception>
     public RssCloudProtocol Protocol
@@ -169,7 +168,7 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// Returns the cloud protocol identifier for the supplied <see cref="RssCloudProtocol"/>.
     /// </summary>
     /// <param name="protocol">The <see cref="RssCloudProtocol"/> to get the cloud protocol identifier for.</param>
-    /// <returns>The <c>protocol</c> attribute value for the supplied <paramref name="protocol"/> — <c>soap</c> or <c>xml-rpc</c> — or an empty string for <see cref="RssCloudProtocol.None"/>.</returns>
+    /// <returns>The <c>protocol</c> attribute value for the supplied <paramref name="protocol"/> — <c>soap</c>, <c>xml-rpc</c> or <c>http-post</c> — or an empty string for <see cref="RssCloudProtocol.None"/>.</returns>
     /// <example>
     ///     <code source="..\..\Argotic.Examples\Core\Rss\RssCloudExample.cs" language="cs" title="The following code example demonstrates the usage of the CloudProtocolAsString method." />
     /// </example>

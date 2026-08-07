@@ -93,9 +93,14 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (apiIterator is { Count: > 0 })
             {
-                int counter = 0;
+                int added = 0;
                 while (apiIterator.MoveNext())
                 {
+                    if (this.Settings.RetrievalLimit != 0 && added >= this.Settings.RetrievalLimit)
+                    {
+                        break;
+                    }
+
                     XPathNavigator? apiNode = apiIterator.Current;
                     if (apiNode is null)
                     {
@@ -103,7 +108,6 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
                     }
 
                     RsdApplicationInterface api = new();
-                    counter++;
 
                     string rpcLinkAttribute = apiNode.GetAttribute("rpcLink", string.Empty);
                     if (Uri.TryCreate(rpcLinkAttribute, UriKind.RelativeOrAbsolute, out Uri? link))
@@ -113,12 +117,8 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
 
                     if (api.Load(apiNode, this.Settings) || api.Link is not null)
                     {
-                        if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                        {
-                            break;
-                        }
-
                         resource.Interfaces.Add(api);
+                        added++;
                     }
                 }
             }

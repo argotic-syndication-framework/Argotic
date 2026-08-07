@@ -401,7 +401,16 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="Sitemap"/>.</param>
     /// <param name="eventData">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data used when raising the <see cref="Sitemap.Loaded"/> event.</param>
     /// <remarks>
+    ///     <para>
     ///     After the load operation has successfully completed, the <see cref="Sitemap.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
+    ///     </para>
+    ///     <para>
+    ///     This walk, not <see cref="Argotic.Data.Adapters.Sitemap09SyndicationResourceAdapter"/>, is what
+    ///     every public <c>Load</c> on this type reaches — the adapter has no caller in this library. The two
+    ///     are kept in step deliberately: <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is a
+    ///     budget of urls <i>kept</i>, so a <c>url</c> that fails to load costs nothing and a limit of ten
+    ///     yields ten urls and ten parses.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
@@ -419,25 +428,25 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
 
         if (urlIterator is { Count: > 0 })
         {
-            int counter = 0;
+            int added = 0;
             while (urlIterator.MoveNext())
             {
+                if (settings.RetrievalLimit != 0 && added >= settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 XPathNavigator? urlNode = urlIterator.Current;
                 if (urlNode is null)
                 {
                     continue;
                 }
 
-                counter++;
-                if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
-                {
-                    break;
-                }
-
                 SitemapUrl url = new();
                 if (url.Load(urlNode, settings))
                 {
                     this.Urls.Add(url);
+                    added++;
                 }
             }
         }

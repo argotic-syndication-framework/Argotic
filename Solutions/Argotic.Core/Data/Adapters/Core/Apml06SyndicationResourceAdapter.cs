@@ -18,10 +18,10 @@ namespace Argotic.Data.Adapters;
 ///     document that spells them in lower case, and there is no fallback that would rescue one.
 ///     </para>
 ///     <para>
-///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> caps profiles and does not cap
-///     applications: the profile loop counts and breaks, the application loop does neither. That is
-///     defensible — a profile carries the whole attention graph, an <see cref="ApmlApplication"/> carries
-///     a name and a payload string — but it is a difference a caller setting a limit will not expect.
+///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> caps profiles and applications alike,
+///     each against its own budget of entities kept. A profile carries the whole attention graph and an
+///     <see cref="ApmlApplication"/> carries a name and a payload string, so the two are not comparable in
+///     cost — but a caller who sets a limit is asking for a bounded document, not a bounded profile list.
 ///     </para>
 /// </remarks>
 public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
@@ -78,9 +78,14 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
             XPathNodeIterator profileIterator = bodyNavigator.SelectChildElements("apml", "Profile", manager);
             if (profileIterator is { Count: > 0 })
             {
-                int counter = 0;
+                int addedProfiles = 0;
                 while (profileIterator.MoveNext())
                 {
+                    if (this.Settings.RetrievalLimit != 0 && addedProfiles >= this.Settings.RetrievalLimit)
+                    {
+                        break;
+                    }
+
                     XPathNavigator? profileNode = profileIterator.Current;
                     if (profileNode is null)
                     {
@@ -88,16 +93,10 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
                     }
 
                     ApmlProfile profile = new();
-                    counter++;
-
                     if (profile.Load(profileNode, this.Settings))
                     {
-                        if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                        {
-                            break;
-                        }
-
                         resource.Profiles.Add(profile);
+                        addedProfiles++;
                     }
                 }
             }
@@ -105,8 +104,14 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
             XPathNodeIterator applicationIterator = bodyNavigator.Select("apml:Applications/apml:Application", manager);
             if (applicationIterator is { Count: > 0 })
             {
+                int addedApplications = 0;
                 while (applicationIterator.MoveNext())
                 {
+                    if (this.Settings.RetrievalLimit != 0 && addedApplications >= this.Settings.RetrievalLimit)
+                    {
+                        break;
+                    }
+
                     XPathNavigator? applicationNode = applicationIterator.Current;
                     if (applicationNode is null)
                     {
@@ -117,6 +122,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
                     if (application.Load(applicationNode, this.Settings))
                     {
                         resource.Applications.Add(application);
+                        addedApplications++;
                     }
                 }
             }

@@ -23,10 +23,10 @@ namespace Argotic.Data.Adapters;
 ///     A sitemap in some other namespace is a different format and is not read as though it were this one.
 ///     </para>
 ///     <para>
-///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is tested <i>before</i> the entry is
-///     parsed here, so the work stops at the limit. The Atom and BlogML adapters test after parsing and
-///     throw one parsed item away; on a sitemap, where a single file may legitimately carry 50,000 URLs,
-///     that difference is the difference between reading the file and reading a prefix of it.
+///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> is a budget of entries <i>kept</i>,
+///     tested at the top of the walk, so a limit of ten yields ten entries and costs ten parses. On a
+///     sitemap, where one file may legitimately carry 50,000 URLs, that is the difference between reading
+///     the file and reading a prefix of it.
 ///     </para>
 /// </remarks>
 public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
@@ -51,10 +51,11 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </summary>
     /// <param name="resource">The <see cref="Sitemap"/> to be filled.</param>
     /// <remarks>
-    ///     A <c>url</c> whose <c>Load</c> returns <see langword="false"/> is dropped but still counts against
-    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/>, because the counter advances before
-    ///     the parse. Google's news, image, video and hreflang extensions are attached per URL by
-    ///     <see cref="SitemapUrl"/>, not here; this call attaches only what is declared at document level.
+    ///     A <c>url</c> whose <c>Load</c> returns <see langword="false"/> is dropped and does not count
+    ///     against <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/>, so a limit of ten yields
+    ///     ten urls from a document whose first is unreadable. Google's news, image, video and hreflang
+    ///     extensions are attached per URL by <see cref="SitemapUrl"/>, not here; this call attaches only
+    ///     what is declared at document level.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
     public void Fill(Sitemap resource)
@@ -71,26 +72,25 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (urlIterator is { Count: > 0 })
             {
-                int counter = 0;
+                int added = 0;
                 while (urlIterator.MoveNext())
                 {
+                    if (this.Settings.RetrievalLimit != 0 && added >= this.Settings.RetrievalLimit)
+                    {
+                        break;
+                    }
+
                     XPathNavigator? urlNode = urlIterator.Current;
                     if (urlNode is null)
                     {
                         continue;
                     }
 
-                    counter++;
-
-                    if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                    {
-                        break;
-                    }
-
                     SitemapUrl url = new();
                     if (url.Load(urlNode, this.Settings))
                     {
                         resource.Urls.Add(url);
+                        added++;
                     }
                 }
             }
@@ -125,26 +125,25 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (sitemapIterator is { Count: > 0 })
             {
-                int counter = 0;
+                int added = 0;
                 while (sitemapIterator.MoveNext())
                 {
+                    if (this.Settings.RetrievalLimit != 0 && added >= this.Settings.RetrievalLimit)
+                    {
+                        break;
+                    }
+
                     XPathNavigator? sitemapNode = sitemapIterator.Current;
                     if (sitemapNode is null)
                     {
                         continue;
                     }
 
-                    counter++;
-
-                    if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                    {
-                        break;
-                    }
-
                     SitemapIndexEntry entry = new();
                     if (entry.Load(sitemapNode))
                     {
                         resource.Sitemaps.Add(entry);
+                        added++;
                     }
                 }
             }

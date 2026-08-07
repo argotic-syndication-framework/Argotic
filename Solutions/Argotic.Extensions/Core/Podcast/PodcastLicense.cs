@@ -113,7 +113,7 @@ public class PodcastLicense : IComparable<PodcastLicense>, IEquatable<PodcastLic
         }
 
         int result = string.Compare(this.Identifier, other.Identifier, StringComparison.OrdinalIgnoreCase);
-        if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }

@@ -194,7 +194,7 @@ public class PodcastTranscript : IComparable<PodcastTranscript>, IEquatable<Podc
             return 1;
         }
 
-        int result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        int result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.MediaType, other.MediaType, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Language, other.Language, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Relationship, other.Relationship, StringComparison.OrdinalIgnoreCase);

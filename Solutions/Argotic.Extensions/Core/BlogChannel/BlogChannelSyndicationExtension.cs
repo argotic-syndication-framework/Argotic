@@ -156,10 +156,10 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
         if (result == 0) result = string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
         if (result == 0) result = string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 
-        if (result == 0) result = Uri.Compare(this.Context.Blink, other.Context.Blink, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-        if (result == 0) result = Uri.Compare(this.Context.BlogRoll, other.Context.BlogRoll, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-        if (result == 0) result = Uri.Compare(this.Context.Changes, other.Context.Changes, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-        if (result == 0) result = Uri.Compare(this.Context.MySubscriptions, other.Context.MySubscriptions, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.Blink, other.Context.Blink, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.BlogRoll, other.Context.BlogRoll, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.Changes, other.Context.Changes, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.MySubscriptions, other.Context.MySubscriptions, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }

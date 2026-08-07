@@ -110,45 +110,46 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// <param name="target">The second collection.</param>
     /// <returns>
     ///     <c>1</c> if <paramref name="source"/> holds more elements than <paramref name="target"/>;
-    ///     <c>-1</c> if it holds fewer, or if the counts match but some element of
-    ///     <paramref name="source"/> is absent from <paramref name="target"/>; otherwise, <c>0</c>.
+    ///     <c>-1</c> if it holds fewer; otherwise the lexical relationship between the two sequences,
+    ///     compared element by element.
     /// </returns>
     /// <remarks>
-    ///     Equal counts are compared as <i>sets</i>, not sequences: order is not consulted, and a value
-    ///     appearing twice in one collection and once in the other still compares equal. XML-RPC
-    ///     parameters are positional, so this is weaker than the protocol's own notion of sameness.
+    ///     <para>
+    ///         Equal counts are compared <i>positionally</i>, each element against the one at the same
+    ///         index, which is the protocol's own notion of sameness: XML-RPC parameters are ordered.
+    ///         Elements are ordered by <see cref="IXmlRpcValue.ToString"/> under
+    ///         <see cref="StringComparison.Ordinal"/> — the same key
+    ///         <see cref="XmlRpcScalarValue.CompareTo"/> and
+    ///         <see cref="XmlRpcStructureMember.CompareTo"/> already use, and the only total ordering
+    ///         that crosses the interface's three implementations.
+    ///     </para>
+    ///     <para>
+    ///         This used to walk <paramref name="source"/> asking <c>!target.Contains(element)</c>. That
+    ///         loop has only two answers — <c>-1</c> when an element is absent, <c>0</c> otherwise — so
+    ///         two equal-length collections with disjoint contents each reported <i>themselves</i> the
+    ///         lesser, and a reordering compared equal while
+    ///         <see cref="XmlRpcArrayValue.GetHashCode"/> folded the values in order.
+    ///     </para>
+    ///     <para>
+    ///         <b>The consequence was a silently arbitrary order, not a crash.</b> On .NET 10 the
+    ///         introsort partition loop carries bounds guards, so <see cref="List{T}.Sort()"/> returns
+    ///         quietly on such a comparer rather than throwing the
+    ///         <see cref="IndexOutOfRangeException"/> older runtimes did — and what it returned depended
+    ///         on the order the elements happened to arrive in. That is worse-shaped than a crash,
+    ///         because nothing announces it.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is <see langword="null"/>.</exception>
     public static int CompareSequence(IList<IXmlRpcValue> source, IList<IXmlRpcValue> target)
     {
-        int result = 0;
-
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(target);
 
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                IXmlRpcValue value = source[i];
-                if (!target.Contains(value))
-                {
-                    result = -1;
-                    break;
-                }
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
+        return ComparisonUtility.CompareSequence(
+            source,
+            target,
+            static (first, second) => string.Compare(first?.ToString(), second?.ToString(), StringComparison.Ordinal));
     }
 
     /// <summary>

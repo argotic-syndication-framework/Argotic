@@ -185,7 +185,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
         }
 
         int result = string.Compare(this.Hreflang, other.Hreflang, StringComparison.OrdinalIgnoreCase);
-        if (result == 0) result = Uri.Compare(this.Href, other.Href, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Href, other.Href, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
         return result;
     }
 

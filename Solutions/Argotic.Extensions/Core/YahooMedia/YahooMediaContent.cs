@@ -602,7 +602,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
         hash.Add(HashCodeUtility.Component(this.FrameRate));
         hash.Add(HashCodeUtility.Component(this.Height));
         hash.Add(HashCodeUtility.Component(this.IsDefault));
-        hash.Add(HashCodeUtility.Component(this.Language?.Name));
+        hash.Add(HashCodeUtility.Component(this.Language));
         hash.Add(HashCodeUtility.Component(this.Medium));
         hash.Add(HashCodeUtility.Component(this.SamplingRate));
         hash.Add(HashCodeUtility.Component(this.Url));

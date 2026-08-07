@@ -217,13 +217,21 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
+    /// <remarks>
+    ///     Folds each value's <see cref="IXmlRpcValue.ToString"/> — the same key
+    ///     <see cref="XmlRpcMessage.CompareSequence"/> orders by, so equal arrays hash equally by
+    ///     construction rather than by coincidence. Folding the element itself would delegate to its own
+    ///     <see cref="object.GetHashCode"/>, which for <see cref="XmlRpcScalarValue"/> is built from
+    ///     <see cref="XmlRpcScalarValue.ValueType"/> and <see cref="XmlRpcScalarValue.Value"/> and can
+    ///     therefore separate two values whose XML — and so whose equality — is identical.
+    /// </remarks>
     public override int GetHashCode()
     {
-        var hash = new HashCode();
+        HashCode hash = new();
         hash.Add(HashCodeUtility.Component(this.Values.Count));
-        foreach (var value in this.Values)
+        foreach (IXmlRpcValue value in this.Values)
         {
-            hash.Add(HashCodeUtility.Component(value));
+            hash.Add(HashCodeUtility.Component(value?.ToString()));
         }
 
         return hash.ToHashCode();

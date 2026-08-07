@@ -318,7 +318,7 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.End), HashCodeUtility.Component(this.Language?.Name), HashCodeUtility.Component(this.Start), HashCodeUtility.Component(this.TextType));
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.End), HashCodeUtility.Component(this.Language), HashCodeUtility.Component(this.Start), HashCodeUtility.Component(this.TextType));
 
     /// <summary>
     /// Determines if operands are equal.

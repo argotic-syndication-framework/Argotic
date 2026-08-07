@@ -147,12 +147,17 @@ internal static class BlogMLUtility
     /// </summary>
     /// <param name="nameTable">The table of atomized string objects.</param>
     /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
+    /// <remarks>
+    ///     The <c>blog</c> prefix always binds to the BlogML 2.0 constant, never to whatever default
+    ///     namespace a document happened to declare: binding it to the document's own would make any
+    ///     document parse as though it were BlogML.
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is <see langword="null"/>.</exception>
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);
         XmlNamespaceManager manager = new(nameTable);
-        manager.AddNamespace("blog", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : BLOGML_NAMESPACE);
+        manager.AddNamespace("blog", BLOGML_NAMESPACE);
 
         return manager;
     }

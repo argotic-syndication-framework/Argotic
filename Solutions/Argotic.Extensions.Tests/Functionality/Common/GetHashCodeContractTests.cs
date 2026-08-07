@@ -1,4 +1,5 @@
 using Argotic.Extensions.Core;
+using Argotic.Syndication;
 using Shouldly;
 
 namespace Argotic.Extensions.Tests.Functionality.Common;
@@ -188,6 +189,61 @@ public class GetHashCodeContractTests
             restriction.Entities.Add("gb");
             return restriction;
         }
+
+        AssertEqualAndSameHash(Build(), Build());
+    }
+
+    /// <summary>
+    /// Two heads differing only by <c>Title</c> are unequal — the third defect class, and the one the
+    /// §4.3 sweep was looking for and did not find: a member hashed more finely than it is compared.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         <c>OpmlHead.CompareTo</c> was <c>int result = 0;</c> followed by a commented-out comparison of
+    ///         a <c>Domain</c> member the type does not have — copy-pasted from another type, so it was never
+    ///         the real comparison. <c>Equals</c> is <c>CompareTo(other) == 0</c>, so <i>every</i> pair of
+    ///         heads was equal, while <c>GetHashCode</c> folded six members. Two heads that differ in all six
+    ///         were equal and hashed differently: a genuine dictionary lookup miss, not a probe-time cost.
+    ///     </para>
+    ///     <para>
+    ///         <c>docs/build-warnings.md</c> §4.3 closes with "A sweep for the inverse defect, a member
+    ///         hashed <i>more finely</i> than it is compared, found none." This is that defect. The sweep
+    ///         missed it because every type it examined came from <c>Argotic.Extensions.Core</c>; it never
+    ///         covered <c>Argotic.Core</c>. A sweep is only as good as the population it names, and that one
+    ///         did not name its population.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void OpmlHead_HeadsDifferingOnlyByTitle_AreUnequal()
+    {
+        OpmlHead first = new() { Title = "Head A" };
+        OpmlHead second = new() { Title = "Head B" };
+
+        first.Equals(second).ShouldBeFalse();
+        first.CompareTo(second).ShouldBeLessThan(0);
+        second.CompareTo(first).ShouldBeGreaterThan(0);
+    }
+
+    /// <summary>
+    /// Two heads built from identical data — across all six compared members — are equal and hash equally.
+    /// </summary>
+    /// <remarks>
+    ///     <c>ExpansionState</c> is deliberately absent from both the comparison and the hash. Folding a
+    ///     collection in by reference is exactly the defect §4.3 fixed in seven types, and adding it to the
+    ///     comparison without folding its elements one at a time would reintroduce it verbatim.
+    /// </remarks>
+    [TestMethod]
+    public void OpmlHead_EqualHeads_HashEqually()
+    {
+        static OpmlHead Build() => new()
+        {
+            Title = "Subscriptions",
+            CreatedOn = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+            ModifiedOn = new DateTime(2024, 6, 1, 0, 0, 0, DateTimeKind.Utc),
+            VerticalScrollState = 12,
+            Owner = new OpmlOwner { Name = "Ada", EmailAddress = "ada@example.com" },
+            Window = new OpmlWindow { Top = 1, Left = 2, Bottom = 3, Right = 4 },
+        };
 
         AssertEqualAndSameHash(Build(), Build());
     }

@@ -1202,6 +1202,54 @@ public class BlogMLDocumentBehaviorTests
         xml.ShouldContain("<comment");
     }
 
+    /// <summary>
+    /// A saved document carries no <c>version</c> attribute on its <c>blog</c> element, because the BlogML
+    /// 2.0 schema declares none.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     <c>BlogMLDocument.Save</c> carried a commented-out <c>WriteAttributeString("version", …)</c> that
+    ///     looked like an oversight waiting to be uncommented. It is not. The BlogML 2.0 XSD — target
+    ///     namespace <c>http://www.blogml.com/2006/09/BlogML</c>, the same one this library writes — declares
+    ///     <c>blogType</c> with exactly two attributes, <c>date-created</c> (<c>use="optional"</c>) and
+    ///     <c>root-url</c>. There is no <c>version</c> attribute at all, and no <c>anyAttribute</c> wildcard
+    ///     to admit one, so emitting it would make every document this library writes schema-<i>invalid</i>.
+    ///     The repository's own corpus agrees: <c>Argotic.Examples/SampleData/BlogMLDocument.xml</c> carries
+    ///     no <c>version</c> either.
+    ///     </para>
+    ///     <para>
+    ///     This is the guard that stops the dead line being restored by symmetry with some other format's
+    ///     root element. <see cref="BlogMLDocument.Version"/> remains a property of the object model — the
+    ///     specification this implementation targets — and is deliberately not part of the wire format.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void ASavedBlogMLDocument_CarriesNoVersionAttribute()
+    {
+        // Arrange
+        BlogMLDocument document = CreateCompleteDocument();
+
+        // Act
+        using MemoryStream stream = new();
+        document.Save(stream);
+
+        stream.Position = 0;
+        using StreamReader reader = new(stream);
+        string xml = reader.ReadToEnd();
+
+        // Assert
+        int blogElement = xml.IndexOf("<blog", StringComparison.Ordinal);
+        blogElement.ShouldBeGreaterThan(-1);
+        int blogElementEnd = xml.IndexOf('>', blogElement);
+        blogElementEnd.ShouldBeGreaterThan(blogElement);
+
+        string blogStartTag = xml[blogElement..blogElementEnd];
+        blogStartTag.ShouldNotContain("version", Case.Sensitive);
+
+        // The object model still knows which specification it implements.
+        document.Version.ShouldBe(new Version(2, 0));
+    }
+
     #endregion
 
     #region Helper Methods

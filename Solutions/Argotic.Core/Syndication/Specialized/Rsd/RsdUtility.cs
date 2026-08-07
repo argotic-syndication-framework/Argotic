@@ -26,12 +26,18 @@ internal static class RsdUtility
     /// </summary>
     /// <param name="nameTable">The table of atomized string objects.</param>
     /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
+    /// <remarks>
+    ///     The <c>rsd</c> prefix always binds to the RSD 1.0 constant, never to whatever default namespace a
+    ///     document happened to declare: binding it to the document's own would make any document parse as
+    ///     though it were RSD. Documents that put the elements in no namespace at all are handled instead by
+    ///     <see cref="SelectSafe"/>'s unprefixed retry, which is a narrower tolerance and a deliberate one.
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is <see langword="null"/>.</exception>
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);
         XmlNamespaceManager manager = new(nameTable);
-        manager.AddNamespace("rsd", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : RSD_NAMESPACE);
+        manager.AddNamespace("rsd", RSD_NAMESPACE);
 
         return manager;
     }

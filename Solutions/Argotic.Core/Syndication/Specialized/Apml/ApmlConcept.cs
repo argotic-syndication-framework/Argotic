@@ -123,25 +123,43 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
     /// <summary>
     /// Gets or sets the decimal score of this concept.
     /// </summary>
-    /// <value>The <c>value</c> attribute: a score in the closed range <c>-1</c> to <c>1</c>, where <c>1</c> is complete interest and <c>-1</c> complete aversion.</value>
+    /// <value>
+    ///     The <c>value</c> attribute: a score in the closed range <c>-1</c> to <c>1</c>, where <c>1</c> is
+    ///     complete interest and <c>-1</c> complete aversion. The default is <see langword="null"/>, meaning
+    ///     no score is known, which suppresses the attribute on save.
+    /// </value>
     /// <remarks>
-    ///     The initial value is <see cref="Decimal.MinValue"/>, which the setter itself would reject — it is an
-    ///     unset marker, not a legal score. <see cref="WriteTo(XmlWriter)"/> writes the attribute
-    ///     unconditionally, so a concept saved without a score emits that sentinel rather than omitting the
-    ///     attribute. Assign a score before saving.
+    ///     <para>
+    ///         <see langword="null"/> and <c>0</c> are different answers and are serialised differently. Zero
+    ///         is a real score — indifference, asserted — while <see langword="null"/> is the absence of one.
+    ///         An unscored concept therefore omits the attribute rather than writing a number, because in an
+    ///         attention-profiling format the score <i>is</i> the payload and any number invented here would
+    ///         be read as a claim the profile never made.
+    ///     </para>
+    ///     <para>
+    ///         Whether APML 0.6 makes <c>value</c> normatively REQUIRED is unverified — the specification is
+    ///         archive-only — so omission is a deliberate, documented deviation taken as the conservative
+    ///         reading. It replaces a worse one: the property used to default to <see cref="decimal.MinValue"/>,
+    ///         a value this setter would itself reject, and write it unconditionally as
+    ///         <c>-79228162514264337593543950335.00</c>.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than -1.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is greater than 1.</exception>
-    public decimal Value
+    public decimal? Value
     {
         get;
         set
         {
-            ArgumentOutOfRangeException.ThrowIfLessThan(value, decimal.MinusOne);
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(value, decimal.One);
+            if (value.HasValue)
+            {
+                ArgumentOutOfRangeException.ThrowIfLessThan(value.Value, decimal.MinusOne);
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(value.Value, decimal.One);
+            }
+
             field = value;
         }
-    } = decimal.MinValue;
+    }
 
     /// <summary>
     /// Loads this <see cref="ApmlConcept"/> using the supplied <see cref="XPathNavigator"/>.
@@ -232,8 +250,15 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("Concept", ApmlUtility.ApmlNamespace);
 
-        writer.WriteAttributeString("key", this.Key);
-        writer.WriteAttributeString("value", this.Value.ToString("0.00", System.Globalization.NumberFormatInfo.InvariantInfo));
+        if (!string.IsNullOrEmpty(this.Key))
+        {
+            writer.WriteAttributeString("key", this.Key);
+        }
+
+        if (this.Value.HasValue)
+        {
+            writer.WriteAttributeString("value", this.Value.Value.ToString("0.00", System.Globalization.NumberFormatInfo.InvariantInfo));
+        }
 
         if (!string.IsNullOrEmpty(this.From))
         {
@@ -273,7 +298,7 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
         int result = string.Compare(this.From, other.From, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Key, other.Key, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = this.UpdatedOn.CompareTo(other.UpdatedOn);
-        if (result == 0) result = this.Value.CompareTo(other.Value);
+        if (result == 0) result = Nullable.Compare(this.Value, other.Value);
 
         return result;
     }

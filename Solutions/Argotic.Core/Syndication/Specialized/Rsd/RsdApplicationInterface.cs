@@ -188,7 +188,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
 
         if (source.HasChildren)
         {
-            XPathNavigator? settingsNavigator = RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
+            XPathNavigator? settingsNavigator = RsdUtility.SelectSafeSingleNode(source, "rsd:settings", manager);
 
             if (settingsNavigator is not null)
             {

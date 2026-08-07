@@ -32,7 +32,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private const SyndicationContentFormat documentFormat = SyndicationContentFormat.Opml;
+    private const SyndicationContentFormat documentFormat = SyndicationContentFormat.Rsd;
 
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.

@@ -407,15 +407,20 @@ public class XmlRpcStructureMemberTests
     public void CompareTo_MembersDifferingByNameAndValue_OrdersByNameFirst()
     {
         // Arrange
-        XmlRpcStructureMember member1 = new("name1", new XmlRpcScalarValue("value1"));
-        XmlRpcStructureMember member2 = new("name2", new XmlRpcScalarValue("value2"));
+        // The two criteria are made to DISAGREE. The previous operands were ("name1","value1") and
+        // ("name2","value2"), where name and value both ordered the same way — so the expected sign was
+        // invariant under which rule applied, and a value-only comparison passed the test whose whole
+        // claim is that the name decides. Here the name says member1 first and the value says the
+        // opposite, so only a name-first comparison can produce the expected signs.
+        XmlRpcStructureMember member1 = new("aaa", new XmlRpcScalarValue("zzz"));
+        XmlRpcStructureMember member2 = new("zzz", new XmlRpcScalarValue("aaa"));
 
         // Act
         int forward = member1.CompareTo(member2);
         int reverse = member2.CompareTo(member1);
 
         // Assert
-        // <name> is written ahead of <value>, so the ordinal comparison reaches '1' against '2' before it
+        // <name> is written ahead of <value>, so the ordinal comparison reaches 'a' against 'z' before it
         // ever sees the values.
         forward.ShouldBeLessThan(0);
         reverse.ShouldBeGreaterThan(0);

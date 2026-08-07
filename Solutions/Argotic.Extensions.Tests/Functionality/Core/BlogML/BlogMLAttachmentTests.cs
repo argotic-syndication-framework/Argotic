@@ -91,7 +91,12 @@ public class BlogMLAttachmentTests
                         url="http://example.com/doc.pdf"/>
             """;
 
-        BlogMLAttachment attachment = new();
+        // Seeded true so that `embedded="false"` has to actively clear it. `IsEmbedded` is a plain
+        // bool with no "absent" state, so on a freshly constructed attachment the expected post-load
+        // value equals the pre-load value: a Load that never read the attribute at all — wrong name,
+        // failed TryParse, block deleted — produced `false` and passed. Load assigns only when the
+        // attribute is present and parses (BlogMLAttachment.Load), so the seed is observable.
+        BlogMLAttachment attachment = new() { IsEmbedded = true };
         using MemoryStream stream = new(Encoding.UTF8.GetBytes(attachmentXml));
         XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
@@ -102,7 +107,7 @@ public class BlogMLAttachmentTests
 
         // Assert
         wasLoaded.ShouldBeTrue();
-        attachment.IsEmbedded.ShouldBeFalse();
+        attachment.IsEmbedded.ShouldBeFalse("embedded=\"false\" must clear a previously set flag, not merely fail to set it");
         attachment.ExternalUri.ShouldBe(new Uri("http://example.com/doc.pdf"));
         attachment.Url.ShouldBe(new Uri("http://example.com/doc.pdf"));
     }
@@ -253,6 +258,10 @@ public class BlogMLAttachmentTests
     public void WriteTo_ExternalUri_WritesExternalUriAttribute()
     {
         // Arrange
+        // `IsEmbedded = false` restates the property's own default, so the line is a no-op arrange. It
+        // is kept for symmetry with the embedded case, but the assertions below now carry the test: the
+        // only `embedded` assertion in this file used to be `ShouldContain("embedded=\"true\"")`, so a
+        // WriteTo hard-wired to emit `embedded="true"` passed every test here.
         BlogMLAttachment attachment = new()
         {
             IsEmbedded = false,
@@ -273,6 +282,7 @@ public class BlogMLAttachmentTests
         string xml = reader.ReadToEnd();
 
         // Assert
+        xml.ShouldContain("embedded=\"false\"");
         xml.ShouldContain("external-uri=\"http://example.com/doc.pdf\"");
     }
 
@@ -747,6 +757,11 @@ public class BlogMLAttachmentTests
         external.IsEmbedded.ShouldBeFalse();
         external.MimeType.ShouldBe("application/pdf");
         external.ExternalUri.ShouldBe(new Uri("http://example.com/doc.pdf"));
+
+        // `false` is also a freshly constructed attachment's birth state, so the line above passes for a
+        // parser that never read `embedded`. The fixture's two attachments disagree on the attribute,
+        // and that disagreement is what has to survive the parse.
+        external.IsEmbedded.ShouldNotBe(embedded.IsEmbedded, "the fixture's two attachments disagree on embedded");
     }
 
     #endregion

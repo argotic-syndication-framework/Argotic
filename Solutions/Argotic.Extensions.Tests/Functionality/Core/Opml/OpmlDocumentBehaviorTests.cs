@@ -515,6 +515,13 @@ public class OpmlDocumentBehaviorTests
         OpmlDocument secondDocument = new();
         secondDocument.Load(serializeStream);
 
+        // Anchored to the fixture's literals first: every assertion below compares against
+        // `firstDocument`, which is the output of the loader under test, so a loader that never read
+        // <title> left both sides at string.Empty and passed.
+        secondDocument.Head.Title.ShouldBe("Test OPML");
+        secondDocument.Outlines.Count.ShouldBe(1);
+        secondDocument.Outlines[0].Text.ShouldBe("Test Outline");
+
         // Assert - Core properties match
         secondDocument.Head.Title.ShouldBe(firstDocument.Head.Title);
         secondDocument.Outlines.Count.ShouldBe(firstDocument.Outlines.Count);
@@ -879,10 +886,10 @@ public class OpmlDocumentBehaviorTests
         using StreamReader reader = new(stream);
         string xml = reader.ReadToEnd();
 
-        // Assert - verify the created attribute is included in the serialized XML
-        xml.ShouldContain("created=\"");
-        xml.ShouldContain("2024");
-        xml.ShouldContain("Jun");
+        // Assert - one clause, tying the spelling to the attribute. The three probes this replaces
+        // (`created="`, `2024`, `Jun`) were independent, so an empty `created=""` alongside a document
+        // title of "2024 Jun" satisfied all three without the date reaching the attribute at all.
+        xml.ShouldContain("created=\"Sat, 15 Jun 2024 10:30:00 GMT\"");
     }
 
     /// <summary>

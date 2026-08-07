@@ -568,20 +568,40 @@ public class AtomPublishingBehaviorTests
     }
 
     /// <summary>
-    /// Encoding a title containing spaces and punctuation for a <c>Slug</c> header yields a non-empty value.
+    /// Encoding a title for a <c>Slug</c> header percent-escapes the reserved characters and the non-ASCII
+    /// ones as their UTF-8 bytes, and leaves the spaces as spaces rather than as the <c>+</c> that form
+    /// encoding would produce.
     /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         The previous assertion was <c>ShouldNotBeNullOrEmpty</c> over the input
+    ///         <c>"My First Blog Post!"</c>. Two things were wrong with that. The assertion is satisfied
+    ///         by an identity implementation; and the input is itself a <i>fixed point</i> of the method —
+    ///         <c>HttpUtility.UrlEncode</c> leaves <c>!</c> unescaped, and the only other transformation
+    ///         is spaces to <c>+</c> and back again — so even an exact assertion on that input could not
+    ///         have distinguished <c>SlugEncode</c> from <c>return characterSequence;</c>.
+    ///     </para>
+    ///     <para>
+    ///         The escapes are lowercase, which is what <c>HttpUtility.UrlEncode</c> emits and what
+    ///         distinguishes it from <c>Uri.EscapeDataString</c>. That is pinned deliberately: the two
+    ///         differ in case and in which characters they treat as reserved, so a swap would be a
+    ///         behaviour change for every server that compares slugs byte for byte.
+    ///     </para>
+    /// </remarks>
     [TestMethod]
     public void AtomMemberResources_SlugEncode_ReturnsEncodedString()
     {
         // Arrange
-        string input = "My First Blog Post!";
+        string input = "Café & Crème?";
 
         // Act
         string encoded = AtomMemberResources.SlugEncode(input);
 
         // Assert
-        // SlugEncode returns a valid slug header value
-        encoded.ShouldNotBeNullOrEmpty();
+        encoded.ShouldBe("Caf%c3%a9 %26 Cr%c3%a8me%3f");
+        encoded.ShouldNotBe(input, "an identity implementation must not satisfy this test");
+        encoded.ShouldNotContain("+", Case.Sensitive);
+        AtomMemberResources.SlugDecode(encoded).ShouldBe(input);
     }
 
     /// <summary>

@@ -370,6 +370,13 @@ public class RsdDocumentBehaviorTests
         // Assert
         preferredApi.ShouldNotBeNull();
         preferredApi.Name.ShouldBe("MetaWeblog");
+
+        // In RsdWithMultipleApis the preferred interface is also the first, so FirstOrDefault(api =>
+        // api.IsPreferred) and FirstOrDefault(_ => true) return the same element: the predicate is a
+        // no-op on that fixture and a parser marking every interface preferred passed. The flag is
+        // therefore asserted across the whole collection, where position and flag disagree.
+        document.Interfaces.Count.ShouldBe(3);
+        document.Interfaces.Select(api => api.IsPreferred).ShouldBe([true, false, false]);
     }
 
     #endregion
@@ -490,6 +497,10 @@ public class RsdDocumentBehaviorTests
         reloadedDocument.Load(stream);
 
         // Assert
+        // The first two used to read their expected values off `document`, which the same save/load
+        // pipeline produced; the literals make a dropped engineName or a lost interface visible.
+        reloadedDocument.EngineName.ShouldBe("Blog Platform");
+        reloadedDocument.Interfaces.Count.ShouldBe(3);
         reloadedDocument.EngineName.ShouldBe(document.EngineName);
         reloadedDocument.Interfaces.Count.ShouldBe(document.Interfaces.Count);
         reloadedDocument.Interfaces[0].Name.ShouldBe("MetaWeblog");

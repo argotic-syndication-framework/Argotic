@@ -82,8 +82,14 @@ public class OpmlHeadComparisonTests
 
         withoutOwner.CompareTo(withOwner).ShouldBeLessThan(0);
         withOwner.CompareTo(withoutOwner).ShouldBeGreaterThan(0);
-        withOwner.CompareTo(withLaterOwner).ShouldBe(
-            new OpmlOwner { Name = "Ada" }.CompareTo(new OpmlOwner { Name = "Grace" }));
+        // Stated as literals rather than as `new OpmlOwner{Name="Ada"}.CompareTo(new OpmlOwner{Name="Grace"})`.
+        // That expected value was produced by OpmlOwner.CompareTo — the very delegation under test — so
+        // both sides of the assertion routed through it: a `return 0;` OpmlOwner.CompareTo made the
+        // left-hand side 0 and the right-hand side 0, and the test passed. This is the only clause in
+        // the class that reaches the (not null, not null) arm of OpmlHead's switch, so nothing else
+        // caught it. "Ada" sorts before "Grace".
+        withOwner.CompareTo(withLaterOwner).ShouldBeLessThan(0);
+        withLaterOwner.CompareTo(withOwner).ShouldBeGreaterThan(0);
     }
 
     /// <summary>

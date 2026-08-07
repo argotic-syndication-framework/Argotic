@@ -927,6 +927,17 @@ public class BlogMLDocumentBehaviorTests
         BlogMLDocument secondDocument = new();
         secondDocument.Load(serializeStream);
 
+        // Assert - anchored to the fixture's literals first. Every assertion below this block compares
+        // against `firstDocument`, which is itself the output of the Load under test, so a Load that
+        // silently produced an empty document satisfied all of them: 0 == 0 for every count, and the
+        // post loop iterated zero times. The literals come from the CompleteBlogML fixture.
+        secondDocument.Posts.Count.ShouldBe(1);
+        secondDocument.Title.Content.ShouldBe("Complete Blog");
+        secondDocument.Authors.Count.ShouldBe(1);
+        secondDocument.Categories.Count.ShouldBe(1);
+        secondDocument.ExtendedProperties.Count.ShouldBe(2);
+        secondDocument.Posts[0].Content.Content.ShouldBe("<p>HTML content</p>");
+
         // Assert - Core properties match
         secondDocument.RootUrl.ShouldBe(firstDocument.RootUrl);
         secondDocument.Title.Content.ShouldBe(firstDocument.Title.Content);
@@ -1244,6 +1255,13 @@ public class BlogMLDocumentBehaviorTests
         blogElementEnd.ShouldBeGreaterThan(blogElement);
 
         string blogStartTag = xml[blogElement..blogElementEnd];
+
+        // The positive half comes first. "Does not contain version" is satisfied by a degenerate
+        // `<blog>` start tag carrying no attributes at all — which is exactly what a Save that dropped
+        // root-url and date-created would emit — so the absence only means something once the tag is
+        // known to be populated.
+        blogStartTag.ShouldContain("root-url=\"http://example.com/blog\"");
+        blogStartTag.ShouldContain("date-created=");
         blogStartTag.ShouldNotContain("version", Case.Sensitive);
 
         // The object model still knows which specification it implements.

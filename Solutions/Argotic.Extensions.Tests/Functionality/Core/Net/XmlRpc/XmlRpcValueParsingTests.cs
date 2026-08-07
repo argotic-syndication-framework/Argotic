@@ -49,13 +49,23 @@ public sealed class XmlRpcValueParsingTests
     /// The explicitly typed spelling of the same value is unchanged.
     /// </summary>
     /// <remarks>
+    ///     <para>
     ///     The control. Without it, the test above passing is equally consistent with "everything is now
     ///     a string", which would break every other branch of the dispatch.
+    ///     </para>
+    ///     <para>
+    ///     The trailing text after <c>&lt;/string&gt;</c> is what makes the control able to fail. With a
+    ///     bare <c>&lt;value&gt;&lt;string&gt;hello&lt;/string&gt;&lt;/value&gt;</c>,
+    ///     <see cref="System.Xml.XPath.XPathNavigator.Value"/> on the outer element is also
+    ///     <c>"hello"</c> — so deleting the <c>string</c> arm of the dispatch and letting the input fall
+    ///     through to the untyped path produced the identical result and the control passed. Here the
+    ///     element's string-value is <c>"hellotail"</c> and only the typed arm answers <c>"hello"</c>.
+    ///     </para>
     /// </remarks>
     [TestMethod]
     public void AnExplicitlyTypedString_IsStillAString()
     {
-        XmlRpcClient.TryParseValue(Value("<value><string>hello</string></value>"), out IXmlRpcValue? value)
+        XmlRpcClient.TryParseValue(Value("<value><string>hello</string>tail</value>"), out IXmlRpcValue? value)
             .ShouldBeTrue();
 
         value.ShouldBeOfType<XmlRpcScalarValue>().Value.ShouldBe("hello");
@@ -121,6 +131,13 @@ public sealed class XmlRpcValueParsingTests
     [DataRow("19980717T14:08:55", DateTimeKind.Unspecified, "the XML-RPC 1.0 spelling")]
     [DataRow("19980717T140855", DateTimeKind.Unspecified, "fully basic ISO 8601")]
     [DataRow("1998-07-17T14:08:55Z", DateTimeKind.Utc, "RFC 3339, which already worked")]
+
+    // Z is offset zero, so on the row above the rebase to UTC is the identity: a parser that read the
+    // wall-clock digits and stamped Kind = Utc without applying the offset produced the same DateTime.
+    // The two zoneless rows carry no offset either, so before this row nothing in the suite reached
+    // XmlRpcClient's Iso8601OffsetFormats at all. +02:00 makes the rebase observable: an implementation
+    // that ignored the offset returns hour 16, and one that dropped AdjustToUniversal returns Local.
+    [DataRow("19980717T16:08:55+02:00", DateTimeKind.Utc, "XML-RPC basic form carrying a real offset")]
     public void ADate_IsReadInEverySpellingTheProtocolUses(string spelling, DateTimeKind kind, string label)
     {
         string xml = $"<value><dateTime.iso8601>{spelling}</dateTime.iso8601></value>";

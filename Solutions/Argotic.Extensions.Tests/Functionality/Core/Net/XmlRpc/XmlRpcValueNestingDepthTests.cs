@@ -236,6 +236,13 @@ public sealed class XmlRpcValueNestingDepthTests
         XmlRpcArrayValue array = new(values);
 
         array.Values.ShouldBeEmpty("INVERTED: the public constructor honours the same cap as Load");
+
+        // `Values` is [] before the constructor body runs, so the assertion above is satisfied by a
+        // constructor that ignored its iterator entirely — and by a cap of 0, or of 1. The accepting
+        // side is what makes the refusal mean something: a payload within the cap must produce a
+        // non-empty, non-default result through the same constructor.
+        XmlRpcArrayValue withinTheCap = new(Value(ArrayChain(4)).Select("array/data/value"));
+        withinTheCap.Values.ShouldNotBeEmpty("a payload well inside the cap must still be read");
     }
 
     /// <summary>

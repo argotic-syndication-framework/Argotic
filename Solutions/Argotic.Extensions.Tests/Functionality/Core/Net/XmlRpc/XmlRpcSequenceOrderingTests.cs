@@ -73,7 +73,10 @@ public class XmlRpcSequenceOrderingTests
         XmlRpcArrayValue left = Array("alpha");
         XmlRpcArrayValue right = Array("zulu");
 
-        left.CompareTo(right).ShouldNotBe(0);
+        // The direction is asserted, not just the sign relationship: antisymmetry alone is satisfied by
+        // a comparison with its sign inverted, and "alpha" sorts before "zulu".
+        left.CompareTo(right).ShouldBeLessThan(0);
+        right.CompareTo(left).ShouldBeGreaterThan(0);
         Math.Sign(left.CompareTo(right)).ShouldBe(-Math.Sign(right.CompareTo(left)));
     }
 
@@ -83,7 +86,10 @@ public class XmlRpcSequenceOrderingTests
         XmlRpcMessage left = Message("alpha");
         XmlRpcMessage right = Message("zulu");
 
-        left.CompareTo(right).ShouldNotBe(0);
+        // The direction is asserted, not just the sign relationship: antisymmetry alone is satisfied by
+        // a comparison with its sign inverted, and "alpha" sorts before "zulu".
+        left.CompareTo(right).ShouldBeLessThan(0);
+        right.CompareTo(left).ShouldBeGreaterThan(0);
         Math.Sign(left.CompareTo(right)).ShouldBe(-Math.Sign(right.CompareTo(left)));
     }
 
@@ -93,7 +99,10 @@ public class XmlRpcSequenceOrderingTests
         XmlRpcStructureValue left = Structure("alpha");
         XmlRpcStructureValue right = Structure("zulu");
 
-        left.CompareTo(right).ShouldNotBe(0);
+        // The direction is asserted, not just the sign relationship: antisymmetry alone is satisfied by
+        // a comparison with its sign inverted, and "alpha" sorts before "zulu".
+        left.CompareTo(right).ShouldBeLessThan(0);
+        right.CompareTo(left).ShouldBeGreaterThan(0);
         Math.Sign(left.CompareTo(right)).ShouldBe(-Math.Sign(right.CompareTo(left)));
     }
 
@@ -131,6 +140,13 @@ public class XmlRpcSequenceOrderingTests
 
         List<XmlRpcArrayValue> descending = [.. Enumerable.Reverse(ascending)];
 
+        // Built ascending, so `ascending` arrives already sorted. The expected sequence is stated
+        // independently rather than taken from either sort: the assertion used to be
+        // `first.ShouldBe(second)`, which says only that the two sorts agree with each other. A
+        // comparison with its sign inverted sorts both lists into descending order and satisfies that,
+        // as does one keyed on something unrelated. Agreement is necessary, not sufficient.
+        List<string> expected = [.. Enumerable.Range(0, 24).Select(i => Array($"value-{i:D2}").Values[0].ToString()!)];
+
         ascending.Sort();
         descending.Sort();
 
@@ -138,5 +154,6 @@ public class XmlRpcSequenceOrderingTests
         string second = string.Join("|", descending.Select(a => a.Values[0].ToString()));
 
         first.ShouldBe(second);
+        first.ShouldBe(string.Join("|", expected));
     }
 }

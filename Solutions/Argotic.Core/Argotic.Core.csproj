@@ -19,7 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="" />
+    <!-- The package README shown on nuget.org. Project-local, not the repo-root one: each package gets
+         its own page, so each needs its own document. PackagePath="" puts it at the package root, which
+         is where <PackageReadmeFile>README.md</PackageReadmeFile> in Directory.Build.props points. -->
+    <None Include="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>

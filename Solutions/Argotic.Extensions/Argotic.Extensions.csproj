@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Product>Argotic Syndication Framework</Product>
     <Description>Argotic Entity Extensibility Class Library, that contains the classes, interfaces, and enumerations that enable web content syndication extensibility.</Description>
-    <PackageDescription>20+ syndication extensions including iTunes, Dublin Core, Yahoo Media, Creative Commons, Trackback, Pingback, and more for extending RSS and Atom feeds.</PackageDescription>
+    <PackageDescription>27 syndication extensions across 22 families - iTunes, Podcasting 2.0, Dublin Core, Yahoo Media, GeoRSS, Creative Commons, the Google sitemap extensions, Trackback, Pingback and more - for extending RSS, Atom, OPML and Sitemap documents.</PackageDescription>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
@@ -12,7 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="" />
+    <!-- The package README shown on nuget.org. Project-local, not the repo-root one: each package gets
+         its own page, so each needs its own document. PackagePath="" puts it at the package root, which
+         is where <PackageReadmeFile>README.md</PackageReadmeFile> in Directory.Build.props points. -->
+    <None Include="README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>

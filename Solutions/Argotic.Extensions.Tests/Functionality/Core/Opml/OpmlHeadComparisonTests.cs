@@ -109,7 +109,7 @@ public class OpmlHeadComparisonTests
     ///     <see cref="OpmlHead.CompareTo(OpmlHead)"/>. <c>HashCodeUtility.Component&lt;T&gt;(T)</c> returns
     ///     its argument unchanged, so folding an <see cref="IList{T}"/> straight into
     ///     <see cref="HashCode.Combine{T1,T2,T3,T4,T5,T6}"/> hashes the list <i>instance</i> — the
-    ///     collection-by-reference defect <c>docs/build-warnings.md</c> §4.3 removed from seven types.
+    ///     collection-by-reference defect <c>.endjin/build-warnings.md</c> §4.3 removed from seven types.
     ///     Including it correctly means folding its elements one at a time, on both sides, together.
     /// </remarks>
     [TestMethod]

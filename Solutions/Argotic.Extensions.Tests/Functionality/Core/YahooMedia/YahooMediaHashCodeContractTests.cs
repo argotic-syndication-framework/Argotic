@@ -21,7 +21,7 @@ namespace Argotic.Extensions.Tests.Functionality.Core.YahooMedia;
 ///         <see cref="HashCode.Combine{T1}(T1)"/> received a <c>YahooMediaSyndicationExtensionContext</c>
 ///         that overrode nothing and hashed by reference identity. Its <c>CompareTo</c> walks the context
 ///         member by member, so two extensions built from identical data were equal and hashed differently.
-///         That is the tenth instance of the family recorded in <c>docs/build-warnings.md</c> §4.3.
+///         That is the tenth instance of the family recorded in <c>.endjin/build-warnings.md</c> §4.3.
 ///     </para>
 ///     <para>
 ///         <c>YahooMediaGroup</c> is the other direction and is deliberately left alone: it folds only

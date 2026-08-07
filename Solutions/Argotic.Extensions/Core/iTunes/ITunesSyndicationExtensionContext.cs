@@ -98,7 +98,7 @@ public class ITunesSyndicationExtensionContext
     /// <remarks>
     ///     Apple defines this as a positive integer, so the loader refuses a zero or negative value
     ///     rather than storing one: a loader that can produce a value the setter would reject is the
-    ///     defect §2.45 of <c>docs/build-warnings.md</c> records.
+    ///     defect §2.45 of <c>.endjin/build-warnings.md</c> records.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than <c>1</c>.</exception>
     public int? Episode

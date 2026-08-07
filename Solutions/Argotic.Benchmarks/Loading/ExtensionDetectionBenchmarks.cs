@@ -16,7 +16,7 @@ namespace Argotic.Benchmarks.Loading;
 /// <para>
 /// <c>ParsePipelineBenchmarks</c>'s f-against-g pair established that auto-detection was most of a
 /// feed load — at a thousand items, 66 MB against 16 MB with it switched off
-/// (<c>docs/build-warnings.md</c> §2.16) — but not which of its three sub-steps dominates. Those
+/// (<c>.endjin/build-warnings.md</c> §2.16) — but not which of its three sub-steps dominates. Those
 /// steps have very different fixes and very different risks:
 /// </para>
 /// <list type="number">

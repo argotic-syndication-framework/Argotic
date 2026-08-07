@@ -198,7 +198,7 @@ dotnet_diagnostic.CA2025.severity = none
 # Builders/FeedBuilders.cs, which take URLs as string literals so the tests read as data. The rule
 # guards public API design, and nothing in this project is public API - it is not packable. Its
 # fixer is also unsafe here: it generates NotImplementedException stub overloads rather than
-# changing the parameter (see section 3.4 of docs/build-warnings.md).
+# changing the parameter (see section 3.4 of .endjin/build-warnings.md).
 dotnet_diagnostic.CA1054.severity = none
 # CA1508: Avoid dead conditional code. Every site in this project is an equality-contract
 # assertion - (nullTrackback == null).ShouldBeTrue(), video.Equals(null).ShouldBeFalse(),

@@ -132,7 +132,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     ///     That is the shape most of the web's thumbnails arrive in: <c>media:thumbnail</c> is the most frequent
     ///     extension element of any family in the 136-document corpus at <b>4,009</b> occurrences, nearly all of
     ///     them inside a group, for which this collection reads empty and nothing looks like a failure
-    ///     (<c>docs/build-warnings.md</c> §2.46). Where several are given at one level and none carries a
+    ///     (<c>.endjin/build-warnings.md</c> §2.46). Where several are given at one level and none carries a
     ///     <see cref="YahooMediaThumbnail.Time"/>, they are in order of importance.
     /// </remarks>
     public IList<YahooMediaThumbnail> Thumbnails { get; } = [];
@@ -250,7 +250,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     ///         identity overload, and this class overrode nothing: two extensions built from identical data
     ///         were <see cref="object.Equals(object)"/> and hashed by reference identity, which made the type
     ///         unusable as a dictionary key. It is the tenth instance of the family recorded in
-    ///         <c>docs/build-warnings.md</c> §4.3, and the sweep there missed it because it looked for
+    ///         <c>.endjin/build-warnings.md</c> §4.3, and the sweep there missed it because it looked for
     ///         collections passed to the identity overload rather than for a whole context object.
     ///     </para>
     ///     <para>

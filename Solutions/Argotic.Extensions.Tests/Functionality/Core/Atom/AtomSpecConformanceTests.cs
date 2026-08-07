@@ -496,7 +496,7 @@ public sealed class AtomSpecConformanceTests
     ///     The trimming setters stay: removing the trim would leak every source document's
     ///     pretty-printed indentation into every <c>Title</c> of every feed, and §3.1.1.1 permits the
     ///     collapse for the text constructs where that matters. That was settled on evidence in
-    ///     <c>docs/build-warnings.md</c> §2.32.
+    ///     <c>.endjin/build-warnings.md</c> §2.32.
     ///     </para>
     ///     <para>
     ///     <b>This row is the one the permission does not cover.</b> §4.1.3.3 rule 5 — a

@@ -206,7 +206,7 @@ public class GetHashCodeContractTests
     ///         were equal and hashed differently: a genuine dictionary lookup miss, not a probe-time cost.
     ///     </para>
     ///     <para>
-    ///         <c>docs/build-warnings.md</c> §4.3 closes with "A sweep for the inverse defect, a member
+    ///         <c>.endjin/build-warnings.md</c> §4.3 closes with "A sweep for the inverse defect, a member
     ///         hashed <i>more finely</i> than it is compared, found none." This is that defect. The sweep
     ///         missed it because every type it examined came from <c>Argotic.Extensions.Core</c>; it never
     ///         covered <c>Argotic.Core</c>. A sweep is only as good as the population it names, and that one

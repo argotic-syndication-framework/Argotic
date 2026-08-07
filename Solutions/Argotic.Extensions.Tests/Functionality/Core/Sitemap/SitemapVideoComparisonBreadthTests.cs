@@ -18,7 +18,7 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 ///     </para>
 ///     <para>
 ///         Both were widened together, which is the only safe way to do it: widening the comparison alone
-///         reintroduces the collection-by-reference defect of <c>docs/build-warnings.md</c> §4.3 verbatim.
+///         reintroduces the collection-by-reference defect of <c>.endjin/build-warnings.md</c> §4.3 verbatim.
 ///         <see cref="TwoVideosBuiltFromIdenticalDataIncludingCollections_AreEqualAndHashAlike"/> is the guard
 ///         for that, and is green on both sides of the change.
 ///     </para>

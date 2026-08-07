@@ -19,7 +19,7 @@ namespace Argotic.Common;
 /// prefixed, which would avoid this type entirely for a <see cref="MemoryStream"/> or a buffered
 /// response body — and that is most traffic today. It is still not worth having: two code paths means
 /// two behaviours, and the one taken only by real sockets would be the one no test exercises. That is
-/// the shape <c>docs/build-warnings.md</c> §4.4 records shipping three regressions.
+/// the shape <c>.endjin/build-warnings.md</c> §4.4 records shipping three regressions.
 /// </para>
 /// </remarks>
 /// <param name="prefix">The buffer holding the bytes already read from <paramref name="inner"/>.</param>

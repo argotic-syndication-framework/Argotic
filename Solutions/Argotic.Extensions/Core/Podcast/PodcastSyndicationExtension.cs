@@ -26,7 +26,7 @@ namespace Argotic.Extensions.Core;
 ///     <c>guid</c>, <c>medium</c>, <c>podping</c>, <c>transcript</c>, <c>funding</c>, <c>txt</c>,
 ///     <c>person</c>, <c>season</c>, <c>episode</c>, <c>chapters</c> and <c>license</c>. The remaining
 ///     tags — among them the nested <c>value</c>, <c>podroll</c>, <c>alternateEnclosure</c> and
-///     <c>liveItem</c> subtrees — are recorded in <c>docs/build-warnings.md</c> with their measured
+///     <c>liveItem</c> subtrees — are recorded in <c>.endjin/build-warnings.md</c> with their measured
 ///     adoption, so what is missing is written down rather than merely absent.
 ///     </para>
 /// </remarks>

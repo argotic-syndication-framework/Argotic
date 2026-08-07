@@ -31,7 +31,7 @@ namespace Argotic.Data.Adapters;
 ///     the two are not interchangeable.
 ///     </para>
 /// </remarks>
-public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
+public sealed class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapterBase
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogML20SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -43,7 +43,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
-    public BlogML20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
+    public BlogML20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
     {
     }
 

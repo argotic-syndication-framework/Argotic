@@ -9,7 +9,7 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Data.Adapters;
 
 /// <summary>
-/// Covers the two properties <see cref="SyndicationResourceAdapter"/> hands to every derived adapter, and
+/// Covers the two properties every adapter inherits from <see cref="SyndicationResourceAdapterBase"/>, and
 /// the constructor guards that decide whether they can ever be unset.
 /// </summary>
 [TestClass]
@@ -66,6 +66,6 @@ public class SyndicationResourceAdapterTests
         XPathNavigator navigator = NavigatorFor("<rss version=\"2.0\"><channel><title>Title</title></channel></rss>");
 
         // Act & Assert
-        Should.Throw<ArgumentNullException>(() => new SyndicationResourceAdapter(navigator, null));
+        Should.Throw<ArgumentNullException>(() => new SyndicationResourceAdapter(navigator, null!));
     }
 }

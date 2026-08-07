@@ -26,7 +26,7 @@ namespace Argotic.Data.Adapters;
 ///     carries an empty default namespace.
 ///     </para>
 /// </remarks>
-public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
+public sealed class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapterBase
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Rsd06SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -38,7 +38,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
-    public Rsd06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
+    public Rsd06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
     {
     }
 

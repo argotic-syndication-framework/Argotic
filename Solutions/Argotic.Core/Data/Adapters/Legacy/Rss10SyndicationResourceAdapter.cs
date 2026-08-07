@@ -40,7 +40,7 @@ namespace Argotic.Data.Adapters;
 ///     <see cref="RssItem.PublicationDate"/>.
 ///     </para>
 /// </remarks>
-public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
+public sealed class Rss10SyndicationResourceAdapter : SyndicationResourceAdapterBase
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Rss10SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -52,7 +52,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
-    public Rss10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
+    public Rss10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
     {
     }
 

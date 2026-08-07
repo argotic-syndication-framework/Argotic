@@ -32,7 +32,7 @@ namespace Argotic.Data.Adapters;
 ///     unrecognised name leaving the property alone rather than failing the channel.
 ///     </para>
 /// </remarks>
-public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
+public sealed class Rss092SyndicationResourceAdapter : SyndicationResourceAdapterBase
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Rss092SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -44,7 +44,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
-    public Rss092SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
+    public Rss092SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
     {
     }
 

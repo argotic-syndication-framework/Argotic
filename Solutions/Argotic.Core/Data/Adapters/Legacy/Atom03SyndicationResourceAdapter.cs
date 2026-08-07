@@ -37,7 +37,7 @@ namespace Argotic.Data.Adapters;
 ///     is found, a date that will not parse leaves the property at its default, and no element is required.
 ///     </para>
 /// </remarks>
-public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
+public sealed class Atom03SyndicationResourceAdapter : SyndicationResourceAdapterBase
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Atom03SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -49,7 +49,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
-    public Atom03SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
+    public Atom03SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
     {
     }
 
@@ -71,7 +71,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is <see langword="null"/>.</exception>
-    protected static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
+    private static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);
 

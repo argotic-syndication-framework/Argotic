@@ -32,7 +32,7 @@ namespace Argotic.Data.Adapters;
 ///     business; this adapter's job is to not lose the <c>href</c> while reading a childless element.
 ///     </para>
 /// </remarks>
-public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAdapter
+public sealed class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAdapterBase
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomPublishing10SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -44,7 +44,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
-    public AtomPublishing10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
+    public AtomPublishing10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
     {
     }
 

@@ -28,9 +28,8 @@ namespace Argotic.Data.Adapters;
 ///     version, which then picks the overload by the resource's runtime type.
 ///     </para>
 /// </remarks>
-public class SyndicationResourceAdapter
+public sealed class SyndicationResourceAdapter : SyndicationResourceAdapterBase
 {
-
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
@@ -38,26 +37,10 @@ public class SyndicationResourceAdapter
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="ISyndicationResource"/>.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
-    public SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings)
+    public SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+        : base(navigator, settings)
     {
-        ArgumentNullException.ThrowIfNull(navigator);
-        ArgumentNullException.ThrowIfNull(settings);
-
-        Navigator = navigator;
-        Settings = settings;
     }
-
-    /// <summary>
-    /// Gets the <see cref="XPathNavigator"/> used to fill a syndication resource.
-    /// </summary>
-    /// <value>The navigator supplied to the constructor. Derived adapters expect it to be positioned on the document root, not on the format's root element.</value>
-    public XPathNavigator Navigator { get; }
-
-    /// <summary>
-    /// Gets the <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of a syndication resource.
-    /// </summary>
-    /// <value>The settings supplied to the constructor. Never a default: the constructor rejects a null argument rather than substituting one.</value>
-    public SyndicationResourceLoadSettings Settings { get; }
 
     /// <summary>
     /// Verifies that the data source is the format the caller expects, then routes it to the adapter for that format and version.

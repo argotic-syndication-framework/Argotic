@@ -29,7 +29,7 @@ namespace Argotic.Data.Adapters;
 ///     the file and reading a prefix of it.
 ///     </para>
 /// </remarks>
-public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
+public sealed class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapterBase
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Sitemap09SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -41,7 +41,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
-    public Sitemap09SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings)
+    public Sitemap09SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
         : base(navigator, settings)
     {
     }
@@ -105,7 +105,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </summary>
     /// <param name="resource">The <see cref="SitemapIndex"/> to be filled.</param>
     /// <remarks>
-    ///     <see cref="SitemapIndexEntry"/> is loaded without <see cref="SyndicationResourceAdapter.Settings"/>
+    ///     <see cref="SitemapIndexEntry"/> is loaded without <see cref="SyndicationResourceAdapterBase.Settings"/>
     ///     and takes no overload that would accept them, because unlike <see cref="SitemapUrl"/> it is not an
     ///     extensible object: an index entry is a location and a last-modified date, with nowhere for an
     ///     extension to attach. The settings still govern how many entries are read.

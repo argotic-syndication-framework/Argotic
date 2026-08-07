@@ -11,22 +11,25 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Data.Adapters;
 
 /// <summary>
-/// Pins what <see cref="SyndicationResourceAdapter.Fill(ISyndicationResource, SyndicationContentFormat)"/>
-/// does with documents its version routing does not claim, and with resources whose runtime type cannot
-/// read the requested format.
+/// Covers how <see cref="SyndicationResourceAdapter.Fill(ISyndicationResource, SyndicationContentFormat)"/>
+/// answers documents whose declared version its routing does not recognise, and resources whose runtime
+/// type cannot read the requested format.
 /// </summary>
 /// <remarks>
 ///     <para>
-///     Version routing is a chain of equality tests with no fallback arm, and these tests state the
-///     consequences as they stand: a document whose format matches but whose declared version no adapter
-///     reads fills nothing and raises <c>Loaded</c>; a resource of the wrong runtime type is met with an
-///     unannounced <see cref="InvalidCastException"/> where the routing casts, and with silence where it
-///     pattern-matches; a format the detection recognises but no arm routes falls through the switch
-///     without a word.
+///     Version routing answers every input. For the formats whose specifications define a version
+///     attribute — RSS, OPML, APML, RSD — a declared version no adapter reads is refused with a
+///     <see cref="FormatException"/> naming the version found and the versions read, and the comparison
+///     ignores build and revision components, so <c>2.0.1</c> reaches the 2.0 adapter. Atom, the Atom
+///     Publishing Protocol and BlogML define no version attribute at all, so an unrecognised value there
+///     is foreign markup and the namespace decides the route. A resource of the wrong runtime type is
+///     refused with an <see cref="ArgumentException"/> naming both types, and a format the detection
+///     recognises but no adapter reads is refused rather than ignored.
 ///     </para>
 ///     <para>
-///     Characterisations, not guards: each pins an answer a later change deliberately inverts, and exists
-///     so that the inversion is seen red before the behaviour moves.
+///     Two pins survive from the characterisation round unchanged: the format-mismatch message, and the
+///     rss-root-claiming-an-RDF-version silence, which is the adapter's boundary rather than the
+///     routing's.
 ///     </para>
 /// </remarks>
 [TestClass]
@@ -48,9 +51,9 @@ public class SyndicationResourceAdapterRoutingTests
         <?xml version="1.0" encoding="UTF-8"?>
         <rss version="2.0.1">
             <channel>
-                <title>An Unread Title</title>
+                <title>A Title</title>
                 <link>http://example.com</link>
-                <description>A channel the routing declines to read.</description>
+                <description>A channel read under build-component tolerance.</description>
                 <item><title>Item 1</title><link>http://example.com/1</link></item>
             </channel>
         </rss>
@@ -90,7 +93,7 @@ public class SyndicationResourceAdapterRoutingTests
     private const string Opml201WithAnOutline = """
         <?xml version="1.0" encoding="UTF-8"?>
         <opml version="2.0.1">
-            <head><title>An Unread Outline</title></head>
+            <head><title>An Outline</title></head>
             <body><outline text="Outline 1"/></body>
         </opml>
         """;
@@ -130,7 +133,7 @@ public class SyndicationResourceAdapterRoutingTests
     private const string Atom10ClaimingVersion05 = """
         <?xml version="1.0" encoding="UTF-8"?>
         <feed xmlns="http://www.w3.org/2005/Atom" version="0.5">
-            <title>An Unread Feed</title>
+            <title>A Feed</title>
             <id>urn:uuid:d3a6b1c0-0000-0000-0000-000000000001</id>
             <updated>2025-01-20T12:00:00Z</updated>
             <entry><title>Entry 1</title><id>urn:uuid:entry-1</id><updated>2025-01-20T12:00:00Z</updated></entry>
@@ -149,7 +152,7 @@ public class SyndicationResourceAdapterRoutingTests
     private const string BlogML10WithAPost = """
         <?xml version="1.0" encoding="UTF-8"?>
         <blog xmlns="http://www.blogml.com/2006/09/BlogML" version="1.0" root-url="http://example.com" date-created="2025-01-01T00:00:00">
-            <title>An Unread Blog</title>
+            <title>A Blog</title>
             <posts>
                 <post id="post1"><title>Post 1</title></post>
             </posts>
@@ -160,7 +163,7 @@ public class SyndicationResourceAdapterRoutingTests
         <?xml version="1.0" encoding="UTF-8"?>
         <service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom" version="0.5">
             <workspace>
-                <atom:title>An Unread Workspace</atom:title>
+                <atom:title>A Workspace</atom:title>
             </workspace>
         </service>
         """;
@@ -190,10 +193,11 @@ public class SyndicationResourceAdapterRoutingTests
     private static MemoryStream StreamFor(string xml) => new(Encoding.UTF8.GetBytes(xml));
 
     /// <summary>
-    /// An RSS document declaring version 0.93 fills nothing and still announces a successful load.
+    /// An RSS document declaring version 0.93 is refused with a message naming the version found and the
+    /// versions read, and <c>Loaded</c> is not raised.
     /// </summary>
     [TestMethod]
-    public void AnRss093Document_LoadedThroughRssFeed_FillsNothingAndRaisesLoaded()
+    public void AnRss093Document_LoadedThroughRssFeed_IsRefusedNamingTheVersion()
     {
         // Arrange
         RssFeed feed = new();
@@ -202,40 +206,41 @@ public class SyndicationResourceAdapterRoutingTests
         using MemoryStream stream = StreamFor(Rss093WithATitledChannel);
 
         // Act
-        feed.Load(stream);
+        FormatException exception = Should.Throw<FormatException>(() => feed.Load(stream));
 
         // Assert
+        exception.Message.ShouldContain("0.93");
+        exception.Message.ShouldContain("2.0");
         feed.Channel.Title.ShouldBe(string.Empty);
-        feed.Channel.Items.ShouldBeEmpty();
-        loadedCount.ShouldBe(1);
+        loadedCount.ShouldBe(0);
     }
 
     /// <summary>
-    /// The same document through <see cref="Syndication.GenericSyndicationFeed"/> yields a feed that
-    /// claims to be RSS and holds nothing.
+    /// The same document through <see cref="Syndication.GenericSyndicationFeed"/> is refused too, leaving
+    /// the feed in its default state.
     /// </summary>
     [TestMethod]
-    public void AnRss093Document_LoadedThroughGenericSyndicationFeed_FillsNothing()
+    public void AnRss093Document_LoadedThroughGenericSyndicationFeed_IsRefused()
     {
         // Arrange
         Syndication.GenericSyndicationFeed feed = new();
         using MemoryStream stream = StreamFor(Rss093WithATitledChannel);
 
         // Act
-        feed.Load(stream);
+        Should.Throw<FormatException>(() => feed.Load(stream));
 
         // Assert
-        feed.Format.ShouldBe(SyndicationContentFormat.Rss);
+        feed.Format.ShouldBe(SyndicationContentFormat.None);
         feed.Title.ShouldBe(string.Empty);
         feed.Items.ShouldBeEmpty();
     }
 
     /// <summary>
-    /// An RSS document declaring version 2.0.1 fills nothing, because <c>Version</c> equality compares the
-    /// build component and <c>2.0.1</c> is not <c>2.0</c>.
+    /// An RSS document declaring version 2.0.1 fills through the 2.0 adapter — routing ignores build and
+    /// revision components, so the version the RSS Advisory Board actually publishes under is readable.
     /// </summary>
     [TestMethod]
-    public void AnRss201Document_LoadedThroughRssFeed_FillsNothing()
+    public void AnRss201Document_LoadedThroughRssFeed_FillsTheChannel()
     {
         // Arrange
         RssFeed feed = new();
@@ -245,32 +250,36 @@ public class SyndicationResourceAdapterRoutingTests
         feed.Load(stream);
 
         // Assert
-        feed.Channel.Title.ShouldBe(string.Empty);
-        feed.Channel.Items.ShouldBeEmpty();
+        feed.Channel.Title.ShouldBe("A Title");
+        feed.Channel.Items.Count.ShouldBe(1);
     }
 
     /// <summary>
-    /// An OPML document declaring version 1.5 fills nothing.
+    /// An OPML document declaring version 1.5 is refused with a message naming the version found and the
+    /// versions read.
     /// </summary>
     [TestMethod]
-    public void AnOpml15Document_LoadedThroughOpmlDocument_FillsNothing()
+    public void AnOpml15Document_LoadedThroughOpmlDocument_IsRefusedNamingTheVersion()
     {
         // Arrange
         OpmlDocument document = new();
         using MemoryStream stream = StreamFor(Opml15WithAnOutline);
 
         // Act
-        document.Load(stream);
+        FormatException exception = Should.Throw<FormatException>(() => document.Load(stream));
 
         // Assert
+        exception.Message.ShouldContain("1.5");
+        exception.Message.ShouldContain("2.0");
         document.Outlines.ShouldBeEmpty();
     }
 
     /// <summary>
-    /// An OPML document declaring version 2.0.1 fills nothing either; patch components lose the document.
+    /// An OPML document declaring version 2.0.1 fills through the 2.0 adapter under the same build-component
+    /// tolerance as RSS.
     /// </summary>
     [TestMethod]
-    public void AnOpml201Document_LoadedThroughOpmlDocument_FillsNothing()
+    public void AnOpml201Document_LoadedThroughOpmlDocument_FillsTheBody()
     {
         // Arrange
         OpmlDocument document = new();
@@ -280,50 +289,55 @@ public class SyndicationResourceAdapterRoutingTests
         document.Load(stream);
 
         // Assert
-        document.Outlines.ShouldBeEmpty();
+        document.Outlines.Count.ShouldBe(1);
     }
 
     /// <summary>
-    /// An APML document declaring version 0.5 fills nothing.
+    /// An APML document declaring version 0.5 is refused with a message naming the version found and the
+    /// version read.
     /// </summary>
     [TestMethod]
-    public void AnApml05Document_LoadedThroughApmlDocument_FillsNothing()
+    public void AnApml05Document_LoadedThroughApmlDocument_IsRefusedNamingTheVersion()
     {
         // Arrange
         ApmlDocument document = new();
         using MemoryStream stream = StreamFor(Apml05WithAProfile);
 
         // Act
-        document.Load(stream);
+        FormatException exception = Should.Throw<FormatException>(() => document.Load(stream));
 
         // Assert
+        exception.Message.ShouldContain("0.5");
+        exception.Message.ShouldContain("0.6");
         document.Profiles.ShouldBeEmpty();
     }
 
     /// <summary>
-    /// An RSD document declaring version 0.51 fills nothing.
+    /// An RSD document declaring version 0.51 is refused with a message naming the version found and the
+    /// versions read.
     /// </summary>
     [TestMethod]
-    public void AnRsd051Document_LoadedThroughRsdDocument_FillsNothing()
+    public void AnRsd051Document_LoadedThroughRsdDocument_IsRefusedNamingTheVersion()
     {
         // Arrange
         RsdDocument document = new();
         using MemoryStream stream = StreamFor(Rsd051WithAnApi);
 
         // Act
-        document.Load(stream);
+        FormatException exception = Should.Throw<FormatException>(() => document.Load(stream));
 
         // Assert
-        document.EngineName.ShouldBeNullOrEmpty();
+        exception.Message.ShouldContain("0.51");
+        exception.Message.ShouldContain("1.0");
         document.Interfaces.ShouldBeEmpty();
     }
 
     /// <summary>
-    /// An Atom 1.0 feed carrying a junk <c>version="0.5"</c> attribute fills nothing, because the detector
-    /// lets the attribute override the namespace and the routing then claims neither value.
+    /// An Atom 1.0 feed carrying a junk <c>version="0.5"</c> attribute fills as Atom 1.0: RFC 4287 defines
+    /// no version attribute on a feed, so the namespace decides and the foreign markup is ignored.
     /// </summary>
     [TestMethod]
-    public void AnAtomFeedClaimingVersion05_LoadedThroughAtomFeed_FillsNothing()
+    public void AnAtomFeedClaimingVersion05_LoadedThroughAtomFeed_FillsTheFeed()
     {
         // Arrange
         AtomFeed feed = new();
@@ -333,15 +347,17 @@ public class SyndicationResourceAdapterRoutingTests
         feed.Load(stream);
 
         // Assert
-        feed.Title.ShouldBeNull();
-        feed.Entries.ShouldBeEmpty();
+        feed.Title.ShouldNotBeNull();
+        feed.Title.Content.ShouldBe("A Feed");
+        feed.Entries.Count.ShouldBe(1);
     }
 
     /// <summary>
-    /// A BlogML document declaring version 1.0 in the 2.0 namespace fills nothing.
+    /// A BlogML document declaring version 1.0 in the 2.0 namespace fills as 2.0: the BlogML schema admits
+    /// no version attribute on the <c>blog</c> root, so the dated namespace decides.
     /// </summary>
     [TestMethod]
-    public void ABlogML10Document_LoadedThroughBlogMLDocument_FillsNothing()
+    public void ABlogML10Document_LoadedThroughBlogMLDocument_FillsThePosts()
     {
         // Arrange
         BlogMLDocument document = new();
@@ -351,15 +367,15 @@ public class SyndicationResourceAdapterRoutingTests
         document.Load(stream);
 
         // Assert
-        document.Posts.ShouldBeEmpty();
+        document.Posts.Count.ShouldBe(1);
     }
 
     /// <summary>
-    /// An Atom Publishing Protocol service document carrying a junk <c>version="0.5"</c> attribute fills
-    /// nothing.
+    /// An Atom Publishing Protocol service document carrying a junk <c>version="0.5"</c> attribute fills:
+    /// RFC 5023 defines no version attribute, so the protocol namespace alone decides.
     /// </summary>
     [TestMethod]
-    public void AnAppServiceDocumentClaimingVersion05_LoadedThroughAtomServiceDocument_FillsNothing()
+    public void AnAppServiceDocumentClaimingVersion05_LoadedThroughAtomServiceDocument_FillsTheWorkspaces()
     {
         // Arrange
         AtomServiceDocument document = new();
@@ -369,74 +385,81 @@ public class SyndicationResourceAdapterRoutingTests
         document.Load(stream);
 
         // Assert
-        document.Workspaces.ShouldBeEmpty();
+        document.Workspaces.Count.ShouldBe(1);
     }
 
     /// <summary>
-    /// A resource whose runtime type cannot read the requested format dies on an unannounced
-    /// <see cref="InvalidCastException"/> — the cast runs before anything else looks at the document.
+    /// A resource whose runtime type cannot read the requested format is refused with an
+    /// <see cref="ArgumentException"/> naming both types.
     /// </summary>
     [TestMethod]
-    public void AWrongResourceType_HandedToTheDispatcher_ThrowsInvalidCastException()
+    public void AWrongResourceType_HandedToTheDispatcher_IsRefusedWithArgumentException()
     {
         // Arrange
         SyndicationResourceAdapter adapter = new(NavigatorFor(Rss20WithATitledChannel), new SyndicationResourceLoadSettings());
 
-        // Act & Assert
-        Should.Throw<InvalidCastException>(() => adapter.Fill(new OpmlDocument(), SyndicationContentFormat.Rss));
+        // Act
+        ArgumentException exception = Should.Throw<ArgumentException>(() => adapter.Fill(new OpmlDocument(), SyndicationContentFormat.Rss));
+
+        // Assert
+        exception.ParamName.ShouldBe("resource");
+        exception.Message.ShouldContain("OpmlDocument");
+        exception.Message.ShouldContain("RssFeed");
     }
 
     /// <summary>
-    /// The Atom arm pattern-matches instead of casting, so a resource that is neither an
-    /// <see cref="AtomFeed"/> nor an <see cref="AtomEntry"/> is not refused — it is ignored.
+    /// The Atom arm refuses a resource that is neither an <see cref="AtomFeed"/> nor an
+    /// <see cref="AtomEntry"/> instead of ignoring it.
     /// </summary>
     [TestMethod]
-    public void AnAtomFormat_WithAResourceThatIsNeitherFeedNorEntry_FillsNothing()
+    public void AnAtomFormat_WithAResourceThatIsNeitherFeedNorEntry_IsRefusedWithArgumentException()
     {
         // Arrange
         SyndicationResourceAdapter adapter = new(NavigatorFor(Atom10WithATitle), new SyndicationResourceLoadSettings());
-        RssFeed foreignResource = new();
 
         // Act
-        Should.NotThrow(() => adapter.Fill(foreignResource, SyndicationContentFormat.Atom));
+        ArgumentException exception = Should.Throw<ArgumentException>(() => adapter.Fill(new RssFeed(), SyndicationContentFormat.Atom));
 
         // Assert
-        foreignResource.Channel.Title.ShouldBe(string.Empty);
+        exception.ParamName.ShouldBe("resource");
+        exception.Message.ShouldContain("RssFeed");
+        exception.Message.ShouldContain("AtomFeed");
     }
 
     /// <summary>
-    /// The Atom Publishing arm behaves the same way: a resource that is neither a category document nor a
-    /// service document is silently ignored.
+    /// The Atom Publishing arm refuses a resource that is neither a category document nor a service
+    /// document instead of ignoring it.
     /// </summary>
     [TestMethod]
-    public void AnAppFormat_WithAResourceThatIsNeitherCategoryNorServiceDocument_FillsNothing()
+    public void AnAppFormat_WithAResourceThatIsNeitherCategoryNorServiceDocument_IsRefusedWithArgumentException()
     {
         // Arrange
         SyndicationResourceAdapter adapter = new(NavigatorFor(AppCategoriesWithACategory), new SyndicationResourceLoadSettings());
-        RssFeed foreignResource = new();
 
         // Act
-        Should.NotThrow(() => adapter.Fill(foreignResource, SyndicationContentFormat.AtomCategoryDocument));
+        ArgumentException exception = Should.Throw<ArgumentException>(() => adapter.Fill(new RssFeed(), SyndicationContentFormat.AtomCategoryDocument));
 
         // Assert
-        foreignResource.Channel.Title.ShouldBe(string.Empty);
+        exception.ParamName.ShouldBe("resource");
+        exception.Message.ShouldContain("RssFeed");
+        exception.Message.ShouldContain("AtomCategoryDocument");
     }
 
     /// <summary>
-    /// A format the detection recognises but no switch arm routes falls through <c>Fill</c> without a word.
+    /// A format the detection recognises but no adapter reads is refused rather than ignored.
     /// </summary>
     [TestMethod]
-    public void ADetectedButUnreadFormat_HandedToTheDispatcher_FillsNothing()
+    public void ADetectedButUnreadFormat_HandedToTheDispatcher_IsRefused()
     {
         // Arrange
         SyndicationResourceAdapter adapter = new(NavigatorFor(NewsMLDocument), new SyndicationResourceLoadSettings());
-        RssFeed foreignResource = new();
 
         // Act
-        Should.NotThrow(() => adapter.Fill(foreignResource, SyndicationContentFormat.NewsML));
+        FormatException exception = Should.Throw<FormatException>(() => adapter.Fill(new RssFeed(), SyndicationContentFormat.NewsML));
 
         // Assert
-        foreignResource.Channel.Title.ShouldBe(string.Empty);
+        exception.Message.ShouldContain("NewsML");
+        exception.Message.ShouldContain("does not read");
     }
 
     /// <summary>

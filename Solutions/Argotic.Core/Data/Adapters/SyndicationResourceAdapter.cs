@@ -1,3 +1,4 @@
+using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -17,9 +18,13 @@ namespace Argotic.Data.Adapters;
 ///     that format <i>and that version</i>. Every element walk happens in the derived adapter.
 ///     </para>
 ///     <para>
-///     Version routing is a chain of equality tests with no fallback arm, and that is observable behaviour:
-///     a document whose format matches but whose version no adapter claims — RSS 0.93, say, or APML 0.5 —
-///     fills nothing and raises nothing. The caller is handed an empty resource with no diagnostic.
+///     Version routing answers every input. For the formats whose specifications define a version
+///     attribute — RSS, OPML, APML and RSD — a declared version no adapter reads is refused with a
+///     <see cref="FormatException"/> naming the version found and the versions read, and the comparison
+///     ignores build and revision components, so a document declaring <c>2.0.1</c> reaches the 2.0
+///     adapter. Atom, the Atom Publishing Protocol and BlogML define no version attribute at all, so a
+///     version found on those documents is foreign markup and the namespace decides the route — RFC 4287
+///     §6.3 forbids refusing a document over markup a processor does not recognise.
 ///     </para>
 ///     <para>
 ///     Two of the routes are deliberately many-to-one. OPML 1.0, 1.1 and 2.0 all reach
@@ -48,13 +53,15 @@ public sealed class SyndicationResourceAdapter : SyndicationResourceAdapterBase
     /// <param name="resource">The <see cref="ISyndicationResource"/> to be filled.</param>
     /// <param name="format">The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that the <paramref name="resource"/> is expected to conform to.</param>
     /// <remarks>
-    ///     The format check is the only validation performed here. Once past it, whether anything is read
-    ///     depends on the document's version matching one the routing recognises; an unrecognised version
-    ///     leaves <paramref name="resource"/> untouched and reports nothing.
+    ///     Three refusals guard the routing. The document must be the format the caller asked for; the
+    ///     <paramref name="resource"/> must be of the runtime type that reads that format; and, for the
+    ///     formats whose specifications define a version attribute, the version the document declares must
+    ///     be one an adapter reads. A format the detection recognises but no adapter reads — NewsML,
+    ///     say — is refused rather than ignored.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">The <paramref name="format"/> is equal to <see cref="SyndicationContentFormat.None"/>.</exception>
-    /// <exception cref="FormatException">The <paramref name="resource"/> data does not conform to the specified <paramref name="format"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="format"/> is equal to <see cref="SyndicationContentFormat.None"/>, or the <paramref name="resource"/> runtime type does not read the <paramref name="format"/>.</exception>
+    /// <exception cref="FormatException">The <paramref name="resource"/> data does not conform to the specified <paramref name="format"/>, declares a version no adapter reads, or is a format this library detects but does not read.</exception>
     public void Fill(ISyndicationResource resource, SyndicationContentFormat format)
     {
         ArgumentNullException.ThrowIfNull(resource);
@@ -82,79 +89,86 @@ public sealed class SyndicationResourceAdapter : SyndicationResourceAdapterBase
         {
             case SyndicationContentFormat.Apml:
 
-                this.FillApmlResource(resource, resourceMetadata);
+                this.FillApmlResource(ResolveResource<ApmlDocument>(resource, format), resourceMetadata);
                 break;
 
             case SyndicationContentFormat.Atom:
 
             // A stand-alone entry document is filled by the same adapters; what the distinct format
-            // value buys is the check above, which now refuses a feed handed to an AtomEntry and an
+            // value buys is the check above, which refuses a feed handed to an AtomEntry and an
             // entry document handed to an AtomFeed. Both used to pass it and yield an empty object.
             case SyndicationContentFormat.AtomEntryDocument:
 
-                this.FillAtomResource(resource, resourceMetadata);
+                this.FillAtomResource(resource, format, resourceMetadata);
                 break;
 
             case SyndicationContentFormat.AtomCategoryDocument:
 
-                this.FillAtomPublishingResource(resource, resourceMetadata);
+                this.FillAtomPublishingResource(ResolveResource<AtomCategoryDocument>(resource, format));
                 break;
 
             case SyndicationContentFormat.AtomServiceDocument:
 
-                this.FillAtomPublishingResource(resource, resourceMetadata);
+                this.FillAtomPublishingResource(ResolveResource<AtomServiceDocument>(resource, format));
                 break;
 
             case SyndicationContentFormat.BlogML:
 
-                this.FillBlogMLResource(resource, resourceMetadata);
+                this.FillBlogMLResource(ResolveResource<BlogMLDocument>(resource, format));
                 break;
 
             case SyndicationContentFormat.Opml:
 
-                this.FillOpmlResource(resource, resourceMetadata);
+                this.FillOpmlResource(ResolveResource<OpmlDocument>(resource, format), resourceMetadata);
                 break;
 
             case SyndicationContentFormat.Rsd:
 
-                this.FillRsdResource(resource, resourceMetadata);
+                this.FillRsdResource(ResolveResource<RsdDocument>(resource, format), resourceMetadata);
                 break;
 
             case SyndicationContentFormat.Rss:
 
-                this.FillRssResource(resource, resourceMetadata);
+                this.FillRssResource(ResolveResource<RssFeed>(resource, format), resourceMetadata);
                 break;
 
             case SyndicationContentFormat.Sitemap:
 
-                this.FillSitemapResource(resource, resourceMetadata);
+                this.FillSitemapResource(ResolveResource<Sitemap>(resource, format), resourceMetadata);
                 break;
 
             case SyndicationContentFormat.SitemapIndex:
 
-                this.FillSitemapIndexResource(resource, resourceMetadata);
+                this.FillSitemapIndexResource(ResolveResource<SitemapIndex>(resource, format), resourceMetadata);
                 break;
+
+            default:
+
+                // MicroSummaryGenerator, NewsML and OpenSearchDescription are detected so that the
+                // mismatch message above can name them, but no adapter reads them. Falling through
+                // here used to hand back an untouched resource and no diagnostic.
+                throw new FormatException(
+                    $"The supplied syndication resource has a content format of {format}, which this library detects but does not read.");
         }
     }
 
     /// <summary>
     /// Routes an Attention Profiling Markup Language (APML) document to <see cref="Apml06SyndicationResourceAdapter"/>.
     /// </summary>
-    /// <param name="resource">The Attention Profiling Markup Language (APML) <see cref="ISyndicationResource"/> to be filled.</param>
-    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
-    private void FillApmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
+    /// <param name="document">The Attention Profiling Markup Language (APML) document to be filled.</param>
+    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="document"/>.</param>
+    /// <exception cref="FormatException">The document declares a version this library does not read. APML's schema requires the version attribute.</exception>
+    private void FillApmlResource(ApmlDocument document, SyndicationResourceMetadata resourceMetadata)
     {
-        ArgumentNullException.ThrowIfNull(resource);
-        ArgumentNullException.ThrowIfNull(resourceMetadata);
-
-        ApmlDocument apmlDocument = (ApmlDocument)resource;
-
-        if (resourceMetadata.Version == new Version("0.6"))
+        switch (resourceMetadata.Version)
         {
-            Apml06SyndicationResourceAdapter apml06Adapter = new(this.Navigator, this.Settings);
-            apml06Adapter.Fill(apmlDocument);
+            case { Major: 0, Minor: 6 }:
+                Apml06SyndicationResourceAdapter apml06Adapter = new(this.Navigator, this.Settings);
+                apml06Adapter.Fill(document);
+                break;
+
+            default:
+                throw UnreadDeclaredVersion(SyndicationContentFormat.Apml, resourceMetadata, "0.6");
         }
     }
 
@@ -162,20 +176,28 @@ public sealed class SyndicationResourceAdapter : SyndicationResourceAdapterBase
     /// Routes an Atom document to <see cref="Atom10SyndicationResourceAdapter"/> or <see cref="Atom03SyndicationResourceAdapter"/>, and to the feed or entry overload by the resource's runtime type.
     /// </summary>
     /// <param name="resource">The Atom <see cref="ISyndicationResource"/> to be filled.</param>
+    /// <param name="format">The Atom document shape the caller asked for, named in the refusal when <paramref name="resource"/> is neither a feed nor an entry.</param>
     /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
     /// <remarks>
     ///     Atom 1.0 and Atom 0.3 are not two versions of one grammar; they are different formats sharing a
     ///     name, with different namespaces and different element vocabularies. That is why the version test
-    ///     selects between two whole adapters rather than a flag inside one.
+    ///     selects between two whole adapters rather than a flag inside one — and why an unrecognised
+    ///     declared version falls back to the namespace: RFC 4287 defines no version attribute on a feed
+    ///     or an entry, so the value is foreign markup, and the namespace is what actually names the
+    ///     format, exactly as it does when no version is declared at all.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
-    private void FillAtomResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
+    /// <exception cref="ArgumentException">The <paramref name="resource"/> is neither an <see cref="AtomFeed"/> nor an <see cref="AtomEntry"/>.</exception>
+    private void FillAtomResource(ISyndicationResource resource, SyndicationContentFormat format, SyndicationResourceMetadata resourceMetadata)
     {
-        ArgumentNullException.ThrowIfNull(resource);
-        ArgumentNullException.ThrowIfNull(resourceMetadata);
+        bool readsAsAtom10 = resourceMetadata.Version switch
+        {
+            { Major: 1, Minor: 0 } => true,
+            { Major: 0, Minor: 3 } => false,
+            _ => resourceMetadata.Resource is { } root
+                && ((Dictionary<string, string>)root.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml)).ContainsValue(AtomUtility.AtomNamespace),
+        };
 
-        if (resourceMetadata.Version == new Version("1.0"))
+        if (readsAsAtom10)
         {
             Atom10SyndicationResourceAdapter atom10Adapter = new(this.Navigator, this.Settings);
             if (resource is AtomFeed atomFeed)
@@ -186,9 +208,12 @@ public sealed class SyndicationResourceAdapter : SyndicationResourceAdapterBase
             {
                 atom10Adapter.Fill(atomEntry);
             }
+            else
+            {
+                throw WrongResourceType(resource, format, "AtomFeed or AtomEntry");
+            }
         }
-
-        if (resourceMetadata.Version == new Version("0.3"))
+        else
         {
             Atom03SyndicationResourceAdapter atom03Adapter = new(this.Navigator, this.Settings);
             if (resource is AtomFeed atomFeed)
@@ -198,6 +223,10 @@ public sealed class SyndicationResourceAdapter : SyndicationResourceAdapterBase
             else if (resource is AtomEntry atomEntry)
             {
                 atom03Adapter.Fill(atomEntry);
+            }
+            else
+            {
+                throw WrongResourceType(resource, format, "AtomFeed or AtomEntry");
             }
         }
     }
@@ -213,205 +242,219 @@ public sealed class SyndicationResourceAdapter : SyndicationResourceAdapterBase
         || (expected == SyndicationContentFormat.AtomEntryDocument && detected == SyndicationContentFormat.Atom);
 
     /// <summary>
-    /// Routes an Atom Publishing Protocol service or category document to <see cref="AtomPublishing10SyndicationResourceAdapter"/>.
+    /// Routes an Atom Publishing Protocol category document to <see cref="AtomPublishing10SyndicationResourceAdapter"/>.
     /// </summary>
-    /// <param name="resource">The Atom Publishing Protocol <see cref="ISyndicationResource"/> to be filled.</param>
-    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
-    private void FillAtomPublishingResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
+    /// <param name="categoryDocument">The Atom Publishing Protocol category document to be filled.</param>
+    /// <remarks>
+    ///     No version is consulted: RFC 5023 defines no version attribute on a category or service
+    ///     document, so the protocol namespace the detection has already required is the whole answer,
+    ///     and a version attribute found on the document is foreign markup.
+    /// </remarks>
+    private void FillAtomPublishingResource(AtomCategoryDocument categoryDocument)
     {
-        ArgumentNullException.ThrowIfNull(resource);
-        ArgumentNullException.ThrowIfNull(resourceMetadata);
+        AtomPublishing10SyndicationResourceAdapter atomPublishing10Adapter = new(this.Navigator, this.Settings);
+        atomPublishing10Adapter.Fill(categoryDocument);
+    }
 
-        if (resourceMetadata.Version == new Version("1.0"))
-        {
-            AtomPublishing10SyndicationResourceAdapter atomPublishing10Adapter = new(this.Navigator, this.Settings);
-            if (resource is AtomCategoryDocument categoryDocument)
-            {
-                atomPublishing10Adapter.Fill(categoryDocument);
-            }
-            else if (resource is AtomServiceDocument serviceDocument)
-            {
-                atomPublishing10Adapter.Fill(serviceDocument);
-            }
-        }
+    /// <summary>
+    /// Routes an Atom Publishing Protocol service document to <see cref="AtomPublishing10SyndicationResourceAdapter"/>.
+    /// </summary>
+    /// <param name="serviceDocument">The Atom Publishing Protocol service document to be filled.</param>
+    /// <remarks>
+    ///     No version is consulted, for the same reason as the category overload.
+    /// </remarks>
+    private void FillAtomPublishingResource(AtomServiceDocument serviceDocument)
+    {
+        AtomPublishing10SyndicationResourceAdapter atomPublishing10Adapter = new(this.Navigator, this.Settings);
+        atomPublishing10Adapter.Fill(serviceDocument);
     }
 
     /// <summary>
     /// Routes a BlogML document to <see cref="BlogML20SyndicationResourceAdapter"/>.
     /// </summary>
-    /// <param name="resource">The BlogML <see cref="ISyndicationResource"/> to be filled.</param>
-    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
-    private void FillBlogMLResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
+    /// <param name="document">The BlogML document to be filled.</param>
+    /// <remarks>
+    ///     No version is consulted: the BlogML 2.0 schema declares no version attribute on the
+    ///     <c>blog</c> root and admits no attribute wildcard — <c>BlogMLDocument.Save</c> records the
+    ///     same fact from the writing side — so the dated namespace the detection has already required
+    ///     names the version, and an attribute claiming otherwise is noise.
+    /// </remarks>
+    private void FillBlogMLResource(BlogMLDocument document)
     {
-        ArgumentNullException.ThrowIfNull(resource);
-        ArgumentNullException.ThrowIfNull(resourceMetadata);
-
-        BlogMLDocument blogMLDocument = (BlogMLDocument)resource;
         BlogML20SyndicationResourceAdapter blogML20Adapter = new(this.Navigator, this.Settings);
-
-        if (resourceMetadata.Version == new Version("2.0"))
-        {
-            blogML20Adapter.Fill(blogMLDocument);
-        }
+        blogML20Adapter.Fill(document);
     }
 
     /// <summary>
     /// Routes an Outline Processor Markup Language (OPML) document of version 1.0, 1.1 or 2.0 to <see cref="Opml20SyndicationResourceAdapter"/>.
     /// </summary>
-    /// <param name="resource">The Outline Processor Markup Language (OPML) <see cref="ISyndicationResource"/> to be filled.</param>
-    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
+    /// <param name="document">The Outline Processor Markup Language (OPML) document to be filled.</param>
+    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="document"/>.</param>
     /// <remarks>
-    ///     Three arms, one destination. The head/body/outline shape is common to all three OPML versions,
-    ///     so the version is used only to decide that the document is OPML at all. The arms are kept apart
-    ///     rather than collapsed because a version-specific adapter would slot into one of them.
+    ///     Three labels, one destination. The head/body/outline shape is common to all three OPML versions,
+    ///     so the version is used only to decide that the document is OPML at all. The labels are kept
+    ///     apart rather than collapsed into one pattern because a version-specific adapter would slot into
+    ///     one of them.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
-    private void FillOpmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
+    /// <exception cref="FormatException">The document declares a version this library does not read. OPML's specification requires the version attribute.</exception>
+    private void FillOpmlResource(OpmlDocument document, SyndicationResourceMetadata resourceMetadata)
     {
-        ArgumentNullException.ThrowIfNull(resource);
-        ArgumentNullException.ThrowIfNull(resourceMetadata);
-
-        OpmlDocument opmlDocument = (OpmlDocument)resource;
-        Opml20SyndicationResourceAdapter opml20Adapter = new(this.Navigator, this.Settings);
-
-        if (resourceMetadata.Version == new Version("2.0"))
+        switch (resourceMetadata.Version)
         {
-            opml20Adapter.Fill(opmlDocument);
-        }
+            case { Major: 2, Minor: 0 }:
+            case { Major: 1, Minor: 1 }:
+            case { Major: 1, Minor: 0 }:
+                Opml20SyndicationResourceAdapter opml20Adapter = new(this.Navigator, this.Settings);
+                opml20Adapter.Fill(document);
+                break;
 
-        if (resourceMetadata.Version == new Version("1.1"))
-        {
-            opml20Adapter.Fill(opmlDocument);
-        }
-
-        if (resourceMetadata.Version == new Version("1.0"))
-        {
-            opml20Adapter.Fill(opmlDocument);
+            default:
+                throw UnreadDeclaredVersion(SyndicationContentFormat.Opml, resourceMetadata, "2.0, 1.1 and 1.0");
         }
     }
 
     /// <summary>
     /// Routes a Really Simple Discovery (RSD) document to <see cref="Rsd10SyndicationResourceAdapter"/> or <see cref="Rsd06SyndicationResourceAdapter"/>.
     /// </summary>
-    /// <param name="resource">The Really Simple Discovery (RSD) <see cref="ISyndicationResource"/> to be filled.</param>
-    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
-    private void FillRsdResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
+    /// <param name="document">The Really Simple Discovery (RSD) document to be filled.</param>
+    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="document"/>.</param>
+    /// <exception cref="FormatException">The document declares a version this library does not read.</exception>
+    private void FillRsdResource(RsdDocument document, SyndicationResourceMetadata resourceMetadata)
     {
-        ArgumentNullException.ThrowIfNull(resource);
-        ArgumentNullException.ThrowIfNull(resourceMetadata);
-
-        RsdDocument rsdDocument = (RsdDocument)resource;
-
-        if (resourceMetadata.Version == new Version("1.0"))
+        switch (resourceMetadata.Version)
         {
-            Rsd10SyndicationResourceAdapter rsd10Adapter = new(this.Navigator, this.Settings);
-            rsd10Adapter.Fill(rsdDocument);
-        }
+            case { Major: 1, Minor: 0 }:
+                Rsd10SyndicationResourceAdapter rsd10Adapter = new(this.Navigator, this.Settings);
+                rsd10Adapter.Fill(document);
+                break;
 
-        if (resourceMetadata.Version == new Version("0.6"))
-        {
-            Rsd06SyndicationResourceAdapter rsd06Adapter = new(this.Navigator, this.Settings);
-            rsd06Adapter.Fill(rsdDocument);
+            case { Major: 0, Minor: 6 }:
+                Rsd06SyndicationResourceAdapter rsd06Adapter = new(this.Navigator, this.Settings);
+                rsd06Adapter.Fill(document);
+                break;
+
+            default:
+                throw UnreadDeclaredVersion(SyndicationContentFormat.Rsd, resourceMetadata, "1.0 and 0.6");
         }
     }
 
     /// <summary>
     /// Routes a Really Simple Syndication (RSS) feed to the adapter for its version, of which there are five.
     /// </summary>
-    /// <param name="resource">The Really Simple Syndication (RSS) <see cref="ISyndicationResource"/> to be filled.</param>
-    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
+    /// <param name="feed">The Really Simple Syndication (RSS) feed to be filled.</param>
+    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="feed"/>.</param>
     /// <remarks>
     ///     The five destinations do not form a version ladder. RSS 0.90 and RSS 1.0 are RDF documents rooted
     ///     at <c>rdf:RDF</c>, in unrelated namespaces; RSS 0.91, 0.92 and 2.0 are plain XML rooted at
     ///     <c>rss</c> with no namespace at all. They share a name and a target object model, and almost
-    ///     nothing else, which is why the adapters share no parsing code.
+    ///     nothing else, which is why the adapters share no parsing code. Matching on major and minor
+    ///     alone is deliberate: the RSS Advisory Board publishes the current specification as 2.0.11, and
+    ///     a feed declaring a patch component is the same format, not an unknown one.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
-    private void FillRssResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
+    /// <exception cref="FormatException">The feed declares a version this library does not read. RSS's specification requires the version attribute.</exception>
+    private void FillRssResource(RssFeed feed, SyndicationResourceMetadata resourceMetadata)
     {
-        ArgumentNullException.ThrowIfNull(resource);
-        ArgumentNullException.ThrowIfNull(resourceMetadata);
-
-        RssFeed rssFeed = (RssFeed)resource;
-
-        if (resourceMetadata.Version == new Version("2.0"))
+        switch (resourceMetadata.Version)
         {
-            Rss20SyndicationResourceAdapter rss20Adapter = new(this.Navigator, this.Settings);
-            rss20Adapter.Fill(rssFeed);
-        }
+            case { Major: 2, Minor: 0 }:
+                Rss20SyndicationResourceAdapter rss20Adapter = new(this.Navigator, this.Settings);
+                rss20Adapter.Fill(feed);
+                break;
 
-        if (resourceMetadata.Version == new Version("1.0"))
-        {
-            Rss10SyndicationResourceAdapter rss10Adapter = new(this.Navigator, this.Settings);
-            rss10Adapter.Fill(rssFeed);
-        }
+            case { Major: 1, Minor: 0 }:
+                Rss10SyndicationResourceAdapter rss10Adapter = new(this.Navigator, this.Settings);
+                rss10Adapter.Fill(feed);
+                break;
 
-        if (resourceMetadata.Version == new Version("0.92"))
-        {
-            Rss092SyndicationResourceAdapter rss092Adapter = new(this.Navigator, this.Settings);
-            rss092Adapter.Fill(rssFeed);
-        }
+            case { Major: 0, Minor: 92 }:
+                Rss092SyndicationResourceAdapter rss092Adapter = new(this.Navigator, this.Settings);
+                rss092Adapter.Fill(feed);
+                break;
 
-        if (resourceMetadata.Version == new Version("0.91"))
-        {
-            Rss091SyndicationResourceAdapter rss091Adapter = new(this.Navigator, this.Settings);
-            rss091Adapter.Fill(rssFeed);
-        }
+            case { Major: 0, Minor: 91 }:
+                Rss091SyndicationResourceAdapter rss091Adapter = new(this.Navigator, this.Settings);
+                rss091Adapter.Fill(feed);
+                break;
 
-        if (resourceMetadata.Version == new Version("0.9"))
-        {
-            Rss090SyndicationResourceAdapter rss090Adapter = new(this.Navigator, this.Settings);
-            rss090Adapter.Fill(rssFeed);
+            case { Major: 0, Minor: 9 }:
+                Rss090SyndicationResourceAdapter rss090Adapter = new(this.Navigator, this.Settings);
+                rss090Adapter.Fill(feed);
+                break;
+
+            default:
+                throw UnreadDeclaredVersion(SyndicationContentFormat.Rss, resourceMetadata, "2.0, 1.0, 0.92, 0.91 and 0.9");
         }
     }
 
     /// <summary>
     /// Routes a Sitemap document to <see cref="Sitemap09SyndicationResourceAdapter"/>.
     /// </summary>
-    /// <param name="resource">The Sitemap <see cref="ISyndicationResource"/> to be filled.</param>
-    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
-    private void FillSitemapResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
+    /// <param name="sitemap">The Sitemap to be filled.</param>
+    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="sitemap"/>.</param>
+    /// <exception cref="FormatException">The document declares a version this library does not read. Unreachable today — detection assigns 0.9 from the namespace and never reads an attribute — and kept so that a detector change fails loud rather than silent.</exception>
+    private void FillSitemapResource(Sitemap sitemap, SyndicationResourceMetadata resourceMetadata)
     {
-        ArgumentNullException.ThrowIfNull(resource);
-        ArgumentNullException.ThrowIfNull(resourceMetadata);
-
-        Sitemap sitemap = (Sitemap)resource;
-
-        if (resourceMetadata.Version == new Version("0.9"))
+        switch (resourceMetadata.Version)
         {
-            Sitemap09SyndicationResourceAdapter adapter = new(this.Navigator, this.Settings);
-            adapter.Fill(sitemap);
+            case { Major: 0, Minor: 9 }:
+                Sitemap09SyndicationResourceAdapter adapter = new(this.Navigator, this.Settings);
+                adapter.Fill(sitemap);
+                break;
+
+            default:
+                throw UnreadDeclaredVersion(SyndicationContentFormat.Sitemap, resourceMetadata, "0.9");
         }
     }
 
     /// <summary>
     /// Routes a Sitemap index document to the <see cref="SitemapIndex"/> overload of <see cref="Sitemap09SyndicationResourceAdapter"/>.
     /// </summary>
-    /// <param name="resource">The Sitemap Index <see cref="ISyndicationResource"/> to be filled.</param>
-    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is <see langword="null"/>.</exception>
-    private void FillSitemapIndexResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
+    /// <param name="sitemapIndex">The Sitemap index to be filled.</param>
+    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="sitemapIndex"/>.</param>
+    /// <exception cref="FormatException">The document declares a version this library does not read. Unreachable today, for the same reason as the Sitemap overload.</exception>
+    private void FillSitemapIndexResource(SitemapIndex sitemapIndex, SyndicationResourceMetadata resourceMetadata)
     {
-        ArgumentNullException.ThrowIfNull(resource);
-        ArgumentNullException.ThrowIfNull(resourceMetadata);
-
-        SitemapIndex sitemapIndex = (SitemapIndex)resource;
-
-        if (resourceMetadata.Version == new Version("0.9"))
+        switch (resourceMetadata.Version)
         {
-            Sitemap09SyndicationResourceAdapter adapter = new(this.Navigator, this.Settings);
-            adapter.Fill(sitemapIndex);
+            case { Major: 0, Minor: 9 }:
+                Sitemap09SyndicationResourceAdapter adapter = new(this.Navigator, this.Settings);
+                adapter.Fill(sitemapIndex);
+                break;
+
+            default:
+                throw UnreadDeclaredVersion(SyndicationContentFormat.SitemapIndex, resourceMetadata, "0.9");
         }
     }
+
+    /// <summary>
+    /// Creates the refusal for a resource whose runtime type does not read the requested format.
+    /// </summary>
+    /// <param name="resource">The resource of the wrong runtime type.</param>
+    /// <param name="format">The format the caller asked for.</param>
+    /// <param name="expected">The name of the resource type — or types — that read <paramref name="format"/>.</param>
+    /// <returns>The <see cref="ArgumentException"/> to throw.</returns>
+    private static ArgumentException WrongResourceType(ISyndicationResource resource, SyndicationContentFormat format, string expected) =>
+        new($"The supplied resource is a {resource.GetType().Name}, which does not read {format} documents; {format} is read by {expected}.", nameof(resource));
+
+    /// <summary>
+    /// Returns <paramref name="resource"/> as <typeparamref name="TResource"/>, or refuses it by naming both types.
+    /// </summary>
+    /// <typeparam name="TResource">The resource type that reads <paramref name="format"/>.</typeparam>
+    /// <param name="resource">The resource the caller supplied.</param>
+    /// <param name="format">The format the caller asked for.</param>
+    /// <returns>The <paramref name="resource"/>, typed.</returns>
+    /// <exception cref="ArgumentException">The <paramref name="resource"/> is not a <typeparamref name="TResource"/>.</exception>
+    private static TResource ResolveResource<TResource>(ISyndicationResource resource, SyndicationContentFormat format)
+        where TResource : class, ISyndicationResource =>
+        resource as TResource ?? throw WrongResourceType(resource, format, typeof(TResource).Name);
+
+    /// <summary>
+    /// Creates the refusal for a document declaring a version no adapter reads.
+    /// </summary>
+    /// <param name="format">The format the document conforms to.</param>
+    /// <param name="resourceMetadata">The meta-data carrying the version the document declared.</param>
+    /// <param name="versionsRead">The versions the library reads for <paramref name="format"/>, as prose.</param>
+    /// <returns>The <see cref="FormatException"/> to throw.</returns>
+    private static FormatException UnreadDeclaredVersion(SyndicationContentFormat format, SyndicationResourceMetadata resourceMetadata, string versionsRead) =>
+        new($"The supplied document declares {format} version {resourceMetadata.Version?.ToString() ?? "none"}, which this library does not read; the versions read are {versionsRead}.");
 }

@@ -88,9 +88,16 @@ public class FeedRankSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An item carrying a <c>re:rank</c> element is found again after the feed is parsed, by both the
-    /// generic lookup and the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the scheme, domain, label and value the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as FeedRankSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes. This file is the reason the pattern matters: the extension's write path
+    ///     qualified <c>scheme</c> and <c>domain</c> into the extension namespace for years, and a test
+    ///     that only asked whether an extension came back could not see it.
+    /// </remarks>
     [TestMethod]
     public void FeedRankFullTest()
     {
@@ -100,18 +107,18 @@ public class FeedRankSyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
 
-        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        FeedRankSyndicationExtension? itemExtension = item.FindExtension<FeedRankSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension)
+        FeedRankSyndicationExtension byType = item.FindExtension<FeedRankSyndicationExtension>().ShouldNotBeNull();
+        FeedRankSyndicationExtension byPredicate = item
+            .FindExtension(FeedRankSyndicationExtension.MatchByType)
             .ShouldBeOfType<FeedRankSyndicationExtension>();
 
-        itemExtension.Context.Value.ShouldBe(1.0m);
-        itemExtension.Context.Label.ShouldBe("Title");
-        itemExtension.Context.Scheme.ShouldBe(new Uri("http://example.com/scheme.txt"));
-        itemExtension.Context.Domain.ShouldBe(new Uri("http://example.com/"));
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Scheme.ShouldBe(new Uri("http://example.com/scheme.txt"));
+        byPredicate.Context.Domain.ShouldBe(new Uri("http://example.com/"));
+        byPredicate.Context.Label.ShouldBe("Title");
+        byPredicate.Context.Value.ShouldBe(1.0m);
     }
 
     /// <summary>

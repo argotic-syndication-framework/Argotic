@@ -98,9 +98,15 @@ public class PheedSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An item carrying the Pheed elements is found again after the feed is parsed, by both the generic
-    /// lookup and the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying both the thumbnail and the source the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as PheedSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected neither URI. Since either element alone is enough for
+    ///     the loader to keep the extension, both are asserted.
+    /// </remarks>
     [TestMethod]
     public void PheedFullTest()
     {
@@ -109,13 +115,17 @@ public class PheedSyndicationExtensionTest
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new();
         feed.Load(reader);
-        feed.Channel.Items.Count.ShouldBe(1);
+
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        PheedSyndicationExtension? itemExtension = item.FindExtension<PheedSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension)
+        PheedSyndicationExtension byType = item.FindExtension<PheedSyndicationExtension>().ShouldNotBeNull();
+        PheedSyndicationExtension byPredicate = item
+            .FindExtension(PheedSyndicationExtension.MatchByType)
             .ShouldBeOfType<PheedSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Thumbnail.ShouldBe(new Uri("http://www.example.com/thumbnail.jpg"));
+        byPredicate.Context.Source.ShouldBe(new Uri("http://www.example.com/"));
     }
 
     /// <summary>

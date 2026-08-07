@@ -364,14 +364,18 @@ public class GenericSyndicationFeedBehaviorTests
     }
 
     /// <summary>
-    /// An RSS item remains reachable and titled whether or not its <c>pubDate</c> parsed.
+    /// An RSS item's <c>pubDate</c> reaches the wrapper as the real date, 20 January 2025 at noon UTC —
+    /// a <c>GMT</c> zone and all.
     /// </summary>
     /// <remarks>
-    ///     The date is deliberately not asserted: the fixture spells its <c>pubDate</c> with a <c>GMT</c>
-    ///     zone, and the inline note records that such a spelling may leave the publication date unset.
+    ///     The date used not to be asserted, on the strength of an inline note claiming that "RSS pubDate
+    ///     parsing with certain timezone formats (like GMT) may not populate the PublishedOn property due to
+    ///     RFC 822 parsing limitations". That is false, and was: <c>SyndicationDateTimeUtility</c> rewrites a
+    ///     trailing <c>" GMT"</c> to <c>+00:00</c> before parsing, so the fixture's spelling has always
+    ///     worked. The note stood over the only RSS date assertion in the file and suppressed it.
     /// </remarks>
     [TestMethod]
-    public void GenericSyndicationFeed_WhenAccessingRssItemPublishedDate_ItemsAreAccessible()
+    public void GenericSyndicationFeed_WhenAccessingRssItemPublishedDate_ReturnsCorrectDate()
     {
         // Arrange
         string xml = FeedTestData.RssWithItems;
@@ -381,12 +385,10 @@ public class GenericSyndicationFeedBehaviorTests
         feed.Load(xml);
 
         // Assert
-        // Note: RSS pubDate parsing with certain timezone formats (like GMT) may not
-        // populate the PublishedOn property due to RFC 822 parsing limitations.
-        // This test verifies that items are still accessible regardless of date parsing.
         GenericSyndicationItem recentItem = feed.Items[0];
-        recentItem.ShouldNotBeNull();
         recentItem.Title.ShouldBe("Recent Item");
+        recentItem.PublishedOn.ShouldBe(new DateTime(2025, 1, 20, 12, 0, 0, DateTimeKind.Utc));
+        recentItem.PublishedOn.Kind.ShouldBe(DateTimeKind.Utc);
     }
 
     /// <summary>

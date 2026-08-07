@@ -126,8 +126,13 @@ public class DublinCoreElementSetSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An RSS 2.0 feed carrying all fifteen <c>dc:</c> elements parses without throwing.
+    /// An RSS 2.0 feed carrying all fifteen <c>dc:</c> elements yields an extension holding all fifteen
+    /// values the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The body used to end at <c>feed.Load(reader)</c> and assert nothing whatever, so it could only
+    ///     ever have caught an exception thrown out of the parse.
+    /// </remarks>
     [TestMethod]
     public void DublinCoreElementSetLoadTest()
     {
@@ -136,6 +141,24 @@ public class DublinCoreElementSetSyndicationExtensionTest
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new();
         feed.Load(reader);
+
+        RssItem item = feed.Channel.Items.Single();
+        DublinCoreElementSetSyndicationExtension extension = item.FindExtension<DublinCoreElementSetSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.Contributor.ShouldBe("Helper");
+        extension.Context.Coverage.ShouldBe("US");
+        extension.Context.Creator.ShouldBe("The Big Guy");
+        extension.Context.Date.ShouldBe(new DateTime(2010, 8, 1, 0, 0, 0, DateTimeKind.Utc));
+        extension.Context.Description.ShouldBe("That kind of thing");
+        extension.Context.Format.ShouldBe("CDROM");
+        extension.Context.Identifier.ShouldBe("MYTESTCDROM-1");
+        extension.Context.Language!.Name.ShouldBe("en-US");
+        extension.Context.Publisher.ShouldBe("MeMeMe");
+        extension.Context.Relation.ShouldBe("MYTESTCDROM-2");
+        extension.Context.Rights.ShouldBe("Copyright 2010");
+        extension.Context.Source.ShouldBe("Out of Me Head");
+        extension.Context.Subject.ShouldBe("Test data (Stupid variety)");
+        extension.Context.Title.ShouldBe("Stupid test data");
+        extension.Context.TypeVocabulary.ShouldBe(DublinCoreTypeVocabularies.PhysicalObject);
     }
 
     /// <summary>
@@ -152,8 +175,14 @@ public class DublinCoreElementSetSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An item parsed from a feed carrying the <c>dc:</c> elements exposes the extension both by generic lookup and through <c>MatchByType</c>.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the Dublin Core values the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as DublinCoreElementSetSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected no parsed value.
+    /// </remarks>
     [TestMethod]
     public void DublinCoreElementSetFullTest()
     {
@@ -163,13 +192,17 @@ public class DublinCoreElementSetSyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
 
-        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        DublinCoreElementSetSyndicationExtension? itemExtension = item.FindExtension<DublinCoreElementSetSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension)
+        DublinCoreElementSetSyndicationExtension byType = item.FindExtension<DublinCoreElementSetSyndicationExtension>().ShouldNotBeNull();
+        DublinCoreElementSetSyndicationExtension byPredicate = item
+            .FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType)
             .ShouldBeOfType<DublinCoreElementSetSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Creator.ShouldBe("The Big Guy");
+        byPredicate.Context.Title.ShouldBe("Stupid test data");
+        byPredicate.Context.TypeVocabulary.ShouldBe(DublinCoreTypeVocabularies.PhysicalObject);
     }
 
     /// <summary>

@@ -357,37 +357,51 @@ public class GenericSyndicationCategoryTests
     }
 
     /// <summary>
-    /// The term participates in ordering: two categories differing only in it do not compare equal.
+    /// The term decides the ordering once the schemes agree, and it decides it in one direction only:
+    /// <c>apple</c> sorts before <c>banana</c>, and the reverse comparison reports the opposite sign.
     /// </summary>
+    /// <remarks>
+    ///     The schemes are identical, so <c>CompareTo</c> falls through to comparing the terms with
+    ///     <see cref="StringComparison.OrdinalIgnoreCase"/>, under which <c>apple</c> is the lesser.
+    /// </remarks>
     [TestMethod]
-    public void CompareTo_WithDifferentTerm_ReturnsNonZero()
+    public void CompareTo_WithDifferentTerm_OrdersByTermAndIsAntisymmetric()
     {
         // Arrange
         var category1 = new GenericSyndicationCategory("apple", "scheme");
         var category2 = new GenericSyndicationCategory("banana", "scheme");
 
         // Act
-        int result = category1.CompareTo(category2);
+        int forward = category1.CompareTo(category2);
+        int reverse = category2.CompareTo(category1);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>
-    /// The scheme participates in ordering too, so the same term under two schemes stays distinct.
+    /// The scheme is consulted before the term, so the same term under <c>schemeA</c> sorts before the
+    /// same term under <c>schemeB</c>, and the reverse comparison reports the opposite sign.
     /// </summary>
+    /// <remarks>
+    ///     The schemes are compared with <see cref="StringComparison.Ordinal"/>, under which <c>A</c>
+    ///     precedes <c>B</c>.
+    /// </remarks>
     [TestMethod]
-    public void CompareTo_WithDifferentScheme_ReturnsNonZero()
+    public void CompareTo_WithDifferentScheme_OrdersBySchemeAndIsAntisymmetric()
     {
         // Arrange
         var category1 = new GenericSyndicationCategory("term", "schemeA");
         var category2 = new GenericSyndicationCategory("term", "schemeB");
 
         // Act
-        int result = category1.CompareTo(category2);
+        int forward = category1.CompareTo(category2);
+        int reverse = category2.CompareTo(category1);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     #endregion
@@ -453,22 +467,22 @@ public class GenericSyndicationCategoryTests
     #region GetHashCode Tests
 
     /// <summary>
-    /// Asking a fully populated category for its hash code returns a value rather than throwing.
+    /// Two distinct categories that compare equal hash equally, and one category hashes the same every
+    /// time it is asked — the contract <see cref="HashSet{T}"/> and <see cref="Dictionary{TKey, TValue}"/>
+    /// rely on to find a category they have already stored.
     /// </summary>
     [TestMethod]
-    public void GetHashCode_ReturnsIntegerValue()
+    public void GetHashCode_ForEqualCategories_MatchesAndIsStable()
     {
         // Arrange
-        var category = new GenericSyndicationCategory("term", "scheme");
+        var first = new GenericSyndicationCategory("term", "scheme");
+        var second = new GenericSyndicationCategory("term", "scheme");
 
-        // Act
-        int hash = category.GetHashCode();
-
-        // Assert - Simply verify it returns an integer without throwing
-        // Note: The underlying implementation has a known issue where it returns
-        // the hash code of a char array reference rather than the content,
-        // so we only verify it doesn't throw
-        hash.ShouldBeOfType<int>();
+        // Act & Assert
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     #endregion

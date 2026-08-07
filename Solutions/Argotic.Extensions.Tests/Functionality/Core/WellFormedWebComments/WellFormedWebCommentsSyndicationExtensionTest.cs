@@ -62,31 +62,30 @@ public class WellFormedWebCommentsSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A populated extension hashes to something other than <c>0</c>.
+    /// Two extensions built from the same comment and comment-feed URLs are equal and hash equally, and
+    /// hashing one twice gives the same answer.
     /// </summary>
     /// <remarks>
-    ///     Weaker than the contract its siblings assert — that equal objects agree on their hash code —
-    ///     and deliberately so: this pins only that hashing a populated extension completes and does not
-    ///     land on the default.
+    ///     The previous assertion was <c>hash.ShouldNotBe(0)</c>, which says nothing about any
+    ///     implementation: <see cref="HashCode.Combine{T}(T)"/> is seeded per process, so the value is
+    ///     unpredictable and only 1 in 2^32 runs would have seen it land on <c>0</c> anyway.
     /// </remarks>
     [TestMethod]
     public void WellFormedWebCommentsGetHashCodeTest()
     {
-        // Verify GetHashCode does not throw
-        WellFormedWebCommentsSyndicationExtension target = CreateExtension1();
-        int hash = target.GetHashCode();
+        WellFormedWebCommentsSyndicationExtension first = CreateExtension1();
+        WellFormedWebCommentsSyndicationExtension second = CreateExtension1();
 
-        hash.ShouldNotBe(0);
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>
-    /// A feed carrying <c>wfw:comment</c> and <c>wfw:commentRss</c> parses without throwing.
+    /// A feed carrying <c>wfw:comment</c> and <c>wfw:commentRss</c> yields an extension holding both
+    /// URLs the document declared.
     /// </summary>
-    /// <remarks>
-    ///     Nothing about the parsed values is asserted here; <c>WellFormedWebCommentsFullTest</c> is what
-    ///     checks that the extension was attached and <c>WellFormedWebCommentsContextTest</c> what it
-    ///     holds.
-    /// </remarks>
     [TestMethod]
     public void WellFormedWebCommentsLoadTest()
     {
@@ -95,6 +94,11 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new();
         feed.Load(reader);
+
+        RssItem item = feed.Channel.Items.Single();
+        WellFormedWebCommentsSyndicationExtension extension = item.FindExtension<WellFormedWebCommentsSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.Comments.ShouldBe(new Uri("http://www.example.com/comments/post/1"));
+        extension.Context.CommentsFeed.ShouldBe(new Uri("http://www.example.com/comments/feed/1"));
     }
 
     /// <summary>
@@ -112,9 +116,14 @@ public class WellFormedWebCommentsSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An item carrying the wfw elements is found again after the feed is parsed, by both the generic
-    /// lookup and the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the comment endpoint and the comment feed the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as WellFormedWebCommentsSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected no parsed value.
+    /// </remarks>
     [TestMethod]
     public void WellFormedWebCommentsFullTest()
     {
@@ -127,10 +136,14 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        WellFormedWebCommentsSyndicationExtension? itemExtension = item.FindExtension<WellFormedWebCommentsSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(WellFormedWebCommentsSyndicationExtension.MatchByType) as WellFormedWebCommentsSyndicationExtension)
+        WellFormedWebCommentsSyndicationExtension byType = item.FindExtension<WellFormedWebCommentsSyndicationExtension>().ShouldNotBeNull();
+        WellFormedWebCommentsSyndicationExtension byPredicate = item
+            .FindExtension(WellFormedWebCommentsSyndicationExtension.MatchByType)
             .ShouldBeOfType<WellFormedWebCommentsSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Comments.ShouldBe(new Uri("http://www.example.com/comments/post/1"));
+        byPredicate.Context.CommentsFeed.ShouldBe(new Uri("http://www.example.com/comments/feed/1"));
     }
 
     /// <summary>

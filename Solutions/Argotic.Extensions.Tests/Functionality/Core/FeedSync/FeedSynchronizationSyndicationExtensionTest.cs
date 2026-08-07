@@ -153,8 +153,8 @@ public class FeedSynchronizationSyndicationExtensionTest
     }
 
     /// <summary>
-    /// The context returns the synchronization item it was given, including its identifier, update count, tombstone status and
-    /// conflict-preservation directive.
+    /// The context returns the synchronization item it was given, including its identifier, update count, tombstone status,
+    /// conflict-preservation directive and its single history entry.
     /// </summary>
     [TestMethod]
     public void FeedSynchronizationContext_WithSynchronization_ContainsSyncItem()
@@ -171,6 +171,10 @@ public class FeedSynchronizationSyndicationExtensionTest
         context.Synchronization.Updates.ShouldBe(3);
         context.Synchronization.TombstoneStatus.ShouldBe(FeedSynchronizationTombstoneStatus.Present);
         context.Synchronization.ConflictPreservation.ShouldBe(FeedSynchronizationConflictPreservationDirective.Ignore);
+        FeedSynchronizationHistory history = context.Synchronization.Histories.Single();
+        history.Sequence.ShouldBe(1);
+        history.When.ShouldBe(new DateTime(2010, 6, 15, 10, 30, 0, DateTimeKind.Utc));
+        history.By.ShouldBe("endpoint-1");
     }
 
     #endregion
@@ -206,19 +210,24 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBe(1);
     }
 
-    /// <summary>Extensions holding different sharing windows do not compare equal.</summary>
+    /// <summary>
+    /// The 2010 sharing window sorts before the 2020 one, and the reverse comparison agrees: <c>Since</c> is
+    /// the first member that differs, and <c>2010-01-01</c> precedes <c>2020-01-01</c>.
+    /// </summary>
     [TestMethod]
-    public void FeedSynchronizationCompareTo_WithDifferentExtension_ReturnsNonZero()
+    public void FeedSynchronizationCompareTo_WithDifferentExtension_OrdersBySinceAndIsAntisymmetric()
     {
         // Arrange
         FeedSynchronizationSyndicationExtension target = CreateExtension1();
         FeedSynchronizationSyndicationExtension other = CreateExtension2();
 
         // Act
-        int actual = target.CompareTo(other);
+        int forward = target.CompareTo(other);
+        int reverse = other.CompareTo(target);
 
         // Assert
-        actual.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>
@@ -282,18 +291,28 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
-    /// <summary>Hashing an extension carrying sharing information yields a non-zero value.</summary>
+    /// <summary>
+    /// Two extensions carrying identical synchronization items — each holding a one-entry <c>Histories</c>
+    /// collection — are equal and hash equally.
+    /// </summary>
+    /// <remarks>
+    ///     The sharing-only fixture is covered by <c>FeedSyncGetHashCode_EqualExtensions_ReturnSameValue</c>;
+    ///     this one exists for the collection member. <c>HashCodeUtility.Component&lt;T&gt;(T)</c> is the
+    ///     identity overload, so a collection passed to it would be folded in by reference while
+    ///     <c>CompareTo</c> walks it element by element — the §4.3 defect shape.
+    /// </remarks>
     [TestMethod]
-    public void FeedSyncGetHashCodeTest()
+    public void FeedSyncGetHashCode_EqualSyncItems_AgreeAndAreStable()
     {
         // Arrange
-        FeedSynchronizationSyndicationExtension target = CreateExtension1();
+        FeedSynchronizationSyndicationExtension first = CreateExtensionWithSync();
+        FeedSynchronizationSyndicationExtension second = CreateExtensionWithSync();
 
-        // Act
-        int hash = target.GetHashCode();
-
-        // Assert
-        hash.ShouldNotBe(0);
+        // Act & Assert
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>Equal extensions hash alike, and repeated calls on one instance return the same value.</summary>
@@ -581,7 +600,10 @@ public class FeedSynchronizationSyndicationExtensionTest
         actual.ShouldContain("sharing");
     }
 
-    /// <summary>The string form of an extension carrying a synchronization item names the <c>sync</c> element and the identifier <c>item-123</c>.</summary>
+    /// <summary>
+    /// The string form of an extension carrying a synchronization item names the <c>sync</c> element, the identifier
+    /// <c>item-123</c>, and the history entry's <c>sequence</c>, <c>when</c> and <c>by</c> attributes.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationToString_WithSync_ContainsSyncElement()
     {
@@ -592,8 +614,11 @@ public class FeedSynchronizationSyndicationExtensionTest
         string actual = target.ToString();
 
         // Assert
-        actual.ShouldContain("sync");
-        actual.ShouldContain("item-123");
+        actual.ShouldContain("sync", Case.Sensitive);
+        actual.ShouldContain("item-123", Case.Sensitive);
+        actual.ShouldContain("sequence=\"1\"", Case.Sensitive);
+        actual.ShouldContain("when=\"2010-06-15T10:30:00.00Z\"", Case.Sensitive);
+        actual.ShouldContain("by=\"endpoint-1\"", Case.Sensitive);
     }
 
     /// <summary>Writing an extension carrying sharing information to a fragment <see cref="XmlWriter"/> completes without throwing.</summary>
@@ -645,7 +670,15 @@ public class FeedSynchronizationSyndicationExtensionTest
         output.ShouldContain("until");
     }
 
-    /// <summary>Writing an extension carrying a synchronization item emits a <c>sync</c> element bearing the identifier <c>item-123</c>.</summary>
+    /// <summary>
+    /// Writing an extension carrying a synchronization item emits a <c>sync</c> element bearing the identifier
+    /// <c>item-123</c> and a nested <c>history</c> carrying <c>sequence</c>, <c>when</c> and <c>by</c>.
+    /// </summary>
+    /// <remarks>
+    ///     The <c>by</c> attribute is the one <c>6392bb9</c> corrected: <c>FeedSynchronizationHistory.WriteTo</c>
+    ///     wrote the endpoint identifier under the attribute name <c>when</c>, which collided with the timestamp.
+    ///     No test reached it, because the shared fixture never set <c>By</c>.
+    /// </remarks>
     [TestMethod]
     public void FeedSynchronizationWriteTo_WithSync_ContainsSyncElement()
     {
@@ -660,15 +693,21 @@ public class FeedSynchronizationSyndicationExtensionTest
         string output = sw.ToString();
 
         // Assert
-        output.ShouldContain("sync");
-        output.ShouldContain("item-123");
+        output.ShouldContain("sync", Case.Sensitive);
+        output.ShouldContain("item-123", Case.Sensitive);
+        output.ShouldContain("sequence=\"1\"", Case.Sensitive);
+        output.ShouldContain("when=\"2010-06-15T10:30:00.00Z\"", Case.Sensitive);
+        output.ShouldContain("by=\"endpoint-1\"", Case.Sensitive);
     }
 
     #endregion
 
     #region Load and CreateXml Tests
 
-    /// <summary>An RSS 2.0 feed whose item carries an <c>sx:sharing</c> element parses to a channel holding one item.</summary>
+    /// <summary>
+    /// An RSS 2.0 feed whose item carries an <c>sx:sharing</c> element yields an extension whose sharing block
+    /// holds the <c>since</c>, <c>until</c> and <c>expires</c> values the document declared.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationLoadTest()
     {
@@ -681,8 +720,12 @@ public class FeedSynchronizationSyndicationExtensionTest
         feed.Load(reader);
 
         // Assert
-        feed.ShouldNotBeNull();
-        feed.Channel.Items.Count.ShouldBe(1);
+        RssItem item = feed.Channel.Items.Single();
+        FeedSynchronizationSyndicationExtension extension = item.FindExtension<FeedSynchronizationSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.Sharing.ShouldNotBeNull();
+        extension.Context.Sharing.Since.ShouldBe("2010-01-01");
+        extension.Context.Sharing.Until.ShouldBe("2010-12-31");
+        extension.Context.Sharing.ExpiresOn.ShouldBe(new DateTime(2011, 1, 1, 0, 0, 0, DateTimeKind.Utc));
     }
 
     /// <summary>Loading from a <see langword="null"/> <c>IXPathNavigable</c> throws <see cref="ArgumentNullException"/>.</summary>
@@ -707,34 +750,46 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentNullException>(() => target.Load((XmlReader)null!));
     }
 
-    /// <summary>Attaching an extension carrying sharing information to a feed item and saving the feed emits the <c>sharing</c> element.</summary>
+    /// <summary>
+    /// Attaching an extension carrying sharing information to a feed item and saving the feed emits exactly one
+    /// <c>sx:sharing</c> element carrying <c>since</c>, <c>until</c> and <c>expires</c>.
+    /// </summary>
+    /// <remarks>
+    ///     The expected document is not <c>StrExtXml</c>, which the load test parses. <c>SyndicationDateTimeUtility.ToRfc3339DateTime</c>
+    ///     formats with <c>.ff</c>, so the library writes <c>2011-01-01T00:00:00.00Z</c> where the load fixture declares
+    ///     <c>2011-01-01T00:00:00Z</c>. Both are RFC-3339 and denote the same instant; the two literals differ because
+    ///     the format is asymmetric, not because the value is.
+    /// </remarks>
     [TestMethod]
     public void FeedSynchronizationCreateXmlTest()
     {
         // Arrange
         FeedSynchronizationSyndicationExtension ext = CreateExtension1();
+        const string SharingXml = """<sx:sharing since="2010-01-01" until="2010-12-31" expires="2011-01-01T00:00:00.00Z" />""";
 
         // Act
         string actual = ExtensionTestUtil.AddExtensionToXml(ext);
 
         // Assert
-        actual.ShouldNotBeNullOrEmpty();
-        actual.ShouldContain("sharing");
+        actual.ShouldBe(ExtensionTestUtil.GetWrappedXml(Namespc, SharingXml));
     }
 
-    /// <summary>Attaching an extension carrying a synchronization item to a feed item and saving the feed emits the <c>sync</c> element.</summary>
+    /// <summary>
+    /// Attaching an extension carrying a synchronization item to a feed item and saving the feed emits the whole
+    /// <c>sync</c> element, its attributes and its nested <c>history</c>, inside the item.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationCreateXml_WithSync_ContainsSyncElement()
     {
         // Arrange
         FeedSynchronizationSyndicationExtension ext = CreateExtensionWithSync();
+        const string SyncXml = """<sx:sync id="item-123" updates="3" deleted="false" noconflicts="true"><sx:history sequence="1" when="2010-06-15T10:30:00.00Z" by="endpoint-1" /></sx:sync>""";
 
         // Act
         string actual = ExtensionTestUtil.AddExtensionToXml(ext);
 
         // Assert
-        actual.ShouldNotBeNullOrEmpty();
-        actual.ShouldContain("sync");
+        actual.ShouldBe(ExtensionTestUtil.GetWrappedXml(Namespc, SyncXml));
     }
 
     #endregion
@@ -1207,20 +1262,21 @@ public class FeedSynchronizationSyndicationExtensionTest
         Should.Throw<ArgumentOutOfRangeException>(() => history.Sequence = 0);
     }
 
-    /// <summary>The string form of a history entry is non-empty and names the <c>history</c> element.</summary>
+    /// <summary>
+    /// The string form of a history entry is the <c>history</c> element carrying <c>sequence</c>, <c>when</c> and
+    /// <c>by</c>, in that order — the endpoint identifier under <c>by</c>, not a second <c>when</c>.
+    /// </summary>
     [TestMethod]
     public void FeedSynchronizationHistory_ToString_ReturnsXml()
     {
         // Arrange
-        // Note: Only set When (not By) to avoid bug in WriteTo that writes "when" instead of "by"
-        FeedSynchronizationHistory history = new(1) { When = DateTime.UtcNow };
+        FeedSynchronizationHistory history = new(1, new DateTime(2010, 6, 15, 10, 30, 0, DateTimeKind.Utc), "endpoint-1");
 
         // Act
         string result = history.ToString();
 
         // Assert
-        result.ShouldNotBeNullOrEmpty();
-        result.ShouldContain("history");
+        result.ShouldBe("""<history sequence="1" when="2010-06-15T10:30:00.00Z" by="endpoint-1" xmlns="http://feedsync.org/2007/feedsync" />""");
     }
 
     /// <summary>Two history entries holding the same sequence, timestamp and endpoint compare equal.</summary>
@@ -1510,9 +1566,16 @@ public class FeedSynchronizationSyndicationExtensionTest
         result.ShouldBe(0);
     }
 
-    /// <summary>Related-information blocks holding different links and relation types do not compare equal.</summary>
+    /// <summary>
+    /// <c>Link</c> is the first member compared, so <c>.../feed</c> sorts before <c>.../other-feed</c> and the
+    /// reverse comparison agrees.
+    /// </summary>
+    /// <remarks>
+    ///     The method was named <c>..._CompareTo_WrongType_ThrowsArgumentException</c> and tested no such thing;
+    ///     the strongly typed overload has no wrong-type case to test.
+    /// </remarks>
     [TestMethod]
-    public void FeedSynchronizationRelatedInformation_CompareTo_WrongType_ThrowsArgumentException()
+    public void FeedSynchronizationRelatedInformation_CompareTo_DifferentLinks_OrdersByLinkAndIsAntisymmetric()
     {
         // Arrange
         FeedSynchronizationRelatedInformation info1 = new(
@@ -1523,10 +1586,12 @@ public class FeedSynchronizationSyndicationExtensionTest
             FeedSynchronizationRelatedInformationType.Aggregated);
 
         // Act
-        int result = info1.CompareTo(info2);
+        int forward = info1.CompareTo(info2);
+        int reverse = info2.CompareTo(info1);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>Two related-information blocks holding the same link and relation type are equal.</summary>
@@ -1587,17 +1652,28 @@ public class FeedSynchronizationSyndicationExtensionTest
         info.Equals("wrong type").ShouldBeFalse();
     }
 
-    /// <summary>Hashing a related-information block does not throw.</summary>
+    /// <summary>
+    /// Two separately built related-information blocks holding the same link, relation type and title are equal
+    /// and hash equally, and hashing one twice gives the same answer.
+    /// </summary>
     [TestMethod]
-    public void FeedSynchronizationRelatedInformation_GetHashCode_DoesNotThrow()
+    public void FeedSynchronizationRelatedInformation_GetHashCode_EqualBlocks_AgreeAndAreStable()
     {
         // Arrange
-        FeedSynchronizationRelatedInformation info = new(
+        FeedSynchronizationRelatedInformation first = new(
             new Uri("http://example.com/feed"),
-            FeedSynchronizationRelatedInformationType.Complete);
+            FeedSynchronizationRelatedInformationType.Complete,
+            "Complete Feed");
+        FeedSynchronizationRelatedInformation second = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete,
+            "Complete Feed");
 
-        // Act & Assert - GetHashCode should not throw
-        Should.NotThrow(() => info.GetHashCode());
+        // Act & Assert
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>The equality operator holds for two related-information blocks sharing a link and relation type.</summary>
@@ -1712,11 +1788,10 @@ public class FeedSynchronizationSyndicationExtensionTest
             }
         };
 
-        // Note: We only set When and Sequence, not By, to avoid a bug in FeedSynchronizationHistory.WriteTo
-        // where the By property is written with attribute name "when" instead of "by", causing duplicate attributes.
         FeedSynchronizationHistory history = new(1)
         {
-            When = new DateTime(2010, 6, 15, 10, 30, 0, DateTimeKind.Utc)
+            When = new DateTime(2010, 6, 15, 10, 30, 0, DateTimeKind.Utc),
+            By = "endpoint-1"
         };
         ext.Context.Synchronization.Histories.Add(history);
 

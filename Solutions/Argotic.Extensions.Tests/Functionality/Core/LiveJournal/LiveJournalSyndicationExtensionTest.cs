@@ -65,20 +65,30 @@ public class LiveJournalSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Hashing a populated extension returns a non-zero value rather than throwing.
+    /// Two extensions built from the same music, mood, security and preformatted flag are equal and hash
+    /// equally, and hashing one twice gives the same answer.
     /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>hash.ShouldNotBe(0)</c>, which says nothing about any
+    ///     implementation: <see cref="HashCode.Combine{T}(T)"/> is seeded per process, so the value is
+    ///     unpredictable and only 1 in 2^32 runs would have seen it land on <c>0</c> anyway.
+    /// </remarks>
     [TestMethod]
     public void LiveJournalGetHashCodeTest()
     {
-        // Verify GetHashCode does not throw
-        LiveJournalSyndicationExtension target = CreateExtension1();
-        int hash = target.GetHashCode();
+        LiveJournalSyndicationExtension first = CreateExtension1();
+        LiveJournalSyndicationExtension second = CreateExtension1();
 
-        hash.ShouldNotBe(0);
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>
-    /// An RSS 2.0 feed whose item carries <c>lj:</c> elements loads without error.
+    /// An RSS 2.0 feed whose item carries <c>lj:music</c>, a <c>lj:mood</c> with its <c>id</c>, a
+    /// <c>lj:security</c> with its <c>type</c> and an empty <c>lj:preformatted</c> yields an extension
+    /// holding all four.
     /// </summary>
     [TestMethod]
     public void LiveJournalLoadTest()
@@ -88,6 +98,16 @@ public class LiveJournalSyndicationExtensionTest
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new();
         feed.Load(reader);
+
+        RssItem item = feed.Channel.Items.Single();
+        LiveJournalSyndicationExtension extension = item.FindExtension<LiveJournalSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.Music.ShouldBe("Test Music Track");
+        extension.Context.Mood.ShouldNotBeNull();
+        extension.Context.Mood.Content.ShouldBe("Happy");
+        extension.Context.Mood.Id.ShouldBe(1);
+        extension.Context.Security.ShouldNotBeNull();
+        extension.Context.Security.Accessibility.ShouldBe(LiveJournalSecurityType.Public);
+        extension.Context.IsPreformatted.ShouldBeTrue();
     }
 
     /// <summary>
@@ -102,9 +122,14 @@ public class LiveJournalSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A loaded feed's single item reports that it has extensions, and the LiveJournal one is found both by
-    /// type argument and through the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the music and the mood the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as LiveJournalSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected no parsed value.
+    /// </remarks>
     [TestMethod]
     public void LiveJournalFullTest()
     {
@@ -117,10 +142,15 @@ public class LiveJournalSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        LiveJournalSyndicationExtension? itemExtension = item.FindExtension<LiveJournalSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(LiveJournalSyndicationExtension.MatchByType) as LiveJournalSyndicationExtension)
+        LiveJournalSyndicationExtension byType = item.FindExtension<LiveJournalSyndicationExtension>().ShouldNotBeNull();
+        LiveJournalSyndicationExtension byPredicate = item
+            .FindExtension(LiveJournalSyndicationExtension.MatchByType)
             .ShouldBeOfType<LiveJournalSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Music.ShouldBe("Test Music Track");
+        byPredicate.Context.Mood.ShouldNotBeNull();
+        byPredicate.Context.Mood.Content.ShouldBe("Happy");
     }
 
     /// <summary>
@@ -186,17 +216,18 @@ public class LiveJournalSyndicationExtensionTest
     }
 
     /// <summary>
-    /// <c>&gt;</c> yields a boolean for two differing extensions without throwing; the direction is not
-    /// asserted.
+    /// The preformatted extension sorts above the one that is not preformatted, and the reverse
+    /// comparison agrees.
     /// </summary>
     [TestMethod]
     public void LiveJournalOpGreaterThanTest()
     {
+        // Ordering is decided by the first member that differs, and Context.IsPreformatted is compared
+        // before mood, music, security or user picture: true against false makes extension 1 the greater.
         LiveJournalSyndicationExtension first = CreateExtension1();
         LiveJournalSyndicationExtension second = CreateExtension2();
-        bool result = first > second;
-        // Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        (first > second).ShouldBeTrue();
+        (second > first).ShouldBeFalse();
     }
 
     /// <summary>
@@ -212,17 +243,16 @@ public class LiveJournalSyndicationExtensionTest
     }
 
     /// <summary>
-    /// <c>&lt;</c> yields a boolean for two differing extensions without throwing; the direction is not
-    /// asserted.
+    /// <c>&lt;</c> agrees with <c>&gt;</c>: the extension that is not preformatted is the lesser of the
+    /// two, in both directions.
     /// </summary>
     [TestMethod]
     public void LiveJournalOpLessThanTest()
     {
         LiveJournalSyndicationExtension first = CreateExtension1();
         LiveJournalSyndicationExtension second = CreateExtension2();
-        bool result = first < second;
-        // Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        (first < second).ShouldBeFalse();
+        (second < first).ShouldBeTrue();
     }
 
     /// <summary>
@@ -359,20 +389,24 @@ public class LiveJournalSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Extensions holding different context do not compare equal.
+    /// The preformatted extension sorts <i>after</i> the one that is not, and the comparison is
+    /// antisymmetric.
     /// </summary>
+    /// <remarks>
+    ///     <c>Context.IsPreformatted</c> is the first member <c>CompareTo</c> looks at, and
+    ///     <c>true.CompareTo(false)</c> is positive — so extension 1 is the greater. Asserting only
+    ///     <c>ShouldNotBe(0)</c> would have held just as well with the operands inverted.
+    /// </remarks>
     [TestMethod]
-    public void LiveJournalCompareToWithDifferentExtensionReturnsNonZero()
+    public void LiveJournalCompareTo_WithDifferentExtension_OrdersByIsPreformattedAndIsAntisymmetric()
     {
         // Arrange
         LiveJournalSyndicationExtension target = CreateExtension1();
         LiveJournalSyndicationExtension other = CreateExtension2();
 
-        // Act
-        int result = target.CompareTo(other);
-
-        // Assert
-        result.ShouldNotBe(0);
+        // Act & Assert
+        target.CompareTo(other).ShouldBeGreaterThan(0);
+        other.CompareTo(target).ShouldBeLessThan(0);
     }
 
     /// <summary>
@@ -518,13 +552,16 @@ public class LiveJournalSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A public entry and a private one are distinguished, in both the comparison and the hash.
+    /// A public entry sorts above a private one, and the two are distinguished in both the comparison and
+    /// the hash.
     /// </summary>
     /// <remarks>
     ///     <see cref="LiveJournalSecurity.Accessibility"/> decides who may read the entry and
     ///     <see cref="LiveJournalSecurity.Mask"/> only narrows a <c>friends</c> entry further, so
     ///     comparing the mask alone made every accessibility equal to every other on the default mask
-    ///     neither instance set.
+    ///     neither instance set. The direction follows the enumeration:
+    ///     <see cref="LiveJournalSecurityType.Public"/> is <c>3</c> and
+    ///     <see cref="LiveJournalSecurityType.Private"/> is <c>2</c>.
     /// </remarks>
     [TestMethod]
     public void LiveJournalSecurityDistinguishesAccessibility()
@@ -534,7 +571,8 @@ public class LiveJournalSyndicationExtensionTest
         LiveJournalSecurity privateEntry = new(LiveJournalSecurityType.Private);
 
         // Act & Assert
-        publicEntry.CompareTo(privateEntry).ShouldNotBe(0);
+        publicEntry.CompareTo(privateEntry).ShouldBeGreaterThan(0);
+        privateEntry.CompareTo(publicEntry).ShouldBeLessThan(0);
         publicEntry.Equals(privateEntry).ShouldBeFalse();
         publicEntry.GetHashCode().ShouldNotBe(privateEntry.GetHashCode());
     }

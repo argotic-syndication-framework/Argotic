@@ -92,6 +92,63 @@ public class SaveAndReloadAnExtendedItem
     }
 
     /// <summary>
+    /// A Simple List <c>listinfo</c> block this library wrote comes back whole — every <c>sort</c> and every
+    /// <c>group</c> inside it.
+    /// </summary>
+    /// <remarks>
+    ///     The third family caught by this scenario's property, and the one that had gone furthest.
+    ///     <c>SimpleListSyndicationExtensionContext.Load</c> selected <c>cf:sort</c> and <c>cf:group</c> from
+    ///     the entity carrying the extension rather than from the <c>cf:listinfo</c> element they are children
+    ///     of, so the iterators were always empty and the whole block was discarded on every load — while
+    ///     <c>WriteTo</c> has always emitted it, nested correctly. Nothing caught it because the
+    ///     <c>WriteTo</c> test compared against a literal, the <c>Load</c> test asserted only that the channel
+    ///     held one item, and neither ever fed the writer's output to the reader.
+    /// </remarks>
+    [TestMethod]
+    public void ASimpleListListInfoBlockThisLibraryWrote_ComesBackWhole()
+    {
+        // Arrange
+        SimpleListSyndicationExtension original = new();
+        original.Context.TreatAsList = true;
+        original.Context.Sorting.Add(new SimpleListSort
+        {
+            Namespace = new Uri("http://www.example.com/ns"),
+            Element = "price",
+            Label = "Price",
+            DataType = SimpleListDataType.Number,
+            IsDefault = true,
+        });
+        original.Context.Grouping.Add(new SimpleListGroup
+        {
+            Namespace = new Uri("http://www.example.com/ns"),
+            Element = "category",
+            Label = "Category",
+        });
+
+        // Act
+        string saved = ExtensionTestUtil.AddExtensionToXml(original);
+        SimpleListSyndicationExtension reloaded = ReloadExtension<SimpleListSyndicationExtension>(saved);
+
+        // Assert
+        saved.ShouldContain("listinfo", Case.Sensitive);
+        reloaded.Context.TreatAsList.ShouldBeTrue();
+
+        SimpleListSort sort = reloaded.Context.Sorting.ShouldHaveSingleItem();
+        sort.Element.ShouldBe("price");
+        sort.Label.ShouldBe("Price");
+        sort.DataType.ShouldBe(SimpleListDataType.Number);
+        sort.IsDefault.ShouldBeTrue();
+        sort.Namespace.ShouldBe(new Uri("http://www.example.com/ns"));
+
+        SimpleListGroup group = reloaded.Context.Grouping.ShouldHaveSingleItem();
+        group.Element.ShouldBe("category");
+        group.Label.ShouldBe("Category");
+        group.Namespace.ShouldBe(new Uri("http://www.example.com/ns"));
+
+        reloaded.ShouldBe(original);
+    }
+
+    /// <summary>
     /// Parses a saved RSS document and returns the extension of the requested type attached to its only
     /// item.
     /// </summary>

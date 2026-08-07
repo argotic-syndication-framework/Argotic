@@ -30,16 +30,20 @@ public class SitemapVideoComparisonBreadthTests
 
     /// <summary>
     /// Two videos agreeing on title, thumbnail and description but differing in every optional member are
-    /// not equal.
+    /// not equal, and the one carrying no optional members sorts before the one that does.
     /// </summary>
     [TestMethod]
-    public void TwoVideosDifferingInEveryOptionalMember_AreUnequal()
+    public void TwoVideosDifferingInEveryOptionalMember_AreUnequalAndOrderedByTheFirstOptionalMember()
     {
         SitemapVideo first = Build();
         SitemapVideo second = BuildWithEveryOptionalMember();
 
         first.Equals(second).ShouldBeFalse();
-        first.CompareTo(second).ShouldNotBe(0);
+
+        // The three required members agree, so the first optional one decides: ContentLocation is absent on
+        // the bare video, and CompareLocation treats an absent location as the lesser.
+        first.CompareTo(second).ShouldBeLessThan(0);
+        second.CompareTo(first).ShouldBeGreaterThan(0);
     }
 
     /// <summary>

@@ -362,20 +362,25 @@ public class XmlRpcStructureMemberTests
     }
 
     /// <summary>
-    /// Members that differ only by name compare as non-zero.
+    /// Members that differ only by name are ordered by name, and the ordering is antisymmetric: <c>aaa</c>
+    /// sorts before <c>zzz</c>, and reversing the operands reverses the sign.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentName_ReturnsNonZero()
+    public void CompareTo_MembersDifferingOnlyByName_OrdersByName()
     {
         // Arrange
         XmlRpcStructureMember member1 = new("aaa", new XmlRpcScalarValue("value"));
         XmlRpcStructureMember member2 = new("zzz", new XmlRpcScalarValue("value"));
 
         // Act
-        int result = member1.CompareTo(member2);
+        int forward = member1.CompareTo(member2);
+        int reverse = member2.CompareTo(member1);
 
         // Assert
-        result.ShouldNotBe(0);
+        // Ordering runs an ordinal comparison over the <member> XML, which writes <name> first, so the name
+        // decides: "aaa" precedes "zzz".
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>
@@ -395,20 +400,25 @@ public class XmlRpcStructureMemberTests
     }
 
     /// <summary>
-    /// Members that differ in both name and value compare as non-zero.
+    /// When both the name and the value differ, the name still decides, antisymmetrically: <c>name1</c> sorts
+    /// before <c>name2</c> whichever way round the pair is compared.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentMember_ReturnsNonZero()
+    public void CompareTo_MembersDifferingByNameAndValue_OrdersByNameFirst()
     {
         // Arrange
         XmlRpcStructureMember member1 = new("name1", new XmlRpcScalarValue("value1"));
         XmlRpcStructureMember member2 = new("name2", new XmlRpcScalarValue("value2"));
 
         // Act
-        int result = member1.CompareTo(member2);
+        int forward = member1.CompareTo(member2);
+        int reverse = member2.CompareTo(member1);
 
         // Assert
-        result.ShouldNotBe(0);
+        // <name> is written ahead of <value>, so the ordinal comparison reaches '1' against '2' before it
+        // ever sees the values.
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>

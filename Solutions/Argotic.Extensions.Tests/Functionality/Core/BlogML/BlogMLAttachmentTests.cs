@@ -349,10 +349,11 @@ public class BlogMLAttachmentTests
     }
 
     /// <summary>
-    /// Attachments differing in media type and URL do not compare equal.
+    /// Attachments differing in media type and URL are ordered by media type, antisymmetrically:
+    /// <c>image/png</c> sorts after <c>image/jpeg</c>, and reversing the operands reverses the sign.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentAttachments_ReturnsNonZero()
+    public void CompareTo_AttachmentsDifferingInMediaTypeAndUrl_OrdersByMediaType()
     {
         // Arrange
         BlogMLAttachment attachment1 = new()
@@ -368,10 +369,14 @@ public class BlogMLAttachmentTests
         };
 
         // Act
-        int result = attachment1.CompareTo(attachment2);
+        int forward = attachment1.CompareTo(attachment2);
+        int reverse = attachment2.CompareTo(attachment1);
 
         // Assert
-        result.ShouldNotBe(0);
+        // Content, ExternalUri and IsEmbedded are at their defaults on both, so MimeType is the first
+        // comparand that differs, and it is reached before Url: 'p' follows 'j'.
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>
@@ -394,10 +399,11 @@ public class BlogMLAttachmentTests
     }
 
     /// <summary>
-    /// Attachments differing in media type, URL and size do not compare equal.
+    /// When media type, URL and size all differ, the media type still decides: <c>image/png</c> sorts after
+    /// <c>image/jpeg</c> even though its size is the smaller of the two.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentAttachment_ReturnsNonZero()
+    public void CompareTo_AttachmentsDifferingInMediaTypeUrlAndSize_OrdersByMediaTypeFirst()
     {
         // Arrange
         BlogMLAttachment attachment1 = new()
@@ -414,10 +420,14 @@ public class BlogMLAttachmentTests
         };
 
         // Act
-        int result = attachment1.CompareTo(attachment2);
+        int forward = attachment1.CompareTo(attachment2);
+        int reverse = attachment2.CompareTo(attachment1);
 
         // Assert
-        result.ShouldNotBe(0);
+        // MimeType precedes Size and Url in the comparison, so the smaller size does not pull the result
+        // the other way.
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     #endregion
@@ -667,23 +677,40 @@ public class BlogMLAttachmentTests
     }
 
     /// <summary>
-    /// An attachment with a media type and a URL hashes to something other than <c>0</c>.
+    /// Two separately built attachments carrying identical data are equal, hash equally, and hash stably —
+    /// the contract a <see cref="Dictionary{TKey, TValue}"/> relies on.
     /// </summary>
     [TestMethod]
-    public void GetHashCode_ReturnsValue()
+    public void GetHashCode_EqualInstances_AgreeAndAreStable()
     {
         // Arrange
-        BlogMLAttachment attachment = new()
+        // Every member the comparison folds is populated, so the assertion covers all six of them rather
+        // than agreeing on a pair of defaults.
+        BlogMLAttachment first = new()
         {
+            Content = "embedded-content",
+            ExternalUri = new Uri("http://example.com/external.png"),
+            IsEmbedded = true,
             MimeType = "image/png",
+            Size = 2048,
             Url = new Uri("http://example.com/image.png")
         };
 
-        // Act
-        int hashCode = attachment.GetHashCode();
+        BlogMLAttachment second = new()
+        {
+            Content = "embedded-content",
+            ExternalUri = new Uri("http://example.com/external.png"),
+            IsEmbedded = true,
+            MimeType = "image/png",
+            Size = 2048,
+            Url = new Uri("http://example.com/image.png")
+        };
 
-        // Assert
-        hashCode.ShouldNotBe(0);
+        // Act & Assert
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     #endregion

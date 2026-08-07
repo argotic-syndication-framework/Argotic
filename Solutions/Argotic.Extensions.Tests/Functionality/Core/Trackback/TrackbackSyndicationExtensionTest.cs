@@ -58,30 +58,30 @@ public class TrackbackSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A populated extension hashes to something other than <c>0</c>.
+    /// Two extensions built from the same ping URL are equal and hash equally, and hashing one twice
+    /// gives the same answer.
     /// </summary>
     /// <remarks>
-    ///     Weaker than the contract its siblings assert — that equal objects agree on their hash code —
-    ///     and deliberately so: this pins only that hashing a populated extension completes and does not
-    ///     land on the default.
+    ///     The previous assertion was <c>hash.ShouldNotBe(0)</c>, which says nothing about any
+    ///     implementation: <see cref="HashCode.Combine{T}(T)"/> is seeded per process, so the value is
+    ///     unpredictable and only 1 in 2^32 runs would have seen it land on <c>0</c> anyway.
     /// </remarks>
     [TestMethod]
     public void TrackbackGetHashCodeTest()
     {
-        // Verify GetHashCode does not throw
-        TrackbackSyndicationExtension target = CreateExtension1();
-        int hash = target.GetHashCode();
+        TrackbackSyndicationExtension first = CreateExtension1();
+        TrackbackSyndicationExtension second = CreateExtension1();
 
-        hash.ShouldNotBe(0);
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>
-    /// A feed carrying a <c>trackback:ping</c> element parses without throwing.
+    /// A feed carrying a <c>trackback:ping</c> element yields an extension holding the ping URL the
+    /// document declared.
     /// </summary>
-    /// <remarks>
-    ///     Nothing about the parsed value is asserted here; <c>TrackbackFullTest</c> is what checks that
-    ///     the extension was attached and <c>TrackbackContextTest</c> what it holds.
-    /// </remarks>
     [TestMethod]
     public void TrackbackLoadTest()
     {
@@ -90,6 +90,10 @@ public class TrackbackSyndicationExtensionTest
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new();
         feed.Load(reader);
+
+        RssItem item = feed.Channel.Items.Single();
+        TrackbackSyndicationExtension extension = item.FindExtension<TrackbackSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.Ping.ShouldBe(new Uri("http://www.example.com/trackback/1"));
     }
 
     /// <summary>
@@ -107,9 +111,14 @@ public class TrackbackSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An item carrying a <c>trackback:ping</c> element is found again after the feed is parsed, by both
-    /// the generic lookup and the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the ping URL the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as TrackbackSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected no parsed value.
+    /// </remarks>
     [TestMethod]
     public void TrackbackFullTest()
     {
@@ -122,10 +131,13 @@ public class TrackbackSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        TrackbackSyndicationExtension? itemExtension = item.FindExtension<TrackbackSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(TrackbackSyndicationExtension.MatchByType) as TrackbackSyndicationExtension)
+        TrackbackSyndicationExtension byType = item.FindExtension<TrackbackSyndicationExtension>().ShouldNotBeNull();
+        TrackbackSyndicationExtension byPredicate = item
+            .FindExtension(TrackbackSyndicationExtension.MatchByType)
             .ShouldBeOfType<TrackbackSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Ping.ShouldBe(new Uri("http://www.example.com/trackback/1"));
     }
 
     /// <summary>

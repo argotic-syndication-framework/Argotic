@@ -81,8 +81,12 @@ public class SimpleListSyndicationExtensionContext
 
             if (listInformationNavigator is { HasChildren: true })
             {
-                XPathNodeIterator sortIterator = source.SelectChildElements("cf", "sort", manager);
-                XPathNodeIterator groupIterator = source.SelectChildElements("cf", "group", manager);
+                // The sort and group elements are children of listinfo, not of the entity carrying the
+                // extension. Selecting them from source found nothing, so the whole listinfo block was
+                // discarded on every load - while WriteTo has always emitted it. The extension could not
+                // read back what it wrote.
+                XPathNodeIterator sortIterator = listInformationNavigator.SelectChildElements("cf", "sort", manager);
+                XPathNodeIterator groupIterator = listInformationNavigator.SelectChildElements("cf", "group", manager);
 
                 if (sortIterator is { Count: > 0 })
                 {

@@ -307,7 +307,7 @@ public class AtomPublishingSyndicationExtensionTest
     #region Round-Trip XML Tests
 
     /// <summary>
-    /// An RSS 2.0 feed carrying <c>app:edited</c> parses into a channel with its single item.
+    /// An RSS 2.0 feed carrying <c>app:edited</c> yields an extension holding the instant the document declared.
     /// </summary>
     [TestMethod]
     public void Load_WithValidXml_ShouldLoadSuccessfully()
@@ -321,8 +321,9 @@ public class AtomPublishingSyndicationExtensionTest
         feed.Load(reader);
 
         // Assert
-        feed.Channel.ShouldNotBeNull();
-        feed.Channel.Items.Count.ShouldBe(1);
+        RssItem item = feed.Channel.Items.Single();
+        AtomPublishingEditedSyndicationExtension extension = item.FindExtension<AtomPublishingEditedSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.EditedOn.ShouldBe(testEditedDate);
     }
 
     /// <summary>
@@ -538,20 +539,29 @@ public class AtomPublishingSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Extensions holding different edit instants do not compare equal.
+    /// The extension edited in 2023 sorts before the one edited in 2024, and the reverse comparison
+    /// reports the opposite sign.
     /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>ShouldNotBe(0)</c>, which states nothing about direction: an
+    ///     inverted comparison satisfies it just as well as a correct one. Every member ahead of
+    ///     <c>EditedOn</c> in <c>CompareTo</c> — description, documentation, name, version, namespace and
+    ///     prefix — is fixed by the type, so the edit instant is the only member that decides this pair.
+    /// </remarks>
     [TestMethod]
-    public void CompareTo_WithDifferentEditedDate_ShouldReturnNonZero()
+    public void CompareTo_WithDifferentEditedDate_OrdersByEditedOnAndIsAntisymmetric()
     {
         // Arrange
-        AtomPublishingEditedSyndicationExtension target = CreateExtension1();
-        AtomPublishingEditedSyndicationExtension other = CreateExtension2();
+        AtomPublishingEditedSyndicationExtension target = CreateExtension1();  // 2023-06-15
+        AtomPublishingEditedSyndicationExtension other = CreateExtension2();   // 2024-01-20
 
         // Act
-        int actual = target.CompareTo(other);
+        int forward = target.CompareTo(other);
+        int reverse = other.CompareTo(target);
 
         // Assert
-        actual.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>

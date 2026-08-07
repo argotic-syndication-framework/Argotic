@@ -1189,8 +1189,15 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     #region XML Serialization Tests
 
     /// <summary>
-    /// An RSS 2.0 feed carrying all fifty-five <c>dcterms:</c> elements parses without throwing.
+    /// An RSS 2.0 feed carrying all fifty-five <c>dcterms:</c> elements yields an extension equal to the one
+    /// the fixture builds — so every term the document declares parses back to the value it was written from.
     /// </summary>
+    /// <remarks>
+    ///     Equality is the strong form of the claim, and the reason to prefer it here over a spot check:
+    ///     <c>CompareTo</c> walks all fifty-five members, so a single term that failed to parse makes this
+    ///     fail. <c>DublinCoreMetadataTermsRoundTripTest</c> spot-checks six of them by name, which is what
+    ///     names the culprit when this goes red.
+    /// </remarks>
     [TestMethod]
     public void DublinCoreMetadataTermsLoadTest()
     {
@@ -1202,8 +1209,11 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
 
-        // Assert - no exception means success
-        feed.ShouldNotBeNull();
+        // Assert
+        RssItem item = feed.Channel.Items.Single();
+        DublinCoreMetadataTermsSyndicationExtension extension =
+            item.FindExtension<DublinCoreMetadataTermsSyndicationExtension>().ShouldNotBeNull();
+        extension.ShouldBe(CreateFullExtension());
     }
 
     /// <summary>
@@ -1255,8 +1265,14 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An item parsed from a feed carrying the <c>dcterms:</c> elements exposes the extension both by generic lookup and through <c>MatchByType</c>.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the terms the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as DublinCoreMetadataTermsSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — a null check wearing a type check's
+    ///     clothes — and no parsed value was inspected at all.
+    /// </remarks>
     [TestMethod]
     public void DublinCoreMetadataTermsFullTest()
     {
@@ -1269,13 +1285,18 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         feed.Load(reader);
 
         // Assert
-        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        DublinCoreMetadataTermsSyndicationExtension? itemExtension = item.FindExtension<DublinCoreMetadataTermsSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) as DublinCoreMetadataTermsSyndicationExtension)
+        DublinCoreMetadataTermsSyndicationExtension byType =
+            item.FindExtension<DublinCoreMetadataTermsSyndicationExtension>().ShouldNotBeNull();
+        DublinCoreMetadataTermsSyndicationExtension byPredicate = item
+            .FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType)
             .ShouldBeOfType<DublinCoreMetadataTermsSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Abstract.ShouldBe("Test Abstract");
+        byPredicate.Context.Title.ShouldBe("Stupid test data");
+        byPredicate.Context.TypeVocabulary.ShouldBe(DublinCoreTypeVocabularies.Text);
     }
 
     #endregion
@@ -1360,20 +1381,24 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A populated extension does not compare equal to an empty one.
+    /// A populated extension sorts after an empty one, and the reverse comparison agrees:
+    /// <c>Context.Abstract</c> is the first context member compared, and <c>"Test Abstract"</c> follows the
+    /// empty string.
     /// </summary>
     [TestMethod]
-    public void DublinCoreMetadataTermsCompareToDifferentExtensionReturnsNonZero()
+    public void DublinCoreMetadataTermsCompareTo_AgainstAnEmptyExtension_IsPositiveAndAntisymmetric()
     {
         // Arrange
         DublinCoreMetadataTermsSyndicationExtension target = CreateFullExtension();
         DublinCoreMetadataTermsSyndicationExtension other = new();
 
         // Act
-        int result = target.CompareTo(other);
+        int forward = target.CompareTo(other);
+        int reverse = other.CompareTo(target);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>
@@ -1578,7 +1603,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Comparing two differing extensions with <c>&gt;</c> completes and yields a boolean; the test pins no direction.
+    /// The extension whose abstract is <c>Test Abstract</c> sorts above the one whose abstract is
+    /// <c>Different Abstract</c>, and the reverse comparison agrees — <c>Context.Abstract</c> is the first
+    /// context member compared, under <see cref="StringComparison.OrdinalIgnoreCase"/>.
     /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpGreaterThanTest()
@@ -1587,11 +1614,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension first = CreateFullExtension();
         DublinCoreMetadataTermsSyndicationExtension second = CreateDifferentExtension();
 
-        // Act
-        bool result = first > second;
-
-        // Assert - Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        // Act & Assert
+        (first > second).ShouldBeTrue();
+        (second > first).ShouldBeFalse();
     }
 
     /// <summary>
@@ -1612,7 +1637,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Comparing two differing extensions with <c>&lt;</c> completes and yields a boolean; the test pins no direction.
+    /// <c>&lt;</c> agrees with <c>&gt;</c>: the <c>Different Abstract</c> extension is the lesser of the two,
+    /// in both directions.
     /// </summary>
     [TestMethod]
     public void DublinCoreMetadataTermsOpLessThanTest()
@@ -1621,11 +1647,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension first = CreateFullExtension();
         DublinCoreMetadataTermsSyndicationExtension second = CreateDifferentExtension();
 
-        // Act
-        bool result = first < second;
-
-        // Assert - Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        // Act & Assert
+        (first < second).ShouldBeFalse();
+        (second < first).ShouldBeTrue();
     }
 
     /// <summary>

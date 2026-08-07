@@ -117,11 +117,48 @@ public class GenericSyndicationFeedTest
         feed.Title.ShouldBe("Test Feed");
     }
 
-    // Note: Tests for filtering items by PublicationDate and Categories are disabled
-    // due to pre-existing bugs in the adapters. The Items collection is initialized
-    // with an empty array [] but the adapter code casts it to Collection<T>, causing
-    // InvalidCastException when loading feeds with items/entries.
-    // Bug locations:
-    // - GenericSyndicationFeed.Parse(RssFeed): casts to Collection<GenericSyndicationItem>
-    // - Atom10SyndicationResourceAdapter.FillFeedCollections: casts to Collection<AtomEntry>
+    /// <summary>
+    /// The items an RSS document contributes can be filtered by the date they were published: of the two
+    /// items in the fixture, only the one dated 20 January 2025 survives a cutoff at the start of that
+    /// year, and the one dated 1 January 2024 is what is left behind.
+    /// </summary>
+    [TestMethod]
+    public void Items_FilteredByPublicationDate_SelectsOnlyTheItemPublishedAfterTheCutoff()
+    {
+        Syndication.GenericSyndicationFeed feed = new();
+        feed.Load(FeedTestData.RssWithItems);
+
+        DateTime cutoff = new(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        List<GenericSyndicationItem> recent = feed.Items.Where(item => item.PublishedOn >= cutoff).ToList();
+
+        feed.Items.Count.ShouldBe(2);
+        recent.Count.ShouldBe(1);
+        recent[0].Title.ShouldBe("Recent Item");
+        feed.Items.Single(item => item.PublishedOn < cutoff).Title.ShouldBe("Old Item");
+    }
+
+    /// <summary>
+    /// The items an Atom document contributes can be filtered by the categories they carry: <c>Tech</c>
+    /// selects the recent entry, <c>Archive</c> selects the old one, and the feed-level <c>Technology</c>
+    /// category stays on the feed rather than reaching either entry.
+    /// </summary>
+    [TestMethod]
+    public void Items_FilteredByCategoryTerm_SelectsOnlyTheEntriesCarryingThatTerm()
+    {
+        Syndication.GenericSyndicationFeed feed = new();
+        feed.Load(FeedTestData.AtomWithEntries);
+
+        List<GenericSyndicationItem> tagged = feed.Items
+            .Where(item => item.Categories.Any(category => string.Equals(category.Term, "Tech", StringComparison.Ordinal)))
+            .ToList();
+
+        feed.Items.Count.ShouldBe(2);
+        tagged.Count.ShouldBe(1);
+        tagged[0].Title.ShouldBe("Recent Entry");
+        feed.Items
+            .Single(item => item.Categories.Any(category => string.Equals(category.Term, "Archive", StringComparison.Ordinal)))
+            .Title.ShouldBe("Old Entry");
+        feed.Categories.Single().Term.ShouldBe("Technology");
+        feed.Items.SelectMany(item => item.Categories).ShouldNotContain(category => string.Equals(category.Term, "Technology", StringComparison.Ordinal));
+    }
 }

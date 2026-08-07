@@ -486,10 +486,17 @@ public class GenericSyndicationItemTests
     }
 
     /// <summary>
-    /// The title participates in ordering: two items differing only in it do not compare equal.
+    /// The title decides the ordering once the categories and summaries agree, and it decides it in one
+    /// direction only: <c>Alpha</c> sorts before <c>Beta</c>, and the reverse comparison reports the
+    /// opposite sign.
     /// </summary>
+    /// <remarks>
+    ///     Neither entry carries categories or a summary, so <c>CompareTo</c> falls through to comparing
+    ///     the titles with <see cref="StringComparison.OrdinalIgnoreCase"/>, under which <c>Alpha</c> is
+    ///     the lesser.
+    /// </remarks>
     [TestMethod]
-    public void CompareTo_WithDifferentTitle_ReturnsNonZero()
+    public void CompareTo_WithDifferentTitle_OrdersByTitleAndIsAntisymmetric()
     {
         // Arrange
         var entry1 = new AtomEntryBuilder().WithTitle("Alpha").Build();
@@ -498,17 +505,26 @@ public class GenericSyndicationItemTests
         var item2 = new GenericSyndicationItem(entry2);
 
         // Act
-        int result = item1.CompareTo(item2);
+        int forward = item1.CompareTo(item2);
+        int reverse = item2.CompareTo(item1);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>
-    /// The summary participates in ordering too, so two items sharing a title stay distinct.
+    /// The summary is consulted before the title, so two items sharing a title are ordered by it:
+    /// <c>Summary A</c> sorts before <c>Summary B</c>, and the reverse comparison reports the opposite
+    /// sign.
     /// </summary>
+    /// <remarks>
+    ///     Neither entry carries categories, so <c>CompareTo</c> reaches the summaries and compares them
+    ///     with <see cref="StringComparison.OrdinalIgnoreCase"/>, under which <c>Summary A</c> is the
+    ///     lesser.
+    /// </remarks>
     [TestMethod]
-    public void CompareTo_WithDifferentSummary_ReturnsNonZero()
+    public void CompareTo_WithDifferentSummary_OrdersBySummaryAndIsAntisymmetric()
     {
         // Arrange
         var entry1 = new AtomEntryBuilder()
@@ -523,10 +539,12 @@ public class GenericSyndicationItemTests
         var item2 = new GenericSyndicationItem(entry2);
 
         // Act
-        int result = item1.CompareTo(item2);
+        int forward = item1.CompareTo(item2);
+        int reverse = item2.CompareTo(item1);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     #endregion
@@ -604,20 +622,30 @@ public class GenericSyndicationItemTests
     #region GetHashCode Tests
 
     /// <summary>
-    /// Asking an item for its hash code returns a value rather than throwing.
+    /// Two distinct items that compare equal hash equally, and one item hashes the same every time it is
+    /// asked — the contract <see cref="HashSet{T}"/> and <see cref="Dictionary{TKey, TValue}"/> rely on to
+    /// find an item they have already stored.
     /// </summary>
     [TestMethod]
-    public void GetHashCode_ReturnsIntegerValue()
+    public void GetHashCode_ForEqualItems_MatchesAndIsStable()
     {
         // Arrange
-        var entry = new AtomEntryBuilder().WithTitle("Test").Build();
-        var item = new GenericSyndicationItem(entry);
+        var entry1 = new AtomEntryBuilder()
+            .WithTitle("Test")
+            .WithSummary("Summary")
+            .Build();
+        var entry2 = new AtomEntryBuilder()
+            .WithTitle("Test")
+            .WithSummary("Summary")
+            .Build();
+        var first = new GenericSyndicationItem(entry1);
+        var second = new GenericSyndicationItem(entry2);
 
-        // Act
-        int hash = item.GetHashCode();
-
-        // Assert
-        hash.ShouldBeOfType<int>();
+        // Act & Assert
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     #endregion

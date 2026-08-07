@@ -288,10 +288,11 @@ public class BlogMLTrackbackTests
     }
 
     /// <summary>
-    /// Trackbacks differing only in URL do not compare equal.
+    /// Trackbacks differing only in URL are ordered by URL, antisymmetrically: <c>post1</c> sorts before
+    /// <c>post2</c>, and reversing the operands reverses the sign.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentUrls_ReturnsNonZero()
+    public void CompareTo_TrackbacksDifferingOnlyInUrl_OrdersByUrl()
     {
         // Arrange
         BlogMLTrackback trackback1 = new()
@@ -305,10 +306,13 @@ public class BlogMLTrackbackTests
         };
 
         // Act
-        int result = trackback1.CompareTo(trackback2);
+        int forward = trackback1.CompareTo(trackback2);
+        int reverse = trackback2.CompareTo(trackback1);
 
         // Assert
-        result.ShouldNotBe(0);
+        // Url is the first comparand, compared as an absolute URI under OrdinalIgnoreCase.
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>
@@ -331,10 +335,11 @@ public class BlogMLTrackbackTests
     }
 
     /// <summary>
-    /// Trackbacks differing in both identifier and URL do not compare equal.
+    /// When both the identifier and the URL differ, the URL decides, antisymmetrically: <c>post1</c> sorts
+    /// before <c>post2</c> whichever way round the pair is compared.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentTrackback_ReturnsNonZero()
+    public void CompareTo_TrackbacksDifferingInIdentifierAndUrl_OrdersByUrlFirst()
     {
         // Arrange
         BlogMLTrackback trackback1 = new()
@@ -349,10 +354,13 @@ public class BlogMLTrackbackTests
         };
 
         // Act
-        int result = trackback1.CompareTo(trackback2);
+        int forward = trackback1.CompareTo(trackback2);
+        int reverse = trackback2.CompareTo(trackback1);
 
         // Assert
-        result.ShouldNotBe(0);
+        // Url is compared before the common BlogML members, so the identifier is never reached here.
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     #endregion
@@ -556,23 +564,40 @@ public class BlogMLTrackbackTests
     }
 
     /// <summary>
-    /// A trackback with an identifier and a URL hashes to something other than <c>0</c>.
+    /// Two separately built trackbacks carrying identical data are equal, hash equally, and hash stably —
+    /// the contract a <see cref="Dictionary{TKey, TValue}"/> relies on.
     /// </summary>
     [TestMethod]
-    public void GetHashCode_ReturnsValue()
+    public void GetHashCode_EqualInstances_AgreeAndAreStable()
     {
         // Arrange
-        BlogMLTrackback trackback = new()
+        // Every member the comparison folds is populated, so the assertion covers all six of them rather
+        // than agreeing on a pair of defaults.
+        BlogMLTrackback first = new()
         {
             Id = "tb1",
-            Url = new Uri("http://example.com/post")
+            Url = new Uri("http://example.com/post"),
+            ApprovalStatus = BlogMLApprovalStatus.Approved,
+            CreatedOn = new DateTime(2025, 1, 16, 10, 0, 0, DateTimeKind.Utc),
+            LastModifiedOn = new DateTime(2025, 1, 17, 11, 30, 0, DateTimeKind.Utc),
+            Title = new BlogMLTextConstruct("Trackback Title")
         };
 
-        // Act
-        int hashCode = trackback.GetHashCode();
+        BlogMLTrackback second = new()
+        {
+            Id = "tb1",
+            Url = new Uri("http://example.com/post"),
+            ApprovalStatus = BlogMLApprovalStatus.Approved,
+            CreatedOn = new DateTime(2025, 1, 16, 10, 0, 0, DateTimeKind.Utc),
+            LastModifiedOn = new DateTime(2025, 1, 17, 11, 30, 0, DateTimeKind.Utc),
+            Title = new BlogMLTextConstruct("Trackback Title")
+        };
 
-        // Assert
-        hashCode.ShouldNotBe(0);
+        // Act & Assert
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     #endregion

@@ -313,11 +313,13 @@ public class MimeMediaTypeAttributeTests
     }
 
     /// <summary>
-    /// The subtype alone is enough to separate two attributes: <c>application/rss+xml</c> does not compare
-    /// equal to <c>application/atom+xml</c>.
+    /// The subtype alone is enough to separate two attributes, and it decides the direction: with
+    /// <c>Documentation</c> and <c>Name</c> equal the comparison falls through to <c>SubName</c>, where
+    /// <c>rss+xml</c> sorts after <c>atom+xml</c>, so <c>application/rss+xml</c> is the greater and
+    /// <c>application/atom+xml</c> the lesser.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentAttributes_ReturnsNonZero()
+    public void CompareTo_WhenSubNameSortsLater_IsPositiveAndAntisymmetric()
     {
         // Arrange
         MimeMediaTypeAttribute attribute1 = new()
@@ -333,10 +335,12 @@ public class MimeMediaTypeAttributeTests
         };
 
         // Act
-        int result = attribute1.CompareTo(attribute2);
+        int forward = attribute1.CompareTo(attribute2);
+        int reverse = attribute2.CompareTo(attribute1);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>
@@ -360,11 +364,12 @@ public class MimeMediaTypeAttributeTests
     }
 
     /// <summary>
-    /// A differing top-level type separates two attributes too: <c>application/rss+xml</c> does not compare
-    /// equal to <c>text/xml</c>.
+    /// A differing top-level type separates two attributes too, and decides before the subtype is
+    /// consulted: <c>application</c> sorts before <c>text</c>, so <c>application/rss+xml</c> is the
+    /// lesser and <c>text/xml</c> the greater.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentAttribute_ReturnsNonZero()
+    public void CompareTo_WhenNameSortsEarlier_IsNegativeAndAntisymmetric()
     {
         // Arrange
         MimeMediaTypeAttribute attribute1 = new()
@@ -379,10 +384,12 @@ public class MimeMediaTypeAttributeTests
         };
 
         // Act
-        int result = attribute1.CompareTo(attribute2);
+        int forward = attribute1.CompareTo(attribute2);
+        int reverse = attribute2.CompareTo(attribute1);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>

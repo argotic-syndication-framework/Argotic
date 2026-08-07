@@ -300,16 +300,19 @@ public class TrackbackResponseTests
     }
 
     /// <summary>
-    /// A default-constructed response hashes to a non-zero value.
+    /// Two separately built responses carrying the same error message are equal, hash equally, and hash
+    /// stably — the contract a <see cref="Dictionary{TKey, TValue}"/> relies on.
     /// </summary>
     [TestMethod]
-    public void GetHashCode_DoesNotThrow()
+    public void GetHashCode_EqualInstances_AgreeAndAreStable()
     {
-        TrackbackResponse response = new();
+        TrackbackResponse first = new("The trackback was refused");
+        TrackbackResponse second = new("The trackback was refused");
 
-        int hash = response.GetHashCode();
-
-        hash.ShouldNotBe(0);
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>

@@ -417,10 +417,13 @@ public class DiscoverableSyndicationEndpointTests
     }
 
     /// <summary>
-    /// Endpoints differing in content type and source do not compare equal.
+    /// Content type is compared first, so it decides the direction even though the sources differ too:
+    /// <c>application/rss+xml</c> sorts after <c>application/atom+xml</c>, making the RSS endpoint the
+    /// greater and the Atom one the lesser — the opposite of what the sources
+    /// (<c>feed1.rss</c> before <c>feed2.rss</c>) would have said had they been reached.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentEndpoint_ReturnsNonZero()
+    public void CompareTo_WhenContentTypeSortsLater_IsPositiveAndAntisymmetric()
     {
         // Arrange
         DiscoverableSyndicationEndpoint endpoint1 = new(
@@ -431,10 +434,12 @@ public class DiscoverableSyndicationEndpointTests
             "application/atom+xml");
 
         // Act
-        int result = endpoint1.CompareTo(endpoint2);
+        int forward = endpoint1.CompareTo(endpoint2);
+        int reverse = endpoint2.CompareTo(endpoint1);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>

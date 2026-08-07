@@ -73,21 +73,28 @@ public class AtomPublishingControlSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An RSS 2.0 feed carrying an <c>app:control</c> element parses, leaving the channel and its single item intact.
+    /// An RSS 2.0 feed carrying an <c>app:control</c> element yields an extension holding the base URI,
+    /// the language and the draft flag the document declared.
     /// </summary>
+    /// <remarks>
+    ///     This is the only test that exercises the <c>app:control</c> parse path. It used to assert that
+    ///     the channel was non-null and held one item — neither of which touches the extension — so until
+    ///     now nothing in the suite had ever read a value back off a parsed <c>app:control</c>.
+    /// </remarks>
     [TestMethod]
     public void AtomPublishingControlLoadTest()
     {
-        // Verify that an RSS feed containing APP extension XML can be loaded without errors
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new();
         feed.Load(reader);
 
-        // Basic feed structure should be intact
-        feed.Channel.ShouldNotBeNull();
-        feed.Channel.Items.Count.ShouldBe(1);
+        RssItem item = feed.Channel.Items.Single();
+        AtomPublishingControlSyndicationExtension extension = item.FindExtension<AtomPublishingControlSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.BaseUri.ShouldBe(new Uri("http://www.example.com/control.html"));
+        extension.Context.Language!.Name.ShouldBe("en-US");
+        extension.Context.IsDraft.ShouldBeTrue();
     }
 
     /// <summary>

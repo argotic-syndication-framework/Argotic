@@ -497,17 +497,20 @@ public class SitemapVideoTests
     }
 
     /// <summary>
-    /// Two videos differing only in title do not compare equal.
+    /// Two videos differing only in title are ordered by title, antisymmetrically: <c>AAA Title</c> sorts
+    /// before <c>ZZZ Title</c>, and reversing the operands reverses the sign.
     /// </summary>
     [TestMethod]
-    public void CompareTo_ReturnsNonZeroForDifferentVideos()
+    public void CompareTo_VideosDifferingOnlyInTitle_OrdersByTitle()
     {
         // Arrange
         SitemapVideo video1 = new(TestThumbnailUri, "AAA Title", TestDescription);
         SitemapVideo video2 = new(TestThumbnailUri, "ZZZ Title", TestDescription);
 
         // Act & Assert
-        video1.CompareTo(video2).ShouldNotBe(0);
+        // Title is the first comparand, compared with StringComparison.OrdinalIgnoreCase.
+        video1.CompareTo(video2).ShouldBeLessThan(0);
+        video2.CompareTo(video1).ShouldBeGreaterThan(0);
     }
 
     /// <summary>
@@ -524,20 +527,24 @@ public class SitemapVideoTests
     }
 
     /// <summary>
-    /// Two videos differing in every required value do not compare equal.
+    /// Two videos differing in every required value are still ordered by title alone, antisymmetrically:
+    /// <c>Test Video Title</c> sorts after <c>Other Title</c>.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentVideos_ReturnsNonZero()
+    public void CompareTo_VideosDifferingInEveryRequiredValue_OrdersByTitleFirst()
     {
         // Arrange
         SitemapVideo video1 = new(TestThumbnailUri, TestTitle, TestDescription);
         SitemapVideo video2 = new(new Uri("http://example.com/other-thumb.jpg"), "Other Title", "Other Description");
 
         // Act
-        int result = video1.CompareTo(video2);
+        int forward = video1.CompareTo(video2);
+        int reverse = video2.CompareTo(video1);
 
         // Assert
-        result.ShouldNotBe(0);
+        // Title decides before the thumbnail or the description is reached: 'T' follows 'O'.
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>

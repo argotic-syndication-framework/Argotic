@@ -82,7 +82,10 @@ public sealed class HtmlDiscoveryScanTests
     {
         string markup = $"""<link rel="{relation}" href="https://example.com/rpc">""";
 
-        SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(markup).ShouldNotBeNull();
+        HtmlAnchor? anchor = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(markup);
+
+        anchor.ShouldNotBeNull(relation);
+        anchor.HRef.ShouldBe("https://example.com/rpc", relation);
     }
 
     /// <summary>

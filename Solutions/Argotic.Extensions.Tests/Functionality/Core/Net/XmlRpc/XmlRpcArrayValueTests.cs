@@ -190,10 +190,11 @@ public class XmlRpcArrayValueTests
     }
 
     /// <summary>
-    /// An array compares as non-zero against one that shares its leading value but carries an extra one.
+    /// The shorter array sorts before the one that shares its leading value but carries an extra one, and the
+    /// comparison is antisymmetric: reversing the operands reverses the sign.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentArrays_ReturnsNonZero()
+    public void CompareTo_ArrayHoldingFewerValues_SortsBeforeTheLongerArray()
     {
         // Arrange
         XmlRpcArrayValue array1 = new();
@@ -204,10 +205,13 @@ public class XmlRpcArrayValueTests
         array2.Values.Add(new XmlRpcScalarValue(2));
 
         // Act
-        int result = array1.CompareTo(array2);
+        int forward = array1.CompareTo(array2);
+        int reverse = array2.CompareTo(array1);
 
         // Assert
-        result.ShouldNotBe(0);
+        // Count decides first: one value against two is the lesser, whichever way round it is asked.
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>
@@ -228,10 +232,12 @@ public class XmlRpcArrayValueTests
     }
 
     /// <summary>
-    /// Two arrays of the same length holding different values compare as non-zero.
+    /// Two arrays of the same length holding different values each report themselves the lesser: the
+    /// membership test behind <c>CompareSequence</c> can only say "not present", so it answers <c>-1</c> in
+    /// both directions rather than ordering the pair.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentValues_ReturnsNonZero()
+    public void CompareTo_SameLengthArraysHoldingDifferentValues_ReportsBothAsLesser()
     {
         // Arrange
         XmlRpcArrayValue array1 = new();
@@ -241,10 +247,15 @@ public class XmlRpcArrayValueTests
         array2.Values.Add(new XmlRpcScalarValue(99));
 
         // Act
-        int result = array1.CompareTo(array2);
+        int forward = array1.CompareTo(array2);
+        int reverse = array2.CompareTo(array1);
 
         // Assert
-        result.ShouldNotBe(0);
+        // Counts match, so XmlRpcMessage.CompareSequence falls back to IList.Contains and returns -1 the
+        // moment an element is absent from the other side. Both operands therefore sort before each other:
+        // the pair is unequal, but it carries no usable ordering.
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>

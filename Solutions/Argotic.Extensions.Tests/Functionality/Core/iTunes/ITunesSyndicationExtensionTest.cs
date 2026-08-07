@@ -136,9 +136,15 @@ public class ITunesSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An item carrying the full set of iTunes elements is found again after the feed is parsed, by both
-    /// the generic lookup and the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying every iTunes value the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as ITunesSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes. A non-null extension proves that <i>one</i> of the ten elements parsed,
+    ///     which is why each is asserted here rather than counted.
+    /// </remarks>
     [TestMethod]
     public void ITunesFullTest()
     {
@@ -148,13 +154,24 @@ public class ITunesSyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
 
-        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        ITunesSyndicationExtension? itemExtension = item.FindExtension<ITunesSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension)
+        ITunesSyndicationExtension byType = item.FindExtension<ITunesSyndicationExtension>().ShouldNotBeNull();
+        ITunesSyndicationExtension byPredicate = item
+            .FindExtension(ITunesSyndicationExtension.MatchByType)
             .ShouldBeOfType<ITunesSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Subtitle.ShouldBe("That song you like.");
+        byPredicate.Context.Author.ShouldBe("BigStar");
+        byPredicate.Context.Summary.ShouldBe("Duh... That song you like");
+        byPredicate.Context.Owner!.EmailAddress.ShouldBe("owner@bigstar.com");
+        byPredicate.Context.Owner.Name.ShouldBe("BigStar's Guy");
+        byPredicate.Context.Image.ShouldBe(new Uri("http://www.eexample.com/image.jpg"));
+        byPredicate.Context.Duration.ShouldBe(new TimeSpan(0, 3, 21));
+        byPredicate.Context.Keywords.ShouldBe(["loud", "good for parties"]);
+        byPredicate.Context.ExplicitMaterial.ShouldBe(ITunesExplicitMaterial.Clean);
+        byPredicate.Context.Categories.Select(category => category.Text).ShouldBe(["Rock", "Folk"]);
     }
 
     /// <summary>

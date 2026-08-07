@@ -230,9 +230,14 @@ public class BasicGeocodingSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An item carrying <c>geo:lat</c> and <c>geo:long</c> is found again after the feed is parsed, by
-    /// both the generic lookup and the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the latitude and longitude the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as BasicGeocodingSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected neither coordinate.
+    /// </remarks>
     [TestMethod]
     public void BasicGeocodingFullTest()
     {
@@ -242,13 +247,16 @@ public class BasicGeocodingSyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
 
-        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        BasicGeocodingSyndicationExtension? itemExtension = item.FindExtension<BasicGeocodingSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension)
+        BasicGeocodingSyndicationExtension byType = item.FindExtension<BasicGeocodingSyndicationExtension>().ShouldNotBeNull();
+        BasicGeocodingSyndicationExtension byPredicate = item
+            .FindExtension(BasicGeocodingSyndicationExtension.MatchByType)
             .ShouldBeOfType<BasicGeocodingSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Latitude.ShouldBe(41.0m);
+        byPredicate.Context.Longitude.ShouldBe(-74.12m);
     }
 
     /// <summary>

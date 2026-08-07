@@ -67,21 +67,24 @@ public class ComparisonUtilityTests
     }
 
     /// <summary>
-    /// Two equal-length day-of-week lists differing at one position — <c>Friday</c> against
-    /// <c>Tuesday</c> — compare unequal.
+    /// The first differing position decides the order and its sign is antisymmetric: <c>Friday</c>
+    /// (<c>5</c>) is the greater enumeration value, so the list holding it is the greater sequence, and
+    /// the same pair compared the other way round is the lesser.
     /// </summary>
     [TestMethod]
-    public void CompareSequence_DayOfWeek_WhenDifferentValues_ReturnsNonZero()
+    public void CompareSequence_DayOfWeek_WhenSourceHoldsTheLaterDay_IsPositiveAndAntisymmetric()
     {
         // Arrange
         IList<DayOfWeek> source = [DayOfWeek.Monday, DayOfWeek.Friday];
         IList<DayOfWeek> target = [DayOfWeek.Monday, DayOfWeek.Tuesday];
 
         // Act
-        int result = ComparisonUtility.CompareSequence(source, target);
+        int forward = ComparisonUtility.CompareSequence(source, target);
+        int reverse = ComparisonUtility.CompareSequence(target, source);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>
@@ -185,21 +188,23 @@ public class ComparisonUtilityTests
     }
 
     /// <summary>
-    /// Two equal-length integer lists differing at the second element — <c>5</c> against <c>2</c> —
-    /// compare unequal.
+    /// The second element decides and the third never gets a say: <c>5</c> is greater than <c>2</c>, so
+    /// the list holding it is the greater sequence, and the reverse comparison is the lesser.
     /// </summary>
     [TestMethod]
-    public void CompareSequence_Int_WhenDifferentValues_ReturnsNonZero()
+    public void CompareSequence_Int_WhenSourceHoldsTheLargerValue_IsPositiveAndAntisymmetric()
     {
         // Arrange
         IList<int> source = [1, 5, 3];
         IList<int> target = [1, 2, 3];
 
         // Act
-        int result = ComparisonUtility.CompareSequence(source, target);
+        int forward = ComparisonUtility.CompareSequence(source, target);
+        int reverse = ComparisonUtility.CompareSequence(target, source);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>
@@ -303,21 +308,23 @@ public class ComparisonUtilityTests
     }
 
     /// <summary>
-    /// Two equal-length long lists differing at the second element — <c>999</c> against <c>200</c> —
-    /// compare unequal.
+    /// <c>999</c> is greater than <c>200</c>, so the list holding it is the greater sequence and the
+    /// reverse comparison is the lesser.
     /// </summary>
     [TestMethod]
-    public void CompareSequence_Long_WhenDifferentValues_ReturnsNonZero()
+    public void CompareSequence_Long_WhenSourceHoldsTheLargerValue_IsPositiveAndAntisymmetric()
     {
         // Arrange
         IList<long> source = [100L, 999L];
         IList<long> target = [100L, 200L];
 
         // Act
-        int result = ComparisonUtility.CompareSequence(source, target);
+        int forward = ComparisonUtility.CompareSequence(source, target);
+        int reverse = ComparisonUtility.CompareSequence(target, source);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>
@@ -391,21 +398,23 @@ public class ComparisonUtilityTests
     }
 
     /// <summary>
-    /// Two equal-length string lists differing at the second element — <c>zebra</c> against
-    /// <c>banana</c> — compare unequal.
+    /// Under <c>StringComparison.Ordinal</c> <c>zebra</c> sorts after <c>banana</c>, so the list holding
+    /// it is the greater sequence and the reverse comparison is the lesser.
     /// </summary>
     [TestMethod]
-    public void CompareSequence_String_WhenDifferentValues_ReturnsNonZero()
+    public void CompareSequence_String_WhenSourceHoldsTheLaterWord_IsPositiveAndAntisymmetric()
     {
         // Arrange
         IList<string> source = ["apple", "zebra"];
         IList<string> target = ["apple", "banana"];
 
         // Act
-        int result = ComparisonUtility.CompareSequence(source, target, StringComparison.Ordinal);
+        int forward = ComparisonUtility.CompareSequence(source, target, StringComparison.Ordinal);
+        int reverse = ComparisonUtility.CompareSequence(target, source, StringComparison.Ordinal);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>
@@ -510,21 +519,24 @@ public class ComparisonUtilityTests
     }
 
     /// <summary>
-    /// Two equal-length type lists differing at the second element — <c>double</c> against <c>int</c> —
-    /// compare unequal, the comparison running over the full type names.
+    /// The comparison runs over <see cref="Type.FullName"/> and not over the C# keyword, which is what
+    /// fixes its direction: <c>System.Double</c> sorts before <c>System.Int32</c> ordinally, so the list
+    /// holding <c>double</c> is the lesser sequence and the reverse comparison is the greater.
     /// </summary>
     [TestMethod]
-    public void CompareSequence_Type_WhenDifferentTypes_ReturnsNonZero()
+    public void CompareSequence_Type_WhenSourceHoldsTheEarlierFullName_IsNegativeAndAntisymmetric()
     {
         // Arrange
         IList<Type> source = [typeof(string), typeof(double)];
         IList<Type> target = [typeof(string), typeof(int)];
 
         // Act
-        int result = ComparisonUtility.CompareSequence(source, target);
+        int forward = ComparisonUtility.CompareSequence(source, target);
+        int reverse = ComparisonUtility.CompareSequence(target, source);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>
@@ -611,21 +623,24 @@ public class ComparisonUtilityTests
     }
 
     /// <summary>
-    /// Two equal-length URI lists whose second hosts differ — <c>different.com</c> against
-    /// <c>test.com</c> — compare unequal.
+    /// The second hosts decide: <c>http://different.com/</c> sorts before <c>http://test.com/</c>
+    /// ordinally, so the list holding it is the lesser sequence and the reverse comparison is the
+    /// greater.
     /// </summary>
     [TestMethod]
-    public void CompareSequence_Uri_WhenDifferentValues_ReturnsNonZero()
+    public void CompareSequence_Uri_WhenSourceHoldsTheEarlierHost_IsNegativeAndAntisymmetric()
     {
         // Arrange
         IList<Uri> source = [new Uri("http://example.com"), new Uri("http://different.com")];
         IList<Uri> target = [new Uri("http://example.com"), new Uri("http://test.com")];
 
         // Act
-        int result = ComparisonUtility.CompareSequence(source, target, StringComparison.Ordinal);
+        int forward = ComparisonUtility.CompareSequence(source, target, StringComparison.Ordinal);
+        int reverse = ComparisonUtility.CompareSequence(target, source, StringComparison.Ordinal);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>
@@ -737,10 +752,12 @@ public class ComparisonUtilityTests
     }
 
     /// <summary>
-    /// Two equal-length navigator lists whose second documents hold different text compare unequal.
+    /// The second documents decide, on their serialized markup: <c>&lt;root&gt;different&lt;/root&gt;</c>
+    /// sorts before <c>&lt;root&gt;value2&lt;/root&gt;</c> ordinally, so the list holding it is the lesser
+    /// sequence and the reverse comparison is the greater.
     /// </summary>
     [TestMethod]
-    public void CompareSequence_XPathNavigator_WhenDifferentXml_ReturnsNonZero()
+    public void CompareSequence_XPathNavigator_WhenSourceHoldsTheEarlierMarkup_IsNegativeAndAntisymmetric()
     {
         // Arrange
         string xml1 = "<root>value1</root>";
@@ -750,10 +767,12 @@ public class ComparisonUtilityTests
         IList<XPathNavigator> target = [CreateNavigator(xml1), CreateNavigator(xml3)];
 
         // Act
-        int result = ComparisonUtility.CompareSequence(source, target);
+        int forward = ComparisonUtility.CompareSequence(source, target);
+        int reverse = ComparisonUtility.CompareSequence(target, source);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>
@@ -865,10 +884,18 @@ public class ComparisonUtilityTests
     }
 
     /// <summary>
-    /// Two single-entry dictionaries sharing a key but differing in value compare unequal.
+    /// Two single-entry dictionaries sharing a key are ordered by that key's value:
+    /// <c>differentValue</c> sorts before <c>value1</c> ordinally, so the dictionary holding it is the
+    /// lesser and the reverse comparison is the greater.
     /// </summary>
+    /// <remarks>
+    ///     The key is present in both, which is what makes this pair antisymmetric at all. A key the
+    ///     other dictionary does not hold yields <c>-1</c> in whichever direction it is missing, and
+    ///     <c>CompareSequence_Dictionary_WhenKeyNotFoundInTarget_ReturnsNegativeOne</c> pins that
+    ///     deliberately asymmetric case separately.
+    /// </remarks>
     [TestMethod]
-    public void CompareSequence_Dictionary_WhenDifferentValues_ReturnsNonZero()
+    public void CompareSequence_Dictionary_WhenSourceHoldsTheEarlierValue_IsNegativeAndAntisymmetric()
     {
         // Arrange
         var source = new Dictionary<string, string>
@@ -881,10 +908,12 @@ public class ComparisonUtilityTests
         };
 
         // Act
-        int result = ComparisonUtility.CompareSequence(source, target, StringComparison.Ordinal);
+        int forward = ComparisonUtility.CompareSequence(source, target, StringComparison.Ordinal);
+        int reverse = ComparisonUtility.CompareSequence(target, source, StringComparison.Ordinal);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>

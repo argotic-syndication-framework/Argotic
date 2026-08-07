@@ -38,38 +38,27 @@ public class TrackbackDiscoveryMetadataTests
     }
 
     /// <summary>
-    /// Constructing from a navigator over a Trackback RDF island completes without throwing.
+    /// Constructing from a navigator over a Trackback RDF island runs the load and keeps every attribute
+    /// the <c>rdf:Description</c> carries: the <c>rdf:about</c>, the <c>dc:identifier</c>, the
+    /// <c>dc:title</c> and the <c>trackback:ping</c> endpoint.
     /// </summary>
-    /// <remarks>
-    ///     That is the whole of the guarantee: nothing here asserts what was loaded. The body also
-    ///     catches an <c>XPathException</c> the current source cannot raise — the selector it was written
-    ///     around now reads <c>rdf:RDF/rdf:Description</c> — so the record does in fact load.
-    /// </remarks>
     [TestMethod]
-    public void Constructor_WithNavigator_CallsLoad()
+    public void Constructor_WithNavigator_LoadsEveryAttributeOfTheIsland()
     {
         // Arrange
-        // Note: The Load method has a bug in the XPath expression (uses \r instead of /)
-        // so this test verifies the constructor doesn't throw and calls Load
         using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.TrackbackRdfMetadata));
         XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToRoot();
 
-        // Act & Assert - just verify constructor completes without throwing
-        // The actual loading will fail due to the XPath bug in the source code
-        TrackbackDiscoveryMetadata metadata;
-        try
-        {
-            metadata = new TrackbackDiscoveryMetadata(navigator);
-            // If we get here, properties might not be loaded due to XPath bug
-            metadata.ShouldNotBeNull();
-        }
-        catch (System.Xml.XPath.XPathException)
-        {
-            // Expected due to bug in source code XPath expression
-            // The source has "rdf:RDF\rdf:Description" instead of "rdf:RDF/rdf:Description"
-        }
+        // Act
+        TrackbackDiscoveryMetadata metadata = new(navigator);
+
+        // Assert
+        metadata.About.ShouldBe(new Uri("http://example.com/post/1"));
+        metadata.Identifier.ShouldBe(new Uri("http://example.com/post/1"));
+        metadata.Title.ShouldBe("Test Post Title");
+        metadata.PingUrl.ShouldBe(new Uri("http://example.com/trackback/1"));
     }
 
     /// <summary>
@@ -239,35 +228,28 @@ public class TrackbackDiscoveryMetadataTests
     }
 
     /// <summary>
-    /// Loading from a navigator over a Trackback RDF island completes without throwing.
+    /// Loading from a navigator over a Trackback RDF island reports <see langword="true"/> and fills all
+    /// four members from the <c>rdf:Description</c> attributes.
     /// </summary>
-    /// <remarks>
-    ///     The return value is read into a local and never asserted, and the <c>XPathException</c> the
-    ///     body catches can no longer be raised: the selector now reads <c>rdf:RDF/rdf:Description</c>.
-    /// </remarks>
     [TestMethod]
-    public void Load_WithNavigator_DoesNotThrowArgumentNullExceptionForValidNavigator()
+    public void Load_WithNavigator_ReturnsTrueAndFillsTheRecord()
     {
         // Arrange
-        // Note: The Load method has a bug in the XPath expression (uses \r instead of /)
-        // so we can only test that it handles null correctly and doesn't throw for valid navigator
         TrackbackDiscoveryMetadata metadata = new();
         using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.TrackbackRdfMetadata));
         XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToRoot();
 
-        // Act & Assert
-        try
-        {
-            bool loaded = metadata.Load(navigator);
-            // If Load completes (after source bug fix), it should set properties
-        }
-        catch (System.Xml.XPath.XPathException)
-        {
-            // Expected due to bug in source code XPath expression
-            // The source has "rdf:RDF\rdf:Description" instead of "rdf:RDF/rdf:Description"
-        }
+        // Act
+        bool loaded = metadata.Load(navigator);
+
+        // Assert
+        loaded.ShouldBeTrue();
+        metadata.About.ShouldBe(new Uri("http://example.com/post/1"));
+        metadata.Identifier.ShouldBe(new Uri("http://example.com/post/1"));
+        metadata.Title.ShouldBe("Test Post Title");
+        metadata.PingUrl.ShouldBe(new Uri("http://example.com/trackback/1"));
     }
 
     /// <summary>
@@ -437,10 +419,12 @@ public class TrackbackDiscoveryMetadataTests
     }
 
     /// <summary>
-    /// Records describing different entries do not compare equal.
+    /// <c>About</c> is compared first and decides: <c>http://example.com/post/1</c> sorts before
+    /// <c>http://example.com/post/2</c>, so the first record is the lesser and the second the greater.
+    /// The ping URLs would say the same, but they are never reached.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentMetadata_ReturnsNonZero()
+    public void CompareTo_WhenAboutSortsEarlier_IsNegativeAndAntisymmetric()
     {
         // Arrange
         TrackbackDiscoveryMetadata metadata1 = new()
@@ -455,10 +439,12 @@ public class TrackbackDiscoveryMetadataTests
         };
 
         // Act
-        int result = metadata1.CompareTo(metadata2);
+        int forward = metadata1.CompareTo(metadata2);
+        int reverse = metadata2.CompareTo(metadata1);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>

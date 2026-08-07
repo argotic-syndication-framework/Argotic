@@ -339,9 +339,12 @@ public class FeedHistorySyndicationExtensionTest
 
     #region Round-trip XML Tests
 
-    /// <summary>An RSS 2.0 feed whose item carries <c>fh:archive</c> and <c>fh:complete</c> parses without error.</summary>
+    /// <summary>
+    /// An RSS 2.0 feed whose item carries <c>fh:archive</c> and <c>fh:complete</c> attaches the extension to
+    /// the item and to nothing else — the channel carries no Feed History extension of its own.
+    /// </summary>
     [TestMethod]
-    public void Load_ValidXml_ReturnsTrue()
+    public void Load_ValidXml_AttachesTheExtensionToTheItemOnly()
     {
         // Arrange
         string strXml = ExtensionTestUtil.GetWrappedXml(Namespc, StrExtXml);
@@ -351,8 +354,10 @@ public class FeedHistorySyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
 
-        // Assert - Load should complete without error
-        feed.ShouldNotBeNull();
+        // Assert
+        RssItem item = feed.Channel.Items.Single();
+        item.FindExtension<FeedHistorySyndicationExtension>().ShouldNotBeNull();
+        feed.Channel.HasExtensions.ShouldBeFalse();
     }
 
     /// <summary>An item carrying both <c>fh:archive</c> and <c>fh:complete</c> yields an extension with both flags set.</summary>
@@ -437,9 +442,14 @@ public class FeedHistorySyndicationExtensionTest
     }
 
     /// <summary>
-    /// A parsed item reports that it carries extensions, and the Feed History extension is retrievable both by generic type and through the
-    /// type predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying both flags the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as FeedHistorySyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — a null check wearing a type check's
+    ///     clothes — and no parsed value was inspected at all.
+    /// </remarks>
     [TestMethod]
     public void FullTest_LoadAndFindExtension_WorksCorrectly()
     {
@@ -452,13 +462,16 @@ public class FeedHistorySyndicationExtensionTest
         feed.Load(reader);
 
         // Assert
-        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        FeedHistorySyndicationExtension? itemExtension = item.FindExtension<FeedHistorySyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(FeedHistorySyndicationExtension.MatchByType) as FeedHistorySyndicationExtension)
+        FeedHistorySyndicationExtension byType = item.FindExtension<FeedHistorySyndicationExtension>().ShouldNotBeNull();
+        FeedHistorySyndicationExtension byPredicate = item
+            .FindExtension(FeedHistorySyndicationExtension.MatchByType)
             .ShouldBeOfType<FeedHistorySyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.IsArchive.ShouldBeTrue();
+        byPredicate.Context.IsComplete.ShouldBeTrue();
     }
 
     #endregion
@@ -518,19 +531,25 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBe(0);
     }
 
-    /// <summary>Extensions carrying different archive and complete flags do not compare equal.</summary>
+    /// <summary>
+    /// The archived, complete extension sorts after the one flagged neither, and the reverse comparison
+    /// agrees: <c>Context.IsArchive</c> is the first member that differs, and <c>true</c> follows
+    /// <c>false</c>.
+    /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentExtensions_ReturnsNonZero()
+    public void CompareTo_DifferentExtensions_OrdersByIsArchiveAndIsAntisymmetric()
     {
         // Arrange
         FeedHistorySyndicationExtension target = CreateExtension1();
         FeedHistorySyndicationExtension other = CreateExtension2();
 
         // Act
-        int actual = target.CompareTo(other);
+        int forward = target.CompareTo(other);
+        int reverse = other.CompareTo(target);
 
         // Assert
-        actual.ShouldNotBe(0);
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>An extension sorts after <see langword="null"/>, returning <c>1</c>.</summary>
@@ -620,18 +639,27 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeFalse();
     }
 
-    /// <summary>Hashing an extension flagged archive and complete yields a non-zero value.</summary>
+    /// <summary>
+    /// Two extensions flagged archive and complete are equal and hash equally, and hashing one twice gives
+    /// the same answer.
+    /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>hash.ShouldNotBe(0)</c>, which says nothing about any
+    ///     implementation: <see cref="HashCode"/> is seeded per process, so the value is unpredictable and
+    ///     only 1 run in 2^32 would have seen it land on <c>0</c>.
+    /// </remarks>
     [TestMethod]
-    public void GetHashCode_DoesNotThrow()
+    public void GetHashCode_EqualExtensions_AgreeAndAreStable()
     {
         // Arrange
-        FeedHistorySyndicationExtension target = CreateExtension1();
+        FeedHistorySyndicationExtension first = CreateExtension1();
+        FeedHistorySyndicationExtension second = CreateExtension1();
 
-        // Act
-        int hash = target.GetHashCode();
-
-        // Assert
-        hash.ShouldNotBe(0);
+        // Act & Assert
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>The equality operator holds for two extensions carrying the same flags.</summary>
@@ -739,19 +767,20 @@ public class FeedHistorySyndicationExtensionTest
         actual.ShouldBeTrue();
     }
 
-    /// <summary>The less-than operator evaluates on two extensions carrying different flags without throwing.</summary>
+    /// <summary>
+    /// The archived, complete extension does not sort before the one flagged neither, and the reverse
+    /// comparison agrees — <c>Context.IsArchive</c> decides, and <c>true</c> follows <c>false</c>.
+    /// </summary>
     [TestMethod]
-    public void OperatorLessThan_VerifyOperatorWorks()
+    public void OperatorLessThan_ArchivedExtension_DoesNotSortFirst()
     {
         // Arrange
         FeedHistorySyndicationExtension first = CreateExtension1();
         FeedHistorySyndicationExtension second = CreateExtension2();
 
-        // Act
-        bool result = first < second;
-
-        // Assert - Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        // Act & Assert
+        (first < second).ShouldBeFalse();
+        (second < first).ShouldBeTrue();
     }
 
     /// <summary>A <see langword="null"/> left operand sorts before a populated extension.</summary>
@@ -784,19 +813,20 @@ public class FeedHistorySyndicationExtensionTest
         result.ShouldBeFalse();
     }
 
-    /// <summary>The greater-than operator evaluates on two extensions carrying different flags without throwing.</summary>
+    /// <summary>
+    /// The archived, complete extension sorts after the one flagged neither, and the reverse comparison
+    /// agrees — <c>Context.IsArchive</c> decides, and <c>true</c> follows <c>false</c>.
+    /// </summary>
     [TestMethod]
-    public void OperatorGreaterThan_VerifyOperatorWorks()
+    public void OperatorGreaterThan_ArchivedExtension_SortsLast()
     {
         // Arrange
         FeedHistorySyndicationExtension first = CreateExtension1();
         FeedHistorySyndicationExtension second = CreateExtension2();
 
-        // Act
-        bool result = first > second;
-
-        // Assert - Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        // Act & Assert
+        (first > second).ShouldBeTrue();
+        (second > first).ShouldBeFalse();
     }
 
     /// <summary>A <see langword="null"/> left operand never sorts after a populated extension.</summary>

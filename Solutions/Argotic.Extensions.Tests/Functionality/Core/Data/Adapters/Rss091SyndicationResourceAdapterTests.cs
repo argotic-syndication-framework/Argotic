@@ -137,10 +137,13 @@ public class Rss091SyndicationResourceAdapterTests
         adapter.Fill(feed);
 
         // Assert
-        feed.Channel.Items.Count.ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(2);
         feed.Channel.Items[0].Title.ShouldBe("Test Item");
         feed.Channel.Items[0].Link.ShouldBe(new Uri("http://example.com/item1"));
         feed.Channel.Items[0].Description.ShouldBe("Test item description");
+        feed.Channel.Items[1].Title.ShouldBe("Second Test Item");
+        feed.Channel.Items[1].Link.ShouldBe(new Uri("http://example.com/item2"));
+        feed.Channel.Items[1].Description.ShouldBe("Second test item description");
     }
 
     /// <summary>
@@ -475,8 +478,13 @@ public class Rss091SyndicationResourceAdapterTests
     }
 
     /// <summary>
-    /// A retrieval limit of <c>0</c> means no limit, and the feed's one item is read.
+    /// A retrieval limit of <c>0</c> means no limit: both of the feed's items are read, in document order.
     /// </summary>
+    /// <remarks>
+    ///     The fixture carries two items for this test's sake. Against the one-item document it used to
+    ///     parse, "no limit" and "a limit of one" produce the same count, so the assertion could not fail
+    ///     for the reason the method is named after. Asserting both titles pins the ordering too.
+    /// </remarks>
     [TestMethod]
     public void Fill_WithZeroRetrievalLimit_RetrievesAllItems()
     {
@@ -495,7 +503,9 @@ public class Rss091SyndicationResourceAdapterTests
         adapter.Fill(feed);
 
         // Assert
-        feed.Channel.Items.Count.ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(2);
+        feed.Channel.Items[0].Title.ShouldBe("Test Item");
+        feed.Channel.Items[1].Title.ShouldBe("Second Test Item");
     }
 
     /// <summary>

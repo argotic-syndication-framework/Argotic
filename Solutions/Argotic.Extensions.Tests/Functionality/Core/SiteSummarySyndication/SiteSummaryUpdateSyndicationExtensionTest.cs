@@ -58,20 +58,29 @@ public class SiteSummaryUpdateSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Hashing a populated extension returns a non-zero value rather than throwing.
+    /// Two extensions built from the same period, frequency and update base are equal and hash equally,
+    /// and hashing one twice gives the same answer.
     /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>hash.ShouldNotBe(0)</c>, which says nothing about any
+    ///     implementation: <see cref="HashCode.Combine{T}(T)"/> is seeded per process, so the value is
+    ///     unpredictable and only 1 in 2^32 runs would have seen it land on <c>0</c> anyway.
+    /// </remarks>
     [TestMethod]
     public void SiteSummarySyndicationGetHashCodeTest()
     {
-        // Verify GetHashCode does not throw
-        SiteSummaryUpdateSyndicationExtension target = CreateExtension1();
-        int hash = target.GetHashCode();
+        SiteSummaryUpdateSyndicationExtension first = CreateExtension1();
+        SiteSummaryUpdateSyndicationExtension second = CreateExtension1();
 
-        hash.ShouldNotBe(0);
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>
-    /// An RSS 2.0 feed whose item carries <c>sy:</c> elements loads without error.
+    /// An RSS 2.0 feed whose item carries <c>sy:updatePeriod</c>, <c>sy:updateFrequency</c> and an
+    /// RFC 3339 <c>sy:updateBase</c> yields an extension holding all three, the update base read as UTC.
     /// </summary>
     [TestMethod]
     public void SiteSummaryUpdateLoadTest()
@@ -81,6 +90,16 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new();
         feed.Load(reader);
+
+        RssItem item = feed.Channel.Items.Single();
+        SiteSummaryUpdateSyndicationExtension extension = item.FindExtension<SiteSummaryUpdateSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.Period.ShouldBe(SiteSummaryUpdatePeriod.Hourly);
+        extension.Context.Frequency.ShouldBe(2);
+        extension.Context.Base.ShouldBe(new DateTime(2010, 8, 1, 0, 0, 0, DateTimeKind.Utc));
+
+        // DateTime.Equals disregards Kind, so the instant above would pass on a Local or Unspecified
+        // value too; TryParseRfc3339DateTime promises Utc, and this is what holds it to that.
+        extension.Context.Base.Kind.ShouldBe(DateTimeKind.Utc);
     }
 
     /// <summary>
@@ -96,9 +115,14 @@ public class SiteSummaryUpdateSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A loaded feed's single item reports that it has extensions, and the syndication-module one is found
-    /// both by type argument and through the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the period and frequency the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as SiteSummaryUpdateSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected no parsed value.
+    /// </remarks>
     [TestMethod]
     public void SiteSummaryUpdateFullTest()
     {
@@ -111,10 +135,14 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        SiteSummaryUpdateSyndicationExtension? itemExtension = item.FindExtension<SiteSummaryUpdateSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(SiteSummaryUpdateSyndicationExtension.MatchByType) as SiteSummaryUpdateSyndicationExtension)
+        SiteSummaryUpdateSyndicationExtension byType = item.FindExtension<SiteSummaryUpdateSyndicationExtension>().ShouldNotBeNull();
+        SiteSummaryUpdateSyndicationExtension byPredicate = item
+            .FindExtension(SiteSummaryUpdateSyndicationExtension.MatchByType)
             .ShouldBeOfType<SiteSummaryUpdateSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Period.ShouldBe(SiteSummaryUpdatePeriod.Hourly);
+        byPredicate.Context.Frequency.ShouldBe(2);
     }
 
     /// <summary>

@@ -727,10 +727,26 @@ public class ExtensionDiscoveryBehaviorTests
     }
 
     /// <summary>
-    /// <c>GetExtensions</c> instantiates every type the scan returns, one instance each, with none dropped.
+    /// <c>GetExtensions</c> instantiates every type the scan returns, one distinct instance each, with none
+    /// dropped — all twenty-seven of them.
     /// </summary>
     /// <remarks>
+    ///     <para>
     ///     The scan feeds <c>GetExtensions</c> directly, so instantiability is the contract that matters.
+    ///     </para>
+    ///     <para>
+    ///     The count used to be asserted against <c>FrameworkExtensions.Count</c> — the property under test,
+    ///     compared to itself. That is self-fulfilling: a scan returning nothing satisfies it, and so does a
+    ///     scan returning half the assembly. A literal is the only spelling of the claim that can fail.
+    ///     </para>
+    ///     <para>
+    ///     Twenty-seven is what the assembly holds: <c>grep ': SyndicationExtension\b' Argotic.Extensions/Core</c>
+    ///     returns twenty-seven concrete classes, and the family table in <c>CLAUDE.md</c> sums to twenty-seven
+    ///     across its twenty-two rows — <c>AtomPublishing</c> 2, <c>DublinCore</c> 2, <c>Sitemap</c> 4, and one
+    ///     each for the other nineteen. The figure of twenty-eight quoted in that file's prose is an arithmetic
+    ///     error; <c>GeoRSS</c> serves both the Simple and the GML encodings from a single
+    ///     <c>GeoRssSyndicationExtension</c>.
+    ///     </para>
     /// </remarks>
     [TestMethod]
     public void FrameworkExtensions_EveryReturnedTypeCanBeInstantiated()
@@ -739,7 +755,9 @@ public class ExtensionDiscoveryBehaviorTests
         IList<ISyndicationExtension> extensions =
             SyndicationExtensionAdapter.GetExtensions(SyndicationExtensionAdapter.FrameworkExtensions);
 
-        extensions.Count.ShouldBe(SyndicationExtensionAdapter.FrameworkExtensions.Count);
+        extensions.Count.ShouldBe(27);
+        extensions.ShouldNotContain(extension => extension == null);
+        extensions.Select(extension => extension.GetType()).Distinct().Count().ShouldBe(27);
     }
 
     #endregion

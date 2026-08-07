@@ -64,29 +64,30 @@ public class BlogChannelSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A populated extension hashes to something other than <c>0</c>.
+    /// Two extensions built from the same four URIs are equal and hash equally, and hashing one twice
+    /// gives the same answer.
     /// </summary>
     /// <remarks>
-    ///     Weaker than the contract its siblings assert — that equal objects agree on their hash code —
-    ///     and deliberately so: this pins only that hashing a populated extension completes and does not
-    ///     land on the default.
+    ///     The previous assertion was <c>hash.ShouldNotBe(0)</c>, which says nothing about any
+    ///     implementation: <see cref="HashCode.Combine{T}(T)"/> is seeded per process, so the value is
+    ///     unpredictable and only 1 in 2^32 runs would have seen it land on <c>0</c> anyway.
     /// </remarks>
     [TestMethod]
     public void BlogChannelGetHashCodeTest()
     {
-        // Verify GetHashCode doesn't throw
-        BlogChannelSyndicationExtension target = CreateExtension1();
-        int hash = target.GetHashCode();
-        hash.ShouldNotBe(0);
+        BlogChannelSyndicationExtension first = CreateExtension1();
+        BlogChannelSyndicationExtension second = CreateExtension1();
+
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>
-    /// A feed carrying the four blogChannel elements parses without throwing.
+    /// A feed carrying the four blogChannel elements yields an extension holding the four URIs the
+    /// document declared.
     /// </summary>
-    /// <remarks>
-    ///     Nothing about the parsed values is asserted here; <c>BlogChannelFullTest</c> is what checks
-    ///     that the extension was attached and <c>BlogChannelContextTest</c> what it holds.
-    /// </remarks>
     [TestMethod]
     public void BlogChannelLoadTest()
     {
@@ -95,6 +96,13 @@ public class BlogChannelSyndicationExtensionTest
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new();
         feed.Load(reader);
+
+        RssItem item = feed.Channel.Items.Single();
+        BlogChannelSyndicationExtension extension = item.FindExtension<BlogChannelSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.BlogRoll.ShouldBe(new Uri("http://www.example.com/blogroll.opml"));
+        extension.Context.MySubscriptions.ShouldBe(new Uri("http://www.example.com/subscriptions.opml"));
+        extension.Context.Blink.ShouldBe(new Uri("http://www.example.com/promoted"));
+        extension.Context.Changes.ShouldBe(new Uri("http://www.example.com/changes.xml"));
     }
 
     /// <summary>
@@ -112,9 +120,14 @@ public class BlogChannelSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An item carrying the blogChannel elements is found again after the feed is parsed, by both the
-    /// generic lookup and the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the four URIs the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as BlogChannelSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected no parsed value.
+    /// </remarks>
     [TestMethod]
     public void BlogChannelFullTest()
     {
@@ -124,13 +137,16 @@ public class BlogChannelSyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
 
-        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        BlogChannelSyndicationExtension? itemExtension = item.FindExtension<BlogChannelSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(BlogChannelSyndicationExtension.MatchByType) as BlogChannelSyndicationExtension)
+        BlogChannelSyndicationExtension byType = item.FindExtension<BlogChannelSyndicationExtension>().ShouldNotBeNull();
+        BlogChannelSyndicationExtension byPredicate = item
+            .FindExtension(BlogChannelSyndicationExtension.MatchByType)
             .ShouldBeOfType<BlogChannelSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Blink.ShouldBe(new Uri("http://www.example.com/promoted"));
+        byPredicate.Context.Changes.ShouldBe(new Uri("http://www.example.com/changes.xml"));
     }
 
     /// <summary>

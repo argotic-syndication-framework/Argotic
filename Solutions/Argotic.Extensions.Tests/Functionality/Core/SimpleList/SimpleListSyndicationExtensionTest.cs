@@ -243,18 +243,24 @@ public class SimpleListSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Extensions differing in their <c>TreatAsList</c> flag do not compare as equal.
+    /// The extension flagged <c>TreatAsList</c> sorts after a default-constructed one, and the reverse
+    /// comparison agrees: <c>Context.TreatAsList</c> is the first member compared, and <c>true</c> follows
+    /// <c>false</c>.
     /// </summary>
     [TestMethod]
-    public void SimpleListCompareTo_WithDifferentExtension_ReturnsNonZero()
+    public void SimpleListCompareTo_WithDifferentExtension_OrdersByTreatAsListAndIsAntisymmetric()
     {
         // Arrange
         SimpleListSyndicationExtension target = CreateExtension1();
         SimpleListSyndicationExtension other = new();
 
-        // Act & Assert
-        int result = target.CompareTo(other);
-        result.ShouldNotBe(0);
+        // Act
+        int forward = target.CompareTo(other);
+        int reverse = other.CompareTo(target);
+
+        // Assert
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     /// <summary>
@@ -324,19 +330,54 @@ public class SimpleListSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An extension carrying a context produces a non-zero hash code.
+    /// Two extensions carrying identical <c>Sorting</c> and <c>Grouping</c> collections are equal and hash
+    /// equally — the collections are folded in element by element, not by list reference.
     /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     The previous assertion was <c>hash.ShouldNotBe(0)</c> over the flag-only fixture, which says
+    ///     nothing about any implementation: <see cref="HashCode"/> is seeded per process.
+    ///     </para>
+    ///     <para>
+    ///     The flag-only case is covered by <c>SimpleListGetHashCode_EqualExtensions_ReturnSameValue</c>;
+    ///     this one exists for the collections, which are the §4.3 defect shape —
+    ///     <c>HashCodeUtility.Component&lt;T&gt;(T)</c> is the identity overload, so passing a list to it
+    ///     would hash the list instance while <c>CompareTo</c> walks it element by element.
+    ///     </para>
+    /// </remarks>
     [TestMethod]
-    public void SimpleListGetHashCodeTest()
+    public void SimpleListGetHashCode_EqualListInfo_AgreesAndIsStable()
     {
         // Arrange
-        SimpleListSyndicationExtension target = CreateExtension1();
+        static SimpleListSyndicationExtension Build()
+        {
+            SimpleListSyndicationExtension extension = new();
+            extension.Context.TreatAsList = true;
+            extension.Context.Sorting.Add(new SimpleListSort
+            {
+                Namespace = new Uri("http://www.example.com/ns"),
+                Element = "price",
+                Label = "Price",
+                DataType = SimpleListDataType.Number,
+                IsDefault = true
+            });
+            extension.Context.Grouping.Add(new SimpleListGroup
+            {
+                Namespace = new Uri("http://www.example.com/ns"),
+                Element = "category",
+                Label = "Category"
+            });
+            return extension;
+        }
 
-        // Act
-        int hash = target.GetHashCode();
+        SimpleListSyndicationExtension first = Build();
+        SimpleListSyndicationExtension second = Build();
 
-        // Assert
-        hash.ShouldNotBe(0);
+        // Act & Assert
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>
@@ -445,7 +486,8 @@ public class SimpleListSyndicationExtensionTest
     }
 
     /// <summary>
-    /// The <c>&gt;</c> operator evaluates over two extensions without throwing; which way they order is not asserted.
+    /// The extension flagged <c>TreatAsList</c> sorts after the one that is not, and the reverse comparison
+    /// agrees — <c>Context.TreatAsList</c> is the first member compared, and <c>true</c> follows <c>false</c>.
     /// </summary>
     [TestMethod]
     public void SimpleListOpGreaterThanTest()
@@ -454,11 +496,9 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension first = CreateExtension1();
         SimpleListSyndicationExtension second = CreateExtension2();
 
-        // Act
-        bool result = first > second;
-
-        // Assert - Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        // Act & Assert
+        (first > second).ShouldBeTrue();
+        (second > first).ShouldBeFalse();
     }
 
     /// <summary>
@@ -479,7 +519,8 @@ public class SimpleListSyndicationExtensionTest
     }
 
     /// <summary>
-    /// The <c>&lt;</c> operator evaluates over two extensions without throwing; which way they order is not asserted.
+    /// <c>&lt;</c> agrees with <c>&gt;</c>: the extension flagged <c>TreatAsList</c> is the greater of the two,
+    /// in both directions.
     /// </summary>
     [TestMethod]
     public void SimpleListOpLessThanTest()
@@ -488,11 +529,9 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension first = CreateExtension1();
         SimpleListSyndicationExtension second = CreateExtension2();
 
-        // Act
-        bool result = first < second;
-
-        // Assert - Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        // Act & Assert
+        (first < second).ShouldBeFalse();
+        (second < first).ShouldBeTrue();
     }
 
     /// <summary>
@@ -908,9 +947,15 @@ public class SimpleListSyndicationExtensionTest
     #region Load and CreateXml Tests
 
     /// <summary>
-    /// An RSS feed carrying <c>cf</c> elements on its only item loads and yields that item; the test stops
-    /// short of inspecting the extension itself.
+    /// An RSS feed carrying <c>cf</c> elements on its only item yields an extension whose context holds the
+    /// <c>treatAs</c> flag and both entries of the <c>listinfo</c> block, each with every attribute the
+    /// document declared.
     /// </summary>
+    /// <remarks>
+    ///     This is one of exactly three parse paths in the suite that no test reached a value through — the
+    ///     method loaded the feed and asserted only that the channel held one item, which the RSS adapter
+    ///     would satisfy whether or not a single <c>cf</c> element had been understood.
+    /// </remarks>
     [TestMethod]
     public void SimpleListLoadTest()
     {
@@ -923,8 +968,21 @@ public class SimpleListSyndicationExtensionTest
         feed.Load(reader);
 
         // Assert
-        feed.ShouldNotBeNull();
-        feed.Channel.Items.Count.ShouldBe(1);
+        RssItem item = feed.Channel.Items.Single();
+        SimpleListSyndicationExtension extension = item.FindExtension<SimpleListSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.TreatAsList.ShouldBeTrue();
+
+        SimpleListSort sort = extension.Context.Sorting.ShouldHaveSingleItem();
+        sort.Namespace.ShouldBe(new Uri("http://www.example.com/ns"));
+        sort.Element.ShouldBe("price");
+        sort.Label.ShouldBe("Price");
+        sort.DataType.ShouldBe(SimpleListDataType.Number);
+        sort.IsDefault.ShouldBeTrue();
+
+        SimpleListGroup group = extension.Context.Grouping.ShouldHaveSingleItem();
+        group.Namespace.ShouldBe(new Uri("http://www.example.com/ns"));
+        group.Element.ShouldBe("category");
+        group.Label.ShouldBe("Category");
     }
 
     /// <summary>

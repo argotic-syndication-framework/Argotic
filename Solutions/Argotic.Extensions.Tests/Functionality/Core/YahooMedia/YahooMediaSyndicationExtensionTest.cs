@@ -423,10 +423,17 @@ public class YahooMediaSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Content entities pointing at different URLs do not compare as equal.
+    /// The content declaring a file size sorts after the one that leaves it at zero, and the reverse
+    /// comparison agrees.
     /// </summary>
+    /// <remarks>
+    ///     <c>Url</c> is the twelfth member <c>CompareTo</c> reaches, and it never gets there: <c>FileSize</c>
+    ///     is compared sixth and already differs (1,024,000 against the default 0). The method was named for
+    ///     the URLs, which is not what decides this pair — worth stating, because a direction-free
+    ///     <c>ShouldNotBe(0)</c> let the name go unchallenged.
+    /// </remarks>
     [TestMethod]
-    public void YahooMediaContent_CompareTo_DifferentContent_ReturnsNonZero()
+    public void YahooMediaContent_CompareTo_DifferentContent_OrdersByFileSizeAndIsAntisymmetric()
     {
         // Arrange
         YahooMediaContent content1 = CreateBasicContent();
@@ -437,10 +444,12 @@ public class YahooMediaSyndicationExtensionTest
         };
 
         // Act
-        int result = content1.CompareTo(content2);
+        int forward = content1.CompareTo(content2);
+        int reverse = content2.CompareTo(content1);
 
         // Assert
-        result.ShouldNotBe(0);
+        forward.ShouldBeGreaterThan(0);
+        reverse.ShouldBeLessThan(0);
     }
 
     #endregion

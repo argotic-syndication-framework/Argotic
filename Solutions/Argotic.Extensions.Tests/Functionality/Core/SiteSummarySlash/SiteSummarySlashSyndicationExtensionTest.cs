@@ -60,20 +60,30 @@ public class SiteSummarySlashSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Hashing a populated extension returns a non-zero value rather than throwing.
+    /// Two extensions built from the same comment count, section, department and hit parade are equal and
+    /// hash equally, and hashing one twice gives the same answer.
     /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>hash.ShouldNotBe(0)</c>, which says nothing about any
+    ///     implementation: <see cref="HashCode.Combine{T}(T)"/> is seeded per process, so the value is
+    ///     unpredictable and only 1 in 2^32 runs would have seen it land on <c>0</c> anyway.
+    /// </remarks>
     [TestMethod]
     public void SiteSummarySlashGetHashCodeTest()
     {
-        // Verify GetHashCode does not throw
-        SiteSummarySlashSyndicationExtension target = CreateExtension1();
-        int hash = target.GetHashCode();
+        SiteSummarySlashSyndicationExtension first = CreateExtension1();
+        SiteSummarySlashSyndicationExtension second = CreateExtension1();
 
-        hash.ShouldNotBe(0);
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>
-    /// An RSS 2.0 feed whose item carries <c>slash:</c> elements loads without error.
+    /// An RSS 2.0 feed whose item carries <c>slash:comments</c>, CDATA <c>slash:section</c> and
+    /// <c>slash:department</c>, and a comma-separated <c>slash:hit_parade</c> yields an extension holding
+    /// all four, the hit parade split into its three integers.
     /// </summary>
     [TestMethod]
     public void SiteSummarySlashLoadTest()
@@ -83,6 +93,16 @@ public class SiteSummarySlashSyndicationExtensionTest
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new();
         feed.Load(reader);
+
+        RssItem item = feed.Channel.Items.Single();
+        SiteSummarySlashSyndicationExtension extension = item.FindExtension<SiteSummarySlashSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.Comments.ShouldBe(42);
+        extension.Context.Section.ShouldBe("Technology");
+        extension.Context.Department.ShouldBe("Software");
+        extension.Context.HitParade.Count.ShouldBe(3);
+        extension.Context.HitParade[0].ShouldBe(100);
+        extension.Context.HitParade[1].ShouldBe(200);
+        extension.Context.HitParade[2].ShouldBe(300);
     }
 
     /// <summary>
@@ -97,9 +117,14 @@ public class SiteSummarySlashSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A loaded feed's single item reports that it has extensions, and the slash-module one is found both
-    /// by type argument and through the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the comment count and the department the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as SiteSummarySlashSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected no parsed value.
+    /// </remarks>
     [TestMethod]
     public void SiteSummarySlashFullTest()
     {
@@ -112,10 +137,14 @@ public class SiteSummarySlashSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        SiteSummarySlashSyndicationExtension? itemExtension = item.FindExtension<SiteSummarySlashSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(SiteSummarySlashSyndicationExtension.MatchByType) as SiteSummarySlashSyndicationExtension)
+        SiteSummarySlashSyndicationExtension byType = item.FindExtension<SiteSummarySlashSyndicationExtension>().ShouldNotBeNull();
+        SiteSummarySlashSyndicationExtension byPredicate = item
+            .FindExtension(SiteSummarySlashSyndicationExtension.MatchByType)
             .ShouldBeOfType<SiteSummarySlashSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Comments.ShouldBe(42);
+        byPredicate.Context.Department.ShouldBe("Software");
     }
 
     /// <summary>
@@ -180,17 +209,18 @@ public class SiteSummarySlashSyndicationExtensionTest
     }
 
     /// <summary>
-    /// <c>&gt;</c> yields a boolean for two differing extensions without throwing; the direction is not
-    /// asserted.
+    /// The extension counting 42 comments sorts above the one counting 10, and the reverse comparison
+    /// agrees.
     /// </summary>
     [TestMethod]
     public void SiteSummarySlashOpGreaterThanTest()
     {
+        // Ordering is decided by the first member that differs, and Context.Comments is compared before
+        // department, section or hit parade: 42 against 10 makes extension 1 the greater.
         SiteSummarySlashSyndicationExtension first = CreateExtension1();
         SiteSummarySlashSyndicationExtension second = CreateExtension2();
-        bool result = first > second;
-        // Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        (first > second).ShouldBeTrue();
+        (second > first).ShouldBeFalse();
     }
 
     /// <summary>
@@ -206,17 +236,16 @@ public class SiteSummarySlashSyndicationExtensionTest
     }
 
     /// <summary>
-    /// <c>&lt;</c> yields a boolean for two differing extensions without throwing; the direction is not
-    /// asserted.
+    /// <c>&lt;</c> agrees with <c>&gt;</c>: the extension counting 10 comments is the lesser of the two,
+    /// in both directions.
     /// </summary>
     [TestMethod]
     public void SiteSummarySlashOpLessThanTest()
     {
         SiteSummarySlashSyndicationExtension first = CreateExtension1();
         SiteSummarySlashSyndicationExtension second = CreateExtension2();
-        bool result = first < second;
-        // Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        (first < second).ShouldBeFalse();
+        (second < first).ShouldBeTrue();
     }
 
     /// <summary>

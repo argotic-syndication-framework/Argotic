@@ -306,8 +306,14 @@ public static class FeedTestData
                                         """;
 
     /// <summary>
-    /// A full RSS 0.91 feed with all optional elements.
+    /// A full RSS 0.91 feed with all optional elements, carrying two items.
     /// </summary>
+    /// <remarks>
+    ///     The second item is what makes <c>Fill_WithZeroRetrievalLimit_RetrievesAllItems</c> mean anything.
+    ///     Against a one-item document, "no limit" and "a limit of one" produce the same count, so the test
+    ///     could not tell them apart. Its <c>Rss090</c> and <c>Rss092</c> siblings have always used two-item
+    ///     fixtures for exactly that reason.
+    /// </remarks>
     public const string Rss091Full = """
                                      <?xml version="1.0" encoding="UTF-8"?>
                                      <rss version="0.91">
@@ -348,6 +354,11 @@ public static class FeedTestData
                                                  <title>Test Item</title>
                                                  <link>http://example.com/item1</link>
                                                  <description>Test item description</description>
+                                             </item>
+                                             <item>
+                                                 <title>Second Test Item</title>
+                                                 <link>http://example.com/item2</link>
+                                                 <description>Second test item description</description>
                                              </item>
                                          </channel>
                                      </rss>

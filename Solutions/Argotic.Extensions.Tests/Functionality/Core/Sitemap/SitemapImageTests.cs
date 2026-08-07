@@ -346,20 +346,24 @@ public class SitemapImageTests
     }
 
     /// <summary>
-    /// Images with different locations do not compare equal.
+    /// Images are ordered by location, antisymmetrically: <c>a.jpg</c> sorts before <c>b.jpg</c>, and
+    /// reversing the operands reverses the sign.
     /// </summary>
     [TestMethod]
-    public void CompareTo_DifferentLocation_ReturnsNonZero()
+    public void CompareTo_DifferentLocation_OrdersByLocation()
     {
         // Arrange
         SitemapImage image1 = new(new Uri("https://example.com/a.jpg"));
         SitemapImage image2 = new(new Uri("https://example.com/b.jpg"));
 
         // Act
-        int result = image1.CompareTo(image2);
+        int forward = image1.CompareTo(image2);
+        int reverse = image2.CompareTo(image1);
 
         // Assert
-        result.ShouldNotBe(0);
+        // Location is the only comparand, compared as an absolute URI under OrdinalIgnoreCase.
+        forward.ShouldBeLessThan(0);
+        reverse.ShouldBeGreaterThan(0);
     }
 
     /// <summary>

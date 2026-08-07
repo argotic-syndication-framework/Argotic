@@ -91,9 +91,15 @@ public class CreativeCommonsSyndicationExtensionTest
     }
 
     /// <summary>
-    /// An item carrying two <c>creativeCommons:license</c> elements is found again after the feed is
-    /// parsed, by both the generic lookup and the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying both licence URIs the document declared, in document order.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as CreativeCommonsSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected neither licence. A non-null extension proves only that
+    ///     <i>one</i> <c>license</c> element parsed, so the count is part of the claim.
+    /// </remarks>
     [TestMethod]
     public void CreativeCommonsFullTest()
     {
@@ -103,13 +109,17 @@ public class CreativeCommonsSyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
 
-        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        CreativeCommonsSyndicationExtension? itemExtension = item.FindExtension<CreativeCommonsSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension)
+        CreativeCommonsSyndicationExtension byType = item.FindExtension<CreativeCommonsSyndicationExtension>().ShouldNotBeNull();
+        CreativeCommonsSyndicationExtension byPredicate = item
+            .FindExtension(CreativeCommonsSyndicationExtension.MatchByType)
             .ShouldBeOfType<CreativeCommonsSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Licenses.Count.ShouldBe(2);
+        byPredicate.Context.Licenses[0].ShouldBe(new Uri("http://www.example.com/license1.html"));
+        byPredicate.Context.Licenses[1].ShouldBe(new Uri("http://www.example.com/license2.html"));
     }
 
     /// <summary>

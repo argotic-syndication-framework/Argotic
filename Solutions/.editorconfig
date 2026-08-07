@@ -122,6 +122,12 @@ dotnet_separate_import_directive_groups = false
 # IDE0005: Remove unnecessary using directives
 dotnet_diagnostic.IDE0005.severity = warning
 
+# IDE0052: Remove unread private members
+# A private field or property that is written and never read is either dead weight or a member whose
+# reader was lost in a refactor. Measured during Wave 2 it lit up two sites, both since deleted; it now
+# lights up none, so promoting it from its silent default costs nothing and catches the next one.
+dotnet_diagnostic.IDE0052.severity = warning
+
 # Naming conventions
 dotnet_naming_rule.interface_should_be_prefixed_with_i.severity = warning
 dotnet_naming_rule.interface_should_be_prefixed_with_i.symbols = interface

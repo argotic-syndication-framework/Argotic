@@ -59,20 +59,29 @@ public class SiteSummaryContentSyndicationExtensionTest
     }
 
     /// <summary>
-    /// Hashing a populated extension returns a non-zero value rather than throwing.
+    /// Two extensions built from the same encoded markup are equal and hash equally, and hashing one
+    /// twice gives the same answer.
     /// </summary>
+    /// <remarks>
+    ///     The previous assertion was <c>hash.ShouldNotBe(0)</c>, which says nothing about any
+    ///     implementation: <see cref="HashCode.Combine{T}(T)"/> is seeded per process, so the value is
+    ///     unpredictable and only 1 in 2^32 runs would have seen it land on <c>0</c> anyway.
+    /// </remarks>
     [TestMethod]
     public void SiteSummaryContentGetHashCodeTest()
     {
-        // Verify GetHashCode does not throw
-        SiteSummaryContentSyndicationExtension target = CreateExtension1();
-        int hash = target.GetHashCode();
+        SiteSummaryContentSyndicationExtension first = CreateExtension1();
+        SiteSummaryContentSyndicationExtension second = CreateExtension1();
 
-        hash.ShouldNotBe(0);
+        ReferenceEquals(first, second).ShouldBeFalse("the two instances must be distinct for this to mean anything");
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     /// <summary>
-    /// An RSS 2.0 feed whose item carries a <c>content:encoded</c> element loads without error.
+    /// An RSS 2.0 feed whose item carries a CDATA <c>content:encoded</c> element yields an extension
+    /// holding the markup the CDATA section wrapped, unescaped.
     /// </summary>
     [TestMethod]
     public void SiteSummaryContentLoadTest()
@@ -82,6 +91,10 @@ public class SiteSummaryContentSyndicationExtensionTest
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new();
         feed.Load(reader);
+
+        RssItem item = feed.Channel.Items.Single();
+        SiteSummaryContentSyndicationExtension extension = item.FindExtension<SiteSummaryContentSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.Encoded.ShouldBe("<p>Test encoded content</p>");
     }
 
     /// <summary>
@@ -96,9 +109,14 @@ public class SiteSummaryContentSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A loaded feed's single item reports that it has extensions, and the content-module one is found both
-    /// by type argument and through the <c>MatchByType</c> predicate.
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the encoded markup the document declared.
     /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as SiteSummaryContentSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected no parsed value.
+    /// </remarks>
     [TestMethod]
     public void SiteSummaryContentFullTest()
     {
@@ -111,10 +129,13 @@ public class SiteSummaryContentSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        SiteSummaryContentSyndicationExtension? itemExtension = item.FindExtension<SiteSummaryContentSyndicationExtension>();
-        itemExtension.ShouldNotBeNull();
-        (item.FindExtension(SiteSummaryContentSyndicationExtension.MatchByType) as SiteSummaryContentSyndicationExtension)
+        SiteSummaryContentSyndicationExtension byType = item.FindExtension<SiteSummaryContentSyndicationExtension>().ShouldNotBeNull();
+        SiteSummaryContentSyndicationExtension byPredicate = item
+            .FindExtension(SiteSummaryContentSyndicationExtension.MatchByType)
             .ShouldBeOfType<SiteSummaryContentSyndicationExtension>();
+
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Encoded.ShouldBe("<p>Test encoded content</p>");
     }
 
     /// <summary>
@@ -180,17 +201,18 @@ public class SiteSummaryContentSyndicationExtensionTest
     }
 
     /// <summary>
-    /// <c>&gt;</c> yields a boolean for two differing extensions without throwing; the direction is not
-    /// asserted.
+    /// The extension encoding <c>Test encoded content</c> sorts above the one encoding
+    /// <c>Other encoded content</c>, and the reverse comparison agrees.
     /// </summary>
     [TestMethod]
     public void SiteSummaryContentOpGreaterThanTest()
     {
+        // Ordering is decided by Context.Encoded under StringComparison.Ordinal, where the first
+        // character that differs is 'T' (84) against 'O' (79) — so extension 1 is the greater.
         SiteSummaryContentSyndicationExtension first = CreateExtension1();
         SiteSummaryContentSyndicationExtension second = CreateExtension2();
-        bool result = first > second;
-        // Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        (first > second).ShouldBeTrue();
+        (second > first).ShouldBeFalse();
     }
 
     /// <summary>
@@ -206,17 +228,16 @@ public class SiteSummaryContentSyndicationExtensionTest
     }
 
     /// <summary>
-    /// <c>&lt;</c> yields a boolean for two differing extensions without throwing; the direction is not
-    /// asserted.
+    /// <c>&lt;</c> agrees with <c>&gt;</c>: the <c>Other encoded content</c> extension is the lesser of
+    /// the two, in both directions.
     /// </summary>
     [TestMethod]
     public void SiteSummaryContentOpLessThanTest()
     {
         SiteSummaryContentSyndicationExtension first = CreateExtension1();
         SiteSummaryContentSyndicationExtension second = CreateExtension2();
-        bool result = first < second;
-        // Just verify the operator works without throwing
-        result.ShouldBeOneOf(true, false);
+        (first < second).ShouldBeFalse();
+        (second < first).ShouldBeTrue();
     }
 
     /// <summary>

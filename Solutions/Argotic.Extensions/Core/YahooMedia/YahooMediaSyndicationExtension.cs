@@ -245,7 +245,14 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Context));
+    /// <remarks>
+    ///     The whole hash is <see cref="YahooMediaSyndicationExtensionContext.GetHashCode"/>, which folds the
+    ///     same members <see cref="CompareTo(YahooMediaSyndicationExtension)"/> walks, element by element.
+    ///     This used to be <c>HashCode.Combine(HashCodeUtility.Component(this.Context))</c> — the identity
+    ///     overload over a context that overrode nothing — so two extensions built from identical data
+    ///     compared equal and hashed by reference identity.
+    /// </remarks>
+    public override int GetHashCode() => this.Context.GetHashCode();
 
     /// <summary>
     /// Determines if operands are equal.

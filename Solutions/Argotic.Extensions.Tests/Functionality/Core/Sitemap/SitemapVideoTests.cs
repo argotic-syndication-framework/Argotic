@@ -5,9 +5,15 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 
 /// <summary>
 /// Covers <see cref="SitemapVideo"/>: the three values Google requires of every entry, the length and
-/// count limits the properties enforce on assignment, the advisory duration and rating constants, the
+/// count limits the properties enforce on assignment, the published duration and rating bounds, the
 /// defaults of the boolean elements, and the equality, ordering and hashing contracts.
 /// </summary>
+/// <remarks>
+///     Two neighbours carry what this file does not:
+///     <c>SitemapVideoComparisonBreadthTests</c> pins the breadth of the comparison and its agreement with
+///     the hash, and <c>SitemapVideoRangeEnforcementTests</c> pins the enforcement of the duration and
+///     rating bounds.
+/// </remarks>
 [TestClass]
 public class SitemapVideoTests
 {
@@ -215,9 +221,10 @@ public class SitemapVideoTests
     /// The longest duration Google accepts is <c>28800</c> seconds.
     /// </summary>
     /// <remarks>
-    ///     Eight hours. This constant and the rating pair are advisory: they are published so a caller can
-    ///     range-check before assigning, but <c>Duration</c> itself is unvalidated and nothing in the class
-    ///     consults them.
+    ///     Eight hours. This constant and the rating pair are the numeric facets of the Video Sitemap 1.1
+    ///     schema, and they are enforced: the setters throw outside the range and <c>Load</c> skips a source
+    ///     value outside it. <c>SitemapVideoRangeEnforcementTests</c> pins that; these four assert only the
+    ///     published values, which is what a consumer compiles against.
     /// </remarks>
     [TestMethod]
     public void MaxDuration_EqualsTwentyEightThousandEightHundred() =>

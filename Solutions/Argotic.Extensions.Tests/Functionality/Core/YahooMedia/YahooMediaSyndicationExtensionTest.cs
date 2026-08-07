@@ -69,19 +69,23 @@ public class YahooMediaSyndicationExtensionTest
     }
 
     /// <summary>
-    /// A default-constructed extension produces a non-zero hash code.
+    /// Two default-constructed extensions hash alike, and each hashes stably.
     /// </summary>
+    /// <remarks>
+    ///     This asserted only <c>hash.ShouldNotBe(0)</c>, which a hash built from reference identity satisfies
+    ///     unconditionally — so it stood over the defect it was named for rather than catching it. It now
+    ///     asserts the contract; <c>YahooMediaHashCodeContractTests</c> carries the populated case.
+    /// </remarks>
     [TestMethod]
     public void YahooMediaGetHashCodeTest()
     {
         // Arrange
         YahooMediaSyndicationExtension target = new();
+        YahooMediaSyndicationExtension identical = new();
 
-        // Act
-        int hash = target.GetHashCode();
-
-        // Assert
-        hash.ShouldNotBe(0);
+        // Act & Assert
+        target.GetHashCode().ShouldBe(identical.GetHashCode());
+        target.GetHashCode().ShouldBe(target.GetHashCode());
     }
 
     /// <summary>

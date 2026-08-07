@@ -22,8 +22,10 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// The longest segment duration Google accepts, in seconds — eight hours.
     /// </summary>
     /// <remarks>
-    ///     Advisory. <see cref="Duration"/> is an unvalidated property; nothing in this class consults this
-    ///     constant.
+    ///     The <c>maxInclusive</c> facet the 1.1 XSD puts on a segment's duration, and it is enforced: the
+    ///     <see cref="Duration"/> setter throws above it, while <see cref="Load"/> skips a source value above
+    ///     it rather than rejecting the document. It is the only numeric facet this element publishes, so it
+    ///     is the only one enforced.
     /// </remarks>
     /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd"/>
     public const int MaxDuration = 28_800;
@@ -90,8 +92,26 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     ///     Seconds, at most <see cref="MaxDuration"/>, or <see langword="null"/> if the <c>duration</c>
     ///     attribute was absent.
     /// </value>
-    /// <remarks>The range is not enforced; any <see cref="int"/> assigned here is written out verbatim.</remarks>
-    public int? Duration { get; set; }
+    /// <remarks>
+    ///     The bound is enforced here but not in <see cref="Load"/>: assigning past it is a programming error
+    ///     and throws, whereas a feed carrying an over-long segment is untrusted input and has its duration
+    ///     skipped rather than costing the whole document.
+    /// </remarks>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is greater than <see cref="MaxDuration"/>.</exception>
+    public int? Duration
+    {
+        get;
+
+        set
+        {
+            if (value is int duration)
+            {
+                ArgumentOutOfRangeException.ThrowIfGreaterThan(duration, MaxDuration, nameof(value));
+            }
+
+            field = value;
+        }
+    }
 
     /// <summary>
     /// Initializes the video segment using the supplied <see cref="XPathNavigator"/>.
@@ -114,9 +134,12 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
             }
         }
 
-        // Load the optional duration attribute
+        // Load the optional duration attribute. One past the schema's facet is skipped rather than
+        // rejected: a feed is untrusted input and one bad attribute must not cost the document.
         string durationAttr = source.GetAttribute("duration", string.Empty);
-        if (!string.IsNullOrEmpty(durationAttr) && int.TryParse(durationAttr, NumberStyles.Integer, CultureInfo.InvariantCulture, out int duration))
+        if (!string.IsNullOrEmpty(durationAttr)
+            && int.TryParse(durationAttr, NumberStyles.Integer, CultureInfo.InvariantCulture, out int duration)
+            && duration <= MaxDuration)
         {
             this.Duration = duration;
             wasLoaded = true;

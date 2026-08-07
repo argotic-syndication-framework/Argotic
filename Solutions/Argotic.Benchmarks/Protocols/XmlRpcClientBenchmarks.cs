@@ -23,7 +23,7 @@ namespace Argotic.Benchmarks.Protocols;
 /// bodies of code, one public call, no numbers for any of it.
 /// </para>
 /// <para>
-/// <b>The transport is a stub handler, and no socket is opened.</b> This follows
+/// The transport is a stub handler, and no socket is opened. This follows
 /// <c>PollingSteadyStateBenchmarks</c> for the same reason: a real socket adds scheduler and kernel
 /// noise to a measurement whose subject is the serialiser and the parser, and BenchmarkDotNet cannot
 /// separate the two. What is measured is everything the library does with a request before it hands
@@ -51,7 +51,7 @@ namespace Argotic.Benchmarks.Protocols;
 /// equally, so it shifts the arm's floor without changing what its slope means.
 /// </para>
 /// <para>
-/// <b>No <c>[Params]</c>.</b> Each arm is a fixed response shape — scalar, struct, fault — and a
+/// No <c>[Params]</c>. Each arm is a fixed response shape — scalar, struct, fault — and a
 /// class-scoped size axis would reproduce the serialise arm and the fault arm unchanged at every
 /// value. Payload scaling is <see cref="XmlRpcCompositeParsingBenchmarks"/>'s job.
 /// </para>

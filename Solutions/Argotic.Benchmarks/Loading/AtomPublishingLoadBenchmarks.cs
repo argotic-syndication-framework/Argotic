@@ -19,37 +19,38 @@ namespace Argotic.Benchmarks.Loading;
 /// and the entry resource that goes with them; <c>SitemapIndexLoadBenchmarks</c> takes the third.
 /// </para>
 /// <para>
-/// <b>Provenance, stated per arm because it differs per arm.</b> Real Atom Publishing documents are
+/// Provenance, stated per arm because it differs per arm. Real Atom Publishing documents are
 /// scarce on the open web — they are the control surface of an editing API, not something a publisher
 /// leaves at a URL — and what survives is uneven:
 /// </para>
 /// <list type="bullet">
-///   <item><description><b>Service documents are real.</b> Four <c>app:service</c> documents fetched
+///   <item><description>Service documents are real. Four <c>app:service</c> documents fetched
 ///   byte-exact from the OData reference services live in the corpus. They are the genuine article,
 ///   and they are also revealing: all four are <c>collection</c> plus <c>atom:title</c> and nothing
 ///   else, with an <c>xml:base</c> and a prefixed Atom namespace. That is what a real service document
 ///   turns out to look like, as against what RFC 5023's examples suggest.</description></item>
-///   <item><description><b>The category document is SYNTHETIC.</b> No public <c>app:categories</c>
+///   <item><description>The category document is synthetic. No public <c>app:categories</c>
 ///   document could be found — searching produced only the specification's own examples — so the one
 ///   used here is written from RFC 5023 §7.2.1 and is labelled as such wherever it appears. It is a
-///   fair test of the parser and it is <em>not</em> evidence about what publishers emit, because
+///   fair test of the parser and it is not evidence about what publishers emit, because
 ///   there is no such evidence.</description></item>
-///   <item><description><b>The entry documents are the repository's own sample plus one synthetic
-///   variant.</b> <c>SampleData/AtomEntryDocument.xml</c> is hand-authored and carries no
+///   <item><description>The entry documents are the repository's own sample plus one synthetic
+///   variant. <c>SampleData/AtomEntryDocument.xml</c> is hand-authored and carries no
 ///   <c>app:</c> elements at all, which is precisely why the synthetic variant exists.</description></item>
 /// </list>
 /// <para>
-/// <b>The categories arm exists because writing this class is what found the defect that blocked it.</b>
-/// Until §2.42, <c>AtomServiceDocument.Load</c> threw <see cref="FormatException"/> on <em>any</em>
-/// service document whose collection declared an <c>app:categories</c> element, inline or out-of-line —
-/// including the example service document in RFC 5023 §8.3.3 — so this arm could only have measured a
-/// throw. The four real corpus documents load because OData emits no categories, which is why nothing
-/// had ever noticed. <see cref="LoadServiceDocumentWithCategories"/> is the arm that was owed once the
-/// three defects behind it were fixed, and it is the only one here that exercises
+/// The categories arm exists because writing this class exposed the defect that had blocked it.
+/// <c>AtomServiceDocument.Load</c> previously threw <see cref="FormatException"/> for any service
+/// document whose collection declared an <c>app:categories</c> element, whether inline or
+/// out-of-line, including the example service document printed in RFC 5023 §8.3.3; this arm could
+/// therefore only have measured a throw. The four real corpus documents load successfully because
+/// OData emits no categories, which is why the defect went unobserved.
+/// <see cref="LoadServiceDocumentWithCategories"/> became measurable once that defect and the two
+/// behind it were fixed, and it is the only arm here that exercises
 /// <c>AtomCategoryDocument.Load</c> through a service document rather than directly.
 /// </para>
 /// <para>
-/// <b>The load-bearing pair is the entry one.</b> <see cref="AtomEntryResource"/> differs from
+/// The load-bearing pair is the entry one. <see cref="AtomEntryResource"/> differs from
 /// <see cref="AtomEntry"/> in exactly one respect: it overrides
 /// <c>Load(IXPathNavigable, settings)</c> to call the base and then run
 /// <c>LoadAtomPublishingExtensions</c>, which is two <c>FindExtension</c> calls — each a
@@ -60,7 +61,7 @@ namespace Argotic.Benchmarks.Loading;
 /// that helps only the empty case cannot hide between those two arms.
 /// </para>
 /// <para>
-/// <b>No <c>[Params]</c>.</b> Every arm here is a document of fixed size — three of them real files
+/// No <c>[Params]</c>. Every arm here is a document of fixed size — three of them real files
 /// that cannot be resized without ceasing to be real — so a class-scoped axis would reproduce all
 /// eight rows unchanged at every value. Scaling belongs where the corpus is generated, which for this
 /// area it is not.
@@ -74,11 +75,12 @@ namespace Argotic.Benchmarks.Loading;
 public class AtomPublishingLoadBenchmarks
 {
     /// <summary>
-    /// A SYNTHETIC <c>app:categories</c> document, written from RFC 5023 §7.2.1.
+    /// A synthetic <c>app:categories</c> document, written from RFC 5023 §7.2.1 and not taken from any
+    /// live service.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     <b>This is not a real-world document and must not be cited as one.</b> No publicly
+    ///     This is not a real-world document and must not be cited as one. No publicly
     ///     reachable <c>app:categories</c> document was found when the corpus was collected, so
     ///     nothing here reflects what a real server emits — only what the specification permits and
     ///     what <c>AtomPublishing10SyndicationResourceAdapter.Fill(AtomCategoryDocument)</c> reads.
@@ -90,9 +92,9 @@ public class AtomPublishingLoadBenchmarks
     ///     term-plus-own-scheme, because <c>AtomCategory.Load</c> branches on each.
     ///     </para>
     ///     <para>
-    ///     One shape it deliberately does <em>not</em> cover: the childless out-of-line document. That
+    ///     One shape it deliberately does not cover: the childless out-of-line document. That
     ///     used to lose all three attributes, because the adapter read them inside an
-    ///     <c>if (documentNavigator.HasChildren)</c> — fixed in §2.42 and pinned by
+    ///     <c>if (documentNavigator.HasChildren)</c>. That is now fixed and pinned by
     ///     <c>AtomPublishingCategoriesTests</c>. It is a correctness question rather than a timing one,
     ///     and it is cheaper than this document by construction, so it stays in the suite and out of
     ///     here.
@@ -115,11 +117,12 @@ public class AtomPublishingLoadBenchmarks
         """;
 
     /// <summary>
-    /// A SYNTHETIC Atom entry document carrying both Atom Publishing extension elements.
+    /// A synthetic Atom entry document carrying both Atom Publishing extension elements, not taken from
+    /// any live service.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     <b>Synthetic, and for a reason the sample cannot serve.</b>
+    ///     Synthetic, and for a reason the sample cannot serve.
     ///     <c>SampleData/AtomEntryDocument.xml</c> declares no <c>app:</c> namespace and carries no
     ///     <c>app:</c> elements, so <c>AtomEntryResource</c>'s override finds nothing there and every
     ///     measurement over it prices the empty case. This document declares the namespace and carries
@@ -156,11 +159,11 @@ public class AtomPublishingLoadBenchmarks
         """;
 
     /// <summary>
-    /// The service document RFC 5023 prints in §8.3.3, verbatim.
+    /// The service document printed verbatim in RFC 5023 §8.3.3.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     <b>Not a real-world document, but not invented either.</b> It is the specification's own
+    ///     Not a real-world document, but not invented either. It is the specification's own
     ///     example, reproduced unchanged, which makes it the fairest available stand-in for the shape
     ///     the four OData documents cannot express: collections that declare categories.
     ///     </para>
@@ -227,7 +230,7 @@ public class AtomPublishingLoadBenchmarks
     }
 
     /// <summary>
-    /// The smallest real service document: three collections, 474 bytes.
+    /// Loads the smallest real service document, of three collections and 474 bytes.
     /// </summary>
     /// <returns>The number of collections parsed, so the load cannot be elided.</returns>
     /// <remarks>
@@ -239,7 +242,7 @@ public class AtomPublishingLoadBenchmarks
     public int LoadSmallestServiceDocument() => LoadServiceDocument(this.smallestServiceDocument);
 
     /// <summary>
-    /// The largest real service document: twenty-six collections, 2,644 bytes.
+    /// Loads the largest real service document, of twenty-six collections and 2,644 bytes.
     /// </summary>
     /// <returns>The number of collections parsed.</returns>
     /// <remarks>
@@ -251,7 +254,7 @@ public class AtomPublishingLoadBenchmarks
     public int LoadLargestServiceDocument() => LoadServiceDocument(this.largestServiceDocument);
 
     /// <summary>
-    /// Every real service document in the corpus.
+    /// Loads every real service document in the corpus.
     /// </summary>
     /// <returns>The total number of collections parsed.</returns>
     /// <remarks>
@@ -274,13 +277,14 @@ public class AtomPublishingLoadBenchmarks
     }
 
     /// <summary>
-    /// The RFC 5023 §8.3.3 service document: three collections, two of which declare categories.
+    /// Loads the RFC 5023 §8.3.3 service document, of three collections, two of which declare
+    /// categories.
     /// </summary>
     /// <returns>The total number of category documents parsed, which must be 2.</returns>
     /// <remarks>
     ///     <para>
-    ///     <b>The arm §2.42 unblocked.</b> Before that, every input of this shape threw
-    ///     <see cref="FormatException"/>, so what this would have measured is a stack unwind. The return
+    ///     Every input of this shape previously threw <see cref="FormatException"/>, so this arm would
+    ///     have measured a stack unwind rather than a parse. The return
     ///     value is the count of parsed category documents rather than of collections, because that is
     ///     the number that was structurally zero for every document ever loaded — the loaded
     ///     <see cref="AtomCategoryDocument"/> was built, filled, and then dropped on the floor.
@@ -314,11 +318,12 @@ public class AtomPublishingLoadBenchmarks
     }
 
     /// <summary>
-    /// The SYNTHETIC category document: six categories, all three document attributes present.
+    /// Loads the synthetic category document, of six categories with all three document attributes
+    /// present.
     /// </summary>
     /// <returns>The number of categories parsed.</returns>
     /// <remarks>
-    ///     <b>Synthetic input — see <see cref="SyntheticCategoryDocument"/>.</b> There is no public
+    ///     Synthetic input — see <see cref="SyntheticCategoryDocument"/>. There is no public
     ///     corpus of <c>app:categories</c> documents, so this number describes the parser and not the
     ///     web. It is still worth having: <see cref="AtomCategoryDocument"/> is one of the twelve types
     ///     implementing the uniform resource contract and the only one whose <c>Load</c> had never run
@@ -335,7 +340,7 @@ public class AtomPublishingLoadBenchmarks
     }
 
     /// <summary>
-    /// The repository's sample entry through <see cref="AtomEntry"/>: the control.
+    /// Loads the repository's sample entry through <see cref="AtomEntry"/>, as the control.
     /// </summary>
     /// <returns>The number of links parsed.</returns>
     /// <remarks>
@@ -354,7 +359,8 @@ public class AtomPublishingLoadBenchmarks
     }
 
     /// <summary>
-    /// The same bytes through <see cref="AtomEntryResource"/>, which adds the publishing projection.
+    /// Loads the same bytes through <see cref="AtomEntryResource"/>, which adds the publishing
+    /// projection.
     /// </summary>
     /// <returns>The number of links parsed.</returns>
     /// <remarks>
@@ -377,12 +383,12 @@ public class AtomPublishingLoadBenchmarks
     }
 
     /// <summary>
-    /// A SYNTHETIC entry that actually carries <c>app:edited</c> and <c>app:control</c>.
+    /// Loads a synthetic entry carrying both <c>app:edited</c> and <c>app:control</c>.
     /// </summary>
     /// <returns>Whether the entry parsed as a draft, which must be <see langword="true"/>.</returns>
     /// <remarks>
     ///     <para>
-    ///     <b>Synthetic input — see <see cref="SyntheticEntryWithPublishingControl"/>.</b> The arm
+    ///     Synthetic input — see <see cref="SyntheticEntryWithPublishingControl"/>. The arm
     ///     exists because <see cref="LoadEntryAsResource"/> cannot fail in the interesting direction:
     ///     a document with no <c>app:</c> namespace gives extension auto-detection nothing to detect
     ///     and both <c>FindExtension</c> calls nothing to find, so any change to either would measure

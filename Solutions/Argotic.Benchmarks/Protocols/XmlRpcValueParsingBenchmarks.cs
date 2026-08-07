@@ -13,15 +13,15 @@ namespace Argotic.Benchmarks.Protocols;
 /// </summary>
 /// <remarks>
 /// <para>
-/// A coverage audit of <c>Argotic.Net</c> found <b>every wire-touching method at 0.000</b>, and inside
-/// this method specifically found that <b>only the <c>i4</c> branch has ever run</b>. <c>int</c>,
+/// A coverage audit of <c>Argotic.Net</c> found every wire-touching method at 0.000, and inside
+/// this method specifically found that only the <c>i4</c> branch has ever run. <c>int</c>,
 /// <c>boolean</c>, <c>string</c>, <c>double</c>, <c>dateTime.iso8601</c>, <c>base64</c>, <c>struct</c>
 /// and <c>array</c> are cold, in a method that every XML-RPC response in the library funnels through.
 /// This class exists so that a change to it has a before.
 /// </para>
 /// <para>
-/// <b>The arms are ordered by their position in the dispatch chain, because that ordering is the
-/// hypothesis.</b> <c>TryParseValue</c> is a linear <c>if</c>/<c>else if</c> over nine
+/// The arms are ordered by their position in the dispatch chain, because that ordering is the
+/// hypothesis. <c>TryParseValue</c> is a linear <c>if</c>/<c>else if</c> over nine
 /// <see cref="string.Equals(string, string, StringComparison)"/> calls with
 /// <see cref="StringComparison.OrdinalIgnoreCase"/>, tested in source order: <c>i4</c>, <c>int</c>,
 /// <c>boolean</c>, <c>string</c>, <c>double</c>, <c>dateTime.iso8601</c>, <c>base64</c>,
@@ -36,19 +36,18 @@ namespace Argotic.Benchmarks.Protocols;
 /// suspect if the arms can show where in the table each input matched.
 /// </para>
 /// <para>
-/// <b>Building this class is what found the defect §2.42 fixed.</b> A spec-legal untyped
+/// Building this class exposed a defect since fixed. A specification-legal untyped
 /// <c>&lt;value&gt;text&lt;/value&gt;</c> — which XML-RPC 1.0 defines as a string, and which real ping
-/// servers emit — was <em>not parsed by this library at all</em>, and the branch written to handle it
+/// servers emit — was not parsed by this library at all, and the branch written to handle it
 /// was unreachable for every possible input. Choosing an input for an arm is what surfaced it; no
 /// measurement was involved. The reasoning is on <see cref="ParseUntyped"/>, which now measures the
 /// success path it always should have.
 /// </para>
 /// <para>
-/// <b>There is no <c>[Params]</c> axis here on purpose.</b> Nine of these twelve arms are a single
+/// There is no <c>[Params]</c> axis here on purpose. Nine of these twelve arms are a single
 /// element with fixed content and do not vary with any size parameter, so a class-scoped axis would
-/// reproduce nine identical rows per value and bury the two that moved. That is the defect
-/// <c>docs/build-warnings.md</c> §D0 records in <c>UtilityBenchmarks</c>. Size-varying payloads live
-/// in <see cref="XmlRpcCompositeParsingBenchmarks"/>, where every arm varies along the axis.
+/// reproduce nine identical rows per value and obscure the two that moved. Size-varying payloads are
+/// measured in <see cref="XmlRpcCompositeParsingBenchmarks"/>, where every arm varies along the axis.
 /// </para>
 /// </remarks>
 [BenchmarkCategory("protocols", "xmlrpc", "parse")]
@@ -117,7 +116,7 @@ public class XmlRpcValueParsingBenchmarks
     /// <remarks>
     ///     <c>int</c> and <c>i4</c> run byte-identical bodies — both call
     ///     <see cref="int.TryParse(string, System.Globalization.NumberStyles, IFormatProvider, out int)"/>
-    ///     and construct one <c>XmlRpcScalarValue</c>. The <em>only</em> difference between these two
+    ///     and construct one <c>XmlRpcScalarValue</c>. The only difference between these two
     ///     arms is one extra <see cref="string.Equals(string, string, StringComparison)"/>, which makes
     ///     this pair the cleanest possible probe of what a single chain step costs. If they measure
     ///     apart, the chain is real; if they measure together, no arm below can blame the chain either.
@@ -188,8 +187,8 @@ public class XmlRpcValueParsingBenchmarks
     ///     <para>
     ///     Worth stating plainly, because it bears on how this number should be read: the element is
     ///     named <c>dateTime.iso8601</c> and XML-RPC's own examples spell it <c>19980717T14:08:55</c>
-    ///     — <b>no hyphens, no colons in the date, no offset</b> — which is not RFC 3339 and which the
-    ///     RFC 3339 table cannot match. That spelling did not parse at all until §2.42. This arm keeps
+    ///     — no hyphens, no colons in the date, no offset — which is not RFC 3339 and which the
+    ///     RFC 3339 table cannot match. That spelling formerly did not parse at all. This arm keeps
     ///     the RFC 3339 spelling, which is what most live servers emit and what already worked;
     ///     <see cref="ParseSpecSpelledDateTime"/> is the one that measures the fallback, and it is
     ///     strictly the more expensive of the two because RFC 3339 is still tried first.
@@ -209,8 +208,8 @@ public class XmlRpcValueParsingBenchmarks
     /// <remarks>
     ///     <para>
     ///     <c>20240101T10:00:00</c> — the spelling XML-RPC 1.0 uses in its own examples, and the one
-    ///     that did not parse at all before §2.42. It is <b>strictly the more expensive of the two date
-    ///     arms by construction</b>: RFC 3339 is still attempted first and must fail its whole
+    ///     that formerly did not parse at all. It is strictly the more expensive of the two date
+    ///     arms by construction: RFC 3339 is still attempted first and must fail its whole
     ///     nine-pattern table before the two XML-RPC formats are tried, so this pays the other arm's
     ///     work plus its own.
     ///     </para>
@@ -300,9 +299,9 @@ public class XmlRpcValueParsingBenchmarks
     ///     its own guard failed as well. No input could execute it.
     ///     </para>
     ///     <para>
-    ///     §2.42 replaced <c>MoveToFirstChild</c> with <c>MoveToChild(XPathNodeType.Element)</c>, which
+    ///     Replacing <c>MoveToFirstChild</c> with <c>MoveToChild(XPathNodeType.Element)</c> fixed that, and
     ///     changes what this arm measures rather than merely whether it succeeds. It is now the
-    ///     <b>shortest</b> path rather than the longest: the element test fails immediately and the
+    ///     shortest path rather than the longest: the element test fails immediately and the
     ///     untyped tail runs, so it skips the comparison chain entirely instead of walking all of it.
     ///     Read against <see cref="ParseString"/> — the same string, reached through the full dispatch —
     ///     the delta is what the chain itself costs.

@@ -9,8 +9,8 @@ namespace Argotic.Benchmarks.Utilities;
 /// </summary>
 /// <remarks>
 /// <para>
-/// Nothing measured this before, which is how a 36-entry format array came to be allocated per call
-/// (§2.34) without anyone noticing. The array is static now, but the <em>walk</em> over it never was
+/// This path was previously unmeasured, which is how a 36-entry format array came to be allocated on
+/// every call without being noticed. The array is now static, but the walk over it has never been
 /// measured, and the walk is what the caller pays.
 /// </para>
 /// <para>
@@ -18,20 +18,20 @@ namespace Argotic.Benchmarks.Utilities;
 /// one of them is a date shape a real publisher emits:
 /// </para>
 /// <list type="bullet">
-///   <item><description><b>Named zone versus numeric offset.</b> A named zone goes through
+///   <item><description>Named zone versus numeric offset. A named zone goes through
 ///   <c>ReplaceRfc822TimeZoneWithOffset</c>, which rebuilds the string; a numeric offset returns the
 ///   original instance untouched. Measured on a probe, 168 B against 0 B. An arm of only one of them
 ///   would price the rewrite at either all or nothing.</description></item>
-///   <item><description><b>Where the matching pattern sits in the table.</b>
+///   <item><description>Where the matching pattern sits in the table.
 ///   <see cref="DateTime.TryParseExact(string, string[], IFormatProvider, System.Globalization.DateTimeStyles, out DateTime)"/>
 ///   walks the array in order, so the index of the first match is the number of attempts. The
 ///   dominant RSS shape matches at index 7 - the eight leading patterns all carry fractional seconds,
 ///   which RSS dates essentially never have - and a single-digit day matches at index 23. Both are
 ///   measured, because reordering the table helps them by different amounts.</description></item>
-///   <item><description><b>The fallback path.</b> A shape the table cannot match walks all 36
+///   <item><description>The fallback path. A shape the table cannot match walks all 36
 ///   patterns and then calls <c>DateTime.TryParse</c> - and calls the zone replacement a second time
 ///   to do it, because the result of the first call is not held. The two shapes that reach it here
-///   are <em>legal RFC 822</em>: the specification makes both the day-of-week and the seconds
+///   are legal RFC 822: the specification makes both the day-of-week and the seconds
 ///   optional.</description></item>
 /// </list>
 /// <para>

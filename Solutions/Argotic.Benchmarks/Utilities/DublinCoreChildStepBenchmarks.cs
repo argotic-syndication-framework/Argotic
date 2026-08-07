@@ -11,111 +11,119 @@ using BenchmarkDotNet.Attributes;
 namespace Argotic.Benchmarks.Utilities;
 
 /// <summary>
-/// Asks whether the largest <see cref="FrozenDictionary{TKey, TValue}"/> in the library should exist
-/// at all.
+/// Measures whether the 55-entry <see cref="FrozenDictionary{TKey, TValue}"/> that resolves Dublin
+/// Core term names is worth retaining, against removing it entirely.
 /// </summary>
 /// <remarks>
 /// <para>
-/// <b>The subject.</b>
-/// <c>Solutions/Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs:27</c>
-/// declares <c>private static readonly FrozenDictionary&lt;string, XPathStep&gt; ChildSteps =
-/// BuildChildSteps();</c> — <b>55 entries</b>, <c>string</c> keys, built by <c>ToFrozenDictionary</c>
-/// with no comparer overload, so the <b>default ordinal, case-sensitive</b> comparer (<c>:1484-1486</c>).
-/// It has exactly one read site, the indexer at <c>:1498</c> inside <c>SelectSingle</c>, and
-/// <c>SelectSingle</c> is called from <b>55 sites</b> across <c>LoadGroup1..6</c>. So every entity that
-/// declares <c>dcterms:</c> pays <b>55 lookups</b>, whether or not it carries a single Dublin Core term.
+/// The subject is <c>ChildSteps</c> in
+/// <c>Argotic.Extensions/Core/DublinCore/DublinCoreMetadataTerms/DublinCoreMetadataTermsSyndicationExtensionContext.cs</c>:
+/// a <c>private static readonly FrozenDictionary&lt;string, XPathStep&gt;</c> of 55 entries with
+/// <see cref="string"/> keys, constructed through <c>ToFrozenDictionary</c> without a comparer
+/// argument and therefore using the default ordinal, case-sensitive comparer. It has one read site,
+/// the indexer inside <c>SelectSingle</c>, and <c>SelectSingle</c> is called from 55 sites across the
+/// six load groups. Every entity that declares the <c>dcterms:</c> prefix consequently performs 55
+/// lookups, whether or not it carries any Dublin Core term.
 /// </para>
 /// <para>
-/// <b>Why it is a candidate for deletion rather than for a faster structure.</b> Every one of those 55
-/// call sites passes a <em>string literal</em>: <c>SelectSingle(source, "dcterms:abstract", manager)</c>.
-/// The dictionary hashes a compile-time constant to recover a prefix and a local name that the
-/// compiler already knew. The change this benchmark exists to price is not "swap the structure" but
-/// "widen <c>SelectSingle</c> to <c>(source, prefix, localName, manager)</c> and delete the dictionary,
-/// the <c>XPathStep</c> record struct and <c>BuildChildSteps</c> with it".
+/// The dictionary is a candidate for removal rather than for replacement by a faster structure,
+/// because all 55 call sites pass a string literal such as
+/// <c>SelectSingle(source, "dcterms:abstract", manager)</c>. The lookup hashes a compile-time constant
+/// to recover a prefix and a local name already known to the compiler. The change being priced is
+/// therefore widening <c>SelectSingle</c> to accept the prefix and local name directly, and deleting
+/// the dictionary, the <c>XPathStep</c> record struct and <c>BuildChildSteps</c> with it.
 /// </para>
 /// <para>
-/// <b>This is a reconstruction, and it has to be.</b> <c>ChildSteps</c>, <c>XPathStep</c> (<c>:1417</c>)
-/// and <c>SelectSingle</c> (<c>:1496</c>) are all <c>private</c> members of the context class.
-/// <c>Argotic.Common</c> grants <c>InternalsVisibleTo</c> to this assembly
-/// (<c>Argotic.Common.csproj:19,23,24</c>), but <c>InternalsVisibleTo</c> reaches <c>internal</c>, not
-/// <c>private</c> — no attribute makes a private field visible to another assembly. <see cref="Expressions"/>
-/// therefore mirrors the literal array at <c>:1425-1482</c>, <see cref="ChildStep"/> mirrors the record
-/// struct at <c>:1417</c>, and <see cref="Frozen"/> mirrors the construction at <c>:1484-1486</c>
-/// including the absent comparer argument. <b>If the product's 55 terms change, this file does not
-/// follow automatically.</b> The one arm that does execute the shipped code is
-/// <see cref="ContextLoad"/>, which goes through the real private path.
+/// The lookup arms are a reconstruction rather than the shipped members. <c>ChildSteps</c>,
+/// <c>XPathStep</c> and <c>SelectSingle</c> are <c>private</c>, and although <c>Argotic.Common</c>
+/// grants <c>InternalsVisibleTo</c> to this assembly, that attribute reaches <c>internal</c> members
+/// and not <c>private</c> ones. <see cref="Expressions"/>, <see cref="ChildStep"/> and
+/// <see cref="Frozen"/> therefore mirror the product's literal array, record struct and construction
+/// respectively, including the omitted comparer argument. A change to the product's 55 terms does not
+/// propagate here automatically. <see cref="ContextLoad"/> is the only arm that executes the shipped
+/// code.
 /// </para>
 /// <para>
-/// <b>The arms, and what each can refute.</b>
+/// Each arm is designed to refute a specific proposition.
 /// </para>
 /// <list type="number">
-///   <item><description><b>Frozen (as shipped)</b> — the baseline. Nothing to refute; it is the
-///   number the others are read against.</description></item>
-///   <item><description><b>Dictionary, same comparer</b> — isolates what <em>freezing</em> buys at 55
-///   entries, holding the structure's shape constant. If this ties the baseline, the freeze is
-///   decoration at this size and the audit's "was Frozen right?" framing is answered
-///   negatively.</description></item>
-///   <item><description><b>switch over the 55 literals</b> — refutes "a lookup is unavoidable, so
-///   pick the best one". It is not a jump table: a jump table needs integer cases. What Roslyn
-///   actually emitted for these 55 cases was checked rather than assumed —
-///   <c>strings Solutions/Argotic.Benchmarks/bin/Release/net10.0/Argotic.Benchmarks.dll | grep
-///   ComputeStringHash</c> returns nothing, so <b>no hash helper was generated</b> and the dispatch is
-///   by length and by discriminating character. That is the interesting case: unlike both dictionary
-///   arms it never hashes the key. Whether reading a few characters beats hashing the whole string is
-///   what this arm measures.</description></item>
-///   <item><description><b>no lookup, prefix and local name as literals</b> — <b>the arm that
-///   matters.</b> It refutes the whole family of "make the dictionary faster" changes. If it wins
-///   decisively the right change is not a better structure, it is no structure.</description></item>
-///   <item><description><b>context.Load (the shipped public path)</b> — not a competitor; the
-///   <em>denominator</em>. A saving of N nanoseconds per entity is meaningless until it is divided by
-///   what an entity costs, and measuring the two in separate runs would compare numbers taken in
-///   different thermal states — the failure <c>docs/build-warnings.md</c> §2.23 records. It is also a
-///   control: it does the same work for every <see cref="Probe"/> value, so if its row is not flat
-///   across the axis, the machine moved during the run and no timing in the table is
-///   safe.</description></item>
+///   <item><description>
+///   Frozen, as shipped. The baseline against which the remaining arms are read.
+///   </description></item>
+///   <item><description>
+///   Dictionary with the same comparer. Isolates the contribution of freezing at 55 entries while
+///   holding the structure's shape constant. A tie with the baseline indicates that freezing confers
+///   no advantage at this size.
+///   </description></item>
+///   <item><description>
+///   A <c>switch</c> over the 55 literals. Refutes the proposition that a lookup is unavoidable and
+///   only its implementation is open. This is not a jump table, which requires integer cases; the
+///   emitted code was inspected rather than assumed, and the assembly contains no
+///   <c>ComputeStringHash</c> helper, so dispatch proceeds by length and by discriminating character.
+///   Unlike both dictionary arms it never hashes the key, and this arm measures whether reading a few
+///   characters is cheaper than hashing the whole string.
+///   </description></item>
+///   <item><description>
+///   No lookup, with prefix and local name supplied as literals. This is the decisive arm. It refutes
+///   the entire family of changes that make the dictionary faster: a clear win indicates that the
+///   correct change is no structure rather than a better one.
+///   </description></item>
+///   <item><description>
+///   <c>context.Load</c>, the shipped public path. Not a competitor but the denominator: a saving of
+///   a given number of nanoseconds per entity cannot be interpreted until it is divided by the cost
+///   of an entity, and measuring the two in separate runs would compare numbers taken in different
+///   thermal states. It also serves as a control, because it performs identical work at every
+///   <see cref="Probe"/> value; a row that is not flat across that axis indicates the machine changed
+///   state during the run, which invalidates every timing in the table.
+///   </description></item>
 /// </list>
 /// <para>
-/// <b>The <see cref="Probe"/> axis.</b> <c>entity</c> is the realistic unit — all 55 lookups as one
-/// operation, because that is what one <c>dcterms:</c>-bearing entity actually costs, and a per-lookup
-/// nanosecond figure invites the reader to forget the ×55. The single-key values exist to answer
-/// whether <em>which</em> key is looked up is observable. The prediction, which the run can refute, is
-/// that <c>first</c>, <c>middle</c> and <c>last</c> are <b>not</b> meaningfully different for any of
-/// these three structures: none of them is ordered by insertion. A frozen string dictionary buckets by
-/// length and by a discriminating character slice, a <c>Dictionary</c> buckets by hash, and the switch
-/// dispatches on computed characters — so those three rows differ only by key length and hash
-/// distribution, not by position. The row that <em>is</em> structurally different is <c>miss</c>, where
-/// a length bucket or a hash bucket can decline early.
+/// The <see cref="Probe"/> axis exists for two reasons. The <c>entity</c> value is the realistic unit,
+/// treating all 55 lookups as one operation, because that is the cost a single entity bearing the
+/// <c>dcterms:</c> prefix incurs; a per-lookup figure omits the factor of 55. The single-key values
+/// determine whether the identity of the key is observable. The expectation, which the run may refute,
+/// is that <c>first</c>, <c>middle</c> and <c>last</c> do not differ meaningfully for any of the three
+/// structures, none of which is ordered by insertion: a frozen string dictionary buckets by length and
+/// by a discriminating character slice, a <see cref="Dictionary{TKey, TValue}"/> buckets by hash, and
+/// the <c>switch</c> dispatches on computed characters. Those three rows differ only by key length and
+/// hash distribution. The structurally distinct value is <c>miss</c>, where a length or hash bucket can
+/// decline early.
 /// </para>
 /// <para>
-/// <b>Three measurement caveats, stated because they change how the numbers should be read.</b>
+/// Three measurement characteristics govern how the results are to be read.
 /// </para>
 /// <list type="bullet">
-///   <item><description><b>The sink is a floor common to all four lookup arms.</b>
-///   <see cref="Consume"/> is <c>NoInlining</c> on purpose. Inlined, the no-lookup arm's
-///   <c>Consume("dcterms", "abstract")</c> folds to a constant and the arm measures nothing — which is
-///   a benchmark artefact, not a product truth, because the product hands those two strings to
-///   <c>manager.LookupNamespace</c> and <c>SelectChildren</c>, which cannot fold. The call floor is
-///   identical in every arm, so it cancels in the <em>difference</em> between arms. <b>Read the
-///   absolute delta, not the ratio</b> — the ratio column is compressed by the floor, and in the
-///   product it would be compressed far further by <c>SelectChildren</c>.</description></item>
-///   <item><description><b>The lookup arms pay an array load the product does not.</b> Keys are held
-///   in a field array so the JIT cannot fold them, per the rule that a benchmark reading a literal at
-///   the call site measures constant propagation. The product reads a literal at each of its 55 call
-///   sites and pays no bounds check. So the measured Frozen − NoLookup delta is an <b>upper bound</b>
-///   on the product saving, by one array element load per key. The three lookup arms all pay it, so
-///   they compare to each other exactly.</description></item>
-///   <item><description><b>The lookup arms use <c>TryGetValue</c>; the shipped code uses the
-///   indexer.</b> <c>ChildSteps[expression]</c> at <c>:1498</c> would throw on a miss, so the
-///   <c>miss</c> column could not exist at all under the shipped form — and it cannot arise in the
-///   product, where every key is a literal drawn from the same 55. Both resolve through the same
-///   lookup, and the difference is arm-common.</description></item>
+///   <item><description>
+///   The sink imposes a floor common to all four lookup arms. <see cref="Consume"/> is marked
+///   <see cref="MethodImplOptions.NoInlining"/> deliberately: if inlined, the no-lookup arm's call
+///   folds to a constant and the arm measures nothing. That outcome would be an artefact of the
+///   benchmark rather than a property of the product, which passes those two strings to
+///   <c>LookupNamespace</c> and <c>SelectChildren</c>, neither of which can fold. The floor is
+///   identical in every arm and therefore cancels in the difference between arms. Read the absolute
+///   difference rather than the ratio, which the floor compresses, and which the product would
+///   compress further through <c>SelectChildren</c>.
+///   </description></item>
+///   <item><description>
+///   The lookup arms pay an array element load that the product does not. Keys are held in a field
+///   array so that the just-in-time compiler cannot fold them, whereas the product reads a literal at
+///   each of its 55 call sites and performs no bounds check. The measured difference between the
+///   frozen and no-lookup arms is therefore an upper bound on the saving available in the product, by
+///   one array element load per key. All three lookup arms pay it, so they remain exactly comparable
+///   to one another.
+///   </description></item>
+///   <item><description>
+///   The lookup arms use <c>TryGetValue</c> where the shipped code uses the indexer. The indexer
+///   throws on a miss, so the <c>miss</c> value could not exist under the shipped form; nor can a miss
+///   arise in the product, where every key is a literal drawn from the same 55. Both forms resolve
+///   through the same lookup, and the difference is common to the arms.
+///   </description></item>
 /// </list>
 /// <para>
-/// <b>What decides the case.</b> Deletion is justified when the <c>entity</c> row shows the no-lookup
-/// arm below the frozen arm by an amount that is (a) larger than the run's error bars and (b) a
-/// non-trivial fraction of the <see cref="ContextLoad"/> row in the same table. If the delta is real
-/// but is a fraction of a percent of a whole entity load, the honest conclusion is that the dictionary
-/// is harmless and the 55 call sites should be left alone.
+/// Removal is justified when the <c>entity</c> row places the no-lookup arm below the frozen arm by a
+/// margin that both exceeds the run's error bars and forms a non-trivial fraction of the
+/// <see cref="ContextLoad"/> row in the same table. A difference that is real but amounts to a
+/// fraction of one percent of a whole entity load indicates that the dictionary is harmless and that
+/// the 55 call sites should be left unchanged.
 /// </para>
 /// </remarks>
 [BenchmarkCategory("utilities", "frozen", "dublincore")]
@@ -347,15 +355,16 @@ public class DublinCoreChildStepBenchmarks
         this.wholeEntity ? ConsumeEveryTerm() : Consume(this.probePrefix, this.probeLocalName);
 
     /// <summary>
-    /// The shipped public path over an entity carrying all 55 terms: the denominator, and the control.
+    /// Loads an entity carrying all 55 terms through the shipped public path, providing both the
+    /// denominator and the control.
     /// </summary>
-    /// <returns><b>true</b> if the context loaded, which it does for this entity.</returns>
+    /// <returns><see langword="true"/> if the context loaded, which it does for this entity.</returns>
     /// <remarks>
-    ///     The only arm that executes the real <c>ChildSteps</c>, through the real private
-    ///     <c>SelectSingle</c>. It is deliberately insensitive to <see cref="Probe"/>: it does the same
-    ///     work in every column, so a row that is not flat across the axis is the machine moving rather
-    ///     than the code, which is the reading <c>docs/build-warnings.md</c> §2.23 insists on before any
-    ///     timing claim.
+    ///     The only arm that executes the product's <c>ChildSteps</c> through its private
+    ///     <c>SelectSingle</c>. It is deliberately insensitive to <see cref="Probe"/> and performs
+    ///     identical work in every column, so a row that is not flat across that axis indicates a
+    ///     change in machine state rather than in the code, and no timing claim should be made from
+    ///     that run.
     /// </remarks>
     [Benchmark(Description = "context.Load, all 55 terms present (denominator)")]
     public bool ContextLoad() =>
@@ -391,7 +400,7 @@ public class DublinCoreChildStepBenchmarks
     ///     and <c>dcterms:language</c> is worse than that: the context builds
     ///     <c>new CultureInfo(value)</c> inside a <c>try</c>/<c>catch</c> that traces a warning
     ///     (<c>DublinCoreMetadataTermsSyndicationExtensionContext.cs:1898-1909</c>), so an unparseable
-    ///     language throws and catches <b>once per operation</b> and writes to <c>Trace</c>. That is
+    ///     language throws and catches once per operation and writes to <c>Trace</c>. That is
     ///     microseconds of noise on top of the number the lookup delta is meant to be divided by, and
     ///     the harness's <c>ExceptionDiagnoser</c> column would show it. Every value here parses, so
     ///     the exception column should read zero — if it does not, this method has drifted from what
@@ -409,8 +418,8 @@ public class DublinCoreChildStepBenchmarks
     /// <summary>
     /// Stands in for what the resolved step is handed to.
     /// </summary>
-    /// <param name="prefix">The namespace prefix, or <b>null</b> when the lookup missed.</param>
-    /// <param name="localName">The element name, or <b>null</b> when the lookup missed.</param>
+    /// <param name="prefix">The namespace prefix, or <see langword="null"/> when the lookup missed.</param>
+    /// <param name="localName">The element name, or <see langword="null"/> when the lookup missed.</param>
     /// <returns>A value derived from both strings, so neither can be discarded.</returns>
     /// <remarks>
     ///     <c>NoInlining</c> is load-bearing. Inlined, the literal arm folds to a constant and measures
@@ -488,7 +497,7 @@ public class DublinCoreChildStepBenchmarks
     /// The dispatch a 55-case switch expression compiles to, over the same keys.
     /// </summary>
     /// <param name="expression">The expression text to resolve.</param>
-    /// <returns>The step the expression represents, or <b>default</b> if it is not one of the 55.</returns>
+    /// <returns>The step the expression represents, or the default value if it is not one of the 55.</returns>
     private static ChildStep StepBySwitch(string expression) => expression switch
     {
         "dcterms:abstract" => new ChildStep("dcterms", "abstract"),
@@ -552,8 +561,10 @@ public class DublinCoreChildStepBenchmarks
     /// <summary>
     /// A single child-axis step: the namespace prefix to resolve, and the element name to match.
     /// </summary>
-    /// <param name="Prefix">The namespace prefix. <b>null</b> when a lookup missed.</param>
-    /// <param name="LocalName">The local name of the child element. <b>null</b> when a lookup missed.</param>
+    /// <param name="Prefix">The namespace prefix, or <see langword="null"/> when a lookup missed.</param>
+    /// <param name="LocalName">
+    /// The local name of the child element, or <see langword="null"/> when a lookup missed.
+    /// </param>
     /// <remarks>
     ///     Mirrors the private <c>XPathStep</c> at
     ///     <c>DublinCoreMetadataTermsSyndicationExtensionContext.cs:1417</c>. The one deliberate

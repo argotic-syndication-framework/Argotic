@@ -17,19 +17,19 @@ namespace Argotic.Benchmarks.Loading;
 /// baseline.
 /// </para>
 /// <para>
-/// <b>Astral characters break the fast path.</b> A <c>SearchValues&lt;char&gt;</c> built from the
+/// Astral characters break the fast path. A <c>SearchValues&lt;char&gt;</c> built from the
 /// complement of <c>XmlConvert.IsXmlChar</c> necessarily contains the whole of <c>[D800-DFFF]</c> — a
 /// surrogate is not a valid XML character on its own — so <c>IndexOfAny</c> fires on every emoji and
 /// the vectorised scan hands off to the char-by-char pair rule. A 7-bit "clean" baseline therefore
 /// measures the path a real feed with an emoji in its title never takes.
 /// </para>
 /// <para>
-/// <b>The all-invalid arms price a loop that correctness tests reach and no benchmark did.</b> A
+/// The all-invalid arms price a loop that correctness tests reach and no benchmark did. A
 /// streaming sanitiser must never return zero characters while input remains, because
 /// <c>TextReader.Read</c> documents zero as end of input and <c>XmlTextReaderImpl</c> treats it that
 /// way — a document with a long NUL run would be silently truncated. A 0–1% dirt sweep never produces
 /// a wholly-dropped chunk, so the loop-again path has no measured cost. Two sizes, an order of
-/// magnitude apart: the pass condition is that cost grows <b>linearly</b> in the NUL count. This is
+/// magnitude apart: the pass condition is that cost grows linearly in the NUL count. This is
 /// coverage of an unmeasured branch, not a guard against a quadratic — no plausible implementation is
 /// quadratic.
 /// </para>

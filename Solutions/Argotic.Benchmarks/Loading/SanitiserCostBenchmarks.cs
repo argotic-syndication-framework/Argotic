@@ -12,10 +12,10 @@ namespace Argotic.Benchmarks.Loading;
 /// <remarks>
 /// <para>
 /// <c>RemoveInvalidXmlHexadecimalCharacters</c> has two costs, not one. On a clean document it scans,
-/// finds nothing, and returns the original instance — 0 B allocated, which
-/// <c>docs/build-warnings.md</c> records. On a dirty one it rebuilds into a <c>StringBuilder</c>.
-/// <b>Every generator in <see cref="FeedCorpus"/> was clean, so only the first cost had ever been
-/// measured</b> and a rewrite of the rebuild loop could be declared free on evidence that never
+/// finds nothing, and returns the original instance, allocating nothing. On a dirty one it rebuilds
+/// into a <c>StringBuilder</c>.
+/// Every generator in <see cref="FeedCorpus"/> was clean, so only the first cost had ever been
+/// measured and a rewrite of the rebuild loop could be declared free on evidence that never
 /// touched it.
 /// </para>
 /// <para>

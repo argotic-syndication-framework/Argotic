@@ -21,12 +21,12 @@ namespace Argotic.Benchmarks.Protocols;
 /// it the right place to find out what the fixed cost of using one of these clients actually is.
 /// </para>
 /// <para>
-/// The interesting variable is not size but <b>escaping</b>. <c>TrackbackMessage.WriteTo</c> passes
+/// The interesting variable is not size but escaping. <c>TrackbackMessage.WriteTo</c> passes
 /// every field through <c>HttpUtility.UrlEncode</c>, and that call has two
 /// very different costs: a string containing only unreserved ASCII is returned as-is, while a string
 /// containing anything else is rebuilt byte by byte into percent-triples. A title in English and a
 /// title in Japanese are the same field taking different paths, and both are ordinary. The arms are
-/// therefore chosen by <em>character class</em>, not by length.
+/// therefore chosen by character class, not by length.
 /// </para>
 /// <para>
 /// The arms nest: <c>encode ⊂ send</c>, and <c>parse ⊂ send</c>. The residual is
@@ -36,16 +36,16 @@ namespace Argotic.Benchmarks.Protocols;
 /// the two together say whether that plumbing is a constant or a proportion.
 /// </para>
 /// <para>
-/// <b>The transport is a stub handler and no socket is opened</b>, following
+/// The transport is a stub handler and no socket is opened, following
 /// <c>PollingSteadyStateBenchmarks</c>: the subject is the encoder and the parser, and a real socket
 /// would add scheduler noise BenchmarkDotNet cannot subtract. It also means nothing here can reach a
 /// network by construction.
 /// </para>
 /// <para>
-/// <b>No <c>[Params]</c>.</b> The arms differ in which fields are present and in what alphabet those
+/// No <c>[Params]</c>. The arms differ in which fields are present and in what alphabet those
 /// fields use, and neither is a numeric axis every arm could vary along; a class-scoped length
-/// parameter would leave the minimal arm and the parse arm identical at every value, which is the
-/// defect <c>docs/build-warnings.md</c> §D0 records.
+/// parameter would leave the minimal arm and the parse arm identical at every value, producing rows
+/// that carry no information.
 /// </para>
 /// </remarks>
 [BenchmarkCategory("protocols", "trackback", "client")]
@@ -150,7 +150,7 @@ public class TrackbackClientBenchmarks : IDisposable
     /// <remarks>
     ///     The innermost measured point, written the way <c>TrackbackClient</c> writes it — a
     ///     <see cref="StreamWriter"/> at the message's own encoding. Contained in every send arm.
-    ///     Note that the client then <em>strips</em> the byte-order mark this writer emits, because a
+    ///     Note that the client then strips the byte-order mark this writer emits, because a
     ///     form body must not carry one; that strip is charged to the send arms and not to this one.
     /// </remarks>
     [Benchmark(Description = "a. encode the form body only (ASCII fields)")]

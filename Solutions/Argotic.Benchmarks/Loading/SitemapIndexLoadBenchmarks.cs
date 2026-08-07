@@ -17,14 +17,14 @@ namespace Argotic.Benchmarks.Loading;
 /// different adapter path and a different per-entry object.
 /// </para>
 /// <para>
-/// It matters more than its size suggests. An index is the document a crawler fetches <em>first</em>
+/// It matters more than its size suggests. An index is the document a crawler fetches first
 /// and refetches on every crawl, and it is how a site with more than 50,000 pages publishes at all.
 /// A site at ten million pages has an index of 200 entries; the protocol permits 50,000, which is a
 /// document a crawler must be able to read.
 /// </para>
 /// <para>
-/// <b>A note on the corpus, because the file names mislead.</b>
-/// <c>sitemap/apple-index.xml</c> is <em>not</em> an index: despite its name it has a
+/// A note on the corpus, because the file names mislead.
+/// <c>sitemap/apple-index.xml</c> is not an index: despite its name it has a
 /// <c>&lt;urlset&gt;</c> root and 847 <c>&lt;url&gt;</c> elements, and handing it to
 /// <see cref="SitemapIndex"/> would throw <see cref="FormatException"/> rather than measure anything.
 /// The corpus holds exactly two genuine indexes — <c>bbc-co-uk-index.xml</c> and
@@ -35,12 +35,12 @@ namespace Argotic.Benchmarks.Loading;
 /// are worth more here than two of the same shape: the BBC's entries are <c>loc</c> and nothing else,
 /// while gov.uk's carry a <c>lastmod</c> apiece. Per entry, that is the difference between no date
 /// parse and one. <c>SitemapIndexScaleBenchmarks</c> takes that observation to the protocol ceiling;
-/// this class establishes that it holds on documents nobody wrote for a benchmark.
+/// this class establishes that it holds on documents not written for a benchmark.
 /// </para>
 /// <para>
-/// <b>No <c>[Params]</c>.</b> Every arm is a fixed file, and a size axis would reproduce all three
-/// rows unchanged at every value — the defect <c>docs/build-warnings.md</c> §D0 records. The scaling
-/// sweep is a separate class over a generator, which is the only honest place for one.
+/// No <c>[Params]</c>. Every arm is a fixed file, and a size axis would reproduce all three
+/// rows unchanged at every value, which makes the axis decorative rather than informative. The
+/// scaling sweep belongs in a separate class over a generator, and is written there.
 /// </para>
 /// </remarks>
 [BenchmarkCategory("load", "sitemap", "realworld")]
@@ -85,7 +85,7 @@ public class SitemapIndexLoadBenchmarks
     /// <remarks>
     ///     Six entries, 745 bytes, and one <c>Uri.TryCreate</c> per entry with no date parse anywhere.
     ///     It also carries an XML comment before the root, which the repository's synthetic generators
-    ///     never emit — a small reminder that real documents contain things nobody thought to generate.
+    ///     never emit, which is characteristic of real documents against generated ones.
     /// </remarks>
     [Benchmark(Description = "b. SitemapIndex.Load, 6 entries, loc only (real)")]
     public int LoadLocOnlyIndex() => Load(this.locOnlyIndex);
@@ -96,7 +96,7 @@ public class SitemapIndexLoadBenchmarks
     /// <returns>The number of entries parsed.</returns>
     /// <remarks>
     ///     Thirty-five entries, 4,733 bytes, each with a full <c>2026-08-06T02:50:02+00:00</c>
-    ///     timestamp. Against the previous arm this is roughly six times the entries <em>and</em> a
+    ///     timestamp. Against the previous arm this is roughly six times the entries and a
     ///     date parse on each, so the two cannot be separated from these two arms alone — which is
     ///     exactly what <c>SitemapIndexScaleBenchmarks</c> exists to do, by holding the entry count
     ///     equal and varying only the date shape.

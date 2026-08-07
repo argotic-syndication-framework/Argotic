@@ -12,10 +12,10 @@ namespace Argotic.Benchmarks.Utilities;
 /// <para>
 /// The audit that went looking for a <c>FrozenDictionary</c> rebuilt per call found none — every one
 /// is <c>static readonly</c>. It found this instead. Six <c>new Regex(...)</c> are constructed as
-/// <em>local variables</em>, so each pays the engine's pattern parse on every call, and one of them is
+/// local variables, so each pays the engine's pattern parse on every call, and one of them is
 /// worse than per-call: <c>ExtractHtmlAttributes</c> builds its pattern once per invocation and
-/// <c>ExtractUrls</c> invokes it <b>once per matched <c>&lt;link&gt;</c> and once per matched
-/// <c>&lt;a&gt;</c></b>. A page with 50 links and 200 anchors constructs 250 of them.
+/// <c>ExtractUrls</c> invokes it once per matched <c>&lt;link&gt;</c> and once per matched
+/// <c>&lt;a&gt;</c>. A page with 50 links and 200 anchors constructs 250 of them.
 /// </para>
 /// <para>
 /// The <c>Count</c> axis is the number of anchors on the page, which is what multiplies the
@@ -23,10 +23,10 @@ namespace Argotic.Benchmarks.Utilities;
 /// hoisted variants pay construction once whatever the page contains.
 /// </para>
 /// <para>
-/// Three variants, and the middle one matters. <b>Interpreted-per-call</b> is what ships.
-/// <b>Interpreted-hoisted</b> isolates how much of the cost is construction alone rather than
+/// Three variants, and the middle one matters. Interpreted-per-call is what ships.
+/// Interpreted-hoisted isolates how much of the cost is construction alone rather than
 /// matching, which is the number that says whether source generation is doing anything beyond what a
-/// <c>static readonly</c> field would. <b>Source-generated</b> is the house style already used for
+/// <c>static readonly</c> field would. Source-generated is the house style already used for
 /// <c>XmlDeclarationEncodingRegex</c>.
 /// </para>
 /// </remarks>

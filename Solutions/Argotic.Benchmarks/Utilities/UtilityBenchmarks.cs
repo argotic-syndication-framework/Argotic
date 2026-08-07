@@ -18,13 +18,13 @@ namespace Argotic.Benchmarks.Utilities;
 /// </para>
 /// <para>
 /// The short-circuit rewrite has a measurable consequence worth capturing: cost now depends on
-/// <em>where</em> sequences first differ. Identical sequences are the worst case (every element
+/// where sequences first differ. Identical sequences are the worst case (every element
 /// compared); sequences differing at the first element are the best. Both are measured, because a
 /// benchmark of only one would describe the change dishonestly.
 /// </para>
 /// <para>
-/// No size parameter on the scalar operations — a single string hash has no meaningful size axis.
-/// That exemption was declared in the plan rather than left as a silent omission.
+/// The scalar operations carry no size parameter, because a single string hash has no meaningful size
+/// axis. The omission is deliberate and is recorded here so that it is not mistaken for an oversight.
 /// </para>
 /// </remarks>
 [BenchmarkCategory("utilities")]

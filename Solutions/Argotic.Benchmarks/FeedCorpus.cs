@@ -14,13 +14,13 @@ namespace Argotic.Benchmarks;
 /// not a fiction.
 /// </para>
 /// <para>
-/// <b>Every generator above <see cref="GenerateRssWithDirtUtf8"/> emits pure 7-bit ASCII, free of
-/// invalid XML characters, over a seekable <see cref="MemoryStream"/>.</b> That is three separate
+/// Every generator above <see cref="GenerateRssWithDirtUtf8"/> emits pure 7-bit ASCII, free of
+/// invalid XML characters, over a seekable <see cref="MemoryStream"/>. That is three separate
 /// blind spots, and each one guarantees a favourable measurement for a change whose whole purpose is
 /// to alter the path the corpus cannot reach: the sanitiser's rebuild loop never runs, the
 /// <c>SearchValues</c> fast path always fires, and <c>GetStreamBytes</c> always takes its
 /// <c>CanSeek</c> branch. The last three generators exist to remove those blind spots, and they were
-/// added <i>before</i> the change they measure — a benchmark authored afterwards has no "before".
+/// added before the change they measure — a benchmark authored afterwards has no "before".
 /// </para>
 /// <para>
 /// The synthetic generator therefore models its element mix on
@@ -78,7 +78,7 @@ internal static class FeedCorpus
     }
 
     /// <summary>
-    /// Generates an RSS 2.0 document that DECLARES extension namespaces and carries extension
+    /// Generates an RSS 2.0 document that both declares extension namespaces and carries extension
     /// elements on every item, modelled on the repository's <c>RssFeedWithExtensions.xml</c>.
     /// </summary>
     /// <param name="itemCount">The number of <c>item</c> elements to emit.</param>
@@ -218,7 +218,7 @@ internal static class FeedCorpus
     /// The <c>lastmod</c> parameter is not decoration, and it is why this generator exists rather than
     /// a one-liner. <c>SitemapIndexEntry.Load</c> parses that element in two stages: it tries
     /// <c>SyndicationDateTimeUtility.TryParseRfc3339DateTime</c>, whose table holds nine patterns that
-    /// all require a full date <i>and</i> time, and only if every one of them fails does it fall
+    /// all require a full date and time, and only if every one of them fails does it fall
     /// through to <see cref="DateTime.TryParse(string, IFormatProvider, System.Globalization.DateTimeStyles, out DateTime)"/>.
     /// </para>
     /// <para>
@@ -283,7 +283,7 @@ internal static class FeedCorpus
     /// </summary>
     /// <param name="itemCount">The number of <c>item</c> elements to emit.</param>
     /// <param name="dirtFraction">
-    ///     The fraction of <b>eligible text characters</b> — lowercase ASCII letters outside any tag —
+    ///     The fraction of eligible text characters — lowercase ASCII letters outside any tag —
     ///     replaced by <c>U+0001</c>. Zero leaves the document clean.
     /// </param>
     /// <returns>The generated document as UTF-8 bytes.</returns>
@@ -291,8 +291,8 @@ internal static class FeedCorpus
     /// <para>
     /// <c>SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters</c> has two completely
     /// different costs. On a clean document it scans and returns the original instance — 0 B
-    /// allocated. On a dirty one it rebuilds into a <see cref="StringBuilder"/>. <b>No generator in
-    /// this file emitted an invalid character, so only the first was ever measured</b>, and a rewrite
+    /// allocated. On a dirty one it rebuilds into a <see cref="StringBuilder"/>. No generator in
+    /// this file emitted an invalid character, so only the first was ever measured, and a rewrite
     /// of the rebuild loop could be declared free on evidence that never touched it.
     /// </para>
     /// <para>
@@ -367,7 +367,7 @@ internal static class FeedCorpus
     /// <para>
     /// A <c>SearchValues&lt;char&gt;</c> built from the complement of <c>XmlConvert.IsXmlChar</c>
     /// contains the whole of <c>[D800-DFFF]</c>, because a surrogate is not a valid XML character on
-    /// its own. So <c>IndexOfAny</c> fires on <b>every astral character</b> and the vectorised fast
+    /// its own. So <c>IndexOfAny</c> fires on every astral character and the vectorised fast
     /// path never completes over a document containing one — the char-by-char pair rule has to run.
     /// </para>
     /// <para>

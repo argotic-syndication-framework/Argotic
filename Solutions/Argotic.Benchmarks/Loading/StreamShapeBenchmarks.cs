@@ -14,9 +14,9 @@ namespace Argotic.Benchmarks.Loading;
 /// <para>
 /// <c>SyndicationEncodingUtility.GetStreamBytes</c> branches on <c>Stream.CanSeek</c>: a seekable
 /// stream is sized and filled with one <c>ReadExactly</c>, a non-seekable one falls into
-/// <c>stream.CopyTo</c>. <b>Every benchmark in this harness passes a <c>MemoryStream</c>, and the
+/// <c>stream.CopyTo</c>. Every benchmark in this harness passes a <c>MemoryStream</c>, and the
 /// test suite reports that branch at 2 of 4 — the <c>CopyTo</c> arm has never executed anywhere in
-/// this repository.</b> It is also the arm that runs against a live network stream, and the one a
+/// this repository. It is also the arm that runs against a live network stream, and the one a
 /// switch to <c>ResponseHeadersRead</c> would make the common case.
 /// </para>
 /// <para>

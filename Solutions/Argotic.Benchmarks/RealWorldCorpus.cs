@@ -10,7 +10,7 @@ namespace Argotic.Benchmarks;
 /// AtomPub, plus a feed for each of the twenty extension families.
 /// </para>
 /// <para>
-/// <b>It lives outside the repository on purpose.</b> 76 MiB of third-party documents is not
+/// It lives outside the repository on purpose. 76 MiB of third-party documents is not
 /// something to commit, and <c>.endjin/</c> is gitignored, so these benchmarks are opt-in: they
 /// measure what the synthetic generators structurally cannot — real encodings, byte-order marks,
 /// unusual date spellings, partial extension usage, and publishers who declare a namespace they never

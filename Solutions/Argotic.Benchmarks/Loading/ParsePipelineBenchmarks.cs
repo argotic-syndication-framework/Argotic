@@ -18,8 +18,8 @@ namespace Argotic.Benchmarks.Loading;
 /// <see cref="XPathDocument"/>, then walk that document into Argotic's object model.
 /// </para>
 /// <para>
-/// <b>The decomposition this class was built on no longer exists, and pretending otherwise would be
-/// worse than losing it.</b> The stream path used to buffer the document, sniff it, decode it to a
+/// The decomposition this class was built on no longer exists, and pretending otherwise would be
+/// worse than losing it. The stream path used to buffer the document, sniff it, decode it to a
 /// string and sanitise that into a second string, so each stage was a public call nested inside the
 /// next and the stages between them fell out by subtraction. It now reads a bounded head and streams
 /// the rest, and there is no intermediate to measure.
@@ -36,13 +36,21 @@ namespace Argotic.Benchmarks.Loading;
 /// decomposition is wrong and no conclusion may be drawn from it.
 /// </para>
 /// <para>
-/// The relations that are now <b>false</b>, written down so nobody rederives them from the shape of
-/// the arm list:
+/// The following relations no longer hold, and are recorded here so that they are not inferred from
+/// the shape of the arm list:
 /// </para>
 /// <list type="bullet">
-///   <item><description><c>c ⊄ d</c> — <c>CreateSafeNavigator(string)</c> no longer calls the sanitiser as a separate pass.</description></item>
-///   <item><description><c>d ⊄ e</c> — the stream path never materialises a string, so the string arm is not inside it.</description></item>
-///   <item><description><c>b ⊄ e</c> — <c>GetXmlEncoding(bytes)</c> sniffs the whole array; the stream path sniffs a bounded head.</description></item>
+///   <item><description>
+///   <c>c ⊄ d</c> — <c>CreateSafeNavigator(string)</c> no longer calls the sanitiser as a separate
+///   pass.
+///   </description></item>
+///   <item><description>
+///   <c>d ⊄ e</c> — the stream path never materialises a string, so the string arm is not inside it.
+///   </description></item>
+///   <item><description>
+///   <c>b ⊄ e</c> — <c>GetXmlEncoding(bytes)</c> sniffs the whole array; the stream path sniffs a
+///   bounded head.
+///   </description></item>
 /// </list>
 /// </remarks>
 [BenchmarkCategory("pipeline", "rss")]
@@ -141,7 +149,8 @@ public class ParsePipelineBenchmarks
     }
 
     /// <summary>
-    /// The whole load, on a feed that DECLARES extension namespaces and carries extension elements.
+    /// Performs the whole load on a feed that both declares extension namespaces and carries extension
+    /// elements.
     /// </summary>
     /// <returns>The parsed feed.</returns>
     /// <remarks>
@@ -181,7 +190,7 @@ public class ParsePipelineBenchmarks
     /// reported delta.
     /// </para>
     /// <para>
-    /// <b>That confound is gone.</b> <c>CharacterEncoding</c> is nullable and defaults to null, so a
+    /// That confound is gone. <c>CharacterEncoding</c> is nullable and defaults to null, so a
     /// default settings object no longer names an encoding and both arms sniff. <c>f</c> and <c>g</c>
     /// are now directly comparable for the first time.
     /// </para>
@@ -193,10 +202,10 @@ public class ParsePipelineBenchmarks
     /// measuring that instead of what it claims to.
     /// </para>
     /// <para>
-    /// Measured: 146,440 B / 969,968 B / 9,092,368 B at 10, 100 and 1000 items — <b>equal in both
-    /// arms at every size</b>, not merely close. Read the allocation column and nothing else here.
+    /// Measured: 146,440 B / 969,968 B / 9,092,368 B at 10, 100 and 1000 items — equal in both
+    /// arms at every size, not merely close. Read the allocation column and nothing else here.
     /// The same run timed these two provably identical code paths at a ratio of 1.384 under one job
-    /// and 0.908 under another; <c>docs/build-warnings.md</c> §2.25 has the table.
+    /// configuration and 0.908 under another, which is why only allocation is quoted from this class.
     /// </para>
     /// </remarks>
     [Benchmark(Description = "f2. Load(Stream, settings), AutoDetectExtensions=true")]

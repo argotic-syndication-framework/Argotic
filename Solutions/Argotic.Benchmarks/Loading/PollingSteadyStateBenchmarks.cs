@@ -18,7 +18,7 @@ namespace Argotic.Benchmarks.Loading;
 /// invokes - fetch, decode, parse, walk - had never been priced as a unit.
 /// </para>
 /// <para>
-/// The number this exists to produce is <b>allocation per feed per poll</b>. That is what sizes the
+/// The number this exists to produce is allocation per feed per poll. That is what sizes the
 /// memory limit of the function or container the poller runs in, and it is the only figure here that
 /// informs a deployment decision rather than a refactoring one.
 /// </para>

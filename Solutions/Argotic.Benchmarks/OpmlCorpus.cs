@@ -9,8 +9,8 @@ namespace Argotic.Benchmarks;
 /// <remarks>
 ///     <para>
 ///     Calibrated against three production newsletter lists — Azure Weekly, Fabric Weekly and Power BI
-///     Weekly — rather than invented. Measured across all three: <b>every</b> outline carries exactly
-///     <b>eight</b> attributes, averages <b>253 bytes</b>, and the body is <b>flat</b>: 478 of 478
+///     Weekly — rather than invented. Measured across all three: every outline carries exactly
+///     eight attributes, averages 253 bytes, and the body is flat: 478 of 478
 ///     self-closing, zero containers. The three real sizes are 88, 299 and 478 subscriptions.
 ///     </para>
 ///     <para>
@@ -29,7 +29,7 @@ namespace Argotic.Benchmarks;
 internal static class OpmlCorpus
 {
     /// <summary>
-    /// The three sizes the production lists actually are.
+    /// Gets the three subscription-list sizes observed in production.
     /// </summary>
     public static int[] RealSizes => [88, 299, 478];
 

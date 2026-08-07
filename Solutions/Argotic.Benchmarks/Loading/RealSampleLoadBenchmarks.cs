@@ -17,7 +17,7 @@ namespace Argotic.Benchmarks.Loading;
 /// </para>
 /// <para>
 /// The two are not expected to match exactly; the real sample's text lengths differ. They are
-/// expected to agree in <em>character</em>: same order of magnitude for time and allocation per
+/// expected to agree in character: same order of magnitude for time and allocation per
 /// item. If they diverge sharply, the generator is wrong and must be fixed before any conclusion
 /// is drawn from a synthetic-only measurement.
 /// </para>

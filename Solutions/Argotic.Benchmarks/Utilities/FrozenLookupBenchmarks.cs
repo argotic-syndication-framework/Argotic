@@ -8,36 +8,39 @@ using BenchmarkDotNet.Attributes;
 namespace Argotic.Benchmarks.Utilities;
 
 /// <summary>
-/// Answers whether the <see cref="FrozenDictionary{TKey, TValue}"/> modernisation actually paid,
-/// against what it actually replaced.
+/// Measures <see cref="FrozenDictionary{TKey, TValue}"/> lookup against the reflection scan it
+/// replaced and against the alternative structures available at the sizes this library uses.
 /// </summary>
 /// <remarks>
 /// <para>
-/// The premise that prompted this was "we moved to FrozenDictionary but never verified it helped".
-/// An audit of all 14 declarations first established two facts that decide what these arms have to
-/// be, and both contradict the obvious experiment:
+/// Two properties of the 14 declarations in this library determine which arms are meaningful, and
+/// both rule out the obvious experiment.
 /// </para>
 /// <list type="number">
-///   <item><description><b>Nothing is built per call.</b> Every declaration is <c>static readonly</c>,
-///   or a <c>static readonly</c> field of a generic type closed over 22 enums. Construction cost is
-///   paid once per process and is not what a caller pays, so an arm that measures
-///   <c>ToFrozenDictionary()</c> would be measuring something no workload reaches.</description></item>
-///   <item><description><b>The predecessor was not a <c>Dictionary</c>.</b> The enum mappings replaced
-///   a <em>per-call reflection scan</em> — <c>GetFields</c>, then <c>GetCustomAttribute</c> on each.
-///   Benchmarking Frozen against Dictionary answers a question nobody asked; the honest baseline is
-///   the reflection it displaced, which is the <c>Reflection…</c> arm below.</description></item>
+///   <item><description>
+///   No mapping is constructed per call. Every declaration is <c>static readonly</c>, or a
+///   <c>static readonly</c> field of a generic type closed over 22 enumerations. Construction is paid
+///   once per process, so an arm measuring <c>ToFrozenDictionary()</c> would measure a cost no
+///   workload reaches.
+///   </description></item>
+///   <item><description>
+///   The predecessor was not a <see cref="Dictionary{TKey, TValue}"/>. The enumeration mappings
+///   replaced a per-call reflection scan of <c>GetFields</c> followed by <c>GetCustomAttribute</c> on
+///   each field. The baseline that establishes whether the change paid is therefore the reflection
+///   arm below, not the dictionary arm.
+///   </description></item>
 /// </list>
 /// <para>
-/// So there are two separate questions here and they have different answers. <b>Was the move worth
-/// making?</b> — compare against reflection. <b>Is Frozen the right structure now?</b> — compare
-/// against <see cref="Dictionary{TKey, TValue}"/>, a <c>switch</c>, and a linear scan, at the sizes
-/// that actually occur. 50 of the 56 live instances hold <b>8 entries or fewer</b> and 30 hold three
-/// or fewer, which is precisely the region where a hash structure has no room to win.
+/// The arms answer two distinct questions. Whether the change paid is answered against reflection.
+/// Whether <see cref="FrozenDictionary{TKey, TValue}"/> remains the correct structure is answered
+/// against <see cref="Dictionary{TKey, TValue}"/>, a <c>switch</c> and a linear scan, at the observed
+/// sizes: 50 of the 56 live instances hold eight entries or fewer and 30 hold three or fewer, which
+/// is the region in which a hash structure has the least opportunity to win.
 /// </para>
 /// <para>
-/// Hit position is a parameter because it is the whole argument: a linear scan beats a hash lookup on
-/// the first key and loses on the last, and a miss is the case a real feed hits most — the audit's
-/// census of 627 live feeds found <c>geo:</c> declared by 121 and used by 5.
+/// Hit position is parameterised because it determines the outcome. A linear scan is faster than a
+/// hash lookup on the first key and slower on the last, and a miss is the most frequent case in
+/// practice: across 627 surveyed live feeds the <c>geo:</c> prefix was declared by 121 and used by 5.
 /// </para>
 /// </remarks>
 [BenchmarkCategory("utilities", "frozen")]
@@ -65,9 +68,9 @@ public class FrozenLookupBenchmarks
     /// Gets or sets which key is looked up: the first, the last, or one that is not present.
     /// </summary>
     /// <remarks>
-    ///     A miss is not an edge case here. Extension probing asks "is this token one of mine?" far
-    ///     more often than it gets a hit, so an arm measuring only hits would price the structure for
-    ///     the rarer half of its work.
+    ///     A miss is the common case rather than an edge case. Extension probing tests whether a token
+    ///     belongs to a given extension far more often than it matches, so an arm measuring only hits
+    ///     would price the structure for the rarer half of its work.
     /// </remarks>
     [Params("first", "last", "miss")]
     public string HitPosition { get; set; } = "first";
@@ -84,7 +87,7 @@ public class FrozenLookupBenchmarks
     };
 
     /// <summary>
-    /// What the library does today.
+    /// Looks the key up in the frozen mapping, as the library does.
     /// </summary>
     /// <returns>The resolved value.</returns>
     [Benchmark(Baseline = true, Description = "FrozenDictionary (as shipped)")]
@@ -92,7 +95,7 @@ public class FrozenLookupBenchmarks
         Frozen.GetValueOrDefault(this.probe, YahooMediaExpression.None);
 
     /// <summary>
-    /// The same structure as an ordinary hash dictionary, to isolate what freezing buys.
+    /// Looks the key up in an ordinary hash dictionary, isolating the contribution of freezing.
     /// </summary>
     /// <returns>The resolved value.</returns>
     [Benchmark(Description = "Dictionary, same comparer")]
@@ -100,7 +103,7 @@ public class FrozenLookupBenchmarks
         Hashed.GetValueOrDefault(this.probe, YahooMediaExpression.None);
 
     /// <summary>
-    /// No structure at all: the comparison chain a three-token enum could be written as.
+    /// Resolves the key through a comparison chain, using no lookup structure at all.
     /// </summary>
     /// <returns>The resolved value.</returns>
     [Benchmark(Description = "switch on the token")]
@@ -113,7 +116,7 @@ public class FrozenLookupBenchmarks
     };
 
     /// <summary>
-    /// A linear scan of the token array, which at three entries is a serious contender.
+    /// Resolves the key by scanning the token array, which at three entries is a viable alternative.
     /// </summary>
     /// <returns>The resolved value.</returns>
     [Benchmark(Description = "linear scan of a 3-entry array")]
@@ -131,7 +134,8 @@ public class FrozenLookupBenchmarks
     }
 
     /// <summary>
-    /// The public API the extensions actually call, which routes through the cached frozen mapping.
+    /// Resolves the key through the public API the extensions call, which routes through the cached
+    /// frozen mapping.
     /// </summary>
     /// <returns>The resolved value.</returns>
     /// <remarks>
@@ -143,15 +147,14 @@ public class FrozenLookupBenchmarks
         EnumerationMetadataAttribute.GetEnumByAlternateValue(this.probe, YahooMediaExpression.None);
 
     /// <summary>
-    /// The predecessor: a reflection scan performed on every call.
+    /// Resolves the key by the per-call reflection scan that the frozen mapping replaced.
     /// </summary>
     /// <returns>The resolved value.</returns>
     /// <remarks>
-    ///     This, not <see cref="DictionaryLookup"/>, is the baseline the modernisation was measured
-    ///     against — the enum mappings replaced this, so this is the arm that says whether the change
-    ///     was worth making. Transcribed to match the shape the audit recovered from the history:
-    ///     enumerate the public static fields, read the attribute off each, compare the alternate
-    ///     value.
+    ///     This arm, not <see cref="DictionaryLookup"/>, is the baseline that establishes whether the
+    ///     change was worth making, because this is what the enumeration mappings replaced. It
+    ///     reproduces the original sequence: enumerate the public static fields, read the attribute
+    ///     from each, and compare its alternate value.
     /// </remarks>
     [Benchmark(Description = "per-call reflection scan (what it replaced)")]
     public YahooMediaExpression ReflectionScan()

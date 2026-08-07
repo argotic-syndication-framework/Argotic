@@ -12,13 +12,12 @@ namespace Argotic.Benchmarks.Loading;
 /// </summary>
 /// <remarks>
 ///     <para>
-///     The arms are <b>cumulative</b>, so each row's cost is the previous row plus one stage, and the
-///     difference between two adjacent rows is that stage's price on its own. That is the only way to
-///     answer "where does the pipeline's memory go" without guessing, and it is how §2.21 measured the
-///     parse pipeline stage by stage.
+///     The arms are cumulative, so each row's cost is the previous row plus one stage, and the
+///     difference between two adjacent rows is that stage's price on its own. Cumulative arms are the
+///     only way to attribute the pipeline's memory to a stage without inference.
 ///     </para>
 ///     <para>
-///     <b>Deliberately no network.</b> A benchmark that fetches is measuring the internet. The real
+///     Deliberately no network. A benchmark that fetches is measuring the internet. The real
 ///     crawl is a separate field harness; this measures the work the library does with what a fetch
 ///     returns, and does it deterministically.
 ///     </para>
@@ -28,8 +27,8 @@ namespace Argotic.Benchmarks.Loading;
 ///     benchmark that took five times longer to say so would be worse, not better.
 ///     </para>
 ///     <para>
-///     <b>Read the allocation column.</b> §2.25 records two provably identical code paths timing 48%
-///     apart on this hardware while allocating byte-identically.
+///     Read the allocation column. On this hardware two provably identical code paths have timed 48%
+///     apart while allocating byte-identically, so timing alone does not support a claim.
 ///     </para>
 /// </remarks>
 [BenchmarkCategory("pipeline")]

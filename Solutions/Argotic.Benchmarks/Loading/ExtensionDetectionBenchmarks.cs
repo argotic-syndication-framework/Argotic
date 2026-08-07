@@ -14,7 +14,7 @@ namespace Argotic.Benchmarks.Loading;
 /// </summary>
 /// <remarks>
 /// <para>
-/// F1 established that auto-detection costs 3.87x allocation, but not <em>which</em> of its three
+/// F1 established that auto-detection costs 3.87x allocation, but not which of its three
 /// sub-steps dominates. Those steps have very different fixes and very different risks:
 /// </para>
 /// <list type="number">
@@ -90,7 +90,8 @@ public class ExtensionDetectionBenchmarks
     }
 
     /// <summary>
-    /// Step 1 alone: the assembly reflection scan behind the FrameworkExtensions property.
+    /// Performs the assembly reflection scan behind the <c>FrameworkExtensions</c> property, in
+    /// isolation.
     /// </summary>
     /// <returns>A running count, so the work cannot be elided.</returns>
     [Benchmark(Description = "1. FrameworkExtensions (reflection scan)")]

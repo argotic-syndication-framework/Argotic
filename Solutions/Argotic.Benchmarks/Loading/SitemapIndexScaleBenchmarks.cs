@@ -12,7 +12,7 @@ namespace Argotic.Benchmarks.Loading;
 /// </summary>
 /// <remarks>
 /// <para>
-/// The sitemap protocol caps an index at <b>50,000 <c>sitemap</c> elements</b>, the same ceiling it
+/// The sitemap protocol caps an index at 50,000 <c>sitemap</c> elements, the same ceiling it
 /// puts on a <c>urlset</c>, and <see cref="SitemapIndex"/> documents that limit in its own remarks. An
 /// index at the ceiling addresses 2.5 billion URLs; it is the shape a site of any real size publishes,
 /// and it is refetched by every crawler on every crawl. <c>SitemapScaleBenchmarks</c> took the
@@ -20,12 +20,11 @@ namespace Argotic.Benchmarks.Loading;
 /// documents parsed by different code.
 /// </para>
 /// <para>
-/// <b>All three arms vary along <see cref="SitemapCount"/>, and they differ from one another in
-/// exactly one element.</b> That constraint is the design. <c>docs/build-warnings.md</c> §D0 records
-/// a class where six of nine rows were pure arithmetic reproducing N× because the axis was
-/// class-scoped and most arms ignored it; here the entry count, the location text and the document
-/// structure are identical across the three, and the only difference is how — or whether — each entry
-/// spells its <c>lastmod</c>.
+/// All three arms vary along <see cref="SitemapCount"/>, and they differ from one another in
+/// exactly one element. That constraint is deliberate. A class-scoped axis that most arms ignore
+/// produces rows which merely reproduce the parameter, carrying no information; here the entry count,
+/// the location text and the document structure are identical across the three arms, and the only
+/// difference is how, or whether, each entry spells its <c>lastmod</c>.
 /// </para>
 /// <para>
 /// All three spellings are legal. The protocol defers to the W3C Datetime profile, which makes the
@@ -33,14 +32,15 @@ namespace Argotic.Benchmarks.Loading;
 /// very different length:
 /// </para>
 /// <list type="bullet">
-///   <item><description><b>No <c>lastmod</c></b> — <c>SelectChildElement</c> returns null and the date
+///   <item><description>No <c>lastmod</c> — <c>SelectChildElement</c> returns null and the date
 ///   parser is never entered. One <c>Uri.TryCreate</c> per entry and nothing else.</description></item>
-///   <item><description><b>Full RFC 3339</b> — <c>TryParseRfc3339DateTime</c> matches inside its
+///   <item><description>Full RFC 3339 — <c>TryParseRfc3339DateTime</c> matches inside its
 ///   nine-pattern table. The delta against the first arm is the whole cost of the date column.</description></item>
-///   <item><description><b>Date only</b> — fails all nine patterns, because every one of them requires
-///   a time, and falls through to <see cref="DateTime.TryParse(string, IFormatProvider, System.Globalization.DateTimeStyles, out DateTime)"/>.
+///   <item><description>Date only — fails all nine patterns, because every one of them requires
+///   a time, and falls through to
+///   <see cref="DateTime.TryParse(string, IFormatProvider, System.Globalization.DateTimeStyles, out DateTime)"/>.
 ///   Its delta against the second arm is the cost of the fallback, and at the ceiling that is
-///   <b>450,000 failed pattern matches</b> in one document.</description></item>
+///   450,000 failed pattern matches in one document.</description></item>
 /// </list>
 /// <para>
 /// What would refute the premise: the three arms landing together across the whole sweep, which would
@@ -118,7 +118,7 @@ public class SitemapIndexScaleBenchmarks
     ///     </para>
     ///     <para>
     ///     This is not a malformed-input arm. <c>2024-01-15</c> is exactly what the sitemap
-    ///     protocol's own documentation shows for <c>lastmod</c>, so this is the <em>common</em> case
+    ///     protocol's own documentation shows for <c>lastmod</c>, so this is the common case
     ///     taking the long path, not an edge case. If the gap against the previous arm is large at
     ///     50,000 entries, the finding is that the pattern table should test a cheap shape guard
     ///     before walking itself.

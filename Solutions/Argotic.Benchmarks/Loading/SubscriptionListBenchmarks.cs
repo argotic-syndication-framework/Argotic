@@ -22,9 +22,9 @@ namespace Argotic.Benchmarks.Loading;
 ///     <c>a</c>, the model is making the caller pay twice for data it already parsed.
 ///     </para>
 ///     <para>
-///     <b>Read the allocation column.</b> §2.25 of <c>docs/build-warnings.md</c> records two provably
-///     identical code paths timing 48% apart on this hardware while allocating byte-identically;
-///     timing here is not evidence unless allocation agrees with it.
+///     Read the allocation column. On this hardware two provably identical code paths have timed 48%
+///     apart while allocating byte-identically, so timing here is not evidence unless allocation
+///     agrees with it.
 ///     </para>
 /// </remarks>
 [BenchmarkCategory("opml")]

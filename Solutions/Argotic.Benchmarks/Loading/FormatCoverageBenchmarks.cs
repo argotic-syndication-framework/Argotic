@@ -13,7 +13,7 @@ namespace Argotic.Benchmarks.Loading;
 /// Atom, Sitemap and <see cref="GenericSyndicationFeed"/> all route through the same
 /// <c>SyndicationExtensionAdapter.Fill</c> machinery as RSS, so the expectation is that they share
 /// the cost. Expectations are what this harness exists to check rather than assume — a format that
-/// does <em>not</em> show it would be the interesting result, because it would mean the RSS path
+/// does not show it would be the interesting result, because it would mean the RSS path
 /// does something extra.
 /// </para>
 /// <para>

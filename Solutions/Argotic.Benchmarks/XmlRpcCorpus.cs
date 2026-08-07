@@ -15,7 +15,7 @@ namespace Argotic.Benchmarks;
 /// <para>
 /// There is no real-world XML-RPC corpus and there cannot easily be one: an XML-RPC response is the
 /// body of an HTTP POST to a weblog ping server, not something a publisher leaves at a URL to be
-/// fetched. Every document this class produces is therefore <b>synthetic</b>, and modelled on the
+/// fetched. Every document this class produces is therefore synthetic, and modelled on the
 /// examples in the XML-RPC 1.0 specification at <c>xmlrpc.com/spec</c> plus the <c>metaWeblog</c> and
 /// <c>weblogUpdates</c> shapes the library was written to talk to.
 /// </para>
@@ -23,7 +23,7 @@ namespace Argotic.Benchmarks;
 /// The point of generating one payload per scalar type is that <c>TryParseValue</c> is a linear
 /// <c>if</c>/<c>else if</c> chain over nine element names, in this order: <c>i4</c>, <c>int</c>,
 /// <c>boolean</c>, <c>string</c>, <c>double</c>, <c>dateTime.iso8601</c>, <c>base64</c>,
-/// <c>struct</c>, <c>array</c>. A value's position in that chain <em>is</em> its dispatch cost — an
+/// <c>struct</c>, <c>array</c>. A value's position in that chain is its dispatch cost — an
 /// <c>array</c> pays nine ordinal-ignore-case string comparisons before it reaches its own branch,
 /// an <c>i4</c> pays one. A corpus containing only <c>i4</c> can neither see that nor refute it.
 /// </para>
@@ -48,7 +48,7 @@ internal static class XmlRpcCorpus
         string.Concat(ResponsePrefix, valueXml, ResponseSuffix);
 
     /// <summary>
-    /// The same document as it would arrive over the wire.
+    /// Returns the same document as the byte sequence it would arrive as over the wire.
     /// </summary>
     /// <param name="valueXml">The <c>value</c> element to wrap.</param>
     /// <returns>The response document as UTF-8 bytes.</returns>
@@ -56,7 +56,7 @@ internal static class XmlRpcCorpus
         Encoding.UTF8.GetBytes(MethodResponse(valueXml));
 
     /// <summary>
-    /// A <c>value</c> carrying an explicitly typed scalar.
+    /// Builds a <c>value</c> element carrying an explicitly typed scalar.
     /// </summary>
     /// <param name="typeName">The XML-RPC type element name, e.g. <c>i4</c> or <c>dateTime.iso8601</c>.</param>
     /// <param name="text">The scalar's text content.</param>
@@ -65,32 +65,32 @@ internal static class XmlRpcCorpus
         string.Concat("<value><", typeName, ">", text, "</", typeName, ">", "</value>");
 
     /// <summary>
-    /// A <c>value</c> with no type element at all, which the specification defines as a string.
+    /// Builds a <c>value</c> element with no type element, which the specification defines as a string.
     /// </summary>
     /// <param name="text">The scalar's text content.</param>
     /// <returns>The <c>value</c> element.</returns>
     /// <remarks>
     ///     <para>
     ///     XML-RPC 1.0 is explicit: "If no type is indicated, the type is string." Real ping servers
-    ///     emit this for short strings, and <c>TryParseValue</c> <b>cannot parse it</b> — measured, not
+    ///     emit this for short strings, and <c>TryParseValue</c> cannot parse it — measured, not
     ///     inferred. It returns <see langword="false"/> and a null value.
     ///     </para>
     ///     <para>
     ///     The mechanism, because it also condemns a block of code as unreachable: text is a child
     ///     node in the XPath data model, so <c>source.HasChildren</c> is <see langword="true"/> for
     ///     <c>&lt;value&gt;text&lt;/value&gt;</c>. Control therefore enters the <c>if</c>,
-    ///     <c>MoveToFirstChild</c> lands on the <em>text</em> node whose <c>Name</c> is the empty
+    ///     <c>MoveToFirstChild</c> lands on the text node whose <c>Name</c> is the empty
     ///     string, all nine name comparisons fail, and the method falls out through
     ///     <c>value = null; return false;</c>. The <c>else if (!string.IsNullOrEmpty(source.Value))</c>
     ///     tail that was written to handle this shape is only reached when the element has no children
     ///     at all — and an element with no children has an empty <c>Value</c>, so its own guard then
-    ///     fails too. <b>That tail cannot execute for any input.</b>
+    ///     fails too. That tail cannot execute for any input.
     ///     </para>
     /// </remarks>
     public static string UntypedScalar(string text) => string.Concat("<value>", text, "</value>");
 
     /// <summary>
-    /// A base64 scalar whose decoded payload is <paramref name="byteCount"/> bytes.
+    /// Builds a base64 scalar whose decoded payload is <paramref name="byteCount"/> bytes.
     /// </summary>
     /// <param name="byteCount">The number of bytes the encoded text decodes to.</param>
     /// <returns>The <c>value</c> element.</returns>
@@ -111,7 +111,7 @@ internal static class XmlRpcCorpus
     }
 
     /// <summary>
-    /// A flat <c>struct</c> of <paramref name="memberCount"/> string-valued members.
+    /// Builds a flat <c>struct</c> of <paramref name="memberCount"/> string-valued members.
     /// </summary>
     /// <param name="memberCount">The number of <c>member</c> elements.</param>
     /// <returns>The <c>value</c> element.</returns>
@@ -137,13 +137,13 @@ internal static class XmlRpcCorpus
     }
 
     /// <summary>
-    /// A flat <c>array</c> of <paramref name="valueCount"/> integer values.
+    /// Builds a flat <c>array</c> of <paramref name="valueCount"/> integer values.
     /// </summary>
     /// <param name="valueCount">The number of <c>value</c> elements inside <c>data</c>.</param>
     /// <returns>The <c>value</c> element.</returns>
     /// <remarks>
     ///     The shape a <c>system.listMethods</c> or <c>pingback</c> enumeration takes. Unlike the
-    ///     struct, every element here dispatches through the <em>first</em> branch of the chain, so
+    ///     struct, every element here dispatches through the first branch of the chain, so
     ///     the struct-versus-array delta is not confounded by dispatch position.
     /// </remarks>
     public static string ArrayValue(int valueCount)
@@ -161,7 +161,7 @@ internal static class XmlRpcCorpus
     }
 
     /// <summary>
-    /// A <c>struct</c> whose members are arrays, holding <paramref name="leafCount"/> leaves in total.
+    /// Builds a <c>struct</c> whose members are arrays, holding <paramref name="leafCount"/> leaves in total.
     /// </summary>
     /// <param name="leafCount">The total number of scalar values across every array.</param>
     /// <param name="memberCount">The number of array-valued members to spread them over.</param>
@@ -195,7 +195,7 @@ internal static class XmlRpcCorpus
     }
 
     /// <summary>
-    /// A chain of arrays nested <c>leafCount / leavesPerLevel</c> deep.
+    /// Builds a chain of arrays nested <c>leafCount / leavesPerLevel</c> levels deep.
     /// </summary>
     /// <param name="leafCount">The total number of scalar leaves, spread evenly down the chain.</param>
     /// <param name="leavesPerLevel">The number of scalars held at each level of the chain.</param>
@@ -206,7 +206,7 @@ internal static class XmlRpcCorpus
     ///     equal to the flat generators', which is what separates recursion depth from element count.
     ///     </para>
     ///     <para>
-    ///     <b>Depth is deliberately bounded here and is not bounded in the library.</b>
+    ///     Depth is deliberately bounded here and is not bounded in the library.
     ///     <c>TryParseValue</c> recurses into <c>XmlRpcArrayValue.Load</c>, which calls
     ///     <c>TryParseValue</c> again, with no depth limit anywhere on the path. A hostile or broken
     ///     server can therefore send a payload that overflows the stack, and the process cannot catch
@@ -239,7 +239,7 @@ internal static class XmlRpcCorpus
     }
 
     /// <summary>
-    /// A complete <c>methodResponse</c> carrying a fault rather than a parameter.
+    /// Builds a complete <c>methodResponse</c> carrying a fault rather than a parameter.
     /// </summary>
     /// <returns>The fault response document.</returns>
     /// <remarks>
@@ -255,7 +255,7 @@ internal static class XmlRpcCorpus
             "</struct></value></fault></methodResponse>");
 
     /// <summary>
-    /// A <c>methodCall</c> request body with <paramref name="parameterCount"/> string parameters.
+    /// Builds a <c>methodCall</c> request body with <paramref name="parameterCount"/> string parameters.
     /// </summary>
     /// <param name="methodName">The remote method name.</param>
     /// <param name="parameterCount">The number of parameters to carry.</param>
@@ -282,7 +282,9 @@ internal static class XmlRpcCorpus
     ///     benchmarks is the walk from an <see cref="XPathNavigator"/> into the object model, and
     ///     <c>XmlRpcResponse.CreateAsync</c> is the arm that prices the document build on top of it.
     /// </remarks>
-    /// <exception cref="InvalidOperationException">The generated document has no value node, which means a generator is broken.</exception>
+    /// <exception cref="InvalidOperationException">
+    /// The generated document has no value node, which indicates a defective generator.
+    /// </exception>
     public static XPathNavigator ValueNavigator(string valueXml)
     {
         // Through the same reader settings the library's own load path uses - DTD resolution off, no

@@ -19,26 +19,26 @@ namespace Argotic.Benchmarks.Protocols;
 /// library caps how large or how deep one may be.
 /// </para>
 /// <para>
-/// <b>Every arm varies along the <see cref="LeafCount"/> axis, and that is the constraint the class
-/// was designed around.</b> <c>docs/build-warnings.md</c> §D0 records a benchmark where six of nine
-/// rows were pure arithmetic that reproduced N× to within 0.15%, because the axis was class-scoped
-/// and most arms ignored it. Here the leaf count is held equal across all four arms at every value of
-/// the axis, so the arms differ in <em>shape</em> and in nothing else:
+/// Every arm varies along the <see cref="LeafCount"/> axis, and that is the constraint the class
+/// was designed around. A class-scoped axis that most arms ignore yields rows which merely reproduce
+/// the parameter, to within measurement error, and carry no information. Here the leaf count is held
+/// equal across all four arms at every value of the axis, so the arms differ in shape and in nothing
+/// else:
 /// </para>
 /// <list type="bullet">
-///   <item><description><b>Flat struct</b> — N members, each a named string. One level.</description></item>
-///   <item><description><b>Flat array</b> — N integers. One level. Its delta against the struct is the
+///   <item><description>Flat struct — N members, each a named string. One level.</description></item>
+///   <item><description>Flat array — N integers. One level. Its delta against the struct is the
 ///   price of the <c>name</c> lookup and the <c>XmlRpcStructureMember</c> per element, at identical
 ///   element counts and identical recursion depth.</description></item>
-///   <item><description><b>Struct of arrays</b> — N leaves spread over ten array-valued members. Two
+///   <item><description>Struct of arrays — N leaves spread over ten array-valued members. Two
 ///   levels. Its delta against the flat arms is the price of one level of recursion at constant leaf
 ///   count, which is the number that says whether nesting is free.</description></item>
-///   <item><description><b>Array chain</b> — N leaves spread ten per level down an N/10-deep chain of
+///   <item><description>Array chain — N leaves spread ten per level down an N/10-deep chain of
 ///   nested arrays. Depth grows with the axis while the leaf count does not, so this is the arm that
 ///   separates depth from width. At the top of the sweep it is a hundred levels deep.</description></item>
 /// </list>
 /// <para>
-/// <b>The unbounded-recursion defect this class stops short of.</b> The chain arm is capped at ten
+/// The unbounded-recursion defect this class stops short of. The chain arm is capped at ten
 /// leaves per level so that the deepest payload measured is a hundred levels. Nothing in
 /// <c>TryParseValue</c>, <c>XmlRpcArrayValue.Load</c> or <c>XmlRpcStructureValue.Load</c> bounds
 /// depth, and the recursion is not tail-recursive, so a server can send a payload that overflows the
@@ -113,8 +113,8 @@ public class XmlRpcCompositeParsingBenchmarks
     /// <returns>The parsed value.</returns>
     /// <remarks>
     ///     <c>XmlRpcStructureValue.Load</c> selects <c>struct/member</c> through
-    ///     <see cref="XPathNavigator.Select(string)"/>, which <b>compiles an XPath expression on every
-    ///     call</b> — the exact cost that <c>XPathNavigatorExtensions.SelectChildElements</c> was
+    ///     <see cref="XPathNavigator.Select(string)"/>, which compiles an XPath expression on every
+    ///     call — the exact cost that <c>XPathNavigatorExtensions.SelectChildElements</c> was
     ///     introduced to remove from the feed adapters, measured there at 7.9× the allocation. This
     ///     path never got the same treatment. If the struct arm's allocation per member is far above
     ///     the array arm's, that is where to look first.

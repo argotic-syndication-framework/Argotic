@@ -48,3 +48,11 @@
 *.nupkg binary
 *.snk binary
 *.pfx binary
+
+# Archived third-party schemas: never normalise line endings.
+#
+# These are validated against as byte-for-byte reproductions of what the publisher served, and
+# Schemas/NOTICE.md says so - a checksum against the canonical URL is supposed to still match. Two of
+# them arrive with CRLF, so without this git would rewrite them to LF on commit and quietly make that
+# claim false for everyone who clones.
+Solutions/Argotic.Extensions.Tests/Schemas/*.xsd -text

@@ -13,44 +13,54 @@
 - Name: Executable Specifications
   Id: bb49fb94-6ab5-40c3-a6da-dfd2e9bc4b00
   Measures:
-    - Score: 0
-      Description: None
+    - Score: 1
+      Description: Specs which cover golden path / APIs have full OpenAPI Definition
+    - Score: 1
+      Description: Specs which cover common failure cases
+    - Score: 1
+      Description: Specs which explore edge cases
 
 - Name: Code Coverage
   Id: 0449cadc-0078-4094-b019-520d75cc6cbb
   Measures:
-    - Score: 2
-      Description: 51-75
+    - Score: 3
+      Description: '>75'
 
 - Name: Benchmarks
   Id: 64ed80dc-d354-45a9-9a56-c32437306afa
   Measures:
-    - Score: 0
-      Description: None
+    - Score: 1
+      Description: Benchmarks which cover baseline performance
+    - Score: 1
+      Description: Benchmarks which demonstrate failure conditions
 
 - Name: Reference Documentation
   Id: 2a7fc206-d578-41b0-85f6-a28b6b0fec5f
   Measures:
     - Score: 1
       Description: Good quality
+    - Score: 1
+      Description: Technical Fellow quality
 
 - Name: Design & Implementation Documentation
   Id: f026d5a2-ce1a-4e04-af15-5a35792b164b
   Measures:
-    - Score: 0
-      Description: None
+    - Score: 1
+      Description: Up-to-date architecture & high level conceptual docs & diagrams
 
 - Name: How-to Documentation
   Id: 145f2e3d-bb05-4ced-989b-7fb218fc6705
   Measures:
     - Score: 1
-      Description: Common scenarios coverage
+      Description: Common scenarios
+    - Score: 1
+      Description: Extensibility Scenarios
 
 - Name: Date of Last IP Review
   Id: da4ed776-0365-4d8a-a297-c4e91a14d646
   Measures:
     - Score: 3
-      Description: January 2026
+      Description: August 2026
 
 - Name: Framework Version
   Id: 6c0402b3-f0e3-4bd7-83fe-04bb6dca7924

@@ -77,6 +77,51 @@ shape, so a snippet written for one reads across to the others unchanged:
 | `void Load(Stream \| XmlReader \| IXPathNavigable[, settings])` | Parse from something you already have.                                   |
 | `void Save(Stream \| XmlWriter[, settings])`                    | Write it back out.                                                       |
 
+### Start here: find out what a site publishes
+
+If you do not already know a site's feed URL, ask the site. `LocateDiscoverableSyndicationEndpointsAsync`
+reads the page and returns the `<link rel="alternate">` endpoints it advertises:
+
+```csharp
+using Argotic.Common;
+
+IList<DiscoverableSyndicationEndpoint> endpoints =
+    await SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(
+        new Uri("https://endjin.com/"),
+        cancellationToken);
+
+foreach (DiscoverableSyndicationEndpoint endpoint in endpoints)
+{
+    Console.WriteLine($"{endpoint.ContentFormat,-8} {endpoint.Source}");
+}
+
+// Atom     https://endjin.com/atom.xml
+// Rss      https://endjin.com/rss.xml
+```
+
+A relative `href` — `href="/rss.xml"`, which is the common form — resolves against the address the page
+came from, after redirects. `endpoint.Title` is whatever the `title` attribute held, and many sites omit
+it, as endjin does here.
+
+If you already have a URL and only need to know what it is, ask for the format alone. This reads the
+first 64 KiB, not the whole document:
+
+```csharp
+SyndicationContentFormat format =
+    await SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(
+        new Uri("https://endjin.com/rss.xml"),
+        cancellationToken);
+
+// Rss
+```
+
+The same call returns `Atom` for `https://endjin.com/atom.xml` and `Sitemap` for
+`https://endjin.com/sitemap.xml`. It returns `SyndicationContentFormat.None` when it cannot tell, which
+includes a document whose prolog is longer than 64 KiB.
+
+Once you know the format, construct the matching type — or hand the URL to `GenericSyndicationFeed` and
+let it decide, as [below](#when-you-dont-know-whether-its-rss-or-atom).
+
 ### Read a feed from a URL
 
 ```csharp
@@ -170,22 +215,6 @@ if (feed.Resource is RssFeed rss)
 `GenericSyndicationFeed` reads RSS, Atom and OPML. It takes `Load(Stream)` and `Load(string)` but not
 `Load(XmlReader)`.
 
-### Find a site's feeds
-
-```csharp
-using Argotic.Common;
-
-IList<DiscoverableSyndicationEndpoint> endpoints =
-    await SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(
-        new Uri("https://endjin.com/"),
-        cancellationToken);
-
-foreach (DiscoverableSyndicationEndpoint endpoint in endpoints)
-{
-    Console.WriteLine($"{endpoint.ContentFormat,-8} {endpoint.Title}  →  {endpoint.Source}");
-}
-```
-
 ### Create a feed and save it
 
 ```csharp
@@ -196,7 +225,7 @@ RssFeed feed = new()
     Channel =
     {
         Title = "endjin blog",
-        Link = new Uri("https://endjin.com/blog"),
+        Link = new Uri("https://endjin.com/blog/"),
         Description = "Latest posts from the endjin blog",
         SelfLink = new Uri("https://endjin.com/rss.xml"),
     },
@@ -205,10 +234,10 @@ RssFeed feed = new()
 feed.Channel.Items.Add(new RssItem
 {
     Title = "Polars Workloads on Microsoft Fabric",
-    Link = new Uri("https://endjin.com/blog/2026/01/polars-workloads-on-microsoft-fabric"),
+    Link = new Uri("https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine"),
     Description = "Leveraging Polars within Microsoft Fabric for efficient data transformation.",
     PublicationDate = DateTime.UtcNow,
-    Guid = new RssGuid("https://endjin.com/blog/2026/01/polars-workloads-on-microsoft-fabric"),
+    Guid = new RssGuid("https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine"),
 });
 
 using FileStream stream = File.Create("feed.xml");
@@ -230,7 +259,7 @@ AtomFeed feed = new()
     UpdatedOn = DateTime.UtcNow,
 };
 
-feed.Links.Add(new AtomLink(new Uri("https://endjin.com/blog")));
+feed.Links.Add(new AtomLink(new Uri("https://endjin.com/blog/")));
 feed.Links.Add(new AtomLink(new Uri("https://endjin.com/atom.xml"), "self"));
 feed.Authors.Add(new AtomPersonConstruct("endjin"));
 
@@ -255,13 +284,16 @@ with the extension's static `MatchByType` predicate.
 
 **Reading iTunes podcast metadata:**
 
+endjin publishes an audio version of many posts, but no podcast feed, so the feed URL below is
+illustrative. Every other URL in this README resolves.
+
 ```csharp
 using Argotic.Extensions;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
 
 RssFeed feed = await RssFeed.CreateAsync(
-    new Uri("https://example.com/podcast.xml"),
+    new Uri("https://endjin.com/podcast.xml"),
     cancellationToken: cancellationToken);
 
 if (feed.Channel.FindExtension(ITunesSyndicationExtension.MatchByType)
@@ -298,32 +330,38 @@ RssFeed feed = new()
 {
     Channel =
     {
-        Title = "A Podcast",
-        Link = new Uri("https://example.com/"),
-        Description = "A podcast about things.",
+        Title = "endjin blog, read aloud",
+        Link = new Uri("https://endjin.com/blog/"),
+        Description = "Audio versions of selected posts from the endjin blog.",
     },
 };
 
 ITunesSyndicationExtension show = new();
 show.Context.Author = "endjin";
-show.Context.Summary = "A podcast about things.";
+show.Context.Summary = "Audio versions of selected posts from the endjin blog.";
 show.Context.ExplicitMaterial = ITunesExplicitMaterial.No;
-show.Context.Image = new Uri("https://example.com/artwork.png");
-show.Context.Owner = new ITunesOwner("podcast@example.com", "endjin");
+show.Context.Image = new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/open-graph/og-endjin.png");
+show.Context.Owner = new ITunesOwner("hello@endjin.com", "endjin");
 show.Context.Categories.Add(new ITunesCategory("Technology"));
 feed.Channel.Extensions.Add(show);
 
 RssItem item = new()
 {
-    Title = "Episode 7",
-    Link = new Uri("https://example.com/episodes/7"),
-    PublicationDate = DateTime.UtcNow,
+    Title = "The GenAI Reality Check: New Instrument, Same Orchestra",
+    Link = new Uri("https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra"),
+    PublicationDate = new DateTime(2026, 5, 14, 8, 54, 29, DateTimeKind.Utc),
 };
 
+// The enclosure is what makes an item an episode. Without it a podcast client has
+// nothing to play, whatever the iTunes metadata says.
+item.Enclosures.Add(new RssEnclosure(
+    36_588_921,
+    "audio/mpeg",
+    new Uri("https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3")));
+
 ITunesSyndicationExtension episode = new();
-episode.Context.Duration = TimeSpan.FromMinutes(42);
-episode.Context.Season = 3;
-episode.Context.Episode = 7;
+episode.Context.Season = 1;
+episode.Context.Episode = 1;
 episode.Context.EpisodeType = ITunesEpisodeType.Full;
 item.Extensions.Add(episode);
 
@@ -333,8 +371,61 @@ using FileStream stream = File.Create("podcast.xml");
 feed.Save(stream);   // xmlns:itunes is written for you
 ```
 
-Everything above works identically for the other 26 extensions —
-`PodcastSyndicationExtension` (Podcasting 2.0: transcripts, chapters, funding, people, locked),
+**Podcasting 2.0** attaches the same way, and carries what iTunes has no element for. A survey of
+1,934 live feeds from the Apple directory found the namespace in 1,200 of them:
+
+```csharp
+using Argotic.Extensions.Core;
+
+PodcastSyndicationExtension show = new();
+show.Context.Identifier = "917393e3-1b1e-5cef-ace4-edaa54e1f810";   // podcast:guid — stable across feed moves
+show.Context.Medium = PodcastMedium.Podcast;
+show.Context.IsLocked = true;                                        // no other host may import this feed
+show.Context.LockOwner = "hello@endjin.com";
+
+show.Context.People.Add(new PodcastPerson
+{
+    Name = "Barry Smart",
+    Role = "host",
+    Url = new Uri("https://endjin.com/who-we-are/"),
+});
+
+show.Context.FundingLinks.Add(new PodcastFunding
+{
+    Message = "Talk to endjin",
+    Url = new Uri("https://endjin.com/contact-us/"),
+});
+
+// The Apple ownership token. Publishers split roughly evenly between sending it here
+// and as itunes:applepodcastsverify, so reading only one form finds about half of them.
+show.Context.TextEntries.Add(new PodcastText
+{
+    Purpose = "applepodcastsverify",
+    Value = "e6cfaae0-9496-11f0-a272-f9e230f88be0",
+});
+
+feed.Channel.Extensions.Add(show);
+```
+
+Per-episode it adds transcripts, chapters and season names:
+
+```csharp
+PodcastSyndicationExtension episodeExtension = new();
+episodeExtension.Context.Season = 1;
+episodeExtension.Context.SeasonName = "Data and AI";
+episodeExtension.Context.Episode = 1m;                  // decimal, so "Ep. 2.1" is expressible
+episodeExtension.Context.Transcripts.Add(new PodcastTranscript
+{
+    Url = new Uri("https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra/transcript.vtt"),
+    MediaType = "text/vtt",
+    Language = "en",
+    Relationship = "captions",
+});
+
+item.Extensions.Add(episodeExtension);
+```
+
+Everything above works identically for the other 25 extensions —
 `DublinCoreElementSetSyndicationExtension`, `GeoRssSyndicationExtension`,
 `YahooMediaSyndicationExtension`, `SitemapNewsExtension`, and the rest.
 
@@ -355,7 +446,7 @@ sitemap.Urls.Add(new SitemapUrl
 
 sitemap.Urls.Add(new SitemapUrl
 {
-    Location = new Uri("https://endjin.com/what-we-do"),
+    Location = new Uri("https://endjin.com/what-we-think/talks/"),
     ChangeFrequency = SitemapChangeFrequency.Monthly,
     Priority = 0.8m,
 });
@@ -374,13 +465,13 @@ SitemapIndex index = new();
 
 index.Sitemaps.Add(new SitemapIndexEntry
 {
-    Location = new Uri("https://endjin.com/sitemap-pages.xml"),
+    Location = new Uri("https://endjin.com/sitemap-news.xml"),
     LastModified = DateTime.UtcNow,
 });
 
 index.Sitemaps.Add(new SitemapIndexEntry
 {
-    Location = new Uri("https://endjin.com/sitemap-blog.xml"),
+    Location = new Uri("https://endjin.com/sitemap-video.xml"),
     LastModified = DateTime.UtcNow.AddDays(-1),
 });
 
@@ -399,15 +490,15 @@ Sitemap sitemap = new();
 
 SitemapUrl url = new()
 {
-    Location = new Uri("https://news.example.com/breaking-story"),
+    Location = new Uri("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases"),
     LastModified = DateTime.UtcNow,
 };
 
 url.Extensions.Add(new SitemapNewsExtension
 {
-    Publication = new SitemapNewsPublication("Example News", "en"),
+    Publication = new SitemapNewsPublication("endjin.com", "en"),
     PublicationDate = DateTime.UtcNow,
-    Title = "Breaking: Major Technology Announcement",
+    Title = "Writing Effective Copilot Instructions for Complex Codebases",
 });
 
 sitemap.Urls.Add(url);
@@ -433,7 +524,7 @@ SocketsHttpHandler handler = new()
 using HttpClient httpClient = new(handler);
 
 RssFeed feed = await RssFeed.CreateAsync(
-    new Uri("https://intranet.example.com/rss.xml"),
+    new Uri("https://endjin.com/rss.xml"),
     httpClient,
     cancellationToken: cancellationToken);
 ```
@@ -618,7 +709,7 @@ the other eight.
 ## Examples
 
 `Solutions/Argotic.Examples` is an interactive [Spectre.Console](https://spectreconsole.net/) CLI
-holding 68 example classes and 174 runnable examples, mirroring the Core and Extensions structure.
+holding 77 example classes and 223 runnable examples, mirroring the Core and Extensions structure.
 It is the best place to look for idiomatic present-day usage — every example compiles against the
 current API and runs end-to-end in CI.
 
@@ -626,7 +717,8 @@ current API and runs end-to-end in CI.
 # List everything
 dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- list
 
-# List one category (Common, Atom, Rss, Opml, Apml, BlogML, Rsd, Net, Generic, Sitemap, Extensions)
+# List one category (Common, Atom, Rss, Opml, Apml, BlogML, Rsd, Net, Generic, Sitemap,
+#                     Publishing, Extensions)
 dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- list --category Rss
 
 # Run one
@@ -670,7 +762,13 @@ dotnet build Solutions/Argotic.slnx -c Debug
 dotnet build Solutions/Argotic.slnx -c Release
 
 # Test. The suite uses MSTest on Microsoft Testing Platform, which requires --project.
-dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj
+# The filter keeps the run offline; see "Conformance testing" below.
+dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj \
+  --filter "TestCategory!=Integration"
+
+# The live conformance tier: Google's sitemap schemas, the W3C Feed Validator, endjin's own feeds
+dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj \
+  --filter "TestCategory=Integration"
 
 # One test
 dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj \
@@ -689,9 +787,31 @@ dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --list flat
 dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --filter '*ParsePipeline*' --job Short
 ```
 
-The test suite is offline-safe: HTTP is mocked, and the two seams a mock handler cannot reach are
-served over an `HttpListener` bound to 127.0.0.1 on an OS-assigned port. Nothing is read from disk
-and nothing leaves the machine.
+The default test run is offline-safe: HTTP is mocked, and the two seams a mock handler cannot reach
+are served over an `HttpListener` bound to 127.0.0.1 on an OS-assigned port. Nothing leaves the
+machine. Fixtures are C# string literals plus the sample documents linked in from
+`Argotic.Examples/SampleData`.
+
+### Conformance testing
+
+Tests carrying `[TestCategory("Integration")]` do reach the network, and are excluded from the
+default run by the filter above. They validate this library's output against the schemas and
+validators their publishers actually serve:
+
+- **Google's sitemap extension schemas**, fetched at test time rather than vendored — each carries an
+  "All Rights Reserved" notice, so checking against the real file without copying it into the
+  repository is the point.
+- **The W3C Feed Validator**, which is the canonical conformance checker for RSS and Atom; neither
+  format has a schema .NET can validate against.
+- **endjin's published feeds**, so a change at the publisher is noticed.
+
+Offline, the sitemaps.org and APML schemas are embedded in the test assembly and validate both what
+the library writes and the sample corpus. That tier is what caught `SitemapVideo` writing its
+elements in an order Google's schema rejects — a defect every round-trip test agreed with, because
+the reader accepts children in any order.
+
+An integration test never passes without reaching its service: unreachable is reported inconclusive,
+and only a rejected document fails.
 
 Build output lands in `_packages/` (NuGet packages), `_codeCoverage/` (coverage reports) and
 `Solutions/Argotic.Extensions.Tests/TestResults/`.
@@ -716,6 +836,9 @@ instead.
 
 ## Documentation
 
+- **Architecture:** [ARCHITECTURE.md](ARCHITECTURE.md) — how the library is put together and why: the
+  load pipeline, format dispatch, extension discovery, the network layer, and what the .NET 10
+  modernisation changed
 - **Wiki:** <https://argotic-syndication-framework.github.io/Argotic>
 - **Changelog:** [CHANGELOG.md](CHANGELOG.md) — the full list of breaking changes in this release
 - **Repository:** <https://github.com/argotic-syndication-framework/Argotic>
@@ -780,7 +903,7 @@ This approach is based on our 15+ years experience of delivering complex, high p
 
 ### IMM for Argotic
 
-[![Shared Engineering Standards](https://endimmfuncdev.azurewebsites.net/api/imm/github/endjin/Stacker/rule/74e29f9b-6dca-4161-8fdd-b468a1eb185d?nocache=true)](https://endimmfuncdev.azurewebsites.net/api/imm/github/endjin/Stacker/rule/74e29f9b-6dca-4161-8fdd-b468a1eb185d?cache=false)
+[![Shared Engineering Standards](https://endimmfuncdev.azurewebsites.net/api/imm/github/argotic-syndication-framework/argotic/rule/74e29f9b-6dca-4161-8fdd-b468a1eb185d?cache=false)](https://endimmfuncdev.azurewebsites.net/api/imm/github/argotic-syndication-framework/argotic/rule/74e29f9b-6dca-4161-8fdd-b468a1eb185d?cache=false)
 
 [![Coding Standards](https://endimmfuncdev.azurewebsites.net/api/imm/github/argotic-syndication-framework/argotic/rule/f6f6490f-9493-4dc3-a674-15584fa951d8?cache=false)](https://endimmfuncdev.azurewebsites.net/api/imm/github/argotic-syndication-framework/argotic/rule/f6f6490f-9493-4dc3-a674-15584fa951d8?cache=false)
 

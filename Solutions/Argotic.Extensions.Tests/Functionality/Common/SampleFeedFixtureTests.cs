@@ -53,6 +53,44 @@ public class SampleFeedFixtureTests
     }
 
     /// <summary>
+    /// The hand-maintained sample list names exactly the documents that are deployed.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     <b>This test exists because the list silently stopped matching.</b> Four samples were added
+    ///     in one pass — <c>PodcastFeed.xml</c>, <c>sitemap_hreflang.xml</c>,
+    ///     <c>AtomServiceDocument.xml</c> and <c>AtomCategoryDocument.xml</c> — and none was added to
+    ///     <see cref="SampleFeeds.All"/>. Every guard in this class iterates that list, so all four
+    ///     escaped the deployment and parse checks completely, and nothing failed. The suite was green
+    ///     and four fixtures were unguarded.
+    ///     </para>
+    ///     <para>
+    ///     It compares in <b>both</b> directions on purpose. A list that is too short loses coverage
+    ///     silently, which is what happened; a list that is too long fails later and less clearly, as a
+    ///     file-not-found from whichever test happened to ask for the missing name first.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void TheSampleList_MatchesTheSampleDirectory()
+    {
+        string directory = Path.Combine(AppContext.BaseDirectory, "SampleData");
+
+        List<string> deployed = [.. Directory.EnumerateFiles(directory, "*.xml")
+            .Select(Path.GetFileName)
+            .Where(name => name is not null)
+            .Select(name => name!)
+            .OrderBy(name => name, StringComparer.Ordinal)];
+
+        List<string> listed = [.. SampleFeeds.All.OrderBy(name => name, StringComparer.Ordinal)];
+
+        listed.Except(deployed, StringComparer.Ordinal).ShouldBeEmpty(
+            "SampleFeeds.All names documents that are not deployed - remove them or restore the files");
+
+        deployed.Except(listed, StringComparer.Ordinal).ShouldBeEmpty(
+            "SampleData holds documents SampleFeeds.All does not name, so no fixture guard covers them - add them to the list");
+    }
+
+    /// <summary>
     /// The extension-bearing RSS sample really is extension-bearing.
     /// </summary>
     /// <remarks>

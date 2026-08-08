@@ -36,4 +36,18 @@
           CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!--
+      Schemas the conformance tests validate against, compiled into the assembly rather than copied
+      beside it, so ConformanceSchemas reads them through GetManifestResourceStream and the tests touch
+      the file system for nothing.
+
+      Only the schemas that may be redistributed are here. Google's three sitemap extension schemas are
+      marked "All Rights Reserved" and are fetched in-process by the integration tier instead - see
+      Schemas/NOTICE.md, which explains what each file is and why one of them is missing.
+    -->
+    <EmbeddedResource Include="Schemas\*.xsd" />
+    <None Include="Schemas\NOTICE.md" />
+  </ItemGroup>
+
 </Project>

@@ -67,22 +67,45 @@ internal static class SampleFeeds
     /// <summary>A sitemap carrying the Google video extension.</summary>
     public const string SitemapVideo = "sitemap_video.xml";
 
+    /// <summary>A sitemap carrying xhtml:link hreflang annotations.</summary>
+    public const string SitemapHreflang = "sitemap_hreflang.xml";
+
+    /// <summary>An RSS 2.0 feed carrying the Podcasting 2.0 namespace.</summary>
+    public const string PodcastFeed = "PodcastFeed.xml";
+
+    /// <summary>An Atom Publishing Protocol service document.</summary>
+    public const string AtomServiceDocument = "AtomServiceDocument.xml";
+
+    /// <summary>A stand-alone Atom Publishing Protocol category document.</summary>
+    public const string AtomCategoryDocument = "AtomCategoryDocument.xml";
+
     /// <summary>
     /// Gets the names of every linked sample document.
     /// </summary>
+    /// <remarks>
+    ///     Hand-maintained, and therefore checked:
+    ///     <c>SampleFeedFixtureTests.TheSampleList_MatchesTheSampleDirectory</c> compares this against
+    ///     what is actually deployed. It has to, because the list was silently four names short after
+    ///     four samples were added in one pass — and every guard that iterates this list skipped those
+    ///     four without failing. A list nothing compares to reality is not a guard.
+    /// </remarks>
     public static IReadOnlyList<string> All { get; } =
     [
         ApmlDocument,
+        AtomCategoryDocument,
         AtomEntryDocument,
         AtomFeed,
         AtomFeedWithExtensions,
+        AtomServiceDocument,
         BlogMLDocument,
         GenericFeed,
         OpmlDocument,
+        PodcastFeed,
         RsdDocument,
         RssFeed,
         RssFeedWithExtensions,
         Sitemap,
+        SitemapHreflang,
         SitemapImage,
         SitemapIndex,
         SitemapNews,

@@ -37,6 +37,24 @@ $NugetPublishSource = property ZF_NUGET_PUBLISH_SOURCE "$here/_local-nuget-feed"
 $IncludeAssembliesInCodeCoverage = "Argotic.*"
 $ExcludeAssembliesInCodeCoverage = "Argotic.*.Tests*"
 
+# The SiteMonitoring tests fetch endjin.com's published sitemaps and validate them against Google's
+# schemas. They check a website, not this library, so a content problem there must not fail a build
+# here - nobody can fix it from this repository, and a red build nobody can fix is a red build
+# everybody learns to ignore.
+#
+# This is not hypothetical. The category was added precisely so this could not happen, and then the
+# pipeline was never told about it: runs 31250504215 and 31261773537 both failed on the single test
+# APublishedSitemap_ConformsToTheSchemasItDeclares, because 17 of the 100 video:description elements
+# endjin.com serves exceed the 2,048 characters sitemap-video-1.1.xsd permits.
+#
+# Everything else in the Integration tier stays in, because it validates what Argotic writes and what
+# Argotic reads. Unreachable services report Inconclusive rather than failing, so third-party downtime
+# does not break the build either.
+#
+# Counts, from 'dotnet test --solution … --list-tests' on 2026-08-08: 3,552 total, 3,549 here,
+# 23 Integration, 3 SiteMonitoring.
+$AdditionalTestArgs = @("--filter", "TestCategory!=SiteMonitoring")
+
 task . FullBuild
 
 #

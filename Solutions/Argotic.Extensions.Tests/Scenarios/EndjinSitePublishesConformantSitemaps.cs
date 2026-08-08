@@ -20,8 +20,16 @@ namespace Argotic.Extensions.Tests.Scenarios;
 ///     </para>
 ///     <para>
 ///     Run it deliberately:
-///     <c>dotnet test --project … --filter "TestCategory=SiteMonitoring"</c>. It is excluded from the
-///     offline gate by <c>TestCategory!=Integration</c> along with the rest of the live tier.
+///     <c>dotnet test --project … --filter "TestCategory=SiteMonitoring"</c>. Two separate filters keep
+///     it out of the builds that must not see it, and both are needed. The local gate excludes the whole
+///     live tier with <c>TestCategory!=Integration</c>; CI keeps the rest of that tier and excludes this
+///     class alone, via <c>$AdditionalTestArgs</c> in <c>.zf/config.ps1</c>.
+///     </para>
+///     <para>
+///     <b>The CI filter was missing when this class was written, and the build went red for exactly the
+///     reason the first paragraph gives.</b> The category existed, the intent was documented here, and
+///     the pipeline was never told - so two runs failed on the 2,048-character finding below. A category
+///     no runner filters on is a comment, not a control.
 ///     </para>
 /// </remarks>
 [TestClass]

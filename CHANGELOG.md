@@ -1,327 +1,431 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project are in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project follows
+[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - .NET 10 Release
+Entries that start with **BREAKING** change behaviour or an API that callers use. Read those first.
 
-### Breaking Changes
+## [Unreleased]
 
-- **An Atom document of the wrong shape is refused rather than silently ignored.** RFC 4287 §2
-  defines two document types: a feed document rooted at `<feed>`, read by `AtomFeed`, and a
-  stand-alone entry document rooted at `<entry>`, read by `AtomEntry`. Handing either type the other
-  document produced a default-constructed object — empty title, empty id, `DateTime.MinValue` — and
-  reported success. `SyndicationContentFormat.Atom` covered both shapes, so the format check that
-  rejects every other mismatched pairing compared `Atom` against `Atom` and passed
-- **`SyndicationContentFormat.AtomEntryDocument` is new, and a stand-alone entry document now reports
-  it** where it previously reported `Atom`. The detector always distinguished the two roots and threw
-  the answer away; keeping it is what lets the format check do its job, and lets a caller of
-  `SyndicationDiscoveryUtility.SyndicationContentFormatGet` know which type to construct. Existing
-  enum values are unchanged. `AtomEntry.Format` and `AtomEntryResource.Format` return the new value
-- **`GenericSyndicationFeed` refuses a format it cannot represent.** `Load` was three `else if` arms
-  with no final `else`, so APML, BlogML, RSD, a sitemap, an Atom Publishing document or a stand-alone
-  entry document fell through to the `Loaded` event — leaving a default-constructed instance and
-  announcing that a load had succeeded. It now raises `FormatException`; it abstracts over Atom feed,
-  RSS and OPML documents only
-- **`SyndicationResourceLoadSettings.CharacterEncoding` is now `Encoding?` and defaults to `null`.**
-  It defaulted to `Encoding.UTF8` and rejected `null`, so one value had to mean both "decode as UTF-8"
-  and "work it out" — and the two load paths read it in opposite directions. `Load(Stream, settings)`
-  honoured it and forced UTF-8 over a document correctly declaring `iso-8859-1`; `LoadAsync` compared it
-  by reference against the singleton and sniffed instead, so an equivalent `new UTF8Encoding(false)`
-  behaved oppositely to a value that decodes identically. **`null` now means "determine it from the
-  byte-order mark or the XML declaration", which is what a default settings object asks for, and naming
-  an encoding means it is used.** A caller relying on the old behaviour — UTF-8 forced over a lying
-  feed — sets the property explicitly. Not binary-breaking: reference-type nullability is metadata
-- **`SyndicationResourceLoadSettings.Timeout` is now `TimeSpan?`.** It still defaults to 100 seconds;
-  `null` means no deadline of the library's own, leaving the caller's own `CancellationToken` as the
-  only bound. `TimeSpan.Zero` is not a way to spell that — it cancels immediately. **Binary-breaking**:
-  `get_Timeout` returns a different CLR type
-- **Conditional GET now answers with the status code, not a heuristic.** `ConditionalGetAsync`
-  compared the response's `Last-Modified` against the one it sent — a comparison only reachable once
-  the origin had already declined to send a 304 — and then fell back to asking whether the response
-  "looked like it had content" via `Content-Length` and `Content-Type`. A chunked 200 with no
-  `Content-Type` answered no to both, so its body was downloaded, discarded, and reported to the caller
-  as unmodified. The fallback was also gated on `== HttpStatusCode.OK` while the success check admits
-  every 2xx, so a 203 or 206 was discarded without reaching it. **304 now means unmodified and any other
-  success means modified.** A caller who depended on the old behaviour was depending on data loss
-- **`SyndicationRequestOptions.ApplyTo` throws on a value it cannot send.** Every setter was a `Try`
-  whose result was discarded, so a malformed `Accept` produced a request with no `Accept` header and
-  the caller learned about it, if at all, as a `406`. A relative `Referer` was worse than dropped:
-  `Uri.TryCreate(..., Absolute, ...)` accepts `/relative/path` on Linux and yields
-  `file:///relative/path`, which was then sent to a remote origin. `Accept`, `User-Agent` and `Referer`
-  now raise `FormatException`; only absolute `http`/`https` referers are accepted. An empty `Referer`
-  still means "do not send one"
-- **Downloaded resources are size-capped by default.** Every `LoadAsync(Uri, ...)` and
-  `CreateAsync(Uri, ...)` now refuses a response larger than its format allows: 8 MiB for a feed,
-  64 MiB for a sitemap or a BlogML export. Nothing bounded them before. A caller who genuinely needs a
-  larger document sets `SyndicationResourceLoadSettings.MaxResponseContentLength`, or
-  `SyndicationResourceLoadSettings.Unbounded` to restore the previous behaviour. Note that
-  `RetrievalLimit` does not bound the download — it is applied after parsing — so taming a large
-  archive feed with it now requires raising the cap as well
-- Update the version from 3001.0.0 to 4000.0.0
-- **Target Framework**: Now targets .NET 10 only (dropped .NET Standard 2.0/2.1, .NET 8, .NET 9)
-- **Configuration**: Removed legacy `System.Configuration` classes:
-  - `PrivilegedConfigurationManager`
-  - `SyndicationResourceProvider` and related classes
-  - `TrackbackClientSection`, `XmlRpcClientSection`
-  - `WebRequestOptions`
-- **IComparable**: All 119 types now implement `IComparable<T>` instead of non-generic `IComparable`
-- **Guard class**: Removed custom `Guard` utility; use built-in `ArgumentNullException.ThrowIfNull()` etc.
-- **Event handlers removed**: `TrackbackMessageSentEventArgs`, `XmlRpcMessageSentEventArgs`
-- **HTTP stack**: Retrieval moved from `WebRequest`/`HttpWebRequest` to `HttpClient`. Failed requests now raise
-  `HttpRequestException` rather than `WebException`, and cancellation surfaces as `OperationCanceledException`
-  rather than a timeout-flavoured `WebException`
-- **Binary serialization**: Removed `[Serializable]` from all 179 types, and the three `[NonSerialized]`
-  field annotations that accompanied them. `Type.IsSerializable` now returns `false` for every Argotic
-  type. Nothing in the library implemented `ISerializable` or used `SerializationInfo`, and the only
-  runtime consumer of the attribute — `BinaryFormatter` — was removed from the platform in .NET 9
-  (`SYSLIB0011`/`SYSLIB0050`). `IXmlSerializable`, `XmlSerializer` and the `Save`/`Load` XML round-trip
-  are unaffected: they never depended on `[Serializable]`
+The .NET 10 release. The version changes from 3001.0.0 to 4000.0.0.
 
-### Changed
+### Added
 
-Behaviour changes that fix no defect and break no documented contract, but that a caller could notice.
+#### Syndication extensions
 
-- **Discovery reads only what it needs.** `IsPingbackEnabledAsync`, `LocatePingbackNotificationServerAsync`,
-  `UriExistsAsync`, `SourceReferencesTargetAsync`, `LocateDiscoverableSyndicationEndpointsAsync`,
-  `LocateTrackbackNotificationServersAsync` and both `SyndicationContentFormatGetAsync` overloads no
-  longer buffer the whole response before deciding what to do with it. A pingback answered from an
-  `X-Pingback` header now reads no body at all; format detection reads the first 64 KiB rather than the
-  whole feed; and every one of them is bounded at 2 MiB. **One consequence to be aware of**: a document
-  whose prolog exceeds 64 KiB now reports `SyndicationContentFormat.None` — documented as "unable to
-  determine" — where before it was parsed in full off the socket
-- **The shared `HttpClient` negotiates Brotli and keeps no cookies.** It advertised only gzip and
-  deflate, declining the smallest encoding most origins offer; and `SocketsHttpHandler.UseCookies`
-  defaults to `true`, so a `Set-Cookie` from any origin was replayed on the next request to that host.
-  On a process-wide singleton that is per-domain session state accumulating for the lifetime of the
-  application, with no API to inspect or clear it
-- **`SyndicationEncodingUtility.CreateSafeNavigator(Stream)` streams rather than buffering.** It read
-  the whole document into a `byte[]`, decoded that to a string, sanitised it into a second string, and
-  parsed the result; it now reads a bounded head, detects the encoding from it, and decodes the
-  remainder as it goes. Allocation for a 706 KiB feed falls 68%. Two visible consequences: an empty
-  stream produces `XmlException` ("Root element is missing.") rather than `ArgumentException` naming
-  `content` — the parameter of a private helper three calls down, which the caller never supplied — and
-  the stream is consumed lazily, so a parse failure part-way through leaves it part-way through rather
-  than drained. This overload still does not close the stream
-- **`SyndicationEncodingUtility.CreateSafeNavigator(Stream, Encoding)` no longer closes the supplied
-  stream.** It wrapped it in a `StreamReader` it owned and disposed, which closed the stream as a side
-  effect — while the single-argument overload, which reads identically at the call site, did not.
-  Nothing documented the difference. Callers who relied on it to dispose their stream must now do so
-  themselves. An empty stream produces `XmlException` rather than `ArgumentException` naming `xml`, and
-  a byte-order mark still takes precedence over the supplied encoding, as it always did
-- **`SyndicationEncodingUtility.CreateSafeNavigator(TextReader)` filters as it reads.** It previously
-  drained the reader to a string, sanitised that into a second string, and parsed the result; it now
-  drops invalid characters incrementally, so a document is no longer held twice. Two visible
-  consequences: an empty reader produces `XmlException` ("Root element is missing.") rather than
-  `ArgumentException` naming `xml` — a parameter that overload does not have and the caller never
-  supplied — and the reader is consumed lazily, so a parse failure part-way through leaves it part-way
-  through rather than drained. The reader is still never disposed by this method.
-
-### New Features
-
-- **Conditional loading**: `SyndicationResourceReader.LoadIfModifiedAsync<TResource>` fetches and parses
-  a resource only when the origin reports it has changed, which is the workload a polling consumer
-  actually has. Both outcomes are successes — a 304 arrives as a result rather than as the
-  `HttpRequestException` the same request produces through `LoadAsync`. `ConditionalLoadResult<T>.WasModified`
-  carries `[MemberNotNullWhen]`, so testing it reaches `Resource` with no null check
-- **`SyndicationValidators`**: the `Last-Modified`/`ETag` pair as one type, since they always travel
-  together and must be sent back exactly as received. `SyndicationValidators.None` makes a request
-  unconditional. Deliberately not folded into `SyndicationRequestOptions`: every path that consumes
-  those funnels through a fetch calling `EnsureSuccessStatusCode`, and 304 is not a success code
-- **A 304 now returns the validators it carried.** An origin may rotate its `ETag` on a not-modified
-  response, and the previous behaviour discarded everything about a 304 — so a polling caller re-sent
-  the validator they started with indefinitely, revalidating against a value the origin had stopped
-  recognising. `ConditionalGetResult` also reports `StatusCode` for a 304, where it previously reported
-  `null`
-- **Conditional GET accepts request options**: `ConditionalGetAsync(Uri, SyndicationValidators, HttpClient,
-  SyndicationRequestOptions?, CancellationToken)`. It was the one fetch in the library that could not be
-  given an `Accept` header or a custom `User-Agent`, because it built its request by hand
-- **Conditional GET no longer downloads before it decides.** It completed on content, so the whole body
-  was buffered before `ConditionalGetResult` existed — unbounded and eager both, and `ContentLength`
-  reported the buffered length rather than what the origin declared. It now completes on headers, so
-  the type streams, as its shape always suggested
-- **`IHttpClientFactory` registration**: `AddTrackbackClient` and `AddXmlRpcClient` register typed
-  clients, so a container-resolved client uses the handler the container built rather than the
-  process-wide singleton. `AddArgoticSyndicationClient` registers a named client for the resource
-  types — resolve it with `IHttpClientFactory.CreateClient(ArgoticHttpClients.Syndication)` and pass it
-  to any `LoadAsync` or `CreateAsync` overload taking an `HttpClient`
-- **`SyndicationEncodingUtility.DefaultRequestTimeout`** is now public. The shared `HttpClient` is
-  deliberately `Timeout.InfiniteTimeSpan` — every deadline comes from a `CancellationTokenSource` — so
-  there was previously no value a caller could read to discover what deadline applied to them
-- **Response size caps**: `SyndicationResourceLoadSettings.MaxResponseContentLength` bounds how much
-  of an HTTP response a load will accept, counted in decompressed bytes. `null` — the default —
-  means the loading type's format default rather than no limit, so a caller who constructs a settings
-  object for an unrelated reason does not silently lose the allowance their document type is entitled
-  to. `SyndicationResourceLoadSettings.Unbounded` asks for no limit, and
-  `SyndicationContentLengthLimits` publishes the per-format defaults: 8 MiB for a feed, 64 MiB for a
-  sitemap or a whole-site export, 2 MiB for a discovery fetch
-- **`SyndicationEncodingUtility.ApplyArgoticHandlerDefaults(SocketsHttpHandler)`**: applies the handler
-  settings the shared client uses, so a caller building their own `HttpClient` or configuring one
-  through `IHttpClientFactory` gets the same pipeline without having to know what it consists of
-- **Sitemap 0.9**: Added support for Sitemap 0.9 protocol
-- **Google Video Sitemap 1.1**: Improved specification implementation
-- **IComparisonOperators**: New interface with extension-based comparison operators (`<`, `<=`, `>`, `>=`)
-- **Dependency Injection**: Added `ServiceCollectionExtensions` for DI registration
-- **Options Pattern**: New `TrackbackClientOptions` and `XmlRpcClientOptions` classes
-- **Examples CLI**: Interactive/non-interactive CLI demonstrating API usage
-- **HashCodeUtility**: New helper producing hash code components that agree with the framework's
-  case-insensitive comparison semantics
-
-### Fixed
+- **Podcasting 2.0** (`https://podcastindex.org/namespace/1.0`). This is a new extension family. A survey
+  of 1,934 live feeds from the Apple directory found the namespace in 1,200 of them. The extension reads
+  `locked`, `guid`, `medium`, `podping`, `txt`, `funding`, `person`, `season`, `episode`, `transcript`,
+  `chapters` and `license`. Before this release, a load and then a save removed all of these elements.
+  The `txt` element with `purpose="applepodcastsverify"` is the most important one. Publishers send the
+  Apple ownership token in two forms. Approximately one half use `podcast:txt`, and the other half use
+  `itunes:applepodcastsverify`. A library that reads only one form loses the other half.
+- **GeoRSS** (OGC 17-002r1). This is a new extension family. It reads and writes both encodings, Simple
+  and GML. It supports the four geometries: point, line, box and polygon. It also supports `elev`,
+  `floor`, `radius`, `featurename`, `featuretypetag` and `relationshiptag`.
+- **Google sitemap extensions.** `SitemapNewsExtension`, `SitemapImageExtension` and
+  `SitemapHreflangExtension` are new. They join the video extension. The hreflang extension is different
+  from the other three. Its annotations are `xhtml:link` elements in the XHTML namespace, and thus it
+  binds the `xhtml` prefix. The value `x-default` is legal, but it is not a language tag.
 
 #### Feed retrieval
 
-- **Auto-discovery with relative links**: an endpoint discovered from `href="/feed.xml"` — the commonest
-  form such a link takes — is now resolved against the address the page was retrieved from, following
-  redirects. It was stored exactly as written, so `DiscoverableSyndicationEndpoint.CreateNavigatorAsync`
-  handed a relative URI to `HttpClient` and threw. A new
-  `ExtractDiscoverableSyndicationEndpoints(string, Uri)` overload exposes the same resolution to callers
-  parsing markup themselves; the single-argument overload is unchanged
-- **Character encoding**: The encoding declared in a feed's XML declaration is honoured again when loading from a
-  `Stream` or `Uri`. Content was being decoded as UTF-8 regardless of the declaration, corrupting non-UTF-8 feeds
-  with replacement characters and failing outright on BOM-less UTF-16
-- **HTTP error responses**: 4xx/5xx responses now raise `HttpRequestException` instead of having their body parsed
-  as feed content. A well-formed XML error page was previously loaded as an empty or incorrect feed with no error
-- **Request time-outs**: Requests issued through the shared `HttpClient` are bounded at 100 seconds. The shared
-  client is configured with an infinite time-out, so discovery calls such as `UriExistsAsync`,
-  `ConditionalGetAsync` and `LocateDiscoverableSyndicationEndpointsAsync` could hang indefinitely against a host
-  that accepted a connection but never responded
-- **Default load time-out**: `SyndicationResourceLoadSettings.Timeout` now defaults to 100 seconds, matching the
-  effective time-out of the previous `HttpWebRequest` pipeline, rather than 15 seconds
-- **User-Agent**: A `SyndicationRequestOptions.UserAgent` value now replaces the framework User-Agent instead of
-  being appended to it, matching the documented "or null to use the default" semantics
-- **Conditional GET**: `ConditionalGetAsync` interprets an `Unspecified`-kind `lastModified` as UTC for both the
-  `If-Modified-Since` header it sends and the `Last-Modified` value it compares against. The two previously
-  disagreed by the host's UTC offset, so updated content could be reported as unmodified, or unchanged feeds
-  re-downloaded on every poll
+- **`SyndicationResourceReader.LoadIfModifiedAsync<TResource>`.** This method gets and parses a resource
+  only when the origin reports a change. This is the usual task for a consumer that polls. Both results
+  are successes. A 304 response is a result, and not the `HttpRequestException` that `LoadAsync` gives
+  for the same request. `ConditionalLoadResult<T>.WasModified` has `[MemberNotNullWhen]`. Thus a test of
+  that property gives access to `Resource` without a null check.
+- **`SyndicationValidators`.** This type holds the `Last-Modified` and `ETag` pair. The two values always
+  travel together, and a caller must send them back without a change. `SyndicationValidators.None` makes
+  a request unconditional. This type is not part of `SyndicationRequestOptions`. Each path that uses
+  `SyndicationRequestOptions` calls `EnsureSuccessStatusCode`, and 304 is not a success code.
+- **A 304 response gives back its validators.** An origin can change its `ETag` on a not-modified
+  response. Before this release, the library discarded all data from a 304. A caller that polls thus
+  sent the first validator again and again, and revalidated against a value the origin no longer knew.
+  `ConditionalGetResult` also reports `StatusCode` for a 304. Before, it reported `null`.
+- **`ConditionalGetAsync(Uri, SyndicationValidators, HttpClient, SyndicationRequestOptions?,
+  CancellationToken)`.** This overload accepts request options. This method was the only fetch in the
+  library that made its request directly. Thus it was the only one that could not accept an `Accept`
+  header or a custom `User-Agent`.
+- **`SyndicationEncodingUtility.DefaultRequestTimeout` is public.** The shared `HttpClient` uses
+  `Timeout.InfiniteTimeSpan`, and each deadline comes from a `CancellationTokenSource`. Before this
+  release, a caller could not read the deadline that applied to them.
+- **`SyndicationResourceLoadSettings.MaxResponseContentLength`.** This property bounds the quantity of an
+  HTTP response that a load accepts. The count is in decompressed bytes. The default value is `null`,
+  which means the format default for the type, and not "no limit". Thus a caller who makes a settings
+  object for a different reason keeps the allowance for their document type.
+  `SyndicationResourceLoadSettings.Unbounded` asks for no limit. `SyndicationContentLengthLimits` gives
+  the default for each format:
+  - 8 MiB for a feed
+  - 64 MiB for a sitemap or a full-site export
+  - 2 MiB for a discovery fetch
+- **`SyndicationEncodingUtility.ApplyArgoticHandlerDefaults(SocketsHttpHandler)`.** This method applies
+  the handler settings that the shared client uses. A caller who makes their own `HttpClient`, or who
+  configures one with `IHttpClientFactory`, gets the same pipeline. The caller does not have to know the
+  contents of that pipeline.
 
-#### XML parsing
+#### Other
 
-- **Internal DTD subsets**: Feeds that declare entities in an internal DTD subset load again. DTD declarations were
-  being discarded, so any entity they defined became undeclared and the whole feed failed to parse
+- **`AddTrackbackClient` and `AddXmlRpcClient`** register typed clients for `IHttpClientFactory`. A client
+  from the container uses the handler that the container made, and not the process-wide singleton.
+  `AddArgoticSyndicationClient` registers a named client for the resource types. Get it with
+  `IHttpClientFactory.CreateClient(ArgoticHttpClients.Syndication)`, then give it to any `LoadAsync` or
+  `CreateAsync` overload that accepts an `HttpClient`.
+- **Sitemap 0.9 support.**
+- **`IComparisonOperators`.** This new interface gives the comparison operators `<`, `<=`, `>` and `>=`
+  as extension members.
+- **`ServiceCollectionExtensions`** for dependency injection registration.
+- **`TrackbackClientOptions` and `XmlRpcClientOptions`** for the options pattern.
+- **Examples CLI.** This is an interactive and non-interactive command-line application. It shows how to
+  use the API.
+- **`HashCodeUtility`.** This helper makes hash code components that agree with the case-insensitive
+  comparison rules of the framework.
 
-#### Comparison and equality
+### Changed
 
-- **`CompareTo`**: Member comparisons are no longer combined with bitwise OR. Combining a positive and a negative
-  result produced a negative value in both directions, so `a < b` and `b < a` could both be true and `List<T>.Sort`
-  produced arbitrary order or threw `InvalidOperationException`. Ordering is now decided by the first member that
-  differs, across all affected types
-- **`GetHashCode`**: Hash codes now agree with the case-insensitive comparisons that `Equals` is defined in terms
-  of. Instances that compared as equal could return different hash codes, so `HashSet<T>.Contains` missed them and
-  a `Dictionary<TKey, TValue>` could hold two equal keys
-- **`ComparisonUtility.CompareSequence`**: Returns the first non-zero element comparison instead of the bitwise OR
-  of every element comparison
+#### Namespaces and types
 
-#### Sitemaps
+- **BREAKING. `Argotic.Syndication.Specialized` no longer exists.** `ApmlDocument`, `BlogMLDocument` and
+  `RsdDocument` are now in `Argotic.Syndication`. All other formats were already in that namespace.
+  Change the `using` statement. No type and no member changed.
+- **BREAKING. `SyndicationResourceAdapter` is sealed, and it is no longer the base class of the
+  adapters.** It was the dispatcher and the base class at the same time. Thus each of the 14 version
+  adapters had a public `Fill(ISyndicationResource, SyndicationContentFormat)` method that no code
+  called. The navigator and the settings moved to the new `SyndicationResourceAdapterBase`. The 14
+  adapters are sealed.
+- **BREAKING. The 15 adapter constructors accept a non-nullable `SyndicationResourceLoadSettings`.** The
+  parameter was nullable, but each constructor threw an exception for a null value. Thus the annotation
+  was the opposite of the behaviour. Nullable annotations are part of the API.
+- **BREAKING. `Atom03SyndicationResourceAdapter.CreateNamespaceManager` is private.** It was `protected
+  static` on a type that is now sealed.
+- **BREAKING. All 119 comparable types implement `IComparable<T>`** in place of the non-generic
+  `IComparable`.
+- **BREAKING. The target framework is `net10.0` only.** Support for .NET Standard 2.0, .NET Standard 2.1,
+  .NET 8 and .NET 9 stopped.
 
-- **Extension scoping**: `image`, `news`, `video` and `xhtml` extension data binds to the `<url>` element it
-  appears under. Every URL previously received every matching element in the document, and re-saving wrote the
-  duplicated data under each `<url>` as well as directly under `<urlset>`
-- **Date-only `<lastmod>`**: Values such as `2024-01-15` keep their stated calendar day and are exposed as UTC.
-  They were converted to the host's local zone, moving the modification date onto the neighbouring day
-- **`RetrievalLimit`**: `Sitemap` and `SitemapIndex` honour `SyndicationResourceLoadSettings.RetrievalLimit` on
-  their public load paths, which previously read every entry regardless of the configured limit
+#### Load behaviour
 
-#### Atom Publishing
+- **BREAKING. The library refuses a declared version that no adapter reads.** Before this release,
+  `<rss version="0.93">` passed the format check, matched no version arm, and gave back an empty feed
+  and a `Loaded` event. There was no diagnostic. RSS, OPML, APML and RSD now throw `FormatException`. The
+  message gives the version in the document and the versions that the library reads. Atom and the Atom
+  Publishing Protocol are different, because their specifications define no version attribute. These two
+  formats route by namespace. RFC 4287 defines a version attribute only on `atom:generator`, and §6.3
+  does not permit an error for foreign markup.
+- **BREAKING. Version routing accepts Build and Revision components.** Before this release,
+  `<rss version="2.0.1">` reached no adapter, because `System.Version` equality compares all four
+  components. `new Version("2.0")` is not equal to `new Version("2.0.1")`. The document now routes to the
+  2.0 adapter. Patch versions of the other formats also route correctly.
+- **BREAKING. A resource of the wrong runtime type causes `ArgumentException`.** Before, seven casts in
+  the dispatcher threw `InvalidCastException`, which no documentation recorded. The Atom arm and the Atom
+  Publishing arm used pattern matching with no `else`, and thus did nothing at all. The message now gives
+  the type of the resource and the type that reads the format.
+- **BREAKING. A format that the library detects but does not read causes `FormatException`.** `NewsML`,
+  `MicroSummaryGenerator` and `OpenSearchDescription` fell through the outer switch of the dispatcher.
+  The library gave back an empty resource and reported success.
+- **BREAKING. `Sitemap` and `SitemapIndex` check the format of the document.** Both types used a private
+  walk with no format check. Thus `Sitemap.Load` of an RSS document was a success with zero URLs. At the
+  same time, the XML documentation promised a `FormatException` on 22 members that could not throw one.
+  Three more cases change. An un-namespaced `urlset`, a `urlset` below the document root, and a navigator
+  on an element instead of the document node loaded before. The library refuses all three now.
+- **BREAKING. The library refuses an Atom document of the wrong shape.** RFC 4287 §2 defines two document
+  types. A feed document has a `<feed>` root, and `AtomFeed` reads it. A stand-alone entry document has an
+  `<entry>` root, and `AtomEntry` reads it. Before this release, each type accepted the other document and
+  gave back a default object with an empty title, an empty id and `DateTime.MinValue`. It reported success.
+  `SyndicationContentFormat.Atom` covered both shapes. Thus the format check compared `Atom` against
+  `Atom`, and it passed.
+- **BREAKING. `SyndicationContentFormat.AtomEntryDocument` is new.** A stand-alone entry document reports
+  this value. Before, it reported `Atom`. The detector always knew the two roots apart, but it discarded
+  the answer. The new value lets the format check do its work. It also lets a caller of
+  `SyndicationDiscoveryUtility.SyndicationContentFormatGet` know which type to make. The other enumeration
+  values do not change. `AtomEntry.Format` and `AtomEntryResource.Format` give back the new value.
+- **BREAKING. `GenericSyndicationFeed` refuses a format that it cannot represent.** `Load` had three
+  `else if` arms and no final `else`. Thus APML, BlogML, RSD, a sitemap, an Atom Publishing document and
+  a stand-alone entry document reached the `Loaded` event. The caller received a default object and a
+  report of success. The method now throws `FormatException`. This type represents an Atom feed, an RSS
+  feed and an OPML document only.
+- **BREAKING. `SyndicationResourceLoadSettings.CharacterEncoding` is `Encoding?`, and the default is
+  `null`.** The default was `Encoding.UTF8`, and the property refused `null`. Thus one value had to mean
+  both "decode as UTF-8" and "detect the encoding". The two load paths read the property in opposite
+  directions. `Load(Stream, settings)` obeyed it, and forced UTF-8 on a document that correctly declared
+  `iso-8859-1`. `LoadAsync` compared it by reference against the singleton, and detected the encoding
+  instead. Thus an equivalent `new UTF8Encoding(false)` behaved differently from a value that decodes the
+  same way. `null` now means "detect the encoding from the byte-order mark or the XML declaration", which
+  is what a default settings object asks for. The library uses a named encoding. A caller who needs the old
+  behaviour sets the property. This change is not binary-breaking, because nullability of a reference
+  type is metadata.
+- **BREAKING. `SyndicationResourceLoadSettings.Timeout` is `TimeSpan?`.** The default is still 100
+  seconds. `null` means that the library applies no deadline, and the `CancellationToken` of the caller
+  is the only bound. Do not use `TimeSpan.Zero` for this purpose, because it cancels immediately. This
+  change is binary-breaking, because `get_Timeout` gives back a different CLR type.
+- **BREAKING. Conditional GET uses the status code.** Before, `ConditionalGetAsync` compared the
+  `Last-Modified` of the response against the one that it sent. The code could reach that comparison only
+  after the origin refused to send a 304. It then asked whether the response "looked like it had content"
+  from `Content-Length` and `Content-Type`. A chunked 200 response with no `Content-Type` failed both
+  tests. Thus the library downloaded the body, discarded it, and told the caller that the resource was
+  unmodified. The fallback also tested for `HttpStatusCode.OK` only, but the success check accepts each
+  2xx code. Thus the library discarded a 203 or a 206 response before it reached the fallback. A 304 now
+  means unmodified, and each other success code means modified. A caller who depended on the old
+  behaviour depended on data loss.
+- **BREAKING. `SyndicationRequestOptions.ApplyTo` throws an exception for a value that it cannot send.**
+  Each setter was a `Try` method, and the code discarded the result. Thus a malformed `Accept` value made
+  a request with no `Accept` header. The caller learned about the problem only as a 406 response, or not
+  at all. A relative `Referer` value was worse. `Uri.TryCreate(..., Absolute, ...)` accepts
+  `/relative/path` on Linux and makes `file:///relative/path`, and the library sent that value to a
+  remote origin. `Accept`, `User-Agent` and `Referer` now throw `FormatException`. The library accepts
+  only an absolute `http` or `https` referer. An empty `Referer` still means "do not send one".
+- **BREAKING. A download has a size limit by default.** Each `LoadAsync(Uri, ...)` and
+  `CreateAsync(Uri, ...)` method refuses a response that is larger than the limit for its format. The
+  limits are 8 MiB for a feed, and 64 MiB for a sitemap or a BlogML export. Before this release, there
+  was no limit. A caller who needs a larger document sets
+  `SyndicationResourceLoadSettings.MaxResponseContentLength`, or
+  `SyndicationResourceLoadSettings.Unbounded` for the old behaviour. Note that `RetrievalLimit` does not
+  bound the download, because the library applies it after the parse. To read a large archive feed, also
+  increase the size limit.
+- **BREAKING. The HTTP stack uses `HttpClient`.** It used `WebRequest` and `HttpWebRequest`. A failed
+  request now throws `HttpRequestException` in place of `WebException`. Cancellation now throws
+  `OperationCanceledException` in place of a `WebException` with a timeout status.
 
-- **`AtomEntryResource.CreateAsync(Uri, SyndicationResourceLoadSettings, CancellationToken)`** is new and
-  returns an `AtomEntryResource`. `AtomEntryResource.CreateAsync(uri, settings)` previously bound the
-  inherited `AtomEntry.CreateAsync` and returned an `AtomEntry`, silently dropping the Atom Publishing
-  members the caller asked for by naming the derived type. The `CancellationToken` parameter of
-  `CreateAsync(Uri, CancellationToken)` no longer has a default value, which is what keeps
-  `CreateAsync(uri)` unambiguous; `CreateAsync(uri, cancellationToken)` still compiles
-- **Six redundant `AtomEntryResource` members removed** - `Load(IXPathNavigable)`, `Load(Stream)`,
-  `Load(Stream, SyndicationResourceLoadSettings)`, `Load(XmlReader)`,
-  `Load(XmlReader, SyndicationResourceLoadSettings)` and `LoadAsync(Uri, CancellationToken)`. Source is
-  unaffected: the inherited `AtomEntry` members have identical signatures and now dispatch correctly
-  through the virtual funnel. Binary-breaking - a caller compiled against 3001.0.0 must be recompiled
-- **Publishing state on a constructed entry**: `AtomEntryResource.Save(Stream)`, `Save(XmlWriter)` and
-  `CreateNavigator()` now write `app:edited` and `app:control/app:draft` from `EditedOn` and `IsDraft`.
-  Only `Save(XmlWriter, SyndicationResourceSaveSettings)` did, so an entry built in code and saved by
-  any other route lost its entire Atom Publishing state, silently. An entry that had been *loaded* was
-  unaffected, because loading places the extension objects directly into `Extensions` - which is why a
-  load-then-save round trip could not detect this
-- **Publishing state through a base or interface reference**: an `AtomEntryResource` held as
-  `ISyndicationResource` or `AtomEntry` now populates `EditedOn` and `IsDraft` on every load overload,
-  synchronous and asynchronous. `AtomEntry.Load(IXPathNavigable, SyndicationResourceLoadSettings)`,
-  `LoadAsync(Uri, HttpClient, ...)` and `Save(XmlWriter, SyndicationResourceSaveSettings)` are now
-  `virtual`, and the corresponding `AtomEntryResource` members `override` rather than shadow them. The
-  interface map was fixed at `AtomEntry`, so a caller not using the concrete type got the publishing
-  members silently dropped
-- **`AtomEntryResource` load overloads**: `Load(IXPathNavigable)`, `Load(Stream)` and `Load(XmlReader)` populate
-  `EditedOn` and `IsDraft`. Only two overloads were wrapped, so the others silently dropped the publishing state
-- **`app:draft`**: The draft flag is read from the `app:control` element that `WriteTo` emits, so an entry's draft
-  state survives a load/save round trip
-- **Duplicate namespace declarations**: Extensions that share an XML prefix - such as the Atom Publishing control
-  and edited extensions - emit a single declaration. Saving an entry that used both produced a duplicate
-  `xmlns:app` attribute and threw `XmlException`
+#### Other behaviour
 
-#### Dates
+The changes in this group fix no defect and break no documented contract. A caller can see them.
 
-- **RFC-822 offsets**: Dates carrying a lowercase `gmt` offset, such as `Mon, 01 Jan 2024 12:00:00 gmt+02:00`,
-  parse correctly. A case-sensitivity mismatch truncated the first three characters of the value, so the date
-  failed to parse and the item's publication date was silently dropped
+- **Discovery reads only the data that it needs.** `IsPingbackEnabledAsync`,
+  `LocatePingbackNotificationServerAsync`, `UriExistsAsync`, `SourceReferencesTargetAsync`,
+  `LocateDiscoverableSyndicationEndpointsAsync`, `LocateTrackbackNotificationServersAsync` and the two
+  `SyndicationContentFormatGetAsync` overloads no longer buffer the full response first. A pingback
+  answer from an `X-Pingback` header reads no body. Format detection reads the first 64 KiB, and not the
+  full feed. Each of these methods has a 2 MiB limit. Note one result of this change. A document with a
+  prolog longer than 64 KiB now reports `SyndicationContentFormat.None`. The documentation defines that
+  value as "unable to determine". Before, the library parsed the full document from the socket.
+- **The shared `HttpClient` accepts Brotli, and it keeps no cookies.** It offered gzip and deflate only,
+  and thus refused the smallest encoding that most origins offer. `SocketsHttpHandler.UseCookies` has a
+  default of `true`. Thus the client sent a `Set-Cookie` value from any origin again on the next request
+  to that host. On a process-wide singleton, that state stays for the life of the application, and there
+  is no API to read it or to clear it.
+- **`SyndicationEncodingUtility.CreateSafeNavigator(Stream)` streams the document.** It read the full
+  document into a `byte[]`. It then decoded that array to a string, cleaned that string into a second
+  string, and parsed the result. It now reads a bounded head, detects the encoding from the head, and
+  decodes the remainder as it goes. For a 706 KiB feed, allocation decreases by 68%. There are two
+  results. An empty stream now causes `XmlException` with the message "Root element is missing.". Before,
+  it caused `ArgumentException` for the parameter `content`. That parameter belongs to a private helper
+  method, and the caller never supplied it. The stream is also read lazily. Thus a parse failure leaves
+  the stream at that point, and not at the end. This overload still does not close the stream.
+- **`SyndicationEncodingUtility.CreateSafeNavigator(Stream, Encoding)` does not close the stream.** It
+  put the stream into a `StreamReader` that it owned and disposed, and thus closed the stream. The
+  single-argument overload did not do this, and no documentation recorded the difference. A caller who
+  depended on this behaviour must now dispose the stream. An empty stream causes `XmlException` in place
+  of `ArgumentException` for the parameter `xml`. A byte-order mark still has precedence over the supplied
+  encoding, as before.
+- **`SyndicationEncodingUtility.CreateSafeNavigator(TextReader)` filters as it reads.** It read the full
+  reader into a string, cleaned that string into a second string, and then parsed the result. It now
+  removes invalid characters as it reads, and thus does not hold the document two times. There are two
+  results. An empty reader now causes `XmlException` with the message "Root element is missing.".
+  Before, it caused `ArgumentException` for the parameter `xml`. This overload does not have that
+  parameter, and the caller never supplied it. The reader is also read lazily. Thus a parse failure leaves the reader at that point. This
+  method still does not dispose the reader.
 
-#### Trackback
+#### Quality and tooling
 
-- **RDF autodiscovery**: Embedded `<rdf:RDF>` discovery blocks are matched again. The pattern used a non-verbatim
-  string in which `\b` was a literal backspace character rather than a word boundary, so autodiscovery returned no
-  endpoints for any page and `IsTrackbackEnabledAsync` always returned `false`
+- **Conformance validation is a test gate, in two tiers.** The offline tier validates the output of the
+  library, and the sample corpus, against embedded sitemaps.org and APML schemas. The tier with
+  `[TestCategory("Integration")]` uses live services. It gets Google's sitemap extension schemas at test
+  time. Each of those files has an "All Rights Reserved" notice, and thus the repository holds no copy. It also uses the W3C Feed Validator, which is the standard checker for RSS and Atom,
+  because .NET cannot validate either format against a schema. An integration test does not pass unless
+  it reaches its service. An unavailable service gives an inconclusive result, and only a document that
+  the service refuses causes a failure.
+- **The documentation does not refer to files that the repository does not hold.** XML documentation
+  comments in `Argotic.Common` and `Argotic.Extensions` referred to an engineering log outside version
+  control. Those comments are in the NuGet packages. Thus a consumer saw a path that does not exist for
+  them. The text keeps the facts, but not the references.
+- **`ARCHITECTURE.md`** is new. It records the load pipeline, format dispatch, extension discovery, the
+  network layer and the test strategy, with diagrams. It also records the changes of the .NET 10
+  modernisation, and the parts that did not change.
+- **C# 7 to C# 14 features.** The code now uses:
+  - file-scoped namespaces
+  - collection expressions
+  - pattern matching
+  - target-typed `new` expressions
+  - range operators and `nameof` expressions
+  - auto-properties and expression-bodied members
+- **This release resolves more than 200 code analysis warnings.** These include:
+  - CA1854 and CA1864, for dictionaries
+  - CA1868, for `Collection.Remove`
+  - CA2000, for `IDisposable`
+  - CA1307 and CA1867, for string methods
+  - CA2251, for string comparison
+- **All comparable types implement `IEquatable<T>`.**
+- **The test project uses Microsoft Testing Platform (MTP) with Shouldly assertions.** The number of
+  tests and the code coverage both increased.
 
-### Security Fixes
-
-- **XXE Prevention**: Resolves CA5372. XML parsing refuses to resolve external entities (`XmlResolver` is `null`)
-  and bounds entity expansion via `MaxCharactersFromEntities`. The internal DTD subset is parsed rather than
-  ignored, so feeds that declare their own entities continue to load without reopening the external-entity vector
-
-### Code Quality
-
-- **C# Modernization** (C# 7-14 features):
-  - File-scoped namespaces
-  - Collection expressions (`[]`)
-  - Pattern matching
-  - Target-typed new expressions
-  - Nullable reference types improvements
-  - Range operators
-  - `nameof()` expressions
-  - Auto-properties
-  - Expression-bodied members
-- **Analyzer Fixes**: ~200+ code analysis warnings resolved:
-  - CA1854/CA1864: Dictionary optimizations
-  - CA1868: Collection.Remove optimizations
-  - CA2000: IDisposable fixes
-  - CA1307/CA1867: String method improvements
-  - CA2251: String comparison fixes
-- **IEquatable<T>**: Implemented across all comparable types
-- **Test Framework**: Migrated to Microsoft Testing Platform (MTP) with Shouldly assertions
-  - Significantly increased the number of unit tests and code coverage.
-
-### Dependencies
+#### Dependencies
 
 - Microsoft.Extensions.Options 10.0.10
 - Microsoft.Extensions.DependencyInjection.Abstractions 10.0.10
-- Spectre.Console 0.57.2 (Examples project)
+- Spectre.Console 0.57.2, in the Examples project
 - MSTest.Sdk 4.3.3
 - Shouldly 4.3.0
 
 ### Removed
 
-- **`SyndicationEncodingUtility.GetXmlEncoding(Stream)`** — source- and binary-breaking. It read the
-  *entire* stream to find forty bytes and left it consumed, so a stream-shaped sniff could not promise
-  non-consumption and could not be used twice. `GetXmlEncoding(byte[])` still accepts a whole document
-  and is still unbounded; `CreateSafeNavigator(Stream)` now sniffs a bounded head internally
-- **Internal `SyndicationEncodingUtility.GetStreamBytes`** — the load path no longer buffers a whole
-  document before parsing it, so nothing called it. Binary-breaking only for the three assemblies
-  holding an `InternalsVisibleTo` grant, all of which are in this repository
-- **`SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters(string)`** — source- and
-  binary-breaking. It had no caller anywhere in the library and could not have had a working one: its
-  pattern relied on `\xD800` meaning U+D800, where .NET regex reads `\x` as exactly two hex digits, so
-  `\xD800` denoted the range `'0'`–`'ß'`. Nearly every letter matched, and each match was passed to
-  `Convert.ToUInt32(value, 16)` — which threw `FormatException` on `"Hello"` and silently rewrote
-  `"abc"` to `"101112"`. Use `RemoveInvalidXmlHexadecimalCharacters` instead
-- `Guard.cs` utility class
-- Legacy configuration provider classes
-- `WebRequestOptions` class
-- Message sent event args classes
+- **BREAKING. `SyndicationEncodingUtility.GetXmlEncoding(Stream)`.** This removal breaks source and
+  binary compatibility. The method read the full stream to find forty bytes, and left the stream at the
+  end. Thus a sniff of a stream could not promise to leave the stream unread, and a caller could not use
+  the stream again. `GetXmlEncoding(byte[])` still accepts a full document, and it still has no limit.
+  `CreateSafeNavigator(Stream)` now reads a bounded head internally.
+- **BREAKING. `SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters(string)`.** This removal
+  breaks source and binary compatibility. No code in the library called it, and no code could have used
+  it correctly. Its pattern used `\xD800` for U+D800, but .NET regular expressions read `\x` and then
+  exactly two hexadecimal digits. Thus `\xD800` was the range `'0'` to `'ß'`. Almost every letter matched.
+  The method gave each match to `Convert.ToUInt32(value, 16)`, which threw `FormatException` for
+  `"Hello"` and changed `"abc"` to `"101112"`. Use `RemoveInvalidXmlHexadecimalCharacters` in place of it.
+- **BREAKING. Binary serialization support.** This release removes the `[Serializable]` attribute from
+  all 179 types, and the three `[NonSerialized]` field annotations with it. `Type.IsSerializable` now gives
+  `false` for each Argotic type. No type in the library implemented `ISerializable` or used
+  `SerializationInfo`. `BinaryFormatter` was the only runtime consumer of the attribute, and .NET 9
+  removed it from the platform (`SYSLIB0011` and `SYSLIB0050`). `IXmlSerializable`, `XmlSerializer` and
+  the `Save` and `Load` XML round trip do not change, because they never used `[Serializable]`.
+- **BREAKING. The legacy `System.Configuration` classes**: `PrivilegedConfigurationManager`,
+  `SyndicationResourceProvider` and its related classes, `TrackbackClientSection`, `XmlRpcClientSection`
+  and `WebRequestOptions`.
+- **BREAKING. The `Guard` utility class.** Use `ArgumentNullException.ThrowIfNull` and the equivalent
+  methods of the framework.
+- **BREAKING. `TrackbackMessageSentEventArgs` and `XmlRpcMessageSentEventArgs`.**
+- **Internal `SyndicationEncodingUtility.GetStreamBytes`.** The load path no longer buffers a full
+  document before the parse, and thus no code called this method. This removal breaks binary
+  compatibility only for the three assemblies with an `InternalsVisibleTo` grant. All three are in this
+  repository.
+
+### Fixed
+
+#### Writing
+
+- **The library writes the elements of a video sitemap in the order that the schema requires.**
+  `sitemap-video-1.1.xsd` declares an `xsd:sequence`, and thus the order of the child elements is part of
+  the contract. `SitemapVideo` wrote `tag` last, and wrote `uploader`, `platform` and `restriction` after
+  `live`. The schema puts `tag` directly after `publication_date`, `restriction` after `family_friendly`,
+  and `platform` and `live` near the end. The position of `content_segment_loc` was also incorrect. Thus
+  Google's schema refused each video sitemap from this library that had a tag, a restriction, a platform
+  or an uploader. No round-trip test could find this defect, because the reader accepts the child
+  elements in any order. A save and then a load gave the same result in both directions.
+
+#### Feed retrieval
+
+- **Auto-discovery with a relative link.** The library resolves an endpoint from `href="/feed.xml"`
+  against the address of the page, and follows redirects. This form of link is the most common one.
+  Before, the library kept the value without a change. Thus
+  `DiscoverableSyndicationEndpoint.CreateNavigatorAsync` gave a relative URI to `HttpClient`, and threw
+  an exception. The new `ExtractDiscoverableSyndicationEndpoints(string, Uri)` overload gives the same
+  resolution to a caller who parses the markup. The overload with one argument does not change.
+- **Character encoding.** The library obeys the encoding in the XML declaration of a feed for a load from
+  a `Stream` or a `Uri`. Before, it decoded the content as UTF-8 in all cases. Thus it damaged a feed in
+  a different encoding with replacement characters, and it failed for UTF-16 with no byte-order mark.
+- **HTTP error responses.** A 4xx or 5xx response throws `HttpRequestException`. Before, the library
+  parsed the body as feed content. Thus a well-formed XML error page became an empty or incorrect feed,
+  with no error.
+- **Request timeouts.** A request through the shared `HttpClient` has a limit of 100 seconds. The shared
+  client has an infinite timeout. Thus discovery methods such as `UriExistsAsync`, `ConditionalGetAsync`
+  and `LocateDiscoverableSyndicationEndpointsAsync` could wait without a limit for a host that accepted
+  a connection but sent no response.
+- **Default load timeout.** The default of `SyndicationResourceLoadSettings.Timeout` is 100 seconds, and
+  not 15 seconds. The new value agrees with the effective timeout of the previous `HttpWebRequest`
+  pipeline.
+- **User-Agent.** A `SyndicationRequestOptions.UserAgent` value replaces the User-Agent of the framework.
+  Before, the library added the value to it. The new behaviour agrees with the documented rule, "or null
+  to use the default".
+- **Conditional GET.** `ConditionalGetAsync` reads a `lastModified` value of kind `Unspecified` as UTC.
+  It does this for the `If-Modified-Since` header that it sends, and for the `Last-Modified` value that
+  it compares. The two disagreed by the UTC offset of the host. Thus the library could report new content
+  as unmodified, or download an unchanged feed on each poll.
+
+#### XML parsing
+
+- **Internal DTD subsets.** A feed that declares entities in an internal DTD subset loads correctly. The
+  library discarded the DTD declarations. Thus each entity became undeclared, and the parse of the full
+  feed failed.
+
+#### Comparison and equality
+
+- **`CompareTo`.** The library no longer combines member comparisons with a bitwise OR. That operation
+  gave a negative result in both directions for a positive and a negative input. Thus `a < b` and
+  `b < a` could both be true, and `List<T>.Sort` gave an arbitrary order or threw
+  `InvalidOperationException`. The first member that differs now decides the order, in each affected
+  type.
+- **`GetHashCode`.** Hash codes agree with the case-insensitive comparisons that define `Equals`. Two
+  equal instances could give different hash codes. Thus `HashSet<T>.Contains` did not find them, and a
+  `Dictionary<TKey, TValue>` could hold two equal keys.
+- **`ComparisonUtility.CompareSequence`.** This method gives the first non-zero element comparison, and
+  not the bitwise OR of each element comparison.
+
+#### Sitemaps
+
+- **Extension scope.** The `image`, `news`, `video` and `xhtml` extension data binds to the `<url>`
+  element that holds it. Before, each URL received each matching element in the document. A save then
+  wrote the duplicate data under each `<url>`, and also directly under `<urlset>`.
+- **A date-only `<lastmod>`.** A value such as `2024-01-15` keeps its calendar day, and the library gives
+  it as UTC. Before, the library changed it to the local zone of the host, and thus moved the date to the
+  adjacent day.
+- **`RetrievalLimit`.** `Sitemap` and `SitemapIndex` obey
+  `SyndicationResourceLoadSettings.RetrievalLimit` on their public load paths. Before, they read each
+  entry and ignored the limit.
+
+#### Atom Publishing
+
+- **`AtomEntryResource.CreateAsync(Uri, SyndicationResourceLoadSettings, CancellationToken)`** is new,
+  and it gives back an `AtomEntryResource`. Before, `AtomEntryResource.CreateAsync(uri, settings)` bound
+  the inherited `AtomEntry.CreateAsync` and gave back an `AtomEntry`. Thus it discarded the Atom
+  Publishing members that the caller asked for by the name of the derived type. The `CancellationToken`
+  parameter of `CreateAsync(Uri, CancellationToken)` no longer has a default value, which keeps
+  `CreateAsync(uri)` unambiguous. `CreateAsync(uri, cancellationToken)` still compiles.
+- **This release removes six unnecessary `AtomEntryResource` members**: `Load(IXPathNavigable)`, `Load(Stream)`,
+  `Load(Stream, SyndicationResourceLoadSettings)`, `Load(XmlReader)`,
+  `Load(XmlReader, SyndicationResourceLoadSettings)` and `LoadAsync(Uri, CancellationToken)`. Source
+  compatibility does not change, because the inherited `AtomEntry` members have the same signatures and
+  now dispatch correctly through the virtual funnel. This removal breaks binary compatibility. Recompile
+  a caller that was built against 3001.0.0.
+- **Publishing state on a constructed entry.** `AtomEntryResource.Save(Stream)`, `Save(XmlWriter)` and
+  `CreateNavigator()` write `app:edited` and `app:control/app:draft` from `EditedOn` and `IsDraft`.
+  Before, only `Save(XmlWriter, SyndicationResourceSaveSettings)` did this. Thus an entry that a caller
+  made in code, and then saved by a different route, lost all of its Atom Publishing state. There was no
+  error. An entry from a load was correct, because a load puts the extension objects directly into
+  `Extensions`. For this reason, a load and then a save could not find this defect.
+- **Publishing state through a base or interface reference.** An `AtomEntryResource` that a caller holds
+  as `ISyndicationResource` or as `AtomEntry` populates `EditedOn` and `IsDraft` on each load overload,
+  synchronous and asynchronous. `AtomEntry.Load(IXPathNavigable, SyndicationResourceLoadSettings)`,
+  `LoadAsync(Uri, HttpClient, ...)` and `Save(XmlWriter, SyndicationResourceSaveSettings)` are now
+  `virtual`. The equivalent `AtomEntryResource` members use `override`, and no longer shadow them. The
+  interface map pointed at `AtomEntry`. Thus a caller who did not use the concrete type lost the
+  publishing members.
+- **`AtomEntryResource` load overloads.** `Load(IXPathNavigable)`, `Load(Stream)` and `Load(XmlReader)`
+  populate `EditedOn` and `IsDraft`. Before, only two overloads did this, and the others lost the
+  publishing state.
+- **`app:draft`.** The library reads the draft flag from the `app:control` element that `WriteTo` writes.
+  Thus the draft state of an entry stays correct through a load and a save.
+- **Duplicate namespace declarations.** Extensions that share an XML prefix, such as the Atom Publishing
+  control and edited extensions, write one declaration. Before, a save of an entry that used both
+  extensions made a duplicate `xmlns:app` attribute, and threw `XmlException`.
+
+#### Dates
+
+- **RFC 822 offsets.** A date with a lowercase `gmt` offset, such as
+  `Mon, 01 Jan 2024 12:00:00 gmt+02:00`, parses correctly. A case-sensitivity error removed the first
+  three characters of the value. Thus the parse failed, and the library discarded the publication date of
+  the item.
+
+#### Trackback
+
+- **RDF autodiscovery.** The library finds an embedded `<rdf:RDF>` discovery block. The pattern used a
+  non-verbatim string, in which `\b` was a backspace character and not a word boundary. Thus
+  autodiscovery found no endpoints on any page, and `IsTrackbackEnabledAsync` always gave `false`.
+
+### Security
+
+- **XXE prevention.** This change resolves CA5372. The XML parser does not resolve external entities,
+  because `XmlResolver` is `null`. It also bounds entity expansion with `MaxCharactersFromEntities`. The
+  parser reads the internal DTD subset, and does not ignore it. Thus a feed that declares its own
+  entities loads correctly, and the external-entity vector stays closed.
+
+[Unreleased]: https://github.com/argotic-syndication-framework/Argotic/compare/3001.0.0...HEAD
+[3001.0.0]: https://github.com/argotic-syndication-framework/Argotic/releases/tag/3001.0.0

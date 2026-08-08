@@ -218,6 +218,32 @@ dotnet_diagnostic.CA1508.severity = none
 # XmlResolver = null and is regression-tested by CreateSafeNavigator_DoesNotResolveExternalEntity.
 dotnet_diagnostic.CA5372.severity = none
 
+# Single-file samples. Each is a .NET 10 file-based app run with `dotnet run --file`, compiled
+# through a virtual project whose directory is this one - so Solutions/Directory.Build.props
+# applies, AnalysisMode is AllEnabledByDefault, and a top-level-statement program trips the same
+# application-code rules Argotic.Examples had to relax above.
+#
+# Deliberately shorter than the Argotic.Examples list. A suppression with no violation behind it is
+# a comment, not a control, and three of that block's eight rules never fire here: samples log
+# nothing (CA1848), declare no types Spectre constructs by reflection (CA1812), and nest no settings
+# classes (CA1034). Add a rule only when a written sample actually trips it.
+#
+# dotnet format cannot reach these files - it wants a project or solution and rejects a bare .cs -
+# so Solutions/.editorconfig line 9 (insert_final_newline = false) is enforced by hand here, as it
+# already is for .md.
+[Samples/**.cs]
+# CA1050: Declare types in namespaces - top-level programs have none
+dotnet_diagnostic.CA1050.severity = none
+# CA1303: Do not pass literals as localized parameters - console output is not localized
+dotnet_diagnostic.CA1303.severity = none
+# CA1515: Make internal since this is an application
+dotnet_diagnostic.CA1515.severity = none
+# CA2007: ConfigureAwait not needed in applications, and it is noise in a teaching sample
+dotnet_diagnostic.CA2007.severity = none
+# CA1031: Do not catch general exception types. Several samples catch to *show* a guard firing -
+# demonstrating that RssChannel.Description rejects "" means catching what it throws.
+dotnet_diagnostic.CA1031.severity = none
+
 # JSON files
 [*.json]
 indent_size = 2

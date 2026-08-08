@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Audio versions of endjin blog posts, published as a Podcasting 2.0 feed.
+
+  Authored rather than mirrored: endjin publishes audio versions of some posts under
+  /assets/podcast/, but no podcast RSS feed of its own, so this file assembles real assets into the
+  feed a podcast host would serve. The enclosure URL, its media type and its byte count are real.
+
+  The namespace is https://podcastindex.org/namespace/1.0 — https, and matched exactly. A feed
+  declaring the http:// form silently yields no extension at all, because discovery compares the
+  namespace URI rather than the prefix.
+
+  The podcast:txt element with purpose="applepodcastsverify" is the reason this extension matters. A
+  survey of live feeds found the Apple ownership token delivered that way by 21 publishers and as
+  itunes:applepodcastsverify by 26, so a library reading only the iTunes form serves about half of
+  the publishers who set one, and loses the other half's claim to their own show.
+-->
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:podcast="https://podcastindex.org/namespace/1.0">
+  <channel>
+    <title>endjin blog, read aloud</title>
+    <link>https://endjin.com/blog/</link>
+    <description>Audio versions of selected posts from the endjin blog.</description>
+    <language>en-gb</language>
+
+    <podcast:locked owner="hello@endjin.com">yes</podcast:locked>
+    <podcast:guid>917393e3-1b1e-5cef-ace4-edaa54e1f810</podcast:guid>
+    <podcast:medium>podcast</podcast:medium>
+    <podcast:podping usesPodping="true"/>
+    <podcast:txt purpose="applepodcastsverify">e6cfaae0-9496-11f0-a272-f9e230f88be0</podcast:txt>
+    <podcast:funding url="https://endjin.com/contact-us/">Talk to endjin</podcast:funding>
+    <podcast:person role="host" href="https://endjin.com/who-we-are/">Barry Smart</podcast:person>
+    <podcast:person role="guest" href="https://endjin.com/who-we-are/">Ian Griffiths</podcast:person>
+
+    <itunes:author>endjin</itunes:author>
+    <itunes:category text="Technology"/>
+    <itunes:explicit>false</itunes:explicit>
+
+    <item>
+      <title>The GenAI Reality Check: New Instrument, Same Orchestra</title>
+      <link>https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra</link>
+      <description>Generative AI is a new instrument in an orchestra that already existed.</description>
+      <guid isPermaLink="false">endjin-audio-genai-reality-check</guid>
+      <pubDate>Thu, 14 May 2026 08:54:29 GMT</pubDate>
+      <enclosure url="https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3" length="36588921" type="audio/mpeg"/>
+
+      <podcast:season name="Data and AI">1</podcast:season>
+      <podcast:episode display="Ep. 1">1</podcast:episode>
+      <podcast:transcript url="https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra/transcript.vtt" type="text/vtt" language="en" rel="captions"/>
+      <podcast:chapters url="https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra/chapters.json" type="application/json+chapters"/>
+      <podcast:license url="https://creativecommons.org/licenses/by/4.0/">cc-by-4.0</podcast:license>
+      <podcast:person role="host" href="https://endjin.com/who-we-are/">Barry Smart</podcast:person>
+
+      <itunes:duration>00:38:07</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+
+    <item>
+      <title>Writing Effective Copilot Instructions for Complex Codebases</title>
+      <link>https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases</link>
+      <description>Modular skill files beat one monolithic instructions document.</description>
+      <guid isPermaLink="false">endjin-audio-copilot-instructions</guid>
+      <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
+      <enclosure url="https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3" length="36588921" type="audio/mpeg"/>
+
+      <podcast:season name="Developer Experience">2</podcast:season>
+      <podcast:episode display="Ep. 2.1 — the interlude">2.1</podcast:episode>
+      <podcast:transcript url="https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases/transcript.srt" type="application/x-subrip" language="en"/>
+
+      <itunes:duration>00:22:14</itunes:duration>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

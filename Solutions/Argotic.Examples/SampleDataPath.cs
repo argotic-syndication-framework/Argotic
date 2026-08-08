@@ -57,6 +57,12 @@ internal static class SampleDataPath
     /// <summary>Gets the path to the sample News sitemap file.</summary>
     public static FilePath SitemapNews => BasePath.CombineWithFilePath("sitemap_news.xml");
 
+    /// <summary>Gets the path to the sample hreflang sitemap file.</summary>
+    public static FilePath SitemapHreflang => BasePath.CombineWithFilePath("sitemap_hreflang.xml");
+
+    /// <summary>Gets the path to the sample Podcasting 2.0 feed file.</summary>
+    public static FilePath PodcastFeed => BasePath.CombineWithFilePath("PodcastFeed.xml");
+
     /// <summary>
     /// Opens a file for reading.
     /// </summary>

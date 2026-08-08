@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Alternate-language annotations, the fourth of the Google sitemap extensions.
+
+  Unlike news, image and video, hreflang has no namespace of its own: the links are xhtml:link
+  elements in the XHTML namespace, which is why the extension's prefix is xhtml rather than something
+  sitemap-shaped.
+
+  Two things a reader has to get right and a single-link document never tests. First, the annotation
+  is reciprocal — every url in a set lists every alternate including itself, so the three entries here
+  each carry three links, not two. Second, x-default is a valid hreflang value and is not a language
+  code; treating it as one produces a culture parse failure on a document Google considers correct.
+
+  endjin publishes in English. The locale paths exist to exercise the extension, and are not a claim
+  that endjin serves translated pages.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released</loc>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"/>
+    <xhtml:link rel="alternate" hreflang="en-gb" href="https://endjin.com/en/what-we-think/talks/rxdotnet-v7-0-released"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://endjin.com/de/what-we-think/talks/rxdotnet-v7-0-released"/>
+  </url>
+  <url>
+    <loc>https://endjin.com/en/what-we-think/talks/rxdotnet-v7-0-released</loc>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"/>
+    <xhtml:link rel="alternate" hreflang="en-gb" href="https://endjin.com/en/what-we-think/talks/rxdotnet-v7-0-released"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://endjin.com/de/what-we-think/talks/rxdotnet-v7-0-released"/>
+  </url>
+  <url>
+    <loc>https://endjin.com/de/what-we-think/talks/rxdotnet-v7-0-released</loc>
+    <lastmod>2026-07-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"/>
+    <xhtml:link rel="alternate" hreflang="en-gb" href="https://endjin.com/en/what-we-think/talks/rxdotnet-v7-0-released"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://endjin.com/de/what-we-think/talks/rxdotnet-v7-0-released"/>
+  </url>
+</urlset>

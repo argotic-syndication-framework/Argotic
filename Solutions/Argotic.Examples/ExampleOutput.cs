@@ -1045,4 +1045,103 @@ internal static class ExampleOutput
             AnsiConsole.MarkupLine($"    [dim]Date:[/] {extension.PublicationDate:yyyy-MM-dd HH:mm:ss}");
         }
     }
+
+    /// <summary>
+    /// Displays information about a <see cref="SitemapHreflangExtension"/>.
+    /// </summary>
+    /// <param name="extension">The extension to display.</param>
+    public static void ShowSitemapHreflangExtension(SitemapHreflangExtension extension)
+    {
+        ArgumentNullException.ThrowIfNull(extension);
+
+        AnsiConsole.MarkupLine("  [dim]Hreflang Extension:[/]");
+        foreach (SitemapHreflangLink link in extension.Links)
+        {
+            AnsiConsole.MarkupLine($"    [dim]{Markup.Escape(link.Hreflang)}:[/] [blue]{Markup.Escape(link.Href?.ToString() ?? "(none)")}[/]");
+        }
+    }
+
+    /// <summary>
+    /// Displays information about a <see cref="PodcastSyndicationExtension"/>.
+    /// </summary>
+    /// <param name="ext">The extension to display.</param>
+    public static void ShowPodcastExtension(PodcastSyndicationExtension ext)
+    {
+        ArgumentNullException.ThrowIfNull(ext);
+
+        AnsiConsole.MarkupLine("  [blue]Podcasting 2.0 Extension:[/]");
+
+        if (!string.IsNullOrEmpty(ext.Context.Identifier))
+        {
+            AnsiConsole.MarkupLine($"    [dim]GUID:[/] {Markup.Escape(ext.Context.Identifier)}");
+        }
+
+        if (ext.Context.Medium != PodcastMedium.None)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Medium:[/] {ext.Context.Medium}");
+        }
+
+        if (ext.Context.IsLocked is { } locked)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Locked:[/] {locked}{(string.IsNullOrEmpty(ext.Context.LockOwner) ? string.Empty : $" (owner {Markup.Escape(ext.Context.LockOwner)})")}");
+        }
+
+        foreach (PodcastPerson person in ext.Context.People)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Person:[/] {Markup.Escape(person.Name)}{(string.IsNullOrEmpty(person.Role) ? string.Empty : $" ({Markup.Escape(person.Role)})")}");
+        }
+
+        foreach (PodcastFunding funding in ext.Context.FundingLinks)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Funding:[/] {Markup.Escape(funding.Message)} -> {Markup.Escape(funding.Url?.ToString() ?? "(none)")}");
+        }
+
+        // The Apple Podcasts ownership token arrives two ways in the wild -- as podcast:txt with this
+        // purpose, and as itunes:applepodcastsverify -- so a reader supporting only one serves roughly
+        // half the publishers who set one.
+        foreach (PodcastText text in ext.Context.TextEntries)
+        {
+            string label = text.IsApplePodcastsVerification ? "Apple verification" : $"Text ({Markup.Escape(text.Purpose)})";
+            AnsiConsole.MarkupLine($"    [dim]{label}:[/] {Markup.Escape(text.Value)}");
+        }
+
+        foreach (PodcastTranscript transcript in ext.Context.Transcripts)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Transcript:[/] {Markup.Escape(transcript.MediaType)} {Markup.Escape(transcript.Url?.ToString() ?? "(none)")}");
+        }
+
+        if (ext.Context.Season is { } season)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Season:[/] {season}{(string.IsNullOrEmpty(ext.Context.SeasonName) ? string.Empty : $" ({Markup.Escape(ext.Context.SeasonName)})")}");
+        }
+
+        if (ext.Context.Episode is { } episode)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Episode:[/] {episode}{(string.IsNullOrEmpty(ext.Context.EpisodeDisplay) ? string.Empty : $" ({Markup.Escape(ext.Context.EpisodeDisplay)})")}");
+        }
+    }
+
+    /// <summary>
+    /// Displays information about an <see cref="AtomPublishingControlSyndicationExtension"/>.
+    /// </summary>
+    /// <param name="ext">The extension to display.</param>
+    public static void ShowAtomPublishingControlExtension(AtomPublishingControlSyndicationExtension ext)
+    {
+        ArgumentNullException.ThrowIfNull(ext);
+
+        AnsiConsole.MarkupLine("  [blue]Atom Publishing Control:[/]");
+        AnsiConsole.MarkupLine($"    [dim]Draft:[/] {(ext.Context.IsDraft ? "yes" : "no")}");
+    }
+
+    /// <summary>
+    /// Displays information about an <see cref="AtomPublishingEditedSyndicationExtension"/>.
+    /// </summary>
+    /// <param name="ext">The extension to display.</param>
+    public static void ShowAtomPublishingEditedExtension(AtomPublishingEditedSyndicationExtension ext)
+    {
+        ArgumentNullException.ThrowIfNull(ext);
+
+        AnsiConsole.MarkupLine("  [blue]Atom Publishing Edited:[/]");
+        AnsiConsole.MarkupLine($"    [dim]Edited on:[/] {ext.Context.EditedOn:yyyy-MM-dd HH:mm:ss}");
+    }
 }

@@ -1,8 +1,3 @@
-using System.Text;
-using System.Xml.XPath;
-using Argotic.Common;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>

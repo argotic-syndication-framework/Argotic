@@ -1,12 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
-using Argotic.Common;
-using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Publishing;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Publishing;
 
 /// <summary>

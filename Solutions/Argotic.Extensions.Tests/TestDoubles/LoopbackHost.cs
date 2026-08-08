@@ -1,7 +1,5 @@
 using System.Collections.Concurrent;
 using System.Net;
-using System.Text;
-
 namespace Argotic.Extensions.Tests.TestDoubles;
 
 /// <summary>

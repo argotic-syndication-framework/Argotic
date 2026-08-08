@@ -1,10 +1,3 @@
-using System.Text;
-
-using Argotic.Common;
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Atom;
 
 /// <summary>
@@ -12,8 +5,8 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Atom;
 /// </summary>
 /// <remarks>
 ///     <para>
-///     The review (<c>.endjin/ATOM-CONFORMANCE-REVIEW.md</c>) probed each suspicion with running
-///     code; these are those probes as tests. Rows marked <b>PINS TODAY</b> assert behaviour the
+///     An RFC 4287 conformance review probed each suspicion with running code; these are those probes
+///     as tests. Rows marked <b>PINS TODAY</b> assert behaviour the
 ///     review classified as divergent and are inverted by the fix commits; rows marked
 ///     <b>INVARIANT</b> assert behaviour that must survive every fix.
 ///     </para>
@@ -495,8 +488,8 @@ public sealed class AtomSpecConformanceTests
     ///     <para>
     ///     The trimming setters stay: removing the trim would leak every source document's
     ///     pretty-printed indentation into every <c>Title</c> of every feed, and §3.1.1.1 permits the
-    ///     collapse for the text constructs where that matters. That was settled on evidence in
-    ///     <c>.endjin/build-warnings.md</c> §2.32.
+    ///     collapse for the text constructs where that matters. That was settled on evidence rather
+    ///     than preference.
     ///     </para>
     ///     <para>
     ///     <b>This row is the one the permission does not cover.</b> §4.1.3.3 rule 5 — a

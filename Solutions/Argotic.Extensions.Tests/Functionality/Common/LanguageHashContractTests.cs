@@ -1,9 +1,5 @@
 using System.Globalization;
-using Argotic.Extensions.Core;
 using Argotic.Publishing;
-using Argotic.Syndication;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>
@@ -27,7 +23,7 @@ namespace Argotic.Extensions.Tests.Functionality.Common;
 ///         normalises the same way the comparison does.
 ///     </para>
 ///     <para>
-///         This is the family §4.3 of <c>.endjin/build-warnings.md</c> hunted and missed: it looked for
+///         This is the family an earlier sweep hunted and missed: it looked for
 ///         collections folded by reference and whole context objects passed to the identity overload,
 ///         never for a <c>?? string.Empty</c> present in the comparison and absent from the hash.
 ///     </para>

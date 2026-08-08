@@ -1,8 +1,3 @@
-using System.Text;
-using System.Xml.XPath;
-
-using Argotic.Common;
-
 namespace Argotic.Extensions.Tests.TestDoubles;
 
 /// <summary>

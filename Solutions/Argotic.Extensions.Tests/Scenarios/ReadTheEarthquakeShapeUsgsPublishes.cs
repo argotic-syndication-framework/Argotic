@@ -1,10 +1,3 @@
-using System.Text;
-
-using Argotic.Extensions.Core;
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Scenarios;
 
 /// <summary>
@@ -17,9 +10,9 @@ namespace Argotic.Extensions.Tests.Scenarios;
 ///     separate adapters, so an extension working in one is no evidence at all about the other.
 ///     </para>
 ///     <para>
-///     Every value below is verbatim from the documents in <c>.endjin/perf-spike/corpus</c> — down to
-///     the fourteen significant digits USGS publishes and the elevation of exactly <c>-10000</c> that
-///     appears on 87 of its entries.
+///     Every value below is verbatim from documents USGS actually published — down to the fourteen
+///     significant digits it emits and the elevation of exactly <c>-10000</c> that appears on 87 of its
+///     entries.
 ///     </para>
 ///     <para>
 ///     This is the workflow the extension exists for, and until it existed the whole of it was lost: the

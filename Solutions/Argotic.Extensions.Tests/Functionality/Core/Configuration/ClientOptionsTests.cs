@@ -1,7 +1,4 @@
 using Argotic.Configuration;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Configuration;
 
 /// <summary>

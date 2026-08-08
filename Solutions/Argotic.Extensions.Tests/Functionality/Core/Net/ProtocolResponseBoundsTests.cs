@@ -1,13 +1,7 @@
 using System.Net;
 using System.Net.Http.Headers;
-using System.Text;
 
-using Argotic.Common;
-using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Net;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Net;
 
 /// <summary>

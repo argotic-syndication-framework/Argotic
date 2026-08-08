@@ -1,9 +1,4 @@
 using System.Xml.Schema;
-
-using Argotic.Extensions.Tests.TestDoubles;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Scenarios;
 
 /// <summary>

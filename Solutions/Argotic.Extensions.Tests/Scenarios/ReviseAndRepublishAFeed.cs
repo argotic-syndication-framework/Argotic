@@ -1,9 +1,3 @@
-using Argotic.Extensions.Core;
-using Argotic.Extensions.Tests.TestDoubles;
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Scenarios;
 
 /// <summary>

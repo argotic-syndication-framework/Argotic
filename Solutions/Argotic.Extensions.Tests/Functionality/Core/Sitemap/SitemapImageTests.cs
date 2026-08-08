@@ -1,8 +1,3 @@
-using System.Xml;
-using System.Xml.XPath;
-using Argotic.Extensions.Core;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 
 /// <summary>

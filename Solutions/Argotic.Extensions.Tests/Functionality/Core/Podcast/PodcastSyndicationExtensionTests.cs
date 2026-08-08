@@ -1,10 +1,3 @@
-using System.Text;
-
-using Argotic.Extensions.Core;
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Podcast;
 
 /// <summary>

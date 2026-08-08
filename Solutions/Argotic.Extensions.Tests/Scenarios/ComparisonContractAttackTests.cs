@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Reflection;
-using Argotic.Extensions.Core;
 using Argotic.Net;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Scenarios;
 
 // As in ComparisonContractTests: a throwing constructor, setter or comparison marks a shape the attack

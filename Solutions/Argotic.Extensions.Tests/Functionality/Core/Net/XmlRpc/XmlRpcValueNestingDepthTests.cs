@@ -1,10 +1,4 @@
-using System.Text;
-using System.Xml.XPath;
-
 using Argotic.Net;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Net.XmlRpc;
 
 /// <summary>

@@ -1,14 +1,9 @@
 using System.Collections.Specialized;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Web;
 
-using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Net;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Scenarios;
 
 /// <summary>

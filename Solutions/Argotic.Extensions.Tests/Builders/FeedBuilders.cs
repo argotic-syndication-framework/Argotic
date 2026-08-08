@@ -1,5 +1,3 @@
-using Argotic.Syndication;
-
 namespace Argotic.Extensions.Tests.Builders;
 
 /// <summary>

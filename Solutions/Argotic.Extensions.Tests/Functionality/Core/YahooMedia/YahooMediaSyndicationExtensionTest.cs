@@ -1,9 +1,4 @@
 using System.Globalization;
-using System.Xml;
-using Argotic.Extensions.Core;
-using Argotic.Syndication;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.YahooMedia;
 
 /// <summary>

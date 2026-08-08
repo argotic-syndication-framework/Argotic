@@ -1,7 +1,4 @@
 using System.Security.Cryptography;
-using Argotic.Extensions.Core;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.YahooMedia;
 
 /// <summary>

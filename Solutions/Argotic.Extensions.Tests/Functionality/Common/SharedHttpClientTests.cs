@@ -1,9 +1,4 @@
 using System.Net;
-
-using Argotic.Common;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>

@@ -2,9 +2,6 @@ using Argotic.Configuration;
 using Argotic.Net;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Configuration;
 
 /// <summary>

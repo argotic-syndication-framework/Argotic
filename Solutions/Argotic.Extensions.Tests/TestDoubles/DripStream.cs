@@ -6,9 +6,9 @@ namespace Argotic.Extensions.Tests.TestDoubles;
 /// <remarks>
 ///     <para>
 ///     Two properties, both of which the suite could not previously express. It is <b>not seekable</b>,
-///     so <c>GetStreamBytes</c> takes its <c>CopyTo</c> arm — the one <c>.endjin/build-warnings.md</c>
-///     §2.19 records at 1 of 2 branches, never executed by any test or benchmark in this repository,
-///     and the one a live network stream takes. And it <b>satisfies no read in full</b>, which is how a
+///     so <c>GetStreamBytes</c> takes its <c>CopyTo</c> arm — measured at 1 of 2 branches covered,
+///     never executed by any test or benchmark in this repository before this type existed, and the one
+///     a live network stream takes. And it <b>satisfies no read in full</b>, which is how a
 ///     socket actually behaves and why a bounded head read has to use <c>ReadAtLeast</c> rather than a
 ///     single <c>Read</c>: a naive read would sniff whatever landed in the first TCP segment.
 ///     </para>

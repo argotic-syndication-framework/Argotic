@@ -1,15 +1,10 @@
 using System.Net;
-using System.Text;
 
 using Argotic.Configuration;
-using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Net;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Configuration;
 
 /// <summary>

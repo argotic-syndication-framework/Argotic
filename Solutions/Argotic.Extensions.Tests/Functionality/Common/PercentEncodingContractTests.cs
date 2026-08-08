@@ -1,6 +1,3 @@
-using Argotic.Extensions.Core;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>

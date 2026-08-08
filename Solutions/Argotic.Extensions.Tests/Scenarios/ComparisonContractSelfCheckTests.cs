@@ -1,5 +1,3 @@
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Scenarios;
 
 /// <summary>

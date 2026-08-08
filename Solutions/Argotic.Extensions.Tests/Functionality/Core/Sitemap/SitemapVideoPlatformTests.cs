@@ -1,9 +1,3 @@
-using System.Text;
-using System.Xml;
-
-using Argotic.Extensions.Core;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 
 /// <summary>

@@ -1,8 +1,3 @@
-using System.Xml.XPath;
-using Argotic.Common;
-using Argotic.Extensions.Tests.TestDoubles;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Async;
 
 /// <summary>

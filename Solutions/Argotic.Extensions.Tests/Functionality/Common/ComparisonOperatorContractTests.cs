@@ -1,16 +1,9 @@
 using System.Reflection;
-using System.Xml.XPath;
 
-using Argotic.Common;
-using Argotic.Extensions.Core;
 using Argotic.Net;
 using Argotic.Publishing;
-using Argotic.Syndication;
-
-using Shouldly;
 
 using static Argotic.Common.ComparisonOperatorExtensions;
-
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>

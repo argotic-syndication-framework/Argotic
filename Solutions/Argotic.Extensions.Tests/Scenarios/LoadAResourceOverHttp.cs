@@ -1,13 +1,6 @@
 using System.Net;
-using System.Text;
 
-using Argotic.Common;
-using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Publishing;
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Scenarios;
 
 /// <summary>

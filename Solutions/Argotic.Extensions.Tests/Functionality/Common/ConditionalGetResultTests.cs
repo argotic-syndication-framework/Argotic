@@ -1,10 +1,6 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Text;
-using Argotic.Common;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>

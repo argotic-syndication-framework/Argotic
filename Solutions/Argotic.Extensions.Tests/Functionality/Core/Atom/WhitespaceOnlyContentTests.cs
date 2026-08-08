@@ -1,10 +1,3 @@
-using System.Text;
-
-using Argotic.Common;
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Atom;
 
 /// <summary>

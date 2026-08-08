@@ -1,10 +1,3 @@
-using System.Text;
-
-using Argotic.Extensions.Core;
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.GeoRss;
 
 /// <summary>
@@ -18,8 +11,8 @@ namespace Argotic.Extensions.Tests.Functionality.Core.GeoRss;
 ///     supported since 2007 — reads nothing from it.
 ///     </para>
 ///     <para>
-///     Every value in this file comes from the repository's own corpus. Census across
-///     <c>.endjin/perf-spike/corpus</c>: <b>114</b> <c>point</c>, <b>47</b> <c>elev</c>, <b>25</b>
+///     Every value in this file comes from a census of real published feeds — a local corpus, not
+///     committed here — which found <b>114</b> <c>point</c>, <b>47</b> <c>elev</c>, <b>25</b>
 ///     <c>featurename</c>, <b>25</b> <c>box</c>, and none of the rest.
 ///     </para>
 /// </remarks>

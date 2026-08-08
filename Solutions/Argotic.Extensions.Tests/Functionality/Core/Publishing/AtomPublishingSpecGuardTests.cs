@@ -1,12 +1,4 @@
-using System.Text;
-using System.Xml;
-using System.Xml.XPath;
-
 using Argotic.Publishing;
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Publishing;
 
 /// <summary>

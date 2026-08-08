@@ -1,9 +1,3 @@
-using System.Text;
-
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Scenarios;
 
 /// <summary>
@@ -21,7 +15,7 @@ namespace Argotic.Extensions.Tests.Scenarios;
 ///     Every test here cycles <b>twice</b> and asserts a fixed point, because a compounding defect
 ///     cannot be told apart from correct behaviour by one clean cycle: a version that doubled half as
 ///     fast would pass a single-cycle assertion just as well. That is the lesson
-///     <c>.endjin/build-warnings.md</c> §2.31 records against the <c>type="html"</c> double-escape, and
+///     the engineering log records against the <c>type="html"</c> double-escape, and
 ///     §2.32 against the whitespace-only category.
 ///     </para>
 /// </remarks>

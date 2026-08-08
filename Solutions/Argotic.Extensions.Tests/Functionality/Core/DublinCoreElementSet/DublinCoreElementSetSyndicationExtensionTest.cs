@@ -1,10 +1,5 @@
 using System.Globalization;
-using System.Xml;
-using Argotic.Extensions.Core;
-using Argotic.Syndication;
-using Shouldly;
 using static Argotic.Common.ComparisonOperatorExtensions;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.DublinCoreElementSet;
 
 /// <summary>

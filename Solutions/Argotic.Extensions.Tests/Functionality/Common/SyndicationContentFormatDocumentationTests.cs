@@ -1,10 +1,6 @@
 using System.Reflection;
 
-using Argotic.Common;
 using Argotic.Publishing;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>

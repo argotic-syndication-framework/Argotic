@@ -1,8 +1,4 @@
 using System.Net;
-using Argotic.Common;
-using Argotic.Extensions.Tests.TestDoubles;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>

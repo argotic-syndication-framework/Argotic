@@ -1,7 +1,3 @@
-using Argotic.Extensions.Core;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Podcast;
 
 /// <summary>

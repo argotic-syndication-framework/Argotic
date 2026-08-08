@@ -1,12 +1,7 @@
 using System.Globalization;
 using System.Net;
-using System.Text;
 
-using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Net;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Scenarios;
 
 /// <summary>

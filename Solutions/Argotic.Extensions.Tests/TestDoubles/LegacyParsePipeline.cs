@@ -1,8 +1,4 @@
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Xml;
-using System.Xml.XPath;
-
 namespace Argotic.Extensions.Tests.TestDoubles;
 
 /// <summary>

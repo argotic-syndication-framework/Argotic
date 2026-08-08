@@ -1,12 +1,3 @@
-using System.Text;
-using System.Xml;
-using System.Xml.XPath;
-
-using Argotic.Common;
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>
@@ -23,9 +14,8 @@ namespace Argotic.Extensions.Tests.Functionality.Common;
 ///     <para>
 ///     This is narrower than validation and should not be mistaken for it. It says the mandatory
 ///     elements are written; it says nothing about cardinality beyond that, ordering, or the content
-///     model of anything optional. The gap is recorded in <c>.endjin/build-warnings.md</c> §12.5, and
-///     the integration tier closes part of it by putting the same documents through the W3C Feed
-///     Validator, which is the canonical checker for both formats.
+///     model of anything optional. The integration tier closes part of that gap by putting the same
+///     documents through the W3C Feed Validator, which is the canonical checker for both formats.
 ///     </para>
 /// </remarks>
 [TestClass]

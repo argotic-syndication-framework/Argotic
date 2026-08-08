@@ -1,8 +1,4 @@
 using System.Globalization;
-using System.Text;
-using System.Xml;
-using Argotic.Syndication;
-
 namespace Argotic.Extensions.Tests;
 
 /// <summary>

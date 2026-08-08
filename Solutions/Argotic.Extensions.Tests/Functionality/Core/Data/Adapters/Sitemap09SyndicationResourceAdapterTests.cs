@@ -1,15 +1,6 @@
-using System.Text;
-using System.Xml.XPath;
-
-using Argotic.Common;
 using Argotic.Data.Adapters;
-using Argotic.Extensions.Tests.TestDoubles;
-using Argotic.Syndication;
-
-using Shouldly;
 
 using SitemapResource = Argotic.Syndication.Sitemap;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Data.Adapters;
 
 /// <summary>

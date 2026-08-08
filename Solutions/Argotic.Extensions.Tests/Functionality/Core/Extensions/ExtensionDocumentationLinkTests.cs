@@ -1,11 +1,6 @@
 using System.Reflection;
-using System.Xml.XPath;
 
-using Argotic.Extensions.Core;
 using Argotic.Publishing;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Extensions;
 
 /// <summary>

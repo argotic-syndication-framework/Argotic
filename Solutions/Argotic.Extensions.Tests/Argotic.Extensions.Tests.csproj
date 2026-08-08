@@ -16,6 +16,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!--
+      Global usings for the namespaces a test file almost always needs. MSTest.Sdk already supplies
+      System, System.Collections.Generic, System.IO, System.Linq, System.Net.Http, System.Threading,
+      System.Threading.Tasks and the MSTest attributes; these are the rest.
+
+      The threshold is deliberate: a namespace is here only if a quarter or more of the 204 test files
+      already imported it. Shouldly was in 188 of them. Below that line a using earns its place at the
+      top of the file, because it says something about what the test touches - Argotic.Net,
+      Argotic.Publishing, System.Reflection and the rest stay local for exactly that reason.
+
+      Verified before adding: no type name collides between Argotic.Syndication, Argotic.Common,
+      Argotic.Extensions.Core, Argotic.Publishing and Argotic.Net.
+    -->
+    <Using Include="Shouldly" />
+    <Using Include="System.Text" />
+    <Using Include="System.Xml" />
+    <Using Include="System.Xml.XPath" />
+    <Using Include="Argotic.Common" />
+    <Using Include="Argotic.Syndication" />
+    <Using Include="Argotic.Extensions.Core" />
+    <Using Include="Argotic.Extensions.Tests.TestDoubles" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
     <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
     <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />

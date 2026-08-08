@@ -1,9 +1,4 @@
 using System.Globalization;
-
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Scenarios;
 
 /// <summary>

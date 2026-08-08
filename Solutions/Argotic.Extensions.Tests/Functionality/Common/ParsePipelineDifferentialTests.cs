@@ -1,9 +1,3 @@
-using System.Text;
-
-using Argotic.Extensions.Tests.TestDoubles;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>
@@ -15,7 +9,7 @@ namespace Argotic.Extensions.Tests.Functionality.Common;
 ///     one of them is a differential — they assert what the current implementation does, so they move
 ///     with it, and a rewrite that changes behaviour consistently passes every one. This file is the
 ///     only thing standing between the coming rewrite of the decode and sanitise stages and the
-///     failure recorded in <c>.endjin/build-warnings.md</c> §4.4, where a <c>GetXmlEncoding</c> rewrite
+///     failure recorded in the engineering log, where a <c>GetXmlEncoding</c> rewrite
 ///     shipped three regressions behind a green 3,700-test suite.
 ///     </para>
 /// </remarks>

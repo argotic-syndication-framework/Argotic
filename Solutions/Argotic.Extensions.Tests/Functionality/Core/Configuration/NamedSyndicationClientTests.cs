@@ -1,12 +1,8 @@
 using System.Net;
 
-using Argotic.Common;
 using Argotic.Configuration;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Configuration;
 
 /// <summary>

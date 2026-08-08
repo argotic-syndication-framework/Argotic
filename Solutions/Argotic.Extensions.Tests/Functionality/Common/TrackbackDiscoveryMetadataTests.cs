@@ -1,10 +1,3 @@
-using System.Text;
-using System.Xml;
-using System.Xml.XPath;
-using Argotic.Common;
-using Argotic.Extensions.Tests.TestDoubles;
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Common;
 
 /// <summary>

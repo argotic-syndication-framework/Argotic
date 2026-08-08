@@ -1,9 +1,3 @@
-using System.Text;
-
-using Argotic.Syndication;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Opml;
 
 /// <summary>

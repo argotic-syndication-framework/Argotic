@@ -4,9 +4,6 @@ using Argotic.Net;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-
-using Shouldly;
-
 namespace Argotic.Extensions.Tests.Functionality.Core.Configuration;
 
 /// <summary>

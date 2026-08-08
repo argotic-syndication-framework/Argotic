@@ -57,4 +57,52 @@ internal static class SiteSummaryContentSyndicationExtensionExample
 
         ExampleOutput.ShowSaved("RssFeed");
     }
+
+    /// <summary>
+    /// Builds a <see cref="SiteSummaryContentSyndicationExtension"/> from scratch and reads it back.
+    /// </summary>
+    /// <remarks>
+    ///     content:encoded carries the full HTML body, which is what separates a feed a reader can display
+    ///     from one that only teases. The markup goes in as text and comes back as text: it is escaped on
+    ///     the way out, not treated as child elements.
+    /// </remarks>
+    public static void AuthorExample()
+    {
+        RssFeed feed = new();
+        feed.Channel.Title = "endjin blog";
+        feed.Channel.Link = new Uri("https://endjin.com/blog/");
+        feed.Channel.Description = "Technical writing from endjin on .NET, data, analytics and AI.";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"),
+            Description = "Moving UI framework support out of System.Reactive can cut 95MB from a deployment.",
+        };
+
+        SiteSummaryContentSyndicationExtension content = new();
+        content.Context.Items.Add(new SiteSummaryContentItem
+        {
+            Content = "<p>Rx.NET 7.0 moves UI framework support into <strong>separate packages</strong>.</p>"
+                + "<p>A self-contained deployment that grew from 102MB to 197MB under Rx 6.1 no longer pulls in WPF and WinForms.</p>",
+            Encoding = SiteSummaryContentItem.WellFormedXmlEncoding,
+        });
+        item.Extensions.Add(content);
+
+        feed.Channel.Items.Add(item);
+
+        using MemoryStream saved = new();
+        feed.Save(saved);
+        ExampleOutput.ShowSaved("RssFeed");
+
+        saved.Seek(0, SeekOrigin.Begin);
+        RssFeed reloaded = new();
+        reloaded.Load(saved);
+
+        RssItem readItem = reloaded.Channel.Items[0];
+        if (readItem.FindExtension(SiteSummaryContentSyndicationExtension.MatchByType) is SiteSummaryContentSyndicationExtension readBack)
+        {
+            ExampleOutput.ShowContentExtension(readBack);
+        }
+    }
 }

@@ -57,4 +57,48 @@ internal static class SiteSummaryUpdateSyndicationExtensionExample
 
         ExampleOutput.ShowSaved("RssFeed");
     }
+
+    /// <summary>
+    /// Builds a <see cref="SiteSummaryUpdateSyndicationExtension"/> from scratch and reads it back.
+    /// </summary>
+    /// <remarks>
+    ///     The three values are read together: period and frequency say how often, and base says from when.
+    ///     A consumer polling on frequency alone will drift.
+    /// </remarks>
+    public static void AuthorExample()
+    {
+        RssFeed feed = new();
+        feed.Channel.Title = "endjin blog";
+        feed.Channel.Link = new Uri("https://endjin.com/blog/");
+        feed.Channel.Description = "Technical writing from endjin on .NET, data, analytics and AI.";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"),
+            Description = "Moving UI framework support out of System.Reactive can cut 95MB from a deployment.",
+        };
+
+        SiteSummaryUpdateSyndicationExtension update = new();
+        update.Context.Period = SiteSummaryUpdatePeriod.Hourly;
+        update.Context.Frequency = 1;
+        update.Context.Base = new DateTime(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        feed.Channel.Extensions.Add(update);
+
+        feed.Channel.Items.Add(item);
+
+        using MemoryStream saved = new();
+        feed.Save(saved);
+        ExampleOutput.ShowSaved("RssFeed");
+
+        saved.Seek(0, SeekOrigin.Begin);
+        RssFeed reloaded = new();
+        reloaded.Load(saved);
+
+
+        if (reloaded.Channel.FindExtension(SiteSummaryUpdateSyndicationExtension.MatchByType) is SiteSummaryUpdateSyndicationExtension readBack)
+        {
+            ExampleOutput.ShowUpdateExtension(readBack);
+        }
+    }
 }

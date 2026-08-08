@@ -57,4 +57,58 @@ internal static class FeedHistorySyndicationExtensionExample
 
         ExampleOutput.ShowSaved("RssFeed");
     }
+
+    /// <summary>
+    /// Builds a <see cref="FeedHistorySyndicationExtension"/> from scratch and reads it back.
+    /// </summary>
+    /// <remarks>
+    ///     IsComplete and IsArchive are mutually exclusive by RFC 5005: a complete feed holds every entry
+    ///     there is, an archive document holds a fixed slice of history, and a document claiming both is
+    ///     making two contradictory promises. This builds the archive form, with the paging relations that
+    ///     belong to it and would be rejected on a complete feed.
+    /// </remarks>
+    public static void AuthorExample()
+    {
+        RssFeed feed = new();
+        feed.Channel.Title = "endjin blog";
+        feed.Channel.Link = new Uri("https://endjin.com/blog/");
+        feed.Channel.Description = "Technical writing from endjin on .NET, data, analytics and AI.";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"),
+            Description = "Moving UI framework support out of System.Reactive can cut 95MB from a deployment.",
+        };
+
+        FeedHistorySyndicationExtension history = new();
+        history.Context.IsArchive = true;
+        history.Context.Relations.Add(new FeedHistoryLinkRelation
+        {
+            RelationType = FeedHistoryLinkRelationType.PreviousArchive,
+            Uri = new Uri("https://endjin.com/rss.xml?archive=2025"),
+        });
+        history.Context.Relations.Add(new FeedHistoryLinkRelation
+        {
+            RelationType = FeedHistoryLinkRelationType.Current,
+            Uri = new Uri("https://endjin.com/rss.xml"),
+        });
+        feed.Channel.Extensions.Add(history);
+
+        feed.Channel.Items.Add(item);
+
+        using MemoryStream saved = new();
+        feed.Save(saved);
+        ExampleOutput.ShowSaved("RssFeed");
+
+        saved.Seek(0, SeekOrigin.Begin);
+        RssFeed reloaded = new();
+        reloaded.Load(saved);
+
+
+        if (reloaded.Channel.FindExtension(FeedHistorySyndicationExtension.MatchByType) is FeedHistorySyndicationExtension readBack)
+        {
+            ExampleOutput.ShowFeedHistoryExtension(readBack);
+        }
+    }
 }

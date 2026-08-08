@@ -60,4 +60,48 @@ internal static class DublinCoreElementSetSyndicationExtensionExample
 
         ExampleOutput.ShowSaved("RssFeed");
     }
+
+    /// <summary>
+    /// Builds a <see cref="DublinCoreElementSetSyndicationExtension"/> from scratch and reads it back.
+    /// </summary>
+    public static void AuthorExample()
+    {
+        RssFeed feed = new();
+        feed.Channel.Title = "endjin blog";
+        feed.Channel.Link = new Uri("https://endjin.com/blog/");
+        feed.Channel.Description = "Technical writing from endjin on .NET, data, analytics and AI.";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"),
+            Description = "Moving UI framework support out of System.Reactive can cut 95MB from a deployment.",
+        };
+
+        DublinCoreElementSetSyndicationExtension dublinCore = new();
+        dublinCore.Context.Creator = "Ian Griffiths";
+        dublinCore.Context.Publisher = "endjin limited";
+        dublinCore.Context.Subject = "Reactive Extensions";
+        dublinCore.Context.Rights = "Copyright 2026 endjin limited";
+        dublinCore.Context.Date = new DateTime(2026, 7, 29, 9, 0, 0, DateTimeKind.Utc);
+        dublinCore.Context.Identifier = "endjin-talk-rxdotnet-v7-0-released";
+        dublinCore.Context.Format = "text/html";
+        item.Extensions.Add(dublinCore);
+
+        feed.Channel.Items.Add(item);
+
+        using MemoryStream saved = new();
+        feed.Save(saved);
+        ExampleOutput.ShowSaved("RssFeed");
+
+        saved.Seek(0, SeekOrigin.Begin);
+        RssFeed reloaded = new();
+        reloaded.Load(saved);
+
+        RssItem readItem = reloaded.Channel.Items[0];
+        if (readItem.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) is DublinCoreElementSetSyndicationExtension readBack)
+        {
+            ExampleOutput.ShowDublinCoreExtension(readBack);
+        }
+    }
 }

@@ -57,4 +57,48 @@ internal static class WellFormedWebCommentsSyndicationExtensionExample
 
         ExampleOutput.ShowSaved("RssFeed");
     }
+
+    /// <summary>
+    /// Builds a <see cref="WellFormedWebCommentsSyndicationExtension"/> from scratch and reads it back.
+    /// </summary>
+    /// <remarks>
+    ///     Two URIs that are easy to conflate: one is where a human reads the comments, the other is the feed
+    ///     a client subscribes to. A reader that returns the first where the second was asked for sends
+    ///     a subscriber to a web page.
+    /// </remarks>
+    public static void AuthorExample()
+    {
+        RssFeed feed = new();
+        feed.Channel.Title = "endjin blog";
+        feed.Channel.Link = new Uri("https://endjin.com/blog/");
+        feed.Channel.Description = "Technical writing from endjin on .NET, data, analytics and AI.";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"),
+            Description = "Moving UI framework support out of System.Reactive can cut 95MB from a deployment.",
+        };
+
+        WellFormedWebCommentsSyndicationExtension comments = new();
+        comments.Context.Comments = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released#comments");
+        comments.Context.CommentsFeed = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released/comments.rss");
+        item.Extensions.Add(comments);
+
+        feed.Channel.Items.Add(item);
+
+        using MemoryStream saved = new();
+        feed.Save(saved);
+        ExampleOutput.ShowSaved("RssFeed");
+
+        saved.Seek(0, SeekOrigin.Begin);
+        RssFeed reloaded = new();
+        reloaded.Load(saved);
+
+        RssItem readItem = reloaded.Channel.Items[0];
+        if (readItem.FindExtension(WellFormedWebCommentsSyndicationExtension.MatchByType) is WellFormedWebCommentsSyndicationExtension readBack)
+        {
+            ExampleOutput.ShowWellFormedWebCommentsExtension(readBack);
+        }
+    }
 }

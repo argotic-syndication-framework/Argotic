@@ -46,4 +46,44 @@ internal static class BlogChannelSyndicationExtensionExample
 
         ExampleOutput.ShowSaved("RssFeed");
     }
+
+    /// <summary>
+    /// Builds a <see cref="BlogChannelSyndicationExtension"/> from scratch and reads it back.
+    /// </summary>
+    public static void AuthorExample()
+    {
+        RssFeed feed = new();
+        feed.Channel.Title = "endjin blog";
+        feed.Channel.Link = new Uri("https://endjin.com/blog/");
+        feed.Channel.Description = "Technical writing from endjin on .NET, data, analytics and AI.";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"),
+            Description = "Moving UI framework support out of System.Reactive can cut 95MB from a deployment.",
+        };
+
+        BlogChannelSyndicationExtension blogChannel = new();
+        blogChannel.Context.BlogRoll = new Uri("https://endjin.com/blogroll.opml");
+        blogChannel.Context.MySubscriptions = new Uri("https://endjin.com/subscriptions.opml");
+        blogChannel.Context.Blink = new Uri("https://endjin.com/what-we-think/talks/");
+        feed.Channel.Extensions.Add(blogChannel);
+
+        feed.Channel.Items.Add(item);
+
+        using MemoryStream saved = new();
+        feed.Save(saved);
+        ExampleOutput.ShowSaved("RssFeed");
+
+        saved.Seek(0, SeekOrigin.Begin);
+        RssFeed reloaded = new();
+        reloaded.Load(saved);
+
+
+        if (reloaded.Channel.FindExtension(BlogChannelSyndicationExtension.MatchByType) is BlogChannelSyndicationExtension readBack)
+        {
+            ExampleOutput.ShowBlogChannelExtension(readBack);
+        }
+    }
 }

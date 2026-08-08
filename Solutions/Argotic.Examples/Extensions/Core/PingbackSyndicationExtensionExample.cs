@@ -57,4 +57,43 @@ internal static class PingbackSyndicationExtensionExample
 
         ExampleOutput.ShowSaved("RssFeed");
     }
+
+    /// <summary>
+    /// Builds a <see cref="PingbackSyndicationExtension"/> from scratch and reads it back.
+    /// </summary>
+    public static void AuthorExample()
+    {
+        RssFeed feed = new();
+        feed.Channel.Title = "endjin blog";
+        feed.Channel.Link = new Uri("https://endjin.com/blog/");
+        feed.Channel.Description = "Technical writing from endjin on .NET, data, analytics and AI.";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"),
+            Description = "Moving UI framework support out of System.Reactive can cut 95MB from a deployment.",
+        };
+
+        PingbackSyndicationExtension pingback = new();
+        pingback.Context.Server = new Uri("https://endjin.com/xmlrpc");
+        pingback.Context.Target = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released");
+        item.Extensions.Add(pingback);
+
+        feed.Channel.Items.Add(item);
+
+        using MemoryStream saved = new();
+        feed.Save(saved);
+        ExampleOutput.ShowSaved("RssFeed");
+
+        saved.Seek(0, SeekOrigin.Begin);
+        RssFeed reloaded = new();
+        reloaded.Load(saved);
+
+        RssItem readItem = reloaded.Channel.Items[0];
+        if (readItem.FindExtension(PingbackSyndicationExtension.MatchByType) is PingbackSyndicationExtension readBack)
+        {
+            ExampleOutput.ShowPingbackExtension(readBack);
+        }
+    }
 }

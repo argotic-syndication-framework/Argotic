@@ -83,4 +83,92 @@ internal static class GeoRssSyndicationExtensionExample
 
         ExampleOutput.ShowSaved("AtomFeed");
     }
+
+    /// <summary>
+    /// Builds each GeoRSS geometry in turn, in both encodings, and reads them back.
+    /// </summary>
+    /// <remarks>
+    ///     GeoRSS models four geometries and this library supports two encodings of them, and the sample
+    ///     corpus only ever exercises point and box in Simple form. Line, polygon and the GML encoding are
+    ///     reached here and nowhere else.
+    ///     <para>
+    ///     A polygon's ring must close: the last position repeats the first. That is the rule a
+    ///     hand-assembled polygon most often breaks, and a consumer is entitled to reject an open ring.
+    ///     </para>
+    /// </remarks>
+    public static void AuthorExample()
+    {
+        RssFeed feed = new();
+        feed.Channel.Title = "endjin blog";
+        feed.Channel.Link = new Uri("https://endjin.com/blog/");
+        feed.Channel.Description = "Technical writing from endjin on .NET, data, analytics and AI.";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"),
+            Description = "Moving UI framework support out of System.Reactive can cut 95MB from a deployment.",
+        };
+
+        // A point, in the Simple encoding. The most common shape by a wide margin.
+        GeoRssSyndicationExtension point = new();
+        point.Context.Point = new GeoRssPosition(51.5074m, -0.1278m);
+        point.Context.Elevation = 11m;
+        point.Context.FeatureName = "London, United Kingdom";
+        item.Extensions.Add(point);
+
+        // A line: an ordered run of positions, here a rough London to Amsterdam path.
+        GeoRssSyndicationExtension line = new();
+        line.Context.Line = new GeoRssLine(
+        [
+            new GeoRssPosition(51.5074m, -0.1278m),
+            new GeoRssPosition(52.0907m, 5.1214m),
+            new GeoRssPosition(52.3676m, 4.9041m),
+        ]);
+        Console.WriteLine($"Line positions: {line.Context.Line.Positions.Count}");
+
+        // A box: lower-left and upper-right corners. Roughly the United Kingdom.
+        GeoRssSyndicationExtension box = new();
+        box.Context.Box = new GeoRssBox(
+            new GeoRssPosition(49.96m, -7.57m),
+            new GeoRssPosition(58.64m, 1.68m));
+        Console.WriteLine($"Box well oriented: {box.Context.Box.Value.IsWellOriented}");
+
+        // A polygon: a closed ring, so the final position repeats the first.
+        GeoRssSyndicationExtension polygon = new();
+        polygon.Context.Polygon = new GeoRssPolygon(
+        [
+            new GeoRssPosition(51.28m, -0.51m),
+            new GeoRssPosition(51.28m, 0.33m),
+            new GeoRssPosition(51.69m, 0.33m),
+            new GeoRssPosition(51.69m, -0.51m),
+            new GeoRssPosition(51.28m, -0.51m),
+        ]);
+        Console.WriteLine($"Polygon positions: {polygon.Context.Polygon.Positions.Count} (first repeated last to close the ring)");
+
+        // The same point, in the GML encoding rather than Simple. Different markup, same geometry --
+        // and the encoding is a property of how it is written, not of what it means.
+        GeoRssSyndicationExtension gml = new();
+        gml.Context.Encoding = GeoRssEncoding.Gml;
+        gml.Context.Point = new GeoRssPosition(52.3676m, 4.9041m);
+        gml.Context.FeatureName = "Amsterdam, Netherlands";
+        Console.WriteLine($"GML encoding: {gml.Context.Encoding}");
+        ExampleOutput.ShowGeoRssExtension(gml);
+
+        feed.Channel.Items.Add(item);
+
+        using MemoryStream saved = new();
+        feed.Save(saved);
+        ExampleOutput.ShowSaved("RssFeed");
+
+        saved.Seek(0, SeekOrigin.Begin);
+        RssFeed reloaded = new();
+        reloaded.Load(saved);
+
+        RssItem readItem = reloaded.Channel.Items[0];
+        if (readItem.FindExtension(GeoRssSyndicationExtension.MatchByType) is GeoRssSyndicationExtension readBack)
+        {
+            ExampleOutput.ShowGeoRssExtension(readBack);
+        }
+    }
 }

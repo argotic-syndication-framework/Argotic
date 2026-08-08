@@ -57,4 +57,55 @@ internal static class LiveJournalSyndicationExtensionExample
 
         ExampleOutput.ShowSaved("RssFeed");
     }
+
+    /// <summary>
+    /// Builds a <see cref="LiveJournalSyndicationExtension"/> from scratch and reads it back.
+    /// </summary>
+    /// <remarks>
+    ///     Mood carries both a free-text name and a numeric id from LiveJournal's own table, and the two are
+    ///     independent: a client that only reads the id loses moods a user typed by hand.
+    /// </remarks>
+    public static void AuthorExample()
+    {
+        RssFeed feed = new();
+        feed.Channel.Title = "endjin blog";
+        feed.Channel.Link = new Uri("https://endjin.com/blog/");
+        feed.Channel.Description = "Technical writing from endjin on .NET, data, analytics and AI.";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"),
+            Description = "Moving UI framework support out of System.Reactive can cut 95MB from a deployment.",
+        };
+
+        LiveJournalSyndicationExtension liveJournal = new();
+        liveJournal.Context.Music = "Steve Reich - Music for 18 Musicians";
+        liveJournal.Context.Mood = new LiveJournalMood
+        {
+            Id = 30,
+            Content = "productive",
+        };
+        liveJournal.Context.Security = new LiveJournalSecurity
+        {
+            Accessibility = LiveJournalSecurityType.Public,
+        };
+        item.Extensions.Add(liveJournal);
+
+        feed.Channel.Items.Add(item);
+
+        using MemoryStream saved = new();
+        feed.Save(saved);
+        ExampleOutput.ShowSaved("RssFeed");
+
+        saved.Seek(0, SeekOrigin.Begin);
+        RssFeed reloaded = new();
+        reloaded.Load(saved);
+
+        RssItem readItem = reloaded.Channel.Items[0];
+        if (readItem.FindExtension(LiveJournalSyndicationExtension.MatchByType) is LiveJournalSyndicationExtension readBack)
+        {
+            ExampleOutput.ShowLiveJournalExtension(readBack);
+        }
+    }
 }

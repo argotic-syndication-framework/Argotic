@@ -57,4 +57,68 @@ internal static class FeedSynchronizationSyndicationExtensionExample
 
         ExampleOutput.ShowSaved("RssFeed");
     }
+
+    /// <summary>
+    /// Builds a <see cref="FeedSynchronizationSyndicationExtension"/> from scratch and reads it back.
+    /// </summary>
+    /// <remarks>
+    ///     FeedSync turns a feed into a replication channel between loosely cooperating applications. The
+    ///     sharing element describes the window the publisher will keep, and the per-item sync element
+    ///     carries the update count and history that let two subscribers converge without a server
+    ///     arbitrating between them.
+    /// </remarks>
+    public static void AuthorExample()
+    {
+        RssFeed feed = new();
+        feed.Channel.Title = "endjin blog";
+        feed.Channel.Link = new Uri("https://endjin.com/blog/");
+        feed.Channel.Description = "Technical writing from endjin on .NET, data, analytics and AI.";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"),
+            Description = "Moving UI framework support out of System.Reactive can cut 95MB from a deployment.",
+        };
+
+        FeedSynchronizationSyndicationExtension channelSync = new();
+        channelSync.Context.Sharing = new FeedSynchronizationSharingInformation
+        {
+            Since = "2026-01-01T00:00:00Z",
+            Until = "2026-12-31T23:59:59Z",
+        };
+        feed.Channel.Extensions.Add(channelSync);
+
+        FeedSynchronizationSyndicationExtension itemSync = new();
+        itemSync.Context.Synchronization = new FeedSynchronizationItem
+        {
+            Id = "endjin-talk-rxdotnet-v7-0-released",
+            Updates = 1,
+            TombstoneStatus = FeedSynchronizationTombstoneStatus.None,
+            ConflictPreservation = FeedSynchronizationConflictPreservationDirective.None,
+        };
+        itemSync.Context.Synchronization.Histories.Add(new FeedSynchronizationHistory
+        {
+            Sequence = 1,
+            By = "hello@endjin.com",
+            When = new DateTime(2026, 7, 29, 9, 0, 0, DateTimeKind.Utc),
+        });
+        item.Extensions.Add(itemSync);
+
+        feed.Channel.Items.Add(item);
+
+        using MemoryStream saved = new();
+        feed.Save(saved);
+        ExampleOutput.ShowSaved("RssFeed");
+
+        saved.Seek(0, SeekOrigin.Begin);
+        RssFeed reloaded = new();
+        reloaded.Load(saved);
+
+        RssItem readItem = reloaded.Channel.Items[0];
+        if (readItem.FindExtension(FeedSynchronizationSyndicationExtension.MatchByType) is FeedSynchronizationSyndicationExtension readBack)
+        {
+            ExampleOutput.ShowFeedSyncExtension(readBack);
+        }
+    }
 }

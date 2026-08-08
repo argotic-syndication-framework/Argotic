@@ -19,7 +19,7 @@ internal static class AtomLinkExample
             UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
+        feed.Links.Add(new AtomLink(new Uri("https://endjin.com/")));
 
         //  Identify a related web resource for the feed
         feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));

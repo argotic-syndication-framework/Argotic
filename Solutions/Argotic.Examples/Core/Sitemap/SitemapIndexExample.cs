@@ -20,17 +20,17 @@ internal static class SitemapIndexExample
         SitemapIndex index = new();
         index.Sitemaps.Add(new SitemapIndexEntry
         {
-            Location = new Uri("https://www.example.com/sitemap-pages.xml"),
+            Location = new Uri("https://endjin.com/sitemap.xml"),
             LastModified = DateTime.UtcNow
         });
         index.Sitemaps.Add(new SitemapIndexEntry
         {
-            Location = new Uri("https://www.example.com/sitemap-products.xml"),
+            Location = new Uri("https://endjin.com/sitemap-news.xml"),
             LastModified = new DateTime(2024, 1, 14)
         });
         index.Sitemaps.Add(new SitemapIndexEntry
         {
-            Location = new Uri("https://www.example.com/sitemap-blog.xml"),
+            Location = new Uri("https://endjin.com/sitemap-video.xml"),
             LastModified = new DateTime(2024, 1, 10)
         });
         ExampleOutput.ShowSitemapIndex(index);
@@ -55,12 +55,12 @@ internal static class SitemapIndexExample
         SitemapIndex index = new();
         index.Sitemaps.Add(new SitemapIndexEntry
         {
-            Location = new Uri("https://www.example.com/sitemap1.xml"),
+            Location = new Uri("https://endjin.com/sitemap.xml"),
             LastModified = DateTime.UtcNow
         });
         index.Sitemaps.Add(new SitemapIndexEntry
         {
-            Location = new Uri("https://www.example.com/sitemap2.xml"),
+            Location = new Uri("https://endjin.com/sitemap-news.xml"),
             LastModified = DateTime.UtcNow.AddDays(-1)
         });
         using Stream stream = new MemoryStream();
@@ -145,7 +145,7 @@ internal static class SitemapIndexExample
         SitemapIndex index = new();
         index.Sitemaps.Add(new SitemapIndexEntry
         {
-            Location = new Uri("https://www.example.com/sitemap-pages.xml"),
+            Location = new Uri("https://endjin.com/sitemap.xml"),
             LastModified = DateTime.UtcNow
         });
 

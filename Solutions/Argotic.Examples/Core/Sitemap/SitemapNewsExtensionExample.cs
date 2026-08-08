@@ -18,17 +18,17 @@ internal static class SitemapNewsExtensionExample
 
         SitemapUrl url = new()
         {
-            Location = new Uri("https://www.example.com/news/breaking-story"),
+            Location = new Uri("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases"),
             LastModified = DateTime.UtcNow
         };
 
-        SitemapNewsPublication publication = new("Example News", "en");
+        SitemapNewsPublication publication = new("endjin.com", "en");
 
         SitemapNewsExtension newsExtension = new()
         {
             Publication = publication,
             PublicationDate = DateTime.UtcNow,
-            Title = "Breaking: Major Technology Announcement"
+            Title = "Writing Effective Copilot Instructions for Complex Codebases"
         };
 
         url.Extensions.Add(newsExtension);
@@ -65,15 +65,15 @@ internal static class SitemapNewsExtensionExample
 
         SitemapUrl url = new()
         {
-            Location = new Uri("https://www.example.com/news/article-123"),
+            Location = new Uri("https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine"),
             LastModified = DateTime.UtcNow
         };
 
         SitemapNewsExtension newsExtension = new()
         {
-            Publication = new SitemapNewsPublication("Tech Daily", "en"),
+            Publication = new SitemapNewsPublication("endjin.com", "en"),
             PublicationDate = DateTime.UtcNow,
-            Title = "New Product Launch Announced"
+            Title = "Optimising DAX: The Formula Engine and Storage Engine"
         };
 
         url.Extensions.Add(newsExtension);
@@ -95,42 +95,42 @@ internal static class SitemapNewsExtensionExample
         // English article
         SitemapUrl englishUrl = new()
         {
-            Location = new Uri("https://www.example.com/en/news/global-summit"),
+            Location = new Uri("https://endjin.com/en/what-we-think/talks/rxdotnet-v7-0-released"),
             LastModified = DateTime.UtcNow
         };
         englishUrl.Extensions.Add(new SitemapNewsExtension
         {
-            Publication = new SitemapNewsPublication("World News Network", "en"),
+            Publication = new SitemapNewsPublication("endjin.com", "en"),
             PublicationDate = DateTime.UtcNow,
-            Title = "Global Leaders Meet at Climate Summit"
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!"
         });
         sitemap.Urls.Add(englishUrl);
 
         // German article
         SitemapUrl germanUrl = new()
         {
-            Location = new Uri("https://www.example.com/de/news/global-summit"),
+            Location = new Uri("https://endjin.com/de/what-we-think/talks/rxdotnet-v7-0-released"),
             LastModified = DateTime.UtcNow
         };
         germanUrl.Extensions.Add(new SitemapNewsExtension
         {
-            Publication = new SitemapNewsPublication("Welt Nachrichten Netzwerk", "de"),
+            Publication = new SitemapNewsPublication("endjin.com", "de"),
             PublicationDate = DateTime.UtcNow,
-            Title = "Weltweite Fuhrer treffen sich beim Klimagipfel"
+            Title = "Rx.NET v7.0 veroeffentlicht - das spart bis zu 95 MB!"
         });
         sitemap.Urls.Add(germanUrl);
 
         // French article
         SitemapUrl frenchUrl = new()
         {
-            Location = new Uri("https://www.example.com/fr/news/global-summit"),
+            Location = new Uri("https://endjin.com/fr/what-we-think/talks/rxdotnet-v7-0-released"),
             LastModified = DateTime.UtcNow
         };
         frenchUrl.Extensions.Add(new SitemapNewsExtension
         {
-            Publication = new SitemapNewsPublication("Reseau Mondial d'Actualites", "fr"),
+            Publication = new SitemapNewsPublication("endjin.com", "fr"),
             PublicationDate = DateTime.UtcNow,
-            Title = "Les dirigeants mondiaux se reunissent au sommet sur le climat"
+            Title = "Rx.NET v7.0 publie - jusqu'a 95 Mo economises !"
         });
         sitemap.Urls.Add(frenchUrl);
 
@@ -148,32 +148,32 @@ internal static class SitemapNewsExtensionExample
         // Tech publication
         SitemapUrl techUrl = new()
         {
-            Location = new Uri("https://www.example.com/tech/ai-breakthrough"),
+            Location = new Uri("https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra"),
             LastModified = DateTime.UtcNow
         };
         techUrl.Extensions.Add(new SitemapNewsExtension
         {
-            Publication = new SitemapNewsPublication("Tech Weekly", "en"),
+            Publication = new SitemapNewsPublication("Azure Weekly", "en"),
             PublicationDate = DateTime.UtcNow,
-            Title = "Revolutionary AI System Unveiled"
+            Title = "The GenAI Reality Check: New Instrument, Same Orchestra"
         });
         sitemap.Urls.Add(techUrl);
 
         // Business publication
         SitemapUrl businessUrl = new()
         {
-            Location = new Uri("https://www.example.com/business/market-update"),
+            Location = new Uri("https://endjin.com/blog/cloud-ai-slas-are-not-what-you-think"),
             LastModified = DateTime.UtcNow
         };
         businessUrl.Extensions.Add(new SitemapNewsExtension
         {
-            Publication = new SitemapNewsPublication("Business Daily", "en"),
+            Publication = new SitemapNewsPublication("endjin.com", "en"),
             PublicationDate = DateTime.UtcNow,
-            Title = "Stock Markets Reach New Highs"
+            Title = "Cloud AI SLAs are not what you think"
         });
         sitemap.Urls.Add(businessUrl);
 
-        Console.WriteLine("News sitemap with multiple publications (Tech Weekly, Business Daily).");
+        Console.WriteLine("News sitemap with multiple publications (Azure Weekly, endjin.com).");
         ExampleOutput.ShowSitemap(sitemap);
     }
 
@@ -197,13 +197,13 @@ internal static class SitemapNewsExtensionExample
         {
             SitemapUrl url = new()
             {
-                Location = new Uri($"https://www.example.com/news/article-{i + 1}"),
+                Location = new Uri($"https://endjin.com/blog/asyncapi-code-generation-with-corvus-part-{i + 1}"),
                 LastModified = DateTime.UtcNow.AddHours(-i)
             };
 
             url.Extensions.Add(new SitemapNewsExtension
             {
-                Publication = new SitemapNewsPublication("Daily News", "en"),
+                Publication = new SitemapNewsPublication("endjin.com", "en"),
                 PublicationDate = DateTime.UtcNow.AddHours(-i),
                 Title = headlines[i]
             });
@@ -230,30 +230,30 @@ internal static class SitemapNewsExtensionExample
         // Article published 12 hours ago - within freshness window
         SitemapUrl recentUrl = new()
         {
-            Location = new Uri("https://www.example.com/news/fresh-article"),
+            Location = new Uri("https://endjin.com/blog/trying-out-wsl-containers"),
             LastModified = DateTime.UtcNow.AddHours(-12)
         };
         recentUrl.Extensions.Add(new SitemapNewsExtension
         {
-            Publication = new SitemapNewsPublication("Breaking News Daily", "en"),
+            Publication = new SitemapNewsPublication("endjin.com", "en"),
             // Google News requires articles to be published within the last 2 days
             // This article was published 12 hours ago, meeting the freshness requirement
             PublicationDate = DateTime.UtcNow.AddHours(-12),
-            Title = "Just In: Latest Market Analysis"
+            Title = "Trying out WSL containers"
         });
         sitemap.Urls.Add(recentUrl);
 
         // Another recent article - published 6 hours ago
         SitemapUrl veryRecentUrl = new()
         {
-            Location = new Uri("https://www.example.com/news/very-fresh-article"),
+            Location = new Uri("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases"),
             LastModified = DateTime.UtcNow.AddHours(-6)
         };
         veryRecentUrl.Extensions.Add(new SitemapNewsExtension
         {
-            Publication = new SitemapNewsPublication("Breaking News Daily", "en"),
+            Publication = new SitemapNewsPublication("endjin.com", "en"),
             PublicationDate = DateTime.UtcNow.AddHours(-6),
-            Title = "Breaking: Emergency Response Update"
+            Title = "Writing Effective Copilot Instructions for Complex Codebases"
         });
         sitemap.Urls.Add(veryRecentUrl);
 

@@ -27,7 +27,7 @@ internal static class AtomFeedExample
             UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
+        feed.Links.Add(new AtomLink(new Uri("https://endjin.com/")));
         feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
         feed.Authors.Add(new AtomPersonConstruct("John Doe"));

@@ -40,8 +40,8 @@ internal static class SyndicationDiscoveryUtilityExample
     {
         //  Certain syndication scenarios involve verifying that one web resource references or 'links' to another web resource.
 
-        Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
-        Uri target = new("https://github.com");
+        Uri source = new("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases");
+        Uri target = new("https://endjin.com");
 
         bool references = await SyndicationDiscoveryUtility.SourceReferencesTargetAsync(source, target).ConfigureAwait(false);
         if (references)
@@ -60,7 +60,7 @@ internal static class SyndicationDiscoveryUtilityExample
     [RequiresNetwork]
     public static async Task UriExistsExampleAsync()
     {
-        Uri source = new("https://devblogs.microsoft.com/dotnet/");
+        Uri source = new("https://endjin.com/blog/");
 
         bool exists = await SyndicationDiscoveryUtility.UriExistsAsync(source).ConfigureAwait(false);
         if (exists)
@@ -113,7 +113,7 @@ internal static class SyndicationDiscoveryUtilityExample
     [RequiresNetwork]
     public static async Task LocateDiscoverableSyndicationEndpointsExampleAsync()
     {
-        Uri source = new("https://www.dotnetrocks.com/");
+        Uri source = new("https://endjin.com/what-we-think/talks/");
 
         IList<DiscoverableSyndicationEndpoint> endpoints = await SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(source).ConfigureAwait(false);
 
@@ -140,7 +140,7 @@ internal static class SyndicationDiscoveryUtilityExample
     [RequiresNetwork]
     public static async Task IsPingbackEnabledExampleAsync()
     {
-        Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
+        Uri source = new("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases");
 
         bool isPingbackEnabled = await SyndicationDiscoveryUtility.IsPingbackEnabledAsync(source).ConfigureAwait(false);
         if (isPingbackEnabled)
@@ -158,7 +158,7 @@ internal static class SyndicationDiscoveryUtilityExample
     [RequiresNetwork]
     public static async Task LocatePingbackNotificationServerExampleAsync()
     {
-        Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
+        Uri source = new("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases");
 
         Uri? pingbackServer = await SyndicationDiscoveryUtility.LocatePingbackNotificationServerAsync(source).ConfigureAwait(false);
         if (pingbackServer is not null)
@@ -181,7 +181,7 @@ internal static class SyndicationDiscoveryUtilityExample
     [RequiresNetwork]
     public static async Task IsTrackbackEnabledExampleAsync()
     {
-        Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
+        Uri source = new("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases");
 
         bool isTrackbackEnabled = await SyndicationDiscoveryUtility.IsTrackbackEnabledAsync(source).ConfigureAwait(false);
         if (isTrackbackEnabled)
@@ -199,7 +199,7 @@ internal static class SyndicationDiscoveryUtilityExample
     [RequiresNetwork]
     public static async Task LocateTrackbackNotificationServersExampleAsync()
     {
-        Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
+        Uri source = new("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases");
 
         IList<TrackbackDiscoveryMetadata> endpoints = await SyndicationDiscoveryUtility.LocateTrackbackNotificationServersAsync(source).ConfigureAwait(false);
         foreach (TrackbackDiscoveryMetadata endpoint in endpoints)

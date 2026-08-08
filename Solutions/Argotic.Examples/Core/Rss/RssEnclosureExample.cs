@@ -16,20 +16,20 @@ internal static class RssEnclosureExample
         {
             Channel =
             {
-                Title = "Dallas Times-Herald",
-                Link = new Uri("http://dallas.example.com"),
-                Description = "Current headlines from the Dallas Times-Herald newspaper"
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI"
             }
         };
 
         RssItem item = new()
         {
-            Title = "Seventh Heaven! Ryan Hurls Another No Hitter",
-            Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm"),
-            Description = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0."
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine"),
+            Description = "Moving UI framework support out of System.Reactive into separate packages cuts up to 95MB from a self-contained deployment."
         };
 
-        item.Enclosures.Add(new RssEnclosure(24_986_239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
+        item.Enclosures.Add(new RssEnclosure(24_986_239L, "audio/mpeg", new Uri("https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3")));
 
         feed.Channel.Items.Add(item);
 

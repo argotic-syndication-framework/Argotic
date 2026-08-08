@@ -19,7 +19,7 @@ internal static class AtomSourceExample
             UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
+        feed.Links.Add(new AtomLink(new Uri("https://endjin.com/")));
         feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
         feed.Authors.Add(new AtomPersonConstruct("John Doe"));
@@ -38,7 +38,7 @@ internal static class AtomSourceExample
             Id = new AtomId(new Uri("http://example2.org/")),
             Title = new AtomTextConstruct("Fourty-Two"),
             UpdatedOn = new DateTime(2003, 11, 13, 18, 30, 2),
-            Rights = new AtomTextConstruct("© 2003 Example, Inc.")
+            Rights = new AtomTextConstruct("© 2026 endjin limited")
         };
         entry.Source = source;
 

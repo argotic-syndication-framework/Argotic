@@ -19,7 +19,7 @@ internal static class AtomTextConstructExample
             UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
+        feed.Links.Add(new AtomLink(new Uri("https://endjin.com/")));
         feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
         feed.Authors.Add(new AtomPersonConstruct("John Doe"));
@@ -34,7 +34,7 @@ internal static class AtomTextConstructExample
         //  Provide summary as entity escaped html
         AtomTextConstruct summary = new()
         {
-            Content = "AT&amp;amp;T bought &lt;b&gt;by SBC&lt;/b&gt;!",
+            Content = "Rx.NET 7.0 &lt;b&gt;saves 95MB&lt;/b&gt;!",
             TextType = AtomTextConstructType.Html
         };
         entry.Summary = summary;

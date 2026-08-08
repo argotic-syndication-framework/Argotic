@@ -16,10 +16,10 @@ internal static class RssTextInputExample
         {
             Channel =
             {
-                Title = "Dallas Times-Herald",
-                Link = new Uri("http://dallas.example.com"),
-                Description = "Current headlines from the Dallas Times-Herald newspaper",
-                TextInput = new RssTextInput("What software are you using?", new Uri("https://example.com/search"), "query", "TextInput Inquiry")
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI",
+                TextInput = new RssTextInput("What software are you using?", new Uri("https://endjin.com/search"), "query", "TextInput Inquiry")
             }
         };
 

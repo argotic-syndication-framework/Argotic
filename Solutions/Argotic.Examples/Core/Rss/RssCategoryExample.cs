@@ -16,9 +16,9 @@ internal static class RssCategoryExample
         {
             Channel =
             {
-                Title = "Dallas Times-Herald",
-                Link = new Uri("http://dallas.example.com"),
-                Description = "Current headlines from the Dallas Times-Herald newspaper"
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI"
             }
         };
 
@@ -27,14 +27,14 @@ internal static class RssCategoryExample
 
         RssItem item = new()
         {
-            Title = "Seventh Heaven! Ryan Hurls Another No Hitter",
-            Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm"),
-            Description = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.",
-            Author = "jbb@dallas.example.com (Joe Bob Briggs)"
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine"),
+            Description = "Moving UI framework support out of System.Reactive into separate packages cuts up to 95MB from a self-contained deployment.",
+            Author = "hello@endjin.com (Barry Smart)"
         };
 
         item.Categories.Add(new RssCategory("sports"));
-        item.Categories.Add(new RssCategory("1991/Texas Rangers", "rec.sports.baseball"));
+        item.Categories.Add(new RssCategory("2026/Rx.NET", "rec.sports.baseball"));
 
         feed.Channel.Items.Add(item);
 

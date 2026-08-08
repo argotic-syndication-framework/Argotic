@@ -19,7 +19,7 @@ internal static class AtomCategoryExample
             UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
+        feed.Links.Add(new AtomLink(new Uri("https://endjin.com/")));
         feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
         feed.Authors.Add(new AtomPersonConstruct("John Doe"));
@@ -39,7 +39,7 @@ internal static class AtomCategoryExample
         AtomCategory entryCategory = new()
         {
             Label = "Baseball",
-            Scheme = new Uri("http://example.org/scheme/category"),
+            Scheme = new Uri("https://endjin.com/tags"),
             Term = "baseball"
         };
 

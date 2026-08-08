@@ -24,7 +24,7 @@ internal sealed class MyCustomSyndicationExtension
     /// Initializes a new instance of the <see cref="MyCustomSyndicationExtension"/> class.
     /// </summary>
     public MyCustomSyndicationExtension()
-        : base("myPrefix", "http://www.example.com/2008/03/custom", new Version("1.0"), new Uri("http://www.example.com/spec"), "My Extension", "Example of a custom syndication extension.")
+        : base("myPrefix", "https://endjin.com/schemas/2026/custom", new Version("1.0"), new Uri("https://endjin.com/schemas/2026/custom/spec"), "My Extension", "Example of a custom syndication extension.")
     {
         // Class state initialized by abstract SyndicationExtension base class
     }

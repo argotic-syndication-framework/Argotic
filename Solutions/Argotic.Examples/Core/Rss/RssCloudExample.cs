@@ -16,10 +16,10 @@ internal static class RssCloudExample
         {
             Channel =
             {
-                Title = "Dallas Times-Herald",
-                Link = new Uri("http://dallas.example.com"),
-                Description = "Current headlines from the Dallas Times-Herald newspaper",
-                Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify")
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI",
+                Cloud = new RssCloud("endjin.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify")
             }
         };
 

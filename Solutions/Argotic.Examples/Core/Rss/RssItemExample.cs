@@ -16,28 +16,28 @@ internal static class RssItemExample
         {
             Channel =
             {
-                Title = "Dallas Times-Herald",
-                Link = new Uri("http://dallas.example.com"),
-                Description = "Current headlines from the Dallas Times-Herald newspaper"
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI"
             }
         };
 
         RssItem item = new()
         {
-            Title = "Seventh Heaven! Ryan Hurls Another No Hitter",
-            Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm"),
-            Description = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.",
-            Author = "jbb@dallas.example.com (Joe Bob Briggs)"
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine"),
+            Description = "Moving UI framework support out of System.Reactive into separate packages cuts up to 95MB from a self-contained deployment.",
+            Author = "hello@endjin.com (Barry Smart)"
         };
 
         item.Categories.Add(new RssCategory("sports"));
-        item.Categories.Add(new RssCategory("1991/Texas Rangers", "rec.sports.baseball"));
+        item.Categories.Add(new RssCategory("2026/Rx.NET", "rec.sports.baseball"));
 
-        item.Comments = new Uri("http://dallas.example.com/feedback/1983/06/joebob.htm");
-        item.Enclosures.Add(new RssEnclosure(24_986_239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
-        item.Guid = new RssGuid("http://dallas.example.com/1983/05/06/joebob.htm");
+        item.Comments = new Uri("https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra#comments");
+        item.Enclosures.Add(new RssEnclosure(24_986_239L, "audio/mpeg", new Uri("https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3")));
+        item.Guid = new RssGuid("https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra");
         item.PublicationDate = new DateTime(2007, 10, 5, 9, 0, 0);
-        item.Source = new RssSource(new Uri("http://la.example.com/rss.xml"), "Los Angeles Herald-Examiner");
+        item.Source = new RssSource(new Uri("https://endjin.com/rss.xml"), "Los Angeles Herald-Examiner");
 
         feed.Channel.Items.Add(item);
 

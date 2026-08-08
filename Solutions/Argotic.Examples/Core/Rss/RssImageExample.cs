@@ -16,15 +16,15 @@ internal static class RssImageExample
         {
             Channel =
             {
-                Title = "Dallas Times-Herald",
-                Link = new Uri("http://dallas.example.com"),
-                Description = "Current headlines from the Dallas Times-Herald newspaper"
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI"
             }
         };
 
-        RssImage image = new(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"))
+        RssImage image = new(new Uri("https://endjin.com"), "endjin blog", new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/endjin-logo.png"))
         {
-            Description = "Read the Dallas Times-Herald",
+            Description = "Read the endjin blog",
             Height = 32,
             Width = 96
         };

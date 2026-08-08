@@ -24,10 +24,10 @@ internal static class OpmlDocumentExample
         {
             Head =
             {
-                Title = "Example OPML List",
+                Title = "endjin blogroll",
                 CreatedOn = new DateTime(2005, 6, 18, 12, 11, 52),
                 ModifiedOn = new DateTime(2005, 7, 2, 21, 42, 48),
-                Owner = new OpmlOwner("John Doe", "john.doe@example.com"),
+                Owner = new OpmlOwner("John Doe", "hello@endjin.com"),
                 VerticalScrollState = 1,
                 Window = new OpmlWindow(61, 304, 562, 842)
             }

@@ -14,7 +14,7 @@ internal static class SitemapUrlExample
     {
         SitemapUrl url = new()
         {
-            Location = new Uri("https://www.example.com/products/widget"),
+            Location = new Uri("https://endjin.com/what-we-do/data-and-analytics/data-platforms/duckdb/"),
             LastModified = DateTime.UtcNow,
             ChangeFrequency = SitemapChangeFrequency.Weekly,
             Priority = 0.8m
@@ -39,35 +39,35 @@ internal static class SitemapUrlExample
         // Homepage - changes frequently
         sitemap.Urls.Add(new SitemapUrl
         {
-            Location = new Uri("https://www.example.com/"),
+            Location = new Uri("https://endjin.com/"),
             ChangeFrequency = SitemapChangeFrequency.Always
         });
 
         // News page - daily updates
         sitemap.Urls.Add(new SitemapUrl
         {
-            Location = new Uri("https://www.example.com/news"),
+            Location = new Uri("https://endjin.com/what-we-think/"),
             ChangeFrequency = SitemapChangeFrequency.Daily
         });
 
         // Blog archive - updated weekly
         sitemap.Urls.Add(new SitemapUrl
         {
-            Location = new Uri("https://www.example.com/blog"),
+            Location = new Uri("https://endjin.com/blog/"),
             ChangeFrequency = SitemapChangeFrequency.Weekly
         });
 
         // About page - rarely changes
         sitemap.Urls.Add(new SitemapUrl
         {
-            Location = new Uri("https://www.example.com/about"),
+            Location = new Uri("https://endjin.com/who-we-are/"),
             ChangeFrequency = SitemapChangeFrequency.Yearly
         });
 
         // Archive page - never changes
         sitemap.Urls.Add(new SitemapUrl
         {
-            Location = new Uri("https://www.example.com/archive/2020"),
+            Location = new Uri("https://endjin.com/blog/page/2"),
             ChangeFrequency = SitemapChangeFrequency.Never
         });
 
@@ -85,35 +85,35 @@ internal static class SitemapUrlExample
         // Homepage - highest priority
         sitemap.Urls.Add(new SitemapUrl
         {
-            Location = new Uri("https://www.example.com/"),
+            Location = new Uri("https://endjin.com/"),
             Priority = 1.0m
         });
 
         // Main category pages - high priority
         sitemap.Urls.Add(new SitemapUrl
         {
-            Location = new Uri("https://www.example.com/products"),
+            Location = new Uri("https://endjin.com/what-we-do/"),
             Priority = 0.9m
         });
 
         // Product pages - medium-high priority
         sitemap.Urls.Add(new SitemapUrl
         {
-            Location = new Uri("https://www.example.com/products/featured-item"),
+            Location = new Uri("https://endjin.com/what-we-do/cloud-native-app-dev/microsoft-azure/"),
             Priority = 0.8m
         });
 
         // Blog posts - medium priority (default)
         sitemap.Urls.Add(new SitemapUrl
         {
-            Location = new Uri("https://www.example.com/blog/recent-post"),
+            Location = new Uri("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases"),
             Priority = 0.5m
         });
 
         // Legal pages - low priority
         sitemap.Urls.Add(new SitemapUrl
         {
-            Location = new Uri("https://www.example.com/terms"),
+            Location = new Uri("https://endjin.com/contact-us/"),
             Priority = 0.2m
         });
 
@@ -128,7 +128,7 @@ internal static class SitemapUrlExample
         // Create a fully configured URL entry with all properties
         SitemapUrl url = new()
         {
-            Location = new Uri("https://www.example.com/products/new-product"),
+            Location = new Uri("https://endjin.com/what-we-do/pricing/"),
             LastModified = new DateTime(2024, 6, 15, 14, 30, 0, DateTimeKind.Utc),
             ChangeFrequency = SitemapChangeFrequency.Weekly,
             Priority = 0.9m
@@ -152,13 +152,13 @@ internal static class SitemapUrlExample
     {
         // Default constructor
         SitemapUrl url1 = new();
-        url1.Location = new Uri("https://www.example.com/page1");
+        url1.Location = new Uri("https://endjin.com/what-we-do/pricing/");
 
         // Constructor with location
-        SitemapUrl url2 = new(new Uri("https://www.example.com/page2"));
+        SitemapUrl url2 = new(new Uri("https://endjin.com/who-we-help/"));
 
         // Constructor with location and last modified date
-        SitemapUrl url3 = new(new Uri("https://www.example.com/page3"), DateTime.UtcNow);
+        SitemapUrl url3 = new(new Uri("https://endjin.com/page3"), DateTime.UtcNow);
 
         Console.WriteLine("Created three SitemapUrl instances:");
         Console.WriteLine($"  URL 1: {url1.Location}");
@@ -175,19 +175,19 @@ internal static class SitemapUrlExample
     {
         SitemapUrl url1 = new()
         {
-            Location = new Uri("https://www.example.com/page1"),
+            Location = new Uri("https://endjin.com/what-we-do/pricing/"),
             Priority = 0.8m
         };
 
         SitemapUrl url2 = new()
         {
-            Location = new Uri("https://www.example.com/page1"),
+            Location = new Uri("https://endjin.com/what-we-do/pricing/"),
             Priority = 0.8m
         };
 
         SitemapUrl url3 = new()
         {
-            Location = new Uri("https://www.example.com/page2"),
+            Location = new Uri("https://endjin.com/who-we-help/"),
             Priority = 0.9m
         };
 

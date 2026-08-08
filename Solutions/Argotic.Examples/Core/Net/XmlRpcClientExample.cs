@@ -28,7 +28,7 @@ internal static class XmlRpcClientExample
         {
             Encoding = Encoding.UTF8
         };
-        message.Parameters.Add(new XmlRpcScalarValue("http://alice.example.org/#p123"));    // sourceURI
+        message.Parameters.Add(new XmlRpcScalarValue("https://endjin.com/who-we-are/#barry-smart"));    // sourceURI
         message.Parameters.Add(new XmlRpcScalarValue("http://bob.example.net/#foo"));       // targetURI
 
         // Note: In a real application, you would send the message:

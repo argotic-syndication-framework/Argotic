@@ -14,18 +14,18 @@ internal static class RsdApplicationInterfaceExample
     {
         RsdDocument document = new()
         {
-            EngineName = "Blog Munging CMS",
-            EngineLink = new Uri("http://www.blogmunging.com/"),
+            EngineName = "endjin publishing",
+            EngineLink = new Uri("https://endjin.com/"),
             Homepage = new Uri("http://www.userdomain.com/")
         };
 
         //  Identify supported services using well known names
-        document.Interfaces.Add(new RsdApplicationInterface("MetaWeblog", new Uri("http://example.com/xml/rpc/url"), true, "123abc"));
-        document.Interfaces.Add(new RsdApplicationInterface("Blogger", new Uri("http://example.com/xml/rpc/url"), false, "123abc"));
-        document.Interfaces.Add(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));
-        document.Interfaces.Add(new RsdApplicationInterface("Antville", new Uri("http://example.com/yet/another/url"), false, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("MetaWeblog", new Uri("https://endjin.com/xmlrpc"), true, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("Blogger", new Uri("https://endjin.com/xmlrpc"), false, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("MetaWiki", new Uri("https://endjin.com/blog/trying-out-wsl-containers"), false, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("Antville", new Uri("https://endjin.com/blog/cloud-ai-slas-are-not-what-you-think"), false, "123abc"));
 
-        RsdApplicationInterface conversantApi = new("Conversant", new Uri("http://example.com/xml/rpc/url"), false, string.Empty)
+        RsdApplicationInterface conversantApi = new("Conversant", new Uri("https://endjin.com/xmlrpc"), false, string.Empty)
         {
             Documentation = new Uri("http://www.conversant.com/docs/api/"),
             Notes = "Additional explanation here."

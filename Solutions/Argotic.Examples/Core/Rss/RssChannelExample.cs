@@ -17,22 +17,22 @@ internal static class RssChannelExample
         {
             Channel =
             {
-                Title = "Dallas Times-Herald",
-                Link = new Uri("http://dallas.example.com"),
-                Description = "Current headlines from the Dallas Times-Herald newspaper"
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI"
             }
         };
 
         feed.Channel.Categories.Add(new RssCategory("Media"));
         feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
 
-        feed.Channel.Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
-        feed.Channel.Copyright = "Copyright 2007 Dallas Times-Herald";
+        feed.Channel.Cloud = new RssCloud("endjin.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
+        feed.Channel.Copyright = "Copyright 2026 endjin limited";
         feed.Channel.Generator = "Microsoft Spaces v1.1";
 
-        RssImage image = new(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"))
+        RssImage image = new(new Uri("https://endjin.com"), "endjin blog", new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/endjin-logo.png"))
         {
-            Description = "Read the Dallas Times-Herald",
+            Description = "Read the endjin blog",
             Height = 32,
             Width = 96
         };
@@ -40,9 +40,9 @@ internal static class RssChannelExample
 
         feed.Channel.Language = new CultureInfo("en-US");
         feed.Channel.LastBuildDate = new DateTime(2007, 10, 14, 17, 17, 44);
-        feed.Channel.ManagingEditor = "jlehrer@dallas.example.com (Jim Lehrer)";
+        feed.Channel.ManagingEditor = "hello@endjin.com (Ian Griffiths)";
         feed.Channel.PublicationDate = new DateTime(2007, 10, 14, 5, 0, 0);
-        feed.Channel.Rating = """(PICS-1.1 "http://www.rsac.org/ratingsv01.html" l by "webmaster@example.com" on "2007.01.29T10:09-0800" r (n 0 s 0 v 0 l 0))""";
+        feed.Channel.Rating = """(PICS-1.1 "http://www.rsac.org/ratingsv01.html" l by "hello@endjin.com" on "2007.01.29T10:09-0800" r (n 0 s 0 v 0 l 0))""";
 
         feed.Channel.SkipDays.Add(DayOfWeek.Saturday);
         feed.Channel.SkipDays.Add(DayOfWeek.Sunday);
@@ -53,9 +53,9 @@ internal static class RssChannelExample
         feed.Channel.SkipHours.Add(22);
         feed.Channel.SkipHours.Add(23);
 
-        feed.Channel.TextInput = new RssTextInput("What software are you using?", new Uri("https://example.com/search"), "query", "TextInput Inquiry");
+        feed.Channel.TextInput = new RssTextInput("What software are you using?", new Uri("https://endjin.com/search"), "query", "TextInput Inquiry");
         feed.Channel.TimeToLive = 60;
-        feed.Channel.Webmaster = "helpdesk@dallas.example.com";
+        feed.Channel.Webmaster = "hello@endjin.com";
 
         ExampleOutput.ShowRssChannel(feed.Channel);
     }

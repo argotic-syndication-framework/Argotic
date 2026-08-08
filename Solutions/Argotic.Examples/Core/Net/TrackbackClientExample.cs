@@ -20,7 +20,7 @@ internal static class TrackbackClientExample
         // Initialize the Trackback peer-to-peer notification protocol client
         TrackbackClient client = new()
         {
-            Host = new Uri("http://www.example.com/trackback/5")
+            Host = new Uri("https://endjin.com/trackback/genai-reality-check")
         };
 
         // Construct the trackback message to be sent
@@ -28,7 +28,7 @@ internal static class TrackbackClientExample
         {
             Encoding = Encoding.UTF8,
             WeblogName = "Foo",
-            Title = "Foo Bar",
+            Title = "endjin blog",
             Excerpt = "My Excerpt"
         };
 

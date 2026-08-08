@@ -17,9 +17,9 @@ internal static class ApmlApplicationExample
             DefaultProfileName = "Work",
             Head =
             {
-                Title = "Example APML file for apml.org",
+                Title = "endjin attention profile",
                 Generator = "Written by Hand",
-                EmailAddress = "sample@apml.org",
+                EmailAddress = "hello@endjin.com",
                 CreatedOn = new DateTime(2007, 3, 11, 13, 55, 0)
             }
         };
@@ -46,7 +46,7 @@ internal static class ApmlApplicationExample
 
         ApmlSource apmlSpecSource = new()
         {
-            Key = "http://feeds.feedburner.com/apmlspec",
+            Key = "https://endjin.com/atom.xml",
             Name = "APML.org",
             Value = 1.00m,
             MimeType = "application/rss+xml",
@@ -61,7 +61,7 @@ internal static class ApmlApplicationExample
 
         ApmlSource techCrunchSource = new()
         {
-            Key = "http://feeds.feedburner.com/TechCrunch",
+            Key = "https://endjin.com/rss.xml",
             Name = "Techcrunch",
             Value = 0.4m,
             MimeType = "application/rss+xml"
@@ -81,7 +81,7 @@ internal static class ApmlApplicationExample
 
         ApmlSource workTechCrunchSource = new()
         {
-            Key = "http://feeds.feedburner.com/TechCrunch",
+            Key = "https://endjin.com/rss.xml",
             Name = "Techcrunch",
             Value = 0.4m,
             MimeType = "application/atom+xml"

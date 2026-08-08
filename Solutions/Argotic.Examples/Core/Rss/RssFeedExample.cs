@@ -25,22 +25,22 @@ internal static class RssFeedExample
         {
             Channel =
             {
-                Title = "Dallas Times-Herald",
-                Link = new Uri("http://dallas.example.com"),
-                Description = "Current headlines from the Dallas Times-Herald newspaper"
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI"
             }
         };
 
         feed.Channel.Categories.Add(new RssCategory("Media"));
         feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
 
-        feed.Channel.Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
-        feed.Channel.Copyright = "Copyright 2007 Dallas Times-Herald";
+        feed.Channel.Cloud = new RssCloud("endjin.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
+        feed.Channel.Copyright = "Copyright 2026 endjin limited";
         feed.Channel.Generator = "Microsoft Spaces v1.1";
 
-        RssImage image = new(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"))
+        RssImage image = new(new Uri("https://endjin.com"), "endjin blog", new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/endjin-logo.png"))
         {
-            Description = "Read the Dallas Times-Herald",
+            Description = "Read the endjin blog",
             Height = 32,
             Width = 96
         };
@@ -48,9 +48,9 @@ internal static class RssFeedExample
 
         feed.Channel.Language = new CultureInfo("en-US");
         feed.Channel.LastBuildDate = new DateTime(2007, 10, 14, 17, 17, 44);
-        feed.Channel.ManagingEditor = "jlehrer@dallas.example.com (Jim Lehrer)";
+        feed.Channel.ManagingEditor = "hello@endjin.com (Ian Griffiths)";
         feed.Channel.PublicationDate = new DateTime(2007, 10, 14, 5, 0, 0);
-        feed.Channel.Rating = """(PICS-1.1 "http://www.rsac.org/ratingsv01.html" l by "webmaster@example.com" on "2007.01.29T10:09-0800" r (n 0 s 0 v 0 l 0))""";
+        feed.Channel.Rating = """(PICS-1.1 "http://www.rsac.org/ratingsv01.html" l by "hello@endjin.com" on "2007.01.29T10:09-0800" r (n 0 s 0 v 0 l 0))""";
 
         feed.Channel.SkipDays.Add(DayOfWeek.Saturday);
         feed.Channel.SkipDays.Add(DayOfWeek.Sunday);
@@ -61,26 +61,26 @@ internal static class RssFeedExample
         feed.Channel.SkipHours.Add(22);
         feed.Channel.SkipHours.Add(23);
 
-        feed.Channel.TextInput = new RssTextInput("What software are you using?", new Uri("https://example.com/search"), "query", "TextInput Inquiry");
+        feed.Channel.TextInput = new RssTextInput("What software are you using?", new Uri("https://endjin.com/search"), "query", "TextInput Inquiry");
         feed.Channel.TimeToLive = 60;
-        feed.Channel.Webmaster = "helpdesk@dallas.example.com";
+        feed.Channel.Webmaster = "hello@endjin.com";
 
         RssItem item = new()
         {
-            Title = "Seventh Heaven! Ryan Hurls Another No Hitter",
-            Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm"),
-            Description = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.",
-            Author = "jbb@dallas.example.com (Joe Bob Briggs)"
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine"),
+            Description = "Moving UI framework support out of System.Reactive into separate packages cuts up to 95MB from a self-contained deployment.",
+            Author = "hello@endjin.com (Barry Smart)"
         };
 
         item.Categories.Add(new RssCategory("sports"));
-        item.Categories.Add(new RssCategory("1991/Texas Rangers", "rec.sports.baseball"));
+        item.Categories.Add(new RssCategory("2026/Rx.NET", "rec.sports.baseball"));
 
-        item.Comments = new Uri("http://dallas.example.com/feedback/1983/06/joebob.htm");
-        item.Enclosures.Add(new RssEnclosure(24_986_239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
-        item.Guid = new RssGuid("http://dallas.example.com/1983/05/06/joebob.htm");
+        item.Comments = new Uri("https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra#comments");
+        item.Enclosures.Add(new RssEnclosure(24_986_239L, "audio/mpeg", new Uri("https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3")));
+        item.Guid = new RssGuid("https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra");
         item.PublicationDate = new DateTime(2007, 10, 5, 9, 0, 0);
-        item.Source = new RssSource(new Uri("http://la.example.com/rss.xml"), "Los Angeles Herald-Examiner");
+        item.Source = new RssSource(new Uri("https://endjin.com/rss.xml"), "Los Angeles Herald-Examiner");
 
         feed.Channel.Items.Add(item);
 

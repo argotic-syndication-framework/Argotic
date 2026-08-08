@@ -87,9 +87,9 @@ internal static class BlogMLDocumentExample
             Url = new Uri("/blogs/archive/2006/09/05/Sample-Blog-Post.aspx"),
             PostType = BlogMLPostType.Normal,
             Views = "0",
-            Title = new BlogMLTextConstruct("Sample Blog Post"),
+            Title = new BlogMLTextConstruct("Writing Effective Copilot Instructions for Complex Codebases"),
             Content = new BlogMLTextConstruct("<p>This is <b>HTML encoded</b> content.&nbsp;</p>", BlogMLContentType.Html),
-            Name = new BlogMLTextConstruct("Sample Blog Post")
+            Name = new BlogMLTextConstruct("Writing Effective Copilot Instructions for Complex Codebases")
         };
 
         post.Categories.Add("1018");
@@ -102,7 +102,7 @@ internal static class BlogMLDocumentExample
             Id = "35",
             CreatedOn = new DateTime(2006, 9, 5, 11, 36, 50),
             LastModifiedOn = new DateTime(2006, 9, 5, 11, 36, 50),
-            Title = new BlogMLTextConstruct("re: Sample Blog Post"),
+            Title = new BlogMLTextConstruct("re: Writing Effective Copilot Instructions for Complex Codebases"),
             Content = new BlogMLTextConstruct("This is a test comment.")
         };
         post.Comments.Add(comment);

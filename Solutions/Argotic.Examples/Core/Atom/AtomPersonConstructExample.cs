@@ -19,7 +19,7 @@ internal static class AtomPersonConstructExample
             UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
+        feed.Links.Add(new AtomLink(new Uri("https://endjin.com/")));
         feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
         //  Identify the author of the feed
@@ -30,9 +30,9 @@ internal static class AtomPersonConstructExample
 
         AtomPersonConstruct contributor = new()
         {
-            EmailAddress = "some.person@example.org",
+            EmailAddress = "hello@endjin.com",
             Name = "Some Person",
-            Uri = new Uri("http://example.org/somePerson")
+            Uri = new Uri("https://endjin.com/who-we-are/")
         };
         feed.Contributors.Add(contributor);
 

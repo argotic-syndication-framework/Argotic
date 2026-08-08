@@ -77,6 +77,9 @@ shape, so a snippet written for one reads across to the others unchanged:
 | `void Load(Stream \| XmlReader \| IXPathNavigable[, settings])` | Parse from something you already have.                                   |
 | `void Save(Stream \| XmlWriter[, settings])`                    | Write it back out.                                                       |
 
+If you would rather read working programs than snippets, [`Solutions/Samples`](Solutions/Samples)
+covers the same ground in 21 single files you can run one at a time — see [Samples](#samples) below.
+
 ### Start here: find out what a site publishes
 
 If you do not already know a site's feed URL, ask the site. `LocateDiscoverableSyndicationEndpointsAsync`
@@ -706,12 +709,34 @@ All 27 live in `Argotic.Extensions.Core`.
 Nineteen families contribute one extension each; AtomPublishing, DublinCore and Sitemap contribute
 the other eight.
 
+## Samples
+
+[`Solutions/Samples`](Solutions/Samples) holds 21 single-file programs — one `.cs` each, no project
+to restore, run with one command:
+
+```bash
+dotnet run --file Solutions/Samples/01-rss-feed.cs
+```
+
+They are .NET 10 [file-based apps](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/sdk),
+and they are a course rather than a reference: five movements — documents, persistence, extensions,
+the network, and beyond the feed — where each file explains why before how, and prints its own
+evidence so you can check the prose against the output. Read them in order, or jump to the one that
+matches your problem; [the index](Solutions/Samples/README.md) has a "start here" table for that.
+
+Nothing in the directory touches the network. Samples 01–13 open no sockets at all, and 14–21 serve
+themselves over an `HttpListener` on 127.0.0.1, so the whole set runs in CI at every commit:
+
+```powershell
+./run-samples.ps1
+```
+
 ## Examples
 
 `Solutions/Argotic.Examples` is an interactive [Spectre.Console](https://spectreconsole.net/) CLI
 holding 77 example classes and 223 runnable examples, mirroring the Core and Extensions structure.
-It is the best place to look for idiomatic present-day usage — every example compiles against the
-current API and runs end-to-end in CI.
+Where the samples are a course you read, this is the reference you query — every format, all 27
+extensions, every overload. Every example compiles against the current API and runs end-to-end in CI.
 
 ```bash
 # List everything
@@ -782,6 +807,10 @@ dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Test
 dotnet format whitespace Solutions/Argotic.slnx --verify-no-changes --no-restore
 dotnet format style      Solutions/Argotic.slnx --verify-no-changes --no-restore
 
+# Samples. Nothing else can see these: they are file-based apps, not in the .slnx, and no
+# csproj compiles them, so the build and formatting gates above are blind to them.
+./run-samples.ps1
+
 # Benchmarks
 dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --list flat
 dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --filter '*ParsePipeline*' --job Short
@@ -826,7 +855,8 @@ Solutions/
 ├── Argotic.Core/               # syndication format implementations
 ├── Argotic.Extensions.Tests/   # MSTest suite covering all three product assemblies
 ├── Argotic.Examples/           # runnable examples (Spectre.Console CLI)
-└── Argotic.Benchmarks/         # BenchmarkDotNet harness
+├── Argotic.Benchmarks/         # BenchmarkDotNet harness
+└── Samples/                    # 21 single-file apps; not a project, not in the solution
 ```
 
 Package versions are managed centrally in `Solutions/Directory.Packages.props`

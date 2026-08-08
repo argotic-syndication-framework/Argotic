@@ -1,69 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  A stand-alone Atom entry document: an <entry> as the root, not an entry inside a <feed>. That is the
+  media type the Atom Publishing Protocol POSTs to a collection and GETs back from a member URI, so it
+  has to parse on its own.
+
+  It carries every link relation the entry surface models, several authors and contributors at different
+  levels of detail, and xhtml content — the shapes a single-author, single-link entry would never reach.
+
+  Deliberately declares no app: namespace and carries no app:control or app:edited, even though the
+  edit link makes it look like a Publishing member. AtomPublishingLoadBenchmarks depends on that: it is
+  the baseline against which the extension-bearing variant is measured, and giving it an app: element
+  would quietly turn a comparison into a tautology.
+-->
 <entry xmlns="http://www.w3.org/2005/Atom">
-  <title type="html">Sample Atom Entry with &lt;em&gt;Comprehensive&lt;/em&gt; Elements</title>
+  <title type="html">Writing Effective Copilot Instructions for &lt;em&gt;Complex&lt;/em&gt; Codebases</title>
   <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6c</id>
-  <published>2024-01-01T10:00:00Z</published>
-  <updated>2024-01-01T12:00:00Z</updated>
-  <rights type="text">Copyright 2024 Sample Authors. Licensed under CC BY 4.0.</rights>
+  <published>2026-08-07T10:00:00Z</published>
+  <updated>2026-08-07T12:00:00Z</updated>
+  <rights type="text">Copyright 2026 endjin limited. Licensed under CC BY 4.0.</rights>
 
-  <link href="https://example.com/entry" rel="alternate" type="text/html"/>
-  <link href="https://example.com/entry.atom" rel="self" type="application/atom+xml"/>
-  <link href="https://example.com/entry/edit" rel="edit" type="application/atom+xml"/>
-  <link href="https://example.com/entry/comments" rel="replies" type="text/html" title="Comments"/>
-  <link href="https://example.com/entry/comments.atom" rel="replies" type="application/atom+xml"/>
-  <link href="https://original.example.com/post" rel="via" title="Original Source"/>
-  <link href="https://example.com/related-entry" rel="related"/>
-  <link href="https://example.com/entry/attachment.pdf" rel="enclosure" type="application/pdf" length="2048576" title="PDF Attachment"/>
+  <link href="https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases" rel="alternate" type="text/html"/>
+  <link href="https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases.atom" rel="self" type="application/atom+xml"/>
+  <link href="https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases/edit" rel="edit" type="application/atom+xml"/>
+  <link href="https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases#comments" rel="replies" type="text/html" title="Comments"/>
+  <link href="https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases/comments.atom" rel="replies" type="application/atom+xml"/>
+  <link href="https://endjin.com/blog/" rel="via" title="endjin blog"/>
+  <link href="https://endjin.com/blog/trying-out-wsl-containers" rel="related"/>
+  <link href="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/06/writing-effective-copilot-instructions-for-complex-codebases.png" rel="enclosure" type="image/png" length="2048576" title="Cover image"/>
 
   <author>
-    <name>Primary Author</name>
-    <email>primary@example.com</email>
-    <uri>https://example.com/authors/primary</uri>
+    <name>Matthew Adams</name>
+    <email>hello@endjin.com</email>
+    <uri>https://endjin.com/who-we-are/</uri>
   </author>
   <author>
-    <name>Co-Author</name>
-    <email>coauthor@example.com</email>
-    <uri>https://example.com/authors/coauthor</uri>
+    <name>Ian Griffiths</name>
+    <email>hello@endjin.com</email>
+    <uri>https://endjin.com/who-we-are/</uri>
   </author>
 
   <contributor>
-    <name>Technical Reviewer</name>
-    <email>reviewer@example.com</email>
-    <uri>https://example.com/contributors/reviewer</uri>
+    <name>Howard van Rooijen</name>
+    <email>hello@endjin.com</email>
+    <uri>https://endjin.com/who-we-are/</uri>
   </contributor>
   <contributor>
-    <name>Content Editor</name>
-    <email>editor@example.com</email>
+    <name>Barry Smart</name>
+    <email>hello@endjin.com</email>
   </contributor>
   <contributor>
-    <name>Proofreader</name>
+    <name>Jess Panni</name>
   </contributor>
 
-  <category term="technology" scheme="https://example.com/categories" label="Technology"/>
-  <category term="software-development" scheme="https://example.com/categories" label="Software Development"/>
-  <category term="tutorial" label="Tutorial"/>
-  <category term="atom-format"/>
+  <category term="developer-experience" scheme="https://endjin.com/tags" label="Developer Experience"/>
+  <category term="copilot" scheme="https://endjin.com/tags" label="Copilot"/>
+  <category term="dotnet" label=".NET"/>
+  <category term="tooling"/>
 
-  <summary type="html">&lt;p&gt;This is a standalone Atom entry document demonstrating &lt;strong&gt;comprehensive&lt;/strong&gt; optional elements including multiple authors, contributors, categories, and link types.&lt;/p&gt;</summary>
+  <summary type="html">&lt;p&gt;Structuring AI assistant guidance as &lt;strong&gt;modular skill files&lt;/strong&gt; rather than one monolithic document, and what that buys you on a repository too large to hold in context.&lt;/p&gt;</summary>
 
   <content type="xhtml">
     <div xmlns="http://www.w3.org/1999/xhtml">
-      <h2>Introduction</h2>
-      <p>This is the <strong>XHTML content</strong> of the Atom entry document. It demonstrates proper namespace handling and structured content.</p>
+      <h2>The problem</h2>
+      <p>A single instructions file is <strong>read in full, every time</strong>. Past a certain repository size that is neither affordable nor useful, and the file drifts out of date because nothing exercises it.</p>
 
-      <h2>Features Demonstrated</h2>
+      <h2>What works better</h2>
       <ul>
-        <li>Multiple authors with full contact information</li>
-        <li>Multiple contributors with varying detail levels</li>
-        <li>Categories with term, scheme, and label attributes</li>
-        <li>Various link rel types (alternate, self, edit, replies, via, related, enclosure)</li>
-        <li>Published and updated timestamps</li>
-        <li>Rights declaration</li>
-        <li>XHTML content type</li>
+        <li>Split guidance by task, not by subsystem</li>
+        <li>State what the build gate actually checks, with the command</li>
+        <li>Record the reasoning behind a rule, so it can be revisited rather than cargo-culted</li>
+        <li>Cite file and line, so a claim can be checked</li>
+        <li>Say what is deliberately out of scope</li>
       </ul>
 
       <h2>Conclusion</h2>
-      <p>This entry provides comprehensive coverage of Atom entry elements for testing purposes.</p>
+      <p>Guidance for an assistant is documentation with a consumer, and it rots exactly the way documentation rots.</p>
     </div>
   </content>
 </entry>

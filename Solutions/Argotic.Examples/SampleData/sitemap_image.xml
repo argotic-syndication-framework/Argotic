@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  endjin blog posts and the Cloudinary-hosted images they carry, using the real asset URLs from
+  https://endjin.com/sitemap-news.xml.
+
+  The first url carries two images and the second one, deliberately: the protocol allows up to 1,000
+  <image:image> per <loc>, and a reader that stops at the first one passes every single-image test.
+
+  Element order is caption before title, which is what sitemap-image-1.1.xsd declares
+  (loc, caption, geo_location, title, license). The file this replaced wrote title first and was
+  rejected by Google's own schema; nothing in the build could see that, because no validator ran.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://www.example.com/products/ergonomic-office-chair</loc>
+    <loc>https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released</loc>
     <image:image>
-      <image:loc>https://www.example.com/images/products/ergonomic-chair-front.jpg</image:loc>
-      <image:title>Ergonomic Office Chair - Front View</image:title>
-      <image:caption>Premium ergonomic office chair with adjustable lumbar support and breathable mesh back, shown from the front.</image:caption>
+      <image:loc>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/talks/rx-dotnet-v7-0-released.jpg</image:loc>
+      <image:caption>Title card for the talk announcing Rx.NET 7.0 and the UI package split.</image:caption>
+      <image:title>Rx.NET v7.0 Released</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://www.example.com/images/products/ergonomic-chair-side.jpg</image:loc>
-      <image:title>Ergonomic Office Chair - Side View</image:title>
-      <image:caption>Side profile of the ergonomic office chair highlighting the adjustable armrests and seat height mechanism.</image:caption>
+      <image:loc>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/06/writing-effective-copilot-instructions-for-complex-codebases.png</image:loc>
+      <image:caption>Cover image for the companion post on structuring AI assistant guidance across a large repository.</image:caption>
+      <image:title>Writing Effective Copilot Instructions for Complex Codebases</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://www.example.com/blog/summer-garden-tips</loc>
+    <loc>https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine</loc>
     <image:image>
-      <image:loc>https://www.example.com/images/blog/summer-garden-flowers.jpg</image:loc>
-      <image:title>Beautiful Summer Garden</image:title>
-      <image:caption>A vibrant summer garden showcasing colorful flowers including roses, lavender, and sunflowers in full bloom.</image:caption>
+      <image:loc>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/optimising-dax-formula-engine-and-storage-engine.png</image:loc>
+      <image:caption>Cover image for the post on how Power BI divides work between the Formula Engine and the Storage Engine.</image:caption>
+      <image:title>Optimising DAX: The Formula Engine and Storage Engine</image:title>
     </image:image>
   </url>
 </urlset>

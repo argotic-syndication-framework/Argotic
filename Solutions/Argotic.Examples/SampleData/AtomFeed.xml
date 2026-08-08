@@ -1,114 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  The endjin blog as Atom 1.0. endjin's real feed at https://endjin.com/atom.xml is plainer than this;
+  the four entries here exist to cover the four content forms RFC 4287 defines — text, html, xhtml with
+  an inline div, and out-of-line content via src — because those are four different code paths and only
+  one of them is common on the open web.
+-->
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title type="text">Sample Atom Feed</title>
-  <subtitle type="html">A &lt;em&gt;comprehensive&lt;/em&gt; sample Atom feed for testing</subtitle>
-  <link href="https://example.com/" rel="alternate" type="text/html"/>
-  <link href="https://example.com/feed.atom" rel="self" type="application/atom+xml"/>
-  <link href="https://example.com/feed.atom?page=2" rel="next" type="application/atom+xml"/>
-  <link href="https://hub.example.com/" rel="hub"/>
+  <title type="text">endjin blog</title>
+  <subtitle type="html">Technical writing on &lt;em&gt;.NET, data, analytics and AI&lt;/em&gt;</subtitle>
+  <link href="https://endjin.com/blog/" rel="alternate" type="text/html"/>
+  <link href="https://endjin.com/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://endjin.com/atom.xml?page=2" rel="next" type="application/atom+xml"/>
+  <link href="https://hub.endjin.com/" rel="hub"/>
   <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
-  <updated>2024-01-01T12:00:00Z</updated>
-  <rights type="text">Copyright 2024 Example Corporation. All rights reserved.</rights>
+  <updated>2026-08-07T12:00:00Z</updated>
+  <rights type="text">Copyright 2026 endjin limited. All rights reserved.</rights>
   <generator uri="https://github.com/argotic-syndication-framework/Argotic" version="3.0">Argotic Framework</generator>
-  <icon>https://example.com/favicon.ico</icon>
-  <logo>https://example.com/images/logo.png</logo>
+  <icon>https://endjin.com/favicon.ico</icon>
+  <logo>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/endjin-logo.png</logo>
 
-  <category term="technology" scheme="https://example.com/categories" label="Technology"/>
-  <category term="software" label="Software Development"/>
+  <category term="dotnet" scheme="https://endjin.com/what-we-do/" label=".NET"/>
+  <category term="data" label="Data and Analytics"/>
 
   <author>
-    <name>Primary Author</name>
-    <email>primary@example.com</email>
-    <uri>https://example.com/authors/primary</uri>
+    <name>Matthew Adams</name>
+    <email>hello@endjin.com</email>
+    <uri>https://endjin.com/who-we-are/</uri>
   </author>
   <author>
-    <name>Secondary Author</name>
-    <email>secondary@example.com</email>
+    <name>Barry Smart</name>
+    <email>hello@endjin.com</email>
   </author>
 
   <contributor>
-    <name>Technical Reviewer</name>
-    <email>reviewer@example.com</email>
-    <uri>https://example.com/contributors/reviewer</uri>
+    <name>Ian Griffiths</name>
+    <email>hello@endjin.com</email>
+    <uri>https://endjin.com/who-we-are/</uri>
   </contributor>
   <contributor>
-    <name>Content Editor</name>
+    <name>Howard van Rooijen</name>
   </contributor>
 
   <entry>
-    <title type="text">First Entry - Plain Text Content</title>
-    <link href="https://example.com/entry1" rel="alternate" type="text/html"/>
-    <link href="https://example.com/entry1/related" rel="related"/>
-    <link href="https://original.example.com/post1" rel="via" title="Original Source"/>
+    <title type="text">Trying out WSL containers</title>
+    <link href="https://endjin.com/blog/trying-out-wsl-containers" rel="alternate" type="text/html"/>
+    <link href="https://endjin.com/blog/trying-out-wsl-containers/related" rel="related"/>
+    <link href="https://learn.microsoft.com/windows/wsl/" rel="via" title="WSL documentation"/>
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
-    <published>2024-01-01T09:00:00Z</published>
-    <updated>2024-01-01T10:00:00Z</updated>
-    <summary type="text">This entry demonstrates plain text content type.</summary>
-    <content type="text">This is the plain text content of the first Atom entry. No HTML formatting is used here.</content>
-    <category term="text-content" label="Text Content"/>
-    <category term="example" scheme="https://example.com/tags"/>
+    <published>2026-08-04T09:00:00Z</published>
+    <updated>2026-08-04T10:00:00Z</updated>
+    <summary type="text">Basic workflows and dev containers work well; a few gaps still stop it replacing Docker Desktop.</summary>
+    <content type="text">Microsoft's built-in container runtime for WSL handles basic workflows and dev containers well. Two limitations still prevent it replacing Docker Desktop outright, and both are worth knowing before you switch.</content>
+    <category term="containers" label="Containers"/>
+    <category term="wsl" scheme="https://endjin.com/tags"/>
   </entry>
 
   <entry>
-    <title type="html">&lt;strong&gt;Second Entry&lt;/strong&gt; - HTML Content</title>
-    <link href="https://example.com/entry2" rel="alternate"/>
-    <link href="https://example.com/entry2/comments.atom" rel="replies" type="application/atom+xml" title="Comments"/>
+    <title type="html">&lt;strong&gt;Optimising DAX&lt;/strong&gt;: Formula Engine and Storage Engine</title>
+    <link href="https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine" rel="alternate"/>
+    <link href="https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine/comments.atom" rel="replies" type="application/atom+xml" title="Comments"/>
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6b</id>
-    <published>2024-01-01T10:30:00Z</published>
-    <updated>2024-01-01T11:00:00Z</updated>
+    <published>2026-08-06T10:30:00Z</published>
+    <updated>2026-08-06T11:00:00Z</updated>
     <author>
-      <name>Entry-Specific Author</name>
-      <email>entry-author@example.com</email>
+      <name>Barry Smart</name>
+      <email>hello@endjin.com</email>
     </author>
     <contributor>
-      <name>Entry Contributor</name>
+      <name>Ed Freeman</name>
     </contributor>
-    <summary type="html">&lt;p&gt;This entry demonstrates &lt;em&gt;HTML&lt;/em&gt; content type.&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;This is the &lt;strong&gt;HTML content&lt;/strong&gt; of the second Atom entry.&lt;/p&gt;&lt;p&gt;It includes multiple paragraphs and &lt;a href="https://example.com"&gt;links&lt;/a&gt;.&lt;/p&gt;</content>
-    <rights>Copyright 2024 Entry-Specific Author</rights>
-    <category term="html-content"/>
-    <category term="formatting"/>
+    <summary type="html">&lt;p&gt;Where a DAX query &lt;em&gt;actually&lt;/em&gt; spends its time.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;Power BI splits query work between a single-threaded &lt;strong&gt;Formula Engine&lt;/strong&gt; and a multi-threaded Storage Engine.&lt;/p&gt;&lt;p&gt;Pushing work to the latter is most of what optimisation means in practice — see &lt;a href="https://endjin.com/blog/"&gt;the series&lt;/a&gt;.&lt;/p&gt;</content>
+    <rights>Copyright 2026 endjin limited</rights>
+    <category term="power-bi"/>
+    <category term="performance"/>
   </entry>
 
   <entry>
-    <title>Third Entry - XHTML Content</title>
-    <link href="https://example.com/entry3"/>
+    <title>Writing Effective Copilot Instructions for Complex Codebases</title>
+    <link href="https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases"/>
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6c</id>
-    <published>2024-01-01T11:30:00Z</published>
-    <updated>2024-01-01T12:00:00Z</updated>
-    <summary>This entry demonstrates XHTML content type with embedded markup.</summary>
+    <published>2026-08-07T11:30:00Z</published>
+    <updated>2026-08-07T12:00:00Z</updated>
+    <summary>Modular skill files beat one monolithic instructions document once a repository stops fitting in context.</summary>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
-        <p>This is <strong>XHTML content</strong> with proper namespace handling.</p>
+        <p>Guidance for an AI assistant is <strong>documentation with a consumer</strong>, and it rots the same way.</p>
         <ul>
-          <li>Item one</li>
-          <li>Item two</li>
-          <li>Item three</li>
+          <li>Split by task, not by subsystem</li>
+          <li>Say what the build gate actually checks</li>
+          <li>Record the reasoning, not just the rule</li>
         </ul>
       </div>
     </content>
-    <category term="xhtml-content" scheme="https://example.com/content-types" label="XHTML Content"/>
+    <category term="developer-experience" scheme="https://endjin.com/tags" label="Developer Experience"/>
   </entry>
 
   <entry>
-    <title>Fourth Entry - External Content Reference</title>
-    <link href="https://example.com/entry4" rel="alternate"/>
-    <link href="https://example.com/entry4/enclosure.pdf" rel="enclosure" type="application/pdf" length="1048576" title="PDF Document"/>
+    <title>Auditing UK energy policy without a cluster</title>
+    <link href="https://endjin.com/what-we-think/talks/auditing-uk-energy-policy-without-a-cluster" rel="alternate"/>
+    <link href="https://endjin.com/what-we-think/talks/auditing-uk-energy-policy-without-a-cluster/slides.pdf" rel="enclosure" type="application/pdf" length="1048576" title="Slides"/>
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6d</id>
-    <published>2024-01-01T12:00:00Z</published>
-    <updated>2024-01-01T12:30:00Z</updated>
-    <summary>This entry references external content via the src attribute.</summary>
-    <content type="application/pdf" src="https://example.com/documents/whitepaper.pdf"/>
+    <published>2026-06-29T05:30:00Z</published>
+    <updated>2026-06-29T06:00:00Z</updated>
+    <summary>Twenty years of fragmented government energy data, audited on one laptop with DuckDB.</summary>
+    <content type="application/pdf" src="https://endjin.com/what-we-think/talks/auditing-uk-energy-policy-without-a-cluster/slides.pdf"/>
     <source>
-      <id>urn:uuid:source-feed-id</id>
-      <title>Original Source Feed</title>
-      <link href="https://original-source.com/feed.atom" rel="self"/>
-      <updated>2024-01-01T08:00:00Z</updated>
+      <id>urn:uuid:9f8a1c34-27b5-4d61-9e3a-6b5c8d0f2a17</id>
+      <title>endjin talks</title>
+      <link href="https://endjin.com/what-we-think/talks/" rel="self"/>
+      <updated>2026-07-29T08:00:00Z</updated>
       <author>
-        <name>Original Author</name>
+        <name>Barry Smart</name>
       </author>
     </source>
-    <category term="external"/>
-    <category term="pdf"/>
+    <category term="duckdb"/>
+    <category term="data-engineering"/>
   </entry>
 </feed>

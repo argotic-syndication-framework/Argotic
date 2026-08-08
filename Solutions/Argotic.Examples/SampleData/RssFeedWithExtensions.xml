@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  The endjin blog carrying every syndication extension this library reads from an RSS feed. No real feed
+  looks like this and none should; the file exists so that one load exercises every RSS-side extension
+  adapter, which is why the same post carries geocoding, trackback and podcast metadata at once.
+
+  Two corrections against the file this replaced, both found by fingerprinting what actually attached
+  rather than by reading the markup:
+
+    * cf: was declared and never used, so SimpleListSyndicationExtension never attached and its example
+      printed nothing but "Loaded" and "Saved". It now carries a real cf:treatAs and cf:listinfo.
+    * sx: was bound to http://www.microsoft.com/schemas/rss/core/2005, the Simple List namespace.
+      FeedSync's namespace is http://feedsync.org/2007/feedsync. The extension attached anyway, on the
+      strength of the prefix, which is exactly the sort of accident a corpus should not be teaching.
+-->
 <rss version="2.0"
-      xmlns:georss="http://www.georss.org/georss"
+     xmlns:georss="http://www.georss.org/georss"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:dcterms="http://purl.org/dc/terms/"
      xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -15,183 +29,189 @@
      xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/"
      xmlns:pingback="http://purl.org/net/pingback/"
      xmlns:lj="http://www.livejournal.org/rss/lj/1.0/"
-     xmlns:sx="http://www.microsoft.com/schemas/rss/core/2005"
+     xmlns:sx="http://feedsync.org/2007/feedsync"
      xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005"
      xmlns:fh="http://purl.org/syndication/history/1.0"
      xmlns:re="http://purl.org/atompub/rank/1.0"
      xmlns:photo="http://www.pheed.com/pheed/"
      xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sample RSS Feed with Extensions</title>
-    <link>https://example.com/</link>
-    <description>A sample RSS feed demonstrating all 20 syndication extensions</description>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jan 2024 12:00:00 GMT</lastBuildDate>
+    <title>endjin blog</title>
+    <link>https://endjin.com/blog/</link>
+    <description>Technical writing from endjin on .NET, data, analytics and AI, carrying every extension Argotic reads.</description>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 07 Aug 2026 12:00:00 GMT</lastBuildDate>
 
     <!-- Dublin Core Elements -->
-    <dc:creator>Sample Author</dc:creator>
-    <dc:publisher>Example Publishing</dc:publisher>
-    <dc:rights>Copyright 2024 Example</dc:rights>
-    <dc:language>en</dc:language>
-    <dc:subject>Technology</dc:subject>
-    <dc:contributor>Editor Name</dc:contributor>
-    <dc:coverage>Worldwide</dc:coverage>
-    <dc:source>https://example.com/</dc:source>
+    <dc:creator>endjin</dc:creator>
+    <dc:publisher>endjin limited</dc:publisher>
+    <dc:rights>Copyright 2026 endjin limited</dc:rights>
+    <dc:language>en-gb</dc:language>
+    <dc:subject>Software Engineering</dc:subject>
+    <dc:contributor>Howard van Rooijen</dc:contributor>
+    <dc:coverage>United Kingdom</dc:coverage>
+    <dc:source>https://endjin.com/rss.xml</dc:source>
 
     <!-- Dublin Core Metadata Terms -->
-    <dcterms:created>2024-01-01T08:00:00Z</dcterms:created>
-    <dcterms:modified>2024-01-01T12:00:00Z</dcterms:modified>
-    <dcterms:valid>start=2024-01-01; end=2024-12-31;</dcterms:valid>
-    <dcterms:audience>Developers</dcterms:audience>
+    <dcterms:created>2026-01-01T08:00:00Z</dcterms:created>
+    <dcterms:modified>2026-08-07T12:00:00Z</dcterms:modified>
+    <dcterms:valid>start=2026-01-01; end=2026-12-31;</dcterms:valid>
+    <dcterms:audience>Software engineers and data practitioners</dcterms:audience>
 
     <!-- Site Summary Syndication -->
     <sy:updatePeriod>hourly</sy:updatePeriod>
     <sy:updateFrequency>1</sy:updateFrequency>
-    <sy:updateBase>2024-01-01T00:00:00Z</sy:updateBase>
+    <sy:updateBase>2026-01-01T00:00:00Z</sy:updateBase>
 
     <!-- Blog Channel -->
-    <blogChannel:blogRoll>http://example.com/blogroll.opml</blogChannel:blogRoll>
-    <blogChannel:mySubscriptions>http://example.com/subscriptions.opml</blogChannel:mySubscriptions>
-    <blogChannel:blink>http://example.com/featured-link</blogChannel:blink>
+    <blogChannel:blogRoll>https://endjin.com/blogroll.opml</blogChannel:blogRoll>
+    <blogChannel:mySubscriptions>https://endjin.com/subscriptions.opml</blogChannel:mySubscriptions>
+    <blogChannel:blink>https://endjin.com/what-we-think/talks/</blogChannel:blink>
 
     <!-- Creative Commons -->
     <creativeCommons:license>http://creativecommons.org/licenses/by/4.0/</creativeCommons:license>
 
-    <!-- iTunes Podcast -->
-    <itunes:author>Sample Podcast Author</itunes:author>
-    <itunes:subtitle>A subtitle for the podcast</itunes:subtitle>
-    <itunes:summary>A comprehensive summary of the podcast content for listeners</itunes:summary>
-    <itunes:category text="Technology">
-      <itunes:category text="Software How-To"/>
-    </itunes:category>
+    <!-- Microsoft Simple List Extensions: the feed is an ordered list, sortable and groupable -->
+    <cf:treatAs>list</cf:treatAs>
+    <cf:listinfo>
+      <cf:sort element="pubDate" label="Date published" data-type="date" default="true"/>
+      <cf:sort element="title" label="Title"/>
+      <cf:group ns="http://purl.org/dc/elements/1.1/" element="subject" label="Topic"/>
+    </cf:listinfo>
+
+    <!-- iTunes Podcast: endjin publishes audio versions of some posts -->
+    <itunes:author>endjin</itunes:author>
+    <itunes:subtitle>Audio versions of the endjin blog</itunes:subtitle>
+    <itunes:summary>Selected endjin blog posts, recorded for listening.</itunes:summary>
+    <itunes:category text="Technology"/>
     <itunes:explicit>false</itunes:explicit>
     <itunes:owner>
-      <itunes:name>Podcast Owner</itunes:name>
-      <itunes:email>podcast@example.com</itunes:email>
+      <itunes:name>endjin</itunes:name>
+      <itunes:email>hello@endjin.com</itunes:email>
     </itunes:owner>
-    <itunes:image href="https://example.com/podcast-art.jpg"/>
+    <itunes:image href="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/endjin-logo.png"/>
     <itunes:type>episodic</itunes:type>
 
     <!-- Atom Self Link -->
-    <atom:link href="https://example.com/feed.rss" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://endjin.com/rss.xml" rel="self" type="application/rss+xml"/>
 
     <!-- Feed Synchronization -->
-    <sx:sharing since="2024-01-01T00:00:00Z" until="2024-12-31T23:59:59Z" version="0.93"/>
+    <sx:sharing since="2026-01-01T00:00:00Z" until="2026-12-31T23:59:59Z"/>
 
     <!-- Feed History -->
     <fh:archive/>
-    <atom:link href="https://example.com/feed.rss?page=1" rel="prev-archive" type="application/rss+xml"/>
-    <atom:link href="https://example.com/feed.rss?page=current" rel="current" type="application/rss+xml"/>
+    <atom:link href="https://endjin.com/rss.xml?page=1" rel="prev-archive" type="application/rss+xml"/>
+    <atom:link href="https://endjin.com/rss.xml?page=current" rel="current" type="application/rss+xml"/>
 
     <!-- Feed Rank -->
-    <re:rank domain="example.com">85</re:rank>
+    <re:rank domain="endjin.com">85</re:rank>
 
     <item>
-      <title>First Article with All Extensions</title>
-      <link>https://example.com/article1</link>
-      <description>This article demonstrates all available syndication extensions.</description>
-      <pubDate>Mon, 01 Jan 2024 10:00:00 GMT</pubDate>
-      <georss:point>52.132633 5.291266</georss:point>
-      <georss:box>23.822399 -29.864984 80.442867 40.447516</georss:box>
-      <georss:featurename>Nederland</georss:featurename>
-      <guid>https://example.com/article1</guid>
+      <title>The GenAI Reality Check: New Instrument, Same Orchestra</title>
+      <link>https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra</link>
+      <description>Generative AI is a new instrument in an orchestra that already existed.</description>
+      <pubDate>Thu, 14 May 2026 08:54:29 GMT</pubDate>
+      <georss:point>51.5074 -0.1278</georss:point>
+      <georss:box>49.960000 -7.570000 58.640000 1.680000</georss:box>
+      <georss:featurename>United Kingdom</georss:featurename>
+      <guid>https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra</guid>
 
       <!-- Dublin Core Elements -->
-      <dc:creator>Article Author</dc:creator>
-      <dc:subject>technology</dc:subject>
-      <dc:date>2024-01-01T10:00:00Z</dc:date>
-      <dc:identifier>article-001</dc:identifier>
+      <dc:creator>Barry Smart</dc:creator>
+      <dc:subject>AI</dc:subject>
+      <dc:date>2026-05-14T08:54:29Z</dc:date>
+      <dc:identifier>endjin-blog-genai-reality-check</dc:identifier>
       <dc:format>text/html</dc:format>
       <dc:type>Article</dc:type>
 
       <!-- Dublin Core Metadata Terms -->
-      <dcterms:abstract>An abstract of the article content</dcterms:abstract>
+      <dcterms:abstract>Why the disciplines that made data work trustworthy did not stop applying when a model joined the section.</dcterms:abstract>
       <dcterms:accessRights>public</dcterms:accessRights>
-      <dcterms:bibliographicCitation>Example, A. (2024). First Article.</dcterms:bibliographicCitation>
+      <dcterms:bibliographicCitation>Smart, B. (2026). The GenAI Reality Check. endjin.</dcterms:bibliographicCitation>
 
       <!-- Site Summary Content -->
-      <content:encoded><![CDATA[<p>This is the full content of the article with <strong>HTML</strong> formatting.</p><p>It includes multiple paragraphs and demonstrates rich content encoding.</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>Generative AI arrived as a <strong>new instrument</strong>, not a new orchestra.</p><p>The data contracts, the testing and the observability that made analytics trustworthy are the same disciplines that make a model deployment trustworthy.</p>]]></content:encoded>
 
       <!-- Site Summary Slash -->
       <slash:comments>42</slash:comments>
-      <slash:department>tech</slash:department>
+      <slash:department>data-and-ai</slash:department>
       <slash:section>technology</slash:section>
       <slash:hit_parade>42,35,28,21,14,7,3</slash:hit_parade>
 
       <!-- Basic Geocoding -->
-      <geo:lat>37.7749</geo:lat>
-      <geo:long>-122.4194</geo:long>
+      <geo:lat>51.5074</geo:lat>
+      <geo:long>-0.1278</geo:long>
 
       <!-- Well-Formed Web Comments -->
-      <wfw:comment>https://example.com/article1/comments</wfw:comment>
-      <wfw:commentRss>https://example.com/article1/comments.rss</wfw:commentRss>
+      <wfw:comment>https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra/comments</wfw:comment>
+      <wfw:commentRss>https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra/comments.rss</wfw:commentRss>
 
       <!-- Trackback -->
-      <trackback:ping>https://example.com/trackback/1</trackback:ping>
-      <trackback:about>https://example.com/article1</trackback:about>
+      <trackback:ping>https://endjin.com/trackback/genai-reality-check</trackback:ping>
+      <trackback:about>https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra</trackback:about>
 
       <!-- Pingback -->
-      <pingback:server>https://example.com/xmlrpc</pingback:server>
-      <pingback:target>https://example.com/article1</pingback:target>
+      <pingback:server>https://endjin.com/xmlrpc</pingback:server>
+      <pingback:target>https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra</pingback:target>
 
       <!-- LiveJournal -->
-      <lj:music>Daft Punk - Around the World</lj:music>
-      <lj:mood>productive</lj:mood>
+      <lj:music>Steve Reich - Music for 18 Musicians</lj:music>
+      <lj:mood>thoughtful</lj:mood>
       <lj:security>public</lj:security>
-      <lj:pickeyword>coding</lj:pickeyword>
+      <lj:pickeyword>data-and-ai</lj:pickeyword>
 
-      <!-- Yahoo Media RSS -->
-      <media:content url="https://example.com/media/video.mp4" type="video/mp4" medium="video" duration="120" width="1920" height="1080" fileSize="15728640" bitrate="1048576" expression="full" isDefault="true">
-        <media:title type="plain">Tutorial Video</media:title>
-        <media:description type="html">&lt;p&gt;A video tutorial demonstrating the concepts.&lt;/p&gt;</media:description>
-        <media:keywords>tutorial, video, demo</media:keywords>
-        <media:category scheme="https://example.com/categories">Technology</media:category>
+      <!-- Yahoo Media RSS: the recorded version of this post -->
+      <media:content url="https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3" type="audio/mpeg" medium="audio" duration="2287" fileSize="36588921" bitrate="128000" expression="full" isDefault="true">
+        <media:title type="plain">The GenAI Reality Check (audio version)</media:title>
+        <media:description type="html">&lt;p&gt;The recorded version of the post.&lt;/p&gt;</media:description>
+        <media:keywords>AI, data, engineering discipline</media:keywords>
+        <media:category scheme="https://endjin.com/what-we-do/">Data and Analytics</media:category>
         <media:hash algo="md5">d41d8cd98f00b204e9800998ecf8427e</media:hash>
-        <media:credit role="author">Video Creator</media:credit>
-        <media:copyright url="https://example.com/terms">Copyright 2024</media:copyright>
+        <media:credit role="author">Barry Smart</media:credit>
+        <media:copyright url="https://endjin.com/terms">Copyright 2026 endjin limited</media:copyright>
         <media:rating scheme="urn:simple">nonadult</media:rating>
       </media:content>
-      <media:thumbnail url="https://example.com/media/thumbnail.jpg" width="160" height="90"/>
-      <media:player url="https://example.com/player?id=1" width="640" height="360"/>
+      <media:thumbnail url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/genai-reality-check.png" width="160" height="90"/>
+      <media:player url="https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra" width="640" height="360"/>
 
       <!-- iTunes Episode -->
-      <itunes:title>Episode 1: Getting Started</itunes:title>
+      <itunes:title>The GenAI Reality Check: New Instrument, Same Orchestra</itunes:title>
       <itunes:episode>1</itunes:episode>
       <itunes:season>1</itunes:season>
-      <itunes:duration>00:15:30</itunes:duration>
+      <itunes:duration>00:38:07</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
       <itunes:explicit>false</itunes:explicit>
 
       <!-- Pheed Photo Extension -->
-      <photo:imgsrc>https://example.com/photos/photo1.jpg</photo:imgsrc>
-      <photo:thumbnail>https://example.com/photos/photo1_thumb.jpg</photo:thumbnail>
+      <photo:imgsrc>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/genai-reality-check.png</photo:imgsrc>
+      <photo:thumbnail>https://res.cloudinary.com/endjin/image/upload/f_auto/q_40/assets/images/blog/2026/05/genai-reality-check.png</photo:thumbnail>
 
       <!-- Feed Synchronization -->
-      <sx:sync id="item-1" updates="1" deleted="false" noconflicts="true">
-        <sx:history sequence="1" by="author@example.com" when="2024-01-01T10:00:00Z"/>
+      <sx:sync id="endjin-blog-genai-reality-check" updates="1" deleted="false" noconflicts="true">
+        <sx:history sequence="1" by="hello@endjin.com" when="2026-05-14T08:54:29Z"/>
       </sx:sync>
     </item>
 
     <item>
-      <title>Second Article - Photo Gallery</title>
-      <link>https://example.com/article2</link>
-      <description>A photo gallery article demonstrating Pheed and media extensions.</description>
-      <pubDate>Mon, 01 Jan 2024 11:00:00 GMT</pubDate>
-      <guid>https://example.com/article2</guid>
+      <title>Rx.NET v7.0 Released - it could save you 95MB!</title>
+      <link>https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released</link>
+      <description>Ian Griffiths on the Rx.NET 7.0 UI package split, and the 95MB it can cut from a self-contained deployment.</description>
+      <pubDate>Wed, 29 Jul 2026 09:00:00 GMT</pubDate>
+      <guid>https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released</guid>
 
-      <dc:creator>Photo Author</dc:creator>
+      <dc:creator>Ian Griffiths</dc:creator>
       <slash:comments>28</slash:comments>
 
-      <!-- Pheed Photo Extension - Multiple Photos -->
-      <photo:imgsrc>https://example.com/photos/gallery1.jpg</photo:imgsrc>
-      <photo:thumbnail>https://example.com/photos/gallery1_thumb.jpg</photo:thumbnail>
+      <!-- Pheed Photo Extension -->
+      <photo:imgsrc>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/talks/rx-dotnet-v7-0-released.jpg</photo:imgsrc>
+      <photo:thumbnail>https://res.cloudinary.com/endjin/image/upload/f_auto/q_40/assets/images/talks/rx-dotnet-v7-0-released.jpg</photo:thumbnail>
 
-      <!-- Yahoo Media Group for multiple images -->
+      <!-- Yahoo Media Group: the talk, its thumbnail, and stills -->
       <media:group>
-        <media:content url="https://example.com/photos/gallery1.jpg" type="image/jpeg" medium="image" width="1920" height="1080"/>
-        <media:content url="https://example.com/photos/gallery2.jpg" type="image/jpeg" medium="image" width="1920" height="1080"/>
-        <media:content url="https://example.com/photos/gallery3.jpg" type="image/jpeg" medium="image" width="1920" height="1080"/>
-        <media:thumbnail url="https://example.com/photos/gallery_composite_thumb.jpg" width="480" height="270"/>
+        <media:content url="https://www.youtube.com/embed/gJlP1vcrxD8" type="video/mp4" medium="video" duration="1612" width="1920" height="1080"/>
+        <media:content url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/talks/rx-dotnet-v7-0-released.jpg" type="image/jpeg" medium="image" width="1920" height="1080"/>
+        <media:content url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/talks/duckcon-07-2026-auditing-uk-energy-policy-without-a-cluster.jpg" type="image/jpeg" medium="image" width="1920" height="1080"/>
+        <media:thumbnail url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_40/assets/images/talks/rx-dotnet-v7-0-released.jpg" width="480" height="270"/>
       </media:group>
 
       <!-- Basic Geocoding -->
@@ -199,33 +219,33 @@
       <geo:long>-0.1278</geo:long>
 
       <!-- LiveJournal -->
-      <lj:mood>creative</lj:mood>
+      <lj:mood>productive</lj:mood>
       <lj:music>Boards of Canada - Music Has the Right to Children</lj:music>
     </item>
 
     <item>
-      <title>Third Article - Podcast Episode</title>
-      <link>https://example.com/article3</link>
-      <description>A podcast episode demonstrating iTunes and media extensions.</description>
-      <pubDate>Mon, 01 Jan 2024 12:00:00 GMT</pubDate>
-      <guid isPermaLink="false">podcast-episode-003</guid>
-      <enclosure url="https://example.com/podcasts/episode3.mp3" length="25165824" type="audio/mpeg"/>
+      <title>Optimising DAX: The Formula Engine and Storage Engine</title>
+      <link>https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine</link>
+      <description>How Power BI divides query work, and why pushing it to the Storage Engine is most of what DAX optimisation means.</description>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">endjin-blog-optimising-dax</guid>
+      <enclosure url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/optimising-dax-formula-engine-and-storage-engine.png" length="0" type="image/png"/>
 
-      <dc:creator>Podcast Host</dc:creator>
+      <dc:creator>Barry Smart</dc:creator>
 
       <!-- iTunes Episode metadata -->
-      <itunes:title>Episode 3: Deep Dive</itunes:title>
-      <itunes:episode>3</itunes:episode>
+      <itunes:title>Optimising DAX: The Formula Engine and Storage Engine</itunes:title>
+      <itunes:episode>2</itunes:episode>
       <itunes:season>1</itunes:season>
-      <itunes:duration>01:05:42</itunes:duration>
+      <itunes:duration>00:22:14</itunes:duration>
       <itunes:episodeType>full</itunes:episodeType>
       <itunes:explicit>false</itunes:explicit>
-      <itunes:image href="https://example.com/podcasts/episode3-art.jpg"/>
-      <itunes:summary>In this episode, we take a deep dive into advanced topics.</itunes:summary>
+      <itunes:image href="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/optimising-dax-formula-engine-and-storage-engine.png"/>
+      <itunes:summary>Where a DAX query actually spends its time, and how to move that work to the engine built for it.</itunes:summary>
 
-      <!-- Media RSS for podcast -->
-      <media:content url="https://example.com/podcasts/episode3.mp3" type="audio/mpeg" medium="audio" duration="3942" fileSize="25165824">
-        <media:title>Episode 3: Deep Dive</media:title>
+      <!-- Media RSS -->
+      <media:content url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/optimising-dax-formula-engine-and-storage-engine.png" type="image/png" medium="image" width="1200" height="630">
+        <media:title>Optimising DAX</media:title>
       </media:content>
 
       <!-- Feed Rank for this item -->

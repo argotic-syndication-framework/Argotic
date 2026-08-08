@@ -1,26 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Two entries taken from https://endjin.com/sitemap-news.xml as endjin actually serves them.
+
+  Worth noting for anyone reading this as a reference: endjin's news sitemap declares the image
+  namespace as well and carries an <image:image> inside each <url>. That makes it the one document
+  in this corpus where two Google sitemap extensions attach to the same url, which is exactly the
+  case a reader that assumed one-extension-per-url would get wrong.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://www.example.com/news/2024/tech-innovation-summit</loc>
+    <loc>https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases</loc>
+    <lastmod>2026-08-07</lastmod>
     <news:news>
       <news:publication>
-        <news:name>Example Daily News</news:name>
+        <news:name>endjin.com</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2024-08-15T09:30:00+00:00</news:publication_date>
-      <news:title>Annual Tech Innovation Summit Draws Record Attendance</news:title>
+      <news:publication_date>2026-08-07T00:00:00Z</news:publication_date>
+      <news:title>Writing Effective Copilot Instructions for Complex Codebases</news:title>
+      <news:keywords>developer-experience, copilot, AI, tooling, C#, CSharp, .NET, dotnet, json-schema</news:keywords>
     </news:news>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/06/writing-effective-copilot-instructions-for-complex-codebases.png</image:loc>
+      <image:caption>Writing Effective Copilot Instructions for Complex Codebases</image:caption>
+    </image:image>
   </url>
   <url>
-    <loc>https://www.example.com/news/2024/renewable-energy-breakthrough</loc>
+    <loc>https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine</loc>
+    <lastmod>2026-08-06</lastmod>
     <news:news>
       <news:publication>
-        <news:name>Example Daily News</news:name>
+        <news:name>endjin.com</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2024-08-14T14:45:00+00:00</news:publication_date>
-      <news:title>Scientists Announce Major Breakthrough in Solar Energy Storage</news:title>
+      <news:publication_date>2026-08-06T00:00:00Z</news:publication_date>
+      <news:title>Optimising DAX: The Formula Engine and Storage Engine</news:title>
+      <news:keywords>Power BI, DAX, VertiPaq, Performance, Data</news:keywords>
     </news:news>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/optimising-dax-formula-engine-and-storage-engine.png</image:loc>
+      <image:caption>Optimising DAX: The Formula Engine and Storage Engine</image:caption>
+    </image:image>
   </url>
 </urlset>

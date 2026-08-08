@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Really Simple Discovery for the endjin blog: the document a client fetches to find out which posting
+  APIs a weblog speaks, before it has been told anything about the engine behind it.
+
+  Five interfaces, only one preferred, and settings collections of different sizes — because the shape
+  a reader has to cope with is "several APIs, each with its own arbitrary settings", not "one API".
+-->
 <rsd version="1.0" xmlns="http://archipelago.phrasewise.com/rsd">
   <service>
-    <engineName>Sample Blog Engine</engineName>
-    <engineLink>http://example.com/engine</engineLink>
-    <homePageLink>http://example.com/blog</homePageLink>
+    <engineName>endjin publishing</engineName>
+    <engineLink>https://endjin.com/</engineLink>
+    <homePageLink>https://endjin.com/blog/</homePageLink>
     <apis>
-      <api name="MetaWeblog" preferred="true" apiLink="http://example.com/xmlrpc" blogID="1">
+      <api name="MetaWeblog" preferred="true" apiLink="https://endjin.com/xmlrpc" blogID="1">
         <docs>http://www.xmlrpc.com/metaWeblogApi</docs>
         <settings>
           <setting name="supportsNewPost">true</setting>
@@ -13,21 +20,21 @@
           <setting name="supportsMediaObjects">true</setting>
         </settings>
       </api>
-      <api name="Blogger" preferred="false" apiLink="http://example.com/blogger" blogID="1">
+      <api name="Blogger" preferred="false" apiLink="https://endjin.com/blogger" blogID="1">
         <docs>http://www.blogger.com/developers/api/1_docs/</docs>
         <settings>
           <setting name="supportsNewPost">true</setting>
           <setting name="supportsEditPost">true</setting>
         </settings>
       </api>
-      <api name="Atom" preferred="false" apiLink="http://example.com/atom" blogID="1">
-        <docs>https://www.ietf.org/rfc/rfc4287.txt</docs>
+      <api name="Atom" preferred="false" apiLink="https://endjin.com/app/service" blogID="1">
+        <docs>https://www.ietf.org/rfc/rfc5023.txt</docs>
         <settings>
           <setting name="supportsAtomPub">true</setting>
           <setting name="version">1.0</setting>
         </settings>
       </api>
-      <api name="WordPress" preferred="false" apiLink="http://example.com/xmlrpc.php" blogID="1">
+      <api name="WordPress" preferred="false" apiLink="https://endjin.com/xmlrpc.php" blogID="1">
         <docs>https://developer.wordpress.org/plugins/metadata/managing-post-metadata/</docs>
         <settings>
           <setting name="supportsPages">true</setting>
@@ -35,7 +42,7 @@
           <setting name="supportsTags">true</setting>
         </settings>
       </api>
-      <api name="MovableType" preferred="false" apiLink="http://example.com/mt-xmlrpc.cgi" blogID="1">
+      <api name="MovableType" preferred="false" apiLink="https://endjin.com/mt-xmlrpc.cgi" blogID="1">
         <docs>http://www.movabletype.org/documentation/developer/api/</docs>
         <settings>
           <setting name="supportsTrackbacks">true</setting>

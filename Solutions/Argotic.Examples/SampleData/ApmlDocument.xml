@@ -1,66 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  An attention profile for an endjin engineer. APML records what a reader pays attention to, so like
+  OPML it is legitimately full of other people's feeds; what makes it endjin's is the shape of the
+  interests and the "from" attribution, which points at the endjin site that observed each concept.
+
+  Three profiles, because defaultprofile only means something when there is more than one to choose
+  between, and each carries both ImplicitData (inferred from behaviour) and ExplicitData (stated by the
+  user) — two sub-trees with the same grammar and quite different provenance.
+-->
 <APML xmlns="http://www.apml.org/apml-0.6" version="0.6">
   <Head>
-    <Title>Sample APML Document</Title>
+    <Title>endjin attention profile</Title>
     <Generator>Argotic Framework 3.0</Generator>
-    <UserEmail>user@example.com</UserEmail>
-    <DateCreated>2024-01-01T08:00:00Z</DateCreated>
+    <UserEmail>hello@endjin.com</UserEmail>
+    <DateCreated>2026-01-05T08:00:00Z</DateCreated>
   </Head>
-  <Body defaultprofile="work">
-    <Profile name="work">
+  <Body defaultprofile="engineering">
+    <Profile name="engineering">
       <ImplicitData>
         <Concepts>
-          <Concept key="technology" value="0.95" from="https://news.ycombinator.com" updated="2024-01-01T12:00:00Z"/>
-          <Concept key="software" value="0.90" from="https://devblogs.microsoft.com" updated="2024-01-01T11:00:00Z"/>
-          <Concept key="cloud computing" value="0.85" from="https://azure.microsoft.com" updated="2024-01-01T10:00:00Z"/>
-          <Concept key="dotnet" value="0.88" from="https://devblogs.microsoft.com/dotnet" updated="2024-01-01T09:00:00Z"/>
-          <Concept key="open source" value="0.75" from="https://github.blog" updated="2024-01-01T08:00:00Z"/>
-          <Concept key="devops" value="0.70" from="https://devblogs.microsoft.com/devops" updated="2023-12-31T12:00:00Z"/>
+          <Concept key="dotnet" value="0.95" from="https://endjin.com/blog/" updated="2026-08-07T12:00:00Z"/>
+          <Concept key="reactive extensions" value="0.92" from="https://endjin.com/what-we-think/talks/" updated="2026-07-29T09:00:00Z"/>
+          <Concept key="C#" value="0.90" from="https://devblogs.microsoft.com/dotnet" updated="2026-08-06T11:00:00Z"/>
+          <Concept key="json-schema" value="0.85" from="https://endjin.com/blog/" updated="2026-08-05T10:00:00Z"/>
+          <Concept key="open source" value="0.80" from="https://github.blog" updated="2026-08-01T08:00:00Z"/>
+          <Concept key="developer-experience" value="0.78" from="https://endjin.com/blog/" updated="2026-07-31T12:00:00Z"/>
         </Concepts>
         <Sources>
-          <Source key="https://devblogs.microsoft.com/dotnet/" value="0.98" name=".NET Blog" type="application/rss+xml" from="https://example.com" updated="2024-01-01T12:00:00Z"/>
-          <Source key="https://azure.microsoft.com/blog/feed/" value="0.92" name="Azure Blog" type="application/rss+xml" from="https://example.com" updated="2024-01-01T11:00:00Z"/>
-          <Source key="https://github.blog/feed/" value="0.85" name="GitHub Blog" type="application/rss+xml" from="https://example.com" updated="2024-01-01T10:00:00Z"/>
-          <Source key="https://news.ycombinator.com/rss" value="0.80" name="Hacker News" type="application/rss+xml" from="https://example.com" updated="2024-01-01T09:00:00Z"/>
+          <Source key="https://endjin.com/rss.xml" value="0.98" name="endjin blog" type="application/rss+xml" from="https://endjin.com" updated="2026-08-07T12:00:00Z"/>
+          <Source key="https://devblogs.microsoft.com/dotnet/feed/" value="0.92" name=".NET Blog" type="application/rss+xml" from="https://endjin.com" updated="2026-08-06T11:00:00Z"/>
+          <Source key="https://github.blog/feed/" value="0.85" name="GitHub Blog" type="application/rss+xml" from="https://endjin.com" updated="2026-08-01T10:00:00Z"/>
+          <Source key="https://devblogs.microsoft.com/visualstudio/feed/" value="0.80" name="Visual Studio Blog" type="application/rss+xml" from="https://endjin.com" updated="2026-07-28T09:00:00Z"/>
         </Sources>
       </ImplicitData>
       <ExplicitData>
         <Concepts>
-          <Concept key="programming" value="1.0"/>
+          <Concept key="Rx.NET" value="1.0"/>
           <Concept key="C#" value="1.0"/>
           <Concept key=".NET" value="1.0"/>
           <Concept key="software architecture" value="0.9"/>
-          <Concept key="microservices" value="0.8"/>
+          <Concept key="AsyncAPI" value="0.8"/>
         </Concepts>
         <Sources>
-          <Source key="https://martinfowler.com/feed.atom" value="1.0" name="Martin Fowler" type="application/atom+xml"/>
-          <Source key="https://blog.codinghorror.com/rss/" value="0.95" name="Coding Horror" type="application/rss+xml"/>
+          <Source key="https://endjin.com/atom.xml" value="1.0" name="endjin blog (Atom)" type="application/atom+xml"/>
+          <Source key="https://martinfowler.com/feed.atom" value="0.95" name="Martin Fowler" type="application/atom+xml"/>
         </Sources>
       </ExplicitData>
     </Profile>
 
-    <Profile name="personal">
+    <Profile name="data-and-ai">
       <ImplicitData>
         <Concepts>
-          <Concept key="photography" value="0.85" from="https://petapixel.com" updated="2024-01-01T12:00:00Z"/>
-          <Concept key="travel" value="0.80" from="https://lonelyplanet.com" updated="2024-01-01T11:00:00Z"/>
-          <Concept key="cooking" value="0.75" from="https://seriouseats.com" updated="2024-01-01T10:00:00Z"/>
-          <Concept key="music" value="0.70" from="https://pitchfork.com" updated="2024-01-01T09:00:00Z"/>
-          <Concept key="books" value="0.65" from="https://lithub.com" updated="2024-01-01T08:00:00Z"/>
+          <Concept key="Power BI" value="0.93" from="https://endjin.com/blog/" updated="2026-08-06T12:00:00Z"/>
+          <Concept key="DAX" value="0.90" from="https://endjin.com/blog/" updated="2026-08-06T11:00:00Z"/>
+          <Concept key="DuckDB" value="0.88" from="https://duckdb.org" updated="2026-06-29T10:00:00Z"/>
+          <Concept key="Microsoft Fabric" value="0.82" from="https://endjin.com/what-we-do/" updated="2026-06-01T09:00:00Z"/>
+          <Concept key="data contracts" value="0.75" from="https://endjin.com/blog/" updated="2026-05-20T08:00:00Z"/>
         </Concepts>
         <Sources>
-          <Source key="https://petapixel.com/feed/" value="0.90" name="PetaPixel" type="application/rss+xml" from="https://example.com" updated="2024-01-01T12:00:00Z"/>
-          <Source key="https://www.seriouseats.com/feeds/all" value="0.85" name="Serious Eats" type="application/rss+xml" from="https://example.com" updated="2024-01-01T11:00:00Z"/>
+          <Source key="https://duckdb.org/feed.xml" value="0.90" name="DuckDB" type="application/rss+xml" from="https://endjin.com" updated="2026-06-29T12:00:00Z"/>
+          <Source key="https://powerbi.microsoft.com/en-us/blog/feed/" value="0.85" name="Power BI Blog" type="application/rss+xml" from="https://endjin.com" updated="2026-08-06T11:00:00Z"/>
         </Sources>
       </ImplicitData>
       <ExplicitData>
         <Concepts>
-          <Concept key="landscape photography" value="1.0"/>
-          <Concept key="hiking" value="0.95"/>
-          <Concept key="national parks" value="0.90"/>
+          <Concept key="VertiPaq" value="1.0"/>
+          <Concept key="medallion architecture" value="0.95"/>
+          <Concept key="Parquet" value="0.90"/>
         </Concepts>
         <Sources>
-          <Source key="https://www.nationalgeographic.com/feed" value="1.0" name="National Geographic" type="application/rss+xml"/>
+          <Source key="https://endjin.com/rss.xml" value="1.0" name="endjin blog" type="application/rss+xml"/>
         </Sources>
       </ExplicitData>
     </Profile>
@@ -68,24 +77,24 @@
     <Profile name="research">
       <ImplicitData>
         <Concepts>
-          <Concept key="machine learning" value="0.92" from="https://arxiv.org" updated="2024-01-01T12:00:00Z"/>
-          <Concept key="artificial intelligence" value="0.90" from="https://openai.com" updated="2024-01-01T11:00:00Z"/>
-          <Concept key="natural language processing" value="0.85" from="https://huggingface.co" updated="2024-01-01T10:00:00Z"/>
-          <Concept key="computer vision" value="0.80" from="https://pytorch.org" updated="2024-01-01T09:00:00Z"/>
+          <Concept key="generative AI" value="0.92" from="https://endjin.com/blog/" updated="2026-05-14T12:00:00Z"/>
+          <Concept key="AI evaluation" value="0.88" from="https://endjin.com/blog/" updated="2026-05-15T11:00:00Z"/>
+          <Concept key="model drift" value="0.85" from="https://endjin.com/blog/" updated="2026-05-15T10:00:00Z"/>
+          <Concept key="prompt engineering" value="0.80" from="https://endjin.com/blog/" updated="2026-08-07T09:00:00Z"/>
         </Concepts>
         <Sources>
-          <Source key="https://arxiv.org/rss/cs.AI" value="0.95" name="arXiv AI" type="application/rss+xml" from="https://example.com" updated="2024-01-01T12:00:00Z"/>
-          <Source key="https://openai.com/blog/rss.xml" value="0.90" name="OpenAI Blog" type="application/rss+xml" from="https://example.com" updated="2024-01-01T11:00:00Z"/>
+          <Source key="https://arxiv.org/rss/cs.AI" value="0.95" name="arXiv AI" type="application/rss+xml" from="https://endjin.com" updated="2026-08-01T12:00:00Z"/>
+          <Source key="https://endjin.com/rss.xml" value="0.90" name="endjin blog" type="application/rss+xml" from="https://endjin.com" updated="2026-08-07T11:00:00Z"/>
         </Sources>
       </ImplicitData>
       <ExplicitData>
         <Concepts>
-          <Concept key="transformer models" value="1.0"/>
-          <Concept key="deep learning" value="1.0"/>
-          <Concept key="neural networks" value="0.95"/>
+          <Concept key="agentic workflows" value="1.0"/>
+          <Concept key="retrieval augmented generation" value="1.0"/>
+          <Concept key="evaluation harnesses" value="0.95"/>
         </Concepts>
         <Sources>
-          <Source key="https://distill.pub/rss.xml" value="1.0" name="Distill" type="application/rss+xml"/>
+          <Source key="https://endjin.com/atom.xml" value="1.0" name="endjin blog (Atom)" type="application/atom+xml"/>
         </Sources>
       </ExplicitData>
     </Profile>

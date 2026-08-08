@@ -97,8 +97,8 @@ public class ITunesSyndicationExtensionContext
     /// <value>The episode number, or <see langword="null"/> if none was specified.</value>
     /// <remarks>
     ///     Apple defines this as a positive integer, so the loader refuses a zero or negative value
-    ///     rather than storing one: a loader that can produce a value the setter would reject is the
-    ///     defect §2.45 of <c>.endjin/build-warnings.md</c> records.
+    ///     rather than storing one. A loader that can produce a value its own setter would reject leaves
+    ///     the object in a state the type says is impossible.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than <c>1</c>.</exception>
     public int? Episode

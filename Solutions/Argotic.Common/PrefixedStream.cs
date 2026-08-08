@@ -18,8 +18,8 @@ namespace Argotic.Common;
 /// There is deliberately no seekable fast path. A seekable stream could be rewound instead of
 /// prefixed, which would avoid this type entirely for a <see cref="MemoryStream"/> or a buffered
 /// response body — and that is most traffic today. It is still not worth having: two code paths means
-/// two behaviours, and the one taken only by real sockets would be the one no test exercises. That is
-/// the shape <c>.endjin/build-warnings.md</c> §4.4 records shipping three regressions.
+/// two behaviours, and the one taken only by real sockets would be the one no test exercises. A path
+/// nothing exercises is where regressions ship unnoticed.
 /// </para>
 /// </remarks>
 /// <param name="prefix">The buffer holding the bytes already read from <paramref name="inner"/>.</param>

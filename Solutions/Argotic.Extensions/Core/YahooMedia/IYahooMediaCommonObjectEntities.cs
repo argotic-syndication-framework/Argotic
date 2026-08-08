@@ -28,7 +28,7 @@ namespace Argotic.Extensions.Core;
 ///         element of any family in the 136-document corpus, at <b>4,009</b> occurrences, and nearly all of it
 ///         arrives inside a <c>media:group</c> in a YouTube channel feed — for which
 ///         <see cref="YahooMediaSyndicationExtensionContext.Thumbnails"/> reads empty and nothing looks like a
-///         failure (<c>.endjin/build-warnings.md</c> §2.46).
+///         failure.
 ///     </para>
 ///     <para>
 ///         <see cref="Title"/>, <see cref="Description"/>, <see cref="Copyright"/>, <see cref="Player"/> and

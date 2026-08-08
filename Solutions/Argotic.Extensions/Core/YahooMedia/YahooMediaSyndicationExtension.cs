@@ -32,7 +32,7 @@ namespace Argotic.Extensions.Core;
 ///         that follows from not asking: <c>media:thumbnail</c> is the most frequent extension element of any
 ///         family in the 136-document corpus at <b>4,009</b> occurrences, and nearly every one of them sits
 ///         inside a <c>media:group</c>, where <see cref="YahooMediaSyndicationExtensionContext.Thumbnails"/>
-///         reads empty (<c>.endjin/build-warnings.md</c> §2.46).
+///         reads empty.
 ///     </para>
 /// </remarks>
 /// <example>

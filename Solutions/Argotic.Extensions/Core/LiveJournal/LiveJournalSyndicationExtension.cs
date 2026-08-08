@@ -27,9 +27,8 @@ namespace Argotic.Extensions.Core;
 ///     <c>journal</c>, <c>journalid</c>, <c>journaltype</c>, <c>mood</c>, <c>music</c>, <c>poster</c>,
 ///     <c>posterid</c>, <c>reply-count</c> and <c>security</c> — of which this extension models three;
 ///     it also models <c>preformatted</c> and <c>userpic</c>, which no observed document emits. Both
-///     halves are recorded as an open decision in §5.1 of <c>.endjin/build-warnings.md</c> rather than
-///     changed here, because an extension's namespace is its identity and moving it is a public
-///     behaviour change.
+///     halves are left as they are rather than changed here, because an extension's namespace is its
+///     identity and moving it is a public behaviour change.
 ///     </para>
 /// </remarks>
 /// <example>

@@ -113,7 +113,7 @@ internal static class SitemapImageExtensionExample
         imageExtension.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/talks/duckcon-07-2026-auditing-uk-energy-policy-without-a-cluster.jpg")));
         imageExtension.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/06/writing-effective-copilot-instructions-for-complex-codebases.png")));
         imageExtension.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/optimising-dax-formula-engine-and-storage-engine.png")));
-        imageExtension.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/endjin-logo.png")));
+        imageExtension.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/open-graph/og-endjin.png")));
 
         talksIndexUrl.Extensions.Add(imageExtension);
         sitemap.Urls.Add(talksIndexUrl);
@@ -213,9 +213,9 @@ internal static class SitemapImageExtensionExample
         };
 
         SitemapImageExtension cdnImages = new();
-        cdnImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/genai-reality-check.png")));
-        cdnImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_40/assets/images/blog/2026/05/genai-reality-check.png")));
-        cdnImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/endjin-logo.png")));
+        cdnImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/01/the-genai-reality-check-new-instrument-same-orchestra.png")));
+        cdnImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/01/the-genai-reality-check-new-instrument-same-orchestra.png")));
+        cdnImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/open-graph/og-endjin.png")));
 
         articleUrl.Extensions.Add(cdnImages);
         sitemap.Urls.Add(articleUrl);
@@ -230,10 +230,10 @@ internal static class SitemapImageExtensionExample
         };
 
         SitemapImageExtension seriesImages = new();
-        seriesImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/08/asyncapi-custom-transports.png")));
-        seriesImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/07/asyncapi-testing.png")));
-        seriesImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/07/asyncapi-filtering.png")));
-        seriesImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/07/asyncapi-durability.png")));
+        seriesImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/06/asyncapi-code-generation-with-corvus-part-08.png")));
+        seriesImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/optimising-dax-formula-engine-and-storage-engine.png")));
+        seriesImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/optimising-dax-why-cardinality-matters.png")));
+        seriesImages.Images.Add(new SitemapImage(new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/06/asyncapi-code-generation-with-corvus-part-08.png")));
 
         seriesUrl.Extensions.Add(seriesImages);
         sitemap.Urls.Add(seriesUrl);

@@ -79,7 +79,7 @@
       <cf:group ns="http://purl.org/dc/elements/1.1/" element="subject" label="Topic"/>
     </cf:listinfo>
 
-    <!-- iTunes Podcast: endjin publishes audio versions of some posts -->
+    <!-- iTunes Podcast: endjin publishes audio versions of many posts -->
     <itunes:author>endjin</itunes:author>
     <itunes:subtitle>Audio versions of the endjin blog</itunes:subtitle>
     <itunes:summary>Selected endjin blog posts, recorded for listening.</itunes:summary>
@@ -89,7 +89,7 @@
       <itunes:name>endjin</itunes:name>
       <itunes:email>hello@endjin.com</itunes:email>
     </itunes:owner>
-    <itunes:image href="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/endjin-logo.png"/>
+    <itunes:image href="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/open-graph/og-endjin.png"/>
     <itunes:type>episodic</itunes:type>
 
     <!-- Atom Self Link -->
@@ -171,7 +171,7 @@
         <media:copyright url="https://endjin.com/terms">Copyright 2026 endjin limited</media:copyright>
         <media:rating scheme="urn:simple">nonadult</media:rating>
       </media:content>
-      <media:thumbnail url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/genai-reality-check.png" width="160" height="90"/>
+      <media:thumbnail url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/01/the-genai-reality-check-new-instrument-same-orchestra.png" width="160" height="90"/>
       <media:player url="https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra" width="640" height="360"/>
 
       <!-- iTunes Episode -->
@@ -183,8 +183,8 @@
       <itunes:explicit>false</itunes:explicit>
 
       <!-- Pheed Photo Extension -->
-      <photo:imgsrc>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/05/genai-reality-check.png</photo:imgsrc>
-      <photo:thumbnail>https://res.cloudinary.com/endjin/image/upload/f_auto/q_40/assets/images/blog/2026/05/genai-reality-check.png</photo:thumbnail>
+      <photo:imgsrc>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/01/the-genai-reality-check-new-instrument-same-orchestra.png</photo:imgsrc>
+      <photo:thumbnail>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/01/the-genai-reality-check-new-instrument-same-orchestra.png</photo:thumbnail>
 
       <!-- Feed Synchronization -->
       <sx:sync id="endjin-blog-genai-reality-check" updates="1" deleted="false" noconflicts="true">

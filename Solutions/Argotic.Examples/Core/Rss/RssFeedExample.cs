@@ -38,7 +38,7 @@ internal static class RssFeedExample
         feed.Channel.Copyright = "Copyright 2026 endjin limited";
         feed.Channel.Generator = "Microsoft Spaces v1.1";
 
-        RssImage image = new(new Uri("https://endjin.com"), "endjin blog", new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/endjin-logo.png"))
+        RssImage image = new(new Uri("https://endjin.com"), "endjin blog", new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/open-graph/og-endjin.png"))
         {
             Description = "Read the endjin blog",
             Height = 32,

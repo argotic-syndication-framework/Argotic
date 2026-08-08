@@ -34,7 +34,7 @@
   <rights type="text">Copyright 2026 endjin limited</rights>
   <generator uri="https://github.com/argotic-syndication-framework/Argotic" version="3.0">Argotic Framework</generator>
   <icon>https://endjin.com/favicon.ico</icon>
-  <logo>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/endjin-logo.png</logo>
+  <logo>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/open-graph/og-endjin.png</logo>
 
   <!-- Dublin Core at feed level -->
   <dc:creator>endjin</dc:creator>

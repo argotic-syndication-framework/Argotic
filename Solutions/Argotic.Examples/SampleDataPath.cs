@@ -63,6 +63,12 @@ internal static class SampleDataPath
     /// <summary>Gets the path to the sample Podcasting 2.0 feed file.</summary>
     public static FilePath PodcastFeed => BasePath.CombineWithFilePath("PodcastFeed.xml");
 
+    /// <summary>Gets the path to the sample Atom Publishing Protocol service document file.</summary>
+    public static FilePath AtomServiceDocument => BasePath.CombineWithFilePath("AtomServiceDocument.xml");
+
+    /// <summary>Gets the path to the sample Atom Publishing Protocol category document file.</summary>
+    public static FilePath AtomCategoryDocument => BasePath.CombineWithFilePath("AtomCategoryDocument.xml");
+
     /// <summary>
     /// Opens a file for reading.
     /// </summary>

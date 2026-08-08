@@ -1,4 +1,5 @@
 using Argotic.Extensions.Core;
+using Argotic.Publishing;
 using Argotic.Syndication;
 using Spectre.Console;
 
@@ -1143,5 +1144,77 @@ internal static class ExampleOutput
 
         AnsiConsole.MarkupLine("  [blue]Atom Publishing Edited:[/]");
         AnsiConsole.MarkupLine($"    [dim]Edited on:[/] {ext.Context.EditedOn:yyyy-MM-dd HH:mm:ss}");
+    }
+
+    /// <summary>
+    /// Displays an <see cref="AtomServiceDocument"/> and every workspace and collection beneath it.
+    /// </summary>
+    /// <param name="document">The service document to display.</param>
+    public static void ShowAtomServiceDocument(AtomServiceDocument document)
+    {
+        ArgumentNullException.ThrowIfNull(document);
+
+        AnsiConsole.MarkupLine($"  [blue]Service Document:[/] {document.Workspaces.Count} workspace(s)");
+        foreach (AtomWorkspace workspace in document.Workspaces)
+        {
+            ShowAtomWorkspace(workspace);
+        }
+    }
+
+    /// <summary>
+    /// Displays an <see cref="AtomWorkspace"/> and its collections.
+    /// </summary>
+    /// <param name="workspace">The workspace to display.</param>
+    public static void ShowAtomWorkspace(AtomWorkspace workspace)
+    {
+        ArgumentNullException.ThrowIfNull(workspace);
+
+        AnsiConsole.MarkupLine($"    [dim]Workspace:[/] [blue]{Markup.Escape(workspace.Title?.Content ?? "(untitled)")}[/]");
+        foreach (AtomMemberResources collection in workspace.Collections)
+        {
+            ShowAtomMemberResources(collection);
+        }
+    }
+
+    /// <summary>
+    /// Displays an <see cref="AtomMemberResources"/> collection: where to post, and what it accepts.
+    /// </summary>
+    /// <param name="collection">The collection to display.</param>
+    public static void ShowAtomMemberResources(AtomMemberResources collection)
+    {
+        ArgumentNullException.ThrowIfNull(collection);
+
+        AnsiConsole.MarkupLine($"      [dim]Collection:[/] {Markup.Escape(collection.Title?.Content ?? "(untitled)")}");
+        AnsiConsole.MarkupLine($"        [dim]href:[/] {Markup.Escape(collection.Uri?.ToString() ?? "(none)")}");
+
+        // An empty Accepts list and an empty <accept/> element are different statements: the first
+        // means the collection said nothing, the second that it takes Atom entries only.
+        AnsiConsole.MarkupLine($"        [dim]accepts:[/] {(collection.Accepts.Count == 0 ? "(unstated)" : string.Join(", ", collection.Accepts.Select(a => Markup.Escape(a.MediaRange ?? "(entries only)"))))}");
+
+        foreach (AtomCategoryDocument categories in collection.Categories)
+        {
+            string form = categories.Uri is not null ? $"out-of-line -> {Markup.Escape(categories.Uri.ToString())}" : $"inline, {categories.Categories.Count} term(s)";
+            AnsiConsole.MarkupLine($"        [dim]categories:[/] {form}{(categories.IsFixed ? ", fixed" : string.Empty)}");
+        }
+    }
+
+    /// <summary>
+    /// Displays an <see cref="AtomCategoryDocument"/> and its terms.
+    /// </summary>
+    /// <param name="document">The category document to display.</param>
+    public static void ShowAtomCategoryDocument(AtomCategoryDocument document)
+    {
+        ArgumentNullException.ThrowIfNull(document);
+
+        AnsiConsole.MarkupLine($"  [blue]Category Document:[/] {document.Categories.Count} term(s){(document.IsFixed ? ", fixed vocabulary" : ", open vocabulary")}");
+        if (document.Scheme is not null)
+        {
+            AnsiConsole.MarkupLine($"    [dim]scheme:[/] {Markup.Escape(document.Scheme.ToString())}");
+        }
+
+        foreach (AtomCategory category in document.Categories)
+        {
+            AnsiConsole.MarkupLine($"    [dim]{Markup.Escape(category.Term ?? "(no term)")}:[/] {Markup.Escape(category.Label ?? string.Empty)}");
+        }
     }
 }

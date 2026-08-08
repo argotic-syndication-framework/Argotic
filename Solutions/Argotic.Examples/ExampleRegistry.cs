@@ -45,6 +45,7 @@ internal static class ExampleRegistry
         new("Network", "Trackback and XML-RPC protocols", "Net"),
         new("Generic", "Format-agnostic syndication", "Generic"),
         new("Sitemap", "XML Sitemap protocol", "Sitemap"),
+        new("Publishing", "Atom Publishing Protocol (RFC 5023)", "Publishing"),
         new("Extensions", "Syndication extensions (iTunes, Dublin Core, etc.)", "Extensions")
     ];
 
@@ -190,6 +191,20 @@ internal static class ExampleRegistry
         if (ns.Contains(".Common", StringComparison.OrdinalIgnoreCase))
         {
             return "Common";
+        }
+
+        // Before the Atom arm, deliberately. Publishing example types are named AtomServiceDocument,
+        // AtomWorkspace and so on, and they live under a .Publishing namespace -- but if this test ran
+        // after the ".Atom" one it would still reach here, because the namespace segment is Publishing,
+        // not Atom. The ordering is defensive rather than load-bearing, and it is cheaper to keep than
+        // to re-derive.
+        //
+        // The key returned here must also appear in Categories above. GetAllExamples iterates
+        // Categories and asks for each key, so a bucket that no category names is never read and its
+        // examples disappear from list, run and run-all without any error.
+        if (ns.Contains(".Publishing", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Publishing";
         }
 
         if (ns.Contains(".Atom", StringComparison.OrdinalIgnoreCase))

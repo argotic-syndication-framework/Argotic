@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  A stand-alone Atom Publishing Protocol category document, per RFC 5023 section 7.
+
+  This is what an out-of-line <categories href="..."/> in a service document points at. Serving the
+  vocabulary separately lets several collections share one list, and lets it change without
+  reissuing the service document.
+
+  fixed="yes" makes the list closed: a client must not post a category outside it. The default is
+  "no", and the difference matters — a client that ignores the attribute will happily invent terms
+  a server is entitled to reject.
+-->
+<categories xmlns="http://www.w3.org/2007/app"
+            xmlns:atom="http://www.w3.org/2005/Atom"
+            fixed="yes"
+            scheme="https://endjin.com/tags">
+  <atom:category term="dotnet" label=".NET"/>
+  <atom:category term="csharp" label="C#"/>
+  <atom:category term="rx-dotnet" label="Rx.NET"/>
+  <atom:category term="power-bi" label="Power BI"/>
+  <atom:category term="duckdb" label="DuckDB"/>
+  <atom:category term="ai" label="AI"/>
+  <atom:category term="developer-experience" label="Developer Experience"/>
+
+  <!-- A category naming its own scheme, overriding the document-level one. -->
+  <atom:category term="azure-weekly" scheme="https://azureweekly.info/tags" label="Azure Weekly"/>
+</categories>

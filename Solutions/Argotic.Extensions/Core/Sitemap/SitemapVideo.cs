@@ -872,6 +872,8 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             writer.WriteElementString("rating", xmlNamespace, this.Rating.Value.ToString("F1", CultureInfo.InvariantCulture));
         }
 
+        WriteContentSegmentElements(writer, xmlNamespace);
+
         if (this.ViewCount.HasValue)
         {
             writer.WriteElementString("view_count", xmlNamespace, this.ViewCount.Value.ToString(CultureInfo.InvariantCulture));
@@ -882,27 +884,35 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             writer.WriteElementString("publication_date", xmlNamespace, this.PublicationDate.Value.ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture));
         }
 
+        // The remaining order is not a matter of taste: sitemap-video-1.1.xsd declares an xsd:sequence,
+        // so tag belongs directly after publication_date, restriction after family_friendly, and platform
+        // and live near the end. This block used to write tag last and group uploader, platform and
+        // restriction after live, which made every video sitemap carrying one of them fail validation
+        // against Google's own schema. The round-trip tests could not see it, because the reader accepts
+        // any order and save-then-load stayed symmetric over the defect.
+        WriteTagElements(writer, xmlNamespace);
+
         if (!this.FamilyFriendly)
         {
             writer.WriteElementString("family_friendly", xmlNamespace, "no");
         }
+
+        WriteRestrictionElement(writer, xmlNamespace);
 
         if (this.RequiresSubscription)
         {
             writer.WriteElementString("requires_subscription", xmlNamespace, "yes");
         }
 
+        WriteUploaderElement(writer, xmlNamespace);
+        WritePlatformElement(writer, xmlNamespace);
+
         if (this.Live)
         {
             writer.WriteElementString("live", xmlNamespace, "yes");
         }
 
-        WriteUploaderElement(writer, xmlNamespace);
-        WritePlatformElement(writer, xmlNamespace);
-        WriteRestrictionElement(writer, xmlNamespace);
-        WriteTagElements(writer, xmlNamespace);
         WriteIdentifierElements(writer, xmlNamespace);
-        WriteContentSegmentElements(writer, xmlNamespace);
     }
 
     /// <summary>

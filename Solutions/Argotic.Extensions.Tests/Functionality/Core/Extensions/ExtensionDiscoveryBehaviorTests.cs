@@ -21,7 +21,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:itunes=""http://www.itunes.com/dtds/podcast-1.0.dtd""",
-            @"<itunes:author>Test Author</itunes:author>");
+            "<itunes:author>Test Author</itunes:author>");
 
         // Act
         RssFeed feed = new();
@@ -45,7 +45,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:dc=""http://purl.org/dc/elements/1.1/""",
-            @"<dc:creator>Test Creator</dc:creator>");
+            "<dc:creator>Test Creator</dc:creator>");
 
         // Act
         RssFeed feed = new();
@@ -69,7 +69,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:geo=""http://www.w3.org/2003/01/geo/wgs84_pos#""",
-            @"<geo:lat>40.7128</geo:lat><geo:long>-74.0060</geo:long>");
+            "<geo:lat>40.7128</geo:lat><geo:long>-74.0060</geo:long>");
 
         // Act
         RssFeed feed = new();
@@ -94,7 +94,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:itunes=""http://www.itunes.com/dtds/podcast-1.0.dtd"" xmlns:dc=""http://purl.org/dc/elements/1.1/""",
-            @"<itunes:author>Podcast Author</itunes:author><dc:creator>Dublin Core Creator</dc:creator>");
+            "<itunes:author>Podcast Author</itunes:author><dc:creator>Dublin Core Creator</dc:creator>");
 
         // Act
         RssFeed feed = new();
@@ -124,7 +124,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:media=""http://search.yahoo.com/mrss/""",
-            @"<media:content url=""http://example.com/video.mp4"" type=""video/mp4"" />");
+            """<media:content url="http://example.com/video.mp4" type="video/mp4" />""");
 
         // Act
         RssFeed feed = new();
@@ -147,7 +147,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:creativeCommons=""http://backend.userland.com/creativeCommonsRssModule""",
-            @"<creativeCommons:license>http://creativecommons.org/licenses/by/4.0/</creativeCommons:license>");
+            "<creativeCommons:license>http://creativecommons.org/licenses/by/4.0/</creativeCommons:license>");
 
         // Act
         RssFeed feed = new();
@@ -210,7 +210,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:dc=""http://purl.org/dc/elements/1.1/""",
-            @"<dc:creator>Item Creator</dc:creator>");
+            "<dc:creator>Item Creator</dc:creator>");
 
         // Act
         RssFeed feed = new();
@@ -349,7 +349,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:itunes=""http://www.itunes.com/dtds/podcast-1.0.dtd""",
-            @"<itunes:author>Test Author</itunes:author>");
+            "<itunes:author>Test Author</itunes:author>");
 
         RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
@@ -373,7 +373,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:dc=""http://purl.org/dc/elements/1.1/""",
-            @"<dc:creator>Test Creator</dc:creator>");
+            "<dc:creator>Test Creator</dc:creator>");
 
         RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
@@ -396,7 +396,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:itunes=""http://www.itunes.com/dtds/podcast-1.0.dtd""",
-            @"<itunes:author>Test Author</itunes:author>");
+            "<itunes:author>Test Author</itunes:author>");
 
         RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
@@ -419,7 +419,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:dc=""http://purl.org/dc/elements/1.1/""",
-            @"<dc:creator>Test Creator</dc:creator>");
+            "<dc:creator>Test Creator</dc:creator>");
 
         RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
@@ -469,7 +469,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:dc=""http://purl.org/dc/elements/1.1/""",
-            @"<dc:creator>Test Creator</dc:creator>");
+            "<dc:creator>Test Creator</dc:creator>");
 
         RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
@@ -489,7 +489,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:itunes=""http://www.itunes.com/dtds/podcast-1.0.dtd"" xmlns:dc=""http://purl.org/dc/elements/1.1/"" xmlns:geo=""http://www.w3.org/2003/01/geo/wgs84_pos#""",
-            @"<itunes:author>Podcast Author</itunes:author><dc:creator>Dublin Core Creator</dc:creator><geo:lat>40.7128</geo:lat><geo:long>-74.0060</geo:long>");
+            "<itunes:author>Podcast Author</itunes:author><dc:creator>Dublin Core Creator</dc:creator><geo:lat>40.7128</geo:lat><geo:long>-74.0060</geo:long>");
 
         RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
@@ -596,7 +596,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:slash=""http://purl.org/rss/1.0/modules/slash/""",
-            @"<slash:comments>42</slash:comments>");
+            "<slash:comments>42</slash:comments>");
 
         // Act
         RssFeed feed = new();
@@ -620,7 +620,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:content=""http://purl.org/rss/1.0/modules/content/""",
-            @"<content:encoded><![CDATA[<p>Full content here</p>]]></content:encoded>");
+            "<content:encoded><![CDATA[<p>Full content here</p>]]></content:encoded>");
 
         // Act
         RssFeed feed = new();
@@ -643,7 +643,7 @@ public class ExtensionDiscoveryBehaviorTests
         // Arrange
         string xml = ExtensionTestUtil.GetWrappedXml(
             @"xmlns:dcterms=""http://purl.org/dc/terms/""",
-            @"<dcterms:abstract>Test abstract content</dcterms:abstract>");
+            "<dcterms:abstract>Test abstract content</dcterms:abstract>");
 
         // Act
         RssFeed feed = new();

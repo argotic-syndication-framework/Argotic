@@ -16,12 +16,14 @@ namespace Argotic.Extensions.Tests.Functionality.Core.SimpleList;
 [TestClass]
 public class SimpleListSyndicationExtensionTest
 {
-    private const string Namespc = @"xmlns:cf=""http://www.microsoft.com/schemas/rss/core/2005""";
+    private const string Namespc = """
+                                   xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005"
+                                   """;
 
     private const string StrExtXml = "<cf:treatAs>list</cf:treatAs>" +
                                      "<cf:listinfo>" +
-                                     "<cf:sort ns=\"http://www.example.com/ns\" element=\"price\" label=\"Price\" data-type=\"number\" default=\"true\" />" +
-                                     "<cf:group ns=\"http://www.example.com/ns\" element=\"category\" label=\"Category\" />" +
+                                     """<cf:sort ns="http://www.example.com/ns" element="price" label="Price" data-type="number" default="true" />""" +
+                                     """<cf:group ns="http://www.example.com/ns" element="category" label="Category" />""" +
                                      "</cf:listinfo>";
 
     public TestContext? TestContext { get; set; }
@@ -887,7 +889,7 @@ public class SimpleListSyndicationExtensionTest
         string output = sw.ToString();
 
         // Assert
-        output.ShouldBe("<treatAs xmlns=\"http://www.microsoft.com/schemas/rss/core/2005\">list</treatAs>");
+        output.ShouldBe("""<treatAs xmlns="http://www.microsoft.com/schemas/rss/core/2005">list</treatAs>""");
     }
 
     /// <summary>
@@ -916,10 +918,10 @@ public class SimpleListSyndicationExtensionTest
 
         // Assert
         output.ShouldBe(
-            "<treatAs xmlns=\"http://www.microsoft.com/schemas/rss/core/2005\">list</treatAs>"
-            + "<listinfo xmlns=\"http://www.microsoft.com/schemas/rss/core/2005\">"
-            + "<sort ns=\"http://www.example.com/ns\" element=\"price\" label=\"Price\" data-type=\"number\" default=\"true\" />"
-            + "<group ns=\"http://www.example.com/ns\" element=\"category\" label=\"Category\" />"
+            """<treatAs xmlns="http://www.microsoft.com/schemas/rss/core/2005">list</treatAs>"""
+            + """<listinfo xmlns="http://www.microsoft.com/schemas/rss/core/2005">"""
+            + """<sort ns="http://www.example.com/ns" element="price" label="Price" data-type="number" default="true" />"""
+            + """<group ns="http://www.example.com/ns" element="category" label="Category" />"""
             + "</listinfo>");
     }
 

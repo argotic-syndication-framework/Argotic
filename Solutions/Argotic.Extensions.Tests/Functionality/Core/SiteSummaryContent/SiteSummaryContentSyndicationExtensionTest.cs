@@ -9,9 +9,11 @@ namespace Argotic.Extensions.Tests.Functionality.Core.SiteSummaryContent;
 [TestClass]
 public class SiteSummaryContentSyndicationExtensionTest
 {
-    private const string Namespc = @"xmlns:content=""http://purl.org/rss/1.0/modules/content/""";
+    private const string Namespc = """
+                                   xmlns:content="http://purl.org/rss/1.0/modules/content/"
+                                   """;
 
-    private readonly string toStringText = "<encoded xmlns=\"http://purl.org/rss/1.0/modules/content/\"><![CDATA[<p>Test encoded content</p>]]></encoded>";
+    private readonly string toStringText = """<encoded xmlns="http://purl.org/rss/1.0/modules/content/"><![CDATA[<p>Test encoded content</p>]]></encoded>""";
 
     private const string StrExtXml = "<content:encoded><![CDATA[<p>Test encoded content</p>]]></content:encoded>";
 

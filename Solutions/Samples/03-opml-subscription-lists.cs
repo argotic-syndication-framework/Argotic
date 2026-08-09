@@ -243,10 +243,10 @@ static int Depth(OpmlOutline outline)
 static string NestedDocument(int levels)
 {
     StringBuilder builder = new();
-    builder.Append("<opml version=\"2.0\"><head><title>deep</title></head><body>");
+    builder.Append("""<opml version="2.0"><head><title>deep</title></head><body>""");
     for (int level = 0; level < levels; level++)
     {
-        builder.Append(CultureInfo.InvariantCulture, $"<outline text=\"level {level}\">");
+        builder.Append(CultureInfo.InvariantCulture, $"""<outline text="level {level}">""");
     }
 
     builder.Append(string.Concat(Enumerable.Repeat("</outline>", levels)));

@@ -476,7 +476,7 @@ public class ApmlDocumentBehaviorTests
     public void ApmlDocument_LoadingMalformedXml_ThrowsXmlException()
     {
         // Arrange
-        const string malformedApml = "<?xml version=\"1.0\"?><APML><Unclosed>";
+        const string malformedApml = """<?xml version="1.0"?><APML><Unclosed>""";
         ApmlDocument document = new();
         using MemoryStream stream = new(Encoding.UTF8.GetBytes(malformedApml));
 

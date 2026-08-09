@@ -8,10 +8,12 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Pheed;
 [TestClass]
 public class PheedSyndicationExtensionTest
 {
-    const string namespc = @"xmlns:photo=""http://www.pheed.com/pheed/""";
+    const string namespc = """
+                           xmlns:photo="http://www.pheed.com/pheed/"
+                           """;
 
-    private readonly string nycText = "<thumbnail xmlns=\"http://www.pheed.com/pheed/\">http://www.example.com/thumbnail.jpg</thumbnail>" + Environment.NewLine
-                                                                                                                                          + "<imgsrc xmlns=\"http://www.pheed.com/pheed/\">http://www.example.com/</imgsrc>";
+    private readonly string nycText = """<thumbnail xmlns="http://www.pheed.com/pheed/">http://www.example.com/thumbnail.jpg</thumbnail>""" + Environment.NewLine
+                                                                                                                                          + """<imgsrc xmlns="http://www.pheed.com/pheed/">http://www.example.com/</imgsrc>""";
 
     private const string strExtXml = "<photo:thumbnail>http://www.example.com/thumbnail.jpg</photo:thumbnail><photo:imgsrc>http://www.example.com/</photo:imgsrc>";
 

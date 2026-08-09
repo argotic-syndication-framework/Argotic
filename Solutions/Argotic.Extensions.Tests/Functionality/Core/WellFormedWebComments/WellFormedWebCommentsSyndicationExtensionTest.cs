@@ -8,10 +8,12 @@ namespace Argotic.Extensions.Tests.Functionality.Core.WellFormedWebComments;
 [TestClass]
 public class WellFormedWebCommentsSyndicationExtensionTest
 {
-    private const string Namespc = @"xmlns:wfw=""http://wellformedweb.org/CommentAPI/""";
+    private const string Namespc = """
+                                   xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+                                   """;
 
-    private readonly string toStringText = "<comment xmlns=\"http://wellformedweb.org/CommentAPI/\">http://www.example.com/comments/post/1</comment>" + Environment.NewLine +
-                                           "<commentRss xmlns=\"http://wellformedweb.org/CommentAPI/\">http://www.example.com/comments/feed/1</commentRss>";
+    private readonly string toStringText = """<comment xmlns="http://wellformedweb.org/CommentAPI/">http://www.example.com/comments/post/1</comment>""" + Environment.NewLine +
+                                           """<commentRss xmlns="http://wellformedweb.org/CommentAPI/">http://www.example.com/comments/feed/1</commentRss>""";
 
     private const string StrExtXml = "<wfw:comment>http://www.example.com/comments/post/1</wfw:comment>"
                                      + "<wfw:commentRss>http://www.example.com/comments/feed/1</wfw:commentRss>";

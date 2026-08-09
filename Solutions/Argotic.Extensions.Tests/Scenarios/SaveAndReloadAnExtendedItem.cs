@@ -21,7 +21,10 @@ namespace Argotic.Extensions.Tests.Scenarios;
 [TestClass]
 public class SaveAndReloadAnExtendedItem
 {
-    private const string LiveJournalNamespace = @"xmlns:lj=""http://livejournal.org/rss/lj/2.0/""";
+    private const string LiveJournalNamespace =
+        """
+        xmlns:lj="http://livejournal.org/rss/lj/2.0/"
+        """;
 
     private const string LiveJournalItemWithAUserPicture =
         "<lj:music>Around the World</lj:music>"

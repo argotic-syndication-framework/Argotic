@@ -9,10 +9,12 @@ namespace Argotic.Extensions.Tests.Functionality.Core.FeedHistory;
 [TestClass]
 public class FeedHistorySyndicationExtensionTest
 {
-    private const string Namespc = @"xmlns:fh=""http://purl.org/syndication/history/1.0""";
+    private const string Namespc = """
+        xmlns:fh="http://purl.org/syndication/history/1.0"
+        """;
 
-    private readonly string toStringText = "<archive xmlns=\"http://purl.org/syndication/history/1.0\" />" + Environment.NewLine +
-                                           "<complete xmlns=\"http://purl.org/syndication/history/1.0\" />";
+    private readonly string toStringText = """<archive xmlns="http://purl.org/syndication/history/1.0" />""" + Environment.NewLine +
+                                           """<complete xmlns="http://purl.org/syndication/history/1.0" />""";
 
     private const string StrExtXml = "<fh:archive /><fh:complete />";
 

@@ -21,8 +21,8 @@ public class SyndicationRetrievalRegressionTests
         // The declaration names a non-UTF-8 encoding, so decoding as UTF-8 would replace the accented
         // bytes with U+FFFD instead of round-tripping them.
         byte[] data = Encoding.Latin1.GetBytes(
-            "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>"
-            + "<rss version=\"2.0\"><channel><title>Café Crème</title></channel></rss>");
+            """<?xml version="1.0" encoding="iso-8859-1"?>"""
+            + """<rss version="2.0"><channel><title>Café Crème</title></channel></rss>""");
         using MemoryStream stream = new(data);
 
         // Act

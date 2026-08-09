@@ -101,7 +101,7 @@ internal static class AtomUtility
             return;
         }
 
-        using StringReader wrapped = new($"<div xmlns=\"{XHTML_NAMESPACE}\">{content}</div>");
+        using StringReader wrapped = new($"""<div xmlns="{XHTML_NAMESPACE}">{content}</div>""");
         using XmlReader reader = XmlReader.Create(wrapped, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit });
         writer.WriteNode(reader, defattr: false);
     }

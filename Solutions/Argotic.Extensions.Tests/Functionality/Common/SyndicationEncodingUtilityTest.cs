@@ -287,7 +287,7 @@ public class SyndicationEncodingUtilityTest
     public void GetXmlEncoding_DefaultsToUtf8_WhenDeclarationHasNoEncoding()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\"?><root>content</root>";
+        string xml = """<?xml version="1.0"?><root>content</root>""";
 
         // Act
         Encoding result = SyndicationEncodingUtility.GetXmlEncoding(xml);
@@ -718,7 +718,7 @@ public class SyndicationEncodingUtilityTest
     public void CreateSafeNavigator_HandlesXmlWithNamespaces()
     {
         // Arrange
-        string xml = "<root xmlns=\"http://example.com\"><child>value</child></root>";
+        string xml = """<root xmlns="http://example.com"><child>value</child></root>""";
 
         // Act
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(xml);
@@ -779,7 +779,7 @@ public class SyndicationEncodingUtilityTest
     public void CreateSafeNavigator_FromStreamWithEncoding_CreatesNavigator()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\"?><root>test content</root>";
+        string xml = """<?xml version="1.0"?><root>test content</root>""";
         using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
 
         // Act
@@ -1150,7 +1150,7 @@ public class SyndicationEncodingUtilityTest
         string result = SyndicationEncodingUtility.DecodeHtmlEscapedString(escaped);
 
         // Assert
-        result.ShouldBe("<a href=\"http://example.com?q=hello world\">link</a>");
+        result.ShouldBe("""<a href="http://example.com?q=hello world">link</a>""");
     }
 
     /// <summary>
@@ -1327,8 +1327,8 @@ public class SyndicationEncodingUtilityTest
     public void CreateSafeNavigator_ResolvesEntityDeclaredInInternalDtdSubset()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\"?><!DOCTYPE rss [<!ENTITY nbsp \"&#160;\">]>"
-            + "<rss version=\"2.0\"><channel><title>a&nbsp;b</title></channel></rss>";
+        string xml = """<?xml version="1.0"?><!DOCTYPE rss [<!ENTITY nbsp "&#160;">]>"""
+            + """<rss version="2.0"><channel><title>a&nbsp;b</title></channel></rss>""";
 
         // Act
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(xml);

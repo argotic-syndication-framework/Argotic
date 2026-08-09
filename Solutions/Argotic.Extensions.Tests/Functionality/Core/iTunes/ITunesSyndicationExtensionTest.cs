@@ -17,25 +17,25 @@ public class ITunesSyndicationExtensionTest
                            xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
                            """;
 
-    private readonly string nycText = "<subtitle xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">That song you like.</subtitle>" + Environment.NewLine
-                                                                                                                                      + "<author xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">BigStar</author>" + Environment.NewLine
-                                                                                                                                      + "<summary xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">Duh... That song you like</summary>" + Environment.NewLine
-                                                                                                                                      + "<owner xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">" + Environment.NewLine
+    private readonly string nycText = """<subtitle xmlns="http://www.itunes.com/dtds/podcast-1.0.dtd">That song you like.</subtitle>""" + Environment.NewLine
+                                                                                                                                      + """<author xmlns="http://www.itunes.com/dtds/podcast-1.0.dtd">BigStar</author>""" + Environment.NewLine
+                                                                                                                                      + """<summary xmlns="http://www.itunes.com/dtds/podcast-1.0.dtd">Duh... That song you like</summary>""" + Environment.NewLine
+                                                                                                                                      + """<owner xmlns="http://www.itunes.com/dtds/podcast-1.0.dtd">""" + Environment.NewLine
                                                                                                                                       + "  <email>owner@bigstar.com</email>" + Environment.NewLine
                                                                                                                                       + "  <name>BigStar's Guy</name>" + Environment.NewLine
                                                                                                                                       + "</owner>" + Environment.NewLine
-                                                                                                                                      + "<image href=\"http://www.eexample.com/image.jpg\" xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" />" + Environment.NewLine
-                                                                                                                                      + "<duration xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">00:03:21</duration>" + Environment.NewLine
-                                                                                                                                      + "<keywords xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">loud,good for parties</keywords>" + Environment.NewLine
-                                                                                                                                      + "<explicit xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">clean</explicit>" + Environment.NewLine
-                                                                                                                                      + "<category text=\"Rock\" xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" />" + Environment.NewLine
-                                                                                                                                      + "<category text=\"Folk\" xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" />";
+                                                                                                                                      + """<image href="http://www.eexample.com/image.jpg" xmlns="http://www.itunes.com/dtds/podcast-1.0.dtd" />""" + Environment.NewLine
+                                                                                                                                      + """<duration xmlns="http://www.itunes.com/dtds/podcast-1.0.dtd">00:03:21</duration>""" + Environment.NewLine
+                                                                                                                                      + """<keywords xmlns="http://www.itunes.com/dtds/podcast-1.0.dtd">loud,good for parties</keywords>""" + Environment.NewLine
+                                                                                                                                      + """<explicit xmlns="http://www.itunes.com/dtds/podcast-1.0.dtd">clean</explicit>""" + Environment.NewLine
+                                                                                                                                      + """<category text="Rock" xmlns="http://www.itunes.com/dtds/podcast-1.0.dtd" />""" + Environment.NewLine
+                                                                                                                                      + """<category text="Folk" xmlns="http://www.itunes.com/dtds/podcast-1.0.dtd" />""";
 
     private const string strExtXml = "<itunes:subtitle>That song you like.</itunes:subtitle><itunes:author>BigStar</itunes:author>"
                                      + "<itunes:summary>Duh... That song you like</itunes:summary><itunes:owner><itunes:email>owner@bigstar.com</itunes:email>"
-                                     + "<itunes:name>BigStar's Guy</itunes:name></itunes:owner><itunes:image href=\"http://www.eexample.com/image.jpg\" />"
+                                     + """<itunes:name>BigStar's Guy</itunes:name></itunes:owner><itunes:image href="http://www.eexample.com/image.jpg" />"""
                                      + "<itunes:duration>00:03:21</itunes:duration><itunes:keywords>loud,good for parties</itunes:keywords><itunes:explicit>clean</itunes:explicit>"
-                                     + "<itunes:category text=\"Rock\" /><itunes:category text=\"Folk\" />";
+                                     + """<itunes:category text="Rock" /><itunes:category text="Folk" />""";
 
     public TestContext? TestContext { get; set; }
     /// <summary>

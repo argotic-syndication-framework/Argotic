@@ -22,7 +22,9 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Atom;
 public sealed class AtomLinkHrefTests
 {
     /// <summary>The characters an empty href attribute puts on the wire.</summary>
-    private const string EmptyHrefAttribute = "href=\"\"";
+    private const string EmptyHrefAttribute = """
+                                              href=""
+                                              """;
 
     private static AtomFeed Load(string entryChildren)
     {

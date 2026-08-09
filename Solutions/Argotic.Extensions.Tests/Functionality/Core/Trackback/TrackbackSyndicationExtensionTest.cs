@@ -8,9 +8,11 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Trackback;
 [TestClass]
 public class TrackbackSyndicationExtensionTest
 {
-    private const string Namespc = @"xmlns:trackback=""http://madskills.com/public/xml/rss/module/trackback/""";
+    private const string Namespc = """
+                                   xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/"
+                                   """;
 
-    private readonly string toStringText = "<ping xmlns=\"http://madskills.com/public/xml/rss/module/trackback/\">http://www.example.com/trackback/1</ping>";
+    private readonly string toStringText = """<ping xmlns="http://madskills.com/public/xml/rss/module/trackback/">http://www.example.com/trackback/1</ping>""";
 
     private const string StrExtXml = "<trackback:ping>http://www.example.com/trackback/1</trackback:ping>";
 

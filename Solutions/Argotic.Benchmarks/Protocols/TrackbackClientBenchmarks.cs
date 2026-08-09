@@ -58,12 +58,12 @@ public class TrackbackClientBenchmarks : IDisposable
     /// <summary>
     /// A successful Trackback response: the one-element document a server returns for an accepted ping.
     /// </summary>
-    private const string SuccessResponse = "<?xml version=\"1.0\" encoding=\"utf-8\"?><response><error>0</error></response>";
+    private const string SuccessResponse = """<?xml version="1.0" encoding="utf-8"?><response><error>0</error></response>""";
 
     /// <summary>
     /// A rejected ping, which carries an error flag and a human-readable message.
     /// </summary>
-    private const string ErrorResponse = "<?xml version=\"1.0\" encoding=\"utf-8\"?><response><error>1</error><message>The entry you are trying to ping does not accept Trackback pings.</message></response>";
+    private const string ErrorResponse = """<?xml version="1.0" encoding="utf-8"?><response><error>1</error><message>The entry you are trying to ping does not accept Trackback pings.</message></response>""";
 
     private static readonly Uri Host = new("http://benchmark.invalid/trackback/ping");
 

@@ -9,7 +9,9 @@ namespace Argotic.Extensions.Tests.Functionality.Core.SiteSummarySlash;
 [TestClass]
 public class SiteSummarySlashSyndicationExtensionTest
 {
-    private const string Namespc = @"xmlns:slash=""http://purl.org/rss/1.0/modules/slash/""";
+    private const string Namespc = """
+                                   xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+                                   """;
 
     private const string StrExtXml = "<slash:comments>42</slash:comments>"
                                      + "<slash:section><![CDATA[Technology]]></slash:section>"
@@ -27,10 +29,10 @@ public class SiteSummarySlashSyndicationExtensionTest
                                             + "<slash:hit_parade>100,200,300</slash:hit_parade>";
 
     private readonly string toStringText =
-        "<section xmlns=\"http://purl.org/rss/1.0/modules/slash/\"><![CDATA[Technology]]></section>" + Environment.NewLine +
-        "<department xmlns=\"http://purl.org/rss/1.0/modules/slash/\"><![CDATA[Software]]></department>" + Environment.NewLine +
-        "<comments xmlns=\"http://purl.org/rss/1.0/modules/slash/\">42</comments>" + Environment.NewLine +
-        "<hit_parade xmlns=\"http://purl.org/rss/1.0/modules/slash/\">100,200,300</hit_parade>";
+        """<section xmlns="http://purl.org/rss/1.0/modules/slash/"><![CDATA[Technology]]></section>""" + Environment.NewLine +
+        """<department xmlns="http://purl.org/rss/1.0/modules/slash/"><![CDATA[Software]]></department>""" + Environment.NewLine +
+        """<comments xmlns="http://purl.org/rss/1.0/modules/slash/">42</comments>""" + Environment.NewLine +
+        """<hit_parade xmlns="http://purl.org/rss/1.0/modules/slash/">100,200,300</hit_parade>""";
 
     public TestContext? TestContext { get; set; }
     /// <summary>

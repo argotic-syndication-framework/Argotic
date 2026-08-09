@@ -16,7 +16,9 @@ namespace Argotic.Extensions.Tests.Functionality.Core.AtomPublishing;
 [TestClass]
 public class AtomPublishingSyndicationExtensionTest
 {
-    private const string Namespace = @"xmlns:app=""http://www.w3.org/2007/app""";
+    private const string Namespace = """
+        xmlns:app="http://www.w3.org/2007/app"
+        """;
     private const string AppNamespace = "http://www.w3.org/2007/app";
     private const string DocumentationUri = "https://www.rfc-editor.org/rfc/rfc5023.html";
 
@@ -25,7 +27,7 @@ public class AtomPublishingSyndicationExtensionTest
 
     private static string GetExtensionXml(DateTime editedOn) => $"<app:edited>{SyndicationDateTimeUtility.ToRfc3339DateTime(editedOn)}</app:edited>";
 
-    private static string GetToStringXml(DateTime editedOn) => $"<edited xmlns=\"{AppNamespace}\">{SyndicationDateTimeUtility.ToRfc3339DateTime(editedOn)}</edited>";
+    private static string GetToStringXml(DateTime editedOn) => $"""<edited xmlns="{AppNamespace}">{SyndicationDateTimeUtility.ToRfc3339DateTime(editedOn)}</edited>""";
 
     public TestContext? TestContext { get; set; }
 

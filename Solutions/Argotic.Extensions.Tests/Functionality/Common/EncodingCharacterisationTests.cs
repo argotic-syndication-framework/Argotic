@@ -157,14 +157,14 @@ public sealed class EncodingCharacterisationTests
                 yield return
                 [
                     "utf-8 mark, declared iso-8859-1" + suffix,
-                    (byte[])[.. Encoding.UTF8.GetPreamble(), .. Encoding.UTF8.GetBytes($"<?xml version=\"1.0\" encoding=\"iso-8859-1\"?><r>{padding}</r>")],
+                    (byte[])[.. Encoding.UTF8.GetPreamble(), .. Encoding.UTF8.GetBytes($"""<?xml version="1.0" encoding="iso-8859-1"?><r>{padding}</r>""")],
                     "iso-8859-1",
                 ];
 
                 yield return
                 [
                     "utf-8 mark, declared us-ascii" + suffix,
-                    (byte[])[.. Encoding.UTF8.GetPreamble(), .. Encoding.UTF8.GetBytes($"<?xml version=\"1.0\" encoding=\"us-ascii\"?><r>{padding}</r>")],
+                    (byte[])[.. Encoding.UTF8.GetPreamble(), .. Encoding.UTF8.GetBytes($"""<?xml version="1.0" encoding="us-ascii"?><r>{padding}</r>""")],
                     "us-ascii",
                 ];
 
@@ -173,14 +173,14 @@ public sealed class EncodingCharacterisationTests
                 yield return
                 [
                     "utf-16 LE mark, declared utf-8" + suffix,
-                    (byte[])[.. Encoding.Unicode.GetPreamble(), .. Encoding.Unicode.GetBytes($"<?xml version=\"1.0\" encoding=\"utf-8\"?><r>{padding}</r>")],
+                    (byte[])[.. Encoding.Unicode.GetPreamble(), .. Encoding.Unicode.GetBytes($"""<?xml version="1.0" encoding="utf-8"?><r>{padding}</r>""")],
                     "utf-8",
                 ];
 
                 yield return
                 [
                     "utf-16 BE mark, declared iso-8859-1" + suffix,
-                    (byte[])[.. Encoding.BigEndianUnicode.GetPreamble(), .. Encoding.BigEndianUnicode.GetBytes($"<?xml version=\"1.0\" encoding=\"iso-8859-1\"?><r>{padding}</r>")],
+                    (byte[])[.. Encoding.BigEndianUnicode.GetPreamble(), .. Encoding.BigEndianUnicode.GetBytes($"""<?xml version="1.0" encoding="iso-8859-1"?><r>{padding}</r>""")],
                     "iso-8859-1",
                 ];
 
@@ -189,7 +189,7 @@ public sealed class EncodingCharacterisationTests
                 yield return
                 [
                     "no mark, declared iso-8859-1" + suffix,
-                    Encoding.ASCII.GetBytes($"<?xml version=\"1.0\" encoding=\"iso-8859-1\"?><r>{padding}</r>"),
+                    Encoding.ASCII.GetBytes($"""<?xml version="1.0" encoding="iso-8859-1"?><r>{padding}</r>"""),
                     "iso-8859-1",
                 ];
             }
@@ -232,7 +232,7 @@ public sealed class EncodingCharacterisationTests
         yield return (
             "6. declared windows-1252, body has 0x92",
             [
-                .. Encoding.ASCII.GetBytes("<?xml version=\"1.0\" encoding=\"windows-1252\"?><r><title>it"),
+                .. Encoding.ASCII.GetBytes("""<?xml version="1.0" encoding="windows-1252"?><r><title>it"""),
                 0x92,
                 .. Encoding.ASCII.GetBytes("s</title></r>"),
             ],
@@ -268,7 +268,7 @@ public sealed class EncodingCharacterisationTests
         yield return (
             "13. declared utf-8, body has invalid utf-8",
             [
-                .. Encoding.ASCII.GetBytes("<?xml version=\"1.0\" encoding=\"utf-8\"?><r><title>caf"),
+                .. Encoding.ASCII.GetBytes("""<?xml version="1.0" encoding="utf-8"?><r><title>caf"""),
                 0xE9,
                 .. Encoding.ASCII.GetBytes("</title></r>"),
             ],
@@ -278,7 +278,7 @@ public sealed class EncodingCharacterisationTests
         //      reading the document whole, or this silently becomes utf-8 and the accents break.
         yield return (
             "15a. declaration padded past the probe window",
-            Latin1().GetBytes($"<?xml version=\"1.0\"{new string(' ', 600)}encoding=\"iso-8859-1\"?><r><title>{LatinPayload}</title></r>"),
+            Latin1().GetBytes($"""<?xml version="1.0"{new string(' ', 600)}encoding="iso-8859-1"?><r><title>{LatinPayload}</title></r>"""),
             LatinPayload);
 
         // 15b. The declaration's `encoding=` sits INSIDE the 512-byte window but its `?>` does not.
@@ -288,15 +288,15 @@ public sealed class EncodingCharacterisationTests
         //      `encoding=`, so both rules behave the same on it.
         yield return (
             "15b. encoding inside the window, close tag outside it",
-            Latin1().GetBytes($"<?xml version=\"1.0\" encoding=\"iso-8859-1\"{new string(' ', 500)}?><r><title>{LatinPayload}</title></r>"),
+            Latin1().GetBytes($"""<?xml version="1.0" encoding="iso-8859-1"{new string(' ', 500)}?><r><title>{LatinPayload}</title></r>"""),
             LatinPayload);
     }
 
     private static string Document(string? declaredEncoding, string payload)
     {
         string declaration = declaredEncoding is null
-            ? "<?xml version=\"1.0\"?>"
-            : $"<?xml version=\"1.0\" encoding=\"{declaredEncoding}\"?>";
+            ? """<?xml version="1.0"?>"""
+            : $"""<?xml version="1.0" encoding="{declaredEncoding}"?>""";
 
         return $"{declaration}<r><title>{payload}</title></r>";
     }

@@ -21,17 +21,19 @@ namespace Argotic.Extensions.Tests.Scenarios;
 public class ReadExtensionsFromBothFormats
 {
     private const string Namespaces =
-        @"xmlns:content=""http://purl.org/rss/1.0/modules/content/"" " +
-        @"xmlns:dc=""http://purl.org/dc/elements/1.1/"" " +
-        @"xmlns:dcterms=""http://purl.org/dc/terms/"" " +
-        @"xmlns:geo=""http://www.w3.org/2003/01/geo/wgs84_pos#"" " +
-        @"xmlns:itunes=""http://www.itunes.com/dtds/podcast-1.0.dtd"" " +
-        @"xmlns:media=""http://search.yahoo.com/mrss/"" " +
-        @"xmlns:photo=""http://www.pheed.com/pheed/"" " +
-        @"xmlns:slash=""http://purl.org/rss/1.0/modules/slash/"" " +
-        @"xmlns:trackback=""http://madskills.com/public/xml/rss/module/trackback/"" " +
-        @"xmlns:wfw=""http://wellformedweb.org/CommentAPI/"" " +
-        @"xmlns:cf=""http://www.microsoft.com/schemas/rss/core/2005""";
+        """xmlns:content="http://purl.org/rss/1.0/modules/content/" """ +
+        """xmlns:dc="http://purl.org/dc/elements/1.1/" """ +
+        """xmlns:dcterms="http://purl.org/dc/terms/" """ +
+        """xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" """ +
+        """xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" """ +
+        """xmlns:media="http://search.yahoo.com/mrss/" """ +
+        """xmlns:photo="http://www.pheed.com/pheed/" """ +
+        """xmlns:slash="http://purl.org/rss/1.0/modules/slash/" """ +
+        """xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/" """ +
+        """xmlns:wfw="http://wellformedweb.org/CommentAPI/" """ +
+        """
+        xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005"
+        """;
 
     private const string ExtensionElements =
         "<content:encoded><![CDATA[<p>The body</p>]]></content:encoded>" +
@@ -40,12 +42,12 @@ public class ReadExtensionsFromBothFormats
         "<dcterms:abstract>An abstract</dcterms:abstract>" +
         "<geo:lat>51.5074</geo:lat><geo:long>-0.1278</geo:long>" +
         "<itunes:author>An Author</itunes:author><itunes:duration>1234</itunes:duration>" +
-        @"<media:content url=""http://example.com/media.mp4"" />" +
+        """<media:content url="http://example.com/media.mp4" />""" +
         "<media:title>A media title</media:title>" +
-        @"<photo:imgsrc>http://example.com/photo.jpg</photo:imgsrc>" +
+        "<photo:imgsrc>http://example.com/photo.jpg</photo:imgsrc>" +
         "<slash:section>articles</slash:section>" +
         "<slash:comments>17</slash:comments>" +
-        @"<trackback:ping>http://example.com/trackback</trackback:ping>" +
+        "<trackback:ping>http://example.com/trackback</trackback:ping>" +
         "<wfw:comment>http://example.com/comment</wfw:comment>" +
         "<cf:treatAs>list</cf:treatAs>";
 

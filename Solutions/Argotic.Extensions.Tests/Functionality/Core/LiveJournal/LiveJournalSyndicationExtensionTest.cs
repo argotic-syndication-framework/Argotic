@@ -10,16 +10,18 @@ namespace Argotic.Extensions.Tests.Functionality.Core.LiveJournal;
 [TestClass]
 public class LiveJournalSyndicationExtensionTest
 {
-    private const string Namespc = @"xmlns:lj=""http://livejournal.org/rss/lj/2.0/""";
+    private const string Namespc = """
+                                   xmlns:lj="http://livejournal.org/rss/lj/2.0/"
+                                   """;
 
-    private readonly string toStringText = "<music xmlns=\"http://livejournal.org/rss/lj/2.0/\"><![CDATA[Test Music Track]]></music>" + Environment.NewLine +
-                                           "<mood id=\"1\" xmlns=\"http://livejournal.org/rss/lj/2.0/\"><![CDATA[Happy]]></mood>" + Environment.NewLine +
-                                           "<security type=\"public\" xmlns=\"http://livejournal.org/rss/lj/2.0/\" />" + Environment.NewLine +
-                                           "<preformatted xmlns=\"http://livejournal.org/rss/lj/2.0/\" />";
+    private readonly string toStringText = """<music xmlns="http://livejournal.org/rss/lj/2.0/"><![CDATA[Test Music Track]]></music>""" + Environment.NewLine +
+                                           """<mood id="1" xmlns="http://livejournal.org/rss/lj/2.0/"><![CDATA[Happy]]></mood>""" + Environment.NewLine +
+                                           """<security type="public" xmlns="http://livejournal.org/rss/lj/2.0/" />""" + Environment.NewLine +
+                                           """<preformatted xmlns="http://livejournal.org/rss/lj/2.0/" />""";
 
     private const string StrExtXml = "<lj:music>Test Music Track</lj:music>"
-                                     + "<lj:mood id=\"1\">Happy</lj:mood>"
-                                     + "<lj:security type=\"public\" />"
+                                     + """<lj:mood id="1">Happy</lj:mood>"""
+                                     + """<lj:security type="public" />"""
                                      + "<lj:preformatted />";
 
     /// <summary>
@@ -28,8 +30,8 @@ public class LiveJournalSyndicationExtensionTest
     /// differ in how the text is escaped, not in what it is.
     /// </summary>
     private const string StrExtXmlWritten = "<lj:music><![CDATA[Test Music Track]]></lj:music>"
-                                            + "<lj:mood id=\"1\"><![CDATA[Happy]]></lj:mood>"
-                                            + "<lj:security type=\"public\" />"
+                                            + """<lj:mood id="1"><![CDATA[Happy]]></lj:mood>"""
+                                            + """<lj:security type="public" />"""
                                             + "<lj:preformatted />";
 
     public TestContext? TestContext { get; set; }

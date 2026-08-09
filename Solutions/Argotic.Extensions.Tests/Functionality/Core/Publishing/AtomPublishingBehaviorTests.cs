@@ -92,7 +92,7 @@ public class AtomPublishingBehaviorTests
     public void AtomAcceptedMediaRange_Load_LoadsFromXml()
     {
         // Arrange
-        string xml = "<accept xmlns=\"http://www.w3.org/2007/app\">image/png</accept>";
+        string xml = """<accept xmlns="http://www.w3.org/2007/app">image/png</accept>""";
         var navigator = CreateNavigator(xml);
         navigator.MoveToFirstChild();
 

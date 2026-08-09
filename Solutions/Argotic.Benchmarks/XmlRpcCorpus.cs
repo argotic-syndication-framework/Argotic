@@ -35,7 +35,7 @@ namespace Argotic.Benchmarks;
 /// </remarks>
 internal static class XmlRpcCorpus
 {
-    private const string ResponsePrefix = "<?xml version=\"1.0\"?><methodResponse><params><param>";
+    private const string ResponsePrefix = """<?xml version="1.0"?><methodResponse><params><param>""";
 
     private const string ResponseSuffix = "</param></params></methodResponse>";
 
@@ -264,7 +264,7 @@ internal static class XmlRpcCorpus
     /// </remarks>
     public static string FaultResponse() =>
         string.Concat(
-            "<?xml version=\"1.0\"?><methodResponse><fault><value><struct>",
+            """<?xml version="1.0"?><methodResponse><fault><value><struct>""",
             "<member><name>faultCode</name><value><int>4</int></value></member>",
             "<member><name>faultString</name><value><string>Too many parameters.</string></value></member>",
             "</struct></value></fault></methodResponse>");

@@ -34,7 +34,7 @@ public class SyndicationResourceAdapterTests
     {
         // Arrange
         SyndicationResourceLoadSettings settings = new() { RetrievalLimit = 7 };
-        XPathNavigator navigator = NavigatorFor("<rss version=\"2.0\"><channel><title>Title</title></channel></rss>");
+        XPathNavigator navigator = NavigatorFor("""<rss version="2.0"><channel><title>Title</title></channel></rss>""");
 
         // Act
         SyndicationResourceAdapter adapter = new(navigator, settings);
@@ -56,7 +56,7 @@ public class SyndicationResourceAdapterTests
     public void Constructor_WithNullSettings_Throws()
     {
         // Arrange
-        XPathNavigator navigator = NavigatorFor("<rss version=\"2.0\"><channel><title>Title</title></channel></rss>");
+        XPathNavigator navigator = NavigatorFor("""<rss version="2.0"><channel><title>Title</title></channel></rss>""");
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new SyndicationResourceAdapter(navigator, null!));

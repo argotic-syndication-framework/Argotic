@@ -11,7 +11,9 @@ namespace Argotic.Extensions.Tests.Functionality.Core.YahooMedia;
 [TestClass]
 public class YahooMediaSyndicationExtensionTest
 {
-    private const string MediaNamespace = @"xmlns:media=""http://search.yahoo.com/mrss/""";
+    private const string MediaNamespace = """
+                                          xmlns:media="http://search.yahoo.com/mrss/"
+                                          """;
 
     public TestContext? TestContext { get; set; }
 

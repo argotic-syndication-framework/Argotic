@@ -99,7 +99,7 @@ public class ConditionalGetTests
         {
             HttpResponseMessage response = new(HttpStatusCode.OK)
             {
-                Content = new StringContent("<rss version=\"2.0\"><channel /></rss>"),
+                Content = new StringContent("""<rss version="2.0"><channel /></rss>"""),
             };
             response.Content.Headers.LastModified = new DateTimeOffset(2024, 6, 1, 0, 0, 0, TimeSpan.Zero);
             return Task.FromResult(response);

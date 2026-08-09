@@ -9,7 +9,9 @@ namespace Argotic.Extensions.Tests.Functionality.Core.SiteSummarySyndication;
 [TestClass]
 public class SiteSummaryUpdateSyndicationExtensionTest
 {
-    private const string Namespc = @"xmlns:sy=""http://purl.org/rss/1.0/modules/syndication/""";
+    private const string Namespc = """
+                                   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+                                   """;
 
     private const string StrExtXml = "<sy:updatePeriod>hourly</sy:updatePeriod>"
                                      + "<sy:updateFrequency>2</sy:updateFrequency>"
@@ -26,9 +28,9 @@ public class SiteSummaryUpdateSyndicationExtensionTest
                                             + "<sy:updateBase>2010-08-01T00:00:00.00Z</sy:updateBase>";
 
     private readonly string toStringText =
-        "<updatePeriod xmlns=\"http://purl.org/rss/1.0/modules/syndication/\">hourly</updatePeriod>" + Environment.NewLine +
-        "<updateFrequency xmlns=\"http://purl.org/rss/1.0/modules/syndication/\">2</updateFrequency>" + Environment.NewLine +
-        "<updateBase xmlns=\"http://purl.org/rss/1.0/modules/syndication/\">2010-08-01T00:00:00.00Z</updateBase>";
+        """<updatePeriod xmlns="http://purl.org/rss/1.0/modules/syndication/">hourly</updatePeriod>""" + Environment.NewLine +
+        """<updateFrequency xmlns="http://purl.org/rss/1.0/modules/syndication/">2</updateFrequency>""" + Environment.NewLine +
+        """<updateBase xmlns="http://purl.org/rss/1.0/modules/syndication/">2010-08-01T00:00:00.00Z</updateBase>""";
 
     public TestContext? TestContext { get; set; }
     /// <summary>

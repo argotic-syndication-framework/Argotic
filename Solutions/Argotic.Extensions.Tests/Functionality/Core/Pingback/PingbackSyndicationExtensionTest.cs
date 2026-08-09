@@ -8,10 +8,12 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Pingback;
 [TestClass]
 public class PingbackSyndicationExtensionTest
 {
-    private const string Namespc = @"xmlns:pingback=""http://madskills.com/public/xml/rss/module/pingback/""";
+    private const string Namespc = """
+                                   xmlns:pingback="http://madskills.com/public/xml/rss/module/pingback/"
+                                   """;
 
-    private readonly string toStringText = "<server xmlns=\"http://madskills.com/public/xml/rss/module/pingback/\">http://www.example.com/xmlrpc.php</server>" + Environment.NewLine +
-                                           "<target xmlns=\"http://madskills.com/public/xml/rss/module/pingback/\">http://www.example.com/post/1</target>";
+    private readonly string toStringText = """<server xmlns="http://madskills.com/public/xml/rss/module/pingback/">http://www.example.com/xmlrpc.php</server>""" + Environment.NewLine +
+                                           """<target xmlns="http://madskills.com/public/xml/rss/module/pingback/">http://www.example.com/post/1</target>""";
 
     private const string StrExtXml = "<pingback:server>http://www.example.com/xmlrpc.php</pingback:server>"
                                      + "<pingback:target>http://www.example.com/post/1</pingback:target>";

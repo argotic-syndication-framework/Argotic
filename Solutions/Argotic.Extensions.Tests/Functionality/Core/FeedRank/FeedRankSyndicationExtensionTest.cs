@@ -8,7 +8,9 @@ namespace Argotic.Extensions.Tests.Functionality.Core.FeedRank;
 [TestClass]
 public class FeedRankSyndicationExtensionTest
 {
-    private const string namespc = @"xmlns:re=""http://purl.org/atompub/rank/1.0""";
+    private const string namespc = """
+        xmlns:re="http://purl.org/atompub/rank/1.0"
+        """;
     private const string nycText = """<rank scheme="http://example.com/scheme.txt" domain="http://example.com/" label="Title" xmlns="http://purl.org/atompub/rank/1.0">1.0</rank>""";
     private const string writeToText = """<rank scheme="http://example.com/scheme.txt" domain="http://example.com/" label="Title" xmlns="http://purl.org/atompub/rank/1.0">1.0</rank>""";
     private const string strExtXml = """<re:rank scheme="http://example.com/scheme.txt" domain="http://example.com/" label="Title">1.0</re:rank>""";

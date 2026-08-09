@@ -12,7 +12,9 @@ namespace Argotic.Extensions.Tests.Functionality.Core.FeedSync;
 [TestClass]
 public class FeedSynchronizationSyndicationExtensionTest
 {
-    private const string Namespc = @"xmlns:sx=""http://feedsync.org/2007/feedsync""";
+    private const string Namespc = """
+        xmlns:sx="http://feedsync.org/2007/feedsync"
+        """;
 
     private const string StrExtXml = """<sx:sharing since="2010-01-01" until="2010-12-31" expires="2011-01-01T00:00:00Z" />""";
 

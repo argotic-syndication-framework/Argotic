@@ -8,10 +8,12 @@ namespace Argotic.Extensions.Tests.Functionality.Core.CreativeCommons;
 [TestClass]
 public class CreativeCommonsSyndicationExtensionTest
 {
-    const string namespc = @"xmlns:creativeCommons=""http://backend.userland.com/creativeCommonsRssModule""";
+    const string namespc = """
+        xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule"
+        """;
 
-    private const string nycText = "<license xmlns=\"http://backend.userland.com/creativeCommonsRssModule\">http://www.example.com/license1.html</license>" +
-                                    "<license xmlns=\"http://backend.userland.com/creativeCommonsRssModule\">http://www.example.com/license2.html</license>";
+    private const string nycText = """<license xmlns="http://backend.userland.com/creativeCommonsRssModule">http://www.example.com/license1.html</license>""" +
+                                    """<license xmlns="http://backend.userland.com/creativeCommonsRssModule">http://www.example.com/license2.html</license>""";
 
     private const string strExtXml = "<creativeCommons:license>http://www.example.com/license1.html</creativeCommons:license>"
                                      + "<creativeCommons:license>http://www.example.com/license2.html</creativeCommons:license>";

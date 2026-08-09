@@ -12,8 +12,10 @@ public class WellFormedWebCommentsSyndicationExtensionTest
                                    xmlns:wfw="http://wellformedweb.org/CommentAPI/"
                                    """;
 
-    private readonly string toStringText = """<comment xmlns="http://wellformedweb.org/CommentAPI/">http://www.example.com/comments/post/1</comment>""" + Environment.NewLine +
-                                           """<commentRss xmlns="http://wellformedweb.org/CommentAPI/">http://www.example.com/comments/feed/1</commentRss>""";
+    private readonly string toStringText = """
+        <comment xmlns="http://wellformedweb.org/CommentAPI/">http://www.example.com/comments/post/1</comment>
+        <commentRss xmlns="http://wellformedweb.org/CommentAPI/">http://www.example.com/comments/feed/1</commentRss>
+        """.ReplaceLineEndings();
 
     private const string StrExtXml = "<wfw:comment>http://www.example.com/comments/post/1</wfw:comment>"
                                      + "<wfw:commentRss>http://www.example.com/comments/feed/1</wfw:commentRss>";

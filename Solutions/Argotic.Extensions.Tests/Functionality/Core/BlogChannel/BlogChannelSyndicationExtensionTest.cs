@@ -12,10 +12,12 @@ public class BlogChannelSyndicationExtensionTest
         xmlns:blogChannel="http://backend.userland.com/blogChannelModule"
         """;
 
-    private readonly string toStringText = """<blogRoll xmlns="http://backend.userland.com/blogChannelModule">http://www.example.com/blogroll.opml</blogRoll>""" + Environment.NewLine +
-                                           """<mySubscriptions xmlns="http://backend.userland.com/blogChannelModule">http://www.example.com/subscriptions.opml</mySubscriptions>""" + Environment.NewLine +
-                                           """<blink xmlns="http://backend.userland.com/blogChannelModule">http://www.example.com/promoted</blink>""" + Environment.NewLine +
-                                           """<changes xmlns="http://backend.userland.com/blogChannelModule">http://www.example.com/changes.xml</changes>""";
+    private readonly string toStringText = """
+        <blogRoll xmlns="http://backend.userland.com/blogChannelModule">http://www.example.com/blogroll.opml</blogRoll>
+        <mySubscriptions xmlns="http://backend.userland.com/blogChannelModule">http://www.example.com/subscriptions.opml</mySubscriptions>
+        <blink xmlns="http://backend.userland.com/blogChannelModule">http://www.example.com/promoted</blink>
+        <changes xmlns="http://backend.userland.com/blogChannelModule">http://www.example.com/changes.xml</changes>
+        """.ReplaceLineEndings();
 
     private const string StrExtXml = "<blogChannel:blogRoll>http://www.example.com/blogroll.opml</blogChannel:blogRoll>"
                                      + "<blogChannel:mySubscriptions>http://www.example.com/subscriptions.opml</blogChannel:mySubscriptions>"

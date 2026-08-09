@@ -12,8 +12,10 @@ public class PheedSyndicationExtensionTest
                            xmlns:photo="http://www.pheed.com/pheed/"
                            """;
 
-    private readonly string nycText = """<thumbnail xmlns="http://www.pheed.com/pheed/">http://www.example.com/thumbnail.jpg</thumbnail>""" + Environment.NewLine
-                                                                                                                                          + """<imgsrc xmlns="http://www.pheed.com/pheed/">http://www.example.com/</imgsrc>""";
+    private readonly string nycText = """
+        <thumbnail xmlns="http://www.pheed.com/pheed/">http://www.example.com/thumbnail.jpg</thumbnail>
+        <imgsrc xmlns="http://www.pheed.com/pheed/">http://www.example.com/</imgsrc>
+        """.ReplaceLineEndings();
 
     private const string strExtXml = "<photo:thumbnail>http://www.example.com/thumbnail.jpg</photo:thumbnail><photo:imgsrc>http://www.example.com/</photo:imgsrc>";
 

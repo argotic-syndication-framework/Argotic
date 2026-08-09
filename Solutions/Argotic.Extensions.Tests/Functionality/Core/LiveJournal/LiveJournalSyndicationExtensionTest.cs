@@ -14,10 +14,12 @@ public class LiveJournalSyndicationExtensionTest
                                    xmlns:lj="http://livejournal.org/rss/lj/2.0/"
                                    """;
 
-    private readonly string toStringText = """<music xmlns="http://livejournal.org/rss/lj/2.0/"><![CDATA[Test Music Track]]></music>""" + Environment.NewLine +
-                                           """<mood id="1" xmlns="http://livejournal.org/rss/lj/2.0/"><![CDATA[Happy]]></mood>""" + Environment.NewLine +
-                                           """<security type="public" xmlns="http://livejournal.org/rss/lj/2.0/" />""" + Environment.NewLine +
-                                           """<preformatted xmlns="http://livejournal.org/rss/lj/2.0/" />""";
+    private readonly string toStringText = """
+        <music xmlns="http://livejournal.org/rss/lj/2.0/"><![CDATA[Test Music Track]]></music>
+        <mood id="1" xmlns="http://livejournal.org/rss/lj/2.0/"><![CDATA[Happy]]></mood>
+        <security type="public" xmlns="http://livejournal.org/rss/lj/2.0/" />
+        <preformatted xmlns="http://livejournal.org/rss/lj/2.0/" />
+        """.ReplaceLineEndings();
 
     private const string StrExtXml = "<lj:music>Test Music Track</lj:music>"
                                      + """<lj:mood id="1">Happy</lj:mood>"""

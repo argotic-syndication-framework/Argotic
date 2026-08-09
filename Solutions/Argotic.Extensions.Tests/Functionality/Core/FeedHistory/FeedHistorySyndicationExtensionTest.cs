@@ -13,8 +13,10 @@ public class FeedHistorySyndicationExtensionTest
         xmlns:fh="http://purl.org/syndication/history/1.0"
         """;
 
-    private readonly string toStringText = """<archive xmlns="http://purl.org/syndication/history/1.0" />""" + Environment.NewLine +
-                                           """<complete xmlns="http://purl.org/syndication/history/1.0" />""";
+    private readonly string toStringText = """
+        <archive xmlns="http://purl.org/syndication/history/1.0" />
+        <complete xmlns="http://purl.org/syndication/history/1.0" />
+        """.ReplaceLineEndings();
 
     private const string StrExtXml = "<fh:archive /><fh:complete />";
 

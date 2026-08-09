@@ -27,10 +27,11 @@ public class SiteSummaryUpdateSyndicationExtensionTest
                                             + "<sy:updateFrequency>2</sy:updateFrequency>"
                                             + "<sy:updateBase>2010-08-01T00:00:00.00Z</sy:updateBase>";
 
-    private readonly string toStringText =
-        """<updatePeriod xmlns="http://purl.org/rss/1.0/modules/syndication/">hourly</updatePeriod>""" + Environment.NewLine +
-        """<updateFrequency xmlns="http://purl.org/rss/1.0/modules/syndication/">2</updateFrequency>""" + Environment.NewLine +
-        """<updateBase xmlns="http://purl.org/rss/1.0/modules/syndication/">2010-08-01T00:00:00.00Z</updateBase>""";
+    private readonly string toStringText = """
+        <updatePeriod xmlns="http://purl.org/rss/1.0/modules/syndication/">hourly</updatePeriod>
+        <updateFrequency xmlns="http://purl.org/rss/1.0/modules/syndication/">2</updateFrequency>
+        <updateBase xmlns="http://purl.org/rss/1.0/modules/syndication/">2010-08-01T00:00:00.00Z</updateBase>
+        """.ReplaceLineEndings();
 
     public TestContext? TestContext { get; set; }
     /// <summary>

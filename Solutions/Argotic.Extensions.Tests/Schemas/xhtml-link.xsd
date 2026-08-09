@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Authored for Argotic. Not a third-party schema, and deliberately not a copy of one.
+
+  It exists because sitemap-0.9.xsd wildcards foreign elements with processContents="strict":
+
+      <xsd:any namespace="##other" minOccurs="0" maxOccurs="unbounded" processContents="strict"/>
+
+  Strict means an extension element must be DECLARED somewhere in the schema set, or validation fails
+  with "the element is not declared" whether or not the document is correct. The Google sitemap
+  extensions satisfy that because their own schemas declare them. Hreflang annotations do not: Google
+  specifies them as xhtml:link, in the XHTML namespace, and the full XHTML schema is far too large to
+  carry here for the sake of one element.
+
+  So this declares that one element and nothing else. It asserts only what the sitemap protocol uses —
+  that xhtml:link exists and carries rel, hreflang and href — and it asserts nothing whatsoever about
+  XHTML itself. Do not mistake it for the XHTML schema and do not grow it into one: if a test ever
+  needs more of XHTML than this, that is a sign the test is asking the wrong question.
+
+  Copyright 2026 endjin limited. Licensed under Apache-2.0 with the rest of Argotic.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.w3.org/1999/xhtml"
+           elementFormDefault="qualified">
+
+  <xs:element name="link">
+    <xs:annotation>
+      <xs:documentation>
+        An alternate-language annotation, as used by the Google sitemap hreflang extension.
+
+        hreflang is xs:string rather than xs:language on purpose: x-default is a legal value and is not
+        a language tag, so typing this as xs:language would reject a document Google considers correct.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="rel" type="xs:string" use="required"/>
+      <xs:attribute name="hreflang" type="xs:string" use="required"/>
+      <xs:attribute name="href" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

@@ -1,456 +1,288 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
 using Argotic.Extensions;
 
-namespace Argotic.Syndication
+namespace Argotic.Syndication;
+
+/// <summary>
+/// Represents a means of uniquely identifying a <see cref="RssItem"/>.
+/// </summary>
+/// <seealso cref="RssItem.Guid"/>
+/// <remarks>
+///     <para>
+///         RSS 2.0 lays down no syntax at all for a guid: "There are no rules for the syntax of a guid.
+///         Aggregators must view them as a string." Its one job is to let an aggregator recognise an item
+///         it has already shown, so the only property that matters is that the publisher never reuses one.
+///     </para>
+///     <para>
+///         <see cref="IsPermanentLink"/> defaults to <see langword="true"/>, and that default is the trap.
+///         A publisher who writes a bare <c>&lt;guid&gt;</c> containing an opaque token — a database key, a
+///         UUID — has, by the letter of the specification, told every reader that the token is a URL it may
+///         open in a browser. Set <see cref="IsPermanentLink"/> to <see langword="false"/> whenever the
+///         value is not a resolvable permalink.
+///     </para>
+/// </remarks>
+/// <example>
+///     <code source="..\..\Argotic.Examples\Core\Rss\RssGuidExample.cs" language="cs" title="The following code example demonstrates the usage of the RssGuid class." />
+/// </example>
+public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
+
     /// <summary>
-    /// Represents a means of uniquely identifying a <see cref="RssItem"/>.
+    /// Initializes a new instance of the <see cref="RssGuid"/> class.
     /// </summary>
-    /// <seealso cref="RssItem.Guid"/>
-    /// <remarks>
-    ///     <para>A publisher <i>should</i> provide a guid with each item.</para>
-    ///     <para>
-    ///         A <see cref="RssGuid"/> enables an aggregator to detect when an item has been received previously and does not need to be presented to a user again. 
-    ///         If the guid's <see cref="RssGuid.IsPermanentLink"/> property has a value of <b>true</b>, the guid's value <b>must</b> be 
-    ///         the permanent URL of the web page associated with the item. Otherwise the guid may employ any syntax the feed's publisher 
-    ///         has devised for ensuring the uniqueness of the string.
-    ///     </para>
-    /// </remarks>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the RssGuid class.">
-    ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssGuidExample.cs" 
-    ///             region="RssGuid" 
-    ///         />
-    ///     </code>
-    /// </example>
-    [Serializable()]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-    public class RssGuid : IComparable, IExtensibleSyndicationObject
+    public RssGuid()
     {
-
-        /// <summary>
-        /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-        /// </summary>
-        private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-        /// <summary>
-        /// Private member to hold a string value that uniquely identifies the item.
-        /// </summary>
-        private string guidIdentifier   = String.Empty;
-        /// <summary>
-        /// Private member to hold a value indicating if the guid represents a permanent URL.
-        /// </summary>
-        private bool guidIsPermalink    = true;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RssGuid"/> class.
-        /// </summary>
-        public RssGuid()
-        {
-
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RssGuid"/> class using the supplied value.
-        /// </summary>
-        /// <param name="value">A string value that uniquely identifies the item.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
-        public RssGuid(string value)
-        {
-            this.Value  = value;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RssGuid"/> class using the supplied value.
-        /// </summary>
-        /// <param name="value">A string value that uniquely identifies the item.</param>
-        /// <param name="isPermanentUrl"><b>true</b> if the <paramref name="value"/> represents a permanent URL of a web page; otherwise <b>false</b>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
-        public RssGuid(string value, bool isPermanentUrl) : this(value)
-        {
-            this.IsPermanentLink    = isPermanentUrl;
-        }
-        /// <summary>
-        /// Gets or sets the syndication extensions applied to this syndication entity.
-        /// </summary>
-        /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-        /// <remarks>
-        ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public IEnumerable<ISyndicationExtension> Extensions
-        {
-            get
-            {
-                if (objectSyndicationExtensions == null)
-                {
-                    objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-                return objectSyndicationExtensions;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                objectSyndicationExtensions = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
-        /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
-        public bool HasExtensions
-        {
-            get
-            {
-                return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-            }
-        }
-        /// <summary>
-        /// Gets or sets a value indicating if the guid represents a permanent URL of a web page associated with this item.
-        /// </summary>
-        /// <value><b>true</b> if the guid <see cref="RssGuid.Value">value</see> represents a permanent URL of a web page; otherwise <b>false</b>.</value>
-        /// <remarks>
-        ///     If set to <b>false</b>, the guid may employ any syntax the feed's publisher has devised for ensuring the uniqueness of the string, 
-        ///     such as the <a href="http://www.faqs.org/rfcs/rfc4151.html">Tag URI scheme</a> described in RFC 4151.
-        /// </remarks>
-        public bool IsPermanentLink
-        {
-            get
-            {
-                return guidIsPermalink;
-            }
-
-            set
-            {
-                guidIsPermalink = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a string value that uniquely identifies this item.
-        /// </summary>
-        /// <value>A string value that uniquely identifies this item.</value>
-        /// <remarks>
-        ///     <para>
-        ///         If the guid's <see cref="RssGuid.IsPermanentLink"/> property has a value of <b>true</b>, the <see cref="RssGuid.Value"/> property <b>must</b> be 
-        ///         the permanent URL of the web page associated with this item. Otherwise the <see cref="RssGuid.Value"/> property may employ any syntax the feed's publisher 
-        ///         has devised for ensuring the uniqueness of the string.
-        ///     </para>
-        ///     <para>
-        ///         When choosing to employ a syntax for ensuring the uniqueness of the string, the <a href="http://www.faqs.org/rfcs/rfc4151.html">Tag URI scheme</a> 
-        ///         described in RFC 4151 is recommended.
-        ///     </para>
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
-        public string Value
-        {
-            get
-            {
-                return guidIdentifier;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNullOrEmptyString(value, "value");
-                guidIdentifier = value.Trim();
-            }
-        }
-        /// <summary>
-        /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-        /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool AddExtension(ISyndicationExtension extension)
-        {
-            bool wasAdded   = false;
-            Guard.ArgumentNotNull(extension, "extension");
-            ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
-
-            return wasAdded;
-        }
-
-        /// <summary>
-        /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
-        /// </summary>
-        /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
-        /// <returns>
-        ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
-        /// </returns>
-        /// <remarks>
-        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
-        ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
-        public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
-        {
-            Guard.ArgumentNotNull(match, "match");
-            List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
-            return list.Find(match);
-        }
-
-        /// <summary>
-        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-        /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool RemoveExtension(ISyndicationExtension extension)
-        {
-            bool wasRemoved = false;
-            Guard.ArgumentNotNull(extension, "extension");
-            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-            {
-                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
-            }
-
-            return wasRemoved;
-        }
-
-        /// <summary>
-        /// Loads this <see cref="RssGuid"/> using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="RssGuid"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssGuid"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source)
-        {
-            bool wasLoaded = false;
-            Guard.ArgumentNotNull(source, "source");
-            if(source.HasAttributes)
-            {
-                string permalinkAttribute = source.GetAttribute("isPermaLink", string.Empty);
-
-                if (!String.IsNullOrEmpty(permalinkAttribute))
-                {
-                    bool isPermaLink;
-                    if (Boolean.TryParse(permalinkAttribute, out isPermaLink))
-                    {
-                        this.IsPermanentLink    = isPermaLink;
-                        wasLoaded               = true;
-                    }
-                }
-            }
-
-            if(!String.IsNullOrEmpty(source.Value))
-            {
-                this.Value  = source.Value;
-                wasLoaded   = true;
-            }
-
-            return wasLoaded;
-        }
-
-        /// <summary>
-        /// Loads this <see cref="RssGuid"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
-        /// </summary>
-        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-        /// <returns><b>true</b> if the <see cref="RssGuid"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssGuid"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
-        {
-            bool wasLoaded  = false;
-            Guard.ArgumentNotNull(source, "source");
-            Guard.ArgumentNotNull(settings, "settings");
-            wasLoaded   = this.Load(source);
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
-            adapter.Fill(this);
-
-            return wasLoaded;
-        }
-
-        /// <summary>
-        /// Saves the current <see cref="RssGuid"/> to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
-        {
-            Guard.ArgumentNotNull(writer, "writer");
-            writer.WriteStartElement("guid");
-
-            writer.WriteAttributeString("isPermaLink", this.IsPermanentLink ? "true" : "false");
-            writer.WriteValue(this.Value);
-            SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
-
-            writer.WriteEndElement();
-        }
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="RssGuid"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="RssGuid"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-            RssGuid value  = obj as RssGuid;
-
-            if (value != null)
-            {
-                int result  = this.IsPermanentLink.CompareTo(value.IsPermanentLink);
-                result      = result | String.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is RssGuid))
-            {
-                return false;
-            }
-
-            return (this.CompareTo(obj) == 0);
-        }
-
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray    = this.ToString().ToCharArray();
-
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(RssGuid first, RssGuid second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(RssGuid first, RssGuid second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(RssGuid first, RssGuid second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(RssGuid first, RssGuid second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
-        }
     }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RssGuid"/> class using the supplied value.
+    /// </summary>
+    /// <param name="value">A string value that uniquely identifies the item.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="value"/> is an empty string.</exception>
+    public RssGuid(string value)
+    {
+        this.Value = value;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RssGuid"/> class using the supplied value.
+    /// </summary>
+    /// <param name="value">A string value that uniquely identifies the item.</param>
+    /// <param name="isPermanentUrl"><see langword="true"/> if <paramref name="value"/> is a permanent URL that can be opened in a browser; otherwise, <see langword="false"/>.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="value"/> is an empty string.</exception>
+    public RssGuid(string value, bool isPermanentUrl) : this(value)
+    {
+        this.IsPermanentLink = isPermanentUrl;
+    }
+
+    /// <summary>
+    /// Gets the syndication extensions applied to this syndication entity.
+    /// </summary>
+    public IList<ISyndicationExtension> Extensions { get; } = [];
+
+    /// <summary>
+    /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
+    /// </summary>
+    /// <value><see langword="true"/> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects; otherwise, <see langword="false"/>.</value>
+    public bool HasExtensions => this.Extensions.Count > 0;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether <see cref="Value"/> is a permanent URL that can be opened in a browser.
+    /// </summary>
+    /// <value>The default value is <see langword="true"/> — the default the specification assigns to an absent <c>isPermaLink</c> attribute.</value>
+    /// <remarks>
+    ///     When <see langword="false"/>, "the guid may not be assumed to be a url, or a url to anything in
+    ///     particular", and the publisher is free to use any scheme that guarantees uniqueness — the tag URI
+    ///     scheme of <a href="https://www.rfc-editor.org/rfc/rfc4151.html">RFC 4151</a> is the usual choice,
+    ///     because it embeds a domain and a date and so needs no central registry.
+    /// </remarks>
+    public bool IsPermanentLink { get; set; } = true;
+
+    /// <summary>
+    /// Gets or sets a string value that uniquely identifies this item.
+    /// </summary>
+    /// <value>An opaque identifier. The default value is an <i>empty</i> string.</value>
+    /// <remarks>
+    ///     Uniqueness is the publisher's responsibility; nothing here enforces it. If
+    ///     <see cref="IsPermanentLink"/> is <see langword="true"/> this must be the permanent URL of the page
+    ///     for the item, since that is what a reader is entitled to assume.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
+    public string Value
+    {
+        get;
+        set
+        {
+            ArgumentException.ThrowIfNullOrEmpty(value);
+            field = value.Trim();
+        }
+    } = string.Empty;
+
+    /// <summary>
+    /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
+    /// </summary>
+    /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
+    /// <returns>
+    ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
+    /// </returns>
+    /// <remarks>
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <see langword="true"/> if the object passed to it matches the conditions defined in the delegate.
+    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
+    ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is <see langword="null"/>.</exception>
+    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
+    {
+        ArgumentNullException.ThrowIfNull(match);
+        foreach (ISyndicationExtension extension in this.Extensions)
+        {
+            if (match(extension))
+            {
+                return extension;
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Loads this <see cref="RssGuid"/> using the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+    /// <returns><see langword="true"/> if the <see cref="RssGuid"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssGuid"/>.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    public bool Load(XPathNavigator source)
+    {
+        bool wasLoaded = false;
+        ArgumentNullException.ThrowIfNull(source);
+        if (source.HasAttributes)
+        {
+            string permalinkAttribute = source.GetAttribute("isPermaLink", string.Empty);
+
+            if (!string.IsNullOrEmpty(permalinkAttribute))
+            {
+                if (bool.TryParse(permalinkAttribute, out bool isPermaLink))
+                {
+                    this.IsPermanentLink = isPermaLink;
+                    wasLoaded = true;
+                }
+            }
+        }
+
+        if (!string.IsNullOrEmpty(source.Value))
+        {
+            this.Value = source.Value;
+            wasLoaded = true;
+        }
+
+        return wasLoaded;
+    }
+
+    /// <summary>
+    /// Loads this <see cref="RssGuid"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
+    /// <returns><see langword="true"/> if the <see cref="RssGuid"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="RssGuid"/>.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(settings);
+        bool wasLoaded = this.Load(source);
+        SyndicationExtensionAdapter adapter = new(source, settings);
+        adapter.Fill(this);
+
+        return wasLoaded;
+    }
+
+    /// <summary>
+    /// Saves the current <see cref="RssGuid"/> to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    public void WriteTo(XmlWriter writer)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+        writer.WriteStartElement("guid");
+
+        writer.WriteAttributeString("isPermaLink", this.IsPermanentLink ? "true" : "false");
+        writer.WriteValue(this.Value);
+        SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
+
+        writer.WriteEndElement();
+    }
+
+    /// <summary>
+    /// Returns a <see cref="string"/> that represents the current <see cref="RssGuid"/>.
+    /// </summary>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="RssGuid"/>.</returns>
+    /// <remarks>
+    ///     This method returns the XML representation for the current instance.
+    /// </remarks>
+    public override string ToString() => this.ToXmlString();
+
+    /// <summary>
+    /// Compares the current instance with another object of the same type.
+    /// </summary>
+    /// <param name="other">The <see cref="RssGuid"/> to compare with this instance.</param>
+    /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+    public int CompareTo(RssGuid? other)
+    {
+        if (other is null)
+        {
+            return 1;
+        }
+
+        int result = this.IsPermanentLink.CompareTo(other.IsPermanentLink);
+        if (result == 0) result = string.Compare(this.Value, other.Value, StringComparison.OrdinalIgnoreCase);
+
+        return result;
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="RssGuid"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="RssGuid"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="RssGuid"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public bool Equals(RssGuid? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public override bool Equals(object? obj) => obj is RssGuid other && this.Equals(other);
+
+    /// <summary>
+    /// Returns a hash code for the current instance.
+    /// </summary>
+    /// <returns>A 32-bit signed integer hash code.</returns>
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(
+            HashCodeUtility.Component(this.IsPermanentLink),
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.Value ?? string.Empty));
+    }
+
+    /// <summary>
+    /// Determines if operands are equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
+    public static bool operator ==(RssGuid? first, RssGuid? second)
+    {
+        if (first is null) return second is null;
+        return first.Equals(second);
+    }
+
+    /// <summary>
+    /// Determines if operands are not equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
+    public static bool operator !=(RssGuid? first, RssGuid? second) => !(first == second);
 }

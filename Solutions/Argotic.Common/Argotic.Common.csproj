@@ -1,19 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0;</TargetFrameworks>
     <Product>Argotic Syndication Framework</Product>
-    <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
-    <Authors>Brian William Kuhn, endjin</Authors>
+    <PackageDescription>Core interfaces and utilities for the Argotic Syndication Framework, including SyndicationEncodingUtility, SyndicationDateTimeUtility, and SyndicationDiscoveryUtility.</PackageDescription>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageDescription></PackageDescription>
-    <PackageTags></PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
+  <ItemGroup>
+    <!-- The package README shown on nuget.org. Project-local, not the repo-root one: each package gets
+         its own page, so each needs its own document. PackagePath="" puts it at the package root, which
+         is where <PackageReadmeFile>README.md</PackageReadmeFile> in Directory.Build.props points. -->
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      The benchmark harness measures individual stages of the load pipeline. The bounded declaration
+      sniff and the two streaming types it feeds - PrefixedStream and XmlSanitizingTextReader - are
+      internal rather than public, so the harness needs this grant. Scoped to the benchmark project
+      alone, not the test project, which exercises public API only.
+    -->
+    <InternalsVisibleTo Include="Argotic.Benchmarks" />
+    <!-- XPathNavigatorExtensions is shared with the parse path in both assemblies. It stays internal
+         because it extends a BCL type: public would add members to every XPathNavigator in every
+         consuming codebase. -->
+    <InternalsVisibleTo Include="Argotic.Core" />
+    <InternalsVisibleTo Include="Argotic.Extensions" />
+  </ItemGroup>
 
 </Project>

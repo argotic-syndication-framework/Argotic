@@ -1,56 +1,107 @@
-﻿using System;
-using System.IO;
-
+using Argotic.Extensions;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Extensions.Core;
+
+/// <summary>
+/// Reads a <see cref="DublinCoreElementSetSyndicationExtension"/> out of a feed the framework has already parsed, then writes the feed back out.
+/// </summary>
+/// <remarks>
+///     Nothing registers the extension. Reflection over the assembly's exported types produces the
+///     candidates; those whose namespace or prefix is bound on the document are asked whether they are
+///     present; and each that says yes is attached to the entity that carried its elements — so the only
+///     call a consumer makes is <c>FindExtension(MatchByType)</c>. The namespace declarations written
+///     back on save are derived the same way, from the extensions actually present.
+/// </remarks>
+internal static class DublinCoreElementSetSyndicationExtensionExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="DublinCoreElementSetSyndicationExtension"/> class.
+    /// Loads a feed carrying the extension, finds it on the channel and on the items, then writes the feed back out.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="DublinCoreElementSetSyndicationExtension"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    public static class DublinCoreElementSetSyndicationExtensionExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the DublinCoreElementSetSyndicationExtension class.
-        /// </summary>
-        public static void ClassExample()
+        // Framework auto-discovers supported extensions based on XML namespace attributes (xmlns) defined on root of resource
+        RssFeed feed = new();
+        using (Stream inputStream = SampleDataPath.OpenRead(SampleDataPath.RssFeedWithExtensions))
         {
-            // Framework auto-discovers supported extensions based on XML namespace attributes (xmlns) defined on root of resource
-            RssFeed feed    = RssFeed.Create(new Uri("http://www.example.com/feed.aspx?format=rss"));
+            feed.Load(inputStream);
+        }
 
-            // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based seaching against available extensions
-            if(feed.Channel.HasExtensions)
+        ExampleOutput.ShowLoaded("RssFeed", feed.Channel.Title);
+
+        // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
+        if (feed.Channel.HasExtensions)
+        {
+            if (feed.Channel.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) is DublinCoreElementSetSyndicationExtension channelExtension)
             {
-                DublinCoreElementSetSyndicationExtension channelExtension = feed.Channel.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension;
-                if (channelExtension != null)
+                ExampleOutput.ShowDublinCoreExtension(channelExtension);
+            }
+        }
+
+        foreach (RssItem item in feed.Channel.Items)
+        {
+            if (item.HasExtensions)
+            {
+                if (item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) is DublinCoreElementSetSyndicationExtension itemExtension)
                 {
-                    // Process channel extension
+                    // Process extension for current item
                 }
             }
+        }
 
-            foreach(RssItem item in feed.Channel.Items)
-            {
-                if (item.HasExtensions)
-                {
-                    DublinCoreElementSetSyndicationExtension itemExtension = item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension;
-                    if (itemExtension != null)
-                    {
-                        // Process extension for current item
-                    }
-                }
-            }
+        int count = feed.Channel.Items.Count(i => i.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) is not null);
+        ExampleOutput.ShowItemsWithExtension(count, feed.Channel.Items.Count, "DublinCore");
 
-            // By default the framework will automatically determine what XML namespace attributes (xmlns) to write 
-            // on the root of the resource based on the extensions applied to extensible parent and child entities
-            using(FileStream stream = new FileStream("Feed.xml", FileMode.Create, FileAccess.Write))
-            {
-                feed.Save(stream);
-            }
+        // By default the framework will automatically determine what XML namespace attributes (xmlns) to write
+        // on the root of the resource based on the extensions applied to extensible parent and child entities
+        using MemoryStream stream = new();
+        feed.Save(stream);
+
+        ExampleOutput.ShowSaved("RssFeed");
+    }
+
+    /// <summary>
+    /// Builds a <see cref="DublinCoreElementSetSyndicationExtension"/> from scratch and reads it back.
+    /// </summary>
+    public static void AuthorExample()
+    {
+        RssFeed feed = new();
+        feed.Channel.Title = "endjin blog";
+        feed.Channel.Link = new Uri("https://endjin.com/blog/");
+        feed.Channel.Description = "Technical writing from endjin on .NET, data, analytics and AI.";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released"),
+            Description = "Moving UI framework support out of System.Reactive can cut 95MB from a deployment.",
+        };
+
+        DublinCoreElementSetSyndicationExtension dublinCore = new();
+        dublinCore.Context.Creator = "Ian Griffiths";
+        dublinCore.Context.Publisher = "endjin limited";
+        dublinCore.Context.Subject = "Reactive Extensions";
+        dublinCore.Context.Rights = "Copyright 2026 endjin limited";
+        dublinCore.Context.Date = new DateTime(2026, 7, 29, 9, 0, 0, DateTimeKind.Utc);
+        dublinCore.Context.Identifier = "endjin-talk-rxdotnet-v7-0-released";
+        dublinCore.Context.Format = "text/html";
+        item.Extensions.Add(dublinCore);
+
+        feed.Channel.Items.Add(item);
+
+        using MemoryStream saved = new();
+        feed.Save(saved);
+        ExampleOutput.ShowSaved("RssFeed");
+
+        saved.Seek(0, SeekOrigin.Begin);
+        RssFeed reloaded = new();
+        reloaded.Load(saved);
+
+        RssItem readItem = reloaded.Channel.Items[0];
+        if (readItem.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) is DublinCoreElementSetSyndicationExtension readBack)
+        {
+            ExampleOutput.ShowDublinCoreExtension(readBack);
         }
     }
 }

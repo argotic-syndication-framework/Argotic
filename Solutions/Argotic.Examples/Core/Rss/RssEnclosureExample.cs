@@ -1,39 +1,38 @@
-﻿using System;
-
-using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core.Rss;
+
+/// <summary>
+/// Attaches a media file to an item with <see cref="RssEnclosure"/>.
+/// </summary>
+internal static class RssEnclosureExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="RssEnclosure"/> class.
+    /// Builds the containing <see cref="RssFeed"/> and prints the <see cref="RssEnclosure"/> it holds.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="RssEnclosure"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-    public static class RssEnclosureExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the RssEnclosure class.
-        /// </summary>
-        public static void ClassExample()
+        RssFeed feed = new()
         {
-            RssFeed feed    = new RssFeed();
+            Channel =
+            {
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI"
+            }
+        };
 
-            feed.Channel.Title          = "Dallas Times-Herald";
-            feed.Channel.Link           = new Uri("http://dallas.example.com");
-            feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine"),
+            Description = "Moving UI framework support out of System.Reactive into separate packages cuts up to 95MB from a self-contained deployment."
+        };
 
-            RssItem item        = new RssItem();
-            item.Title          = "Seventh Heaven! Ryan Hurls Another No Hitter";
-            item.Link           = new Uri("http://dallas.example.com/1991/05/02/nolan.htm");
-            item.Description    = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.";
+        item.Enclosures.Add(new RssEnclosure(24_986_239L, "audio/mpeg", new Uri("https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3")));
 
-            item.Enclosures.Add(new RssEnclosure(24986239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
+        feed.Channel.Items.Add(item);
 
-            feed.Channel.AddItem(item);
-        }
+        ExampleOutput.ShowRssEnclosure(item.Enclosures[0]);
     }
 }

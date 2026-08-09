@@ -1,144 +1,136 @@
-﻿using System;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
 
-namespace Argotic.Extensions.Core
+namespace Argotic.Extensions.Core;
+
+/// <summary>
+/// Encapsulates specific information about an individual <see cref="PheedSyndicationExtension"/>.
+/// </summary>
+public class PheedSyndicationExtensionContext
 {
     /// <summary>
-    /// Encapsulates specific information about an individual <see cref="PheedSyndicationExtension"/>.
+    /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pheed")]
-    [Serializable()]
-    public class PheedSyndicationExtensionContext
+    public PheedSyndicationExtensionContext()
     {
-        /// <summary>
-        /// Private member to hold a thumbnail sized version of the photograph.
-        /// </summary>
-        private Uri extensionThumbnail;
-        /// <summary>
-        /// Private member to hold a larger or original version of the photograph.
-        /// </summary>
-        private Uri extensionImageSource;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class.
-        /// </summary>
-        public PheedSyndicationExtensionContext()
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class using the supplied parameters.
+    /// </summary>
+    /// <param name="source">The location of the full-size photograph.</param>
+    /// <param name="thumbnail">The location of the thumbnail-sized photograph.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="thumbnail"/> is <see langword="null"/>.</exception>
+    public PheedSyndicationExtensionContext(Uri source, Uri thumbnail)
+    {
+        this.Source = source;
+        this.Thumbnail = thumbnail;
+    }
+
+    /// <summary>
+    /// Gets or sets the original version of this photograph.
+    /// </summary>
+    /// <value>A <see cref="Uri"/> that represents the location of the full-size photograph, or <see langword="null"/> if none was specified.</value>
+    /// <remarks>
+    ///     Written as <c>photo:imgsrc</c>, and only when it has one: saving a context that never had a
+    ///     source omits the element rather than emitting an empty one.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    public Uri? Source
+    {
+        get;
+
+        set
         {
+            ArgumentNullException.ThrowIfNull(value);
+            field = value;
         }
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class using the supplied parameters.
-        /// </summary>
-        /// <param name="source">>A <see cref="Uri"/> that represents a URL to the original version of this photograph.</param>
-        /// <param name="thumbnail">A <see cref="Uri"/> that represents a URL to a thumbnail sized version of this photograph.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="thumbnail"/> is a null reference (Nothing in Visual Basic).</exception>
-        public PheedSyndicationExtensionContext(Uri source, Uri thumbnail)
+    /// <summary>
+    /// Gets or sets the thumbnail sized version of this photograph.
+    /// </summary>
+    /// <value>A <see cref="Uri"/> that represents the location of the thumbnail-sized photograph, or <see langword="null"/> if none was specified.</value>
+    /// <remarks>
+    ///     The module requires the longest dimension to be at most <c>120</c> pixels. Nothing here
+    ///     checks that, and nothing can: the constraint is on the image the URL points at, not on the
+    ///     URL. Written as <c>photo:thumbnail</c>, and only when it has one.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    public Uri? Thumbnail
+    {
+        get;
+
+        set
         {
-            this.Source     = source;
-            this.Thumbnail  = thumbnail;
+            ArgumentNullException.ThrowIfNull(value);
+            field = value;
         }
+    }
 
-        /// <summary>
-        /// Gets or sets the original version of this photograph.
-        /// </summary>
-        /// <value>A <see cref="Uri"/> that represents a URL to the original version of this photograph.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Uri Source
+    /// <summary>
+    /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="PheedSyndicationExtensionContext"/>.</param>
+    /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
+    /// <returns><see langword="true"/> if the <see cref="PheedSyndicationExtensionContext"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    {
+        bool wasLoaded = false;
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+
+        if (source.HasChildren)
         {
-            get
+            XPathNavigator? thumbnailNavigator = source.SelectChildElement("photo", "thumbnail", manager);
+            XPathNavigator? imageSourceNavigator = source.SelectChildElement("photo", "imgsrc", manager);
+
+            if (thumbnailNavigator is not null)
             {
-                return extensionImageSource;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                extensionImageSource = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the thumbnail sized version of this photograph.
-        /// </summary>
-        /// <value>A <see cref="Uri"/> that represents a URL to a thumbnail sized version of this photograph.</value>
-        /// <remarks>
-        ///     The maximum size of the longest dimension <b>must be</b> 120 pixels.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Uri Thumbnail
-        {
-            get
-            {
-                return extensionThumbnail;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                extensionThumbnail = value;
-            }
-        }
-
-        /// <summary>
-        /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="PheedSyndicationExtensionContext"/>.</param>
-        /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="PheedSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source, XmlNamespaceManager manager)
-        {
-            bool wasLoaded  = false;
-            Guard.ArgumentNotNull(source, "source");
-            Guard.ArgumentNotNull(manager, "manager");
-
-            if (source.HasChildren)
-            {
-                XPathNavigator thumbnailNavigator   = source.SelectSingleNode("photo:thumbnail", manager);
-                XPathNavigator imageSourceNavigator = source.SelectSingleNode("photo:imgsrc", manager);
-
-                if (thumbnailNavigator != null)
+                if (Uri.TryCreate(thumbnailNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? thumbnail))
                 {
-                    Uri thumbnail;
-                    if (Uri.TryCreate(thumbnailNavigator.Value, UriKind.RelativeOrAbsolute, out thumbnail))
-                    {
-                        this.Thumbnail  = thumbnail;
-                        wasLoaded       = true;
-                    }
-                }
-
-                if (imageSourceNavigator != null)
-                {
-                    Uri original;
-                    if (Uri.TryCreate(imageSourceNavigator.Value, UriKind.RelativeOrAbsolute, out original))
-                    {
-                        this.Source = original;
-                        wasLoaded   = true;
-                    }
+                    this.Thumbnail = thumbnail;
+                    wasLoaded = true;
                 }
             }
 
-            return wasLoaded;
+            if (imageSourceNavigator is not null)
+            {
+                if (Uri.TryCreate(imageSourceNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? original))
+                {
+                    this.Source = original;
+                    wasLoaded = true;
+                }
+            }
         }
 
-        /// <summary>
-        /// Writes the current context to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
-        /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
-        public void WriteTo(XmlWriter writer, string xmlNamespace)
+        return wasLoaded;
+    }
+
+    /// <summary>
+    /// Writes the current context to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
+    /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    public void WriteTo(XmlWriter writer, string xmlNamespace)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
+        if (this.Thumbnail is not null)
         {
-            Guard.ArgumentNotNull(writer, "writer");
-            Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail != null ? this.Thumbnail.ToString() : String.Empty);
-            writer.WriteElementString("imgsrc", xmlNamespace, this.Source != null ? this.Source.ToString() : String.Empty);
+            writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail.ToString());
+        }
+
+        if (this.Source is not null)
+        {
+            writer.WriteElementString("imgsrc", xmlNamespace, this.Source.ToString());
         }
     }
 }

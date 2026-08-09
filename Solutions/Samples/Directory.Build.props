@@ -1,0 +1,26 @@
+<Project>
+
+  <!--
+    A .NET 10 file-based app is compiled through a virtual project whose directory is the .cs file's
+    own directory, so everything in Solutions/Directory.Build.props already applies to the samples:
+    net10.0, LangVersion 14.0, nullable-as-error, AnalysisMode=AllEnabledByDefault. That is wanted,
+    and the Import below keeps it — a samples directory held to a laxer standard than the library
+    teaches the wrong thing.
+
+    What is not wanted is the set of properties the SDK turns on for file-based apps specifically.
+    Measured on a virtual project under this directory: PublishAot, PublishTrimmed and PackAsTool
+    all evaluate to true, which switches on the trim, AOT and single-file analyzers. A sample that
+    touches Assembly.Location earns IL3000; one that reaches XmlSerializer earns IL2026 and IL3050.
+    Argotic carries no trim annotations, so these fire on the BCL rather than on anything a sample
+    could fix, and they hold documentation to a contract nobody will ever publish it under.
+  -->
+
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+  <PropertyGroup>
+    <PublishAot>false</PublishAot>
+    <PublishTrimmed>false</PublishTrimmed>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,407 @@
+ <xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.apml.org/apml-0.6"
+    xmlns:apml="http://www.apml.org/apml-0.6"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+
+  <!--
+    The root document type - a chunk containing nodes and links.
+
+    Basic outline:
+      <APML>
+        <Head />
+        <Body />
+      </APML>
+  -->
+  <xs:element name="APML">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Head" type="apml:HeadType"/>
+        <xs:element name="Body" type="apml:BodyType"/>
+      </xs:sequence>
+
+      <!--
+        Defines the specification version this APML document currently adheres to.
+
+        Currently expected to be 0.6.
+      -->
+      <xs:attribute name="version" type="xs:string" use="required"/>
+
+      <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+    </xs:complexType>
+  </xs:element>
+
+  <!--
+    The document header. Provides basic administrative data about the APML document.
+
+    Basic outline:
+      <Head>
+        <Title/>
+        <Generator/>
+        <UserEmail/>
+        <DateCreated/>
+      </Head>
+  -->
+  <xs:complexType name="HeadType">
+    <xs:sequence>
+      <xs:element name="Title" type="xs:string"/>
+      <xs:element name="Generator" type="xs:string"/>
+      <xs:element name="UserEmail" type="apml:EmailType"/>
+      <xs:element name="DateCreated" type="apml:ISO8601DateType"/>
+    </xs:sequence>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+  <!--
+    The document body. Contains the actual content of the user's APML data.
+
+    Basic outline:
+      <Body defaultprofile="">
+        <Profile />
+        <Profile />
+
+        <Applications/>
+      </Body>
+  -->
+  <xs:complexType name="BodyType">
+    <xs:sequence>
+      <!-- The list of profiles -->
+      <xs:element name="Profile" type="apml:ProfileType" minOccurs="1" maxOccurs="unbounded"/>
+
+      <!-- Provides application data storage -->
+      <xs:element name="Applications" type="apml:ApplicationsBlockType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+
+    <!--
+      Specifies the default profile to use when either no user selection is made, or no user selection
+      can be made.
+    -->
+    <xs:attribute name="defaultprofile" type="xs:string" use="required"/>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+  <!--
+    Details of a profile.
+
+    Basic outline:
+      <Profile name="">
+        <ImplicitData />
+        <ExplicitData />
+      </Profile>
+  -->
+  <xs:complexType name="ProfileType">
+    <xs:sequence>
+      <!-- Provides the implicit data associated with this profile -->
+      <xs:element name="ImplicitData" type="apml:ImplicitBlockType"/>
+
+      <!-- Provides the explicit data associated with this profile -->
+      <xs:element name="ExplicitData" type="apml:ExplicitBlockType"/>
+    </xs:sequence>
+
+    <!-- Provides the name of the profile -->
+    <xs:attribute name="name" type="xs:string" use="required"/>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+  <!--
+    Details of implicit data - data that is automatically gathered.
+
+    Basic outline:
+      <ImplicitData>
+        <Concepts/>
+        <Sources/>
+      </ImplicitData>
+  -->
+  <xs:complexType name="ImplicitBlockType">
+    <xs:sequence>
+      <xs:element name="Concepts" type="apml:ImplicitConceptsBlockType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Sources" type="apml:ImplicitSourcesBlockType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+  <!--
+    Details of explicit data - data that the user provides.
+
+    Basic outline:
+      <ExplicitData>
+        <Concepts/>
+        <Sources/>
+      </ExplicitData>
+  -->
+  <xs:complexType name="ExplicitBlockType">
+    <xs:sequence>
+      <xs:element name="Concepts" type="apml:ExplicitConceptsBlockType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Sources" type="apml:ExplicitSourcesBlockType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+  <!--
+    Details of explit concepts and their scores
+
+    Basic Outline:
+      <Concepts>
+        <Concept key="" value=""/>
+      </Concepts>
+  -->
+  <xs:complexType name="ExplicitConceptsBlockType">
+    <xs:sequence>
+      <xs:element name="Concept" type="apml:ExplicitNodeType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+  <!--
+    Details of explicit sources and their scores
+
+    Basic Outline:
+      <Sources>
+        <Source key="" value=""/>
+      </Sources>
+  -->
+  <xs:complexType name="ExplicitSourcesBlockType">
+    <xs:sequence>
+      <xs:element name="Source" type="apml:ExplicitSourceType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+  <!--
+    Detail of explicit source and its authors.
+
+    Basic Outline:
+      <Source key="" name="" value="" type="">
+      <Author key="" value=""/>
+  -->
+  <xs:complexType name="ExplicitSourceType">
+    <xs:complexContent>
+      <xs:extension base="apml:ExplicitNodeType">
+        <xs:sequence>
+          <xs:element name="Author" type="apml:ExplicitNodeType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+
+
+        <!-- The (not necessarily unique) friendly name of the source -->
+        <xs:attribute name="name" type="xs:string" use="required" />
+
+        <!-- The type of the source. This is specified as a mime-type -->
+        <xs:attribute name="type" type="apml:MimeType" use="required" />
+
+        <!-- Allow additional attributes -->
+        <xs:anyAttribute/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!--
+    Details of implicit concepts and their scores
+
+    Basic Outline:
+      <Concepts>
+        <Concept key="" value="" from="" updated=""/>
+      </Concepts>
+  -->
+  <xs:complexType name="ImplicitConceptsBlockType">
+    <xs:sequence>
+      <xs:element name="Concept" type="apml:ImplicitNodeType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+  <!--
+    Details of implicit sources and their scores
+
+    Basic Outline:
+      <Sources>
+        <Source key="" value="" from="" updated=""/>
+      </Sources>
+  -->
+  <xs:complexType name="ImplicitSourcesBlockType">
+    <xs:sequence>
+      <xs:element name="Source" type="apml:ImplicitSourceType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+  <!--
+    Detail of implicit source and its authors
+
+    Basic Outline:
+      <Source key="" name="" value="" type="">
+        <Author key="" value="" from="" updated=""/>
+      </Source>
+  -->
+  <xs:complexType name="ImplicitSourceType">
+    <xs:complexContent>
+      <xs:extension base="apml:ImplicitNodeType">
+        <xs:sequence>
+          <xs:element name="Author" type="apml:ImplicitNodeType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+
+        <!-- The (not necessarily unique) friendly name of the source -->
+        <xs:attribute name="name" type="xs:string" use="required" />
+
+        <!-- The type of the source. This is specified as a mime-type -->
+        <xs:attribute name="type" type="apml:MimeType" use="required" />
+
+        <!-- Allow additional attributes -->
+        <xs:anyAttribute/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!--
+    List of application specific data
+
+    Basic Outline:
+      <Applications>
+        <Application name=""/>
+      </Applications>
+  -->
+  <xs:complexType name="ApplicationsBlockType">
+    <xs:sequence>
+      <!-- List of application elements -->
+      <xs:element name="Application" type="apml:ApplicationType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+  <!--
+    Storage element for application data
+
+    Basic Outline:
+      <Application name="">
+          Application Data goes here
+      </Application>
+  -->
+  <xs:complexType name="ApplicationType">
+    <xs:sequence>
+      <xs:any namespace="##any" minOccurs="0" maxOccurs="unbounded" processContents="skip" />
+    </xs:sequence>
+
+    <!-- The unique name of the application -->
+    <xs:attribute name="name" type="xs:string" use="required"/>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+
+  <!--                   -->
+  <!--    Base Types     -->
+  <!--                   -->
+
+  <!--
+    Defines an Explicit Node - a node containing data explicitly specified by a user.
+   -->
+  <xs:complexType name="ExplicitNodeType">
+    <!-- Provides the text or value of the node, such as a name or a term -->
+    <xs:attribute name="key" type="xs:string" use="required"/>
+
+    <!-- Provides the rank (or score) of the node -->
+    <xs:attribute name="value" type="apml:NodeValueType" use="required"/>
+
+    <!-- Allow additional attributes -->
+    <xs:anyAttribute/>
+  </xs:complexType>
+
+  <!--
+    Defines an Implicit Node - a node containing data automatically/programmatically discovered
+    by an application
+  -->
+  <xs:complexType name="ImplicitNodeType">
+    <xs:complexContent>
+      <xs:extension base="apml:ExplicitNodeType">
+        <!--
+          Contains a unique application identifier that allows each application to determine
+          the nodes that they have contributed. This, however, should not be used as a filter
+          when reading the data.
+        -->
+        <xs:attribute name="from" type="xs:string" use="required"/>
+
+        <!--
+          A date indicating the last time this value was updated. Nodes older than 30 days
+          should be considered deprecated by other applications, and thus ignored.
+          This ensures that if an application that was contributing to an APML profile no longer
+          continues being used, it data will not result in the profile being stale.
+        -->
+        <xs:attribute name="updated" type="apml:ISO8601DateType" use="required"/>
+
+        <!-- Allow additional attributes -->
+        <xs:anyAttribute/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <!--                          -->
+  <!--    Simple Data Types     -->
+  <!--                          -->
+
+  <!--
+    The ISO8601-style date type. Accepted examples include:
+      2007-03-09T22:35:56Z
+    NOTE: Only a subset of ISO8601 formats are accepted.  In
+          particular, the time zone must be "Z"
+  -->
+  <xs:simpleType name="ISO8601DateType">
+    <xs:restriction base="xs:dateTime">
+      <!-- Restricts the dateTime format to only accept GMT times -->
+      <xs:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!--
+    Defines an email address. This accepts any address in the format that contains one or more
+    non-@ characters, then an @, then two or more dot-seperated blocks not containing @ symbols.
+  -->
+  <xs:simpleType name="EmailType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[^@]+[@][^@]+(\.[^.]+)+" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!--
+    The Node Rank Type. Defines the ways in which a rank can be specified.
+    Accepted examples include:
+      -0.5, 0, 0.5 (Bounded between -1 and 1)
+  -->
+  <xs:simpleType name="NodeValueType">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="-1"/>
+      <xs:maxInclusive value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!--
+    Defines a mime-type. This accepts a string containing two parts divided by a '/'.
+  -->
+  <xs:simpleType name="MimeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[^/]+/[^/]+" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

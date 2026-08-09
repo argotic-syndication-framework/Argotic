@@ -1,44 +1,43 @@
-﻿using System;
-
-using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core.Rss;
+
+/// <summary>
+/// Categorises a channel and an item with <see cref="RssCategory"/>, with and without a taxonomy domain.
+/// </summary>
+internal static class RssCategoryExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="RssCategory"/> class.
+    /// Builds the containing <see cref="RssFeed"/> and prints the <see cref="RssCategory"/> it holds.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="RssCategory"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-    public static class RssCategoryExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the RssCategory class.
-        /// </summary>
-        public static void ClassExample()
+        RssFeed feed = new()
         {
-            RssFeed feed    = new RssFeed();
+            Channel =
+            {
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI"
+            }
+        };
 
-            feed.Channel.Title          = "Dallas Times-Herald";
-            feed.Channel.Link           = new Uri("http://dallas.example.com");
-            feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
+        feed.Channel.Categories.Add(new RssCategory("Media"));
+        feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
 
-            feed.Channel.Categories.Add(new RssCategory("Media"));
-            feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine"),
+            Description = "Moving UI framework support out of System.Reactive into separate packages cuts up to 95MB from a self-contained deployment.",
+            Author = "hello@endjin.com (Barry Smart)"
+        };
 
-            RssItem item        = new RssItem();
-            item.Title          = "Seventh Heaven! Ryan Hurls Another No Hitter";
-            item.Link           = new Uri("http://dallas.example.com/1991/05/02/nolan.htm");
-            item.Description    = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.";
-            item.Author         = "jbb@dallas.example.com (Joe Bob Briggs)";
+        item.Categories.Add(new RssCategory("sports"));
+        item.Categories.Add(new RssCategory("2026/Rx.NET", "rec.sports.baseball"));
 
-            item.Categories.Add(new RssCategory("sports"));
-            item.Categories.Add(new RssCategory("1991/Texas Rangers", "rec.sports.baseball"));
+        feed.Channel.Items.Add(item);
 
-            feed.Channel.AddItem(item);
-        }
+        ExampleOutput.ShowRssCategory(feed.Channel.Categories[0]);
     }
 }

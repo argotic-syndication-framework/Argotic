@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The endjin blog, written the way the RSS 2.0 specification describes rather than the way endjin's own
+  feed happens to be generated: every optional channel element the spec defines is present, because the
+  point of this file is to exercise a reader, not to mirror one publisher's subset.
+
+  The posts, authors, links and both enclosures are real. The audio enclosure is the recorded version of
+  the GenAI post, and its length is that file's actual byte count — endjin publishes audio versions of
+  some posts under /assets/podcast/. The image enclosure keeps length="0", which is what endjin's feed
+  genuinely writes: a real-world quirk worth reading correctly rather than tidying away.
+-->
+<rss version="2.0">
+  <channel>
+    <title>endjin blog</title>
+    <link>https://endjin.com/blog/</link>
+    <description>Technical writing from endjin on .NET, data, analytics and AI.</description>
+    <language>en-gb</language>
+    <copyright>Copyright 2026 endjin limited</copyright>
+    <managingEditor>hello@endjin.com (endjin)</managingEditor>
+    <webMaster>hello@endjin.com (endjin)</webMaster>
+    <pubDate>Fri, 07 Aug 2026 08:00:00 GMT</pubDate>
+    <lastBuildDate>Fri, 07 Aug 2026 12:00:00 GMT</lastBuildDate>
+    <category domain="https://endjin.com/what-we-do/">Cloud Native App Dev</category>
+    <category>Data and Analytics</category>
+    <generator>Argotic Framework 3.0</generator>
+    <docs>https://www.rssboard.org/rss-specification</docs>
+    <ttl>60</ttl>
+
+    <image>
+      <url>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/open-graph/og-endjin.png</url>
+      <title>endjin blog</title>
+      <link>https://endjin.com/blog/</link>
+      <width>144</width>
+      <height>144</height>
+      <description>The endjin logo</description>
+    </image>
+
+    <cloud domain="rpc.endjin.com" port="80" path="/RPC2" registerProcedure="pingMe" protocol="soap"/>
+
+    <textInput>
+      <title>Search</title>
+      <description>Search the endjin blog</description>
+      <name>query</name>
+      <link>https://endjin.com/search</link>
+    </textInput>
+
+    <skipHours>
+      <hour>0</hour>
+      <hour>1</hour>
+      <hour>2</hour>
+      <hour>3</hour>
+    </skipHours>
+
+    <skipDays>
+      <day>Saturday</day>
+      <day>Sunday</day>
+    </skipDays>
+
+    <item>
+      <title>The GenAI Reality Check: New Instrument, Same Orchestra</title>
+      <link>https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra</link>
+      <description>Generative AI is a new instrument in an orchestra that already existed. The disciplines that made data work trustworthy did not stop applying the moment a model joined the section.</description>
+      <author>hello@endjin.com (Barry Smart)</author>
+      <category>AI</category>
+      <category domain="https://endjin.com/what-we-do/data-and-analytics/">Data</category>
+      <comments>https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra#comments</comments>
+      <enclosure url="https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3" length="36588921" type="audio/mpeg"/>
+      <guid isPermaLink="true">https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra</guid>
+      <pubDate>Thu, 14 May 2026 08:54:29 GMT</pubDate>
+      <source url="https://endjin.com/rss.xml">endjin blog</source>
+    </item>
+
+    <item>
+      <title>Writing Effective Copilot Instructions for Complex Codebases</title>
+      <link>https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases</link>
+      <description>Structuring AI assistant guidance as modular skill files rather than one monolithic document, and what that buys you on a repository too large to hold in context.</description>
+      <author>hello@endjin.com (Matthew Adams)</author>
+      <category>developer-experience</category>
+      <category>copilot</category>
+      <category domain="https://endjin.com/what-we-do/cloud-native-app-dev/">.NET</category>
+      <enclosure url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/06/writing-effective-copilot-instructions-for-complex-codebases.png" length="0" type="image/png"/>
+      <guid isPermaLink="false">urn:uuid:8f2d4c1e-9b37-4a5e-8c12-writing-copilot</guid>
+      <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title>Optimising DAX: The Formula Engine and Storage Engine</title>
+      <link>https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine</link>
+      <description>Power BI divides query work between a single-threaded Formula Engine and a multi-threaded Storage Engine. Pushing work to the latter is most of what DAX optimisation means in practice.</description>
+      <author>hello@endjin.com (Barry Smart)</author>
+      <category>Power BI</category>
+      <comments>https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine#comments</comments>
+      <guid>https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine</guid>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 GMT</pubDate>
+      <source url="https://endjin.com/rss.xml">endjin blog</source>
+    </item>
+  </channel>
+</rss>

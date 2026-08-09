@@ -1,0 +1,78 @@
+using Spectre.IO;
+
+namespace Argotic.Examples;
+
+/// <summary>
+/// Provides paths to sample data files for examples.
+/// </summary>
+internal static class SampleDataPath
+{
+    private static readonly DirectoryPath BasePath = new DirectoryPath(AppContext.BaseDirectory).Combine("SampleData");
+
+    /// <summary>Gets the file system instance for file operations.</summary>
+    public static IFileSystem Files { get; } = Spectre.IO.FileSystem.Shared;
+
+    /// <summary>Gets the path to the sample RSS feed file.</summary>
+    public static FilePath RssFeed => BasePath.CombineWithFilePath("RssFeed.xml");
+
+    /// <summary>Gets the path to the sample Atom feed file.</summary>
+    public static FilePath AtomFeed => BasePath.CombineWithFilePath("AtomFeed.xml");
+
+    /// <summary>Gets the path to the sample Atom entry document file.</summary>
+    public static FilePath AtomEntryDocument => BasePath.CombineWithFilePath("AtomEntryDocument.xml");
+
+    /// <summary>Gets the path to the sample OPML document file.</summary>
+    public static FilePath OpmlDocument => BasePath.CombineWithFilePath("OpmlDocument.xml");
+
+    /// <summary>Gets the path to the sample APML document file.</summary>
+    public static FilePath ApmlDocument => BasePath.CombineWithFilePath("ApmlDocument.xml");
+
+    /// <summary>Gets the path to the sample BlogML document file.</summary>
+    public static FilePath BlogMLDocument => BasePath.CombineWithFilePath("BlogMLDocument.xml");
+
+    /// <summary>Gets the path to the sample RSD document file.</summary>
+    public static FilePath RsdDocument => BasePath.CombineWithFilePath("RsdDocument.xml");
+
+    /// <summary>Gets the path to the sample generic feed file.</summary>
+    public static FilePath GenericFeed => BasePath.CombineWithFilePath("GenericFeed.xml");
+
+    /// <summary>Gets the path to the sample RSS feed with extensions file.</summary>
+    public static FilePath RssFeedWithExtensions => BasePath.CombineWithFilePath("RssFeedWithExtensions.xml");
+
+    /// <summary>Gets the path to the sample Atom feed with extensions file.</summary>
+    public static FilePath AtomFeedWithExtensions => BasePath.CombineWithFilePath("AtomFeedWithExtensions.xml");
+
+    /// <summary>Gets the path to the sample Sitemap file.</summary>
+    public static FilePath Sitemap => BasePath.CombineWithFilePath("sitemap.xml");
+
+    /// <summary>Gets the path to the sample Sitemap Index file.</summary>
+    public static FilePath SitemapIndex => BasePath.CombineWithFilePath("sitemap_index.xml");
+
+    /// <summary>Gets the path to the sample Video sitemap file.</summary>
+    public static FilePath SitemapVideo => BasePath.CombineWithFilePath("sitemap_video.xml");
+
+    /// <summary>Gets the path to the sample Image sitemap file.</summary>
+    public static FilePath SitemapImage => BasePath.CombineWithFilePath("sitemap_image.xml");
+
+    /// <summary>Gets the path to the sample News sitemap file.</summary>
+    public static FilePath SitemapNews => BasePath.CombineWithFilePath("sitemap_news.xml");
+
+    /// <summary>Gets the path to the sample hreflang sitemap file.</summary>
+    public static FilePath SitemapHreflang => BasePath.CombineWithFilePath("sitemap_hreflang.xml");
+
+    /// <summary>Gets the path to the sample Podcasting 2.0 feed file.</summary>
+    public static FilePath PodcastFeed => BasePath.CombineWithFilePath("PodcastFeed.xml");
+
+    /// <summary>Gets the path to the sample Atom Publishing Protocol service document file.</summary>
+    public static FilePath AtomServiceDocument => BasePath.CombineWithFilePath("AtomServiceDocument.xml");
+
+    /// <summary>Gets the path to the sample Atom Publishing Protocol category document file.</summary>
+    public static FilePath AtomCategoryDocument => BasePath.CombineWithFilePath("AtomCategoryDocument.xml");
+
+    /// <summary>
+    /// Opens a file for reading.
+    /// </summary>
+    /// <param name="path">The path to the file to open.</param>
+    /// <returns>A stream for reading the file.</returns>
+    public static Stream OpenRead(FilePath path) => Files.GetFile(path).OpenRead();
+}

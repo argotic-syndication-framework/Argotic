@@ -1,505 +1,300 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
-using System.IO;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
-using Argotic.Syndication;
 using Argotic.Extensions;
+using Argotic.Syndication;
 
-namespace Argotic.Publishing
+namespace Argotic.Publishing;
+
+/// <summary>
+/// Represents a media range as defined in <a href="https://www.rfc-editor.org/rfc/rfc2616.html">RFC 2616: Hypertext Transfer Protocol</a> that
+/// specifies a type of representation that can be added to a <see cref="AtomMemberResources"/>.
+/// </summary>
+/// <remarks>
+///     <para>
+///         The <see cref="AtomAcceptedMediaRange"/> class implements the <i>app:accept</i> element of the <a href="https://www.rfc-editor.org/rfc/rfc5023.html">Atom Publishing Protocol</a>.
+///     </para>
+///     <para>
+///         <see cref="MediaRange"/> holds a media range, and RFC 5023 §8.3.4 pins its grammar to section 14.1 of
+///         <a href="https://www.rfc-editor.org/rfc/rfc2616.html">RFC 2616</a> — the citation the protocol makes, so that is the one kept here. RFC 2616
+///         has since been split into three documents; the corresponding clause is <b>§12.5.1 of RFC 9110</b>, not §14.1 of it. The range names a type of
+///         representation that may be added to a <see cref="AtomMemberResources">collection</see> by POST.
+///     </para>
+///     <para>
+///         It is <i>similar</i> to an HTTP <c>Accept</c> request-header, and the difference is the trap: media type parameters are allowed, but this
+///         element has no notion of preference. The <i>accept-params</i> and <i>q</i> arguments RFC 2616 §14.1 permits are not significant here, so a
+///         server writing <c>image/png;q=0.8</c> expresses nothing a client is entitled to act on.
+///     </para>
+///     <para>See <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a> for a listing of the registered IANA MIME media types and subtypes.</para>
+/// </remarks>
+/// <seealso cref="AtomMemberResources.Accepts"/>
+/// <seealso cref="AtomMemberResources"/>
+public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEquatable<AtomAcceptedMediaRange>, IExtensibleSyndicationObject, IAtomCommonObjectAttributes, IComparisonOperators
 {
     /// <summary>
-    /// Represents a media range as defined in <a href="http://tools.ietf.org/html/rfc2616">RFC 2616: Hypertext Transfer Protocol</a> that
-    /// specifies a type of representation that can be added to a <see cref="AtomMemberResources"/>.
+    /// Initializes a new instance of the <see cref="AtomAcceptedMediaRange"/> class.
     /// </summary>
+    public AtomAcceptedMediaRange()
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AtomAcceptedMediaRange"/> class using the specified media range.
+    /// </summary>
+    /// <param name="mediaRange">The value of the accepted media range.</param>
+    public AtomAcceptedMediaRange(string mediaRange)
+    {
+        this.MediaRange = mediaRange;
+    }
+
+    /// <summary>
+    /// Gets or sets the base against which relative references inside this element are resolved.
+    /// </summary>
+    /// <value>The <c>xml:base</c> in effect for this element, or <see langword="null"/> when none is. The default value is <see langword="null"/>.</value>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="AtomAcceptedMediaRange"/> class implements the <i>app:accept</i> element of the <a href="http://bitworking.org/projects/atom/rfc5023.html">Atom Publishing Protocol</a>.
+    ///         RFC 4287 §2 gives <c>xml:base</c> the function described in section 5.1.1 of
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3986.html">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a> — it establishes the base URI,
+    ///         or IRI, for every relative reference in the attribute's effective scope. The value itself is a URI reference after processing according to
+    ///         <a href="https://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.
     ///     </para>
     ///     <para>
-    ///         The content value of the <see cref="MediaRange"/> property for an <see cref="AtomAcceptedMediaRange"/> is a media range as defined in <a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a>.
-    ///         The media range specifies a type of representation that can be added to a <see cref="AtomMemberResources">collection</see> via a POST operation.
+    ///         Loading resolves inheritance: an element without an <c>xml:base</c> of its own reports the nearest ancestor's, so the value here is the
+    ///         <i>effective</i> base a consumer can resolve an href against, not the literal attribute.
     ///     </para>
-    ///     <para>
-    ///         The <see cref="AtomAcceptedMediaRange"/> is similar to the HTTP Accept request-header [<a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a>].
-    ///         Media type parameters are allowed within <see cref="AtomAcceptedMediaRange"/>, but <see cref="AtomAcceptedMediaRange"/> has no notion of preference e.g. <i>accept-params</i> or <i>q</i> arguments,
-    ///         as specified in section 14.1 of <a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a> are not significant.
-    ///     </para>
-    ///     <para>See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and sub-types.</para>
     /// </remarks>
-    /// <seealso cref="AtomMemberResources.Accepts"/>
-    /// <seealso cref="AtomMemberResources"/>
-    [Serializable()]
-    public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
+    public Uri? BaseUri { get; set; }
+
+    /// <summary>
+    /// Gets or sets the natural or formal language in which the content is written.
+    /// </summary>
+    /// <value>The language declared by <c>xml:lang</c>, or <see langword="null"/> when none is in scope. The default value is <see langword="null"/>.</value>
+    /// <remarks>
+    ///     <para>
+    ///         RFC 4287 defines <c>atomLanguageTag</c> as a language identifier per
+    ///         <a href="https://www.rfc-editor.org/rfc/rfc3066.html">RFC 3066 (BCP 47; now RFC 5646)</a>, or its successor. A tag this runtime cannot turn
+    ///         into a <see cref="CultureInfo"/> is traced and dropped rather than failing the load.
+    ///     </para>
+    /// </remarks>
+    public CultureInfo? Language { get; set; }
+
+    /// <summary>
+    /// Gets the syndication extensions applied to this syndication entity.
+    /// </summary>
+    public IList<ISyndicationExtension> Extensions { get; } = [];
+
+    /// <summary>
+    /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
+    /// </summary>
+    /// <value><see langword="true"/> if <see cref="Extensions"/> holds at least one <see cref="ISyndicationExtension"/>; otherwise, <see langword="false"/>.</value>
+    public bool HasExtensions => this.Extensions.Count > 0;
+
+    /// <summary>
+    /// Gets the media range meaning "<see cref="AtomEntry">Atom Entry Documents</see> may be added to this collection".
+    /// </summary>
+    /// <value><c>application/atom+xml;type=entry</c>.</value>
+    /// <remarks>
+    ///     RFC 5023 §8.3.4 makes this the assumed range when a collection carries no <c>app:accept</c> at all. Its <i>presence</i> is therefore not what
+    ///     distinguishes an entry collection; its <i>absence</i> alongside some other range is.
+    /// </remarks>
+    public static string AtomEntryMediaRange => "application/atom+xml;type=entry";
+
+    /// <summary>
+    /// Gets the media range meaning "<see cref="AtomFeed">Atom Feed Documents</see> may be added to this collection".
+    /// </summary>
+    /// <value><c>application/atom+xml;type=feed</c>.</value>
+    public static string AtomFeedMediaRange => "application/atom+xml;type=feed";
+
+    /// <summary>
+    /// Gets or sets the value of this accepted media range.
+    /// </summary>
+    /// <value>A media range such as <c>image/*</c> or <c>application/atom+xml;type=entry</c>. The default value is an <i>empty</i> string, which means the collection accepts nothing.</value>
+    /// <remarks>
+    ///     <para>
+    ///         See <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a> for a listing of the registered IANA MIME media types and subtypes.
+    ///     </para>
+    ///     <para>
+    ///         Media type parameters are allowed, but this element has no notion of preference: the <i>accept-params</i> and <i>q</i> arguments of an HTTP
+    ///         <c>Accept</c> header (RFC 2616 §14.1, now <a href="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110</a> §12.5.1) are not significant.
+    ///     </para>
+    /// </remarks>
+    /// <seealso cref="AtomAcceptedMediaRange.AtomEntryMediaRange"/>
+    public string MediaRange
     {
-        /// <summary>
-        /// Private member to hold the base URI other than the base URI of the document or external entity.
-        /// </summary>
-        private Uri commonObjectBaseUri;
-        /// <summary>
-        /// Private member to hold the natural or formal language in which the content is written.
-        /// </summary>
-        private CultureInfo commonObjectLanguage;
-        /// <summary>
-        /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-        /// </summary>
-        private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-        /// <summary>
-        /// Private member to hold the value of the accepted media range.
-        /// </summary>
-        private string acceptedMediaRangeValue  = String.Empty;
+        get;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AtomAcceptedMediaRange"/> class.
-        /// </summary>
-        public AtomAcceptedMediaRange()
+        set
         {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AtomAcceptedMediaRange"/> class using the specified media range.
-        /// </summary>
-        /// <param name="mediaRange">The value of the accepted media range.</param>
-        public AtomAcceptedMediaRange(string mediaRange)
-        {
-            this.MediaRange = mediaRange;
-        }
-
-        /// <summary>
-        /// Gets or sets the base URI other than the base URI of the document or external entity.
-        /// </summary>
-        /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
-        /// <remarks>
-        ///     <para>
-        ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
-        ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
-        /// </remarks>
-        public Uri BaseUri
-        {
-            get
+            if (string.IsNullOrEmpty(value))
             {
-                return commonObjectBaseUri;
-            }
-
-            set
-            {
-                commonObjectBaseUri = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the natural or formal language in which the content is written.
-        /// </summary>
-        /// <value>A <see cref="CultureInfo"/> that represents the natural or formal language in which the content is written. The default value is a <b>null</b> reference.</value>
-        /// <remarks>
-        ///     <para>
-        ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
-        ///     </para>
-        /// </remarks>
-        public CultureInfo Language
-        {
-            get
-            {
-                return commonObjectLanguage;
-            }
-
-            set
-            {
-                commonObjectLanguage = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the syndication extensions applied to this syndication entity.
-        /// </summary>
-        /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-        /// <remarks>
-        ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public IEnumerable<ISyndicationExtension> Extensions
-        {
-            get
-            {
-                if (objectSyndicationExtensions == null)
-                {
-                    objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-                }
-                return objectSyndicationExtensions;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                objectSyndicationExtensions = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
-        /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
-        public bool HasExtensions
-        {
-            get
-            {
-                return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-            }
-        }
-
-        /// <summary>
-        /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-        /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool AddExtension(ISyndicationExtension extension)
-        {
-            bool wasAdded   = false;
-
-            Guard.ArgumentNotNull(extension, "extension");
-
-            ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-            wasAdded    = true;
-
-            return wasAdded;
-        }
-
-        /// <summary>
-        /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
-        /// </summary>
-        /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
-        /// <returns>
-        ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
-        /// </returns>
-        /// <remarks>
-        ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
-        ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
-        ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
-        public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
-        {
-            Guard.ArgumentNotNull(match, "match");
-
-            List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
-            return list.Find(match);
-        }
-
-        /// <summary>
-        /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-        /// </summary>
-        /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool RemoveExtension(ISyndicationExtension extension)
-        {
-            bool wasRemoved = false;
-
-            Guard.ArgumentNotNull(extension, "extension");
-
-            if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-            {
-                ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-                wasRemoved  = true;
-            }
-
-            return wasRemoved;
-        }
-
-        /// <summary>
-        /// Gets a <see cref="MediaRange"/> that indicates that <see cref="AtomEntry">Atom Entry Documents</see> can be added to a <see cref="AtomMemberResources"/>.
-        /// </summary>
-        /// <value>A <see cref="MediaRange"/> value that indicates that <see cref="AtomEntry">Atom Entry Documents</see> can be added to a <see cref="AtomMemberResources"/>.</value>
-        public static string AtomEntryMediaRange
-        {
-            get
-            {
-                return "application/atom+xml;type=entry";
-            }
-        }
-
-        /// <summary>
-        /// Gets a <see cref="MediaRange"/> that indicates that <see cref="AtomFeed">Atom Feed Documents</see> can be added to a <see cref="AtomMemberResources"/>.
-        /// </summary>
-        /// <value>A <see cref="MediaRange"/> value that indicates that <see cref="AtomFeed">Atom Feed Documents</see> can be added to a <see cref="AtomMemberResources"/>.</value>
-        public static string AtomFeedMediaRange
-        {
-            get
-            {
-                return "application/atom+xml;type=feed";
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the value of this accepted media range.
-        /// </summary>
-        /// <value>The value of this accepted media range.</value>
-        /// <remarks>
-        ///     <para>
-        ///         See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and sub-types.
-        ///     </para>
-        ///     <para>
-        ///         The <see cref="AtomAcceptedMediaRange"/> is similar to the HTTP Accept request-header [<a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a>].
-        ///         Media type parameters are allowed within <see cref="AtomAcceptedMediaRange"/>, but <see cref="AtomAcceptedMediaRange"/> has no notion of preference e.g. <i>accept-params</i> or <i>q</i> arguments,
-        ///         as specified in section 14.1 of [<a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a>] are not significant.
-        ///     </para>
-        /// </remarks>
-        /// <seealso cref="AtomAcceptedMediaRange.AtomEntryMediaRange"/>
-        public string MediaRange
-        {
-            get
-            {
-                return acceptedMediaRangeValue;
-            }
-
-            set
-            {
-                if (String.IsNullOrEmpty(value))
-                {
-                    acceptedMediaRangeValue = String.Empty;
-                }
-                else
-                {
-                    acceptedMediaRangeValue = value.Trim();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Loads this <see cref="AtomAcceptedMediaRange"/> using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="AtomAcceptedMediaRange"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomAcceptedMediaRange"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source)
-        {
-            bool wasLoaded              = false;
-
-            Guard.ArgumentNotNull(source, "source");
-
-            if (AtomUtility.FillCommonObjectAttributes(this, source))
-            {
-                wasLoaded = true;
-            }
-
-            this.MediaRange = !String.IsNullOrEmpty(source.Value) ? source.Value.Trim() : String.Empty;
-            wasLoaded       = true;
-
-            return wasLoaded;
-        }
-
-        /// <summary>
-        /// Loads this <see cref="AtomAcceptedMediaRange"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
-        /// </summary>
-        /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-        /// <returns><b>true</b> if the <see cref="AtomAcceptedMediaRange"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <remarks>
-        ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomAcceptedMediaRange"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
-        {
-            bool wasLoaded = false;
-
-            Guard.ArgumentNotNull(source, "source");
-            Guard.ArgumentNotNull(settings, "settings");
-
-            wasLoaded   = this.Load(source);
-
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
-            adapter.Fill(this);
-
-            return wasLoaded;
-        }
-
-        /// <summary>
-        /// Saves the current <see cref="AtomAcceptedMediaRange"/> to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void WriteTo(XmlWriter writer)
-        {
-            Guard.ArgumentNotNull(writer, "writer");
-
-            writer.WriteStartElement("accept", AtomUtility.AtomPublishingNamespace);
-            AtomUtility.WriteCommonObjectAttributes(this, writer);
-
-            if(!String.IsNullOrEmpty(this.MediaRange))
-            {
-                writer.WriteString(this.MediaRange);
-            }
-
-            SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
-
-            writer.WriteEndElement();
-        }
-
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.</returns>
-        /// <remarks>
-        ///     This method returns the XML representation for the current instance.
-        /// </remarks>
-        public override string ToString()
-        {
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Fragment;
-                settings.Indent             = true;
-                settings.OmitXmlDeclaration = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    this.WriteTo(writer);
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
-        {
-            if (obj == null)
-            {
-                return 1;
-            }
-
-            AtomAcceptedMediaRange value  = obj as AtomAcceptedMediaRange;
-
-            if (value != null)
-            {
-                int result  = String.Compare(this.MediaRange, value.MediaRange, StringComparison.OrdinalIgnoreCase);
-                result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
-
-                return result;
+                field = string.Empty;
             }
             else
             {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                field = value.Trim();
             }
         }
+    } = string.Empty;
 
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is AtomAcceptedMediaRange))
-            {
-                return false;
-            }
+    /// <summary>
+    /// Loads this <see cref="AtomAcceptedMediaRange"/> using the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+    /// <returns>
+    ///     Always <see langword="true"/>. <b>An empty <c>app:accept</c> is a statement, not a parse failure.</b> RFC 5023 §8.3.4 makes an <i>absent</i>
+    ///     <c>app:accept</c> mean the collection accepts Atom entry documents, and one whose value is empty mean the opposite — that the collection accepts
+    ///     nothing and does not support member creation at all. Returning <see langword="false"/> here would stop <see cref="AtomMemberResources"/> adding
+    ///     the range, leaving an empty <see cref="AtomMemberResources.Accepts"/> that a consumer must read as the entry default: the exact inverse of what
+    ///     the server published. This is pinned by <c>AnEmptyAcceptElement_LoadsAndMeansTheCollectionAcceptsNothing</c>.
+    /// </returns>
+    /// <remarks>
+    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomAcceptedMediaRange"/>.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    public bool Load(XPathNavigator source)
+    {
+        ArgumentNullException.ThrowIfNull(source);
 
-            return (this.CompareTo(obj) == 0);
-        }
+        AtomUtility.FillCommonObjectAttributes(this, source);
 
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray    = this.ToString().ToCharArray();
+        this.MediaRange = !string.IsNullOrEmpty(source.Value) ? source.Value.Trim() : string.Empty;
 
-            return charArray.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(AtomAcceptedMediaRange first, AtomAcceptedMediaRange second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return first.Equals(second);
-        }
-
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(AtomAcceptedMediaRange first, AtomAcceptedMediaRange second)
-        {
-            return !(first == second);
-        }
-
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(AtomAcceptedMediaRange first, AtomAcceptedMediaRange second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
-
-            return (first.CompareTo(second) < 0);
-        }
-
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(AtomAcceptedMediaRange first, AtomAcceptedMediaRange second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
-
-            return (first.CompareTo(second) > 0);
-        }
+        return true;
     }
+
+    /// <summary>
+    /// Loads this <see cref="AtomAcceptedMediaRange"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
+    /// <returns><see langword="true"/> if the <see cref="AtomAcceptedMediaRange"/> was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomAcceptedMediaRange"/>.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(settings);
+
+        bool wasLoaded = this.Load(source);
+
+        SyndicationExtensionAdapter adapter = new(source, settings);
+        adapter.Fill(this);
+
+        return wasLoaded;
+    }
+
+    /// <summary>
+    /// Saves the current <see cref="AtomAcceptedMediaRange"/> to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    public void WriteTo(XmlWriter writer)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+
+        writer.WriteStartElement("accept", AtomUtility.AtomPublishingNamespace);
+        AtomUtility.WriteCommonObjectAttributes(this, writer);
+
+        if (!string.IsNullOrEmpty(this.MediaRange))
+        {
+            writer.WriteString(this.MediaRange);
+        }
+
+        SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
+
+        writer.WriteEndElement();
+    }
+
+    /// <summary>
+    /// Returns a <see cref="string"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.
+    /// </summary>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.</returns>
+    /// <remarks>
+    ///     This method returns the XML representation for the current instance.
+    /// </remarks>
+    public override string ToString()
+    {
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = SyndicationEncodingUtility.CreateFragmentXmlWriterSettings();
+
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
+        {
+            this.WriteTo(writer);
+        }
+
+        stream.Seek(0, SeekOrigin.Begin);
+
+        using StreamReader reader = new(stream);
+        return reader.ReadToEnd();
+    }
+
+    /// <summary>
+    /// Compares the current instance with another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this instance.</param>
+    /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+    public int CompareTo(AtomAcceptedMediaRange? other)
+    {
+        if (other is null)
+        {
+            return 1;
+        }
+
+        int result = string.Compare(this.MediaRange, other.MediaRange, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = AtomUtility.CompareCommonObjectAttributes(this, other);
+
+        return result;
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="AtomAcceptedMediaRange"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="AtomAcceptedMediaRange"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="AtomAcceptedMediaRange"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public bool Equals(AtomAcceptedMediaRange? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public override bool Equals(object? obj) => obj is AtomAcceptedMediaRange other && this.Equals(other);
+
+    /// <summary>
+    /// Returns a hash code for the current instance.
+    /// </summary>
+    /// <returns>A 32-bit signed integer hash code.</returns>
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.MediaRange), HashCodeUtility.Component(this.BaseUri), HashCodeUtility.Component(this.Language));
+
+    /// <summary>
+    /// Determines if operands are equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="true"/> if the operands are equal; otherwise, <see langword="false"/>.</returns>
+    public static bool operator ==(AtomAcceptedMediaRange? first, AtomAcceptedMediaRange? second)
+    {
+        if (first is null) return second is null;
+        return first.Equals(second);
+    }
+
+    /// <summary>
+    /// Determines if operands are not equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="true"/> if the operands are not equal; otherwise, <see langword="false"/>.</returns>
+    public static bool operator !=(AtomAcceptedMediaRange? first, AtomAcceptedMediaRange? second) => !(first == second);
 }

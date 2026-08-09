@@ -1,0 +1,263 @@
+root = true
+
+# All files
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+end_of_line = lf
+insert_final_newline = false
+trim_trailing_whitespace = true
+
+# C# files
+[*.cs]
+
+# C# 12 Language features
+csharp_style_namespace_declarations = file_scoped:warning
+csharp_style_prefer_primary_constructors = false:suggestion
+csharp_style_prefer_top_level_statements = true:silent
+
+# C# 14 Language features. The codebase uses the `field` keyword throughout, so a getter that
+# only reads the backing field is written `get;` rather than `get => field;`.
+csharp_style_prefer_simplified_property_accessor = true:suggestion
+csharp_style_prefer_field_keyword = true:suggestion
+# Only fires where the null check guards the assignment TARGET. Guards on the assigned *value*
+# (`if (description is not null) item.Description = description;`) are not candidates - `?.` tests
+# the receiver - so this reports nothing today and is here to catch the shape if it appears.
+csharp_style_prefer_null_conditional_assignment = true:suggestion
+
+# Pattern matching preferences
+csharp_style_pattern_matching_over_is_with_cast_check = true:warning
+csharp_style_pattern_matching_over_as_with_null_check = true:warning
+csharp_style_prefer_switch_expression = true:suggestion
+csharp_style_prefer_pattern_matching = true:suggestion
+csharp_style_prefer_not_pattern = true:suggestion
+csharp_style_prefer_extended_property_pattern = true:suggestion
+
+# Null-checking preferences
+csharp_style_throw_expression = true:suggestion
+csharp_style_conditional_delegate_call = true:warning
+csharp_style_prefer_null_check_over_type_check = true:suggestion
+
+# Modifier preferences
+csharp_prefer_static_local_function = true:warning
+csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async:warning
+csharp_style_prefer_readonly_struct = true:suggestion
+csharp_style_prefer_readonly_struct_member = true:suggestion
+
+# Expression preferences
+csharp_prefer_simple_using_statement = true:warning
+csharp_style_prefer_index_operator = true:suggestion
+csharp_style_prefer_range_operator = true:suggestion
+csharp_style_implicit_object_creation_when_type_is_apparent = true:warning
+csharp_style_prefer_tuple_swap = true:suggestion
+csharp_style_prefer_utf8_string_literals = true:suggestion
+csharp_style_inlined_variable_declaration = true:warning
+csharp_style_deconstructed_variable_declaration = true:suggestion
+csharp_style_unused_value_assignment_preference = discard_variable:suggestion
+csharp_style_unused_value_expression_statement_preference = discard_variable:silent
+
+# Expression-bodied members
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_constructors = false:suggestion
+csharp_style_expression_bodied_operators = when_on_single_line:suggestion
+csharp_style_expression_bodied_properties = true:suggestion
+csharp_style_expression_bodied_indexers = true:suggestion
+csharp_style_expression_bodied_accessors = true:suggestion
+csharp_style_expression_bodied_lambdas = true:suggestion
+csharp_style_expression_bodied_local_functions = when_on_single_line:suggestion
+
+# Collection expressions (C# 12)
+dotnet_style_prefer_collection_expression = true:suggestion
+
+# Code style rules
+dotnet_style_prefer_auto_properties = true:warning
+dotnet_style_prefer_conditional_expression_over_assignment = true:suggestion
+dotnet_style_prefer_conditional_expression_over_return = true:suggestion
+dotnet_style_prefer_inferred_tuple_names = true:suggestion
+dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
+dotnet_style_prefer_compound_assignment = true:suggestion
+dotnet_style_prefer_simplified_interpolation = true:suggestion
+dotnet_style_prefer_simplified_boolean_expressions = true:warning
+
+# Field preferences
+dotnet_style_readonly_field = true:warning
+
+# Parameter preferences
+dotnet_code_quality_unused_parameters = all:warning
+
+# Suppression preferences
+dotnet_remove_unnecessary_suppression_exclusions = none
+
+# CA1036: Override methods on comparable types
+dotnet_diagnostic.CA1036.severity = none
+# CA2225: Operator overloads have named alternates
+dotnet_diagnostic.CA2225.severity = none
+# CA1308: Normalize strings to uppercase. Every site normalises an input token in order to match
+# spec-defined literals that are themselves lower case ASCII - the sitemap changefreq values
+# ("always", "hourly", ...) and the video id types ("tms:series", ...). Following the rule would
+# mean rewriting those literals in upper case, which reads worse against the specification and
+# gains nothing: the Turkish-I hazard the rule exists for cannot arise on this token set.
+dotnet_diagnostic.CA1308.severity = none
+
+# Code style for 'this.' qualification
+dotnet_style_qualification_for_field = true:silent
+dotnet_style_qualification_for_property = true:silent
+dotnet_style_qualification_for_method = true:silent
+dotnet_style_qualification_for_event = true:silent
+
+# Blank line preferences. These are JetBrains Rider options, not Roslyn ones - they shape what the
+# IDE does and have no effect on the build or on dotnet format.
+csharp_blank_lines_around_region = 1
+csharp_blank_lines_inside_region = 1
+csharp_blank_lines_between_using_groups = 1
+
+# Using preferences
+csharp_using_directive_placement = outside_namespace:warning
+csharp_prefer_simple_using_statement = true:warning
+dotnet_style_namespace_match_folder = true:suggestion
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+# IDE0005: Remove unnecessary using directives
+dotnet_diagnostic.IDE0005.severity = warning
+
+# IDE0052: Remove unread private members
+# A private field or property that is written and never read is either dead weight or a member whose
+# reader was lost in a refactor. Measured during Wave 2 it lit up two sites, both since deleted; it now
+# lights up none, so promoting it from its silent default costs nothing and catches the next one.
+dotnet_diagnostic.IDE0052.severity = warning
+
+# Naming conventions
+dotnet_naming_rule.interface_should_be_prefixed_with_i.severity = warning
+dotnet_naming_rule.interface_should_be_prefixed_with_i.symbols = interface
+dotnet_naming_rule.interface_should_be_prefixed_with_i.style = begins_with_i
+
+dotnet_naming_rule.types_should_be_pascal_case.severity = warning
+dotnet_naming_rule.types_should_be_pascal_case.symbols = types
+dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_rule.non_field_members_should_be_pascal_case.severity = warning
+dotnet_naming_rule.non_field_members_should_be_pascal_case.symbols = non_field_members
+dotnet_naming_rule.non_field_members_should_be_pascal_case.style = pascal_case
+
+dotnet_naming_symbols.interface.applicable_kinds = interface
+dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+
+dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
+dotnet_naming_symbols.types.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+
+dotnet_naming_symbols.non_field_members.applicable_kinds = property, event, method
+dotnet_naming_symbols.non_field_members.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+
+dotnet_naming_style.begins_with_i.required_prefix = I
+dotnet_naming_style.begins_with_i.capitalization = pascal_case
+
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+# Application (non-library) code. The sample runner is an executable, not a shipped
+# package, so the library-authoring rules below do not apply to it.
+[Argotic.Examples/**.cs]
+# CA1848: Use LoggerMessage delegates for performance
+dotnet_diagnostic.CA1848.severity = none
+# CA1031: Do not catch general exception types
+dotnet_diagnostic.CA1031.severity = none
+# CA1515: Make internal since this is an application
+dotnet_diagnostic.CA1515.severity = none
+# CA1050: Declare types in namespaces - top-level programs don't need this
+dotnet_diagnostic.CA1050.severity = none
+# CA2007: ConfigureAwait not needed in applications
+dotnet_diagnostic.CA2007.severity = none
+# CA1034: Nested types are ok for settings
+dotnet_diagnostic.CA1034.severity = none
+# CA1303: Do not pass literals as localized parameters - console output is not localized
+dotnet_diagnostic.CA1303.severity = none
+# CA1812: Internal class apparently never instantiated. The commands and settings types are
+# constructed by Spectre.Console.Cli through reflection when it binds the command line, so the
+# analyzer cannot see the instantiation. Removing them would break the sample runner.
+dotnet_diagnostic.CA1812.severity = none
+
+# Test files. Scoped to the whole test project rather than a filename pattern: the suite
+# mixes *Test.cs and *Tests.cs, and the builders/test-doubles/base classes carry the same
+# relaxations without matching either suffix.
+[Argotic.Extensions.Tests/**.cs]
+# CA1707: Allow underscores in test method names
+dotnet_diagnostic.CA1707.severity = none
+# CA1303: Do not pass literals as localized parameters
+dotnet_diagnostic.CA1303.severity = none
+# CA1515: MSTest requires public test classes, so they cannot be made internal
+dotnet_diagnostic.CA1515.severity = none
+# CA2007: Consider calling ConfigureAwait on the awaited task
+dotnet_diagnostic.CA2007.severity = none
+# CA2025: Ensure tasks using IDisposable instances complete before the instances are disposed. All
+# four sites are safe: the two handler lambdas transfer ownership of the HttpResponseMessage to the
+# caller, which is how HttpMessageHandler is meant to work, and the two concurrency tests await
+# Task.WhenAll inside the using scope that owns the HttpClient. The analyzer cannot see either.
+dotnet_diagnostic.CA2025.severity = none
+# CA1054: URI parameters should not be strings. All 14 sites are the fluent test builders in
+# Builders/FeedBuilders.cs, which take URLs as string literals so the tests read as data. The rule
+# guards public API design, and nothing in this project is public API - it is not packable. Its
+# fixer is also unsafe here: it generates NotImplementedException stub overloads rather than
+# changing the parameter (see section 3.4 of .endjin/build-warnings.md).
+dotnet_diagnostic.CA1054.severity = none
+# CA1508: Avoid dead conditional code. Every site in this project is an equality-contract
+# assertion - (nullTrackback == null).ShouldBeTrue(), video.Equals(null).ShouldBeFalse(),
+# item1 == item2 over two locally arranged instances. The condition being statically decidable
+# is exactly what the test asserts, so the rule fires on the basic shape of a unit test:
+# arrange known values, assert the known outcome. Removing the conditions would delete the
+# operator and Equals coverage they exist to provide. Shipped code is not suppressed - its 12
+# sites were genuine dead code and were fixed.
+dotnet_diagnostic.CA1508.severity = none
+# CA5372: Use XmlReader for XPathDocument. Every XPathDocument in this project is built from a
+# const string literal compiled into the test assembly (see TestDoubles/FeedTestData.cs) - a
+# trusted source that cannot be tampered with, which is the condition Microsoft documents for
+# suppressing this rule:
+# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5372
+# Scoped to the test project, so the shipped libraries stay covered - they have zero violations
+# and parse through SyndicationEncodingUtility.CreateSafeNavigator, which passes an XmlReader with
+# XmlResolver = null and is regression-tested by CreateSafeNavigator_DoesNotResolveExternalEntity.
+dotnet_diagnostic.CA5372.severity = none
+
+# Single-file samples. Each is a .NET 10 file-based app run with `dotnet run --file`, compiled
+# through a virtual project whose directory is this one - so Solutions/Directory.Build.props
+# applies, AnalysisMode is AllEnabledByDefault, and a top-level-statement program trips the same
+# application-code rules Argotic.Examples had to relax above.
+#
+# Deliberately shorter than the Argotic.Examples list. A suppression with no violation behind it is
+# a comment, not a control, and three of that block's eight rules never fire here: samples log
+# nothing (CA1848), declare no types Spectre constructs by reflection (CA1812), and nest no settings
+# classes (CA1034). Add a rule only when a written sample actually trips it.
+#
+# dotnet format cannot reach these files - it wants a project or solution and rejects a bare .cs -
+# so Solutions/.editorconfig line 9 (insert_final_newline = false) is enforced by hand here, as it
+# already is for .md.
+[Samples/**.cs]
+# CA1050: Declare types in namespaces - top-level programs have none
+dotnet_diagnostic.CA1050.severity = none
+# CA1303: Do not pass literals as localized parameters - console output is not localized
+dotnet_diagnostic.CA1303.severity = none
+# CA1515: Make internal since this is an application
+dotnet_diagnostic.CA1515.severity = none
+# CA2007: ConfigureAwait not needed in applications, and it is noise in a teaching sample
+dotnet_diagnostic.CA2007.severity = none
+# CA1031: Do not catch general exception types. Several samples catch to *show* a guard firing -
+# demonstrating that RssChannel.Description rejects "" means catching what it throws.
+dotnet_diagnostic.CA1031.severity = none
+
+# JSON files
+[*.json]
+indent_size = 2
+
+# YAML files
+[*.{yml,yaml}]
+indent_size = 2
+
+# XML files
+[*.{xml,csproj,props,targets}]
+indent_size = 2
+
+# Windows tooling that expects CRLF. Must match the eol=crlf pins in /.gitattributes,
+# otherwise the working tree and the repository disagree and every formatter run
+# rewrites these files back and forth.
+[*.{sln,slnx,ps1,cmd,bat}]
+end_of_line = crlf

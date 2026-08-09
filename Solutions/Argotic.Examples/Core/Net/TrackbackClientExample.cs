@@ -1,47 +1,51 @@
-﻿using System;
 using System.Text;
-
 using Argotic.Net;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core.Net;
+
+/// <summary>
+/// Configures a <see cref="TrackbackClient"/> and the url-encoded <see cref="TrackbackMessage"/> it would post.
+/// </summary>
+/// <remarks>
+///     Nothing is sent. The endpoint is a placeholder, so the example stops at a configured client and a
+///     well-formed message; the <c>SendAsync</c> call is left commented out beside them.
+/// </remarks>
+internal static class TrackbackClientExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="TrackbackClient"/> class.
+    /// Configures a <see cref="TrackbackClient"/> and the <see cref="TrackbackMessage"/> it would post.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="TrackbackClient"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
-    public static class TrackbackClientExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the TrackbackClient class.
-        /// </summary>
-        public static void ClassExample()
+        // Initialize the Trackback peer-to-peer notification protocol client
+        TrackbackClient client = new()
         {
-            // Initialize the Trackback peer-to-peer notification protocol client
-            TrackbackClient client      = new TrackbackClient();
-            client.Host                 = new Uri("http://www.example.com/trackback/5");
+            Host = new Uri("https://endjin.com/trackback/genai-reality-check")
+        };
 
-            // Construct the trackback message to be sent
-            TrackbackMessage message    = new TrackbackMessage(new Uri("http://www.bar.com/"));
-            message.Encoding            = Encoding.UTF8;
-            message.WeblogName          = "Foo";
-            message.Title               = "Foo Bar";
-            message.Excerpt             = "My Excerpt";
+        // Construct the trackback message to be sent
+        TrackbackMessage message = new(new Uri("http://www.bar.com/"))
+        {
+            Encoding = Encoding.UTF8,
+            WeblogName = "Foo",
+            Title = "endjin blog",
+            Excerpt = "My Excerpt"
+        };
 
-            // Send a synchronous trackback ping
-            TrackbackResponse response  = client.Send(message);
+        // Note: In a real application, you would send the message:
+        // TrackbackResponse response = await client.SendAsync(message).ConfigureAwait(false);
 
+        // For demonstration, we just verify the client and message are configured correctly
+        if (client.Host is not null && message.Permalink is not null)
+        {
+            // Client is configured and ready to send
             // Verify response to the trackback ping
-            if (response != null)
-            {
-                if (response.HasError)
-                {
-                    // Use the TrackbackResponse.ErrorMessage property to determine the reason the trackback ping failed
-                }
-            }
+            // if (response != null && response.HasError)
+            // {
+            //     // Use the TrackbackResponse.ErrorMessage property to determine the reason the trackback ping failed
+            // }
         }
+
+        ExampleOutput.ShowTrackbackClient(client.Host!, message.WeblogName, message.Title);
     }
 }

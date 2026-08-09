@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Deliberately the plainest feed in the corpus: RSS 2.0 with nothing optional and no extensions.
+
+  GenericSyndicationFeed exists to read a feed whose format the caller does not know in advance, so what
+  this file has to exercise is the lowest common denominator across RSS and Atom — title, link,
+  description, published date — and nothing that only one of them can express.
+-->
+<rss version="2.0">
+  <channel>
+    <title>endjin blog</title>
+    <link>https://endjin.com/blog/</link>
+    <description>Technical writing from endjin on .NET, data, analytics and AI.</description>
+    <language>en-gb</language>
+    <item>
+      <title>Trying out WSL containers</title>
+      <link>https://endjin.com/blog/trying-out-wsl-containers</link>
+      <description>Microsoft's built-in container runtime handles basic workflows and dev containers well, but a few limitations still stop it replacing Docker Desktop.</description>
+      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Cloud AI SLAs are not what you think</title>
+      <link>https://endjin.com/blog/cloud-ai-slas-are-not-what-you-think</link>
+      <description>Uptime guarantees say nothing about the risk that actually bites: model behaviour drifting without an outage, degrading reasoning while the service stays green.</description>
+      <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

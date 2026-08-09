@@ -1,180 +1,156 @@
-﻿using System;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
 
-namespace Argotic.Extensions.Core
+namespace Argotic.Extensions.Core;
+
+/// <summary>
+/// Encapsulates specific information about an individual <see cref="SiteSummaryUpdateSyndicationExtension"/>.
+/// </summary>
+public class SiteSummaryUpdateSyndicationExtensionContext
 {
+
     /// <summary>
-    /// Encapsulates specific information about an individual <see cref="SiteSummaryUpdateSyndicationExtension"/>.
+    /// Initializes a new instance of the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> class.
     /// </summary>
-    [Serializable()]
-    public class SiteSummaryUpdateSyndicationExtensionContext
+    public SiteSummaryUpdateSyndicationExtensionContext()
     {
+    }
 
-        /// <summary>
-        /// Private member to hold the period over which the feed format is updated.
-        /// </summary>
-        private SiteSummaryUpdatePeriod extensionUpdatePeriod   = SiteSummaryUpdatePeriod.None;
-        /// <summary>
-        /// Private member to hold the frequency of updates in relation to the update period.
-        /// </summary>
-        private int extensionUpdateFrequency                    = Int32.MinValue;
-        /// <summary>
-        /// Private member to hold a base date to be used in concert with period and frequency to calculate the publishing schedule.
-        /// </summary>
-        private DateTime extensionUpdateBase                    = DateTime.MinValue;
+    /// <summary>
+    /// Gets or sets the base date to be used in concert with period and frequency to calculate the publishing schedule.
+    /// </summary>
+    /// <value>
+    ///     The instant the update cycle is measured from. The default value is
+    ///     <see cref="DateTime.MinValue"/>, which stands in for "absent" and is the one value
+    ///     <see cref="WriteTo"/> will not write.
+    /// </value>
+    /// <remarks>
+    ///     Supply it in UTC. It is read and written as an RFC 3339 date-time, so a value with an unhelpful
+    ///     <see cref="DateTimeKind"/> serialises to an offset that does not mean what the caller intended.
+    /// </remarks>
+    public DateTime Base { get; set; } = DateTime.MinValue;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> class.
-        /// </summary>
-        public SiteSummaryUpdateSyndicationExtensionContext()
+    /// <summary>
+    /// Gets or sets how many times per <see cref="Period"/> the feed is updated.
+    /// </summary>
+    /// <value>
+    ///     A count of updates per period — <c>2</c> with an hourly <see cref="Period"/> means twice an
+    ///     hour. The default value is <see cref="int.MinValue"/>, which stands in for "absent"; note that
+    ///     the setter rejects it, so once a real value has been assigned there is no way back to unset.
+    /// </value>
+    /// <exception cref="ArgumentOutOfRangeException">The value specified for a set operation is less than <c>1</c>.</exception>
+    public int Frequency
+    {
+        get;
+
+        set
         {
+            ArgumentOutOfRangeException.ThrowIfLessThan(value, 1);
+            field = value;
         }
+    } = int.MinValue;
 
-        /// <summary>
-        /// Gets or sets the base date to be used in concert with period and frequency to calculate the publishing schedule.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="DateTime"/> that represents the base date to be used in concert with period and frequency to calculate the publishing schedule. 
-        ///     The default value is <see cref="DateTime.MinValue"/>, which indicates no base date was specified.
-        /// </value>
-        /// <remarks>
-        ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
-        /// </remarks>
-        public DateTime Base
+    /// <summary>
+    /// Gets or sets the period over which the feed format is updated.
+    /// </summary>
+    /// <value>
+    ///     The unit <see cref="Frequency"/> counts against. The default value is
+    ///     <see cref="SiteSummaryUpdatePeriod.None"/>, which stands in for "absent" and suppresses the
+    ///     element on write.
+    /// </value>
+    /// <remarks>
+    ///     An unrecognised <c>sy:updatePeriod</c> value leaves this at
+    ///     <see cref="SiteSummaryUpdatePeriod.None"/> and is dropped rather than round-tripped, so
+    ///     <see cref="Frequency"/> can survive a load with nothing left to count against.
+    /// </remarks>
+    public SiteSummaryUpdatePeriod Period { get; set; } = SiteSummaryUpdatePeriod.None;
+
+    /// <summary>
+    /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="SiteSummaryUpdateSyndicationExtensionContext"/>.</param>
+    /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
+    /// <returns><see langword="true"/> if the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     Every unusable value is skipped rather than rejected, and that includes a
+    ///     <c>sy:updateFrequency</c> below <c>1</c>. A feed is untrusted remote input and an aggregator
+    ///     hint is optional metadata, so losing the whole document to one out-of-range integer would be
+    ///     a catastrophic response to a trivial fault. <see cref="Frequency"/>'s own guard still throws,
+    ///     because a programmatic assignment of <c>0</c> is a caller error rather than a bad feed.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    {
+        bool wasLoaded = false;
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        if (source.HasChildren)
         {
-            get
-            {
-                return extensionUpdateBase;
-            }
+            XPathNavigator? updatePeriodNavigator = source.SelectChildElement("sy", "updatePeriod", manager);
+            XPathNavigator? updateFrequencyNavigator = source.SelectChildElement("sy", "updateFrequency", manager);
+            XPathNavigator? updateBaseNavigator = source.SelectChildElement("sy", "updateBase", manager);
 
-            set
+            if (updatePeriodNavigator is not null && !string.IsNullOrEmpty(updatePeriodNavigator.Value))
             {
-                extensionUpdateBase = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the frequency of updates in relation to the update period.
-        /// </summary>
-        /// <value>The frequency of updates in relation to the update period.</value>
-        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <b>1</b>.</exception>
-        public int Frequency
-        {
-            get
-            {
-                return extensionUpdateFrequency;
-            }
-            
-            set
-            {
-                Guard.ArgumentNotLessThan(value, "value", 1);
-                extensionUpdateFrequency = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the period over which the feed format is updated.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="SiteSummaryUpdatePeriod"/> enumeration value that indicates the period over which the feed format is updated. 
-        ///     The default value is <see cref="SiteSummaryUpdatePeriod.None"/>, which indicates that no update period was specified.
-        /// </value>
-        public SiteSummaryUpdatePeriod Period
-        {
-            get
-            {
-                return extensionUpdatePeriod;
-            }
-
-            set
-            {
-                extensionUpdatePeriod = value;
-            }
-        }
-
-        /// <summary>
-        /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="SiteSummaryUpdateSyndicationExtensionContext"/>.</param>
-        /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source, XmlNamespaceManager manager)
-        {
-            bool wasLoaded  = false;
-            Guard.ArgumentNotNull(source, "source");
-            Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
-            {
-                XPathNavigator updatePeriodNavigator    = source.SelectSingleNode("sy:updatePeriod", manager);
-                XPathNavigator updateFrequencyNavigator = source.SelectSingleNode("sy:updateFrequency", manager);
-                XPathNavigator updateBaseNavigator      = source.SelectSingleNode("sy:updateBase", manager);
-
-                if (updatePeriodNavigator != null && !String.IsNullOrEmpty(updatePeriodNavigator.Value))
+                SiteSummaryUpdatePeriod period = SiteSummaryUpdateSyndicationExtension.PeriodByName(updatePeriodNavigator.Value);
+                if (period != SiteSummaryUpdatePeriod.None)
                 {
-                    SiteSummaryUpdatePeriod period  = SiteSummaryUpdateSyndicationExtension.PeriodByName(updatePeriodNavigator.Value);
-                    if (period != SiteSummaryUpdatePeriod.None)
-                    {
-                        this.Period = period;
-                        wasLoaded   = true;
-                    }
-                }
-
-                if (updateFrequencyNavigator != null)
-                {
-                    int frequency;
-                    if (Int32.TryParse(updateFrequencyNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out frequency))
-                    {
-                        this.Frequency  = frequency;
-                        wasLoaded       = true;
-                    }
-                }
-
-                if (updateBaseNavigator != null)
-                {
-                    DateTime updateBase;
-                    if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updateBaseNavigator.Value, out updateBase))
-                    {
-                        this.Base   = updateBase;
-                        wasLoaded   = true;
-                    }
+                    this.Period = period;
+                    wasLoaded = true;
                 }
             }
 
-            return wasLoaded;
+            if (updateFrequencyNavigator is not null)
+            {
+                if (int.TryParse(updateFrequencyNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int frequency) && frequency >= 1)
+                {
+                    this.Frequency = frequency;
+                    wasLoaded = true;
+                }
+            }
+
+            if (updateBaseNavigator is not null)
+            {
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updateBaseNavigator.Value, out DateTime updateBase))
+                {
+                    this.Base = updateBase;
+                    wasLoaded = true;
+                }
+            }
         }
 
-        /// <summary>
-        /// Writes the current context to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
-        /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
-        public void WriteTo(XmlWriter writer, string xmlNamespace)
+        return wasLoaded;
+    }
+
+    /// <summary>
+    /// Writes the current context to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
+    /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    public void WriteTo(XmlWriter writer, string xmlNamespace)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
+        if (this.Period != SiteSummaryUpdatePeriod.None)
         {
-            Guard.ArgumentNotNull(writer, "writer");
-            Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            if(this.Period != SiteSummaryUpdatePeriod.None)
-            {
-                writer.WriteElementString("updatePeriod", xmlNamespace, SiteSummaryUpdateSyndicationExtension.PeriodAsString(this.Period));
-            }
+            writer.WriteElementString("updatePeriod", xmlNamespace, SiteSummaryUpdateSyndicationExtension.PeriodAsString(this.Period));
+        }
 
-            if(this.Frequency != Int32.MinValue)
-            {
-                writer.WriteElementString("updateFrequency", xmlNamespace, this.Frequency.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            }
+        if (this.Frequency != int.MinValue)
+        {
+            writer.WriteElementString("updateFrequency", xmlNamespace, this.Frequency.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        }
 
-            if(this.Base != DateTime.MinValue)
-            {
-                writer.WriteElementString("updateBase", xmlNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.Base));
-            }
+        if (this.Base != DateTime.MinValue)
+        {
+            writer.WriteElementString("updateBase", xmlNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.Base));
         }
     }
 }

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  A BlogML export of the endjin blog. BlogML is an engine-to-engine migration format, so what it has to
+  carry is everything a blog holds that a syndication feed drops: unapproved authors and comments,
+  trackbacks, attachments, category hierarchy, view counts and engine-specific extended properties.
+
+  The unapproved author, comment and trackback are deliberate. BlogMLApprovalStatus has two values and
+  an export where everything is approved never exercises the other one — and "approved" is exactly the
+  field an importer must not get wrong, because getting it wrong publishes something the author did not.
+-->
+<blog root-url="https://endjin.com/blog/" date-created="2026-01-05T08:00:00Z" xmlns="http://www.blogml.com/2006/09/BlogML">
+  <title type="text">endjin blog</title>
+  <sub-title type="html">&lt;em&gt;Technical writing&lt;/em&gt; on .NET, data, analytics and AI</sub-title>
+
+  <authors>
+    <author id="author-1" date-created="2026-01-05T08:00:00Z" date-modified="2026-08-07T12:00:00Z" approved="true" email="hello@endjin.com">
+      <title type="text">Matthew Adams</title>
+    </author>
+    <author id="author-2" date-created="2026-01-05T08:00:00Z" date-modified="2026-08-06T10:00:00Z" approved="true" email="hello@endjin.com">
+      <title type="text">Barry Smart</title>
+    </author>
+    <author id="author-3" date-created="2026-01-05T08:00:00Z" date-modified="2026-07-29T09:00:00Z" approved="false" email="hello@endjin.com">
+      <title type="text">Ian Griffiths</title>
+    </author>
+  </authors>
+
+  <extended-properties>
+    <property name="CommentModeration" value="true"/>
+    <property name="TrackbacksEnabled" value="true"/>
+    <property name="BlogEngine" value="endjin publishing"/>
+    <property name="Version" value="3.0"/>
+  </extended-properties>
+
+  <categories>
+    <category id="cat-1" date-created="2026-01-05T08:00:00Z" date-modified="2026-08-07T12:00:00Z" approved="true" parentref="0">
+      <title type="text">Cloud Native App Dev</title>
+      <description type="text">Posts about .NET, C# and application development</description>
+    </category>
+    <category id="cat-2" date-created="2026-01-05T08:00:00Z" date-modified="2026-08-05T11:00:00Z" approved="true" parentref="cat-1">
+      <title type="text">Developer Experience</title>
+      <description type="text">Tooling, workflow and the day-to-day of building software</description>
+    </category>
+    <category id="cat-3" date-created="2026-01-05T08:00:00Z" date-modified="2026-08-06T10:00:00Z" approved="true" parentref="cat-1">
+      <title type="text">Reactive Extensions</title>
+    </category>
+    <category id="cat-4" date-created="2026-01-05T08:00:00Z" date-modified="2026-08-06T09:00:00Z" approved="true" parentref="0">
+      <title type="text">Data and Analytics</title>
+    </category>
+    <category id="cat-5" date-created="2026-01-05T08:00:00Z" date-modified="2026-05-15T08:30:00Z" approved="true" parentref="0">
+      <title type="text">AI</title>
+    </category>
+  </categories>
+
+  <posts>
+    <post id="post-1" date-created="2026-08-07T10:00:00Z" date-modified="2026-08-07T12:00:00Z" approved="true" post-url="https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases" type="normal" hasexcerpt="true" views="1500">
+      <title type="text">Writing Effective Copilot Instructions for Complex Codebases</title>
+      <excerpt type="html">&lt;p&gt;Modular skill files beat one monolithic instructions document once a repository stops fitting in context.&lt;/p&gt;</excerpt>
+      <content type="html">&lt;p&gt;A single instructions file is read in full, every time. Past a certain repository size that is neither affordable nor useful.&lt;/p&gt;&lt;h2&gt;What works better&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Split guidance by task, not by subsystem&lt;/li&gt;&lt;li&gt;State what the build gate actually checks&lt;/li&gt;&lt;li&gt;Record the reasoning, so a rule can be revisited&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Guidance for an assistant is documentation with a consumer, and it rots the same way.&lt;/p&gt;</content>
+      <post-name type="text">writing-effective-copilot-instructions-for-complex-codebases</post-name>
+      <authors>
+        <author ref="author-1"/>
+      </authors>
+      <categories>
+        <category ref="cat-1"/>
+        <category ref="cat-2"/>
+      </categories>
+      <comments>
+        <comment id="comment-1" date-created="2026-08-07T11:00:00Z" date-modified="2026-08-07T11:00:00Z" approved="true" user-name="Jess Panni" user-email="hello@endjin.com" user-url="https://endjin.com/who-we-are/">
+          <title type="text">The skill-file split</title>
+          <content type="text">The by-task split is the part that generalises. We reached the same conclusion from the opposite direction.</content>
+        </comment>
+        <comment id="comment-2" date-created="2026-08-07T11:30:00Z" date-modified="2026-08-07T11:30:00Z" approved="true" user-name="Ed Freeman" user-email="hello@endjin.com">
+          <content type="text">Worth adding: state the command, not just the rule. A gate nobody can run is a gate nobody runs.</content>
+        </comment>
+        <comment id="comment-3" date-created="2026-08-07T12:00:00Z" date-modified="2026-08-07T12:00:00Z" approved="false" user-name="Unmoderated Commenter">
+          <content type="text">An unapproved comment. It exists so BlogMLApprovalStatus.NotApproved is reached on load.</content>
+        </comment>
+      </comments>
+      <trackbacks>
+        <trackback id="trackback-1" date-created="2026-08-07T11:15:00Z" date-modified="2026-08-07T11:15:00Z" approved="true" url="https://endjin.com/trackback/copilot-instructions">
+          <title type="text">Referenced in: endjin weekly roundup</title>
+        </trackback>
+      </trackbacks>
+      <attachments>
+        <attachment id="attach-1" date-created="2026-08-07T10:00:00Z" date-modified="2026-08-07T10:00:00Z" approved="true" url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/06/writing-effective-copilot-instructions-for-complex-codebases.png" mime-type="image/png" size="245760" embedded="false" path="assets/images/blog/2026/06/writing-effective-copilot-instructions-for-complex-codebases.png">
+          <title type="text">Cover image</title>
+        </attachment>
+      </attachments>
+    </post>
+
+    <post id="post-2" date-created="2026-08-06T14:00:00Z" date-modified="2026-08-06T15:00:00Z" approved="true" post-url="https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine" type="normal" hasexcerpt="false" views="850">
+      <title type="text">Optimising DAX: The Formula Engine and Storage Engine</title>
+      <content type="html">&lt;p&gt;Power BI divides query work between two engines with very different characteristics.&lt;/p&gt;&lt;h2&gt;The Formula Engine&lt;/h2&gt;&lt;p&gt;Single-threaded, and where a slow query usually ends up.&lt;/p&gt;&lt;h2&gt;The Storage Engine&lt;/h2&gt;&lt;p&gt;Multi-threaded and compressed. Pushing work here is most of what optimisation means.&lt;/p&gt;</content>
+      <authors>
+        <author ref="author-2"/>
+        <author ref="author-1"/>
+      </authors>
+      <categories>
+        <category ref="cat-4"/>
+      </categories>
+      <comments>
+        <comment id="comment-4" date-created="2026-08-06T15:30:00Z" date-modified="2026-08-06T15:30:00Z" approved="true" user-name="Carmel Eve" user-email="hello@endjin.com">
+          <content type="text">The cardinality follow-up is the one I keep sending people to.</content>
+        </comment>
+      </comments>
+    </post>
+
+    <post id="post-3" date-created="2026-07-29T16:00:00Z" date-modified="2026-07-29T16:00:00Z" approved="true" post-url="https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released" type="article" hasexcerpt="true" views="320">
+      <title type="html">&lt;strong&gt;Released:&lt;/strong&gt; Rx.NET v7.0</title>
+      <excerpt type="text">Rx.NET 7.0 ships, and the UI package split can cut 95MB from a self-contained deployment.</excerpt>
+      <content type="html">&lt;p&gt;&lt;strong&gt;Rx.NET 7.0&lt;/strong&gt; moves UI framework support out of System.Reactive into separate packages, so a Windows target no longer implicitly pulls in WPF and WinForms.&lt;/p&gt;</content>
+      <authors>
+        <author ref="author-3"/>
+      </authors>
+      <categories>
+        <category ref="cat-3"/>
+      </categories>
+      <extended-properties>
+        <property name="IsRelease" value="true"/>
+        <property name="Priority" value="high"/>
+      </extended-properties>
+    </post>
+
+    <post id="post-4" date-created="2026-05-14T10:00:00Z" date-modified="2026-05-14T10:00:00Z" approved="true" post-url="https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra" type="normal" hasexcerpt="false" views="2100">
+      <title type="text">The GenAI Reality Check: New Instrument, Same Orchestra</title>
+      <content type="text">Generative AI is a new instrument in an orchestra that already existed. The disciplines that made data work trustworthy did not stop applying the moment a model joined the section.</content>
+      <authors>
+        <author ref="author-2"/>
+        <author ref="author-1"/>
+        <author ref="author-3"/>
+      </authors>
+      <categories>
+        <category ref="cat-5"/>
+      </categories>
+      <trackbacks>
+        <trackback id="trackback-2" date-created="2026-05-15T09:00:00Z" date-modified="2026-05-15T09:00:00Z" approved="true" url="https://endjin.com/trackback/cloud-ai-slas">
+          <title type="text">Also on this: Cloud AI SLAs are not what you think</title>
+        </trackback>
+        <trackback id="trackback-3" date-created="2026-05-17T14:00:00Z" date-modified="2026-05-17T14:00:00Z" approved="false" url="https://endjin.com/trackback/unmoderated">
+          <title type="text">An unapproved trackback</title>
+        </trackback>
+      </trackbacks>
+      <attachments>
+        <attachment id="attach-2" date-created="2026-05-14T10:00:00Z" date-modified="2026-05-14T10:00:00Z" approved="true" url="https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3" mime-type="audio/mpeg" size="36588921" embedded="false">
+          <title type="text">Audio version of this post</title>
+        </attachment>
+        <attachment id="attach-3" date-created="2026-05-14T10:00:00Z" date-modified="2026-05-14T10:00:00Z" approved="true" url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/blog/2026/01/the-genai-reality-check-new-instrument-same-orchestra.png" mime-type="image/png" size="524288" embedded="false">
+          <title type="text">Cover image</title>
+        </attachment>
+      </attachments>
+    </post>
+  </posts>
+</blog>

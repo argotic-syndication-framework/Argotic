@@ -1,397 +1,342 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
 
-namespace Argotic.Extensions.Core
+namespace Argotic.Extensions.Core;
+
+/// <summary>
+/// Extends syndication specifications to provide a means of describing iTunes podcasting information.
+/// </summary>
+/// <remarks>
+///     <para>
+///         The <see cref="ITunesSyndicationExtension"/> extends syndicated content to specify iTunes podcasting information. This syndication extension conforms to
+///         Apple's <b>Podcast RSS feed requirements</b>, which can be found at
+///         <a href="https://podcasters.apple.com/support/823-podcast-requirements">https://podcasters.apple.com/support/823-podcast-requirements</a>.
+///     </para>
+///     <para>
+///         Every element of that specification is modelled. The XML namespace remains
+///         <c>http://www.itunes.com/dtds/podcast-1.0.dtd</c> — Apple has never changed it, and it is the
+///         identifier on the wire rather than a document location. The <see cref="SyndicationExtension.Documentation"/>
+///         URI is a different thing, and it did change: the original
+///         <c>apple.com/itunes/store/podcaststechspecs.html</c> has not existed for years.
+///     </para>
+///     <para>
+///         Two elements of Apple's <em>earlier</em> specification are deliberately not modelled:
+///         <c>itunes:isClosedCaptioned</c> and <c>itunes:order</c>. Apple has dropped both, neither
+///         appears in the 136-document real-world corpus, and implementing a retired element would add
+///         public API that nothing writes and nothing reads.
+///     </para>
+/// </remarks>
+/// <example>
+///     <code source="..\..\Argotic.Examples\Extensions\Core\ITunesSyndicationExtensionExample.cs" language="cs" title="The following code example demonstrates the usage of the ITunesSyndicationExtension class." />
+/// </example>
+public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITunesSyndicationExtension>, IEquatable<ITunesSyndicationExtension>, IComparisonOperators
 {
-	/// <summary>
-	/// Extends syndication specifications to provide a means of describing iTunes podcasting information.
-	/// </summary>
-	/// <remarks>
-	///     <para>
-	///         The <see cref="ITunesSyndicationExtension"/> extends syndicated content to specify iTunes podcasting information. This syndication extension conforms to the 
-	///         <b>iTunes RSS Tags</b> 1.0 specification, which can be found at <a href="http://www.apple.com/itunes/store/podcaststechspecs.html#rss">http://www.apple.com/itunes/store/podcaststechspecs.html#rss</a>.
-	///     </para>
-	/// </remarks>
-	/// <example>
-	///     <code lang="cs" title="The following code example demonstrates the usage of the ITunesSyndicationExtension class.">
-	///         <code 
-	///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\Core\ITunesSyndicationExtensionExample.cs" 
-	///             region="ITunesSyndicationExtension"
-	///         />
-	///     </code>
-	/// </example>
-	[Serializable()]
-	public class ITunesSyndicationExtension : SyndicationExtension, IComparable
-	{
-	    /// <summary>
-		/// Private member to hold specific information about the extension.
-		/// </summary>
-		private ITunesSyndicationExtensionContext extensionContext  = new ITunesSyndicationExtensionContext();
-	    /// <summary>
-		/// Initializes a new instance of the <see cref="ITunesSyndicationExtension"/> class.
-		/// </summary>
-		public ITunesSyndicationExtension()
-			: base("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd", new Version("1.0"), new Uri("http://www.apple.com/itunes/store/podcaststechspecs.html#rss"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
-		{
-		}
-	    /// <summary>
-		/// Gets or sets the <see cref="ITunesSyndicationExtensionContext"/> object associated with this extension.
-		/// </summary>
-		/// <value>A <see cref="ITunesSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
-		/// <remarks>
-		///     The <b>Context</b> encapsulates all of the syndication extension information that can be retrieved or written to an extended syndication entity. 
-		///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
-		///     are defined for the custom syndication extension.
-		/// </remarks>
-		/// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-		public ITunesSyndicationExtensionContext Context
-		{
-			get
-			{
-				return extensionContext;
-			}
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ITunesSyndicationExtension"/> class.
+    /// </summary>
+    public ITunesSyndicationExtension()
+        : base("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd", new Version("1.0"), new Uri("https://podcasters.apple.com/support/823-podcast-requirements"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
+    {
+    }
 
-			set
-			{
-				Guard.ArgumentNotNull(value, "value");
-				extensionContext = value;
-			}
-		}
-	    /// <summary>
-		/// Compares two specified <see cref="Collection{ITunesCategory}"/> collections.
-		/// </summary>
-		/// <param name="source">The first collection.</param>
-		/// <param name="target">The second collection.</param>
-		/// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-		/// <remarks>
-		///     <para>
-		///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-		///     </para>
-		///     <para>
-		///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-		///     </para>
-		///     <para>
-		///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-		///     </para>
-		/// </remarks>
-		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-		/// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
-		public static int CompareSequence(Collection<ITunesCategory> source, Collection<ITunesCategory> target)
-		{
-			int result  = 0;
-			Guard.ArgumentNotNull(source, "source");
-			Guard.ArgumentNotNull(target, "target");
+    /// <summary>
+    /// Gets or sets the <see cref="ITunesSyndicationExtensionContext"/> object associated with this extension.
+    /// </summary>
+    /// <value>A <see cref="ITunesSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    public ITunesSyndicationExtensionContext Context
+    {
+        get;
+        set
+        {
+            ArgumentNullException.ThrowIfNull(value);
+            field = value;
+        }
+    } = new();
 
-			if (source.Count == target.Count)
-			{
-				for (int i = 0; i < source.Count; i++)
-				{
-					result  = result | source[i].CompareTo(target[i]);
-				}
-			}
-			else if (source.Count > target.Count)
-			{
-				return 1;
-			}
-			else if (source.Count < target.Count)
-			{
-				return -1;
-			}
+    /// <summary>
+    /// Returns the element value written to a feed for the supplied <see cref="ITunesExplicitMaterial"/>.
+    /// </summary>
+    /// <param name="material">The <see cref="ITunesExplicitMaterial"/> to get the element value for.</param>
+    /// <returns>The element value for the supplied <paramref name="material"/>; otherwise, an empty string.</returns>
+    /// <remarks>
+    ///     This is what gets written back out, and it is the <i>legacy</i> spelling — <c>yes</c>,
+    ///     <c>no</c> or <c>clean</c> — because that is the enumeration's <c>AlternateValue</c> and a
+    ///     member cannot carry two. <see cref="ExplicitMaterialByName"/> reads both vocabularies; only
+    ///     one of them can be emitted.
+    /// </remarks>
+    public static string ExplicitMaterialAsString(ITunesExplicitMaterial material) =>
+        EnumerationMetadataAttribute.GetAlternateValue(material);
 
-			return result;
-		}
+    /// <summary>
+    /// Returns the <see cref="ITunesExplicitMaterial"/> enumeration value that corresponds to the specified explicit material name.
+    /// </summary>
+    /// <param name="name">The name of the explicit material.</param>
+    /// <returns>A <see cref="ITunesExplicitMaterial"/> enumeration value that corresponds to the specified string; otherwise, <see cref="ITunesExplicitMaterial.None"/>.</returns>
+    /// <remarks>
+    ///     <para>This method disregards case of specified explicit material name.</para>
+    ///     <para>
+    ///     Apple's original podcasting specification defined this element as <c>yes</c>, <c>no</c> or
+    ///     <c>clean</c>, and its current one defines <c>true</c> and <c>false</c>. Both boolean
+    ///     spellings name the same two states, so they resolve to <see cref="ITunesExplicitMaterial.Yes"/>
+    ///     and <see cref="ITunesExplicitMaterial.No"/> rather than extending the enumeration; <c>clean</c>
+    ///     remains a distinct third answer, which is why this cannot collapse into a
+    ///     <see cref="bool"/>.
+    ///     </para>
+    ///     <para>
+    ///     They are matched here rather than as an <c>AlternateValue</c> because that attribute is the
+    ///     value written back out, and one member cannot carry two of them. Across 136 live documents
+    ///     the newer spelling accounted for 2,940 of 4,770 values, so leaving it unrecognised silently
+    ///     discarded the advisory on 62% of real episodes.
+    ///     </para>
+    /// </remarks>
+    public static ITunesExplicitMaterial ExplicitMaterialByName(string name)
+    {
+        if (string.Equals(name, "true", StringComparison.OrdinalIgnoreCase))
+        {
+            return ITunesExplicitMaterial.Yes;
+        }
 
-	    /// <summary>
-		/// Returns the cloud protocol identifier for the supplied <see cref="ITunesExplicitMaterial"/>.
-		/// </summary>
-		/// <param name="material">The <see cref="ITunesExplicitMaterial"/> to get the explicit material identifier for.</param>
-		/// <returns>The explicit material identifier for the supplied <paramref name="material"/>, otherwise returns an empty string.</returns>
-		public static string ExplicitMaterialAsString(ITunesExplicitMaterial material)
-		{
-			string name = String.Empty;
-			foreach (System.Reflection.FieldInfo fieldInfo in typeof(ITunesExplicitMaterial).GetFields())
-			{
-				if (fieldInfo.FieldType == typeof(ITunesExplicitMaterial))
-				{
-					ITunesExplicitMaterial explicitMaterial = (ITunesExplicitMaterial)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+        if (string.Equals(name, "false", StringComparison.OrdinalIgnoreCase))
+        {
+            return ITunesExplicitMaterial.No;
+        }
 
-					if (explicitMaterial == material)
-					{
-						object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+        return EnumerationMetadataAttribute.GetEnumByAlternateValue(name, ITunesExplicitMaterial.None);
+    }
 
-						if (customAttributes != null && customAttributes.Length > 0)
-						{
-							EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
+    /// <summary>
+    /// Returns the alternate value for the supplied <see cref="ITunesEpisodeType"/>.
+    /// </summary>
+    /// <param name="episodeType">The <see cref="ITunesEpisodeType"/> to get the alternate value for.</param>
+    /// <returns>The alternate value for the supplied <paramref name="episodeType"/>; otherwise, an empty string.</returns>
+    public static string EpisodeTypeAsString(ITunesEpisodeType episodeType) =>
+        EnumerationMetadataAttribute.GetAlternateValue(episodeType);
 
-							name    = enumerationMetadata.AlternateValue;
-							break;
-						}
-					}
-				}
-			}
+    /// <summary>
+    /// Returns the <see cref="ITunesEpisodeType"/> enumeration value that corresponds to the specified episode type name.
+    /// </summary>
+    /// <param name="name">The name of the episode type.</param>
+    /// <returns>A <see cref="ITunesEpisodeType"/> enumeration value that corresponds to the specified string; otherwise, <see cref="ITunesEpisodeType.None"/>.</returns>
+    /// <remarks>This method disregards case of specified episode type name.</remarks>
+    public static ITunesEpisodeType EpisodeTypeByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, ITunesEpisodeType.None);
 
-			return name;
-		}
+    /// <summary>
+    /// Returns the alternate value for the supplied <see cref="ITunesPodcastType"/>.
+    /// </summary>
+    /// <param name="podcastType">The <see cref="ITunesPodcastType"/> to get the alternate value for.</param>
+    /// <returns>The alternate value for the supplied <paramref name="podcastType"/>; otherwise, an empty string.</returns>
+    public static string PodcastTypeAsString(ITunesPodcastType podcastType) =>
+        EnumerationMetadataAttribute.GetAlternateValue(podcastType);
 
-	    /// <summary>
-		/// Returns the <see cref="ITunesExplicitMaterial"/> enumeration value that corresponds to the specified explicit material name.
-		/// </summary>
-		/// <param name="name">The name of the explicit material.</param>
-		/// <returns>A <see cref="ITunesExplicitMaterial"/> enumeration value that corresponds to the specified string, otherwise returns <b>ITunesExplicitMaterial.None</b>.</returns>
-		/// <remarks>This method disregards case of specified explicit material name.</remarks>
-		/// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
-		/// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-		public static ITunesExplicitMaterial ExplicitMaterialByName(string name)
-		{
-			ITunesExplicitMaterial explicitMaterial = ITunesExplicitMaterial.None;
-			Guard.ArgumentNotNullOrEmptyString(name, "name");
-			foreach (System.Reflection.FieldInfo fieldInfo in typeof(ITunesExplicitMaterial).GetFields())
-			{
-				if (fieldInfo.FieldType == typeof(ITunesExplicitMaterial))
-				{
-					ITunesExplicitMaterial material = (ITunesExplicitMaterial)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-					object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+    /// <summary>
+    /// Returns the <see cref="ITunesPodcastType"/> enumeration value that corresponds to the specified podcast type name.
+    /// </summary>
+    /// <param name="name">The name of the podcast type.</param>
+    /// <returns>A <see cref="ITunesPodcastType"/> enumeration value that corresponds to the specified string; otherwise, <see cref="ITunesPodcastType.None"/>.</returns>
+    /// <remarks>
+    ///     This method disregards case of specified podcast type name, and has to: of the six
+    ///     <c>itunes:type</c> values in the 136-document real-world corpus, five read <c>episodic</c>
+    ///     and one reads <c>Episodic</c>, so a case-sensitive match would drop a sixth of them.
+    /// </remarks>
+    public static ITunesPodcastType PodcastTypeByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, ITunesPodcastType.None);
 
-					if (customAttributes != null && customAttributes.Length > 0)
-					{
-						EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
+    /// <summary>
+    /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
+    /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
+    /// </summary>
+    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
+    public static bool MatchByType(ISyndicationExtension extension)
+    {
+        ArgumentNullException.ThrowIfNull(extension);
+        return extension is ITunesSyndicationExtension;
+    }
 
-						if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
-						{
-							explicitMaterial    = material;
-							break;
-						}
-					}
-				}
-			}
+    /// <summary>
+    /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="ITunesSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the extension was initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    public override bool Load(IXPathNavigable source)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        XPathNavigator navigator = source.CreateNavigator()
+            ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
+        bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
+        this.OnExtensionLoaded(args);
 
-			return explicitMaterial;
-		}
+        return wasLoaded;
+    }
 
-	    /// <summary>
-		/// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
-		/// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
-		/// </summary>
-		/// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-		/// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-		public static bool MatchByType(ISyndicationExtension extension)
-		{
-			Guard.ArgumentNotNull(extension, "extension");
-			if (extension.GetType() == typeof(ITunesSyndicationExtension))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-	    /// <summary>
-		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
-		/// </summary>
-		/// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="ITunesSyndicationExtension"/>.</param>
-		/// <returns><b>true</b> if the <see cref="ITunesSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-		public override bool Load(IXPathNavigable source)
-		{
-			bool wasLoaded  = false;
-			Guard.ArgumentNotNull(source, "source");
-			XPathNavigator navigator    = source.CreateNavigator();
-			wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-			SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
-			this.OnExtensionLoaded(args);
+    /// <summary>
+    /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
+    /// </summary>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="ITunesSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the extension was initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
+    public override bool Load(XmlReader reader)
+    {
+        ArgumentNullException.ThrowIfNull(reader);
+        XPathDocument document = new(reader);
 
-			return wasLoaded;
-		}
+        return this.Load(document.CreateNavigator());
+    }
 
-	    /// <summary>
-		/// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
-		/// </summary>
-		/// <param name="reader">The <b>XmlReader</b> used to load this <see cref="ITunesSyndicationExtension"/>.</param>
-		/// <returns><b>true</b> if the <see cref="ITunesSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
-		public override bool Load(XmlReader reader)
-		{
-			Guard.ArgumentNotNull(reader, "reader");
-			XPathDocument document  = new XPathDocument(reader);
+    /// <summary>
+    /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    public override void WriteTo(XmlWriter writer)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+        this.Context.WriteTo(writer, this.XmlNamespace);
+    }
 
-			return this.Load(document.CreateNavigator());
-		}
+    /// <summary>
+    /// Returns a <see cref="string"/> that represents the current <see cref="ITunesSyndicationExtension"/>.
+    /// </summary>
+    /// <returns>The XML representation for the current instance.</returns>
+    public override string ToString()
+    {
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = SyndicationEncodingUtility.CreateFragmentXmlWriterSettings();
 
-	    /// <summary>
-		/// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
-		/// </summary>
-		/// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-		public override void WriteTo(XmlWriter writer)
-		{
-			Guard.ArgumentNotNull(writer, "writer");
-			this.Context.WriteTo(writer, this.XmlNamespace);
-		}
-	    /// <summary>
-		/// Returns a <see cref="String"/> that represents the current <see cref="ITunesSyndicationExtension"/>.
-		/// </summary>
-		/// <returns>A <see cref="String"/> that represents the current <see cref="ITunesSyndicationExtension"/>.</returns>
-		/// <remarks>
-		///     This method returns the XML representation for the current instance.
-		/// </remarks>
-		public override string ToString()
-		{
-			using(MemoryStream stream = new MemoryStream())
-			{
-				XmlWriterSettings settings  = new XmlWriterSettings();
-				settings.ConformanceLevel   = ConformanceLevel.Fragment;
-				settings.Indent             = true;
-				settings.OmitXmlDeclaration = true;
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
+        {
+            this.WriteTo(writer);
+        }
 
-				using(XmlWriter writer = XmlWriter.Create(stream, settings))
-				{
-					this.WriteTo(writer);
-				}
+        stream.Seek(0, SeekOrigin.Begin);
 
-				stream.Seek(0, SeekOrigin.Begin);
+        using StreamReader reader = new(stream);
+        return reader.ReadToEnd();
+    }
 
-				using (StreamReader reader = new StreamReader(stream))
-				{
-					return reader.ReadToEnd();
-				}
-			}
-		}
-	    /// <summary>
-		/// Compares the current instance with another object of the same type.
-		/// </summary>
-		/// <param name="obj">An object to compare with this instance.</param>
-		/// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-		/// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-		public int CompareTo(object obj)
-		{
-			if (obj == null)
-			{
-				return 1;
-			}
-			ITunesSyndicationExtension value  = obj as ITunesSyndicationExtension;
+    /// <summary>
+    /// Compares the current instance with another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this instance.</param>
+    /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     <b>Every member of <see cref="ITunesSyndicationExtensionContext"/> must appear below, in
+    ///     alphabetical order.</b> This is a hand-maintained list and it has already fallen behind once:
+    ///     the five members added for Apple's 2017 revision never reached it, so two extensions
+    ///     describing different episodes compared equal. <c>ITunesComparisonCoversEveryMemberTests</c>
+    ///     holds one row per member and fails on the row it is missing.
+    ///     </para>
+    ///     <para>
+    ///     <see cref="Nullable.Compare{T}"/> is used for the two nullable members because
+    ///     <see cref="Nullable{T}"/> exposes no <c>CompareTo</c> that accepts another
+    ///     <see cref="Nullable{T}"/>.
+    ///     </para>
+    /// </remarks>
+    public int CompareTo(ITunesSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return 1;
+        }
 
-			if (value != null)
-			{
-				int result  = String.Compare(this.Context.Author, value.Context.Author, StringComparison.OrdinalIgnoreCase);
-				result      = result | ITunesSyndicationExtension.CompareSequence(this.Context.Categories, value.Context.Categories);
-				result      = result | this.Context.Duration.CompareTo(value.Context.Duration);
-				result      = result | this.Context.ExplicitMaterial.CompareTo(value.Context.ExplicitMaterial);
-				result      = result | Uri.Compare(this.Context.Image, value.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-				result      = result | this.Context.IsBlocked.CompareTo(value.Context.IsBlocked);
-				result      = result | ComparisonUtility.CompareSequence(this.Context.Keywords, value.Context.Keywords, StringComparison.OrdinalIgnoreCase);
-				result      = result | Uri.Compare(this.Context.NewFeedUrl, value.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-				result      = result | this.Context.Owner.CompareTo(value.Context.Owner);
-				result      = result | String.Compare(this.Context.Subtitle, value.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Context.Summary, value.Context.Summary, StringComparison.OrdinalIgnoreCase);
+        int result = string.Compare(this.Context.Author, other.Context.Author, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Categories, other.Context.Categories);
+        if (result == 0) result = this.Context.Duration.CompareTo(other.Context.Duration);
+        if (result == 0) result = Nullable.Compare(this.Context.Episode, other.Context.Episode);
+        if (result == 0) result = this.Context.EpisodeType.CompareTo(other.Context.EpisodeType);
+        if (result == 0) result = this.Context.ExplicitMaterial.CompareTo(other.Context.ExplicitMaterial);
+        if (result == 0) result = Uri.Compare(this.Context.Image, other.Context.Image, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Context.IsBlocked.CompareTo(other.Context.IsBlocked);
+        if (result == 0) result = this.Context.IsComplete.CompareTo(other.Context.IsComplete);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Keywords, other.Context.Keywords, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.NewFeedUrl, other.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Comparer<ITunesOwner>.Default.Compare(this.Context.Owner, other.Context.Owner);
+        if (result == 0) result = this.Context.PodcastType.CompareTo(other.Context.PodcastType);
+        if (result == 0) result = Nullable.Compare(this.Context.Season, other.Context.Season);
+        if (result == 0) result = string.Compare(this.Context.Subtitle, other.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Summary, other.Context.Summary, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Title, other.Context.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.VerificationToken, other.Context.VerificationToken, StringComparison.OrdinalIgnoreCase);
 
-				return result;
-			}
-			else
-			{
-				throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-			}
-		}
+        return result;
+    }
 
-	    /// <summary>
-		/// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-		/// </summary>
-		/// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-		/// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-		public override bool Equals(Object obj)
-		{
-			if (!(obj is ITunesSyndicationExtension))
-			{
-				return false;
-			}
+    /// <summary>
+    /// Determines whether the specified <see cref="ITunesSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="ITunesSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="ITunesSyndicationExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public bool Equals(ITunesSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
 
-			return (this.CompareTo(obj) == 0);
-		}
+        return this.CompareTo(other) == 0;
+    }
 
-	    /// <summary>
-		/// Returns a hash code for the current instance.
-		/// </summary>
-		/// <returns>A 32-bit signed integer hash code.</returns>
-		public override int GetHashCode()
-		{
-			return this.ToString().GetHashCode();
-		}
+    /// <summary>
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public override bool Equals(object? obj) => obj is ITunesSyndicationExtension other && this.Equals(other);
 
-	    /// <summary>
-		/// Determines if operands are equal.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-		public static bool operator ==(ITunesSyndicationExtension first, ITunesSyndicationExtension second)
-		{
-			if (object.Equals(first, null) && object.Equals(second, null))
-			{
-				return true;
-			}
-			else if (object.Equals(first, null) && !object.Equals(second, null))
-			{
-				return false;
-			}
+    /// <summary>
+    /// Returns a hash code for the current instance.
+    /// </summary>
+    /// <returns>A 32-bit signed integer hash code.</returns>
+    public override int GetHashCode()
+    {
+        HashCode hash = new();
+        hash.Add(HashCodeUtility.Component(this.Context.Author));
+        hash.Add(HashCodeUtility.Component(this.Context.Categories.Count));
+        hash.Add(HashCodeUtility.Component(this.Context.Duration));
+        hash.Add(HashCodeUtility.Component(this.Context.Episode));
+        hash.Add(HashCodeUtility.Component(this.Context.EpisodeType));
+        hash.Add(HashCodeUtility.Component(this.Context.ExplicitMaterial));
+        hash.Add(HashCodeUtility.Component(this.Context.Image));
+        hash.Add(HashCodeUtility.Component(this.Context.IsBlocked));
+        hash.Add(HashCodeUtility.Component(this.Context.IsComplete));
+        hash.Add(HashCodeUtility.Component(this.Context.Keywords.Count));
+        hash.Add(HashCodeUtility.Component(this.Context.NewFeedUrl));
+        hash.Add(HashCodeUtility.Component(this.Context.Owner));
+        hash.Add(HashCodeUtility.Component(this.Context.PodcastType));
+        hash.Add(HashCodeUtility.Component(this.Context.Season));
+        hash.Add(HashCodeUtility.Component(this.Context.Subtitle));
+        hash.Add(HashCodeUtility.Component(this.Context.Summary));
+        hash.Add(HashCodeUtility.Component(this.Context.Title));
+        hash.Add(HashCodeUtility.Component(this.Context.VerificationToken));
+        return hash.ToHashCode();
+    }
 
-			return first.Equals(second);
-		}
+    /// <summary>
+    /// Determines if operands are equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
+    public static bool operator ==(ITunesSyndicationExtension? first, ITunesSyndicationExtension? second)
+    {
+        if (first is null) return second is null;
+        return first.Equals(second);
+    }
 
-	    /// <summary>
-		/// Determines if operands are not equal.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-		public static bool operator !=(ITunesSyndicationExtension first, ITunesSyndicationExtension second)
-		{
-			return !(first == second);
-		}
+    /// <summary>
+    /// Determines if operands are not equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
+    public static bool operator !=(ITunesSyndicationExtension? first, ITunesSyndicationExtension? second) => !(first == second);
 
-	    /// <summary>
-		/// Determines if first operand is less than second operand.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-		public static bool operator <(ITunesSyndicationExtension first, ITunesSyndicationExtension second)
-		{
-			if (object.Equals(first, null) && object.Equals(second, null))
-			{
-				return false;
-			}
-			else if (object.Equals(first, null) && !object.Equals(second, null))
-			{
-				return true;
-			}
-
-			return (first.CompareTo(second) < 0);
-		}
-
-	    /// <summary>
-		/// Determines if first operand is greater than second operand.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-		public static bool operator >(ITunesSyndicationExtension first, ITunesSyndicationExtension second)
-		{
-			if (object.Equals(first, null) && object.Equals(second, null))
-			{
-				return false;
-			}
-			else if (object.Equals(first, null) && !object.Equals(second, null))
-			{
-				return false;
-			}
-
-			return (first.CompareTo(second) > 0);
-		}
-	}
 }

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  endjin talks as an Atom feed, carrying the extensions that attach on the Atom side rather than the RSS
+  side: the Atom Publishing Protocol's app:control and app:edited, threading, OpenSearch, feed history,
+  Dublin Core, geocoding and Yahoo Media.
+
+  The talks, their YouTube players and their thumbnails are real. The geographic coordinates are UK and
+  European cities chosen to exercise the two geocoding extensions — georss on one entry and the W3C
+  basic geo vocabulary on another, because they are separate adapters and a feed carrying only one of
+  them leaves the other unexercised. They do not assert where any particular talk was given.
+
+  The draft entry is deliberately present: app:draft = yes is the state a Publishing client has to be
+  able to read back after a POST, and a feed where every entry is published never exercises it.
+-->
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:georss="http://www.georss.org/georss"
+      xmlns:app="http://www.w3.org/2007/app"
+      xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:dcterms="http://purl.org/dc/terms/"
+      xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+      xmlns:media="http://search.yahoo.com/mrss/"
+      xmlns:fh="http://purl.org/syndication/history/1.0"
+      xmlns:thr="http://purl.org/syndication/thread/1.0"
+      xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"
+      xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule">
+
+  <title type="text">endjin talks</title>
+  <subtitle type="html">Conference talks and screencasts from &lt;strong&gt;endjin&lt;/strong&gt;</subtitle>
+  <link href="https://endjin.com/what-we-think/talks/" rel="alternate" type="text/html"/>
+  <link href="https://endjin.com/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://endjin.com/search" rel="search" type="application/opensearchdescription+xml" title="Search"/>
+  <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+  <updated>2026-07-29T12:00:00Z</updated>
+  <rights type="text">Copyright 2026 endjin limited</rights>
+  <generator uri="https://github.com/argotic-syndication-framework/Argotic" version="3.0">Argotic Framework</generator>
+  <icon>https://endjin.com/favicon.ico</icon>
+  <logo>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/open-graph/og-endjin.png</logo>
+
+  <!-- Dublin Core at feed level -->
+  <dc:creator>endjin</dc:creator>
+  <dc:publisher>endjin limited</dc:publisher>
+  <dc:rights>Copyright 2026 endjin limited</dc:rights>
+  <dc:language>en-gb</dc:language>
+
+  <!-- Dublin Core Metadata Terms -->
+  <dcterms:created>2026-01-01T08:00:00Z</dcterms:created>
+  <dcterms:modified>2026-07-29T12:00:00Z</dcterms:modified>
+
+  <!-- Creative Commons -->
+  <creativeCommons:license>http://creativecommons.org/licenses/by/4.0/</creativeCommons:license>
+
+  <!-- Feed History: a complete feed, per RFC 5005 section 2.
+       Deliberately carries no paging or archive link relation. fh:complete asserts that this document
+       holds every entry there is, so next, first, prev-archive and current all contradict it — the
+       W3C Feed Validator reports each one as FeedRelInCompleteFeed. The archive half of RFC 5005 is
+       exercised by RssFeedWithExtensions.xml, which uses fh:archive with prev-archive and current. -->
+  <fh:complete/>
+
+  <!-- OpenSearch elements -->
+  <opensearch:totalResults>107</opensearch:totalResults>
+  <opensearch:startIndex>1</opensearch:startIndex>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+
+  <author>
+    <name>endjin</name>
+    <email>hello@endjin.com</email>
+    <uri>https://endjin.com/who-we-are/</uri>
+  </author>
+
+  <category term="talks" scheme="https://endjin.com/what-we-think/" label="Talks"/>
+  <category term="dotnet" label=".NET"/>
+
+  <contributor>
+    <name>Howard van Rooijen</name>
+    <email>hello@endjin.com</email>
+  </contributor>
+
+  <entry>
+    <title type="text">Rx.NET v7.0 Released - it could save you 95MB!</title>
+    <link href="https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released" rel="alternate" type="text/html"/>
+    <link href="https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released.atom" rel="self" type="application/atom+xml"/>
+    <link href="https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released/edit" rel="edit" type="application/atom+xml"/>
+    <link href="https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released/media" rel="edit-media" type="image/jpeg"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+    <georss:point>51.5074 -0.1278</georss:point>
+    <georss:elev>11.0</georss:elev>
+    <georss:featurename>London, United Kingdom</georss:featurename>
+    <published>2026-07-29T09:00:00Z</published>
+    <updated>2026-07-29T10:00:00Z</updated>
+    <summary type="text">Moving UI framework support out of System.Reactive can cut 95MB from a self-contained deployment.</summary>
+
+    <!-- Atom Publishing Protocol -->
+    <app:control>
+      <app:draft>no</app:draft>
+    </app:control>
+    <app:edited>2026-07-29T10:30:00Z</app:edited>
+
+    <content type="html">&lt;p&gt;Ian Griffiths announces &lt;strong&gt;Rx.NET 7.0&lt;/strong&gt; and its three breaking changes: dropping .NET 6 and 7, a nullability fix on OfType, and the UI package split.&lt;/p&gt;&lt;p&gt;The split is the one that matters: a self-contained deployment that grew from 102MB to 197MB under Rx 6.1 no longer implicitly pulls in WPF and WinForms.&lt;/p&gt;</content>
+
+    <!-- Dublin Core -->
+    <dc:creator>Ian Griffiths</dc:creator>
+    <dc:subject>Reactive Extensions</dc:subject>
+    <dc:date>2026-07-29T09:00:00Z</dc:date>
+
+    <!-- Dublin Core Metadata Terms -->
+    <dcterms:abstract>Rx.NET 7.0 and the 95MB deployment saving behind its UI package split.</dcterms:abstract>
+
+    <category term="rx-dotnet" label="Rx.NET"/>
+    <category term="dotnet"/>
+
+    <author>
+      <name>Ian Griffiths</name>
+      <email>hello@endjin.com</email>
+    </author>
+  </entry>
+
+  <entry>
+    <title type="html">&lt;em&gt;Draft&lt;/em&gt; - Rx.NET v8.0 planning</title>
+    <link href="https://endjin.com/what-we-think/talks/rxdotnet-v8-planning" rel="alternate"/>
+    <link href="https://endjin.com/what-we-think/talks/rxdotnet-v8-planning/edit" rel="edit" type="application/atom+xml"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6b</id>
+    <published>2026-07-30T10:00:00Z</published>
+    <updated>2026-07-30T11:00:00Z</updated>
+    <summary>Not yet published: an outline of what a v8.0 might contain, pending community feedback.</summary>
+
+    <!-- Atom Publishing Protocol - Draft status -->
+    <app:control>
+      <app:draft>yes</app:draft>
+    </app:control>
+    <app:edited>2026-07-30T11:00:00Z</app:edited>
+
+    <content type="text">A draft. app:draft is "yes", so a Publishing client should treat this member as not publicly visible.</content>
+
+    <category term="draft"/>
+  </entry>
+
+  <entry>
+    <title>Auditing UK energy policy without a cluster</title>
+    <link href="https://endjin.com/what-we-think/talks/auditing-uk-energy-policy-without-a-cluster" rel="alternate"/>
+    <link href="https://endjin.com/what-we-think/talks/auditing-uk-energy-policy-without-a-cluster/replies.atom" rel="replies" type="application/atom+xml" thr:count="15" thr:updated="2026-06-30T14:00:00Z"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6c</id>
+    <published>2026-06-29T05:30:00Z</published>
+    <updated>2026-06-29T06:00:00Z</updated>
+    <summary>A laptop, a duck, and twenty years of wind: auditing UK energy policy with DuckDB.</summary>
+
+    <!-- Threading extension -->
+    <thr:total>15</thr:total>
+
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>Barry Smart audits twenty years of fragmented government energy data on a <strong>single laptop</strong>.</p>
+        <p>What replaced the monolithic warehouse:</p>
+        <ul>
+          <li>Python ingestion guarded by strict data contracts</li>
+          <li>Parquet and a DuckDB medallion model</li>
+          <li>Requirements written in Gherkin as composable, tested functions</li>
+        </ul>
+      </div>
+    </content>
+
+    <app:control>
+      <app:draft>no</app:draft>
+    </app:control>
+
+    <category term="duckdb"/>
+    <category term="data-engineering"/>
+  </entry>
+
+  <entry>
+    <title>Re: Auditing UK energy policy without a cluster</title>
+    <link href="https://endjin.com/what-we-think/talks/auditing-uk-energy-policy-follow-up" rel="alternate"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6d</id>
+    <published>2026-06-30T13:00:00Z</published>
+    <updated>2026-06-30T13:00:00Z</updated>
+    <summary>A follow-up on where DuckDB stopped scaling and what came next.</summary>
+
+    <!-- Threading extension - in-reply-to -->
+    <thr:in-reply-to ref="urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6c"
+                     type="application/atom+xml"
+                     href="https://endjin.com/what-we-think/talks/auditing-uk-energy-policy-without-a-cluster.atom"/>
+
+    <content type="text">A reply entry, carrying thr:in-reply-to rather than an app: element, so the threading adapter is reached on an entry the Publishing adapters do not touch.</content>
+
+    <author>
+      <name>Barry Smart</name>
+      <email>hello@endjin.com</email>
+    </author>
+
+    <category term="reply"/>
+  </entry>
+
+  <entry>
+    <title>Reactive Extensions for .NET: status and plans for .NET 10</title>
+    <link href="https://endjin.com/what-we-think/talks/reactive-extensions-for-dotnet-status-and-plans-for-dotnet-10" rel="alternate"/>
+    <link href="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/talks/rx-dotnet-v7-0-released.jpg" rel="enclosure" type="image/jpeg" length="2048576"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6e</id>
+    <published>2026-05-20T14:00:00Z</published>
+    <updated>2026-05-20T14:30:00Z</updated>
+    <summary>Where Rx.NET stands on .NET 10, and what the roadmap looks like from here.</summary>
+
+    <content type="html">&lt;p&gt;A status update on Rx.NET, its .NET 10 targets, and the shape of the work ahead.&lt;/p&gt;</content>
+
+    <!-- Basic Geocoding -->
+    <geo:lat>52.3676</geo:lat>
+    <geo:long>4.9041</geo:long>
+
+    <!-- Yahoo Media RSS -->
+    <media:content url="https://www.youtube.com/embed/gJlP1vcrxD8" type="video/mp4" medium="video" width="1920" height="1080">
+      <media:title type="plain">Reactive Extensions for .NET</media:title>
+      <media:description type="plain">Conference recording of the Rx.NET status session.</media:description>
+      <media:credit role="author">Ian Griffiths</media:credit>
+    </media:content>
+    <media:thumbnail url="https://res.cloudinary.com/endjin/image/upload/f_auto/q_40/assets/images/talks/rx-dotnet-v7-0-released.jpg" width="320" height="180"/>
+
+    <app:control>
+      <app:draft>no</app:draft>
+    </app:control>
+    <app:edited>2026-05-20T14:30:00Z</app:edited>
+
+    <category term="rx-dotnet"/>
+    <category term="conference"/>
+    <category term="dotnet"/>
+
+    <!-- Dublin Core for this entry -->
+    <dc:creator>Ian Griffiths</dc:creator>
+    <dc:coverage>Amsterdam, Netherlands</dc:coverage>
+    <dcterms:spatial>Amsterdam, Netherlands</dcterms:spatial>
+  </entry>
+</feed>

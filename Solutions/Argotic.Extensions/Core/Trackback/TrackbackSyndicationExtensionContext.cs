@@ -1,141 +1,125 @@
-﻿using System;
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
 
-namespace Argotic.Extensions.Core
+namespace Argotic.Extensions.Core;
+
+/// <summary>
+/// Encapsulates specific information about an individual <see cref="TrackbackSyndicationExtension"/>.
+/// </summary>
+public class TrackbackSyndicationExtensionContext
 {
+
     /// <summary>
-    /// Encapsulates specific information about an individual <see cref="TrackbackSyndicationExtension"/>.
+    /// Initializes a new instance of the <see cref="TrackbackSyndicationExtensionContext"/> class.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
-    [Serializable()]
-    public class TrackbackSyndicationExtensionContext
+    public TrackbackSyndicationExtensionContext()
     {
+    }
 
-        /// <summary>
-        /// Private member to hold the item's TrackBack URL.
-        /// </summary>
-        private Uri extensionPing;
+    /// <summary>
+    /// Gets the addresses this item has already pinged.
+    /// </summary>
+    /// <value>
+    ///     One <see cref="Uri"/> per <c>trackback:about</c> element, in document order. The default value
+    ///     is an <i>empty</i> collection.
+    /// </value>
+    /// <remarks>
+    ///     A record of outbound notifications, and the inverse of <see cref="Ping"/>: that property says
+    ///     where others should ping this item, these say where this item pinged others.
+    /// </remarks>
+    public IList<Uri> Abouts { get; } = [];
 
-        /// <summary>
-        /// Private member to hold the TRackbackURLs that were pinged in reference.
-        /// </summary>
-        private Collection<Uri> extensionAbouts;
+    /// <summary>
+    /// Gets or sets the address at which this item accepts Trackback pings.
+    /// </summary>
+    /// <value>
+    ///     The <c>trackback:ping</c> URL, or <see langword="null"/> if none was specified.
+    /// </value>
+    /// <remarks>
+    ///     The element is written whether or not this is set — a <see langword="null"/> ping produces an
+    ///     empty <c>trackback:ping</c> rather than no element, so every serialized context carries one.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    public Uri? Ping
+    {
+        get;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TrackbackSyndicationExtensionContext"/> class.
-        /// </summary>
-        public TrackbackSyndicationExtensionContext()
+        set
         {
+            ArgumentNullException.ThrowIfNull(value);
+            field = value;
         }
+    }
 
-        /// <summary>
-        /// Gets the trackbacks that were pinged in reference.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="Uri"/> objects that represent trackbacks that were pinged in reference. 
-        ///     The default value is an <i>empty</i> collection.
-        /// </value>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Abouts")]
-        public Collection<Uri> Abouts
+    /// <summary>
+    /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="TrackbackSyndicationExtensionContext"/>.</param>
+    /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
+    /// <returns><see langword="true"/> if the <see cref="TrackbackSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    {
+        bool wasLoaded = false;
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        if (source.HasChildren)
         {
-            get
+            XPathNavigator? pingNavigator = source.SelectChildElement("trackback", "ping", manager);
+            XPathNodeIterator aboutIterator = source.SelectChildElements("trackback", "about", manager);
+
+            if (pingNavigator is not null)
             {
-                if (extensionAbouts == null)
+                if (Uri.TryCreate(pingNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? ping))
                 {
-                    extensionAbouts = new Collection<Uri>();
+                    this.Ping = ping;
+                    wasLoaded = true;
                 }
-                return extensionAbouts;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the TrackBack URL.
-        /// </summary>
-        /// <value>A <see cref="Uri"/> that represents the item's TrackBack URL.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Uri Ping
-        {
-            get
-            {
-                return extensionPing;
             }
 
-            set
+            if (aboutIterator is { Count: > 0 })
             {
-                Guard.ArgumentNotNull(value, "value");
-                extensionPing = value;
-            }
-        }
-
-        /// <summary>
-        /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="TrackbackSyndicationExtensionContext"/>.</param>
-        /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="TrackbackSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source, XmlNamespaceManager manager)
-        {
-            bool wasLoaded  = false;
-            Guard.ArgumentNotNull(source, "source");
-            Guard.ArgumentNotNull(manager, "manager");
-            if (source.HasChildren)
-            {
-                XPathNavigator pingNavigator    = source.SelectSingleNode("trackback:ping", manager);
-                XPathNodeIterator aboutIterator = source.Select("trackback:about", manager);
-
-                if (pingNavigator != null)
+                while (aboutIterator.MoveNext())
                 {
-                    Uri ping;
-                    if (Uri.TryCreate(pingNavigator.Value, UriKind.RelativeOrAbsolute, out ping))
+                    XPathNavigator? aboutNode = aboutIterator.Current;
+                    if (aboutNode is null)
                     {
-                        this.Ping   = ping;
-                        wasLoaded   = true;
+                        continue;
                     }
-                }
 
-                if (aboutIterator != null && aboutIterator.Count > 0)
-                {
-                    while (aboutIterator.MoveNext())
+                    if (Uri.TryCreate(aboutNode.Value, UriKind.RelativeOrAbsolute, out Uri? about))
                     {
-                        Uri about;
-                        if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out about))
-                        {
-                            this.Abouts.Add(about);
-                            wasLoaded   = true;
-                        }
+                        this.Abouts.Add(about);
+                        wasLoaded = true;
                     }
                 }
             }
-
-            return wasLoaded;
         }
 
-        /// <summary>
-        /// Writes the current context to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
-        /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
-        public void WriteTo(XmlWriter writer, string xmlNamespace)
-        {
-            Guard.ArgumentNotNull(writer, "writer");
-            Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            writer.WriteElementString("ping", xmlNamespace, this.Ping != null ? this.Ping.ToString() : String.Empty);
+        return wasLoaded;
+    }
 
-            foreach (Uri about in this.Abouts)
+    /// <summary>
+    /// Writes the current context to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
+    /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    public void WriteTo(XmlWriter writer, string xmlNamespace)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
+        writer.WriteElementString("ping", xmlNamespace, this.Ping?.ToString() ?? string.Empty);
+
+        foreach (Uri about in this.Abouts)
+        {
+            if (about is not null)
             {
-                if (about != null)
-                {
-                    writer.WriteElementString("about", xmlNamespace, about.ToString());
-                }
+                writer.WriteElementString("about", xmlNamespace, about.ToString());
             }
         }
     }

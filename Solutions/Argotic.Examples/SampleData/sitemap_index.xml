@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  The three sitemaps endjin's robots.txt actually announces, presented as the index a larger site
+  would publish. endjin serves all three as separate <urlset> documents and no index of its own, so
+  this file is the shape rather than a mirror: the locations are real, the wrapper is not.
+
+  The lastmod values deliberately mix the two forms the protocol allows: a full W3C datetime and a
+  bare date. Both must round-trip.
+-->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://endjin.com/sitemap.xml</loc>
+    <lastmod>2026-08-07T00:00:00+00:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://endjin.com/sitemap-news.xml</loc>
+    <lastmod>2026-08-07</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://endjin.com/sitemap-video.xml</loc>
+    <lastmod>2026-07-29T09:00:00+00:00</lastmod>
+  </sitemap>
+</sitemapindex>

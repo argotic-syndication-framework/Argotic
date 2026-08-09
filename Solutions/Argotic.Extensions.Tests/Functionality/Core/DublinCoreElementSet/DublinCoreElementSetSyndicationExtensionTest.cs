@@ -1,383 +1,396 @@
-﻿namespace Argotic.Extensions.Tests
+using System.Globalization;
+using static Argotic.Common.ComparisonOperatorExtensions;
+namespace Argotic.Extensions.Tests.Functionality.Core.DublinCoreElementSet;
+
+/// <summary>
+/// Covers the Dublin Core Element Set extension — the fifteen legacy <c>dc:</c> elements under
+/// <c>http://purl.org/dc/elements/1.1/</c> — from the context that holds them, through the XML
+/// <c>WriteTo</c> and <c>ToString</c> produce, to the comparison and equality contracts.
+/// </summary>
+[TestClass]
+public class DublinCoreElementSetSyndicationExtensionTest
 {
-	using System;
-	using System.IO;
-	using System.Xml;
-	using Argotic.Extensions.Core;
-	using Argotic.Syndication;
-	using Microsoft.VisualStudio.TestTools.UnitTesting;
-	using System.Globalization;
-	using System.Linq;
+    const string namespc = """
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        """;
 
-	/// <summary>
-	///This is a test class for DublinCoreElementSetSyndicationExtensionTest and is intended
-	///to contain all DublinCoreElementSetSyndicationExtensionTest Unit Tests
-	///</summary>
-	[TestClass()]
-	public class DublinCoreElementSetSyndicationExtensionTest
-	{
-		const string namespc = @"xmlns:dc=""http://purl.org/dc/elements/1.1/""";
+    private readonly string nycText = """
+        <contributor xmlns="http://purl.org/dc/elements/1.1/">Helper</contributor>
+        <coverage xmlns="http://purl.org/dc/elements/1.1/">US</coverage>
+        <creator xmlns="http://purl.org/dc/elements/1.1/">The Big Guy</creator>
+        <date xmlns="http://purl.org/dc/elements/1.1/">2010-08-01T00:00:00.00Z</date>
+        <description xmlns="http://purl.org/dc/elements/1.1/">That kind of thing</description>
+        <format xmlns="http://purl.org/dc/elements/1.1/">CDROM</format>
+        <identifier xmlns="http://purl.org/dc/elements/1.1/">MYTESTCDROM-1</identifier>
+        <language xmlns="http://purl.org/dc/elements/1.1/">en-US</language>
+        <publisher xmlns="http://purl.org/dc/elements/1.1/">MeMeMe</publisher>
+        <relation xmlns="http://purl.org/dc/elements/1.1/">MYTESTCDROM-2</relation>
+        <rights xmlns="http://purl.org/dc/elements/1.1/">Copyright 2010</rights>
+        <source xmlns="http://purl.org/dc/elements/1.1/">Out of Me Head</source>
+        <subject xmlns="http://purl.org/dc/elements/1.1/">Test data (Stupid variety)</subject>
+        <title xmlns="http://purl.org/dc/elements/1.1/">Stupid test data</title>
+        <type xmlns="http://purl.org/dc/elements/1.1/">PhysicalObject</type>
+        """.ReplaceLineEndings();
 
-		private string nycText = "<contributor xmlns=\"http://purl.org/dc/elements/1.1/\">Helper</contributor>" + Environment.NewLine +
-			"<coverage xmlns=\"http://purl.org/dc/elements/1.1/\">US</coverage>" + Environment.NewLine +
-			"<creator xmlns=\"http://purl.org/dc/elements/1.1/\">The Big Guy</creator>" + Environment.NewLine +
-			"<date xmlns=\"http://purl.org/dc/elements/1.1/\">2010-08-01T00:00:00.00Z</date>" + Environment.NewLine +
-			"<description xmlns=\"http://purl.org/dc/elements/1.1/\">That kind of thing</description>" + Environment.NewLine +
-			"<format xmlns=\"http://purl.org/dc/elements/1.1/\">CDROM</format>" + Environment.NewLine +
-			"<identifier xmlns=\"http://purl.org/dc/elements/1.1/\">MYTESTCDROM-1</identifier>" + Environment.NewLine +
-			"<language xmlns=\"http://purl.org/dc/elements/1.1/\">en-US</language>" + Environment.NewLine +
-			"<publisher xmlns=\"http://purl.org/dc/elements/1.1/\">MeMeMe</publisher>" + Environment.NewLine +
-			"<relation xmlns=\"http://purl.org/dc/elements/1.1/\">MYTESTCDROM-2</relation>" + Environment.NewLine +
-			"<rights xmlns=\"http://purl.org/dc/elements/1.1/\">Copyright 2010</rights>" + Environment.NewLine +
-			"<source xmlns=\"http://purl.org/dc/elements/1.1/\">Out of Me Head</source>" + Environment.NewLine +
-			"<subject xmlns=\"http://purl.org/dc/elements/1.1/\">Test data (Stupid variety)</subject>" + Environment.NewLine +
-			"<title xmlns=\"http://purl.org/dc/elements/1.1/\">Stupid test data</title>" + Environment.NewLine +
-			"<type xmlns=\"http://purl.org/dc/elements/1.1/\">PhysicalObject</type>";
+    private const string strExtXml = "<dc:contributor>Helper</dc:contributor>"
+                                     + "<dc:coverage>US</dc:coverage>"
+                                     + "<dc:creator>The Big Guy</dc:creator>"
+                                     + "<dc:date>2010-08-01T00:00:00.00Z</dc:date>"
+                                     + "<dc:description>That kind of thing</dc:description>"
+                                     + "<dc:format>CDROM</dc:format>"
+                                     + "<dc:identifier>MYTESTCDROM-1</dc:identifier>"
+                                     + "<dc:language>en-US</dc:language>"
+                                     + "<dc:publisher>MeMeMe</dc:publisher>"
+                                     + "<dc:relation>MYTESTCDROM-2</dc:relation>"
+                                     + "<dc:rights>Copyright 2010</dc:rights>"
+                                     + "<dc:source>Out of Me Head</dc:source>"
+                                     + "<dc:subject>Test data (Stupid variety)</dc:subject>"
+                                     + "<dc:title>Stupid test data</dc:title>"
+                                     + "<dc:type>PhysicalObject</dc:type>";
 
-		private const string strExtXml = "<dc:contributor>Helper</dc:contributor>"
-			+"<dc:coverage>US</dc:coverage>"
-			+"<dc:creator>The Big Guy</dc:creator>"
-			+"<dc:date>2010-08-01T00:00:00.00Z</dc:date>"
-			+"<dc:description>That kind of thing</dc:description>"
-			+"<dc:format>CDROM</dc:format>"
-			+"<dc:identifier>MYTESTCDROM-1</dc:identifier>"
-			+"<dc:language>en-US</dc:language>"
-			+"<dc:publisher>MeMeMe</dc:publisher>"
-			+"<dc:relation>MYTESTCDROM-2</dc:relation>"
-			+"<dc:rights>Copyright 2010</dc:rights>"
-			+"<dc:source>Out of Me Head</dc:source>"
-			+"<dc:subject>Test data (Stupid variety)</dc:subject>"
-			+"<dc:title>Stupid test data</dc:title>"
-			+"<dc:type>PhysicalObject</dc:type>";
+    public TestContext? TestContext { get; set; }
+    /// <summary>
+    /// Two extensions holding identical context compare equal.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetCompareToTest()
+    {
+        DublinCoreElementSetSyndicationExtension target = CreateExtension1();
+        DublinCoreElementSetSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
+        actual.ShouldBe(0);
+    }
 
-		private TestContext testContextInstance;
+    /// <summary>
+    /// The <c>MovingImage</c> vocabulary term renders as the string <c>MovingImage</c>.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreTypeVocabularyAsString()
+    {
+        DublinCoreTypeVocabularies value = DublinCoreTypeVocabularies.MovingImage;
+        string expected = "MovingImage";
+        string actual = DublinCoreElementSetSyndicationExtension.TypeVocabularyAsString(value);
+        actual.ShouldBe(expected);
+    }
 
-		/// <summary>
-		///Gets or sets the test context which provides
-		///information about and functionality for the current test run.
-		///</summary>
-		public TestContext TestContext
-		{
-			get
-			{
-				return testContextInstance;
-			}
-			set
-			{
-				testContextInstance = value;
-			}
-		}
+    /// <summary>
+    /// The name <c>MovingImage</c> resolves back to the <c>MovingImage</c> vocabulary term.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreTypeVocabularyByName()
+    {
+        DublinCoreTypeVocabularies expected = DublinCoreTypeVocabularies.MovingImage;
+        DublinCoreTypeVocabularies actual = DublinCoreElementSetSyndicationExtension.TypeVocabularyByName("MovingImage");
+        actual.ShouldBe(expected);
+    }
 
-	    /// <summary>
-		///A test for DublinCoreElementSetSyndicationExtension Constructor
-		///</summary>
-		[TestMethod()]
-		public void DublinCoreElementSetSyndicationExtensionConstructorTest()
-		{
-			DublinCoreElementSetSyndicationExtension target = new DublinCoreElementSetSyndicationExtension();
-			Assert.IsNotNull(target);
-			Assert.IsInstanceOfType(target, typeof(DublinCoreElementSetSyndicationExtension));
-		}
+    /// <summary>
+    /// An extension is equal to a separately constructed extension holding the same context.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetEqualsTest()
+    {
+        DublinCoreElementSetSyndicationExtension target = CreateExtension1();
+        object obj = CreateExtension1();
+        bool actual = target.Equals(obj);
+        actual.ShouldBeTrue();
+    }
 
-		/// <summary>
-		///A test for CompareTo
-		///</summary>
-		[TestMethod()]
-		public void DublinCoreElementSet_CompareToTest()
-		{
-			DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-			object obj = CreateExtension1();
-			int expected = 0; 
-			int actual;
-			actual = target.CompareTo(obj);
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// A hash code is stable across calls, and equal extensions hash equally.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetGetHashCodeTest()
+    {
+        // Consistency: same object returns same hash
+        DublinCoreElementSetSyndicationExtension target = CreateExtension1();
+        target.GetHashCode().ShouldBe(target.GetHashCode());
 
-		public void DublinCore_TypeVocabularyAsString()
-		{
-			var value = DublinCoreTypeVocabularies.MovingImage;
-			string expected = "MovingImage";
-			string actual = DublinCoreElementSetSyndicationExtension.TypeVocabularyAsString(value);
-			Assert.AreEqual(expected, actual);
-		}
+        // Equality contract: equal objects have equal hashes
+        DublinCoreElementSetSyndicationExtension other = CreateExtension1();
+        target.Equals(other).ShouldBeTrue();
+        target.GetHashCode().ShouldBe(other.GetHashCode());
+    }
 
-		/// <summary>
-		///A test for ConvertDegreesMinutesSecondsToDecimal
-		///</summary>
-		[TestMethod()]
-		public void DublinCore_TypeVocabularyByName()
-		{
-			var expected = DublinCoreTypeVocabularies.MovingImage;
-			var actual = DublinCoreElementSetSyndicationExtension.TypeVocabularyByName("MovingImage");
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// An RSS 2.0 feed carrying all fifteen <c>dc:</c> elements yields an extension holding all fifteen
+    /// values the document declared.
+    /// </summary>
+    /// <remarks>
+    ///     The body used to end at <c>feed.Load(reader)</c> and assert nothing whatever, so it could only
+    ///     ever have caught an exception thrown out of the parse.
+    /// </remarks>
+    [TestMethod]
+    public void DublinCoreElementSetLoadTest()
+    {
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-		/// <summary>
-		///A test for Equals
-		///</summary>
-		[TestMethod()]
-		public void DublinCoreElementSet_EqualsTest()
-		{
-			DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-			object obj = CreateExtension1();
-			bool expected = true;
-			bool actual;
-			actual = target.Equals(obj);
-			Assert.AreEqual(expected, actual);
-		}
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
 
-		/// <summary>
-		///A test for GetHashCode
-		///</summary>
-		[TestMethod,Ignore]
-		public void DublinCoreElementSet_GetHashCodeTest()
-		{
-			DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-			int expected = 1398804031;
-			int actual;
-			actual = target.GetHashCode();
-			Assert.AreEqual(expected, actual);
-		}
+        RssItem item = feed.Channel.Items.Single();
+        DublinCoreElementSetSyndicationExtension extension = item.FindExtension<DublinCoreElementSetSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.Contributor.ShouldBe("Helper");
+        extension.Context.Coverage.ShouldBe("US");
+        extension.Context.Creator.ShouldBe("The Big Guy");
+        extension.Context.Date.ShouldBe(new DateTime(2010, 8, 1, 0, 0, 0, DateTimeKind.Utc));
+        extension.Context.Description.ShouldBe("That kind of thing");
+        extension.Context.Format.ShouldBe("CDROM");
+        extension.Context.Identifier.ShouldBe("MYTESTCDROM-1");
+        extension.Context.Language!.Name.ShouldBe("en-US");
+        extension.Context.Publisher.ShouldBe("MeMeMe");
+        extension.Context.Relation.ShouldBe("MYTESTCDROM-2");
+        extension.Context.Rights.ShouldBe("Copyright 2010");
+        extension.Context.Source.ShouldBe("Out of Me Head");
+        extension.Context.Subject.ShouldBe("Test data (Stupid variety)");
+        extension.Context.Title.ShouldBe("Stupid test data");
+        extension.Context.TypeVocabulary.ShouldBe(DublinCoreTypeVocabularies.PhysicalObject);
+    }
 
-		/// <summary>
-		///A test for Load
-		///</summary>
-		[TestMethod]
-		public void DublinCoreElementSet_LoadTest()
-		{
-			DublinCoreElementSetSyndicationExtension target = new DublinCoreElementSetSyndicationExtension(); // TODO: Initialize to an appropriate value
-			var nt = new NameTable();
-			var ns = new XmlNamespaceManager(nt);
-			 var xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
-			 var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+    /// <summary>
+    /// Attaching the extension to an RSS item emits every populated element under the <c>dc</c> prefix, in the order the fixture spells them.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetCreateXmlTest()
+    {
+        DublinCoreElementSetSyndicationExtension dub = CreateExtension1();
 
-			using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
-			{
-				RssFeed feed = new RssFeed();
-				feed.Load(reader);
-			}
-		}
+        string actual = ExtensionTestUtil.AddExtensionToXml(dub);
+        string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        actual.ShouldBe(expected);
+    }
 
-	[TestMethod]
-		public void DublinCoreElementSet_CreateXmlTest()
-	  {
-		  var dub = CreateExtension1();
+    /// <summary>
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying the Dublin Core values the document declared.
+    /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as DublinCoreElementSetSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected no parsed value.
+    /// </remarks>
+    [TestMethod]
+    public void DublinCoreElementSetFullTest()
+    {
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-		  var actual = ExtensionTestUtil.AddExtensionToXml(dub);
-		  string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
-		  Assert.AreEqual(expected, actual);
-	  }
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
 
+        RssItem item = feed.Channel.Items.Single();
+        item.HasExtensions.ShouldBeTrue();
+        DublinCoreElementSetSyndicationExtension byType = item.FindExtension<DublinCoreElementSetSyndicationExtension>().ShouldNotBeNull();
+        DublinCoreElementSetSyndicationExtension byPredicate = item
+            .FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType)
+            .ShouldBeOfType<DublinCoreElementSetSyndicationExtension>();
 
-	    [TestMethod]
-	    public void DublinCoreElementSet_FullTest()
-	    {
-	        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Creator.ShouldBe("The Big Guy");
+        byPredicate.Context.Title.ShouldBe("Stupid test data");
+        byPredicate.Context.TypeVocabulary.ShouldBe(DublinCoreTypeVocabularies.PhysicalObject);
+    }
 
-	        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
-	        {
-	            RssFeed feed = new RssFeed();
-	            feed.Load(reader);
+    /// <summary>
+    /// <c>MatchByType</c> accepts an instance of its own extension type.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetMatchByTypeTest()
+    {
+        ISyndicationExtension extension = CreateExtension1();
+        bool actual = DublinCoreElementSetSyndicationExtension.MatchByType(extension);
+        actual.ShouldBeTrue();
+    }
 
-	            Assert.AreEqual(1, feed.Channel.Items.Count());
-	            var item = feed.Channel.Items.Single();
-	            Assert.IsTrue(item.HasExtensions);
-	            var itemExtension = item.FindExtension<DublinCoreElementSetSyndicationExtension>();
-	            Assert.IsNotNull(itemExtension);
-	            Assert.IsInstanceOfType(
-	                item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension,
-	                typeof(DublinCoreElementSetSyndicationExtension));
-	        }
-	    }
+    /// <summary>
+    /// <c>ToString</c> renders each populated element on its own line, every one redeclaring the Dublin Core namespace as its default.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetToStringTest()
+    {
+        DublinCoreElementSetSyndicationExtension target = CreateExtension1();
+        string actual = target.ToString();
+        actual.ShouldBe(nycText);
+    }
 
-	    /// <summary>
-		///A test for MatchByType
-		///</summary>
-		[TestMethod()]
-		public void DublinCoreElementSet_MatchByTypeTest()
-		{
-			ISyndicationExtension extension = CreateExtension1();
-			bool expected = true;
-			bool actual;
-			actual = DublinCoreElementSetSyndicationExtension.MatchByType(extension);
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// Writing to an <see cref="XmlWriter"/> emits the same elements as <c>ToString</c>, once line breaks are discounted.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetWriteToTest()
+    {
+        DublinCoreElementSetSyndicationExtension target = CreateExtension1();
+        using StringWriter sw = new();
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        target.WriteTo(writer);
+        writer.Flush();
+        string output = sw.ToString();
+        output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(nycText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
+    }
 
-		/// <summary>
-		///A test for ToString
-		///</summary>
-		[TestMethod()]
-		public void DublinCoreElementSet_ToStringTest()
-		{
-			DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-			string expected = nycText;
-			string actual;
-			actual = target.ToString();
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// Extensions built from different Dublin Core values are not equal under <c>==</c>.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetOpEqualityTestFailure()
+    {
+        DublinCoreElementSetSyndicationExtension first = CreateExtension1();
+        DublinCoreElementSetSyndicationExtension second = CreateExtension2();
+        bool actual = first == second;
+        actual.ShouldBeFalse();
+    }
 
-		/// <summary>
-		///A test for WriteTo
-		///</summary>
-		[TestMethod()]
-		public void DublinCoreElementSet_WriteToTest()
-		{
-			DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-			using(var sw = new StringWriter())
-			using (XmlWriter writer = new XmlTextWriter(sw))
-			{
+    /// <summary>
+    /// Extensions holding identical context are equal under <c>==</c>.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetOpEqualityTestSuccess()
+    {
+        DublinCoreElementSetSyndicationExtension first = CreateExtension1();
+        DublinCoreElementSetSyndicationExtension second = CreateExtension1();
+        bool actual = first == second;
+        actual.ShouldBeTrue();
+    }
 
-				target.WriteTo(writer);
-				var output = sw.ToString();
-				Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
-			}
-		}
+    /// <summary>
+    /// An extension whose first differing context value sorts earlier is not greater than the other.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetOpGreaterThanTest()
+    {
+        DublinCoreElementSetSyndicationExtension first = CreateExtension1();
+        DublinCoreElementSetSyndicationExtension second = CreateExtension2();
+        bool actual = first > second;
+        actual.ShouldBeFalse();
+    }
 
-		/// <summary>
-		///A test for op_Equality
-		///</summary>
-		[TestMethod()]
-		public void DublinCoreElementSet_op_EqualityTest_Failure()
-		{
-			DublinCoreElementSetSyndicationExtension first = CreateExtension1();
-			DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-			bool expected = false; 
-			bool actual;
-			actual = (first == second);
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// Extensions holding different context are unequal under <c>!=</c>.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetOpInequalityTest()
+    {
+        DublinCoreElementSetSyndicationExtension first = CreateExtension1();
+        DublinCoreElementSetSyndicationExtension second = CreateExtension2();
+        bool actual = first != second;
+        actual.ShouldBeTrue();
+    }
 
-		public void DublinCoreElementSet_op_EqualityTest_Success()
-		{
-			DublinCoreElementSetSyndicationExtension first = CreateExtension1();
-			DublinCoreElementSetSyndicationExtension second = CreateExtension1();
-			bool expected = true;
-			bool actual;
-			actual = (first == second);
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// An extension whose first differing context value sorts earlier — contributor <c>Helper</c> ahead of <c>Helper-er</c> — is less than the other.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetOpLessThanTest()
+    {
+        DublinCoreElementSetSyndicationExtension first = CreateExtension1();
+        DublinCoreElementSetSyndicationExtension second = CreateExtension2();
+        bool actual = first < second;
+        actual.ShouldBeTrue();
+    }
 
-		/// <summary>
-		///A test for op_GreaterThan
-		///</summary>
-		[TestMethod()]
-		public void DublinCoreElementSet_op_GreaterThanTest()
-		{
-			DublinCoreElementSetSyndicationExtension first = CreateExtension1();
-			DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-			bool expected = false; 
-			bool actual = false;
-			actual = (first > second);
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// The context reports all fifteen Dublin Core values it was given, down to the <c>PhysicalObject</c> type vocabulary.
+    /// </summary>
+    [TestMethod]
+    public void DublinCoreElementSetContextTest()
+    {
+        DublinCoreElementSetSyndicationExtension target = CreateExtension1();
+        DublinCoreElementSetSyndicationExtensionContext context = target.Context;
 
-		/// <summary>
-		///A test for op_Inequality
-		///</summary>
-		[TestMethod()]
-		public void DublinCoreElementSet_op_InequalityTest()
-		{
-			DublinCoreElementSetSyndicationExtension first = CreateExtension1();
-			DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-			bool expected = true;
-			bool actual = (first != second);
-			Assert.AreEqual(expected, actual);
-		}
+        context.ShouldNotBeNull();
+        context.Contributor.ShouldBe("Helper");
+        context.Coverage.ShouldBe("US");
+        context.Creator.ShouldBe("The Big Guy");
+        context.Date.ShouldBe(new DateTime(2010, 8, 1));
+        context.Description.ShouldBe("That kind of thing");
+        context.Format.ShouldBe("CDROM");
+        context.Identifier.ShouldBe("MYTESTCDROM-1");
+        context.Language!.Name.ShouldBe("en-US");
+        context.Publisher.ShouldBe("MeMeMe");
+        context.Relation.ShouldBe("MYTESTCDROM-2");
+        context.Rights.ShouldBe("Copyright 2010");
+        context.Source.ShouldBe("Out of Me Head");
+        context.Subject.ShouldBe("Test data (Stupid variety)");
+        context.Title.ShouldBe("Stupid test data");
+        context.TypeVocabulary.ShouldBe(DublinCoreTypeVocabularies.PhysicalObject);
+    }
 
-		/// <summary>
-		///A test for op_LessThan
-		///</summary>
-		[TestMethod()]
-		public void DublinCoreElementSet_op_LessThanTest()
-		{
-			DublinCoreElementSetSyndicationExtension first = CreateExtension1();
-			DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-			bool expected = true; 
-			bool actual;
-			actual = (first < second);
-			Assert.AreEqual(expected, actual);
-		}
+    private static DublinCoreElementSetSyndicationExtension CreateExtension1()
+    {
+        DublinCoreElementSetSyndicationExtension dub = new()
+        {
+            Context =
+            {
+                Contributor = "Helper",
+                Coverage = "US",
+                Creator = "The Big Guy",
+                Date = new DateTime(2010, 8, 1),
+                Description = "That kind of thing",
+                Format = "CDROM",
+                Identifier = "MYTESTCDROM-1",
+                Language = new CultureInfo("en-US"),
+                Publisher = "MeMeMe",
+                Relation = "MYTESTCDROM-2",
+                Rights = "Copyright 2010",
+                Source = "Out of Me Head",
+                Subject = "Test data (Stupid variety)",
+                Title = "Stupid test data",
+                TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject
+            }
+        };
 
-		/// <summary>
-		///A test for Context
-		///</summary>
-		[TestMethod(), Ignore]
-		public void DublinCoreElementSet_ContextTest()
-		{
-			DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-			DublinCoreElementSetSyndicationExtensionContext expected = CreateContext1();
-			DublinCoreElementSetSyndicationExtensionContext actual = target.Context;
+        return dub;
+    }
 
-			Assert.AreEqual(expected, actual);
-			Assert.Inconclusive("Verify the correctness of this test method.");
-		}
+    private static DublinCoreElementSetSyndicationExtension CreateExtension2()
+    {
+        DublinCoreElementSetSyndicationExtension dub = new()
+        {
+            Context =
+            {
+                Contributor = "Helper-er",
+                Coverage = "US",
+                Creator = "The Not-So-Big Guy",
+                Date = new DateTime(2010, 8, 1),
+                Description = "This kind of thing",
+                Format = "CDROM",
+                Identifier = "MYTESTCDROM-2",
+                Language = new CultureInfo("en-US"),
+                Publisher = "MeMyselfI",
+                Relation = "MYTESTCDROM-1",
+                Rights = "Copyright 2010",
+                Source = "Nowheres, man",
+                Subject = "Test data (Son of)",
+                Title = "More Stupid test data",
+                TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject
+            }
+        };
 
-		private DublinCoreElementSetSyndicationExtension CreateExtension1()
-		{
-			var dub = new DublinCoreElementSetSyndicationExtension();
-			dub.Context.Contributor = "Helper";
-			dub.Context.Coverage = "US";
-			dub.Context.Creator = "The Big Guy";
-			dub.Context.Date = new DateTime(2010, 8, 1);
-			dub.Context.Description = "That kind of thing";
-			dub.Context.Format = "CDROM";
-			dub.Context.Identifier = "MYTESTCDROM-1";
-			dub.Context.Language = new CultureInfo("en-US");
-			dub.Context.Publisher = "MeMeMe";
-			dub.Context.Relation = "MYTESTCDROM-2";
-			dub.Context.Rights = "Copyright 2010";
-			dub.Context.Source = "Out of Me Head";
-			dub.Context.Subject = "Test data (Stupid variety)";
-			dub.Context.Title = "Stupid test data";
-			dub.Context.TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject;
+        return dub;
+    }
 
-			return dub;
-		}
+    public static DublinCoreElementSetSyndicationExtensionContext CreateContext1()
+    {
+        DublinCoreElementSetSyndicationExtensionContext dub = new()
+        {
+            Contributor = "",
+            Coverage = "",
+            Creator = "",
+            Date = new DateTime(2010, 8, 1),
+            Description = "",
+            Format = "",
+            Identifier = "",
+            Language = new CultureInfo("US-en"),
+            Publisher = "",
+            Relation = "",
+            Rights = "",
+            Source = "",
+            Subject = "",
+            Title = "",
+            TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject
+        };
 
-		private DublinCoreElementSetSyndicationExtension CreateExtension2()
-		{
-			var dub = new DublinCoreElementSetSyndicationExtension();
-
-			dub.Context.Contributor = "Helper-er";
-			dub.Context.Coverage = "US";
-			dub.Context.Creator = "The Not-So-Big Guy";
-			dub.Context.Date = new DateTime(2010, 8, 1);
-			dub.Context.Description = "This kind of thing";
-			dub.Context.Format = "CDROM";
-			dub.Context.Identifier = "MYTESTCDROM-2";
-			dub.Context.Language = new CultureInfo("en-US");
-			dub.Context.Publisher = "MeMyselfI";
-			dub.Context.Relation = "MYTESTCDROM-1";
-			dub.Context.Rights = "Copyright 2010";
-			dub.Context.Source = "Nowheres, man";
-			dub.Context.Subject = "Test data (Son of)";
-			dub.Context.Title = "More Stupid test data";
-			dub.Context.TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject;
-
-			return dub;
-		}
-
-		public static DublinCoreElementSetSyndicationExtensionContext CreateContext1()
-		{
-			var dub = new DublinCoreElementSetSyndicationExtensionContext();
-
-			dub.Contributor = "";
-			dub.Coverage = "";
-			dub.Creator = "";
-			dub.Date = new DateTime(2010, 8, 1);
-			dub.Description = "";
-			dub.Format = "";
-			dub.Identifier = "";
-			dub.Language = new CultureInfo("US-en");
-			dub.Publisher = "";
-			dub.Relation = "";
-			dub.Rights = "";
-			dub.Source = "";
-			dub.Subject = "";
-			dub.Title = "";
-			dub.TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject;
-
-			return dub;
-		}
-	}
+        return dub;
+    }
 }

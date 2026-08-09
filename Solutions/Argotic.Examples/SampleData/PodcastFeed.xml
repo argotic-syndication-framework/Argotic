@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Audio versions of endjin blog posts, published as a Podcasting 2.0 feed.
+
+  Authored rather than mirrored: endjin publishes an audio version of many posts under
+  /assets/podcast/, but no podcast RSS feed of its own, so this file assembles real assets into the feed
+  a podcast host would serve. Every enclosure URL, media type and byte count below is real and was
+  checked with a HEAD request.
+
+  The asset name comes from the post title, not from its slug, and cannot be derived from one. The first
+  episode is the example: the slug is genai-reality-check-new-instrument-same-orchestra, and the file is
+  2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3 — an extra "the-" and a capital I.
+  Read the <audio> element off the post; do not construct the URL.
+
+  The namespace is https://podcastindex.org/namespace/1.0 — https, and matched exactly. A feed declaring
+  the http:// form silently yields no extension at all, because discovery compares the namespace URI
+  rather than the prefix.
+
+  The podcast:txt element with purpose="applepodcastsverify" is the reason this extension matters. A
+  survey of live feeds found the Apple ownership token delivered that way by 21 publishers and as
+  itunes:applepodcastsverify by 26, so a library reading only the iTunes form serves about half of the
+  publishers who set one, and loses the other half's claim to their own show.
+-->
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:podcast="https://podcastindex.org/namespace/1.0">
+  <channel>
+    <title>endjin blog, read aloud</title>
+    <link>https://endjin.com/blog/</link>
+    <description>Audio versions of posts from the endjin blog.</description>
+    <language>en-gb</language>
+
+    <podcast:locked owner="hello@endjin.com">yes</podcast:locked>
+    <podcast:guid>917393e3-1b1e-5cef-ace4-edaa54e1f810</podcast:guid>
+    <podcast:medium>podcast</podcast:medium>
+    <podcast:podping usesPodping="true"/>
+    <podcast:txt purpose="applepodcastsverify">e6cfaae0-9496-11f0-a272-f9e230f88be0</podcast:txt>
+    <podcast:funding url="https://endjin.com/contact-us/">Talk to endjin</podcast:funding>
+    <podcast:person role="host" href="https://endjin.com/who-we-are/">Barry Smart</podcast:person>
+    <podcast:person role="guest" href="https://endjin.com/who-we-are/our-people/paul-waller/">Paul Waller</podcast:person>
+
+    <itunes:author>endjin</itunes:author>
+    <itunes:category text="Technology"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:image href="https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/open-graph/og-endjin.png"/>
+
+    <item>
+      <title>The GenAI Reality Check: New Instrument, Same Orchestra</title>
+      <link>https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra</link>
+      <description>Generative AI is a new instrument in an orchestra that already existed.</description>
+      <guid isPermaLink="false">endjin-audio-genai-reality-check</guid>
+      <pubDate>Thu, 14 May 2026 08:54:29 GMT</pubDate>
+      <enclosure url="https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3" length="36588921" type="audio/mpeg"/>
+
+      <podcast:season name="Data and AI">1</podcast:season>
+      <podcast:episode display="Ep. 1">1</podcast:episode>
+      <podcast:transcript url="https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra/transcript.vtt" type="text/vtt" language="en" rel="captions"/>
+      <podcast:chapters url="https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra/chapters.json" type="application/json+chapters"/>
+      <podcast:license url="https://creativecommons.org/licenses/by/4.0/">cc-by-4.0</podcast:license>
+      <podcast:person role="host" href="https://endjin.com/who-we-are/">Barry Smart</podcast:person>
+
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+
+    <item>
+      <title>AI Strategy: Think Top-Down, Experiment Bottom-Up</title>
+      <link>https://endjin.com/blog/ai-strategy-think-top-down-experiment-bottom-up</link>
+      <description>Strategy sets the direction from the top. The experiments that prove it start at the bottom.</description>
+      <guid isPermaLink="false">endjin-audio-ai-strategy</guid>
+      <pubDate>Thu, 07 May 2026 00:00:00 GMT</pubDate>
+      <enclosure url="https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-07-ai-strategy-think-top-down-experiment-bottom-up.mp3" length="36715586" type="audio/mpeg"/>
+
+      <podcast:season name="Data and AI">1</podcast:season>
+      <podcast:episode display="Ep. 2">2</podcast:episode>
+      <podcast:person role="host" href="https://endjin.com/who-we-are/">Barry Smart</podcast:person>
+
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+
+    <item>
+      <title>Data is a socio-technical endeavour</title>
+      <link>https://endjin.com/blog/data-is-a-socio-technical-endeavour</link>
+      <description>The hard part of a data platform is rarely the technology.</description>
+      <guid isPermaLink="false">endjin-audio-socio-technical</guid>
+      <pubDate>Thu, 18 Apr 2024 00:00:00 GMT</pubDate>
+      <enclosure url="https://endjincdn.blob.core.windows.net/assets/podcast/2024-04-18-data-is-a-socio-technical-endeavour.mp3" length="19905117" type="audio/mpeg"/>
+
+      <podcast:season name="Data and AI">1</podcast:season>
+      <podcast:episode display="Ep. 3">3</podcast:episode>
+      <podcast:transcript url="https://endjin.com/blog/data-is-a-socio-technical-endeavour/transcript.srt" type="application/x-subrip" language="en"/>
+
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+
+    <item>
+      <title>How to Build Navigation into Power BI</title>
+      <link>https://endjin.com/blog/how-to-build-navigation-in-power-bi</link>
+      <description>Navigation is a design problem before it is a Power BI problem.</description>
+      <guid isPermaLink="false">endjin-audio-power-bi-navigation</guid>
+      <pubDate>Wed, 13 Mar 2024 00:00:00 GMT</pubDate>
+      <enclosure url="https://endjincdn.blob.core.windows.net/assets/podcast/2024-03-13-how-to-build-navigation-in-power-bi.mp3" length="9025976" type="audio/mpeg"/>
+
+      <podcast:season name="Design">2</podcast:season>
+      <podcast:episode display="Ep. 2.1">2.1</podcast:episode>
+      <podcast:person role="host" href="https://endjin.com/who-we-are/our-people/paul-waller/">Paul Waller</podcast:person>
+
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+
+    <item>
+      <title>Visualising Technical Content - How we Design our Blog Headers</title>
+      <link>https://endjin.com/blog/visualising-technical-content-how-we-design-our-blog-headers</link>
+      <description>Every post gets a header image. This is how they are made, and why.</description>
+      <guid isPermaLink="false">endjin-audio-blog-headers</guid>
+      <pubDate>Wed, 19 Jan 2022 00:00:00 GMT</pubDate>
+      <enclosure url="https://endjincdn.blob.core.windows.net/assets/podcast/2022-01-19-visualising-technical-content-how-we-design-our-blog-headers.mp3" length="10565579" type="audio/mpeg"/>
+
+      <podcast:season name="Design">2</podcast:season>
+      <podcast:episode display="Ep. 2.2">2.2</podcast:episode>
+      <podcast:person role="host" href="https://endjin.com/who-we-are/our-people/paul-waller/">Paul Waller</podcast:person>
+
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

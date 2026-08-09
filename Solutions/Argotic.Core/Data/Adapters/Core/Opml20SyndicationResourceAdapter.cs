@@ -1,5 +1,3 @@
-﻿using System;
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -7,80 +5,99 @@ using Argotic.Common;
 using Argotic.Extensions;
 using Argotic.Syndication;
 
-namespace Argotic.Data.Adapters
+namespace Argotic.Data.Adapters;
+
+/// <summary>
+/// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="OpmlDocument"/>.
+/// </summary>
+/// <remarks>
+///     <para>
+///     This adapter reads OPML 1.0, 1.1 and 2.0, not just the version in its name.
+///     <see cref="SyndicationResourceAdapter"/> routes all three here because the document shape —
+///     <c>opml</c> with a <c>head</c> and a <c>body</c> of <c>outline</c> elements — is identical across
+///     them. What changed between versions is which attributes an <c>outline</c> may carry, and that is
+///     <see cref="OpmlOutline"/>'s business, not this adapter's.
+///     </para>
+///     <para>
+///     OPML elements bear no namespace, and the selectors match only the no-namespace partition.
+///     </para>
+///     <para>
+///     Only the outlines directly under <c>body</c> are enumerated here. An OPML outline tree is arbitrarily
+///     deep, and the recursion is <see cref="OpmlOutline"/>'s: each one loads its own <c>outline</c>
+///     children. <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> therefore caps <i>top-level</i>
+///     outlines, and a subscription list nested one level down is not capped at all.
+///     </para>
+/// </remarks>
+public sealed class Opml20SyndicationResourceAdapter : SyndicationResourceAdapterBase
 {
     /// <summary>
-    /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="OpmlDocument"/>.
+    /// Initializes a new instance of the <see cref="Opml20SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
+    /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the syndication document information.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="OpmlDocument"/>.</param>
     /// <remarks>
-    ///     <para>
-    ///         The <see cref="Opml20SyndicationResourceAdapter"/> serves as a bridge between a <see cref="OpmlDocument"/> and an XML data source.
-    ///         The <see cref="Opml20SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(OpmlDocument)"/>, which changes the data
-    ///         in the <see cref="OpmlDocument"/> to match the data in the data source.
-    ///     </para>
-    ///     <para>This syndication resource adapter is designed to fill <see cref="OpmlDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the OPML 2.0 specification.</para>
+    ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="OpmlDocument"/>.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
-    public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
+    public Opml20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Opml20SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
-        /// </summary>
-        /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the syndication document information.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="OpmlDocument"/>.</param>
-        /// <remarks>
-        ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="OpmlDocument"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Opml20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+    }
+
+    /// <summary>
+    /// Loads <c>opml/head</c>, enumerates the top-level <c>opml/body/outline</c> elements, and attaches the document-level syndication extensions found on <c>opml</c>.
+    /// </summary>
+    /// <param name="resource">The <see cref="OpmlDocument"/> to be filled.</param>
+    /// <remarks>
+    ///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> counts outlines <i>kept</i>, and is
+    ///     tested at the top of the loop. A body whose first outlines fail to load still yields the limit,
+    ///     and the outline that would trip it is never parsed — which on OPML means never descending its
+    ///     subtree either.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    public void Fill(OpmlDocument resource)
+    {
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(this.Navigator.NameTable);
+
+        XPathNavigator? documentNavigator = this.Navigator.SelectChildElement("opml");
+        if (documentNavigator is not null)
         {
-        }
-
-        /// <summary>
-        /// Modifies the <see cref="OpmlDocument"/> to match the data source.
-        /// </summary>
-        /// <param name="resource">The <see cref="OpmlDocument"/> to be filled.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void Fill(OpmlDocument resource)
-        {
-            Guard.ArgumentNotNull(resource, "resource");
-
-            XmlNamespaceManager manager     = new XmlNamespaceManager(this.Navigator.NameTable);
-
-            XPathNavigator documentNavigator    = this.Navigator.SelectSingleNode("opml", manager);
-            if (documentNavigator != null)
+            XPathNavigator? headNavigator = documentNavigator.SelectChildElement("head");
+            if (headNavigator is not null)
             {
-                XPathNavigator headNavigator    = documentNavigator.SelectSingleNode("head", manager);
-                if (headNavigator != null)
-                {
-                    resource.Head.Load(headNavigator, this.Settings);
-                }
+                resource.Head.Load(headNavigator, this.Settings);
+            }
 
-                XPathNodeIterator outlineIterator   = documentNavigator.Select("body/outline", manager);
-                if (outlineIterator != null && outlineIterator.Count > 0)
+            XPathNodeIterator outlineIterator = documentNavigator.Select("body/outline", manager);
+            if (outlineIterator is { Count: > 0 })
+            {
+                int added = 0;
+                while (outlineIterator.MoveNext())
                 {
-                    int counter = 0;
-                    while (outlineIterator.MoveNext())
+                    if (this.Settings.RetrievalLimit != 0 && added >= this.Settings.RetrievalLimit)
                     {
-                        OpmlOutline outline = new OpmlOutline();
-                        counter++;
+                        break;
+                    }
 
-                        if (outline.Load(outlineIterator.Current, this.Settings))
-                        {
-                            if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                            {
-                                break;
-                            }
+                    XPathNavigator? outlineNode = outlineIterator.Current;
+                    if (outlineNode is null)
+                    {
+                        continue;
+                    }
 
-                            ((Collection<OpmlOutline>)resource.Outlines).Add(outline);
-                        }
+                    OpmlOutline outline = new();
+                    if (outline.Load(outlineNode, this.Settings))
+                    {
+                        resource.Outlines.Add(outline);
+                        added++;
                     }
                 }
-
-                SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(documentNavigator, this.Settings);
-                adapter.Fill(resource, manager);
             }
+
+            SyndicationExtensionAdapter adapter = new(documentNavigator, this.Settings);
+            adapter.Fill(resource, manager);
         }
     }
 }

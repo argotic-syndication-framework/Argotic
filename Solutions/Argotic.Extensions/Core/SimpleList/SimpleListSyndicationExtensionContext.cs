@@ -1,190 +1,168 @@
-﻿using System;
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
 
-namespace Argotic.Extensions.Core
+namespace Argotic.Extensions.Core;
+
+/// <summary>
+/// Encapsulates specific information about an individual <see cref="SimpleListSyndicationExtension"/>.
+/// </summary>
+public class SimpleListSyndicationExtensionContext
 {
     /// <summary>
-    /// Encapsulates specific information about an individual <see cref="SimpleListSyndicationExtension"/>.
+    /// Initializes a new instance of the <see cref="SimpleListSyndicationExtensionContext"/> class.
     /// </summary>
-    [Serializable()]
-    public class SimpleListSyndicationExtensionContext
+    public SimpleListSyndicationExtensionContext()
     {
+    }
 
-        /// <summary>
-        /// Private member to hold a value indicating if the feed is intended to be consumed as a list.
-        /// </summary>
-        private bool extensionTreatAsList;
-        /// <summary>
-        /// Private member to hold information that allows the client to group or filter on the values of feed properties.
-        /// </summary>
-        private Collection<SimpleListGroup> extensionGroups;
-        /// <summary>
-        /// Private member to hold information that allows the client to sort on the values of feed properties.
-        /// </summary>
-        private Collection<SimpleListSort> extensionSorts;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SimpleListSyndicationExtensionContext"/> class.
-        /// </summary>
-        public SimpleListSyndicationExtensionContext()
-        {
+    /// <summary>
+    /// Gets information that allows the client to group or filter on the values of feed properties.
+    /// </summary>
+    /// <value>
+    ///     One <see cref="SimpleListGroup"/> per property a client may group or filter on. The default
+    ///     value is an <i>empty</i> collection.
+    /// </value>
+    /// <remarks>
+    ///     Written inside a single <c>cf:listinfo</c> element, which is emitted only when this or
+    ///     <see cref="Sorting"/> is non-empty. Sorts are written before groups regardless of the order
+    ///     they were read in.
+    /// </remarks>
+    public IList<SimpleListGroup> Grouping { get; } = [];
 
-        }
-        /// <summary>
-        /// Gets information that allows the client to group or filter on the values of feed properties.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="SimpleListGroup"/> objects that represent information that allows the client to group or filter on the values of feed properties. 
-        ///     The default value is an <i>empty</i> collection.
-        /// </value>
-        public Collection<SimpleListGroup> Grouping
+    /// <summary>
+    /// Gets the properties a client may sort the list by.
+    /// </summary>
+    /// <value>
+    ///     One <see cref="SimpleListSort"/> per sortable property. The default value is an <i>empty</i>
+    ///     collection.
+    /// </value>
+    public IList<SimpleListSort> Sorting { get; } = [];
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this feed is meant to be read as a list.
+    /// </summary>
+    /// <value>
+    ///     <see langword="true"/> if the feed is a list; otherwise, <see langword="false"/>. The default
+    ///     value is <see langword="false"/>.
+    /// </value>
+    /// <remarks>
+    ///     The flag that distinguishes a list from an ordinary feed, and the thing a consumer should test
+    ///     first. It is carried by <c>cf:treatAs</c>, whose only defined value is the string <c>list</c>:
+    ///     this reads as <see langword="true"/> when that element holds <c>list</c> and
+    ///     <see langword="false"/> in every other case, including an element present with some other
+    ///     value.
+    /// </remarks>
+    public bool TreatAsList { get; set; }
+
+    /// <summary>
+    /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="SimpleListSyndicationExtensionContext"/>.</param>
+    /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
+    /// <returns><see langword="true"/> if the <see cref="SimpleListSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    {
+        bool wasLoaded = false;
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        if (source.HasChildren)
         {
-            get
+            XPathNavigator? treatAsNavigator = source.SelectChildElement("cf", "treatAs", manager);
+            XPathNavigator? listInformationNavigator = source.SelectChildElement("cf", "listinfo", manager);
+
+            if (treatAsNavigator is not null && string.Equals(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase))
             {
-                if (extensionGroups == null)
-                {
-                    extensionGroups = new Collection<SimpleListGroup>();
-                }
-                return extensionGroups;
-            }
-        }
-
-        /// <summary>
-        /// Gets information that allows the client to sort on the values of feed properties.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="SimpleListSort"/> objects that represent information that allows the client to sort on the values of feed properties. 
-        ///     The default value is an <i>empty</i> collection.
-        /// </value>
-        public Collection<SimpleListSort> Sorting
-        {
-            get
-            {
-                if (extensionSorts == null)
-                {
-                    extensionSorts = new Collection<SimpleListSort>();
-                }
-                return extensionSorts;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating if this feed is intended to be consumed as a list.
-        /// </summary>
-        /// <value><b>true</b> if the syndication feed is intended to be consumed as a list; otherwise false.</value>
-        /// <remarks>
-        ///     This property allows the publisher of a feed document to indicate to the consumers of the feed that the feed is intended to be consumed as a list, 
-        ///     and as such is the primary means for feed consumers to identify lists.
-        /// </remarks>
-        public bool TreatAsList
-        {
-            get
-            {
-                return extensionTreatAsList;
+                this.TreatAsList = true;
+                wasLoaded = true;
             }
 
-            set
+            if (listInformationNavigator is { HasChildren: true })
             {
-                extensionTreatAsList = value;
-            }
-        }
+                // The sort and group elements are children of listinfo, not of the entity carrying the
+                // extension. Selecting them from source found nothing, so the whole listinfo block was
+                // discarded on every load - while WriteTo has always emitted it. The extension could not
+                // read back what it wrote.
+                XPathNodeIterator sortIterator = listInformationNavigator.SelectChildElements("cf", "sort", manager);
+                XPathNodeIterator groupIterator = listInformationNavigator.SelectChildElements("cf", "group", manager);
 
-        /// <summary>
-        /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="SimpleListSyndicationExtensionContext"/>.</param>
-        /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="SimpleListSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source, XmlNamespaceManager manager)
-        {
-            bool wasLoaded  = false;
-            Guard.ArgumentNotNull(source, "source");
-            Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
-            {
-                XPathNavigator treatAsNavigator         = source.SelectSingleNode("cf:treatAs", manager);
-                XPathNavigator listInformationNavigator = source.SelectSingleNode("cf:listinfo", manager);
-
-                if (treatAsNavigator != null && String.Compare(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase) == 0)
+                if (sortIterator is { Count: > 0 })
                 {
-                    this.TreatAsList    = true;
-                    wasLoaded           = true;
-                }
-
-                if (listInformationNavigator != null && listInformationNavigator.HasChildren)
-                {
-                    XPathNodeIterator sortIterator  = source.Select("cf:sort", manager);
-                    XPathNodeIterator groupIterator = source.Select("cf:group", manager);
-
-                    if (sortIterator != null && sortIterator.Count > 0)
+                    while (sortIterator.MoveNext())
                     {
-                        while (sortIterator.MoveNext())
+                        XPathNavigator? sortNode = sortIterator.Current;
+                        if (sortNode is null)
                         {
-                            SimpleListSort sort = new SimpleListSort();
-                            if (sort.Load(sortIterator.Current))
-                            {
-                                this.Sorting.Add(sort);
-                                wasLoaded   = true;
-                            }
+                            continue;
+                        }
+
+                        SimpleListSort sort = new();
+                        if (sort.Load(sortNode))
+                        {
+                            this.Sorting.Add(sort);
+                            wasLoaded = true;
                         }
                     }
+                }
 
-                    if (groupIterator != null && groupIterator.Count > 0)
+                if (groupIterator is { Count: > 0 })
+                {
+                    while (groupIterator.MoveNext())
                     {
-                        while (groupIterator.MoveNext())
+                        XPathNavigator? groupNode = groupIterator.Current;
+                        if (groupNode is null)
                         {
-                            SimpleListGroup group   = new SimpleListGroup();
-                            if (group.Load(groupIterator.Current))
-                            {
-                                this.Grouping.Add(group);
-                                wasLoaded   = true;
-                            }
+                            continue;
+                        }
+
+                        SimpleListGroup group = new();
+                        if (group.Load(groupNode))
+                        {
+                            this.Grouping.Add(group);
+                            wasLoaded = true;
                         }
                     }
                 }
             }
-
-            return wasLoaded;
         }
 
-        /// <summary>
-        /// Writes the current context to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
-        /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
-        public void WriteTo(XmlWriter writer, string xmlNamespace)
+        return wasLoaded;
+    }
+
+    /// <summary>
+    /// Writes the current context to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
+    /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    public void WriteTo(XmlWriter writer, string xmlNamespace)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
+        if (this.TreatAsList)
         {
-            Guard.ArgumentNotNull(writer, "writer");
-            Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            if(this.TreatAsList)
+            writer.WriteElementString("treatAs", xmlNamespace, "list");
+        }
+
+        if (this.Grouping.Count > 0 || this.Sorting.Count > 0)
+        {
+            writer.WriteStartElement("listinfo", xmlNamespace);
+
+            foreach (SimpleListSort sort in this.Sorting)
             {
-                writer.WriteElementString("treatAs", xmlNamespace, "list");
+                sort.WriteTo(writer);
             }
 
-            if(this.Grouping.Count > 0 || this.Sorting.Count > 0)
+            foreach (SimpleListGroup group in this.Grouping)
             {
-                writer.WriteStartElement("listinfo", xmlNamespace);
-
-                foreach (SimpleListSort sort in this.Sorting)
-                {
-                    sort.WriteTo(writer);
-                }
-
-                foreach (SimpleListGroup group in this.Grouping)
-                {
-                    group.WriteTo(writer);
-                }
-
-                writer.WriteEndElement();
+                group.WriteTo(writer);
             }
+
+            writer.WriteEndElement();
         }
     }
 }

@@ -1,247 +1,262 @@
-﻿using System;
 using System.Globalization;
-using System.IO;
-using System.Net;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core.Rss;
+
+/// <summary>
+/// Demonstrates the whole <see cref="RssFeed"/> surface: building a channel by hand, then the <c>Load</c>, <c>LoadAsync</c>, <c>CreateAsync</c> and <c>Save</c> overloads.
+/// </summary>
+/// <remarks>
+///     Every resource type in the library exposes this same set of overloads, so what is shown here for
+///     <see cref="RssFeed"/> reads across to the other formats unchanged. <c>CreateAsync</c> is the one-call
+///     form; <c>LoadAsync</c> on an instance is the form that lets you subscribe to <c>Loaded</c> first.
+/// </remarks>
+internal static class RssFeedExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="RssFeed"/> class.
+    /// Builds a complete <see cref="RssFeed"/> by hand and prints it.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="RssFeed"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-    public static class RssFeedExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the RssFeed class.
-        /// </summary>
-        public static void ClassExample()
+        RssFeed feed = new()
         {
-            RssFeed feed    = new RssFeed();
-
-            feed.Channel.Title          = "Dallas Times-Herald";
-            feed.Channel.Link           = new Uri("http://dallas.example.com");
-            feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
-
-            feed.Channel.Categories.Add(new RssCategory("Media"));
-            feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
-
-            feed.Channel.Cloud              = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
-            feed.Channel.Copyright          = "Copyright 2007 Dallas Times-Herald";
-            feed.Channel.Generator          = "Microsoft Spaces v1.1";
-
-            RssImage image                  = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"));
-            image.Description               = "Read the Dallas Times-Herald";
-            image.Height                    = 32;
-            image.Width                     = 96;
-            feed.Channel.Image              = image;
-
-            feed.Channel.Language           = new CultureInfo("en-US");
-            feed.Channel.LastBuildDate      = new DateTime(2007, 10, 14, 17, 17, 44);
-            feed.Channel.ManagingEditor     = "jlehrer@dallas.example.com (Jim Lehrer)";
-            feed.Channel.PublicationDate    = new DateTime(2007, 10, 14, 5, 0, 0);
-            feed.Channel.Rating             = "(PICS-1.1 \"http://www.rsac.org/ratingsv01.html\" l by \"webmaster@example.com\" on \"2007.01.29T10:09-0800\" r (n 0 s 0 v 0 l 0))";
-
-            feed.Channel.SkipDays.Add(DayOfWeek.Saturday);
-            feed.Channel.SkipDays.Add(DayOfWeek.Sunday);
-
-            feed.Channel.SkipHours.Add(0);
-            feed.Channel.SkipHours.Add(1);
-            feed.Channel.SkipHours.Add(2);
-            feed.Channel.SkipHours.Add(22);
-            feed.Channel.SkipHours.Add(23);
-
-            feed.Channel.TextInput          = new RssTextInput("What software are you using?", new Uri("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry");
-            feed.Channel.TimeToLive         = 60;
-            feed.Channel.Webmaster          = "helpdesk@dallas.example.com";
-
-            RssItem item        = new RssItem();
-            item.Title          = "Seventh Heaven! Ryan Hurls Another No Hitter";
-            item.Link           = new Uri("http://dallas.example.com/1991/05/02/nolan.htm");
-            item.Description    = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.";
-            item.Author         = "jbb@dallas.example.com (Joe Bob Briggs)";
-
-            item.Categories.Add(new RssCategory("sports"));
-            item.Categories.Add(new RssCategory("1991/Texas Rangers", "rec.sports.baseball"));
-
-            item.Comments           = new Uri("http://dallas.example.com/feedback/1983/06/joebob.htm");
-            item.Enclosures.Add(new RssEnclosure(24986239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
-            item.Guid               = new RssGuid("http://dallas.example.com/1983/05/06/joebob.htm");
-            item.PublicationDate    = new DateTime(2007, 10, 5, 9, 0, 0);
-            item.Source             = new RssSource(new Uri("http://la.example.com/rss.xml"), "Los Angeles Herald-Examiner");
-
-            feed.Channel.AddItem(item);
-        }
-
-        /// <summary>
-        /// Provides example code for the RssFeed.Create(Uri) method
-        /// </summary>
-        public static void CreateExample()
-        {
-            RssFeed feed    = RssFeed.Create(new Uri("http://news.google.com/?output=rss"));
-
-            foreach (RssItem item in feed.Channel.Items)
+            Channel =
             {
-                if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
-                {
-                    //  Process channel items published in the last week
-                }
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI"
+            }
+        };
+
+        feed.Channel.Categories.Add(new RssCategory("Media"));
+        feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
+
+        feed.Channel.Cloud = new RssCloud("endjin.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
+        feed.Channel.Copyright = "Copyright 2026 endjin limited";
+        feed.Channel.Generator = "Microsoft Spaces v1.1";
+
+        RssImage image = new(new Uri("https://endjin.com"), "endjin blog", new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/open-graph/og-endjin.png"))
+        {
+            Description = "Read the endjin blog",
+            Height = 32,
+            Width = 96
+        };
+        feed.Channel.Image = image;
+
+        feed.Channel.Language = new CultureInfo("en-US");
+        feed.Channel.LastBuildDate = new DateTime(2007, 10, 14, 17, 17, 44);
+        feed.Channel.ManagingEditor = "hello@endjin.com (Ian Griffiths)";
+        feed.Channel.PublicationDate = new DateTime(2007, 10, 14, 5, 0, 0);
+        feed.Channel.Rating = """(PICS-1.1 "http://www.rsac.org/ratingsv01.html" l by "hello@endjin.com" on "2007.01.29T10:09-0800" r (n 0 s 0 v 0 l 0))""";
+
+        feed.Channel.SkipDays.Add(DayOfWeek.Saturday);
+        feed.Channel.SkipDays.Add(DayOfWeek.Sunday);
+
+        feed.Channel.SkipHours.Add(0);
+        feed.Channel.SkipHours.Add(1);
+        feed.Channel.SkipHours.Add(2);
+        feed.Channel.SkipHours.Add(22);
+        feed.Channel.SkipHours.Add(23);
+
+        feed.Channel.TextInput = new RssTextInput("What software are you using?", new Uri("https://endjin.com/search"), "query", "TextInput Inquiry");
+        feed.Channel.TimeToLive = 60;
+        feed.Channel.Webmaster = "hello@endjin.com";
+
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine"),
+            Description = "Moving UI framework support out of System.Reactive into separate packages cuts up to 95MB from a self-contained deployment.",
+            Author = "hello@endjin.com (Barry Smart)"
+        };
+
+        item.Categories.Add(new RssCategory("sports"));
+        item.Categories.Add(new RssCategory("2026/Rx.NET", "rec.sports.baseball"));
+
+        item.Comments = new Uri("https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra#comments");
+        item.Enclosures.Add(new RssEnclosure(24_986_239L, "audio/mpeg", new Uri("https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3")));
+        item.Guid = new RssGuid("https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra");
+        item.PublicationDate = new DateTime(2007, 10, 5, 9, 0, 0);
+        item.Source = new RssSource(new Uri("https://endjin.com/rss.xml"), "Los Angeles Herald-Examiner");
+
+        feed.Channel.Items.Add(item);
+
+        ExampleOutput.ShowRssFeed(feed);
+    }
+
+    /// <summary>
+    /// Creates an <see cref="RssFeed"/> from a <see cref="Uri"/> in a single call.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task CreateExampleAsync()
+    {
+        RssFeed feed = await RssFeed.CreateAsync(new Uri("https://endjin.com/rss.xml")).ConfigureAwait(false);
+
+        foreach (RssItem item in feed.Channel.Items)
+        {
+            if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
+            {
+                //  Process channel items published in the last week
+            }
+        }
+    }
+
+    /// <summary>
+    /// Subscribes to <c>Loaded</c> before loading, so the handler sees the resource the moment it is parsed.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task LoadAsyncExampleAsync()
+    {
+        RssFeed feed = new();
+
+        feed.Loaded += FeedLoadedCallback;
+
+        await feed.LoadAsync(new Uri("https://endjin.com/rss.xml")).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Handles the <see cref="RssFeed.Loaded"/> event.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
+    private static void FeedLoadedCallback(object? sender, SyndicationResourceLoadedEventArgs e)
+    {
+        // Process the loaded feed using e.Data or e.Source
+        if (e.Source is not null)
+        {
+            // Process the source URI
+        }
+    }
+
+    /// <summary>
+    /// Loads an <see cref="RssFeed"/> from an <see cref="IXPathNavigable"/>.
+    /// </summary>
+    public static void LoadIXPathNavigableExample()
+    {
+        using XmlReader xmlReader = XmlReader.Create("https://endjin.com/rss.xml", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        XPathDocument source = new(xmlReader);
+
+        RssFeed feed = new();
+        feed.Load(source);
+
+        foreach (RssItem item in feed.Channel.Items)
+        {
+            if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
+            {
+                //  Process channel items published in the last week
+            }
+        }
+    }
+
+    /// <summary>
+    /// Loads an <see cref="RssFeed"/> from a <see cref="Stream"/>.
+    /// </summary>
+    public static void LoadStreamExample()
+    {
+        RssFeed feed = new();
+
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RssFeed);
+        feed.Load(stream);
+
+        foreach (RssItem item in feed.Channel.Items)
+        {
+            if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
+            {
+                //  Process channel items published in the last week
             }
         }
 
-        /// <summary>
-        /// Provides example code for the LoadAsync(Uri, Object) method
-        /// </summary>
-        public static void LoadAsyncExample()
+        ExampleOutput.ShowRssFeed(feed);
+    }
+
+    /// <summary>
+    /// Loads an <see cref="RssFeed"/> from an <see cref="XmlReader"/>.
+    /// </summary>
+    public static void LoadXmlReaderExample()
+    {
+        RssFeed feed = new();
+
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RssFeed);
+        XmlReaderSettings settings = new()
         {
-            RssFeed feed   = new RssFeed();
+            IgnoreComments = true,
+            IgnoreWhitespace = true
+        };
 
-            feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
+        using XmlReader reader = XmlReader.Create(stream, settings);
+        feed.Load(reader);
 
-            feed.LoadAsync(new Uri("http://news.google.com/?output=rss"), null);
-        }
-
-        /// <summary>
-        /// Handles the <see cref="RssFeed.Loaded"/> event.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void FeedLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
+        foreach (RssItem item in feed.Channel.Items)
         {
-            if(e.State != null)
+            if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
             {
+                //  Process channel items published in the last week
             }
         }
+    }
 
-        /// <summary>
-        /// Provides example code for the Load(IXPathNavigable) method
-        /// </summary>
-        public static void LoadIXPathNavigableExample()
+    /// <summary>
+    /// Loads an <see cref="RssFeed"/> from a <see cref="Uri"/>, and shows where a caller-supplied <see cref="HttpClient"/> goes.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task LoadUriExampleAsync()
+    {
+        RssFeed feed = new();
+        Uri source = new("https://endjin.com/rss.xml");
+
+        // For simple case (no credentials):
+        await feed.LoadAsync(source).ConfigureAwait(false);
+
+        // Or for credentials:
+        // var handler = new SocketsHttpHandler { Credentials = CredentialCache.DefaultNetworkCredentials };
+        // using var httpClient = new HttpClient(handler);
+        // await feed.LoadAsync(source, httpClient);
+
+        foreach (RssItem item in feed.Channel.Items)
         {
-            XPathDocument source    = new XPathDocument("http://news.google.com/?output=rss");
-
-            RssFeed feed    = new RssFeed();
-            feed.Load(source);
-
-            foreach (RssItem item in feed.Channel.Items)
+            if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
             {
-                if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
-                {
-                    //  Process channel items published in the last week
-                }
+                //  Process channel items published in the last week
             }
         }
+    }
 
-        /// <summary>
-        /// Provides example code for the Load(Stream) method
-        /// </summary>
-        public static void LoadStreamExample()
+    /// <summary>
+    /// Saves an <see cref="RssFeed"/> to a <see cref="Stream"/>.
+    /// </summary>
+    public static void SaveStreamExample()
+    {
+        RssFeed feed = new();
+
+        //  Modify feed state using public properties and methods
+
+        using Stream stream = new MemoryStream();
+        feed.Save(stream);
+
+        ExampleOutput.ShowSaved("RssFeed");
+    }
+
+    /// <summary>
+    /// Saves an <see cref="RssFeed"/> through an <see cref="XmlWriter"/>, with indentation turned on.
+    /// </summary>
+    public static void SaveXmlWriterExample()
+    {
+        RssFeed feed = new();
+
+        //  Modify feed state using public properties and methods
+
+        using Stream stream = new MemoryStream();
+        XmlWriterSettings settings = new()
         {
-            RssFeed feed    = new RssFeed();
+            Indent = true
+        };
 
-            using (Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read))
-            {
-                feed.Load(stream);
+        using XmlWriter writer = XmlWriter.Create(stream, settings);
+        feed.Save(writer);
 
-                foreach (RssItem item in feed.Channel.Items)
-                {
-                    if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
-                    {
-                        //  Process channel items published in the last week
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Load(XmlReader) method
-        /// </summary>
-        public static void LoadXmlReaderExample()
-        {
-            RssFeed feed    = new RssFeed();
-
-            using (Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read))
-            {
-                XmlReaderSettings settings  = new XmlReaderSettings();
-                settings.IgnoreComments     = true;
-                settings.IgnoreWhitespace   = true;
-
-                using(XmlReader reader = XmlReader.Create(stream, settings))
-                {
-                    feed.Load(reader);
-
-                    foreach (RssItem item in feed.Channel.Items)
-                    {
-                        if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
-                        {
-                            //  Process channel items published in the last week
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
-        /// </summary>
-        public static void LoadUriExample()
-        {
-            RssFeed feed    = new RssFeed();
-            Uri source      = new Uri("http://news.google.com/?output=rss");
-
-            feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
-
-            foreach (RssItem item in feed.Channel.Items)
-            {
-                if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
-                {
-                    //  Process channel items published in the last week
-                }
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Save(Stream) method
-        /// </summary>
-        public static void SaveStreamExample()
-        {
-            RssFeed feed   = new RssFeed();
-
-            //  Modify feed state using public properties and methods
-
-            using(Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write))
-            {
-                feed.Save(stream);
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Save(XmlWriter) method
-        /// </summary>
-        public static void SaveXmlWriterExample()
-        {
-            RssFeed feed   = new RssFeed();
-
-            //  Modify feed state using public properties and methods
-
-            using (Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write))
-            {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.Indent             = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    feed.Save(writer);
-                }
-            }
-        }
+        ExampleOutput.ShowSaved("RssFeed");
     }
 }

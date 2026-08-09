@@ -1,110 +1,122 @@
-﻿using System;
-using System.Net;
-
 using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core;
+
+/// <summary>
+/// Reads a feed without knowing whether it is RSS or Atom, through <see cref="GenericSyndicationFeed"/>.
+/// </summary>
+/// <remarks>
+///     The wrapper exposes only what both formats agree on — title, description, categories, items — and
+///     hands back the underlying <c>RssFeed</c> or <c>AtomFeed</c> through <c>Resource</c> when you need
+///     the rest.
+/// </remarks>
+internal static class GenericSyndicationFeedExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="GenericSyndicationFeed"/> class.
+    /// Walks a feed's categories and items without knowing which format produced them.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="GenericSyndicationFeed"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    public static class GenericSyndicationFeedExample
+    [RequiresNetwork]
+    public static async Task ClassExampleAsync()
     {
-        /// <summary>
-        /// Provides example code for the GenericSyndicationFeed class.
-        /// </summary>
-        public static void ClassExample()
+        GenericSyndicationFeed feed = await GenericSyndicationFeed.CreateAsync(new Uri("https://endjin.com/rss.xml")).ConfigureAwait(false);
+
+        foreach (GenericSyndicationCategory category in feed.Categories)
         {
-            GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
-
-            foreach(GenericSyndicationCategory category in feed.Categories)
+            if (string.Equals(category.Term, ".NET", StringComparison.OrdinalIgnoreCase))
             {
-                if (String.Compare(category.Term, ".NET", StringComparison.OrdinalIgnoreCase) == 0)
-                {
-                    //  Process feed category
-                }
+                //  Process feed category
+            }
+        }
+
+        // Enumerate through syndicated content
+        foreach (GenericSyndicationItem item in feed.Items)
+        {
+            if (item.PublishedOn > DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0)))
+            {
+                //  Process generic item's published in the last week
             }
 
-            // Enumerate through syndicated content
-            foreach (GenericSyndicationItem item in feed.Items)
+            foreach (GenericSyndicationCategory category in item.Categories)
             {
-                if (item.PublishedOn > DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0)))
+                if (string.Equals(category.Term, "WCF", StringComparison.OrdinalIgnoreCase))
                 {
-                    //  Process generic item's published in the last week
-                }
-
-                foreach (GenericSyndicationCategory category in item.Categories)
-                {
-                    if (String.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        //  Process item category
-                    }
-                }
-            }
-
-            if(feed.Format == SyndicationContentFormat.Rss)
-            {
-                RssFeed rssFeed = feed.Resource as RssFeed;
-                if (rssFeed != null)
-                {
-                    //  Process RSS format specific information
+                    //  Process item category
                 }
             }
         }
 
-        /// <summary>
-        /// Provides example code for the GenericSyndicationFeed.Create(Uri) method
-        /// </summary>
-        public static void CreateExample()
+        if (feed.Format == SyndicationContentFormat.Rss)
         {
-            GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
-
-            foreach (GenericSyndicationItem item in feed.Items)
+            if (feed.Resource is RssFeed)
             {
-                if (item.PublishedOn > DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0)))
-                {
-                    //  Process generic item's published in the last week
-                }
+                //  Process RSS format specific information
+            }
+        }
 
-                foreach (GenericSyndicationCategory category in item.Categories)
+        ExampleOutput.ShowGenericFeed(feed);
+    }
+
+    /// <summary>
+    /// Creates a <see cref="GenericSyndicationFeed"/> from a <see cref="Uri"/> in a single call.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task CreateExampleAsync()
+    {
+        GenericSyndicationFeed feed = await GenericSyndicationFeed.CreateAsync(new Uri("https://endjin.com/rss.xml")).ConfigureAwait(false);
+
+        foreach (GenericSyndicationItem item in feed.Items)
+        {
+            if (item.PublishedOn > DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0)))
+            {
+                //  Process generic item's published in the last week
+            }
+
+            foreach (GenericSyndicationCategory category in item.Categories)
+            {
+                if (string.Equals(category.Term, "WCF", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (String.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        //  Process item category
-                    }
+                    //  Process item category
                 }
             }
         }
-        /// <summary>
-        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
-        /// </summary>
-        public static void LoadUriExample()
+
+        ExampleOutput.ShowGenericFeed(feed);
+    }
+
+    /// <summary>
+    /// Loads a <see cref="GenericSyndicationFeed"/> from a <see cref="Uri"/>, and shows where a caller-supplied <see cref="HttpClient"/> goes.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task LoadUriExampleAsync()
+    {
+        GenericSyndicationFeed feed = new();
+        Uri source = new("https://endjin.com/rss.xml");
+
+        // For simple case (no credentials):
+        await feed.LoadAsync(source).ConfigureAwait(false);
+
+        // Or for credentials:
+        // var handler = new SocketsHttpHandler { Credentials = CredentialCache.DefaultNetworkCredentials };
+        // using var httpClient = new HttpClient(handler);
+        // await feed.LoadAsync(source, httpClient);
+
+        foreach (GenericSyndicationItem item in feed.Items)
         {
-            GenericSyndicationFeed feed = new GenericSyndicationFeed();
-            Uri source                  = new Uri("http://feeds.feedburner.com/OppositionallyDefiant");
-
-            feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
-
-            foreach (GenericSyndicationItem item in feed.Items)
+            if (item.PublishedOn > DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0)))
             {
-                if (item.PublishedOn > DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0)))
-                {
-                    //  Process generic item's published in the last week
-                }
+                //  Process generic item's published in the last week
+            }
 
-                foreach (GenericSyndicationCategory category in item.Categories)
+            foreach (GenericSyndicationCategory category in item.Categories)
+            {
+                if (string.Equals(category.Term, "WCF", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (String.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        //  Process item category
-                    }
+                    //  Process item category
                 }
             }
         }
+
+        ExampleOutput.ShowGenericFeed(feed);
     }
 }

@@ -1,108 +1,145 @@
-﻿using System;
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
 using Argotic.Extensions;
-using Argotic.Syndication.Specialized;
+using Argotic.Syndication;
 
-namespace Argotic.Data.Adapters
+namespace Argotic.Data.Adapters;
+
+/// <summary>
+/// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="ApmlDocument"/>.
+/// </summary>
+/// <remarks>
+///     <para>
+///     APML 0.6 puts its elements in <c>http://www.apml.org/apml-0.6</c> and — unusually among the formats
+///     here — capitalises them: <c>APML</c>, <c>Head</c>, <c>Body</c>, <c>Profile</c>, <c>Applications</c>,
+///     <c>Application</c>. XML element names are case sensitive, so these selectors match nothing in a
+///     document that spells them in lower case, and there is no fallback that would rescue one.
+///     </para>
+///     <para>
+///     <see cref="SyndicationResourceLoadSettings.RetrievalLimit"/> caps profiles and applications alike,
+///     each against its own budget of entities kept. A profile carries the whole attention graph and an
+///     <see cref="ApmlApplication"/> carries a name and a payload string, so the two are not comparable in
+///     cost — but a caller who sets a limit is asking for a bounded document, not a bounded profile list.
+///     </para>
+/// </remarks>
+public sealed class Apml06SyndicationResourceAdapter : SyndicationResourceAdapterBase
 {
     /// <summary>
-    /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="ApmlDocument"/>.
+    /// Initializes a new instance of the <see cref="Apml06SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
+    /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the syndication document information.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="ApmlDocument"/>.</param>
     /// <remarks>
-    ///     <para>
-    ///         The <see cref="Apml06SyndicationResourceAdapter"/> serves as a bridge between a <see cref="ApmlDocument"/> and an XML data source.
-    ///         The <see cref="Apml06SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(ApmlDocument)"/>, which changes the data
-    ///         in the <see cref="ApmlDocument"/> to match the data in the data source.
-    ///     </para>
-    ///     <para>This syndication resource adapter is designed to fill <see cref="ApmlDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the APML 0.6 specification.</para>
+    ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="ApmlDocument"/>.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
-    public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
+    public Apml06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Apml06SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
-        /// </summary>
-        /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the syndication document information.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="ApmlDocument"/>.</param>
-        /// <remarks>
-        ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="ApmlDocument"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Apml06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+    }
+
+    /// <summary>
+    /// Loads <c>APML/Head</c>, then the <c>Profile</c> and <c>Applications/Application</c> children of <c>APML/Body</c>, then attaches the syndication extensions found on <c>APML</c>.
+    /// </summary>
+    /// <param name="resource">The <see cref="ApmlDocument"/> to be filled.</param>
+    /// <remarks>
+    ///     The <c>defaultprofile</c> attribute on <c>Body</c> — lower case, unlike the elements — names which
+    ///     of the profiles is the active one. It is read as a string and never checked against the profiles
+    ///     actually present, so <see cref="ApmlDocument.DefaultProfileName"/> may name a profile that is not
+    ///     in the document.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    public void Fill(ApmlDocument resource)
+    {
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(this.Navigator.NameTable);
+
+        XPathNavigator? headNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Head", manager);
+        if (headNavigator is not null)
         {
+            resource.Head.Load(headNavigator, this.Settings);
         }
 
-        /// <summary>
-        /// Modifies the <see cref="ApmlDocument"/> to match the data source.
-        /// </summary>
-        /// <param name="resource">The <see cref="ApmlDocument"/> to be filled.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void Fill(ApmlDocument resource)
+        XPathNavigator? bodyNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Body", manager);
+        if (bodyNavigator is not null)
         {
-            Guard.ArgumentNotNull(resource, "resource");
-
-            XmlNamespaceManager manager     = ApmlUtility.CreateNamespaceManager(this.Navigator.NameTable);
-
-            XPathNavigator headNavigator    = this.Navigator.SelectSingleNode("apml:APML/apml:Head", manager);
-            if (headNavigator != null)
+            if (bodyNavigator.HasAttributes)
             {
-                resource.Head.Load(headNavigator, this.Settings);
+                string defaultProfileAttribute = bodyNavigator.GetAttribute("defaultprofile", string.Empty);
+                if (!string.IsNullOrEmpty(defaultProfileAttribute))
+                {
+                    resource.DefaultProfileName = defaultProfileAttribute;
+                }
             }
 
-            XPathNavigator bodyNavigator    = this.Navigator.SelectSingleNode("apml:APML/apml:Body", manager);
-            if (bodyNavigator != null)
+            XPathNodeIterator profileIterator = bodyNavigator.SelectChildElements("apml", "Profile", manager);
+            if (profileIterator is { Count: > 0 })
             {
-                if (bodyNavigator.HasAttributes)
+                int addedProfiles = 0;
+                while (profileIterator.MoveNext())
                 {
-                    string defaultProfileAttribute  = bodyNavigator.GetAttribute("defaultprofile", String.Empty);
-                    if (!String.IsNullOrEmpty(defaultProfileAttribute))
+                    if (this.Settings.RetrievalLimit != 0 && addedProfiles >= this.Settings.RetrievalLimit)
                     {
-                        resource.DefaultProfileName = defaultProfileAttribute;
+                        break;
                     }
-                }
 
-                XPathNodeIterator profileIterator   = bodyNavigator.Select("apml:Profile", manager);
-                if (profileIterator != null && profileIterator.Count > 0)
-                {
-                    int counter = 0;
-                    while (profileIterator.MoveNext())
+                    XPathNavigator? profileNode = profileIterator.Current;
+                    if (profileNode is null)
                     {
-                        ApmlProfile profile = new ApmlProfile();
-                        counter++;
-
-                        if (profile.Load(profileIterator.Current, this.Settings))
-                        {
-                            if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                            {
-                                break;
-                            }
-
-                            ((Collection<ApmlProfile>)resource.Profiles).Add(profile);
-                        }
+                        continue;
                     }
-                }
 
-                XPathNodeIterator applicationIterator   = bodyNavigator.Select("apml:Applications/apml:Application", manager);
-                if (applicationIterator != null && applicationIterator.Count > 0)
-                {
-                    while (applicationIterator.MoveNext())
+                    ApmlProfile profile = new();
+                    if (profile.Load(profileNode, this.Settings))
                     {
-                        ApmlApplication application = new ApmlApplication();
-                        if (application.Load(applicationIterator.Current, this.Settings))
-                        {
-                            resource.Applications.Add(application);
-                        }
+                        resource.Profiles.Add(profile);
+                        addedProfiles++;
                     }
                 }
             }
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(this.Navigator.SelectSingleNode("apml:APML", manager), this.Settings);
-            adapter.Fill(resource, manager);
+            XPathNodeIterator applicationIterator = bodyNavigator.Select("apml:Applications/apml:Application", manager);
+            if (applicationIterator is { Count: > 0 })
+            {
+                int addedApplications = 0;
+                while (applicationIterator.MoveNext())
+                {
+                    if (this.Settings.RetrievalLimit != 0 && addedApplications >= this.Settings.RetrievalLimit)
+                    {
+                        break;
+                    }
+
+                    XPathNavigator? applicationNode = applicationIterator.Current;
+                    if (applicationNode is null)
+                    {
+                        continue;
+                    }
+
+                    ApmlApplication application = new();
+                    if (application.Load(applicationNode, this.Settings))
+                    {
+                        resource.Applications.Add(application);
+                        addedApplications++;
+                    }
+                }
+            }
         }
+
+        XPathNavigator? extensionRoot = this.Navigator.SelectChildElement("apml", "APML", manager);
+
+        if (extensionRoot is null)
+
+        {
+
+            return;
+
+        }
+
+
+        SyndicationExtensionAdapter adapter = new(extensionRoot, this.Settings);
+        adapter.Fill(resource, manager);
     }
 }

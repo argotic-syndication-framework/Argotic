@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  An Atom Publishing Protocol service document, per RFC 5023 section 8.
+
+  This is the entry point of a publishing API: a client GETs it and learns, without being told
+  anything else, what collections exist, where to POST to them, and what each will accept. Two
+  workspaces here, because the element is repeatable and a document with one never shows that.
+
+  Three details a reader has to get right and a single-collection document never reaches:
+
+    * app:accept is not a media type, it is a media RANGE. "image/*" and the empty accept element
+      both appear below; the empty one means the collection accepts nothing but Atom entries, which
+      is a different statement from omitting the element entirely.
+    * app:categories comes in two forms, inline and out-of-line via href. Both are here.
+    * A fixed category list (fixed="yes") is a closed vocabulary, and a client must not invent terms
+      for it.
+-->
+<service xmlns="http://www.w3.org/2007/app"
+         xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+    <atom:title>endjin blog</atom:title>
+
+    <collection href="https://endjin.com/app/blog/posts">
+      <atom:title>Blog posts</atom:title>
+      <accept>application/atom+xml;type=entry</accept>
+      <categories fixed="yes" scheme="https://endjin.com/tags">
+        <atom:category term="dotnet" label=".NET"/>
+        <atom:category term="data" label="Data and Analytics"/>
+        <atom:category term="ai" label="AI"/>
+        <atom:category term="developer-experience" label="Developer Experience"/>
+      </categories>
+    </collection>
+
+    <collection href="https://endjin.com/app/blog/media">
+      <atom:title>Post images</atom:title>
+      <accept>image/png</accept>
+      <accept>image/jpeg</accept>
+      <accept>image/*</accept>
+      <categories href="https://endjin.com/app/categories/media"/>
+    </collection>
+  </workspace>
+
+  <workspace>
+    <atom:title>endjin talks</atom:title>
+
+    <collection href="https://endjin.com/app/talks">
+      <atom:title>Talks</atom:title>
+      <!-- An empty accept element: this collection takes Atom entries and nothing else. -->
+      <accept/>
+      <categories fixed="no" scheme="https://endjin.com/tags"/>
+    </collection>
+
+    <collection href="https://endjin.com/app/talks/audio">
+      <atom:title>Audio versions</atom:title>
+      <accept>audio/mpeg</accept>
+    </collection>
+  </workspace>
+</service>

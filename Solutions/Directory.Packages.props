@@ -1,0 +1,45 @@
+<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+  <!--
+    Package versions for every project in the solution. Projects declare which packages they use
+    via <PackageReference Include="..." /> without a Version; the version comes from here.
+
+    Not listed here, deliberately:
+      - MSTest.Sdk. It is an MSBuild SDK, pinned in global.json, and supplies its own PackageVersion
+        items for MSTest.TestAdapter/TestFramework, Microsoft.Testing.Platform and the testing
+        extensions when central package management is enabled. Declaring them here would collide
+        with the SDK's own entries.
+  -->
+
+  <!-- Microsoft.Extensions - used by Argotic.Core and Argotic.Extensions.Tests -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.10" />
+  </ItemGroup>
+
+  <!-- Testing -->
+  <ItemGroup>
+    <PackageVersion Include="Shouldly" Version="4.3.0" />
+  </ItemGroup>
+
+  <!-- Benchmarking -->
+  <ItemGroup>
+    <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
+  </ItemGroup>
+
+  <!-- Examples CLI -->
+  <ItemGroup>
+    <PackageVersion Include="Spectre.Console" Version="0.57.2" />
+    <PackageVersion Include="Spectre.Console.Cli" Version="0.55.0" />
+    <PackageVersion Include="Spectre.IO" Version="0.23.0" />
+  </ItemGroup>
+
+</Project>

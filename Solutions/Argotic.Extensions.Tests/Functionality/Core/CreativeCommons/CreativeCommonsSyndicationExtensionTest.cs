@@ -1,318 +1,258 @@
-﻿namespace Argotic.Extensions.Tests
+using static Argotic.Common.ComparisonOperatorExtensions;
+namespace Argotic.Extensions.Tests.Functionality.Core.CreativeCommons;
+
+/// <summary>
+/// Covers <c>CreativeCommonsSyndicationExtension</c>, the module that attaches one or more
+/// <c>creativeCommons:license</c> URIs to a feed or an item.
+/// </summary>
+[TestClass]
+public class CreativeCommonsSyndicationExtensionTest
 {
-	using Argotic.Extensions.Core;
-	using Argotic.Syndication;
-	using Microsoft.VisualStudio.TestTools.UnitTesting;
-	using System;
-	using System.IO;
-	using System.Linq;
-	using System.Xml;
+    const string namespc = """
+        xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule"
+        """;
 
-	/// <summary>
-	///This is a test class for CreativeCommonsSyndicationExtensionTest and is intended
-	///to contain all CreativeCommonsSyndicationExtensionTest Unit Tests
-	///</summary>
-	[TestClass()]
-	public class CreativeCommonsSyndicationExtensionTest
-	{
+    private const string nycText = """<license xmlns="http://backend.userland.com/creativeCommonsRssModule">http://www.example.com/license1.html</license>""" +
+                                    """<license xmlns="http://backend.userland.com/creativeCommonsRssModule">http://www.example.com/license2.html</license>""";
 
-		const string namespc = @"xmlns:creativeCommons=""http://backend.userland.com/creativeCommonsRssModule""";
+    private const string strExtXml = "<creativeCommons:license>http://www.example.com/license1.html</creativeCommons:license>"
+                                     + "<creativeCommons:license>http://www.example.com/license2.html</creativeCommons:license>";
 
-		private const string nycText =  "<license xmlns=\"http://backend.userland.com/creativeCommonsRssModule\">http://www.example.com/license1.html</license>"+
-										"<license xmlns=\"http://backend.userland.com/creativeCommonsRssModule\">http://www.example.com/license2.html</license>";
+    public TestContext? TestContext { get; set; }
+    /// <summary>
+    /// Two extensions carrying the same two licences compare equal, so <c>CompareTo</c> returns
+    /// <c>0</c> — the licence list is compared by its contents, not by reference.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsCompareToTest()
+    {
+        CreativeCommonsSyndicationExtension target = CreateExtension1();
+        CreativeCommonsSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
+        actual.ShouldBe(0);
+    }
 
-		private const string strExtXml = "<creativeCommons:license>http://www.example.com/license1.html</creativeCommons:license>"
-			+"<creativeCommons:license>http://www.example.com/license2.html</creativeCommons:license>";
+    /// <summary>
+    /// Two separately built extensions carrying the same two licences are equal through the
+    /// <c>object</c> overload of <c>Equals</c>.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsEqualsTest()
+    {
+        CreativeCommonsSyndicationExtension target = CreateExtension1();
+        object obj = CreateExtension1();
+        bool actual = target.Equals(obj);
+        actual.ShouldBeTrue();
+    }
 
-		private TestContext testContextInstance;
+    /// <summary>
+    /// The hash code is stable across repeated calls, and two equal extensions agree on it.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsGetHashCodeTest()
+    {
+        // Consistency: same object returns same hash
+        CreativeCommonsSyndicationExtension target = CreateExtension1();
+        target.GetHashCode().ShouldBe(target.GetHashCode());
 
-		/// <summary>
-		///Gets or sets the test context which provides
-		///information about and functionality for the current test run.
-		///</summary>
-		public TestContext TestContext
-		{
-			get
-			{
-				return testContextInstance;
-			}
-			set
-			{
-				testContextInstance = value;
-			}
-		}
+        // Equality contract: equal objects have equal hashes
+        CreativeCommonsSyndicationExtension other = CreateExtension1();
+        target.Equals(other).ShouldBeTrue();
+        target.GetHashCode().ShouldBe(other.GetHashCode());
+    }
 
-	    /// <summary>
-		///A test for CreativeCommonsSyndicationExtension Constructor
-		///</summary>
-		[TestMethod()]
-		public void CreativeCommonsSyndicationExtensionConstructorTest()
-		{
-			CreativeCommonsSyndicationExtension target = new CreativeCommonsSyndicationExtension();
-			Assert.IsNotNull(target);
-			Assert.IsInstanceOfType(target, typeof(CreativeCommonsSyndicationExtension));
-		}
+    /// <summary>
+    /// Saving a feed with the extension attached writes one <c>creativeCommons:license</c> element per
+    /// licence, in the order they were added.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsCreateXmlTest()
+    {
+        CreativeCommonsSyndicationExtension itunes = CreateExtension1();
 
-		/// <summary>
-		///A test for CompareTo
-		///</summary>
-		[TestMethod()]
-		public void CreativeCommons_CompareToTest()
-		{
-			CreativeCommonsSyndicationExtension target = CreateExtension1();
-			object obj = CreateExtension1();
-			int expected = 0; 
-			int actual;
-			actual = target.CompareTo(obj);
-			Assert.AreEqual(expected, actual);
-		}
+        string actual = ExtensionTestUtil.AddExtensionToXml(itunes);
+        string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        actual.ShouldBe(expected);
+    }
 
+    /// <summary>
+    /// The <c>MatchByType</c> predicate reaches the very same parsed extension the generic lookup does,
+    /// carrying both licence URIs the document declared, in document order.
+    /// </summary>
+    /// <remarks>
+    ///     The predicate path used to be asserted as <c>(… as CreativeCommonsSyndicationExtension).ShouldBeOfType&lt;…&gt;()</c>,
+    ///     where the <c>as</c> cast made the type assertion unreachable — it was a null check wearing a
+    ///     type check's clothes, and it inspected neither licence. A non-null extension proves only that
+    ///     <i>one</i> <c>license</c> element parsed, so the count is part of the claim.
+    /// </remarks>
+    [TestMethod]
+    public void CreativeCommonsFullTest()
+    {
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-		/// <summary>
-		///A test for Equals
-		///</summary>
-		[TestMethod()]
-		public void CreativeCommons_EqualsTest()
-		{
-			CreativeCommonsSyndicationExtension target = CreateExtension1();
-			object obj = CreateExtension1();
-			bool expected = true;
-			bool actual;
-			actual = target.Equals(obj);
-			Assert.AreEqual(expected, actual);
-		}
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
 
-		/// <summary>
-		///A test for GetHashCode
-		///</summary>
-		[TestMethod, Ignore]
-		public void CreativeCommons_GetHashCodeTest()
-		{
-			CreativeCommonsSyndicationExtension target = CreateExtension1();
-			int expected = -2111858259;
-			int actual;
-			actual = target.GetHashCode();
-			Assert.AreEqual(expected, actual);
-		}
+        RssItem item = feed.Channel.Items.Single();
+        item.HasExtensions.ShouldBeTrue();
+        CreativeCommonsSyndicationExtension byType = item.FindExtension<CreativeCommonsSyndicationExtension>().ShouldNotBeNull();
+        CreativeCommonsSyndicationExtension byPredicate = item
+            .FindExtension(CreativeCommonsSyndicationExtension.MatchByType)
+            .ShouldBeOfType<CreativeCommonsSyndicationExtension>();
 
-		/// <summary>
-		///A test for Load
-		///</summary>
-		[TestMethod, Ignore]
-		public void CreativeCommons_LoadTest()
-		{
-			CreativeCommonsSyndicationExtension target = new CreativeCommonsSyndicationExtension(); // TODO: Initialize to an appropriate value
-			var nt = new NameTable();
-			var ns = new XmlNamespaceManager(nt);
-			 var xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
-			 var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        ReferenceEquals(byType, byPredicate).ShouldBeTrue();
+        byPredicate.Context.Licenses.Count.ShouldBe(2);
+        byPredicate.Context.Licenses[0].ShouldBe(new Uri("http://www.example.com/license1.html"));
+        byPredicate.Context.Licenses[1].ShouldBe(new Uri("http://www.example.com/license2.html"));
+    }
 
-			using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
-			{
-#if false
-				//var document  = new XPathDocument(reader);
-				//var nav = document.CreateNavigator();
-				//nav.Select("//item");
-				do
-				{
-					if (!reader.Read())
-						break;
-				} while (reader.NodeType != XmlNodeType.EndElement || reader.Name != "webMaster");
+    /// <summary>
+    /// <c>MatchByType</c> accepts an <c>ISyndicationExtension</c> that is a
+    /// <c>CreativeCommonsSyndicationExtension</c>.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsMatchByTypeTest()
+    {
+        ISyndicationExtension extension = CreateExtension1();
+        bool actual = CreativeCommonsSyndicationExtension.MatchByType(extension);
+        actual.ShouldBeTrue();
+    }
 
-				
-				bool expected = true;
-				bool actual;
-				actual = target.Load(reader);
-				Assert.AreEqual(expected, actual);
-#else
-				RssFeed feed = new RssFeed();
-				feed.Load(reader);
-#endif
-			}
-		}
+    /// <summary>
+    /// <c>ToString</c> renders both licences as sibling <c>license</c> elements, each declaring the
+    /// Creative Commons module namespace as its default.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsToStringTest()
+    {
+        CreativeCommonsSyndicationExtension target = CreateExtension1();
+        string actual = target.ToString();
+        actual.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(nycText);
+    }
 
-	    [TestMethod]
-	    public void CreativeCommons_CreateXmlTest()
-	    {
-	        var itunes = CreateExtension1();
+    /// <summary>
+    /// Writing to a non-indenting fragment <c>XmlWriter</c> emits the same two elements as
+    /// <c>ToString</c>, without the line breaks or indentation between them.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsWriteToTest()
+    {
+        using StringWriter sw = new();
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        CreativeCommonsSyndicationExtension target = CreateExtension1();
+        target.WriteTo(writer);
+        writer.Flush();
+        string output = sw.ToString();
+        output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(nycText.Replace(Environment.NewLine + "  ", "", StringComparison.Ordinal).Replace(Environment.NewLine, "", StringComparison.Ordinal));
+    }
 
-	        var actual = ExtensionTestUtil.AddExtensionToXml(itunes);
-	        string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
-	        Assert.AreEqual(expected, actual);
-	    }
+    /// <summary>
+    /// Two extensions carrying different licence URIs are not equal under <c>==</c>.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsOpEqualityTestFailure()
+    {
+        CreativeCommonsSyndicationExtension first = CreateExtension1();
+        CreativeCommonsSyndicationExtension second = CreateExtension2();
+        bool actual = first == second;
+        actual.ShouldBeFalse();
+    }
 
+    /// <summary>
+    /// Two extensions carrying the same licence URIs are equal under <c>==</c>.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsOpEqualityTestSuccess()
+    {
+        CreativeCommonsSyndicationExtension first = CreateExtension1();
+        CreativeCommonsSyndicationExtension second = CreateExtension1();
+        bool actual = first == second;
+        actual.ShouldBeTrue();
+    }
 
-	    [TestMethod]
-	    public void CreativeCommons_FullTest()
-		{
-			var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+    /// <summary>
+    /// The extension licensed under <c>example.com</c> does not sort above the one under
+    /// <c>example.net</c> — the licence lists are compared element by element.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsOpGreaterThanTest()
+    {
+        CreativeCommonsSyndicationExtension first = CreateExtension1();
+        CreativeCommonsSyndicationExtension second = CreateExtension2();
+        bool actual = first > second;
+        actual.ShouldBeFalse();
+    }
 
-			 using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
-			 {
-				 RssFeed feed = new RssFeed();
-				 feed.Load(reader);
+    /// <summary>
+    /// Two extensions carrying different licence URIs are unequal under <c>!=</c>.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsOpInequalityTest()
+    {
+        CreativeCommonsSyndicationExtension first = CreateExtension1();
+        CreativeCommonsSyndicationExtension second = CreateExtension2();
+        bool actual = first != second;
+        actual.ShouldBeTrue();
+    }
 
-				 //				 Assert.IsTrue(feed.Channel.HasExtensions);
-				 //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension,
-				 //						 typeof(CreativeCommonsSyndicationExtension));
+    /// <summary>
+    /// The extension licensed under <c>example.com</c> sorts below the one under <c>example.net</c>.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsOpLessThanTest()
+    {
+        CreativeCommonsSyndicationExtension first = CreateExtension1();
+        CreativeCommonsSyndicationExtension second = CreateExtension2();
+        bool actual = first < second;
+        actual.ShouldBeTrue();
+    }
 
-				 Assert.AreEqual(1, feed.Channel.Items.Count());
-				 var item = feed.Channel.Items.Single();
-				 Assert.IsTrue(item.HasExtensions);
-				 var itemExtension = item.FindExtension<CreativeCommonsSyndicationExtension>();
-				 Assert.IsNotNull(itemExtension);
-				 Assert.IsInstanceOfType(item.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension,
-				  typeof(CreativeCommonsSyndicationExtension));
+    /// <summary>
+    /// The <c>Context</c> property hands back both licence URIs, in the order they were added.
+    /// </summary>
+    [TestMethod]
+    public void CreativeCommonsContextTest()
+    {
+        CreativeCommonsSyndicationExtension target = CreateExtension1();
+        CreativeCommonsSyndicationExtensionContext context = target.Context;
 
-			 }
-		}
+        context.ShouldNotBeNull();
+        context.Licenses.Count.ShouldBe(2);
+        context.Licenses[0].ShouldBe(new Uri("http://www.example.com/license1.html"));
+        context.Licenses[1].ShouldBe(new Uri("http://www.example.com/license2.html"));
+    }
 
-		/// <summary>
-		///A test for MatchByType
-		///</summary>
-		[TestMethod()]
-		public void CreativeCommons_MatchByTypeTest()
-		{
-			ISyndicationExtension extension = CreateExtension1();
-			bool expected = true;
-			bool actual;
-			actual = CreativeCommonsSyndicationExtension.MatchByType(extension);
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the lesser, licensed under two
+    /// <c>example.com</c> URIs.
+    /// </summary>
+    /// <returns>An extension carrying two licences.</returns>
+    private static CreativeCommonsSyndicationExtension CreateExtension1()
+    {
+        CreativeCommonsSyndicationExtension nyc = new();
 
-		/// <summary>
-		///A test for ToString
-		///</summary>
-		[TestMethod()]
-		public void CreativeCommons_ToStringTest()
-		{
-			CreativeCommonsSyndicationExtension target = CreateExtension1();
-			string expected = nycText;
-			string actual;
-			actual = target.ToString();
-			Assert.AreEqual(expected, actual.Replace(Environment.NewLine, ""));
-		}
+        nyc.Context.Licenses.Add(new Uri("http://www.example.com/license1.html"));
+        nyc.Context.Licenses.Add(new Uri("http://www.example.com/license2.html"));
+        return nyc;
+    }
 
-		/// <summary>
-		///A test for WriteTo
-		///</summary>
-		[TestMethod()]
-		public void CreativeCommons_WriteToTest()
-		{
-			using(var sw = new StringWriter())
-			using (XmlWriter writer = new XmlTextWriter(sw))
-			{
+    /// <summary>
+    /// Builds the extension the comparison tests treat as the greater, licensed under two
+    /// <c>example.net</c> URIs.
+    /// </summary>
+    /// <returns>An extension carrying two licences.</returns>
+    private static CreativeCommonsSyndicationExtension CreateExtension2()
+    {
+        CreativeCommonsSyndicationExtension nyc = new();
+        nyc.Context.Licenses.Add(new Uri("http://www.example.net/license1.html"));
+        nyc.Context.Licenses.Add(new Uri("http://www.example.net/license2.html"));
+        return nyc;
+    }
 
-				var target = CreateExtension1();
-				target.WriteTo(writer);
-				var output = sw.ToString();
-				Assert.AreEqual(nycText.Replace(Environment.NewLine+"  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
-			}
-		}
-
-		/// <summary>
-		///A test for op_Equality
-		///</summary>
-		[TestMethod()]
-		public void CreativeCommons_op_EqualityTest_Failure()
-		{
-			CreativeCommonsSyndicationExtension first = CreateExtension1();
-			CreativeCommonsSyndicationExtension second = CreateExtension2();
-			bool expected = false; 
-			bool actual;
-			actual = (first == second);
-			Assert.AreEqual(expected, actual);
-		}
-
-		public void CreativeCommons_op_EqualityTest_Success()
-		{
-			CreativeCommonsSyndicationExtension first = CreateExtension1();
-			CreativeCommonsSyndicationExtension second = CreateExtension1();
-			bool expected = true;
-			bool actual;
-			actual = (first == second);
-			Assert.AreEqual(expected, actual);
-		}
-
-		/// <summary>
-		///A test for op_GreaterThan
-		///</summary>
-		[TestMethod()]
-		public void CreativeCommons_op_GreaterThanTest()
-		{
-			CreativeCommonsSyndicationExtension first = CreateExtension1();
-			CreativeCommonsSyndicationExtension second = CreateExtension2();
-			bool expected = false; 
-			bool actual = false;
-			actual = (first > second);
-			Assert.AreEqual(expected, actual);
-		}
-
-		/// <summary>
-		///A test for op_Inequality
-		///</summary>
-		[TestMethod()]
-		public void CreativeCommons_op_InequalityTest()
-		{
-			CreativeCommonsSyndicationExtension first = CreateExtension1();
-			CreativeCommonsSyndicationExtension second = CreateExtension2();
-			bool expected = true;
-			bool actual = (first != second);
-			Assert.AreEqual(expected, actual);
-		}
-
-		/// <summary>
-		///A test for op_LessThan
-		///</summary>
-		[TestMethod()]
-		public void CreativeCommons_op_LessThanTest()
-		{
-			CreativeCommonsSyndicationExtension first = CreateExtension1();
-			CreativeCommonsSyndicationExtension second = CreateExtension2();
-			bool expected = true; 
-			bool actual;
-			actual = (first < second);
-			Assert.AreEqual(expected, actual);
-		}
-
-		/// <summary>
-		///A test for Context
-		///</summary>
-		[TestMethod(), Ignore]
-		public void CreativeCommons_ContextTest()
-		{
-			CreativeCommonsSyndicationExtension target = CreateExtension1();
-			CreativeCommonsSyndicationExtensionContext expected =CreateContext1();
-			CreativeCommonsSyndicationExtensionContext actual;
-//			target.Context = expected;
-			actual = target.Context;
-			var b = actual.Equals(expected);
-			Assert.AreEqual(expected, actual);
-			Assert.Inconclusive("Verify the correctness of this test method.");
-		}
-
-		private CreativeCommonsSyndicationExtension CreateExtension1()
-		{
-			var nyc = new CreativeCommonsSyndicationExtension();
-
-			nyc.Context.Licenses.Add(new Uri("http://www.example.com/license1.html"));
-			nyc.Context.Licenses.Add(new Uri("http://www.example.com/license2.html"));
-			return nyc;
-		}
-		private CreativeCommonsSyndicationExtension CreateExtension2()
-		{
-			var nyc = new CreativeCommonsSyndicationExtension();
-			nyc.Context.Licenses.Add(new Uri("http://www.example.net/license1.html"));
-			nyc.Context.Licenses.Add(new Uri("http://www.example.net/license2.html"));
-			return nyc;
-		}
-
-		public static CreativeCommonsSyndicationExtensionContext CreateContext1()
-		{
-			var nyc = new CreativeCommonsSyndicationExtensionContext();
-			//nyc.Latitude = 40;
-			//nyc.Longitude = -74;
-			return nyc;
-		}
-	}
+    /// <summary>
+    /// Builds an empty context, without an extension around it.
+    /// </summary>
+    /// <returns>A context carrying no licences.</returns>
+    public static CreativeCommonsSyndicationExtensionContext CreateContext1() => new();
 }

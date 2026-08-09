@@ -1,807 +1,669 @@
-﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Security.Permissions;
-using System.Threading;
+using System.Net.Http.Headers;
 using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
 using Argotic.Configuration;
 
-namespace Argotic.Net
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+
+namespace Argotic.Net;
+
+/// <summary>
+/// Sends remote procedure calls using the XML-RPC protocol.
+/// </summary>
+/// <remarks>
+///     <para>
+///         A call is an HTTP <c>POST</c> of <c>text/xml</c>: a <c>&lt;methodCall&gt;</c> naming a method
+///         and carrying its parameters, answered by a <c>&lt;methodResponse&gt;</c> holding either one
+///         return value or a fault structure. Parameters are scalars, arrays or structures, and the last
+///         two nest. This implementation follows the XML-RPC 1.0 specification at
+///         <a href="https://xmlrpc.com/spec.md">https://xmlrpc.com/spec.md</a>.
+///     </para>
+///     <para>
+///         The endpoint this library expects to reach is a Pingback server —
+///         <see cref="SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(string)"/> finds one,
+///         and <c>pingback.ping</c> is an XML-RPC call. Pingback is the sibling of Trackback and is
+///         legacy for the same reasons: the ping asserts a link with no authentication behind it, the
+///         spam followed, and most weblog software stopped accepting them years ago. Nothing here is
+///         specific to Pingback, though; the client will call any XML-RPC endpoint.
+///     </para>
+///     <para>
+///         A fault is not an exception. The server answers <c>200 OK</c> and puts the failure in the
+///         body, so a <see cref="SendAsync"/> that returns normally may still have failed — read
+///         <see cref="XmlRpcResponse.Fault"/>.
+///     </para>
+///     <para>
+///         For scenarios requiring authentication or proxy configuration, provide a pre-configured <see cref="HttpClient"/>
+///         via the constructor. This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+///     </para>
+/// </remarks>
+/// <example>
+///     <code source="..\..\Argotic.Examples\Core\Net\XmlRpcClientExample.cs" language="cs" title="The following code example demonstrates the usage of the XmlRpcClient class." />
+/// </example>
+public class XmlRpcClient
 {
     /// <summary>
-    /// Allows applications to send remote procedure calls by using the Extensible Markup Language Remote Procedure Call (XML-RPC) protocol.
+    /// The deepest a <c>&lt;struct&gt;</c> or <c>&lt;array&gt;</c> may nest before the parser stops descending.
     /// </summary>
     /// <remarks>
-    ///     <para>This implementation of XML-RPC is based on the XML-RPC 1.0 specification which can be found at <a href="http://www.xmlrpc.com/spec">http://www.xmlrpc.com/spec</a>.</para>
-    ///     <para><b>XML-RPC</b> is a Remote Procedure Calling protocol that works over the Internet.</para>
     ///     <para>
-    ///         An XML-RPC <i>message</i> is an HTTP-POST request. The body of the request is in XML.
-    ///         A procedure executes on the server and the value it returns is also formatted in XML.
+    ///     A bound, not a preference. Parsing a composite re-enters
+    ///     <see cref="TryParseValue(XPathNavigator, out IXmlRpcValue?)"/> — two stack frames per level
+    ///     for an array, three for a structure — and the recursion is not tail-recursive, so without a
+    ///     limit a sufficiently nested reply overflows the reading process's stack. That is a process
+    ///     kill, not a catchable exception, and it is cheap to provoke: a nesting level costs 43 bytes
+    ///     of document for an array and 49 for a structure, against the 2 MiB body
+    ///     <see cref="XmlRpcResponse.CreateAsync"/> already allows. Roughly 176 KB is enough against the
+    ///     1 MiB stack a thread-pool thread gets, and the response is read on one.
     ///     </para>
-    ///     <para>Procedure parameters can be scalars, numbers, strings, dates and other simple types; and can also be complex record and list structures.</para>
+    ///     <para>
+    ///     Sixty-four is generous by three orders of magnitude against real traffic: XML-RPC's own
+    ///     vocabulary nests two or three levels, and a <c>metaWeblog.getRecentPosts</c> reply — an array
+    ///     of structures of arrays of scalars — is three.
+    ///     </para>
+    ///     <para>
+    ///     A constant rather than a setting because neither <c>SyndicationResourceLoadSettings</c> nor
+    ///     <see cref="SyndicationRequestOptions"/> is reachable from these methods:
+    ///     <see cref="TryParseValue(XPathNavigator, out IXmlRpcValue?)"/> is <see langword="static"/>
+    ///     with no instance state, and nothing under the XML-RPC or Trackback implementations mentions
+    ///     either type.
+    ///     </para>
     /// </remarks>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the XmlRpcClient class.">
-    ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs"
-    ///             region="XmlRpcClient"
-    ///         />
-    ///     </code>
-    /// </example>
-    public class XmlRpcClient
+    public const int MaxValueNestingDepth = 64;
+
+    /// <summary>
+    /// Private member to hold the HttpClient used for sending requests.
+    /// </summary>
+    private readonly HttpClient httpClient;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XmlRpcClient"/> class using the shared <see cref="HttpClient"/>.
+    /// </summary>
+    /// <remarks>
+    ///     This constructor uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.
+    ///     For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
+    /// </remarks>
+    public XmlRpcClient()
     {
-        /// <summary>
-        /// Private member to hold the location of the host computer that client XML-RPC calls will be sent to.
-        /// </summary>
-        private Uri clientHost;
-        /// <summary>
-        /// Private member to hold information such as the application name, version, host operating system, and language.
-        /// </summary>
-        private string clientUserAgent  = String.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(XmlRpcClient)).GetName().Version.ToString(4));
-        /// <summary>
-        /// Private member to hold the web request options.
-        /// </summary>
-        private WebRequestOptions clientOptions = new WebRequestOptions();
-        /// <summary>
-        /// Private member to hold a value that specifies the amount of time after which an asynchronous send operation times out.
-        /// </summary>
-        private TimeSpan clientTimeout  = TimeSpan.FromSeconds(15);
-        /// <summary>
-        /// Private member to hold a value that indictaes if the client sends default credentials when making an XML-RPC call.
-        /// </summary>
-        private bool clientUsesDefaultCredentials;
-        /// <summary>
-        /// Private member to hold a value indicating if the client is in the process of sending a remote procedure call.
-        /// </summary>
-        private bool clientIsSending;
-        /// <summary>
-        /// Private member to hold a value indicating if the client asynchronous send operation was cancelled.
-        /// </summary>
-        private bool clientAsyncSendCancelled;
-        /// <summary>
-        /// Private member to hold HTTP web request used by asynchronous send operations.
-        /// </summary>
-        private static WebRequest asyncHttpWebRequest;
+        this.httpClient = SyndicationEncodingUtility.SharedHttpClient;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XmlRpcClient"/> class.
-        /// </summary>
-        public XmlRpcClient()
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XmlRpcClient"/> class with the specified options.
+    /// </summary>
+    /// <param name="options">The options to configure this client.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is <see langword="null"/>.</exception>
+    /// <remarks>
+    ///     This constructor is intended for use with dependency injection and the <see cref="IOptions{TOptions}"/> pattern.
+    /// </remarks>
+    public XmlRpcClient(IOptions<XmlRpcClientOptions> options)
+    {
+        ArgumentNullException.ThrowIfNull(options);
+        this.httpClient = SyndicationEncodingUtility.SharedHttpClient;
+        ApplyOptions(options.Value);
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XmlRpcClient"/> class with the specified options and <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="options">The options to configure this client.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for sending requests. The caller is responsible for managing the client's lifecycle.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
+    /// <remarks>
+    ///     <para>
+    ///     This constructor is intended for use with dependency injection and the <see cref="IOptions{TOptions}"/> pattern.
+    ///     </para>
+    ///     <para>
+    ///     Marked as the preferred constructor because three of this type’s six accept an
+    ///     <see cref="HttpClient"/>, and <c>ActivatorUtilities.CreateFactory</c> — which is how a typed
+    ///     client is activated — refuses to choose between them. Without the attribute,
+    ///     <c>AddHttpClient&lt;T&gt;</c> throws at registration.
+    ///     </para>
+    /// </remarks>
+    [ActivatorUtilitiesConstructor]
+    public XmlRpcClient(IOptions<XmlRpcClientOptions> options, HttpClient httpClient)
+    {
+        ArgumentNullException.ThrowIfNull(options);
+        ArgumentNullException.ThrowIfNull(httpClient);
+        this.httpClient = httpClient;
+        ApplyOptions(options.Value);
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XmlRpcClient"/> class that sends remote procedure calls using the specified XML-RPC server.
+    /// </summary>
+    /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</param>
+    /// <remarks>
+    ///     This constructor uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.
+    ///     For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is <see langword="null"/>.</exception>
+    public XmlRpcClient(Uri host) : this()
+    {
+        this.Host = host;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XmlRpcClient"/> class that sends remote procedure calls using the specified <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for sending requests. The caller is responsible for managing the client's lifecycle.</param>
+    /// <remarks>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    ///     <para>
+    ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
+    ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
+    public XmlRpcClient(HttpClient httpClient)
+    {
+        ArgumentNullException.ThrowIfNull(httpClient);
+        this.httpClient = httpClient;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XmlRpcClient"/> class that sends remote procedure calls using the specified <see cref="HttpClient"/> and XML-RPC server.
+    /// </summary>
+    /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for sending requests. The caller is responsible for managing the client's lifecycle.</param>
+    /// <remarks>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    ///     <para>
+    ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
+    ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
+    public XmlRpcClient(Uri host, HttpClient httpClient) : this(httpClient)
+    {
+        this.Host = host;
+    }
+
+    /// <summary>
+    /// Gets or sets the location of the host computer that client remote procedure calls will be sent to.
+    /// </summary>
+    /// <value>
+    ///     The XML-RPC endpoint URL. The default value is <see langword="null"/>, in which case
+    ///     <see cref="SendAsync"/> throws <see cref="InvalidOperationException"/>.
+    /// </value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    public Uri? Host
+    {
+        get;
+
+        set
         {
-            this.Initialize();
+            ArgumentNullException.ThrowIfNull(value);
+            field = value;
         }
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XmlRpcClient"/> class that sends remote procedure calls using the specified XML-RPC server.
-        /// </summary>
-        /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
-        public XmlRpcClient(Uri host)
+    /// <summary>
+    /// Gets or sets a value that specifies the amount of time after which asynchronous send operations will time-out.
+    /// </summary>
+    /// <value>The time-out period. The default value is 15 seconds. The permitted range is zero to 365 days, inclusive.</value>
+    /// <remarks>
+    ///     Enforced by <see cref="CancellationTokenSource.CancelAfter(TimeSpan)"/> on a source linked to
+    ///     the token passed to <see cref="SendAsync"/>, not by <see cref="HttpClient.Timeout"/> — the
+    ///     shared client is built with <see cref="System.Threading.Timeout.InfiniteTimeSpan"/>. The
+    ///     deadline therefore covers reading the response body as well as the request, and expiry
+    ///     surfaces as <see cref="OperationCanceledException"/>.
+    /// </remarks>
+    /// <exception cref="ArgumentOutOfRangeException">The time-out period is less than zero.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
+    public TimeSpan Timeout
+    {
+        get;
+
+        set
         {
-            this.Initialize();
-
-            this.Host   = host;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XmlRpcClient"/> class that sends remote procedure calls using the specified XML-RPC server and user agent.
-        /// </summary>
-        /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</param>
-        /// <param name="userAgent">Information such as the application name, version, host operating system, and language.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
-        public XmlRpcClient(Uri host, string userAgent) : this(host)
-        {
-            this.UserAgent  = userAgent;
-        }
-
-        /// <summary>
-        /// Occurs when an asynchronous remote procedure call send operation completes.
-        /// </summary>
-        /// <seealso cref="SendAsync(XmlRpcMessage, Object)"/>
-        public event EventHandler<XmlRpcMessageSentEventArgs> SendCompleted;
-
-        /// <summary>
-        /// Raises the <see cref="SendCompleted"/> event.
-        /// </summary>
-        /// <param name="e">A <see cref="XmlRpcMessageSentEventArgs"/> that contains the event data.</param>
-        /// <remarks>
-        ///     <para>
-        ///         Classes that inherit from the <see cref="XmlRpcClient"/> class can override the <see cref="OnMessageSent(XmlRpcMessageSentEventArgs)"/> method
-        ///         to perform additional tasks when the <see cref="SendCompleted"/> event occurs.
-        ///     </para>
-        ///     <para>
-        ///         <see cref="OnMessageSent(XmlRpcMessageSentEventArgs)"/> also allows derived classes to handle <see cref="SendCompleted"/> without attaching a delegate.
-        ///         This is the preferred technique for handling <see cref="SendCompleted"/> in a derived class.
-        ///     </para>
-        /// </remarks>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
-        protected virtual void OnMessageSent(XmlRpcMessageSentEventArgs e)
-        {
-            EventHandler<XmlRpcMessageSentEventArgs> handler    = null;
-
-            handler = this.SendCompleted;
-
-            if (handler != null)
+            if (value.TotalMilliseconds < 0)
             {
-                handler(this, e);
+                throw new ArgumentOutOfRangeException(nameof(value));
             }
-        }
-
-        /// <summary>
-        /// Gets or sets the authentication credentials utilized by this client when making remote procedure calls.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="ICredentials"/> object that represents the authentication credentials provided by this client when making remote procedure calls.
-        ///     The default is a null reference (Nothing in Visual Basic), which indicates no authentication information will be supplied to identify the maker of the request.
-        /// </value>
-        public ICredentials Credentials
-        {
-            get
+            else if (value > TimeSpan.FromDays(365))
             {
-                return clientOptions.Credentials;
-            }
-
-            set
-            {
-                clientOptions.Credentials = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the location of the host computer that client remote procedure calls will be sent to.
-        /// </summary>
-        /// <value>A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</value>
-        /// <remarks>
-        ///     If <see cref="Host"/> is a null reference (Nothing in Visual Basic), <see cref="Host"/> is initialized using the settings in the application or machine configuration files.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Uri Host
-        {
-            get
-            {
-                return clientHost;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                clientHost = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the web proxy utilized by this client to proxy remote procedure calls.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="IWebProxy"/> object that represents the web proxy utilized by this client to proxy remote procedure calls.
-        ///     The default is a null reference (Nothing in Visual Basic), which indicates no proxy will be used to proxy the request.
-        /// </value>
-        public IWebProxy Proxy
-        {
-            get
-            {
-                return clientOptions.Proxy;
-            }
-
-            set
-            {
-                clientOptions.Proxy = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value that specifies the amount of time after which asynchronous send operations will time out.
-        /// </summary>
-        /// <value>A <see cref="TimeSpan"/> that specifies the time-out period. The default value is 15 seconds.</value>
-        /// <exception cref="ArgumentOutOfRangeException">The time out period is less than zero.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The time out period is greater than a year.</exception>
-        public TimeSpan Timeout
-        {
-            get
-            {
-                return clientTimeout;
-            }
-
-            set
-            {
-                if (value.TotalMilliseconds < 0)
-                {
-                    throw new ArgumentOutOfRangeException("value");
-                }
-                else if (value > TimeSpan.FromDays(365))
-                {
-                    throw new ArgumentOutOfRangeException("value");
-                }
-                else
-                {
-                    clientTimeout   = value;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making remote procedure calls.
-        /// </summary>
-        /// <value><b>true</b> if the default credentials are used; otherwise <b>false</b>. The default value is <b>false</b>.</value>
-        /// <remarks>
-        ///     <para>
-        ///         Some XML-RPC servers require that the client be authenticated before the server executes remote procedures on its behalf.
-        ///         Set this property to <b>true</b> when this <see cref="XmlRpcClient"/> object should, if requested by the server, authenticate using the
-        ///         default credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios.
-        ///     </para>
-        ///     <para>
-        ///         Credentials information can also be specified using the application and machine configuration files.
-        ///         For more information, see <see cref="Argotic.Configuration.XmlRpcClientNetworkElement"/> Element (Network Settings).
-        ///     </para>
-        ///     <para>
-        ///         If the UseDefaultCredentials property is set to <b>false</b>, then the value set in the <see cref="Credentials"/> property
-        ///         will be used for the credentials when connecting to the server. If the UseDefaultCredentials property is set to <b>false</b>
-        ///         and the <see cref="Credentials"/> property has not been set, then remote procedure calls are sent to the server anonymously.
-        ///     </para>
-        /// </remarks>
-        public bool UseDefaultCredentials
-        {
-            get
-            {
-                return clientUsesDefaultCredentials;
-            }
-
-            set
-            {
-                clientUsesDefaultCredentials = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets information such as the client application name, version, host operating system, and language.
-        /// </summary>
-        /// <value>Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
-        public string UserAgent
-        {
-            get
-            {
-                return clientUserAgent;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNullOrEmptyString(value, "value");
-                clientUserAgent = value.Trim();
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating if the client asynchronous send operation was cancelled.
-        /// </summary>
-        /// <value><b>true</b> if client asynchronous send operation has been cancelled, otherwise <b>false</b>.</value>
-        internal bool AsyncSendHasBeenCancelled
-        {
-            get
-            {
-                return clientAsyncSendCancelled;
-            }
-
-            set
-            {
-                clientAsyncSendCancelled = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating if the client is in the process of sending a remote procedure call.
-        /// </summary>
-        /// <value><b>true</b> if client is in the process of sending a remote procedure call, otherwise <b>false</b>.</value>
-        internal bool SendOperationInProgress
-        {
-            get
-            {
-                return clientIsSending;
-            }
-
-            set
-            {
-                clientIsSending = value;
-            }
-        }
-
-        /// <summary>
-        /// Returns the scalar type identifier for the supplied <see cref="XmlRpcScalarValueType"/>.
-        /// </summary>
-        /// <param name="type">The <see cref="XmlRpcScalarValueType"/> to get the scalar type identifier for.</param>
-        /// <returns>The scalar type identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
-        /// <example>
-        ///     <code
-        ///         lang="cs"
-        ///         title="The following code example demonstrates the usage of the ScalarTypeAsString method."
-        ///     />
-        /// </example>
-        public static string ScalarTypeAsString(XmlRpcScalarValueType type)
-        {
-            string name = String.Empty;
-
-            foreach (System.Reflection.FieldInfo fieldInfo in typeof(XmlRpcScalarValueType).GetFields())
-            {
-                if (fieldInfo.FieldType == typeof(XmlRpcScalarValueType))
-                {
-                    XmlRpcScalarValueType valueType = (XmlRpcScalarValueType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                    if (valueType == type)
-                    {
-                        object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                        if (customAttributes != null && customAttributes.Length > 0)
-                        {
-                            EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                            name    = enumerationMetadata.AlternateValue;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            return name;
-        }
-
-        /// <summary>
-        /// Returns the <see cref="XmlRpcScalarValueType"/> enumeration value that corresponds to the specified scalar type name.
-        /// </summary>
-        /// <param name="name">The name of the scalar type.</param>
-        /// <returns>A <see cref="XmlRpcScalarValueType"/> enumeration value that corresponds to the specified string, otherwise returns <b>XmlRpcScalarValueType.None</b>.</returns>
-        /// <remarks>This method disregards case of specified scalar type name.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-        /// <example>
-        ///     <code
-        ///         lang="cs"
-        ///         title="The following code example demonstrates the usage of the ScalarTypeByName method."
-        ///     />
-        /// </example>
-        public static XmlRpcScalarValueType ScalarTypeByName(string name)
-        {
-            XmlRpcScalarValueType valueType = XmlRpcScalarValueType.None;
-
-            Guard.ArgumentNotNullOrEmptyString(name, "name");
-
-            foreach (System.Reflection.FieldInfo fieldInfo in typeof(XmlRpcScalarValueType).GetFields())
-            {
-                if (fieldInfo.FieldType == typeof(XmlRpcScalarValueType))
-                {
-                    XmlRpcScalarValueType type  = (XmlRpcScalarValueType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes != null && customAttributes.Length > 0)
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
-                        {
-                            valueType   = type;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            return valueType;
-        }
-
-        /// <summary>
-        /// Constructs a new <see cref="IXmlRpcValue"/> object from the specified <see cref="XPathNavigator"/>.
-        /// Parameters specify the XML data source and the variable where the new <see cref="IXmlRpcValue"/> object is returned.
-        /// </summary>
-        /// <param name="source">A <see cref="XPathNavigator"/> that represents the XML data source to be parsed.</param>
-        /// <param name="value">
-        ///     When this method returns, contains an object that represents the <see cref="IXmlRpcValue"/> specified by the <paramref name="source"/>, or <b>null</b> if the conversion failed.
-        ///     This parameter is passed uninitialized.
-        /// </param>
-        /// <returns>
-        ///     <b>true</b> if <paramref name="source"/> was converted successfully; otherwise, <b>false</b>.
-        ///     This operation returns <b>false</b> if the <paramref name="source"/> parameter is a null reference (Nothing in Visual Basic),
-        ///     or represents XML data that is not in the expected format.
-        /// </returns>
-        /// <remarks>
-        ///     The <paramref name="source"/> is expected to represent an XML-RPC <b>value</b> node.
-        /// </remarks>
-        public static bool TryParseValue(XPathNavigator source, out IXmlRpcValue value)
-        {
-            if (source == null || String.Compare(source.Name, "value", StringComparison.OrdinalIgnoreCase) != 0)
-            {
-                value   = null;
-                return false;
-            }
-
-            if(source.HasChildren)
-            {
-                XPathNavigator navigator    = source.CreateNavigator();
-                if (navigator.MoveToFirstChild())
-                {
-                    if (String.Compare(navigator.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        int scalar;
-                        if (Int32.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out scalar))
-                        {
-                            value   = new XmlRpcScalarValue(scalar);
-                            return true;
-                        }
-                    }
-                    else if (String.Compare(navigator.Name, "int", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        int scalar;
-                        if (Int32.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out scalar))
-                        {
-                            value   = new XmlRpcScalarValue(scalar);
-                            return true;
-                        }
-                    }
-                    else if (String.Compare(navigator.Name, "boolean", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        bool scalar;
-                        if (XmlRpcClient.TryParseBoolean(navigator.Value, out scalar))
-                        {
-                            value   = new XmlRpcScalarValue(scalar);
-                            return true;
-                        }
-                    }
-                    else if (String.Compare(navigator.Name, "string", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        value   = new XmlRpcScalarValue(navigator.Value);
-                        return true;
-                    }
-                    else if (String.Compare(navigator.Name, "double", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        double scalar;
-                        if (Double.TryParse(navigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out scalar))
-                        {
-                            value   = new XmlRpcScalarValue(scalar);
-                            return true;
-                        }
-                    }
-                    else if (String.Compare(navigator.Name, "dateTime.iso8601", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        DateTime scalar;
-                        if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(navigator.Value, out scalar))
-                        {
-                            value   = new XmlRpcScalarValue(scalar);
-                            return true;
-                        }
-                    }
-                    else if (String.Compare(navigator.Name, "base64", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        if(!String.IsNullOrEmpty(navigator.Value))
-                        {
-                            try
-                            {
-                                byte[] data = Convert.FromBase64String(navigator.Value);
-                                value       = new XmlRpcScalarValue(data);
-                                return true;
-                            }
-                            catch(FormatException)
-                            {
-                                value = null;
-                                return false;
-                            }
-                        }
-                    }
-                    else if (String.Compare(navigator.Name, "struct", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        XmlRpcStructureValue structure  = new XmlRpcStructureValue();
-                        if (structure.Load(source))
-                        {
-                            value   = structure;
-                            return true;
-                        }
-                    }
-                    else if (String.Compare(navigator.Name, "array", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        XmlRpcArrayValue array  = new XmlRpcArrayValue();
-                        if (array.Load(source))
-                        {
-                            value   = array;
-                            return true;
-                        }
-                    }
-                }
-            }
-            else if (!String.IsNullOrEmpty(source.Value))
-            {
-                value   = new XmlRpcScalarValue(source.Value);
-                return true;
-            }
-
-            value   = null;
-            return false;
-        }
-
-        /// <summary>
-        /// Converts the specified string representation of a logical value to its <see cref="Boolean"/> equivalent. A return value indicates whether the conversion succeeded or failed.
-        /// </summary>
-        /// <param name="value">A string containing the value to convert.</param>
-        /// <param name="result">
-        ///     When this method returns, if the conversion succeeded, contains <b>true</b> if value is equivalent to <i>1</i>, <i>true</i> or <i>True</i>;
-        ///     or <b>false</b> if value is equivalent to <i>0</i>, <i>false</i> or <i>False</i>. If the conversion failed, contains <b>false</b>.
-        ///     The conversion fails if value is a null reference (Nothing in Visual Basic) or is not equivalent to <i>1</i>, <i>true</i>, <i>True</i>, <i>0</i>, <i>false</i> or <i>False</i>.
-        ///     This parameter is passed uninitialized.
-        /// </param>
-        /// <returns><b>true</b> if <paramref name="value"/> was converted successfully; otherwise, <b>false</b>.</returns>
-        internal static bool TryParseBoolean(string value, out bool result)
-        {
-            if (String.Compare(value, "1", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                result  = true;
-                return true;
-            }
-            else if (String.Compare(value, "0", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                result  = false;
-                return true;
-            }
-            else if (String.Compare(value, "true", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                result  = true;
-                return true;
-            }
-            else if (String.Compare(value, "false", StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                result = false;
-                return true;
+                throw new ArgumentOutOfRangeException(nameof(value));
             }
             else
             {
-                result  = false;
+                field = value;
+            }
+        }
+    } = TimeSpan.FromSeconds(15);
+
+    /// <summary>
+    /// Gets or sets information such as the client application name, version, host operating system, and language.
+    /// </summary>
+    /// <value>The <c>User-Agent</c> header value, trimmed. The default value is <c>Argotic-Syndication-Framework/</c> followed by this assembly's four-part version.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The value specified for a set operation is an empty string.</exception>
+    // Both null-forgiving operators in the default value are provable. Assembly.GetAssembly returns
+    // null only for a type with no backing assembly, which a typeof() of a type declared here cannot
+    // be, and AssemblyName.Version is always populated because the SDK emits an assembly version
+    // whether or not one is set explicitly.
+    public string UserAgent
+    {
+        get;
+
+        set
+        {
+            ArgumentException.ThrowIfNullOrEmpty(value);
+            field = value.Trim();
+        }
+    } = $"Argotic-Syndication-Framework/{System.Reflection.Assembly.GetAssembly(typeof(XmlRpcClient))!.GetName().Version!.ToString(4)}";
+
+    /// <summary>
+    /// Returns the scalar type identifier for the supplied <see cref="XmlRpcScalarValueType"/>.
+    /// </summary>
+    /// <param name="type">The <see cref="XmlRpcScalarValueType"/> to get the scalar type identifier for.</param>
+    /// <returns>
+    ///     The element name XML-RPC uses for the type, such as <c>int</c> or <c>dateTime.iso8601</c>;
+    ///     an <i>empty</i> string for <see cref="XmlRpcScalarValueType.None"/> or a value outside the
+    ///     enumeration.
+    /// </returns>
+    public static string ScalarTypeAsString(XmlRpcScalarValueType type) =>
+        EnumerationMetadataAttribute.GetAlternateValue(type);
+
+    /// <summary>
+    /// Returns the <see cref="XmlRpcScalarValueType"/> enumeration value that corresponds to the specified scalar type name.
+    /// </summary>
+    /// <param name="name">The XML-RPC element name, such as <c>string</c> or <c>dateTime.iso8601</c>. Matched without regard to case.</param>
+    /// <returns>The matching <see cref="XmlRpcScalarValueType"/>; otherwise, <see cref="XmlRpcScalarValueType.None"/>, which is also what an unrecognised, <see langword="null"/> or empty <paramref name="name"/> yields.</returns>
+    /// <remarks>
+    ///     <c>i4</c> is not recognised here. XML-RPC permits it as a synonym for <c>int</c>, and callers
+    ///     that need to accept it map it themselves before asking.
+    /// </remarks>
+    public static XmlRpcScalarValueType ScalarTypeByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, XmlRpcScalarValueType.None);
+
+    /// <summary>
+    /// Constructs a new <see cref="IXmlRpcValue"/> object from the specified <see cref="XPathNavigator"/>.
+    /// Parameters specify the XML data source and the variable where the new <see cref="IXmlRpcValue"/> object is returned.
+    /// </summary>
+    /// <param name="source">A <see cref="XPathNavigator"/> that represents the XML data source to be parsed.</param>
+    /// <param name="value">
+    ///     When this method returns, contains an object that represents the <see cref="IXmlRpcValue"/> specified by the <paramref name="source"/>, or <see langword="null"/> if the conversion failed.
+    ///     This parameter is passed uninitialized.
+    /// </param>
+    /// <returns>
+    ///     <see langword="true"/> if <paramref name="source"/> was converted successfully; otherwise, <see langword="false"/>.
+    ///     This operation returns <see langword="false"/> if the <paramref name="source"/> parameter is <see langword="null"/>,
+    ///     or represents XML data that is not in the expected format.
+    /// </returns>
+    /// <remarks>
+    ///     <para>
+    ///     The <paramref name="source"/> is expected to be positioned on an XML-RPC
+    ///     <c>&lt;value&gt;</c> element; one positioned anywhere else fails rather than guessing.
+    ///     </para>
+    ///     <para>
+    ///     A typed element whose text will not parse — <c>&lt;value&gt;&lt;i4&gt;abc&lt;/i4&gt;&lt;/value&gt;</c>
+    ///     — is a failure, not the string <c>abc</c>. Only an element carrying no type at all falls back
+    ///     to a string, which is what the specification says: "If no type is indicated, the type is
+    ///     string."
+    ///     </para>
+    ///     <para>
+    ///     A <c>&lt;struct&gt;</c> or <c>&lt;array&gt;</c> nested deeper than
+    ///     <see cref="MaxValueNestingDepth"/> is a failure as well, for the reasons given there.
+    ///     </para>
+    /// </remarks>
+    public static bool TryParseValue(XPathNavigator source, [NotNullWhen(true)] out IXmlRpcValue? value) =>
+        TryParseValue(source, 0, out value);
+
+    /// <summary>
+    /// Constructs a new <see cref="IXmlRpcValue"/> object from the specified <see cref="XPathNavigator"/>, at a known nesting depth.
+    /// </summary>
+    /// <param name="source">A <see cref="XPathNavigator"/> that represents the XML data source to be parsed.</param>
+    /// <param name="depth">How many composite values enclose <paramref name="source"/>. Zero at the outermost <c>value</c>.</param>
+    /// <param name="value">
+    ///     When this method returns, contains an object that represents the <see cref="IXmlRpcValue"/> specified by the <paramref name="source"/>, or <see langword="null"/> if the conversion failed.
+    ///     This parameter is passed uninitialized.
+    /// </param>
+    /// <returns><see langword="true"/> if <paramref name="source"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     Only the two composite branches consult <paramref name="depth"/>, and they consult it before
+    ///     recursing. A scalar leaf never re-enters this method, so refusing one at the boundary would
+    ///     buy no stack and would lose the innermost element of a document nested exactly to the limit.
+    /// </remarks>
+    internal static bool TryParseValue(XPathNavigator source, int depth, [NotNullWhen(true)] out IXmlRpcValue? value)
+    {
+        if (source is null || !string.Equals(source.Name, "value", StringComparison.OrdinalIgnoreCase))
+        {
+            value = null;
+            return false;
+        }
+
+        // MoveToChild(Element) rather than MoveToFirstChild(). A text node is a child, so an untyped
+        // <value>text</value> satisfies HasChildren and lands MoveToFirstChild on a node whose Name is
+        // the empty string; nothing matched it and the method returned false. That made the untyped
+        // branch below unreachable for every possible input, because it sat in the else of
+        // HasChildren -- reachable only for an empty element, which its own guard then rejects.
+        if (source.HasChildren)
+        {
+            XPathNavigator navigator = source.CreateNavigator();
+            if (navigator.MoveToChild(XPathNodeType.Element))
+            {
+                if (string.Equals(navigator.Name, "i4", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (int.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int scalar))
+                    {
+                        value = new XmlRpcScalarValue(scalar);
+                        return true;
+                    }
+                }
+                else if (string.Equals(navigator.Name, "int", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (int.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int scalar))
+                    {
+                        value = new XmlRpcScalarValue(scalar);
+                        return true;
+                    }
+                }
+                else if (string.Equals(navigator.Name, "boolean", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (XmlRpcClient.TryParseBoolean(navigator.Value, out bool scalar))
+                    {
+                        value = new XmlRpcScalarValue(scalar);
+                        return true;
+                    }
+                }
+                else if (string.Equals(navigator.Name, "string", StringComparison.OrdinalIgnoreCase))
+                {
+                    value = new XmlRpcScalarValue(navigator.Value);
+                    return true;
+                }
+                else if (string.Equals(navigator.Name, "double", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (double.TryParse(navigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out double scalar))
+                    {
+                        value = new XmlRpcScalarValue(scalar);
+                        return true;
+                    }
+                }
+                else if (string.Equals(navigator.Name, "dateTime.iso8601", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (XmlRpcClient.TryParseIso8601DateTime(navigator.Value, out DateTime scalar))
+                    {
+                        value = new XmlRpcScalarValue(scalar);
+                        return true;
+                    }
+                }
+                else if (string.Equals(navigator.Name, "base64", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (!string.IsNullOrEmpty(navigator.Value))
+                    {
+                        try
+                        {
+                            byte[] data = Convert.FromBase64String(navigator.Value);
+                            value = new XmlRpcScalarValue(data);
+                            return true;
+                        }
+                        catch (FormatException)
+                        {
+                            value = null;
+                            return false;
+                        }
+                    }
+                }
+                else if (string.Equals(navigator.Name, "struct", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (depth < XmlRpcClient.MaxValueNestingDepth)
+                    {
+                        XmlRpcStructureValue structure = new();
+                        if (structure.Load(source, depth))
+                        {
+                            value = structure;
+                            return true;
+                        }
+                    }
+                }
+                else if (string.Equals(navigator.Name, "array", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (depth < XmlRpcClient.MaxValueNestingDepth)
+                    {
+                        XmlRpcArrayValue array = new();
+                        if (array.Load(source, depth))
+                        {
+                            value = array;
+                            return true;
+                        }
+                    }
+                }
+
+                // A typed element that would not parse is a failure, not an untyped string. Falling
+                // through to the branch below would turn <value><i4>abc</i4></value> into the string
+                // "abc", because that is what source.Value reports for it.
+                value = null;
                 return false;
             }
         }
 
-        /// <summary>
-        /// Called when a corresponding asynchronous send operation completes.
-        /// </summary>
-        /// <param name="result">The result of the asynchronous operation.</param>
-        private static void AsyncSendCallback(IAsyncResult result)
+        // XML-RPC 1.0, on <value>: "If no type is indicated, the type is string."
+        if (!string.IsNullOrEmpty(source.Value))
         {
-            XmlRpcResponse response         = null;
-            WebRequest httpWebRequest       = null;
-            XmlRpcClient client             = null;
-            Uri host                        = null;
-            XmlRpcMessage message           = null;
-            WebRequestOptions options       = null;
-            object userToken                = null;
-
-            if (result.IsCompleted)
-            {
-                object[] parameters = (object[])result.AsyncState;
-                httpWebRequest      = parameters[0] as WebRequest;
-                client              = parameters[1] as XmlRpcClient;
-                host                = parameters[2] as Uri;
-                message             = parameters[3] as XmlRpcMessage;
-                options             = parameters[4] as WebRequestOptions;
-                userToken           = parameters[5];
-
-                if (client != null)
-                {
-                    WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
-
-                    response    = new XmlRpcResponse(httpWebResponse);
-
-                    client.OnMessageSent(new XmlRpcMessageSentEventArgs(host, message, response, options, userToken));
-
-                    client.SendOperationInProgress  = false;
-                }
-            }
+            value = new XmlRpcScalarValue(source.Value);
+            return true;
         }
 
-        /// <summary>
-        /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
-        /// </summary>
-        /// <param name="state">An object containing information to be used by the callback method each time it executes.</param>
-        /// <param name="timedOut"><b>true</b> if the <see cref="WaitHandle"/> timed out; <b>false</b> if it was signaled.</param>
-        private void AsyncTimeoutCallback(object state, bool timedOut)
-        {
-            if (timedOut)
-            {
-                if (asyncHttpWebRequest != null)
-                {
-                    asyncHttpWebRequest.Abort();
-                }
-            }
+        value = null;
+        return false;
+    }
 
-            this.SendOperationInProgress    = false;
+    /// <summary>
+    /// The zoneless spellings of an XML-RPC <c>dateTime.iso8601</c> value.
+    /// </summary>
+    /// <remarks>
+    ///     XML-RPC 1.0 spells its own example <c>19980717T14:08:55</c> — a basic-format date, an
+    ///     extended-format time, and no offset. The second entry is the fully basic form, which the
+    ///     same paragraph of ISO 8601 permits and which servers do emit.
+    /// </remarks>
+    private static readonly string[] Iso8601ZonelessFormats =
+    [
+        "yyyyMMdd'T'HH:mm:ss",
+        "yyyyMMdd'T'HHmmss",
+    ];
+
+    /// <summary>
+    /// The offset-bearing spellings of an XML-RPC <c>dateTime.iso8601</c> value.
+    /// </summary>
+    /// <remarks>
+    ///     Tried only after <see cref="Iso8601ZonelessFormats"/> has failed, and that order is
+    ///     load-bearing: <c>K</c> matches the empty string, so a zoneless value offered to these
+    ///     patterns under <see cref="DateTimeStyles.AdjustToUniversal"/> would be read as machine-local
+    ///     and rebased. That is the defect §2.37 records in <c>TryParseRfc822DateTime</c>.
+    /// </remarks>
+    private static readonly string[] Iso8601OffsetFormats =
+    [
+        "yyyyMMdd'T'HH:mm:ssK",
+        "yyyyMMdd'T'HHmmssK",
+    ];
+
+    /// <summary>
+    /// Converts the string representation of an XML-RPC <c>dateTime.iso8601</c> value to its <see cref="DateTime"/> equivalent. A return value indicates whether the conversion succeeded or failed.
+    /// </summary>
+    /// <param name="value">A string containing the value to convert.</param>
+    /// <param name="result">When this method returns, contains the converted value if the conversion succeeded, or <see cref="DateTime.MinValue"/> if it failed. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="value"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     RFC 3339 is tried first, unchanged, because that is what this element accepted before and
+    ///     because most live servers emit it despite the element's name. The XML-RPC spellings are a
+    ///     fallback, so nothing that parsed before parses differently now.
+    ///     </para>
+    ///     <para>
+    ///     A zoneless value comes back <see cref="DateTimeKind.Unspecified"/>. It carries no offset, so
+    ///     that is the only honest answer; calling it <see cref="DateTimeKind.Utc"/> would invent one.
+    ///     </para>
+    /// </remarks>
+    private static bool TryParseIso8601DateTime(string value, out DateTime result)
+    {
+        if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(value, out result))
+        {
+            return true;
         }
 
-        /// <summary>
-        /// Sends the specified message to an XML-RPC server to execute a remote procedure call.
-        /// </summary>
-        /// <param name="message">A <see cref="XmlRpcMessage"/> that represents the information needed to execute the remote procedure call.</param>
-        /// <returns>A <see cref="XmlRpcResponse"/> that represents the server's response to the remote procedure call.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="XmlRpcClient"/> has a <see cref="SendAsync(XmlRpcMessage, Object)"/> call in progress.</exception>
-        public XmlRpcResponse Send(XmlRpcMessage message)
+        return DateTime.TryParseExact(value, XmlRpcClient.Iso8601ZonelessFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out result)
+            || DateTime.TryParseExact(value, XmlRpcClient.Iso8601OffsetFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AdjustToUniversal, out result);
+    }
+
+    /// <summary>
+    /// Converts the specified string representation of a logical value to its <see cref="Boolean"/> equivalent. A return value indicates whether the conversion succeeded or failed.
+    /// </summary>
+    /// <param name="value">A string containing the value to convert.</param>
+    /// <param name="result">
+    ///     When this method returns, if the conversion succeeded, contains <see langword="true"/> if value is equivalent to <i>1</i>, <i>true</i> or <i>True</i>;
+    ///     or <see langword="false"/> if value is equivalent to <i>0</i>, <i>false</i> or <i>False</i>. If the conversion failed, contains <see langword="false"/>.
+    ///     The conversion fails if value is <see langword="null"/> or is not equivalent to <i>1</i>, <i>true</i>, <i>True</i>, <i>0</i>, <i>false</i> or <i>False</i>.
+    ///     This parameter is passed uninitialized.
+    /// </param>
+    /// <returns><see langword="true"/> if <paramref name="value"/> was converted successfully; otherwise, <see langword="false"/>.</returns>
+    internal static bool TryParseBoolean(string value, out bool result)
+    {
+        if (string.Equals(value, "1", StringComparison.OrdinalIgnoreCase))
         {
-            XmlRpcResponse response = null;
+            result = true;
+            return true;
+        }
+        else if (string.Equals(value, "0", StringComparison.OrdinalIgnoreCase))
+        {
+            result = false;
+            return true;
+        }
+        else if (string.Equals(value, "true", StringComparison.OrdinalIgnoreCase))
+        {
+            result = true;
+            return true;
+        }
+        else if (string.Equals(value, "false", StringComparison.OrdinalIgnoreCase))
+        {
+            result = false;
+            return true;
+        }
+        else
+        {
+            result = false;
+            return false;
+        }
+    }
 
-            Guard.ArgumentNotNull(message, "message");
+    /// <summary>
+    /// Sends the specified message to an XML-RPC server to execute a remote procedure call asynchronously.
+    /// </summary>
+    /// <param name="message">A <see cref="XmlRpcMessage"/> that represents the information needed to execute the remote procedure call.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task whose result is the server's <see cref="XmlRpcResponse"/>. A call the server faulted is
+    ///     still a successful send — read <see cref="XmlRpcResponse.Fault"/>, which no exception here
+    ///     reports.
+    /// </returns>
+    /// <remarks>
+    ///     Bounded by <see cref="Timeout"/>, applied to a source linked to
+    ///     <paramref name="cancellationToken"/>; whichever fires first cancels the send and the read of
+    ///     the response body alike.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="message"/> is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidOperationException">The <see cref="Host"/> has not been set.</exception>
+    public async Task<XmlRpcResponse> SendAsync(XmlRpcMessage message, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(message);
 
-            if(this.Host == null)
+        Uri host = this.Host ?? throw new InvalidOperationException($"Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {message}");
+
+        using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(this.Timeout);
+
+        using HttpResponseMessage httpResponse = await SendRequestAsync(
+            host, this.UserAgent, message, this.httpClient, timeoutCts.Token).ConfigureAwait(false);
+
+        return await XmlRpcResponse.CreateAsync(httpResponse, timeoutCts.Token).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Sends an XML-RPC request asynchronously using the supplied host, user agent, message, and HttpClient.
+    /// </summary>
+    /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</param>
+    /// <param name="userAgent">Information such as the application name, version, host operating system, and language.</param>
+    /// <param name="message">A <see cref="XmlRpcMessage"/> that represents the information needed to execute the remote procedure call.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="HttpResponseMessage"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="userAgent"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="message"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
+    private static async Task<HttpResponseMessage> SendRequestAsync(
+        Uri host,
+        string userAgent,
+        XmlRpcMessage message,
+        HttpClient httpClient,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(host);
+        ArgumentException.ThrowIfNullOrEmpty(userAgent);
+        ArgumentNullException.ThrowIfNull(message);
+        ArgumentNullException.ThrowIfNull(httpClient);
+
+        byte[] payloadData;
+        using (MemoryStream stream = new())
+        {
+            XmlWriterSettings settings = new()
             {
-                throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}", message));
-            }
-            else if (this.SendOperationInProgress)
+                ConformanceLevel = ConformanceLevel.Document,
+                Encoding = message.Encoding,
+                Indent = true,
+                OmitXmlDeclaration = false
+            };
+
+            using (XmlWriter writer = XmlWriter.Create(stream, settings))
             {
-                throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
+                message.WriteTo(writer);
             }
-
-            WebRequest webRequest   = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
-
-            using (WebResponse webResponse = (WebResponse)webRequest.GetResponse())
-            {
-                response    = new XmlRpcResponse(webResponse);
-            }
-
-            return response;
+            payloadData = stream.ToArray();
         }
 
-        /// <summary>
-        /// Sends the specified message to an XML-RPC server to execute a remote procedure call.
-        /// This method does not block the calling thread and allows the caller to pass an object to the method that is invoked when the operation completes.
-        /// </summary>
-        /// <param name="message">A <see cref="XmlRpcMessage"/> that represents the information needed to execute the remote procedure call.</param>
-        /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
-        /// <remarks>
-        ///     <para>
-        ///         To receive notification when the remote procedure call has been sent or the operation has been cancelled, add an event handler to the <see cref="SendCompleted"/> event.
-        ///         You can cancel a <see cref="SendAsync(XmlRpcMessage, Object)"/> operation by calling the <see cref="SendAsyncCancel()"/> method.
-        ///     </para>
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">This <see cref="XmlRpcClient"/> has a <see cref="SendAsync(XmlRpcMessage, Object)"/> call in progress.</exception>
-        //[HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
-        public void SendAsync(XmlRpcMessage message, Object userToken)
+        using HttpRequestMessage request = new(HttpMethod.Post, host);
+        request.Headers.UserAgent.ParseAdd(userAgent);
+        request.Content = new ByteArrayContent(payloadData);
+        request.Content.Headers.ContentType = new MediaTypeHeaderValue("text/xml")
         {
-            Guard.ArgumentNotNull(message, "message");
+            CharSet = message.Encoding.WebName
+        };
 
-            if (this.Host == null)
-            {
-                throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}", message));
-            }
-            else if (this.SendOperationInProgress)
-            {
-                throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
-            }
+        return await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+    }
 
-            this.SendOperationInProgress    = true;
-            this.AsyncSendHasBeenCancelled  = false;
-
-            asyncHttpWebRequest = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
-
-            object[] state      = new object[6] { asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken };
-            IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncSendCallback), state);
-
-            ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, this.Timeout, true);
+    /// <summary>
+    /// Applies the specified options to this client instance.
+    /// </summary>
+    /// <param name="options">The options to apply.</param>
+    private void ApplyOptions(XmlRpcClientOptions options)
+    {
+        if (options.Timeout > TimeSpan.Zero && options.Timeout < TimeSpan.FromDays(365))
+        {
+            this.Timeout = options.Timeout;
         }
 
-        /// <summary>
-        /// Cancels an asynchronous operation to send a remote procedure call.
-        /// </summary>
-        /// <remarks>
-        ///     Use the <see cref="SendAsyncCancel()"/> method to cancel a pending <see cref="SendAsync(XmlRpcMessage, Object)"/> operation.
-        ///     If there is a remote procedure call waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation.
-        ///     If there is no send operation pending, this method does nothing.
-        /// </remarks>
-        public void SendAsyncCancel()
+        if (!string.IsNullOrEmpty(options.UserAgent))
         {
-            if (this.SendOperationInProgress && !this.AsyncSendHasBeenCancelled)
-            {
-                this.AsyncSendHasBeenCancelled  = true;
-                asyncHttpWebRequest.Abort();
-            }
+            this.UserAgent = options.UserAgent;
         }
 
-        /// <summary>
-        /// Initializes a new <see cref="WebRequest"/> suitable for sending a remote procedure call using the supplied host, user agent, message, credentials, and proxy.
-        /// </summary>
-        /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</param>
-        /// <param name="userAgent">Information such as the application name, version, host operating system, and language.</param>
-        /// <param name="message">A <see cref="XmlRpcMessage"/> that represents the information needed to execute the remote procedure call.</param>
-        /// <param name="useDefaultCredentials">
-        ///     Controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making remote procedure calls.
-        /// </param>
-        /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static WebRequest CreateWebRequest(Uri host, string userAgent, XmlRpcMessage message, bool useDefaultCredentials, WebRequestOptions options)
+        if (options.Host is not null)
         {
-            HttpWebRequest httpRequest  = null;
-            byte[] payloadData;
-
-            Guard.ArgumentNotNull(host, "host");
-            Guard.ArgumentNotNullOrEmptyString(userAgent, "userAgent");
-            Guard.ArgumentNotNull(message, "message");
-
-            using(MemoryStream stream = new MemoryStream())
-            {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.ConformanceLevel   = ConformanceLevel.Document;
-                settings.Encoding           = message.Encoding;
-                settings.Indent             = true;
-                settings.OmitXmlDeclaration = false;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    message.WriteTo(writer);
-                    writer.Flush();
-                }
-
-                stream.Seek(0, SeekOrigin.Begin);
-                payloadData                 = message.Encoding.GetBytes((new StreamReader(stream)).ReadToEnd());
-            }
-
-            httpRequest                     = (HttpWebRequest)HttpWebRequest.Create(host);
-            httpRequest.Method              = "POST";
-            httpRequest.ContentLength       = payloadData.Length;
-            httpRequest.ContentType         = String.Format(null, "text/xml; charset={0}", message.Encoding.WebName);
-            httpRequest.UserAgent           = userAgent;
-            if (options != null) options.ApplyOptions(httpRequest);
-
-            if(useDefaultCredentials)
-            {
-                httpRequest.Credentials = CredentialCache.DefaultCredentials;
-            }
-
-            using (Stream stream = httpRequest.GetRequestStream())
-            {
-                stream.Write(payloadData, 0, payloadData.Length);
-            }
-
-            return httpRequest;
-        }
-
-        /// <summary>
-        /// Initializes the current instance using the application configuration settings.
-        /// </summary>
-        /// <seealso cref="XmlRpcClientSection"/>
-        private void Initialize()
-        {
-            XmlRpcClientSection clientConfiguration = PrivilegedConfigurationManager.GetXmlRpcClientSection();
-
-            if (clientConfiguration != null)
-            {
-                if(clientConfiguration.Timeout.TotalMilliseconds > 0 && clientConfiguration.Timeout < TimeSpan.FromDays(365))
-                {
-                    this.Timeout    = clientConfiguration.Timeout;
-                }
-
-                if (!String.IsNullOrEmpty(clientConfiguration.UserAgent))
-                {
-                    this.UserAgent  = clientConfiguration.UserAgent;
-                }
-
-                if (clientConfiguration.Network != null)
-                {
-                    this.UseDefaultCredentials  = clientConfiguration.Network.DefaultCredentials;
-
-                    if (clientConfiguration.Network.Credential != null)
-                    {
-                        this.Credentials    = clientConfiguration.Network.Credential;
-                    }
-
-                    if (clientConfiguration.Network.Host != null)
-                    {
-                        this.Host   = clientConfiguration.Network.Host;
-                    }
-                }
-            }
+            this.Host = options.Host;
         }
     }
 }

@@ -12,4 +12,9 @@ updates:
     microsoft-extensions:
       patterns:
       - Microsoft.Extensions.*
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: "daily"
+  open-pull-requests-limit: 10
 

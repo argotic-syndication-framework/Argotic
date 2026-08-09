@@ -1,0 +1,160 @@
+using System.Xml;
+using System.Xml.XPath;
+
+using Argotic.Common;
+
+namespace Argotic.Extensions.Core;
+
+/// <summary>
+/// Represents a GeoRSS line: an ordered run of two or more positions.
+/// </summary>
+/// <remarks>
+///     A class rather than a value type because it holds a variable-length, mutable collection. Its
+///     sibling <see cref="GeoRssBox"/> is a <see langword="struct"/> precisely because a box is neither
+///     of those things — that inconsistency is the value/object distinction, not an oversight.
+/// </remarks>
+/// <seealso cref="GeoRssSyndicationExtensionContext.Line"/>
+public class GeoRssLine : IComparable<GeoRssLine>, IEquatable<GeoRssLine>, IComparisonOperators
+{
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GeoRssLine"/> class.
+    /// </summary>
+    public GeoRssLine()
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GeoRssLine"/> class using the supplied positions.
+    /// </summary>
+    /// <param name="positions">The positions along the line.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="positions"/> is <see langword="null"/>.</exception>
+    public GeoRssLine(IEnumerable<GeoRssPosition> positions)
+    {
+        ArgumentNullException.ThrowIfNull(positions);
+
+        foreach (GeoRssPosition position in positions)
+        {
+            this.Positions.Add(position);
+        }
+    }
+
+    /// <summary>
+    /// Gets the positions along this line, in order.
+    /// </summary>
+    /// <value>A collection of <see cref="GeoRssPosition"/> values. The default is an <i>empty</i> collection.</value>
+    /// <remarks>
+    ///     The specification calls for two or more. That is not enforced: the collection is filled
+    ///     element by element, so there is no setter to validate through, and an enforcing one would be
+    ///     a rule the loader breaks on its own first <c>Add</c>.
+    /// </remarks>
+    public IList<GeoRssPosition> Positions { get; } = [];
+
+    /// <summary>
+    /// Loads this <see cref="GeoRssLine"/> using the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
+    /// <returns><see langword="true"/> if the whole coordinate list was read; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    public bool Load(XPathNavigator source)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+
+        if (!GeoRssExtensionUtility.TryReadPositions(source.Value, out List<GeoRssPosition>? positions))
+        {
+            return false;
+        }
+
+        this.Positions.Clear();
+        foreach (GeoRssPosition position in positions)
+        {
+            this.Positions.Add(position);
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Saves the current <see cref="GeoRssLine"/> to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    public void WriteTo(XmlWriter writer) => this.WriteTo(writer, GeoRssExtensionUtility.NamespaceUri);
+
+    /// <summary>
+    /// Saves the current <see cref="GeoRssLine"/> to the specified <see cref="XmlWriter"/>, in the supplied namespace.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+    /// <param name="xmlNamespace">The XML namespace to qualify the element with.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is <see langword="null"/> or an empty string.</exception>
+    /// <remarks>
+    ///     The context passes the namespace its own caller supplied, so that every geometry it writes
+    ///     lands in one namespace rather than two.
+    /// </remarks>
+    public void WriteTo(XmlWriter writer, string xmlNamespace)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
+        GeoRssExtensionUtility.WritePositionElement(writer, "line", xmlNamespace, (IReadOnlyCollection<GeoRssPosition>)this.Positions);
+    }
+
+    /// <summary>
+    /// Returns a <see cref="string"/> that represents the current <see cref="GeoRssLine"/>.
+    /// </summary>
+    /// <returns>The XML representation for the current instance.</returns>
+    public override string ToString() => GeoRssExtensionUtility.ToXmlString(this.WriteTo);
+
+    /// <summary>
+    /// Compares the current instance with another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this instance.</param>
+    /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+    public int CompareTo(GeoRssLine? other) =>
+        other is null ? 1 : ComparisonUtility.CompareSequence(this.Positions, other.Positions);
+
+    /// <summary>
+    /// Determines whether the specified <see cref="GeoRssLine"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="GeoRssLine"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if equal; otherwise, <see langword="false"/>.</returns>
+    public bool Equals(GeoRssLine? other) => other is not null && this.CompareTo(other) == 0;
+
+    /// <summary>
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if equal; otherwise, <see langword="false"/>.</returns>
+    public override bool Equals(object? obj) => obj is GeoRssLine other && this.Equals(other);
+
+    /// <summary>
+    /// Returns a hash code for the current instance.
+    /// </summary>
+    /// <returns>A 32-bit signed integer hash code.</returns>
+    /// <remarks>
+    ///     <b>The positions are hashed by content, not handed to <c>HashCodeUtility.Component</c>.</b>
+    ///     That helper returns its argument unchanged, which for a collection means hashing the
+    ///     reference — and two lines carrying identical positions would then compare equal while hashing
+    ///     differently, so a <see cref="HashSet{T}"/> would keep both.
+    /// </remarks>
+    public override int GetHashCode() => GeoRssExtensionUtility.HashPositions(this.Positions);
+
+    /// <summary>
+    /// Determines if operands are equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
+    public static bool operator ==(GeoRssLine? first, GeoRssLine? second)
+    {
+        if (first is null) return second is null;
+        return first.Equals(second);
+    }
+
+    /// <summary>
+    /// Determines if operands are not equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
+    public static bool operator !=(GeoRssLine? first, GeoRssLine? second) => !(first == second);
+}

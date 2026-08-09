@@ -1,660 +1,1260 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.IO.Compression;
+using System.Buffers;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace Argotic.Common
+namespace Argotic.Common;
+
+/// <summary>
+/// Provides methods for encoding and decoding information exposed by syndicated content. This class cannot be inherited.
+/// </summary>
+public static partial class SyndicationEncodingUtility
 {
     /// <summary>
-    /// Provides methods for encoding and decoding information exposed by syndicated content. This class cannot be inherited.
+    /// Private member to hold the lazily-initialized shared HttpClient instance.
     /// </summary>
-    public static class SyndicationEncodingUtility
+    private static readonly Lazy<HttpClient> sharedHttpClient = new(CreateSharedHttpClient);
+
+    /// <summary>
+    /// The default time-out applied to requests made with the shared <see cref="HttpClient"/> when the caller supplies no bound of their own,
+    /// matching the 100-second default of the <see cref="HttpWebRequest"/> pipeline this framework previously used.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     Public because a caller cannot otherwise discover what deadline they are subject to. The
+    ///     shared <see cref="HttpClient"/> is deliberately constructed with
+    ///     <see cref="System.Threading.Timeout.InfiniteTimeSpan"/> — every deadline in this library
+    ///     comes from a <see cref="CancellationTokenSource"/>, so reading
+    ///     <see cref="HttpClient.Timeout"/> tells the caller nothing, and there was previously no
+    ///     value to read that did.
+    ///     </para>
+    ///     <para>
+    ///     It is also the default of <see cref="SyndicationResourceLoadSettings.Timeout"/>, which used
+    ///     to write <c>TimeSpan.FromSeconds(100)</c> out a second time in a different assembly's file.
+    ///     Two independent spellings of one number is one edit away from two different numbers.
+    ///     </para>
+    /// </remarks>
+    public static readonly TimeSpan DefaultRequestTimeout = TimeSpan.FromSeconds(100);
+
+    /// <summary>
+    /// Holds the invalid directory character set, deferred for the same reason as <see cref="InvalidXmlCharacters"/>.
+    /// </summary>
+    /// <remarks>
+    ///     Eight literal characters, so the set itself is nearly free to build — but
+    ///     <see cref="SearchValues.Create(ReadOnlySpan{char})"/> is not free to <i>compile</i>, and while
+    ///     this field sat directly on <see cref="SyndicationEncodingUtility"/> every
+    ///     <c>Load</c> paid that jitting through <see cref="DefaultRequestTimeout"/>. Its only reader,
+    ///     <see cref="EncodeSafeDirectoryName(string)"/>, has no caller anywhere in the framework.
+    /// </remarks>
+    private static class InvalidDirectoryCharacters
     {
         /// <summary>
-        /// Creates a <see cref="XPathNavigator"/> against the supplied XML data.
+        /// Characters that are invalid in directory names.
         /// </summary>
-        /// <param name="xml">The XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-        /// <returns>
-        ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied XML data.
-        ///     The supplied <paramref name="xml"/> data is parsed to remove invalid XML characters that would normally prevent
-        ///     a navigator from being created.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is an empty string.</exception>
-        public static XPathNavigator CreateSafeNavigator(string xml)
-        {
-            XPathNavigator navigator    = null;
+        internal static readonly SearchValues<char> Value = SearchValues.Create(@"\/:*?<>|");
+    }
 
-            Guard.ArgumentNotNullOrEmptyString(xml, "xml");
-
-            string safeXml  = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(xml);
-
-            using(StringReader reader = new StringReader(safeXml))
-            {
-                XPathDocument document  = new XPathDocument(reader);
-                navigator               = document.CreateNavigator();
-            }
-
-            return navigator;
-        }
-
+    /// <summary>
+    /// Holds the invalid-XML-character set, so that building it is deferred until something asks for it.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     A separate type purely to move the cost off everyone else's path. This class has no
+    ///     static constructor, so it is <c>beforefieldinit</c> and every static field initialiser on it
+    ///     runs together, on first touch of any one of them. <see cref="DefaultRequestTimeout"/> is one
+    ///     of those fields, and <see cref="SyndicationResourceLoadSettings"/> reads it in the field
+    ///     initialiser of its <c>Timeout</c> property — so <i>constructing load settings</i>, which every
+    ///     <c>Load</c> does, used to build this set. Measured: a first
+    ///     <c>RssFeed.Load(Stream)</c> in a fresh process spent about ten milliseconds of its
+    ///     thirty-six inside the 65,536-iteration pass below, on behalf of an API the library never
+    ///     calls internally.
+    ///     </para>
+    ///     <para>
+    ///     Moving it to a nested type defers that to the first caller of
+    ///     <see cref="RemoveInvalidXmlHexadecimalCharacters(string)"/>, which is the only thing that
+    ///     reads it. After the first read the initialisation check is elided, so there is no
+    ///     steady-state cost to the indirection.
+    ///     </para>
+    /// </remarks>
+    private static class InvalidXmlCharacters
+    {
         /// <summary>
-        /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Stream"/>.
+        /// Every code unit in the basic multilingual plane that is not a valid XML character.
         /// </summary>
-        /// <param name="stream">The <see cref="Stream"/> object that contains the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-        /// <returns>
-        ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="stream"/>.
-        ///     The supplied <paramref name="stream"/> XML data is parsed to remove invalid XML characters that would normally prevent
-        ///     a navigator from being created.
-        /// </returns>
         /// <remarks>
-        ///     The character encoding of the supplied <paramref name="stream"/> is automatically determined based on the <i>encoding</i> attribute of the XML document declaration.
-        ///     If the character encoding cannot be determined, a default encoding of <see cref="Encoding.UTF8"/> is used.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static XPathNavigator CreateSafeNavigator(Stream stream)
-        {
-            Encoding encoding   = Encoding.UTF8;
-            byte[] buffer       = null;
-
-            Guard.ArgumentNotNull(stream, "stream");
-
-            buffer      = SyndicationEncodingUtility.GetStreamBytes(stream);
-
-            encoding    = SyndicationEncodingUtility.GetXmlEncoding(buffer);
-
-            using(MemoryStream memoryStream = new MemoryStream(buffer))
-            {
-                return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, encoding);
-            }
-        }
-
-        /// <summary>
-        /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Stream"/> using the specified <see cref="Encoding"/>.
-        /// </summary>
-        /// <param name="stream">The <see cref="Stream"/> object that contains the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-        /// <param name="encoding">A <see cref="Encoding"/> object that indicates the character encoding to use when reading the supplied <paramref name="stream"/>.</param>
-        /// <returns>
-        ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="stream"/>.
-        ///     The supplied <paramref name="stream"/> XML data is parsed to remove invalid XML characters that would normally prevent
-        ///     a navigator from being created.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="encoding"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static XPathNavigator CreateSafeNavigator(Stream stream, Encoding encoding)
-        {
-            Guard.ArgumentNotNull(stream, "stream");
-            Guard.ArgumentNotNull(encoding, "encoding");
-
-            using (StreamReader reader = new StreamReader(stream, encoding))
-            {
-                return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
-            }
-        }
-
-        /// <summary>
-        /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="TextReader"/>.
-        /// </summary>
-        /// <param name="reader">The <see cref="TextReader"/> object that contains the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-        /// <returns>
-        ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="reader"/>.
-        ///     The supplied <paramref name="reader"/> XML data is parsed to remove invalid XML characters that would normally prevent
-        ///     a navigator from being created.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static XPathNavigator CreateSafeNavigator(TextReader reader)
-        {
-            Guard.ArgumentNotNull(reader, "reader");
-
-            return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
-        }
-
-        /// <summary>
-        /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-        /// </summary>
-        /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-        /// <param name="credentials">
-        ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required.
-        ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-        /// </param>
-        /// <param name="proxy">
-        ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required.
-        ///     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings.
-        /// </param>
-        /// <returns>
-        ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="source"/>.
-        ///     The supplied <paramref name="source"/> XML data is parsed to remove invalid XML characters that would normally prevent
-        ///     a navigator from being created.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy)
-        {
-            return SyndicationEncodingUtility.CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy));
-        }
-
-        /// <summary>
-        /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-        /// </summary>
-        /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-        /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-        /// <returns>
-        ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="source"/>.
-        ///     The supplied <paramref name="source"/> XML data is parsed to remove invalid XML characters that would normally prevent
-        ///     a navigator from being created.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static XPathNavigator CreateSafeNavigator(Uri source, WebRequestOptions options)
-        {
-            return SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
-        }
-
-        /// <summary>
-        /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-        /// </summary>
-        /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-        /// <param name="credentials">
-        ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required.
-        ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-        /// </param>
-        /// <param name="proxy">
-        ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required.
-        ///     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings.
-        /// </param>
-        /// <param name="encoding">A <see cref="Encoding"/> object that indicates the expected character encoding of the supplied <paramref name="source"/>. This value can be <b>null</b>.</param>
-        /// <returns>
-        ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="source"/>.
-        ///     The supplied <paramref name="source"/> XML data is parsed to remove invalid XML characters that would normally prevent
-        ///     a navigator from being created.
-        /// </returns>
-        /// <remarks>
-        ///     If the <paramref name="encoding"/> is <b>null</b>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
-        ///     Otherwise the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy, Encoding encoding)
-        {
-            return SyndicationEncodingUtility.CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy), encoding);
-        }
-
-        /// <summary>
-        /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-        /// </summary>
-        /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-        /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-        /// <param name="encoding">A <see cref="Encoding"/> object that indicates the expected character encoding of the supplied <paramref name="source"/>. This value can be <b>null</b>.</param>
-        /// <returns>
-        ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="source"/>.
-        ///     The supplied <paramref name="source"/> XML data is parsed to remove invalid XML characters that would normally prevent
-        ///     a navigator from being created.
-        /// </returns>
-        /// <remarks>
-        ///     If the <paramref name="encoding"/> is <b>null</b>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
-        ///     Otherwise the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static XPathNavigator CreateSafeNavigator(Uri source, WebRequestOptions options, Encoding encoding)
-        {
-            Guard.ArgumentNotNull(source, "source");
-
-            using (WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, options))
-            {
-                Stream stream = null;
-                HttpWebResponse httpResponse = response as HttpWebResponse;
-
-                if (httpResponse != null)
-                {
-                    string contentEncoding = httpResponse.ContentEncoding?.ToUpperInvariant();
-
-                    if(string.IsNullOrEmpty(contentEncoding))
-                    {
-                        stream = response.GetResponseStream();
-                    }
-                    else
-                    {
-                        if (contentEncoding.Contains("GZIP"))
-                        {
-                            stream = new GZipStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
-                        }
-                        else if (contentEncoding.Contains("DEFLATE"))
-                        {
-                            stream = new DeflateStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
-                        }
-                        else
-                        {
-                            stream = httpResponse.GetResponseStream();
-                        }
-                    }
-                }
-                else
-                {
-                    stream = response.GetResponseStream();
-                }
-
-                if (encoding != null)
-                {
-                    return SyndicationEncodingUtility.CreateSafeNavigator(stream, encoding);
-                }
-                else
-                {
-                    return SyndicationEncodingUtility.CreateSafeNavigator(stream);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Returns a <see cref="WebRequest"/> that makes a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-        /// </summary>
-        /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
-        /// <param name="credentials">
-        ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required.
-        ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials if supported by the underlying protocol.
-        /// </param>
-        /// <param name="proxy">
-        ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required.
-        ///     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings if supported by the underlying protocol.
-        /// </param>
-        /// <returns>
-        ///     An <see cref="WebRequest"/> that makes a request to the <paramref name="source"/>. If unable to create a <see cref="WebRequest"/> for
-        ///     the specified <paramref name="source"/>, returns a <b>null</b> reference (Nothing in Visual Basic).
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static WebRequest CreateWebRequest(Uri source, ICredentials credentials, IWebProxy proxy)
-        {
-            return SyndicationEncodingUtility.CreateWebRequest(source, new WebRequestOptions(credentials, proxy));
-        }
-
-        /// <summary>
-        /// Returns a <see cref="WebRequest"/> that makes a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-        /// </summary>
-        /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
-        /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-        /// <returns>
-        ///     An <see cref="WebRequest"/> that makes a request to the <paramref name="source"/>. If unable to create a <see cref="WebRequest"/> for
-        ///     the specified <paramref name="source"/>, returns a <b>null</b> reference (Nothing in Visual Basic).
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static WebRequest CreateWebRequest(Uri source, WebRequestOptions options)
-        {
-            WebRequest request  = null;
-
-            Guard.ArgumentNotNull(source, "source");
-
-            request             = WebRequest.Create(source);
-
-            if(source.IsAbsoluteUri)
-            {
-                if (String.Compare(source.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) == 0 ||
-                    String.Compare(source.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) == 0)
-                {
-                    HttpWebRequest httpRequest      = (HttpWebRequest)request;
-                    httpRequest.UserAgent           = SyndicationDiscoveryUtility.FrameworkUserAgent;
-                    request                         = httpRequest;
-                }
-            }
-
-            if (options != null) options.ApplyOptions(request);
-            return request;
-        }
-
-        /// <summary>
-        /// Returns the <see cref="WebResponse"/> to a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-        /// </summary>
-        /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
-        /// <param name="credentials">
-        ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required.
-        ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials if supported by the underlying protocol.
-        /// </param>
-        /// <param name="proxy">
-        ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required.
-        ///     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings if supported by the underlying protocol.
-        /// </param>
-        /// <returns>
-        ///     An <see cref="WebResponse"/> that contains the response from the requested resource. If unable to create a <see cref="WebResponse"/> for
-        ///     the requested <paramref name="source"/>, returns a <b>null</b> reference (Nothing in Visual Basic).
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static WebResponse CreateWebResponse(Uri source, ICredentials credentials, IWebProxy proxy)
-        {
-            return SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials, proxy));
-        }
-
-        /// <summary>
-        /// Returns the <see cref="WebResponse"/> to a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-        /// </summary>
-        /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
-        /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-        /// <returns>
-        ///     An <see cref="WebResponse"/> that contains the response from the requested resource. If unable to create a <see cref="WebResponse"/> for
-        ///     the requested <paramref name="source"/>, returns a <b>null</b> reference (Nothing in Visual Basic).
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static WebResponse CreateWebResponse(Uri source, WebRequestOptions options)
-        {
-            WebResponse response    = null;
-
-            Guard.ArgumentNotNull(source, "source");
-
-            WebRequest webRequest   = SyndicationEncodingUtility.CreateWebRequest(source, options);
-            if (webRequest != null)
-            {
-                response    = webRequest.GetResponse();
-            }
-
-            return response;
-        }
-
-        /// <summary>
-        /// Decodes a base64 encoded string.
-        /// </summary>
-        /// <param name="encodedValue">The base64 encoded string to decode.</param>
-        /// <returns>A <see cref="Stream"/> the represents the decoded result of the base64 encoded value.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="encodedValue"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="encodedValue"/> is an empty string.</exception>
-        public static Stream DecodeBase64String(string encodedValue)
-        {
-            MemoryStream stream = null;
-
-            Guard.ArgumentNotNullOrEmptyString(encodedValue, "encodedValue");
-
-            byte[] data = Convert.FromBase64String(encodedValue);
-            stream      = new MemoryStream(data);
-
-            if (stream.CanSeek)
-            {
-                stream.Seek(0, SeekOrigin.Begin);
-            }
-
-            return stream;
-        }
-
-        /// <summary>
-        /// Decodes an HTML escaped string.
-        /// </summary>
-        /// <param name="escapedValue">The HTML escaped string to decode.</param>
-        /// <returns>A string the represents the unescaped result of the HTML escaped value.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is an empty string.</exception>
-        public static string DecodeHtmlEscapedString(string escapedValue)
-        {
-            string decodedResult = String.Empty;
-
-            Guard.ArgumentNotNullOrEmptyString(escapedValue, "escapedValue");
-
-            decodedResult   = System.Web.HttpUtility.HtmlDecode(escapedValue);
-            decodedResult   = System.Web.HttpUtility.UrlDecode(decodedResult);
-
-            return decodedResult;
-        }
-
-        /// <summary>
-        /// Encodes the supplied string so that it can be safely represented in XML.
-        /// </summary>
-        /// <param name="content">A string that represents the XML data to parse for invalid XML hexadecimal characters.</param>
-        /// <returns>A string that has been encoded to be safe for XML.</returns>
-        /// <remarks>
-        ///     <para>The encoding process replaces invalid XML hexadecimal characters with their equivalent decimal representation.</para>
         ///     <para>
-        ///         Hexadecimal characters that are valid include: #x9, #xA, #xD, [#x20-#xD7FF], [#xE000-#xFFFD], [#x10000-#x10FFFF],
-        ///         and any Unicode character; excluding the surrogate blocks FFFE and FFFF.
+        ///     Built by asking <see cref="XmlConvert.IsXmlChar(char)"/> rather than by writing the ranges
+        ///     out, so the set cannot drift from the predicate it stands in for. It costs one pass over
+        ///     65,536 values, once, on first use.
+        ///     </para>
+        ///     <para>
+        ///     The ranges are in fact known — the set is exactly <c>[0000-0008]</c>, <c>[000B-000C]</c>,
+        ///     <c>[000E-001F]</c>, <c>[D800-DFFF]</c> and <c>[FFFE-FFFF]</c>, 2,079 code units, verified
+        ///     identical to the predicate's answer — and writing them out directly builds the same string
+        ///     roughly fifty times faster. That is deliberately <i>not</i> done. The set has to agree with
+        ///     <see cref="XmlConvert.IsXmlChar(char)"/> exactly, because the rebuild loop in
+        ///     <see cref="RemoveInvalidXmlHexadecimalCharacters(string)"/> consults the predicate directly
+        ///     while the scan that decides whether to rebuild at all consults this set. Now that the cost
+        ///     is paid only by callers of that one method, buying speed with a transcription that could
+        ///     silently disagree is the wrong trade.
+        ///     </para>
+        ///     <para>
+        ///     This is a candidate finder, not a predicate. It necessarily contains the whole of
+        ///     <c>[D800-DFFF]</c> — a surrogate is not a valid XML character on its own — so it fires on
+        ///     every astral character, including the perfectly valid ones. The pair rule is stateful and
+        ///     stays where it is; what the set buys is skipping the runs in between.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-        public static string EncodeInvalidXmlHexadecimalCharacters(string content)
+        internal static readonly SearchValues<char> Value = SearchValues.Create(BuildInvalidXmlCharacters());
+    }
+
+    /// <summary>
+    /// The number of leading characters of a document examined when looking for an XML declaration.
+    /// </summary>
+    /// <remarks>
+    ///     The declaration must be the first thing in the document and cannot legally exceed this,
+    ///     so nothing beyond it can affect the result.
+    /// </remarks>
+    private const int XmlDeclarationProbeLength = 512;
+
+    /// <summary>
+    /// The furthest into a document the streaming load will look for the end of an XML declaration.
+    /// </summary>
+    /// <remarks>
+    ///     A declaration may legally carry unbounded whitespace between its pseudo-attributes, so there
+    ///     is no length at which one provably cannot still be open. Reading without a bound would put a
+    ///     whole document back in memory for a pathological input, which is what the streaming load
+    ///     exists to avoid — so the bound is stated rather than left implicit. Beyond it the sniff
+    ///     answers <see cref="Encoding.UTF8"/>. <see cref="GetXmlEncoding(byte[])"/> is unbounded and
+    ///     unaffected, so the two can disagree only on a declaration longer than this.
+    /// </remarks>
+    private const int MaxDeclarationProbeLength = 64 * 1024;
+
+    /// <summary>
+    /// Matches the <c>encoding</c> pseudo-attribute of an XML declaration.
+    /// </summary>
+    /// <returns>The compiled regular expression.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     Source-generated rather than interpreted: the pattern is a compile-time constant, so the
+    ///     generator emits a matcher directly instead of the engine parsing the pattern at run time.
+    ///     </para>
+    ///     <para>
+    ///     Three alternations, because XML permits either quote character. The single-quoted arm
+    ///     was missing, so <c>encoding='iso-8859-1'</c> fell through to the bare-value arm, which
+    ///     captured <c>'iso-8859-1'</c> <i>including the quotes</i>. <see cref="Encoding.GetEncoding(string)"/>
+    ///     then threw <see cref="ArgumentException"/>, the caller swallowed it, and the document was
+    ///     decoded as UTF-8 — silently, since the exception never surfaced and UTF-8 is also the
+    ///     legitimate answer when no encoding is declared. A Latin-1 feed came out as replacement
+    ///     characters where its accented letters had been.
+    ///     </para>
+    ///     <para>
+    ///     Ten of the 136 documents in the real-world corpus declare their encoding this way — arXiv,
+    ///     Blogger, LiveJournal and Tim Bray's <i>ongoing</i> among them. All ten happen to be UTF-8,
+    ///     which is why the fallback returned the right answer for the wrong reason and nothing looked
+    ///     broken. The bare-value arm is kept last: it is the lenient one, and it must not shadow either
+    ///     quoted form.
+    ///     </para>
+    /// </remarks>
+    [GeneratedRegex("""^<\?xml.+?encoding\s*=\s*(?:"(?<webName>[^"]*)"|'(?<webName>[^']*)'|(?<webName>\S+)).*?\?>""", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
+    private static partial Regex XmlDeclarationEncodingRegex();
+
+    /// <summary>
+    /// Creates a shared <see cref="HttpClient"/> instance configured for optimal connection pooling.
+    /// </summary>
+    /// <returns>A configured <see cref="HttpClient"/> instance.</returns>
+    private static HttpClient CreateSharedHttpClient()
+    {
+#pragma warning disable CA2000 // HttpClient takes ownership of the handler; this is an intentional singleton
+        SocketsHttpHandler handler = new()
+#pragma warning restore CA2000
         {
-            Regex invalidXmlUnicodeCharacters   = new Regex(@"[\x01-\x08\x0B-\x0C\x0E-\x1F\xD800-\xDFFF\xFFFE-\xFFFF]");
-            string encodedContent               = String.Empty;
+            // Pooling policy is the singleton's own business and deliberately not shared: a static
+            // client must rotate its own connections, where a factory-built one has its whole handler
+            // rotated for it.
+            PooledConnectionLifetime = TimeSpan.FromMinutes(15),
+            PooledConnectionIdleTimeout = TimeSpan.FromMinutes(2),
+        };
 
-            Guard.ArgumentNotNullOrEmptyString(content, "content");
+        ApplyArgoticHandlerDefaults(handler);
+        return new HttpClient(handler) { Timeout = Timeout.InfiniteTimeSpan };
+    }
 
-            encodedContent  = content;
+    /// <summary>
+    /// Applies the handler settings every Argotic HTTP pipeline shares.
+    /// </summary>
+    /// <param name="handler">The handler to configure.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="handler"/> is <see langword="null"/>.</exception>
+    /// <remarks>
+    ///     <para>
+    ///     Named so that the shared client and anything built by <c>IHttpClientFactory</c> cannot drift
+    ///     apart. Keeping them in step by remembering to is a coordination requirement between two
+    ///     assemblies with nothing enforcing it, and the failure is silent — a factory-built client that
+    ///     keeps cookies while the singleton does not.
+    ///     </para>
+    ///     <para>
+    ///     Cookies are off. <see cref="SocketsHttpHandler.UseCookies"/> defaults to
+    ///     <see langword="true"/>, so a <c>Set-Cookie</c> from any origin was replayed on the next
+    ///     request to that host — and on a process-wide singleton that means per-domain session state
+    ///     accumulating for the lifetime of the application, with no API to inspect or clear it. A feed
+    ///     reader has no use for a cookie jar.
+    ///     </para>
+    ///     <para>
+    ///     Brotli is on. It has been in the platform since .NET Core 3.0 and is what most origins
+    ///     prefer; advertising only gzip and deflate meant declining the smallest encoding available.
+    ///     </para>
+    /// </remarks>
+    public static void ApplyArgoticHandlerDefaults(SocketsHttpHandler handler)
+    {
+        ArgumentNullException.ThrowIfNull(handler);
 
-            MatchCollection matches = invalidXmlUnicodeCharacters.Matches(encodedContent);
-            foreach (Match match in matches)
-            {
-                encodedContent  = encodedContent.Replace(match.Value, Convert.ToUInt32(match.Value, 16).ToString(NumberFormatInfo.InvariantInfo));
-            }
+        handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.Brotli;
+        handler.UseCookies = false;
+    }
 
-            return encodedContent;
+    /// <summary>
+    /// Gets the shared <see cref="HttpClient"/> instance for making HTTP requests.
+    /// </summary>
+    /// <value>The process-wide client, created on first use and never replaced.</value>
+    /// <remarks>
+    ///     <para>
+    ///     Its <see cref="HttpClient.Timeout"/> is
+    ///     <see cref="System.Threading.Timeout.InfiniteTimeSpan"/>, deliberately: every deadline in this
+    ///     library is imposed by a <see cref="CancellationTokenSource"/> so that it covers the body read
+    ///     as well as the headers. Reading <see cref="HttpClient.Timeout"/> therefore tells a caller
+    ///     nothing; <see cref="DefaultRequestTimeout"/> is the value that does.
+    ///     </para>
+    ///     <para>
+    ///     Intended for use when no custom credentials or proxy settings are needed. Handler-level
+    ///     settings cannot be changed on it after the fact, so for authentication, a proxy, or a
+    ///     rotating handler, create an <see cref="HttpClient"/> of your own — passing it to
+    ///     <see cref="ApplyArgoticHandlerDefaults(SocketsHttpHandler)"/> to keep it in step with this
+    ///     one — or use <c>IHttpClientFactory</c>.
+    ///     </para>
+    /// </remarks>
+    public static HttpClient SharedHttpClient => sharedHttpClient.Value;
+
+    /// <summary>
+    /// Creates <see cref="XmlReaderSettings"/> configured for secure XML parsing.
+    /// </summary>
+    /// <returns>
+    ///     An <see cref="XmlReaderSettings"/> instance that parses internal DTD subsets (so entities declared by a feed resolve)
+    ///     while preventing XXE attacks: external entity resolution is disabled and entity expansion is capped.
+    /// </returns>
+    public static XmlReaderSettings CreateSafeXmlReaderSettings()
+    {
+        return new XmlReaderSettings
+        {
+            ConformanceLevel = ConformanceLevel.Document,
+            IgnoreComments = true,
+            IgnoreProcessingInstructions = true,
+            IgnoreWhitespace = true,
+            DtdProcessing = DtdProcessing.Parse,
+            XmlResolver = null,
+            MaxCharactersFromEntities = 10_000_000
+        };
+    }
+
+    /// <summary>
+    /// Creates <see cref="XmlWriterSettings"/> for writing a syndication entity as an XML fragment.
+    /// </summary>
+    /// <param name="encoding">The character encoding to write with, or <see langword="null"/> to leave the writer's default.</param>
+    /// <returns>Settings that indent, omit the XML declaration, and permit a fragment rather than a whole document.</returns>
+    /// <remarks>
+    ///     Entities are written as fragments because they are composed into a document by their parent.
+    ///     This shape was repeated inline at 66 call sites before being named here.
+    /// </remarks>
+    public static XmlWriterSettings CreateFragmentXmlWriterSettings(Encoding? encoding = null)
+    {
+        XmlWriterSettings settings = new()
+        {
+            ConformanceLevel = ConformanceLevel.Fragment,
+            Indent = true,
+            OmitXmlDeclaration = true,
+        };
+
+        if (encoding is not null)
+        {
+            settings.Encoding = encoding;
         }
 
-        /// <summary>
-        /// Extracts the character encoding for the content type of the supplied <see cref="HttpRequest"/>.
-        /// </summary>
-        /// <param name="request">The HTTP values sent by a client during a Web request.</param>
-        /// <returns>
-        ///     A <see cref="Encoding"/> that represents character encoding of the Content-Type <i>charset</i> attribute.
-        ///     If the <i>charset</i> attribute is unavailable or invalid, returns <b>null</b>.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference (Nothing in Visual Basic).</exception>
-        /*public static Encoding GetCharacterEncoding(HttpRequest request)
+        return settings;
+    }
+
+    /// <summary>
+    /// Creates <see cref="XmlWriterSettings"/> for writing a complete syndication document.
+    /// </summary>
+    /// <param name="encoding">The character encoding to write with, or <see langword="null"/> to leave the writer's default.</param>
+    /// <returns>Settings that indent, emit the XML declaration, and require a well-formed document.</returns>
+    /// <remarks>This shape was repeated inline at 12 call sites before being named here.</remarks>
+    public static XmlWriterSettings CreateDocumentXmlWriterSettings(Encoding? encoding = null)
+    {
+        XmlWriterSettings settings = new()
         {
-            Encoding contentEncoding    = null;
+            ConformanceLevel = ConformanceLevel.Document,
+            Indent = true,
+            OmitXmlDeclaration = false,
+        };
 
-            Guard.ArgumentNotNull(request, "request");
+        if (encoding is not null)
+        {
+            settings.Encoding = encoding;
+        }
 
-            if (!String.IsNullOrEmpty(request.ContentType))
+        return settings;
+    }
+
+    /// <summary>
+    /// Creates a <see cref="XPathNavigator"/> against the supplied XML data.
+    /// </summary>
+    /// <param name="xml">The XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
+    /// <returns>
+    ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied XML data.
+    ///     The supplied <paramref name="xml"/> data is parsed to remove invalid XML characters that would normally prevent
+    ///     a navigator from being created.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xml"/> data is an empty string.</exception>
+    /// <remarks>
+    ///     Filters through the same streaming reader the other overloads use, so a dirty document is no
+    ///     longer rebuilt into a second string before parsing. The explicit guard stays: unlike the
+    ///     stream and reader overloads, this one really does have a parameter called <c>xml</c>, so
+    ///     rejecting an empty one by name is the caller's own contract rather than a leak from somewhere
+    ///     else.
+    /// </remarks>
+    public static XPathNavigator CreateSafeNavigator(string xml)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(xml);
+
+        using StringReader stringReader = new(xml);
+        using XmlSanitizingTextReader sanitising = new(stringReader, leaveOpen: true);
+        using XmlReader xmlReader = XmlReader.Create(sanitising, CreateSafeXmlReaderSettings());
+        XPathDocument document = new(xmlReader);
+
+        return document.CreateNavigator();
+    }
+
+    /// <summary>
+    /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Stream"/>.
+    /// </summary>
+    /// <param name="stream">The <see cref="Stream"/> object that contains the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
+    /// <returns>
+    ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="stream"/>.
+    ///     The supplied <paramref name="stream"/> XML data is parsed to remove invalid XML characters that would normally prevent
+    ///     a navigator from being created.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
+    /// <remarks>
+    ///     <para>
+    ///     The encoding is determined from the byte-order mark if there is one and the <c>encoding</c>
+    ///     pseudo-attribute of the XML declaration otherwise, falling back to <see cref="Encoding.UTF8"/>
+    ///     when a document declares neither.
+    ///     </para>
+    ///     <para>
+    ///     Reads a bounded head, sniffs the declaration from it, then decodes the head and the
+    ///     remainder as one stream. The document is never buffered whole, and never becomes a string.
+    ///     </para>
+    ///     <para>
+    ///     The head is filled with <c>ReadAtLeast</c>, not one <c>Read</c>. A single read on a
+    ///     network stream routinely returns far less than asked for, so a naive read would sniff
+    ///     whatever happened to be in the first TCP segment.
+    ///     </para>
+    ///     <para>
+    ///     The head grows when a declaration did not close inside it. Whitespace between the
+    ///     pseudo-attributes of a declaration is legal and unbounded, so one can run past any fixed
+    ///     window. Growing on that condition — rather than on "no <c>encoding=</c> was found" — is what
+    ///     keeps the answer identical to reading the document whole. Past
+    ///     <see cref="MaxDeclarationProbeLength"/> the sniff gives up and returns
+    ///     <see cref="Encoding.UTF8"/>; <see cref="GetXmlEncoding(byte[])"/> remains unbounded and is
+    ///     unaffected.
+    ///     </para>
+    ///     <para>
+    ///     Two deliberate changes come with this. An empty stream now produces
+    ///     <see cref="System.Xml.XmlException"/> rather than <see cref="ArgumentException"/> naming
+    ///     <c>content</c> — the parameter of a private helper three calls down, which this method's
+    ///     caller never supplied. And the stream is consumed lazily, so a parse failure part-way
+    ///     through leaves it part-way through rather than drained.
+    ///     </para>
+    /// </remarks>
+    public static XPathNavigator CreateSafeNavigator(Stream stream)
+    {
+        ArgumentNullException.ThrowIfNull(stream);
+
+        byte[] head = new byte[XmlDeclarationProbeLength];
+        int filled = stream.ReadAtLeast(head, head.Length, throwOnEndOfStream: false);
+
+        Encoding encoding = SniffXmlEncoding(head.AsSpan(0, filled), out bool declarationMayOverrun);
+
+        // Only grow while the window is genuinely full: a short fill means the document ended, so
+        // there is nothing more to find and re-reading would loop.
+        while (declarationMayOverrun && filled == head.Length && head.Length < MaxDeclarationProbeLength)
+        {
+            byte[] grown = new byte[Math.Min(head.Length * 2, MaxDeclarationProbeLength)];
+            head.AsSpan(0, filled).CopyTo(grown);
+            head = grown;
+
+            filled += stream.ReadAtLeast(head.AsSpan(filled), head.Length - filled, throwOnEndOfStream: false);
+            encoding = SniffXmlEncoding(head.AsSpan(0, filled), out declarationMayOverrun);
+        }
+
+        using PrefixedStream prefixed = new(head, filled, stream);
+        using StreamReader decoded = new(prefixed, encoding, detectEncodingFromByteOrderMarks: true, bufferSize: -1, leaveOpen: true);
+        using XmlSanitizingTextReader sanitising = new(decoded, leaveOpen: true);
+        using XmlReader xmlReader = XmlReader.Create(sanitising, CreateSafeXmlReaderSettings());
+        XPathDocument document = new(xmlReader);
+
+        return document.CreateNavigator();
+    }
+
+    /// <summary>
+    /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Stream"/> using the specified <see cref="Encoding"/>.
+    /// </summary>
+    /// <param name="stream">The <see cref="Stream"/> object that contains the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
+    /// <param name="encoding">A <see cref="Encoding"/> object that indicates the character encoding to use when reading the supplied <paramref name="stream"/>.</param>
+    /// <returns>
+    ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="stream"/>.
+    ///     The supplied <paramref name="stream"/> XML data is parsed to remove invalid XML characters that would normally prevent
+    ///     a navigator from being created.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="encoding"/> is <see langword="null"/>.</exception>
+    /// <remarks>
+    ///     <para>
+    ///     This overload no longer closes the caller's stream. It wrapped it in a
+    ///     <see cref="StreamReader"/> it owned and disposed, which closed the stream as a side effect —
+    ///     while the single-argument overload, which looks symmetrical, did not. Nothing documented the
+    ///     difference and no test observed it. Callers who relied on it to dispose their stream must now
+    ///     do so themselves.
+    ///     </para>
+    ///     <para>
+    ///     A byte-order mark still takes precedence over <paramref name="encoding"/>. That is what the
+    ///     two-argument <see cref="StreamReader"/> constructor did, so it is preserved rather than
+    ///     quietly corrected, and the flag is now passed explicitly instead of inherited.
+    ///     </para>
+    ///     <para>
+    ///     An empty stream produces <see cref="System.Xml.XmlException"/> rather than
+    ///     <see cref="ArgumentException"/> naming <c>xml</c> — the parameter of the string overload this
+    ///     one used to delegate to, which this method's caller never supplied.
+    ///     </para>
+    /// </remarks>
+    public static XPathNavigator CreateSafeNavigator(Stream stream, Encoding encoding)
+    {
+        ArgumentNullException.ThrowIfNull(stream);
+        ArgumentNullException.ThrowIfNull(encoding);
+
+        using StreamReader reader = new(stream, encoding, detectEncodingFromByteOrderMarks: true, bufferSize: -1, leaveOpen: true);
+        using XmlSanitizingTextReader sanitising = new(reader, leaveOpen: true);
+        using XmlReader xmlReader = XmlReader.Create(sanitising, CreateSafeXmlReaderSettings());
+        XPathDocument document = new(xmlReader);
+
+        return document.CreateNavigator();
+    }
+
+    /// <summary>
+    /// Creates a <see cref="XPathNavigator"/> over a stream, honouring the caller's load settings.
+    /// </summary>
+    /// <param name="stream">The stream to navigate.</param>
+    /// <param name="settings">The load settings. This value can be <see langword="null"/>.</param>
+    /// <returns>A navigator over the supplied <paramref name="stream"/>.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     The synchronous counterpart of the settings-taking <c>CreateSafeNavigatorAsync</c>, and the same
+    ///     motivation: twelve <c>Load(Stream, settings)</c> implementations each carried an identical
+    ///     branch on <c>settings is not null</c>, so what a settings object means for encoding was
+    ///     written down twelve times.
+    ///     </para>
+    ///     <para>
+    ///     Behaviour is unchanged and is presently wrong — a non-null settings object forces
+    ///     <see cref="SyndicationResourceLoadSettings.CharacterEncoding"/>, whose default overrides a
+    ///     correctly declared <c>iso-8859-1</c>. That is pinned by
+    ///     <c>SettingsEncodingCharacterisationTests</c> and fixed by the commit that makes the
+    ///     property nullable. Gathering it here first is what lets that commit be one edit.
+    ///     </para>
+    ///     <para>
+    ///     Internal rather than public, and not only for scope. <c>CreateSafeNavigator(stream, null)</c>
+    ///     would become ambiguous against the <see cref="Encoding"/> overload, and there is a call of
+    ///     exactly that shape in <c>ParseEntryPointGuardTests</c> — which, being in the test project,
+    ///     cannot see this one.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
+    internal static XPathNavigator CreateSafeNavigator(Stream stream, SyndicationResourceLoadSettings? settings)
+    {
+        ArgumentNullException.ThrowIfNull(stream);
+
+        // The condition is now "did the caller name an encoding", where it used to be "did the caller
+        // supply a settings object at all". Those were the same question only because the property
+        // could not be left unset.
+        return settings?.CharacterEncoding is { } encoding
+            ? CreateSafeNavigator(stream, encoding)
+            : CreateSafeNavigator(stream);
+    }
+
+    /// <summary>
+    /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="TextReader"/>.
+    /// </summary>
+    /// <param name="reader">The <see cref="TextReader"/> object that contains the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
+    /// <returns>
+    ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="reader"/>.
+    ///     The supplied <paramref name="reader"/> XML data is parsed to remove invalid XML characters that would normally prevent
+    ///     a navigator from being created.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
+    /// <remarks>
+    ///     <para>
+    ///     Filters as it reads. The other overloads still drain their input to a string first; this one
+    ///     no longer does, so a document arrives at the parser without ever being held twice.
+    ///     </para>
+    ///     <para>
+    ///     Two consequences, both deliberate. An empty reader now produces
+    ///     <see cref="System.Xml.XmlException"/> — "Root element is missing" — rather than
+    ///     <see cref="ArgumentException"/> naming <c>xml</c>, a parameter this overload does not have and
+    ///     the caller never supplied. And the reader is consumed lazily, so a parse failure part-way
+    ///     through leaves it part-way through rather than drained.
+    ///     </para>
+    ///     <para>
+    ///     The caller's reader is not disposed. Nothing should close what it did not open.
+    ///     </para>
+    /// </remarks>
+    public static XPathNavigator CreateSafeNavigator(TextReader reader)
+    {
+        ArgumentNullException.ThrowIfNull(reader);
+
+        using XmlSanitizingTextReader sanitising = new(reader, leaveOpen: true);
+        using XmlReader xmlReader = XmlReader.Create(sanitising, CreateSafeXmlReaderSettings());
+        XPathDocument document = new(xmlReader);
+
+        return document.CreateNavigator();
+    }
+
+    /// <summary>
+    /// Drains a response body asynchronously, refusing to exceed <paramref name="maxBytes"/>.
+    /// </summary>
+    /// <param name="response">The response whose body to read.</param>
+    /// <param name="maxBytes">The most this will accept. Pass <see cref="SyndicationResourceLoadSettings.Unbounded"/> for no limit.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>The drained body. The caller owns it and must dispose it.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     The rule this exists to enforce: <see cref="HttpCompletionOption.ResponseHeadersRead"/> is
+    ///     correct exactly where the body is consumed asynchronously or not at all. Every site that
+    ///     hands the stream to a synchronous reader — an <c>XPathDocument</c>, an <c>XmlReader</c> over a
+    ///     <see cref="Stream"/>, <c>ReadToEnd</c>, <c>CopyTo</c> — must come through here first, or it
+    ///     performs a blocking drain of a socket on a thread-pool thread.
+    ///     </para>
+    ///     <para>
+    ///     The declared-length check is an optimisation, not the defence. Automatic decompression
+    ///     strips <c>Content-Length</c> from every response it decompresses, so on a compressing origin
+    ///     it never fires at all. The streaming counter below it is the only guaranteed bound, and it
+    ///     counts <i>decompressed</i> bytes — which is the right unit, because a few kilobytes of gzip
+    ///     can expand to a megabyte.
+    ///     </para>
+    ///     <para>
+    ///     The limit is checked <i>before</i> each chunk is written, so the buffer never holds more than
+    ///     the cap. Reading to the end and then comparing totals would have spent the memory the cap
+    ///     exists to save.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="response"/> is <see langword="null"/>.</exception>
+    /// <exception cref="SyndicationContentTooLargeException">The body exceeds <paramref name="maxBytes"/>.</exception>
+    internal static async Task<PooledContentBuffer> ReadContentAsync(
+        HttpResponseMessage response,
+        long maxBytes,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(response);
+
+        using Stream responseStream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+        return await ReadContentAsync(
+            responseStream, response.Content.Headers.ContentLength, maxBytes, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Reads a stream into a pooled buffer, refusing one longer than <paramref name="maxBytes"/>.
+    /// </summary>
+    /// <param name="stream">The stream to drain. The caller keeps ownership of it.</param>
+    /// <param name="declaredLength">The length the origin declared, or <see langword="null"/> if it declared none.</param>
+    /// <param name="maxBytes">The most to accept.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>The drained body. The caller owns it and must dispose it.</returns>
+    /// <remarks>
+    ///     Split out from the response-taking overload for the conditional load path, which holds a
+    ///     stream rather than a response — the body having been left unread on purpose, so that
+    ///     deciding not to want it costs nothing.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is <see langword="null"/>.</exception>
+    /// <exception cref="SyndicationContentTooLargeException">The stream exceeds <paramref name="maxBytes"/>.</exception>
+    internal static async Task<PooledContentBuffer> ReadContentAsync(
+        Stream stream,
+        long? declaredLength,
+        long maxBytes,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(stream);
+
+        if (declaredLength is { } declared && declared > maxBytes)
+        {
+            throw new SyndicationContentTooLargeException(maxBytes, declared);
+        }
+
+        // Nulled once ownership passes to the caller, so the finally disposes it on every failure
+        // path and on none of the success path.
+        PooledContentBuffer? sink = PooledContentBuffer.ForDeclaredLength(declaredLength);
+        byte[] chunk = ArrayPool<byte>.Shared.Rent(81_920);
+
+        try
+        {
+            long total = 0;
+            int read;
+            while ((read = await stream.ReadAsync(chunk.AsMemory(), cancellationToken).ConfigureAwait(false)) > 0)
             {
-                if (request.ContentType.Contains(";"))
+                total += read;
+                if (total > maxBytes)
                 {
-                    string[] contentTypeParts   = request.ContentType.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    if (contentTypeParts != null && contentTypeParts.Length > 0)
-                    {
-                        for (int i = 0; i < contentTypeParts.Length; i++)
-                        {
-                            string typePart = contentTypeParts[i].Trim();
-                            if (typePart.Contains("="))
-                            {
-                                string[] nameValuePair  = typePart.Split("=".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                                if (nameValuePair != null && nameValuePair.Length == 2)
-                                {
-                                    string name     = nameValuePair[0].Trim();
-                                    string value    = nameValuePair[1].Trim();
+                    // Thrown before the write, so the sink never holds more than the cap. Unwinding
+                    // disposes the caller's response, which aborts the connection rather than returning
+                    // an undrained one to the pool - so nothing further is read from the socket.
+                    throw new SyndicationContentTooLargeException(maxBytes, declaredLength);
+                }
 
-                                    if (String.Compare(name, "charset", StringComparison.OrdinalIgnoreCase) == 0)
-                                    {
-                                        try
-                                        {
-                                            contentEncoding = Encoding.GetEncoding(value);
-                                        }
-                                        catch (ArgumentException)
-                                        {
-                                            return null;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                sink.Write(chunk.AsSpan(0, read));
+            }
+
+            PooledContentBuffer drained = sink;
+            sink = null;
+            return drained;
+        }
+        finally
+        {
+            sink?.Dispose();
+            ArrayPool<byte>.Shared.Return(chunk);
+        }
+    }
+
+    /// <summary>
+    /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> asynchronously using the shared <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
+    /// <param name="encoding">A <see cref="Encoding"/> object that indicates the expected character encoding of the supplied <paramref name="source"/>. This value can be <see langword="null"/>.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result contains an <see cref="XPathNavigator"/>
+    ///     that provides a cursor model for navigating the supplied <paramref name="source"/>.
+    /// </returns>
+    /// <remarks>
+    ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
+    ///     <para>
+    ///         If the <paramref name="encoding"/> is <see langword="null"/>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
+    ///         Otherwise, the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="HttpRequestException">The response status code does not indicate success.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static Task<XPathNavigator> CreateSafeNavigatorAsync(
+        Uri source,
+        Encoding? encoding,
+        CancellationToken cancellationToken = default) => CreateSafeNavigatorAsync(source, SharedHttpClient, encoding, null, cancellationToken);
+
+    /// <summary>
+    /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> asynchronously using the specified <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="encoding">A <see cref="Encoding"/> object that indicates the expected character encoding of the supplied <paramref name="source"/>. This value can be <see langword="null"/>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <see langword="null"/>.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result contains an <see cref="XPathNavigator"/>
+    ///     that provides a cursor model for navigating the supplied <paramref name="source"/>.
+    /// </returns>
+    /// <remarks>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    ///     <para>
+    ///         If the <paramref name="encoding"/> is <see langword="null"/>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
+    ///         Otherwise, the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
+    /// <exception cref="HttpRequestException">The response status code does not indicate success.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<XPathNavigator> CreateSafeNavigatorAsync(
+        Uri source,
+        HttpClient httpClient,
+        Encoding? encoding,
+        SyndicationRequestOptions? requestOptions = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(httpClient);
+
+        using HttpResponseMessage response = await SendHttpRequestAsync(source, httpClient, requestOptions, cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+
+        return encoding is not null
+            ? CreateSafeNavigator(stream, encoding)
+            : CreateSafeNavigator(stream);
+    }
+
+    /// <summary>
+    /// Creates an <see cref="HttpRequestMessage"/> for a resource located at the supplied <see cref="Uri"/>.
+    /// </summary>
+    /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <see langword="null"/>.</param>
+    /// <param name="method">The HTTP method to use. Defaults to <see cref="HttpMethod.Get"/>.</param>
+    /// <returns>An <see cref="HttpRequestMessage"/> configured for the request.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    public static HttpRequestMessage CreateHttpRequestMessage(Uri source, SyndicationRequestOptions? requestOptions = null, HttpMethod? method = null)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+
+        HttpRequestMessage request = new(method ?? HttpMethod.Get, source);
+        request.Headers.UserAgent.ParseAdd(SyndicationDiscoveryUtility.FrameworkUserAgent);
+        requestOptions?.ApplyTo(request);
+
+        return request;
+    }
+
+    /// <summary>
+    /// Sends an HTTP request using the shared <see cref="HttpClient"/> and returns the response asynchronously.
+    /// </summary>
+    /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <see langword="null"/>.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="HttpResponseMessage"/>.</returns>
+    /// <remarks>
+    ///     This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.
+    ///     For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
+    ///     Requests made through this overload are subject to a 100-second default time-out, mirroring the legacy <see cref="HttpWebRequest"/> behavior.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="OperationCanceledException">The request was canceled or exceeded the 100-second default time-out.</exception>
+    public static async Task<HttpResponseMessage> SendHttpRequestAsync(Uri source, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
+    {
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(DefaultRequestTimeout);
+        return await SendHttpRequestAsync(source, SharedHttpClient, requestOptions, timeoutCts.Token).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Sends an HTTP request using the specified <see cref="HttpClient"/> and returns the response asynchronously.
+    /// </summary>
+    /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <see langword="null"/>.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="HttpResponseMessage"/>.</returns>
+    /// <remarks>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    ///     <para>
+    ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
+    ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
+    public static async Task<HttpResponseMessage> SendHttpRequestAsync(Uri source, HttpClient httpClient, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(httpClient);
+
+        using HttpRequestMessage request = CreateHttpRequestMessage(source, requestOptions);
+        return await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+    }
+    /// <summary>
+    /// Fetches a resource and returns a navigator over it, honouring the caller's load settings.
+    /// </summary>
+    /// <param name="source">The resource to fetch.</param>
+    /// <param name="httpClient">The client to fetch with.</param>
+    /// <param name="settings">The load settings. Its encoding and size cap are both honoured.</param>
+    /// <param name="defaultMaxResponseContentLength">
+    ///     The size cap to apply when <see cref="SyndicationResourceLoadSettings.MaxResponseContentLength"/>
+    ///     is unset — the format default for whichever type is loading.
+    /// </param>
+    /// <param name="requestOptions">Request-level options. This value can be <see langword="null"/>.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A navigator over the fetched document.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     The cap default comes from the caller, not from the settings object. A settings object
+    ///     cannot know what kind of document is being loaded, and the answer differs by a factor of
+    ///     eight between a feed and a sitemap. So the loading type passes its own default and the
+    ///     settings override it when set — which is what lets a caller construct settings for an
+    ///     unrelated reason without silently losing their format's allowance.
+    ///     </para>
+    ///     <para>
+    ///     Taking the settings whole is also what removes the encoding sentinel from thirteen call
+    ///     sites. Each one used to translate <c>CharacterEncoding == Encoding.UTF8</c> into
+    ///     <see langword="null"/> before calling; reading the property here means those lines are
+    ///     deleted rather than rewritten.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
+    /// <exception cref="SyndicationContentTooLargeException">The response exceeds the effective size cap.</exception>
+    internal static async Task<XPathNavigator> CreateSafeNavigatorAsync(
+        Uri source,
+        HttpClient httpClient,
+        SyndicationResourceLoadSettings settings,
+        long defaultMaxResponseContentLength,
+        SyndicationRequestOptions? requestOptions,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(httpClient);
+        ArgumentNullException.ThrowIfNull(settings);
+
+        long cap = settings.MaxResponseContentLength ?? defaultMaxResponseContentLength;
+
+        // The deadline is applied here rather than at each of the thirteen callers, all of which
+        // built this same linked source, applied this same value, and used the token for nothing
+        // but the call below. It covers the body read as well as the headers - which is the point
+        // of a CancellationTokenSource rather than HttpClient.Timeout, and matters more now that
+        // the send completes on headers.
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        if (settings.Timeout is { } deadline)
+        {
+            // Left unarmed when null. The linked source is still built, so the caller's own token
+            // still cancels the load - what a null removes is the library's deadline, not theirs.
+            timeoutCts.CancelAfter(deadline);
+        }
+
+        using HttpResponseMessage response = await SendHttpRequestAsync(
+            source, httpClient, requestOptions, HttpCompletionOption.ResponseHeadersRead, timeoutCts.Token).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
+
+        using PooledContentBuffer body = await ReadContentAsync(response, cap, timeoutCts.Token).ConfigureAwait(false);
+        using Stream stream = body.AsStream();
+
+        return settings.CharacterEncoding is { } encoding
+            ? CreateSafeNavigator(stream, encoding)
+            : CreateSafeNavigator(stream);
+    }
+
+    /// <summary>
+    /// Reads at most <paramref name="maxBytes"/> of a response body, treating a longer body as normal.
+    /// </summary>
+    /// <param name="response">The response whose body to read.</param>
+    /// <param name="maxBytes">The most to read.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>The leading bytes of the body. The caller owns it and must dispose it.</returns>
+    /// <remarks>
+    ///     Distinct from <c>ReadContentAsync</c> in what an overrun means. There, exceeding the
+    ///     limit is an error and throws; here it is the expected case — the caller wants a head and does
+    ///     not care that more exists. Detecting a document's format needs its first element, not its
+    ///     contents.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="response"/> is <see langword="null"/>.</exception>
+    internal static async Task<PooledContentBuffer> ReadContentPrefixAsync(
+        HttpResponseMessage response,
+        int maxBytes,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(response);
+
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+
+        PooledContentBuffer? sink = PooledContentBuffer.ForDeclaredLength(maxBytes);
+        byte[] chunk = ArrayPool<byte>.Shared.Rent(Math.Min(maxBytes, 81_920));
+
+        try
+        {
+            int total = 0;
+            while (total < maxBytes)
+            {
+                int wanted = Math.Min(chunk.Length, maxBytes - total);
+                int read = await stream.ReadAsync(chunk.AsMemory(0, wanted), cancellationToken).ConfigureAwait(false);
+                if (read <= 0)
+                {
+                    break;
+                }
+
+                sink.Write(chunk.AsSpan(0, read));
+                total += read;
+            }
+
+            PooledContentBuffer head = sink;
+            sink = null;
+            return head;
+        }
+        finally
+        {
+            sink?.Dispose();
+            ArrayPool<byte>.Shared.Return(chunk);
+        }
+    }
+    /// <summary>
+    /// Sends a request, choosing when the returned task completes.
+    /// </summary>
+    /// <param name="source">The resource to request.</param>
+    /// <param name="httpClient">The client to send with.</param>
+    /// <param name="requestOptions">Request-level options. This value can be <see langword="null"/>.</param>
+    /// <param name="completionOption">When the returned task completes.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>The response. The caller owns it.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     <c>internal</c> rather than public, and no default on the trailing parameters, so that
+    ///     <c>SendHttpRequestAsync(uri, client)</c> still binds the public overload uniquely. Nothing
+    ///     outside this assembly needs to choose a completion option yet, and adding an optional
+    ///     parameter to the public method instead would have been a binary break for a published
+    ///     library.
+    ///     </para>
+    ///     <para>
+    ///     <see cref="HttpCompletionOption.ResponseHeadersRead"/> hands back a live network stream, so
+    ///     the caller becomes responsible for reading it — asynchronously, and under a bound. See
+    ///     <c>ReadContentAsync</c>.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is <see langword="null"/>.</exception>
+    internal static async Task<HttpResponseMessage> SendHttpRequestAsync(
+        Uri source,
+        HttpClient httpClient,
+        SyndicationRequestOptions? requestOptions,
+        HttpCompletionOption completionOption,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(httpClient);
+
+        using HttpRequestMessage request = CreateHttpRequestMessage(source, requestOptions);
+        return await httpClient.SendAsync(request, completionOption, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Decodes a base64 encoded string.
+    /// </summary>
+    /// <param name="encodedValue">The base64 encoded string to decode.</param>
+    /// <returns>A readable, seekable stream over the decoded bytes, positioned at the start. The caller owns it.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="encodedValue"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="encodedValue"/> is an empty string.</exception>
+    /// <exception cref="FormatException">The <paramref name="encodedValue"/> is not valid base64.</exception>
+    public static Stream DecodeBase64String(string encodedValue)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(encodedValue);
+
+        byte[] data = Convert.FromBase64String(encodedValue);
+        MemoryStream stream = new(data);
+
+        if (stream.CanSeek)
+        {
+            stream.Seek(0, SeekOrigin.Begin);
+        }
+
+        return stream;
+    }
+
+    /// <summary>
+    /// Decodes an HTML escaped string.
+    /// </summary>
+    /// <param name="escapedValue">The HTML escaped string to decode.</param>
+    /// <returns>The unescaped value.</returns>
+    /// <remarks>
+    ///     Two decodes, not one: HTML entity decoding followed by URL decoding. The second is what makes
+    ///     this unsuitable for arbitrary prose — URL decoding reads <c>+</c> as a space and <c>%</c> as
+    ///     the start of an escape, so text that legitimately contains either comes back altered.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="escapedValue"/> is an empty string.</exception>
+    public static string DecodeHtmlEscapedString(string escapedValue)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(escapedValue);
+
+        string decodedResult = System.Web.HttpUtility.HtmlDecode(escapedValue);
+        decodedResult = System.Web.HttpUtility.UrlDecode(decodedResult);
+
+        return decodedResult;
+    }
+
+    /// <summary>
+    /// Returns an <see cref="Encoding"/> that represents the XML character encoding for the supplied array of bytes.
+    /// </summary>
+    /// <param name="data">An array of bytes that represents an XML data source to determine the character encoding for.</param>
+    /// <returns>
+    ///     A <see cref="Encoding"/> that represents the character encoding specified by the XML data source.
+    ///     If the character encoding is not specified or unable to be determined, returns <see cref="Encoding.UTF8"/>.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is <see langword="null"/>.</exception>
+    public static Encoding GetXmlEncoding(byte[] data)
+    {
+        ArgumentNullException.ThrowIfNull(data);
+
+        // The declaration sits at offset 0, so sniffing the head of the document is normally enough.
+        // The previous implementation decoded the whole document and ran the regex over all of it,
+        // which on a 1000-item feed cost megabytes to read a few dozen bytes.
+        if (data.Length > XmlDeclarationProbeLength)
+        {
+            Encoding sniffed = SniffXmlEncoding(data.AsSpan(0, XmlDeclarationProbeLength), out bool declarationMayOverrun);
+            if (!declarationMayOverrun)
+            {
+                return sniffed;
+            }
+        }
+
+        // Decoding the whole array, which is what a declaration longer than the probe window costs and
+        // why this overload is documented as unbounded. Routed through the string overload rather than
+        // the regex directly, so an empty array still produces the ArgumentException that overload's
+        // guard raises.
+        using MemoryStream stream = new(data);
+        using StreamReader reader = new(stream);
+        return SyndicationEncodingUtility.GetXmlEncoding(reader.ReadToEnd());
+    }
+
+    /// <summary>
+    /// Returns an <see cref="Encoding"/> that represents the XML character encoding for the supplied content.
+    /// </summary>
+    /// <param name="content">A string that represents the XML data to determine the character encoding for.</param>
+    /// <returns>
+    ///     A <see cref="Encoding"/> that represents the character encoding specified by the XML data.
+    ///     If the character encoding is not specified or unable to be determined, returns <see cref="Encoding.UTF8"/>.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
+    public static Encoding GetXmlEncoding(string content)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(content);
+
+        // Deliberately unbounded. A declaration may legally contain arbitrary whitespace between its
+        // pseudo-attributes, so truncating the input here would change the answer for a document
+        // whose declaration runs long - and this overload is public API. The byte[] overload gets
+        // the bounded fast path instead, falling back to this one when the declaration overruns it.
+        return SyndicationEncodingUtility.EncodingFromMatch(XmlDeclarationEncodingRegex().Match(content));
+    }
+
+    /// <summary>
+    /// Reads the character encoding out of an XML declaration at the head of a document.
+    /// </summary>
+    /// <param name="window">The leading bytes of the document.</param>
+    /// <param name="declarationMayOverrun">
+    ///     On return, <see langword="true"/> when the window opens an XML declaration whose closing
+    ///     <c>?&gt;</c> is not inside it, so the answer is not yet known and more bytes are needed.
+    /// </param>
+    /// <returns>The declared encoding, or <see cref="Encoding.UTF8"/> when none is declared, the name is
+    /// unknown, or the window is empty.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     The flag is not optional. Three different situations all produce
+    ///     <see cref="Encoding.UTF8"/> — the document declared UTF-8, the document declared nothing, and
+    ///     the document opened a declaration this window could not see the end of. Only the third means
+    ///     "ask again with more bytes", and a caller cannot tell them apart from the return value alone.
+    ///     </para>
+    ///     <para>
+    ///     The trigger is <i>a declaration that did not close</i>, not <i>an <c>encoding=</c> that was
+    ///     not found</i>, and the difference is a silent mis-decode. The declaration regex requires the
+    ///     closing <c>?&gt;</c>, so a declaration whose <c>encoding=</c> sits inside the window but whose
+    ///     <c>?&gt;</c> does not fails to match even though the answer was right there. Growing on
+    ///     "no <c>encoding=</c>" would stop early on exactly that document and answer <c>utf-8</c> for a
+    ///     feed that said <c>iso-8859-1</c>. Row 15b of the encoding matrix is that document.
+    ///     </para>
+    ///     <para>
+    ///     Decoding goes through <see cref="StreamReader"/> rather than a hand-rolled preamble scan.
+    ///     A byte-order mark has to be detected and stripped before the regex sees the text or a UTF-16
+    ///     document decodes to nonsense, and the three byte-order-mark tests in this repository all
+    ///     declare an encoding matching their own mark — so a decoder that forgot to strip it would pass
+    ///     every one of them. Copying ≤512 bytes to let the framework do it is worth more than the
+    ///     allocation it costs.
+    ///     </para>
+    /// </remarks>
+    internal static Encoding SniffXmlEncoding(ReadOnlySpan<byte> window, out bool declarationMayOverrun)
+    {
+        declarationMayOverrun = false;
+
+        if (window.IsEmpty)
+        {
+            return Encoding.UTF8;
+        }
+
+        using MemoryStream head = new(window.ToArray(), writable: false);
+        using StreamReader headReader = new(head, Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
+        string prefix = headReader.ReadToEnd();
+
+        Match prefixMatch = XmlDeclarationEncodingRegex().Match(prefix);
+        if (prefixMatch.Success)
+        {
+            return SyndicationEncodingUtility.EncodingFromMatch(prefixMatch);
+        }
+
+        declarationMayOverrun = prefix.TrimStart().StartsWith("<?xml", StringComparison.OrdinalIgnoreCase);
+        return Encoding.UTF8;
+    }
+
+    /// <summary>
+    /// Resolves the <see cref="Encoding"/> named by an XML declaration match.
+    /// </summary>
+    /// <param name="encodingMatch">The result of matching <see cref="XmlDeclarationEncodingRegex"/>.</param>
+    /// <returns>The named encoding, or <see cref="Encoding.UTF8"/> if the match failed or named an unknown encoding.</returns>
+    private static Encoding EncodingFromMatch(Match encodingMatch)
+    {
+        Encoding encoding = Encoding.UTF8;
+
+        if (encodingMatch is { Groups.Count: > 0 })
+        {
+            Group group = encodingMatch.Groups["webName"];
+            if (group is not null)
+            {
+                try
+                {
+                    encoding = Encoding.GetEncoding(group.Value);
+                }
+                catch (ArgumentException)
+                {
+                    encoding = Encoding.UTF8;
                 }
             }
+        }
 
-            return contentEncoding;
-        }*/
+        return encoding;
+    }
 
-        /// <summary>
-        /// Returns an <see cref="Encoding"/> that represents the XML character encoding for the supplied array of bytes.
-        /// </summary>
-        /// <param name="data">An array of bytes that represents an XML data source to determine the character encoding for.</param>
-        /// <returns>
-        ///     A <see cref="Encoding"/> that represents the character encoding specified by the XML data source.
-        ///     If the character encoding is not specified or unable to be determined, returns <see cref="Encoding.UTF8"/>.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static Encoding GetXmlEncoding(byte[] data)
+    /// <summary>
+    /// Sanitizes the supplied string so that it can be safely represented in XML.
+    /// </summary>
+    /// <param name="content">A string that represents the XML data to parse for invalid XML hexadecimal characters.</param>
+    /// <returns>A string that has been sanitized to be safe for XML.</returns>
+    /// <remarks>
+    ///     <para>The sanitation process removes characters that are invalid for XML encoding.</para>
+    ///     <para>
+    ///         Hexadecimal characters that are valid include: #x9, #xA, #xD, [#x20-#xD7FF], [#xE000-#xFFFD], [#x10000-#x10FFFF],
+    ///         and any Unicode character; excluding the surrogate blocks FFFE and FFFF.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
+    public static string RemoveInvalidXmlHexadecimalCharacters(string content)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(content);
+
+        // Almost every real document is already clean, and the old implementation still allocated a
+        // StringBuilder the size of the whole document and rebuilt it character by character to
+        // discover that. Scan first and hand back the original instance when there is nothing to
+        // remove; only pay for a rebuild when a character actually has to go.
+        int firstInvalid = IndexOfInvalidXmlCharacter(content);
+        if (firstInvalid < 0)
         {
-            Guard.ArgumentNotNull(data, "data");
+            return content;
+        }
 
-            using (MemoryStream stream = new MemoryStream(data))
+        // Adapted from https://stackoverflow.com/a/17735649
+        StringBuilder result = new(content.Length);
+        result.Append(content.AsSpan(0, firstInvalid));
+
+        for (int i = firstInvalid; i < content.Length; i++)
+        {
+            if (XmlConvert.IsXmlChar(content[i]))
             {
-                return SyndicationEncodingUtility.GetXmlEncoding(stream);
+                result.Append(content[i]);
+            }
+            else if (i + 1 < content.Length && XmlConvert.IsXmlSurrogatePair(content[i + 1], content[i]))
+            {
+                result.Append(content[i]);
+                result.Append(content[i + 1]);
+                i++;
             }
         }
 
-        /// <summary>
-        /// Returns an <see cref="Encoding"/> that represents the XML character encoding for the supplied <see cref="Stream"/>.
-        /// </summary>
-        /// <param name="stream">A <see cref="Stream"/> that represents an XML data source to determine the character encoding for.</param>
-        /// <returns>
-        ///     A <see cref="Encoding"/> that represents the character encoding specified by the XML data source.
-        ///     If the character encoding is not specified or unable to be determined, returns <see cref="Encoding.UTF8"/>.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
-        public static Encoding GetXmlEncoding(Stream stream)
-        {
-            Guard.ArgumentNotNull(stream, "stream");
+        return result.ToString();
+    }
 
-            using (StreamReader reader = new StreamReader(stream))
+    /// <summary>
+    /// Returns the index of the first character that <see cref="RemoveInvalidXmlHexadecimalCharacters(string)"/> would drop.
+    /// </summary>
+    /// <param name="content">The content to scan.</param>
+    /// <returns>The index of the first character that would be removed, or <c>-1</c> if the content is already valid.</returns>
+    /// <remarks>
+    ///     The two keep conditions mirror the rebuild loop exactly: a character survives if it is a valid
+    ///     XML character, or if it opens a valid surrogate pair with the character after it.
+    /// </remarks>
+    private static int IndexOfInvalidXmlCharacter(string content)
+    {
+        // Read the deferred set once rather than on every iteration, so the loop is unchanged by
+        // where the field now lives.
+        SearchValues<char> invalid = InvalidXmlCharacters.Value;
+        int consumed = 0;
+
+        while (true)
+        {
+            int candidate = content.AsSpan(consumed).IndexOfAny(invalid);
+            if (candidate < 0)
             {
-                return SyndicationEncodingUtility.GetXmlEncoding(reader.ReadToEnd());
+                return -1;
+            }
+
+            int index = consumed + candidate;
+
+            // The set is a candidate finder rather than an answer: it contains every surrogate, so a
+            // valid astral character lands here too. Resume the vectorised search past a genuine pair
+            // instead of falling into a scalar walk for the remainder - otherwise one emoji early in a
+            // document would cost the whole rest of it.
+            if (index + 1 < content.Length && XmlConvert.IsXmlSurrogatePair(content[index + 1], content[index]))
+            {
+                consumed = index + 2;
+                continue;
+            }
+
+            return index;
+        }
+    }
+
+    /// <summary>
+    /// Enumerates every code unit that <see cref="XmlConvert.IsXmlChar(char)"/> rejects.
+    /// </summary>
+    /// <returns>The complement of the valid XML character set over the basic multilingual plane.</returns>
+    private static string BuildInvalidXmlCharacters()
+    {
+        StringBuilder builder = new(2_079);
+
+        for (int codeUnit = 0; codeUnit <= 0xFFFF; codeUnit++)
+        {
+            if (!XmlConvert.IsXmlChar((char)codeUnit))
+            {
+                builder.Append((char)codeUnit);
             }
         }
 
-        /// <summary>
-        /// Returns an <see cref="Encoding"/> that represents the XML character encoding for the supplied content.
-        /// </summary>
-        /// <param name="content">A string that represents the XML data to determine the character encoding for.</param>
-        /// <returns>
-        ///     A <see cref="Encoding"/> that represents the character encoding specified by the XML data.
-        ///     If the character encoding is not specified or unable to be determined, returns <see cref="Encoding.UTF8"/>.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-        public static Encoding GetXmlEncoding(string content)
+        return builder.ToString();
+    }
+
+    /// <summary>
+    /// Converts a string into a value that can be safely used as a <see cref="Directory">directory</see> name.
+    /// </summary>
+    /// <param name="name">The directory name to encode.</param>
+    /// <returns>A string that can be safely used as an argument when <see cref="Directory.CreateDirectory(string)">creating a directory</see>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
+    public static string EncodeSafeDirectoryName(string name)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(name);
+
+        SearchValues<char> invalid = InvalidDirectoryCharacters.Value;
+
+        // Fast path: check if any invalid characters exist
+        if (!name.ContainsAny(invalid))
         {
-            Encoding encoding       = Encoding.UTF8;
-            string encodingPattern  = @"^<\?xml.+?encoding\s*=\s*(?:""(?<webName>[^""]*)""|(?<webName>\S+)).*?\?>";
+            return name;
+        }
 
-            Guard.ArgumentNotNullOrEmptyString(content, "content");
-
-            Match encodingMatch = Regex.Match(content, encodingPattern, RegexOptions.IgnoreCase | RegexOptions.Singleline);
-            if (encodingMatch != null && encodingMatch.Groups.Count > 0)
+        // Remove invalid characters using StringBuilder
+        StringBuilder result = new(name.Length);
+        foreach (char c in name)
+        {
+            if (!invalid.Contains(c))
             {
-                Group group = encodingMatch.Groups["webName"];
-                if (group != null)
-                {
-                    try
-                    {
-                        encoding    = Encoding.GetEncoding(group.Value);
-                    }
-                    catch (ArgumentException)
-                    {
-                        encoding    = Encoding.UTF8;
-                    }
-                }
+                result.Append(c);
             }
-
-            return encoding;
         }
 
-        /// <summary>
-        /// Sanitizes the supplied string so that it can be safely represented in XML.
-        /// </summary>
-        /// <param name="content">A string that represents the XML data to parse for invalid XML hexadecimal characters.</param>
-        /// <returns>A string that has been sanitized to be safe for XML.</returns>
-        /// <remarks>
-        ///     <para>The sanitation process removes characters that are invalid for XML encoding.</para>
-        ///     <para>
-        ///         Hexadecimal characters that are valid include: #x9, #xA, #xD, [#x20-#xD7FF], [#xE000-#xFFFD], [#x10000-#x10FFFF],
-        ///         and any Unicode character; excluding the surrogate blocks FFFE and FFFF.
-        ///     </para>
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-        public static string RemoveInvalidXmlHexadecimalCharacters(string content)
-        {
-            Guard.ArgumentNotNullOrEmptyString(content, "content");
-
-            // Adapted from https://stackoverflow.com/a/17735649
-            StringBuilder result = new StringBuilder(content.Length);
-            for (int i = 0; i < content.Length; i++)
-            {
-                if (XmlConvert.IsXmlChar(content[i]))
-                {
-                    result.Append(content[i]);
-                }
-                else if (i + 1 < content.Length && XmlConvert.IsXmlSurrogatePair(content[i + 1], content[i]))
-                {
-                    result.Append(content[i]);
-                    result.Append(content[i + 1]);
-                    i++;
-                }
-            }
-
-            return result.ToString();
-        }
-
-        /// <summary>
-        /// Converts a string into a value that can be safely used as a <see cref="Directory">directory</see> name.
-        /// </summary>
-        /// <param name="name">The directory name to encode.</param>
-        /// <returns>A string that can be safely used as an argument when <see cref="Directory.CreateDirectory(string)">creating a directory</see>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-        public static string EncodeSafeDirectoryName(string name)
-        {
-            string directoryName    = String.Empty;
-
-            Guard.ArgumentNotNullOrEmptyString(name, "name");
-
-            directoryName   = name.Replace("\\", String.Empty);
-            directoryName   = directoryName.Replace("/", String.Empty);
-            directoryName   = directoryName.Replace(":", String.Empty);
-            directoryName   = directoryName.Replace("*", String.Empty);
-            directoryName   = directoryName.Replace("?", String.Empty);
-            directoryName   = directoryName.Replace("<", String.Empty);
-            directoryName   = directoryName.Replace(">", String.Empty);
-            directoryName   = directoryName.Replace("|", String.Empty);
-
-            return directoryName;
-        }
-
-        /// <summary>
-        /// Gets an array of bytes that represent the data of the supplied <see cref="Stream"/>.
-        /// </summary>
-        /// <param name="stream">The <see cref="Stream"/> to get an array of bytes for.</param>
-        /// <returns>An array of bytes that represent the data of the supplied <paramref name="stream"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
-        private static byte[] GetStreamBytes(Stream stream)
-        {
-            int initialLength   = 32768;
-            int read            = 0;
-            int chunk;
-
-            Guard.ArgumentNotNull(stream, "stream");
-
-            byte[] buffer   = new byte[initialLength];
-
-            while ((chunk = stream.Read(buffer, read, buffer.Length - read)) > 0)
-            {
-                read += chunk;
-
-                if (read == buffer.Length)
-                {
-                    int nextByte    = stream.ReadByte();
-
-                    if (nextByte == -1)
-                    {
-                        return buffer;
-                    }
-
-                    byte[] newBuffer    = new byte[buffer.Length * 2];
-                    Array.Copy(buffer, newBuffer, buffer.Length);
-                    newBuffer[read]     = (byte)nextByte;
-                    buffer              = newBuffer;
-                    read++;
-                }
-            }
-
-            byte[] result  = new byte[read];
-            Array.Copy(buffer, result, read);
-
-            return result;
-        }
+        return result.ToString();
     }
 }

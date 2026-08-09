@@ -1,52 +1,49 @@
-﻿using System;
-
-using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core.Atom;
+
+/// <summary>
+/// Preserves the metadata of the feed an entry was copied from, using <see cref="AtomSource"/>.
+/// </summary>
+internal static class AtomSourceExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="AtomSource"/> class.
+    /// Builds the containing <see cref="AtomFeed"/> and prints the <see cref="AtomSource"/> it holds.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="AtomSource"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    public static class AtomSourceExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the AtomSource class.
-        /// </summary>
-        public static void ClassExample()
+        AtomFeed feed = new()
         {
-            AtomFeed feed   = new AtomFeed();
+            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new AtomTextConstruct("Example Feed"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
+        };
 
-            feed.Id         = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
-            feed.Title      = new AtomTextConstruct("Example Feed");
-            feed.UpdatedOn  = new DateTime(2003, 12, 13, 18, 30, 2);
+        feed.Links.Add(new AtomLink(new Uri("https://endjin.com/")));
+        feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
-            feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
-            feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
+        feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
-            feed.Authors.Add(new AtomPersonConstruct("John Doe"));
+        AtomEntry entry = new()
+        {
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
+            Summary = new AtomTextConstruct("Some text.")
+        };
 
-            AtomEntry entry = new AtomEntry();
+        //  Entry was copied from another feed, so preserve source meta-data
+        AtomSource source = new()
+        {
+            Id = new AtomId(new Uri("http://example2.org/")),
+            Title = new AtomTextConstruct("Fourty-Two"),
+            UpdatedOn = new DateTime(2003, 11, 13, 18, 30, 2),
+            Rights = new AtomTextConstruct("© 2026 endjin limited")
+        };
+        entry.Source = source;
 
-            entry.Id        = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
-            entry.Title     = new AtomTextConstruct("Atom-Powered Robots Run Amok");
-            entry.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
+        feed.Entries.Add(entry);
 
-            entry.Summary   = new AtomTextConstruct("Some text.");
-
-            //  Entry was copied from another feed, so preserve source meta-data
-            AtomSource source   = new AtomSource();
-            source.Id           = new AtomId(new Uri("http://example2.org/"));
-            source.Title        = new AtomTextConstruct("Fourty-Two");
-            source.UpdatedOn    = new DateTime(2003, 11, 13, 18, 30, 2);
-            source.Rights       = new AtomTextConstruct("© 2003 Example, Inc.");
-            entry.Source        = source;
-
-            feed.AddEntry(entry);
-        }
+        ExampleOutput.ShowAtomSource(source);
     }
 }

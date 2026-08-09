@@ -1,32 +1,28 @@
-﻿using System;
-
-using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core.Rss;
+
+/// <summary>
+/// Adds an <see cref="RssTextInput"/> form to a channel.
+/// </summary>
+internal static class RssTextInputExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="RssTextInput"/> class.
+    /// Builds the containing <see cref="RssFeed"/> and prints the <see cref="RssTextInput"/> it holds.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="RssTextInput"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-    public static class RssTextInputExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the RssTextInput class.
-        /// </summary>
-        public static void ClassExample()
+        RssFeed feed = new()
         {
-            RssFeed feed    = new RssFeed();
+            Channel =
+            {
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI",
+                TextInput = new RssTextInput("What software are you using?", new Uri("https://endjin.com/search"), "query", "TextInput Inquiry")
+            }
+        };
 
-            feed.Channel.Title          = "Dallas Times-Herald";
-            feed.Channel.Link           = new Uri("http://dallas.example.com");
-            feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
-
-            feed.Channel.TextInput      = new RssTextInput("What software are you using?", new Uri("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry");
-        }
+        ExampleOutput.ShowRssTextInput(feed.Channel.TextInput);
     }
 }

@@ -1,36 +1,47 @@
-﻿using System;
-
 using Argotic.Common;
 
-namespace Argotic.Syndication
+namespace Argotic.Syndication;
+
+/// <summary>
+/// Represents the remote-procedure-call transport a subscriber uses to register with an <see cref="RssCloud"/>.
+/// </summary>
+/// <seealso cref="RssCloud.Protocol"/>
+/// <remarks>
+///     <para>
+///     The RssCloud interface defines three transports, identified in the <c>protocol</c> attribute as
+///     <c>xml-rpc</c>, <c>soap</c> and <c>http-post</c>, and all three are modelled here. The interface is
+///     specified at
+///     <a href="https://www.rssboard.org/rsscloud-interface">https://www.rssboard.org/rsscloud-interface</a>.
+///     </para>
+///     <para>
+///     A <c>protocol</c> value outside those three still resolves to <see cref="None"/> and is lost, because
+///     the transport is modelled as an enumeration and <see cref="RssCloud.Protocol"/> refuses
+///     <see cref="None"/>. Preserving an unknown transport would need a member that carries the string.
+///     </para>
+/// </remarks>
+public enum RssCloudProtocol
 {
     /// <summary>
-    /// Represents the message format utilized by a web service that implements the RssCloud application programming interface.
+    /// No cloud protocol specified. Also the result of parsing a <c>protocol</c> attribute this enumeration does not model.
     /// </summary>
-    /// <seealso cref="RssCloud"/>
-    /// <remarks>
-    ///     For more information about the RssCloud application programming interface, see <a href="http://www.rssboard.org/rsscloud-interface">http://www.rssboard.org/rsscloud-interface</a>.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-    [Serializable()]
-    public enum RssCloudProtocol
-    {
-        /// <summary>
-        /// No cloud protocol specified.
-        /// </summary>
-        [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-        None = 0,
+    [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
+    None = 0,
 
-        /// <summary>
-        /// The cloud notification web service utilizes SOAP 1.1 message exchange. 
-        /// </summary>
-        [EnumerationMetadata(DisplayName = "SOAP 1.1", AlternateValue = "soap")]
-        Soap = 1,
+    /// <summary>
+    /// The cloud notification web service exchanges SOAP 1.1 messages. Written as <c>protocol="soap"</c>.
+    /// </summary>
+    [EnumerationMetadata(DisplayName = "SOAP 1.1", AlternateValue = "soap")]
+    Soap = 1,
 
-        /// <summary>
-        /// The cloud notification web service utilizes XML-RPC message exchange. 
-        /// </summary>
-        [EnumerationMetadata(DisplayName = "XML-RPC", AlternateValue = "xml-rpc")]
-        XmlRpc = 2
-    }
+    /// <summary>
+    /// The cloud notification web service exchanges XML-RPC messages. Written as <c>protocol="xml-rpc"</c>.
+    /// </summary>
+    [EnumerationMetadata(DisplayName = "XML-RPC", AlternateValue = "xml-rpc")]
+    XmlRpc = 2,
+
+    /// <summary>
+    /// The cloud notification web service is called with a REST-style HTTP POST. Written as <c>protocol="http-post"</c>.
+    /// </summary>
+    [EnumerationMetadata(DisplayName = "HTTP POST", AlternateValue = "http-post")]
+    HttpPost = 3
 }

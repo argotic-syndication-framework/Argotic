@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  An endjin blogroll. OPML is a subscription list, so a realistic one is mostly other people's feeds —
+  the third-party URLs here are the point of the format rather than placeholder content, and they are
+  real feeds an engineer at endjin would plausibly follow.
+
+  Six top-level outlines, chosen so that between them they cover every outline type OPML 2.0 defines:
+  rss subscriptions nested three deep, plain link outlines, include outlines that pull in another OPML
+  file, and an outline carrying non-standard attributes a reader must preserve without understanding.
+-->
+<opml version="2.0">
+  <head>
+    <title>endjin blogroll</title>
+    <dateCreated>Mon, 05 Jan 2026 08:00:00 GMT</dateCreated>
+    <dateModified>Fri, 07 Aug 2026 12:00:00 GMT</dateModified>
+    <ownerName>endjin</ownerName>
+    <ownerEmail>hello@endjin.com</ownerEmail>
+    <ownerId>https://endjin.com/who-we-are/</ownerId>
+    <docs>http://opml.org/spec2.opml</docs>
+    <expansionState>1,2,5</expansionState>
+    <vertScrollState>1</vertScrollState>
+    <windowTop>100</windowTop>
+    <windowLeft>200</windowLeft>
+    <windowBottom>700</windowBottom>
+    <windowRight>1000</windowRight>
+  </head>
+  <body>
+    <outline text="endjin" title="endjin" description="endjin's own feeds">
+      <outline text="endjin blog" title="endjin blog" type="rss"
+               xmlUrl="https://endjin.com/rss.xml"
+               htmlUrl="https://endjin.com/blog/"
+               description="Technical writing on .NET, data, analytics and AI"
+               language="en-gb"
+               version="RSS2"/>
+      <outline text="endjin blog (Atom)" title="endjin blog (Atom)" type="rss"
+               xmlUrl="https://endjin.com/atom.xml"
+               htmlUrl="https://endjin.com/blog/"
+               description="The same posts, served as Atom 1.0"/>
+      <outline text="endjin talks" title="endjin talks" type="link"
+               url="https://endjin.com/what-we-think/talks/"
+               description="Conference talks and screencasts"/>
+    </outline>
+
+    <outline text="Technology" title="Technology" description="Technology-related feeds and resources">
+      <outline text="Microsoft" title="Microsoft" description="Microsoft developer blogs and news">
+        <outline text=".NET Blog" title=".NET Blog" type="rss"
+                 xmlUrl="https://devblogs.microsoft.com/dotnet/feed/"
+                 htmlUrl="https://devblogs.microsoft.com/dotnet/"
+                 description="Official .NET Blog"
+                 language="en-us"
+                 version="RSS2"/>
+        <outline text="Azure Blog" title="Azure Blog" type="rss"
+                 xmlUrl="https://azure.microsoft.com/en-us/blog/feed/"
+                 htmlUrl="https://azure.microsoft.com/en-us/blog/"
+                 description="Microsoft Azure updates and announcements"/>
+        <outline text="Visual Studio" title="Visual Studio Blog" type="rss"
+                 xmlUrl="https://devblogs.microsoft.com/visualstudio/feed/"
+                 htmlUrl="https://devblogs.microsoft.com/visualstudio/"/>
+      </outline>
+      <outline text="Open Source" title="Open Source Projects">
+        <outline text="GitHub Blog" title="GitHub Blog" type="rss"
+                 xmlUrl="https://github.blog/feed/"
+                 htmlUrl="https://github.blog/"
+                 description="GitHub company blog"/>
+        <outline text="DuckDB" title="DuckDB" type="rss"
+                 xmlUrl="https://duckdb.org/feed.xml"
+                 htmlUrl="https://duckdb.org/"/>
+      </outline>
+    </outline>
+
+    <outline text="News" title="News" description="General news sources">
+      <outline text="World News" title="World News">
+        <outline text="BBC" title="BBC News" type="rss"
+                 xmlUrl="https://feeds.bbci.co.uk/news/rss.xml"
+                 htmlUrl="https://www.bbc.co.uk/news"
+                 description="BBC World News"/>
+        <outline text="Reuters" title="Reuters" type="rss"
+                 xmlUrl="https://www.reutersagency.com/feed/"
+                 htmlUrl="https://www.reuters.com/"/>
+      </outline>
+      <outline text="Tech News" title="Technology News">
+        <outline text="Ars Technica" title="Ars Technica" type="rss"
+                 xmlUrl="https://feeds.arstechnica.com/arstechnica/index"
+                 htmlUrl="https://arstechnica.com/"
+                 description="Technology news and analysis"/>
+        <outline text="The Verge" title="The Verge" type="rss"
+                 xmlUrl="https://www.theverge.com/rss/index.xml"
+                 htmlUrl="https://www.theverge.com/"/>
+      </outline>
+    </outline>
+
+    <outline text="Reference Links" title="Reference Links" description="Useful reference links (non-RSS)">
+      <outline text="W3C" title="W3C" type="link"
+               url="https://www.w3.org/"
+               description="World Wide Web Consortium"/>
+      <outline text="RSS Advisory Board" title="RSS Advisory Board" type="link"
+               url="https://www.rssboard.org/rss-specification"
+               description="The RSS 2.0 specification"/>
+      <outline text="Podcast Namespace" title="Podcast Namespace" type="link"
+               url="https://podcastindex.org/namespace/1.0"
+               description="The Podcasting 2.0 namespace specification"/>
+    </outline>
+
+    <outline text="Included Lists" title="Included Lists" description="OPML files included from other sources">
+      <outline text="Azure Weekly" title="Azure Weekly subscriptions" type="include"
+               url="https://endjin.com/opml/azure-weekly.opml"
+               description="The feeds behind the Azure Weekly newsletter"/>
+      <outline text="Power BI Weekly" title="Power BI Weekly subscriptions" type="include"
+               url="https://endjin.com/opml/power-bi-weekly.opml"
+               description="The feeds behind the Power BI Weekly newsletter"/>
+    </outline>
+
+    <outline text="Custom Attributes" title="Custom Attributes Demo"
+             description="Attributes OPML 2.0 does not define, which a reader must round-trip untouched"
+             created="2026-01-05T12:00:00Z"
+             category="demo,example,testing">
+      <outline text="endjin blog" title="endjin blog" type="rss"
+               xmlUrl="https://endjin.com/rss.xml"
+               htmlUrl="https://endjin.com/blog/"
+               isComment="false"
+               isBreakpoint="false"/>
+    </outline>
+  </body>
+</opml>

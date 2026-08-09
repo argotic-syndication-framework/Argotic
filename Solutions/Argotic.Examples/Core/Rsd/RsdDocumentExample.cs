@@ -1,211 +1,225 @@
-﻿using System;
-using System.IO;
-using System.Net;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
-using Argotic.Syndication.Specialized;
+using Argotic.Syndication;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core.Rsd;
+
+/// <summary>
+/// Demonstrates the whole <see cref="RsdDocument"/> surface: describing a blog's APIs by hand, then the <c>Load</c>, <c>LoadAsync</c>, <c>CreateAsync</c> and <c>Save</c> overloads.
+/// </summary>
+/// <remarks>
+///     Every resource type in the library exposes this same set of overloads, so what is shown here for
+///     <see cref="RsdDocument"/> reads across to the other formats unchanged. <c>CreateAsync</c> is the one-call
+///     form; <c>LoadAsync</c> on an instance is the form that lets you subscribe to <c>Loaded</c> first.
+/// </remarks>
+internal static class RsdDocumentExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="RsdDocument"/> class.
+    /// Builds a complete <see cref="RsdDocument"/> by hand and prints it.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="RsdDocument"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
-    public static class RsdDocumentExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the RsdDocument class.
-        /// </summary>
-        public static void ClassExample()
+        RsdDocument document = new()
         {
-            RsdDocument document    = new RsdDocument();
+            EngineName = "endjin publishing",
+            EngineLink = new Uri("https://endjin.com/"),
+            Homepage = new Uri("http://www.userdomain.com/")
+        };
 
-            document.EngineName     = "Blog Munging CMS";
-            document.EngineLink     = new Uri("http://www.blogmunging.com/");
-            document.Homepage       = new Uri("http://www.userdomain.com/");
+        document.Interfaces.Add(new RsdApplicationInterface("MetaWeblog", new Uri("https://endjin.com/xmlrpc"), true, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("Blogger", new Uri("https://endjin.com/xmlrpc"), false, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("MetaWiki", new Uri("https://endjin.com/blog/trying-out-wsl-containers"), false, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("Antville", new Uri("https://endjin.com/blog/cloud-ai-slas-are-not-what-you-think"), false, "123abc"));
 
-            document.AddInterface(new RsdApplicationInterface("MetaWeblog", new Uri("http://example.com/xml/rpc/url"), true, "123abc"));
-            document.AddInterface(new RsdApplicationInterface("Blogger", new Uri("http://example.com/xml/rpc/url"), false, "123abc"));
-            document.AddInterface(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));
-            document.AddInterface(new RsdApplicationInterface("Antville", new Uri("http://example.com/yet/another/url"), false, "123abc"));
-
-            RsdApplicationInterface conversantApi   = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, String.Empty);
-            conversantApi.Documentation             = new Uri("http://www.conversant.com/docs/api/");
-            conversantApi.Notes                     = "Additional explanation here.";
-            conversantApi.Settings.Add("service-specific-setting", "a value");
-            conversantApi.Settings.Add("another-setting", "another value");
-            document.AddInterface(conversantApi);
-        }
-        /// <summary>
-        /// Provides example code for the RsdDocument.Create(Uri) method
-        /// </summary>
-        public static void CreateExample()
+        RsdApplicationInterface conversantApi = new("Conversant", new Uri("https://endjin.com/xmlrpc"), false, string.Empty)
         {
-            RsdDocument document    = RsdDocument.Create(new Uri("http://blog.oppositionallydefiant.com/rsd.axd"));
-            
-            foreach(RsdApplicationInterface api in document.Interfaces)
+            Documentation = new Uri("http://www.conversant.com/docs/api/"),
+            Notes = "Additional explanation here."
+        };
+        conversantApi.Settings.Add("service-specific-setting", "a value");
+        conversantApi.Settings.Add("another-setting", "another value");
+        document.Interfaces.Add(conversantApi);
+        ExampleOutput.ShowRsdDocument(document);
+    }
+
+    /// <summary>
+    /// Creates an <see cref="RsdDocument"/> from a <see cref="Uri"/> in a single call.
+    /// </summary>
+    public static async Task CreateExampleAsync()
+    {
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RsdDocument);
+        RsdDocument document = new();
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
+
+        foreach (RsdApplicationInterface api in document.Interfaces)
+        {
+            if (api.IsPreferred)
             {
-                if (api.IsPreferred)
-                {
-                    //  Perform some processing on the application programming interface
-                    break;
-                }
+                //  Perform some processing on the application programming interface
+                break;
             }
         }
-        /// <summary>
-        /// Provides example code for the LoadAsync(Uri, Object) method
-        /// </summary>
-        public static void LoadAsyncExample()
+        ExampleOutput.ShowRsdDocument(document);
+    }
+
+    /// <summary>
+    /// Subscribes to <c>Loaded</c> before loading, so the handler sees the resource the moment it is parsed.
+    /// </summary>
+    public static async Task LoadAsyncExampleAsync()
+    {
+        RsdDocument document = new();
+
+        document.Loaded += ResourceLoadedCallback;
+
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RsdDocument);
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
+        ExampleOutput.ShowRsdDocument(document);
+    }
+
+    /// <summary>
+    /// Handles the <see cref="RsdDocument.Loaded"/> event.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
+    private static void ResourceLoadedCallback(object? sender, SyndicationResourceLoadedEventArgs e)
+    {
+        // Process the loaded document using e.Data or e.Source
+        if (e.Source is not null)
         {
-            RsdDocument document   = new RsdDocument();
-
-            document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
-
-            document.LoadAsync(new Uri("http://blog.oppositionallydefiant.com/rsd.axd"), null);
+            // Process the source URI
         }
+    }
 
-        /// <summary>
-        /// Handles the <see cref="RsdDocument.Loaded"/> event.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-        private static void ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
+    /// <summary>
+    /// Loads an <see cref="RsdDocument"/> from an <see cref="IXPathNavigable"/>.
+    /// </summary>
+    public static void LoadIXPathNavigableExample()
+    {
+        using XmlReader xmlReader = XmlReader.Create(SampleDataPath.RsdDocument.FullPath, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        XPathDocument source = new(xmlReader);
+
+        RsdDocument document = new();
+        document.Load(source);
+
+        foreach (RsdApplicationInterface api in document.Interfaces)
         {
-            if(e.State != null)
+            if (api.IsPreferred)
             {
+                //  Perform some processing on the application programming interface
+                break;
             }
         }
-        /// <summary>
-        /// Provides example code for the Load(IXPathNavigable) method
-        /// </summary>
-        public static void LoadIXPathNavigableExample()
+        ExampleOutput.ShowRsdDocument(document);
+    }
+
+    /// <summary>
+    /// Loads an <see cref="RsdDocument"/> from a <see cref="Stream"/>.
+    /// </summary>
+    public static void LoadStreamExample()
+    {
+        RsdDocument document = new();
+
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RsdDocument);
+        document.Load(stream);
+
+        foreach (RsdApplicationInterface api in document.Interfaces)
         {
-            XPathDocument source    = new XPathDocument("http://blog.oppositionallydefiant.com/rsd.axd");
-
-            RsdDocument document   = new RsdDocument();
-            document.Load(source);
-
-            foreach (RsdApplicationInterface api in document.Interfaces)
+            if (api.IsPreferred)
             {
-                if (api.IsPreferred)
-                {
-                    //  Perform some processing on the application programming interface
-                    break;
-                }
+                //  Perform some processing on the application programming interface
+                break;
             }
         }
+        ExampleOutput.ShowRsdDocument(document);
+    }
 
-        /// <summary>
-        /// Provides example code for the Load(Stream) method
-        /// </summary>
-        public static void LoadStreamExample()
+    /// <summary>
+    /// Loads an <see cref="RsdDocument"/> from an <see cref="XmlReader"/>.
+    /// </summary>
+    public static void LoadXmlReaderExample()
+    {
+        RsdDocument document = new();
+
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RsdDocument);
+        XmlReaderSettings settings = new()
         {
-            RsdDocument document   = new RsdDocument();
+            IgnoreComments = true,
+            IgnoreWhitespace = true
+        };
 
-            using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read))
+        using XmlReader reader = XmlReader.Create(stream, settings);
+        document.Load(reader);
+
+        foreach (RsdApplicationInterface api in document.Interfaces)
+        {
+            if (api.IsPreferred)
             {
-                document.Load(stream);
-
-                foreach (RsdApplicationInterface api in document.Interfaces)
-                {
-                    if (api.IsPreferred)
-                    {
-                        //  Perform some processing on the application programming interface
-                        break;
-                    }
-                }
+                //  Perform some processing on the application programming interface
+                break;
             }
         }
+        ExampleOutput.ShowRsdDocument(document);
+    }
 
-        /// <summary>
-        /// Provides example code for the Load(XmlReader) method
-        /// </summary>
-        public static void LoadXmlReaderExample()
+    /// <summary>
+    /// Loads an <see cref="RsdDocument"/> from a <see cref="Uri"/>, and shows where a caller-supplied <c>HttpClient</c> goes.
+    /// </summary>
+    public static async Task LoadUriExampleAsync()
+    {
+        RsdDocument document = new();
+
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RsdDocument);
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
+
+        foreach (RsdApplicationInterface api in document.Interfaces)
         {
-            RsdDocument document   = new RsdDocument();
-
-            using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read))
+            if (api.IsPreferred)
             {
-                XmlReaderSettings settings  = new XmlReaderSettings();
-                settings.IgnoreComments     = true;
-                settings.IgnoreWhitespace   = true;
-
-                using(XmlReader reader = XmlReader.Create(stream, settings))
-                {
-                    document.Load(reader);
-
-                    foreach (RsdApplicationInterface api in document.Interfaces)
-                    {
-                        if (api.IsPreferred)
-                        {
-                            //  Perform some processing on the application programming interface
-                            break;
-                        }
-                    }
-                }
+                //  Perform some processing on the application programming interface
+                break;
             }
         }
+        ExampleOutput.ShowRsdDocument(document);
+    }
 
-        /// <summary>
-        /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
-        /// </summary>
-        public static void LoadUriExample()
+    /// <summary>
+    /// Saves an <see cref="RsdDocument"/> to a <see cref="Stream"/>.
+    /// </summary>
+    public static void SaveStreamExample()
+    {
+        RsdDocument document = new();
+
+        //  Modify document state using public properties and methods
+
+        using Stream stream = new MemoryStream();
+        document.Save(stream);
+        ExampleOutput.ShowSaved("RsdDocument");
+    }
+
+    /// <summary>
+    /// Saves an <see cref="RsdDocument"/> through an <see cref="XmlWriter"/>, with indentation turned on.
+    /// </summary>
+    public static void SaveXmlWriterExample()
+    {
+        RsdDocument document = new();
+
+        //  Modify document state using public properties and methods
+
+        using Stream stream = new MemoryStream();
+        XmlWriterSettings settings = new()
         {
-            RsdDocument document   = new RsdDocument();
-            Uri source              = new Uri("http://blog.oppositionallydefiant.com/rsd.axd");
+            Indent = true
+        };
 
-            document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
-
-            foreach (RsdApplicationInterface api in document.Interfaces)
-            {
-                if (api.IsPreferred)
-                {
-                    //  Perform some processing on the application programming interface
-                    break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Save(Stream) method
-        /// </summary>
-        public static void SaveStreamExample()
-        {
-            RsdDocument document   = new RsdDocument();
-
-            //  Modify document state using public properties and methods
-
-            using(Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write))
-            {
-                document.Save(stream);
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the Save(XmlWriter) method
-        /// </summary>
-        public static void SaveXmlWriterExample()
-        {
-            RsdDocument document   = new RsdDocument();
-
-            //  Modify document state using public properties and methods
-
-            using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write))
-            {
-                XmlWriterSettings settings  = new XmlWriterSettings();
-                settings.Indent             = true;
-
-                using(XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
-                    document.Save(writer);
-                }
-            }
-        }
+        using XmlWriter writer = XmlWriter.Create(stream, settings);
+        document.Save(writer);
+        ExampleOutput.ShowSaved("RsdDocument");
     }
 }

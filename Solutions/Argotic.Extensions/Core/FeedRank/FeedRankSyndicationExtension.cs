@@ -1,287 +1,217 @@
-﻿using System;
-using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
 
-namespace Argotic.Extensions.Core
+namespace Argotic.Extensions.Core;
+
+/// <summary>
+/// Extends syndication specifications to provide a means feed publishers to convey one or more numeric rankings for entries contained within feeds, 
+/// each of which can be used, independently or in conjunction with the others, to establish a sorting order.
+/// </summary>
+/// <remarks>
+///     <para>
+///         The Atom Ranking Extensions, <c>re:rank</c> in the
+///         <c>http://purl.org/atompub/rank/1.0</c> namespace. The specification is the tenth revision of
+///         an Internet-Draft,
+///         <a href="https://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt">draft-snell-atompub-feed-index-10</a>;
+///         it never became an RFC, and this is a niche extension rather than a deployed one.
+///     </para>
+///     <para>
+///         One element carries a decimal <see cref="FeedRankSyndicationExtensionContext.Value"/> and
+///         names the ranking it belongs to with
+///         <see cref="FeedRankSyndicationExtensionContext.Scheme"/> — a URI identifying the scale, so
+///         that a consumer knows whether two feeds' numbers are comparable. Nothing constrains the
+///         range or the direction: a scheme may count upwards, downwards, or between zero and one, and
+///         a number read without its scheme means nothing.
+///     </para>
+/// </remarks>
+/// <example>
+///     <code source="..\..\Argotic.Examples\Extensions\Core\FeedRankSyndicationExtensionExample.cs" language="cs" title="The following code example demonstrates the usage of the FeedRankSyndicationExtension class." />
+/// </example>
+public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<FeedRankSyndicationExtension>, IEquatable<FeedRankSyndicationExtension>, IComparisonOperators
 {
-	/// <summary>
-	/// Extends syndication specifications to provide a means feed publishers to convey one or more numeric rankings for entries contained within feeds, 
-	/// each of which can be used, independently or in conjunction with the others, to establish a sorting order.
-	/// </summary>
-	/// <remarks>
-	///     <para>
-	///         The <see cref="FeedRankSyndicationExtension"/> extends syndicated content to specify a means of numerically ranking entries within a syndication feed. 
-	///         This syndication extension conforms to the <b>Atom Ranking Extensions</b> 1.0 specification, which can be found 
-	///         at <a href="http://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt">http://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt</a>.
-	///     </para>
-	/// </remarks>
-	/// <example>
-	///     <code lang="cs" title="The following code example demonstrates the usage of the FeedRankSyndicationExtension class.">
-	///         <code 
-	///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\Core\FeedRankSyndicationExtensionExample.cs" 
-	///             region="FeedRankSyndicationExtension"
-	///         />
-	///     </code>
-	/// </example>
-	[Serializable()]
-	public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
-	{
-	    /// <summary>
-		/// Private member to hold specific information about the extension.
-		/// </summary>
-		private FeedRankSyndicationExtensionContext extensionContext = new FeedRankSyndicationExtensionContext();
-	    /// <summary>
-		/// Initializes a new instance of the <see cref="FeedRankSyndicationExtension"/> class.
-		/// </summary>
-		public FeedRankSyndicationExtension()
-			: base("re", "http://purl.org/atompub/rank/1.0", new Version("1.0"), new Uri("http://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt"), "Feed Ranking", "Extends syndication feeds to provide a means feed publishers to convey one or more numeric rankings for entries contained within feeds, each of which can be used, independently or in conjunction with the others, to establish a sorting order.")
-		{
-		}
-	    /// <summary>
-		/// Gets or sets the <see cref="FeedRankSyndicationExtensionContext"/> object associated with this extension.
-		/// </summary>
-		/// <value>A <see cref="FeedRankSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
-		/// <remarks>
-		///     The <b>Context</b> encapsulates all of the syndication extension information that can be retrieved or written to an extended syndication entity. 
-		///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
-		///     are defined for the custom syndication extension.
-		/// </remarks>
-		/// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-		public FeedRankSyndicationExtensionContext Context
-		{
-			get
-			{
-				return extensionContext;
-			}
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FeedRankSyndicationExtension"/> class.
+    /// </summary>
+    public FeedRankSyndicationExtension()
+        : base("re", "http://purl.org/atompub/rank/1.0", new Version("1.0"), new Uri("https://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt"), "Feed Ranking", "Extends syndication feeds to provide a means feed publishers to convey one or more numeric rankings for entries contained within feeds, each of which can be used, independently or in conjunction with the others, to establish a sorting order.")
+    {
+    }
 
-			set
-			{
-				Guard.ArgumentNotNull(value, "value");
-				extensionContext = value;
-			}
-		}
-	    /// <summary>
-		/// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
-		/// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
-		/// </summary>
-		/// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-		/// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-		public static bool MatchByType(ISyndicationExtension extension)
-		{
-			Guard.ArgumentNotNull(extension, "extension");
-			if (extension.GetType() == typeof(FeedRankSyndicationExtension))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-	    /// <summary>
-		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
-		/// </summary>
-		/// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="FeedRankSyndicationExtension"/>.</param>
-		/// <returns><b>true</b> if the <see cref="FeedRankSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-		public override bool Load(IXPathNavigable source)
-		{
-			bool wasLoaded  = false;
-			Guard.ArgumentNotNull(source, "source");
-			XPathNavigator navigator    = source.CreateNavigator();
-			wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-			SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
-			this.OnExtensionLoaded(args);
+    /// <summary>
+    /// Gets or sets the <see cref="FeedRankSyndicationExtensionContext"/> object associated with this extension.
+    /// </summary>
+    /// <value>The context. Never <see langword="null"/>: one is created with the extension, and the setter rejects <see langword="null"/>.</value>
+    /// <remarks>
+    ///     The <c>Context</c> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
+    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
+    ///     are defined for the custom syndication extension.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    public FeedRankSyndicationExtensionContext Context
+    {
+        get;
 
-			return wasLoaded;
-		}
+        set
+        {
+            ArgumentNullException.ThrowIfNull(value);
+            field = value;
+        }
+    } = new();
 
-	    /// <summary>
-		/// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
-		/// </summary>
-		/// <param name="reader">The <b>XmlReader</b> used to load this <see cref="FeedRankSyndicationExtension"/>.</param>
-		/// <returns><b>true</b> if the <see cref="FeedRankSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
-		public override bool Load(XmlReader reader)
-		{
-			Guard.ArgumentNotNull(reader, "reader");
-			XPathDocument document  = new XPathDocument(reader);
+    /// <summary>
+    /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
+    /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
+    /// </summary>
+    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
+    public static bool MatchByType(ISyndicationExtension extension)
+    {
+        ArgumentNullException.ThrowIfNull(extension);
+        return extension is FeedRankSyndicationExtension;
+    }
 
-			return this.Load(document.CreateNavigator());
-		}
+    /// <summary>
+    /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="FeedRankSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="FeedRankSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    public override bool Load(IXPathNavigable source)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        XPathNavigator navigator = source.CreateNavigator()
+            ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
+        bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
+        this.OnExtensionLoaded(args);
 
-	    /// <summary>
-		/// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
-		/// </summary>
-		/// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-		public override void WriteTo(XmlWriter writer)
-		{
-			Guard.ArgumentNotNull(writer, "writer");
-			this.Context.WriteTo(writer, this.XmlNamespace);
-		}
-	    /// <summary>
-		/// Returns a <see cref="String"/> that represents the current <see cref="FeedRankSyndicationExtension"/>.
-		/// </summary>
-		/// <returns>A <see cref="String"/> that represents the current <see cref="FeedRankSyndicationExtension"/>.</returns>
-		/// <remarks>
-		///     This method returns the XML representation for the current instance.
-		/// </remarks>
-		public override string ToString()
-		{
-			using(MemoryStream stream = new MemoryStream())
-			{
-				XmlWriterSettings settings  = new XmlWriterSettings();
-				settings.ConformanceLevel   = ConformanceLevel.Fragment;
-				settings.Indent             = true;
-				settings.OmitXmlDeclaration = true;
+        return wasLoaded;
+    }
 
-				using(XmlWriter writer = XmlWriter.Create(stream, settings))
-				{
-					this.WriteTo(writer);
-				}
+    /// <summary>
+    /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
+    /// </summary>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="FeedRankSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="FeedRankSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
+    public override bool Load(XmlReader reader)
+    {
+        ArgumentNullException.ThrowIfNull(reader);
+        XPathDocument document = new(reader);
 
-				stream.Seek(0, SeekOrigin.Begin);
+        return this.Load(document.CreateNavigator());
+    }
 
-				using (StreamReader reader = new StreamReader(stream))
-				{
-					return reader.ReadToEnd();
-				}
-			}
-		}
-	    /// <summary>
-		/// Compares the current instance with another object of the same type.
-		/// </summary>
-		/// <param name="obj">An object to compare with this instance.</param>
-		/// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-		/// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-		public int CompareTo(object obj)
-		{
-			if (obj == null)
-			{
-				return 1;
-			}
-			FeedRankSyndicationExtension value  = obj as FeedRankSyndicationExtension;
+    /// <summary>
+    /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    public override void WriteTo(XmlWriter writer)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+        this.Context.WriteTo(writer, this.XmlNamespace);
+    }
 
-			if (value != null)
-			{
-				int result  = String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-				result      = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-				result      = result | this.Version.CompareTo(value.Version);
-				result      = result | String.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-				result      = result | String.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+    /// <summary>
+    /// Returns a <see cref="string"/> that represents the current <see cref="FeedRankSyndicationExtension"/>.
+    /// </summary>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="FeedRankSyndicationExtension"/>.</returns>
+    /// <remarks>
+    ///     This method returns the XML representation for the current instance.
+    /// </remarks>
+    public override string ToString()
+    {
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = SyndicationEncodingUtility.CreateFragmentXmlWriterSettings();
 
-				result      = result | Uri.Compare(this.Context.Domain, value.Context.Domain, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Context.Label, value.Context.Label, StringComparison.Ordinal);
-				result      = result | Uri.Compare(this.Context.Scheme, value.Context.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
-				result      = result | this.Context.Value.CompareTo(value.Context.Value);
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
+        {
+            this.WriteTo(writer);
+        }
 
-				return result;
-			}
-			else
-			{
-				throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-			}
-		}
+        stream.Seek(0, SeekOrigin.Begin);
 
-	    /// <summary>
-		/// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-		/// </summary>
-		/// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-		/// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-		public override bool Equals(Object obj)
-		{
-			if (!(obj is FeedRankSyndicationExtension))
-			{
-				return false;
-			}
+        using StreamReader reader = new(stream);
+        return reader.ReadToEnd();
+    }
 
-			return (this.CompareTo(obj) == 0);
-		}
+    /// <summary>
+    /// Compares the current instance with another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this instance.</param>
+    /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+    public int CompareTo(FeedRankSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return 1;
+        }
 
-	    /// <summary>
-		/// Returns a hash code for the current instance.
-		/// </summary>
-		/// <returns>A 32-bit signed integer hash code.</returns>
-		public override int GetHashCode()
-		{
-			return this.ToString().GetHashCode();
-		}
+        int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Comparer<Version>.Default.Compare(this.Version, other.Version);
+        if (result == 0) result = string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 
-	    /// <summary>
-		/// Determines if operands are equal.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-		public static bool operator ==(FeedRankSyndicationExtension first, FeedRankSyndicationExtension second)
-		{
-			if (object.Equals(first, null) && object.Equals(second, null))
-			{
-				return true;
-			}
-			else if (object.Equals(first, null) && !object.Equals(second, null))
-			{
-				return false;
-			}
+        if (result == 0) result = Uri.Compare(this.Context.Domain, other.Context.Domain, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Label, other.Context.Label, StringComparison.Ordinal);
+        if (result == 0) result = Uri.Compare(this.Context.Scheme, other.Context.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+        if (result == 0) result = this.Context.Value.CompareTo(other.Context.Value);
 
-			return first.Equals(second);
-		}
+        return result;
+    }
 
-	    /// <summary>
-		/// Determines if operands are not equal.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-		public static bool operator !=(FeedRankSyndicationExtension first, FeedRankSyndicationExtension second)
-		{
-			return !(first == second);
-		}
+    /// <summary>
+    /// Determines whether the specified <see cref="FeedRankSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="FeedRankSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="FeedRankSyndicationExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public bool Equals(FeedRankSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
 
-	    /// <summary>
-		/// Determines if first operand is less than second operand.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-		public static bool operator <(FeedRankSyndicationExtension first, FeedRankSyndicationExtension second)
-		{
-			if (object.Equals(first, null) && object.Equals(second, null))
-			{
-				return false;
-			}
-			else if (object.Equals(first, null) && !object.Equals(second, null))
-			{
-				return true;
-			}
+        return this.CompareTo(other) == 0;
+    }
 
-			return (first.CompareTo(second) < 0);
-		}
+    /// <summary>
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public override bool Equals(object? obj) => obj is FeedRankSyndicationExtension other && this.Equals(other);
 
-	    /// <summary>
-		/// Determines if first operand is greater than second operand.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-		public static bool operator >(FeedRankSyndicationExtension first, FeedRankSyndicationExtension second)
-		{
-			if (object.Equals(first, null) && object.Equals(second, null))
-			{
-				return false;
-			}
-			else if (object.Equals(first, null) && !object.Equals(second, null))
-			{
-				return false;
-			}
+    /// <summary>
+    /// Returns a hash code for the current instance.
+    /// </summary>
+    /// <returns>A 32-bit signed integer hash code.</returns>
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix), HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Domain), HashCodeUtility.Component(this.Context.Label), HashCodeUtility.Component(this.Context.Scheme), HashCodeUtility.Component(this.Context.Value))));
 
-			return (first.CompareTo(second) > 0);
-		}
-	}
+    /// <summary>
+    /// Determines if operands are equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
+    public static bool operator ==(FeedRankSyndicationExtension? first, FeedRankSyndicationExtension? second)
+    {
+        if (first is null) return second is null;
+        return first.Equals(second);
+    }
+
+    /// <summary>
+    /// Determines if operands are not equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
+    public static bool operator !=(FeedRankSyndicationExtension? first, FeedRankSyndicationExtension? second) => !(first == second);
+
 }

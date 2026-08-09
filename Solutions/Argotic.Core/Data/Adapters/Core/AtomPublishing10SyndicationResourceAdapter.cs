@@ -1,5 +1,3 @@
-﻿using System;
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -8,149 +6,219 @@ using Argotic.Extensions;
 using Argotic.Publishing;
 using Argotic.Syndication;
 
-namespace Argotic.Data.Adapters
+namespace Argotic.Data.Adapters;
+
+/// <summary>
+/// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="AtomServiceDocument"/> or <see cref="AtomCategoryDocument"/>.
+/// </summary>
+/// <remarks>
+///     <para>
+///     Reads the two document types RFC 5023 defines: a service document rooted at <c>app:service</c>, and a
+///     category document rooted at <c>app:categories</c>. Both live in <c>http://www.w3.org/2007/app</c>,
+///     while the <c>atom:category</c> elements inside a category document remain in the Atom namespace — so
+///     both prefixes must resolve, which is why the manager comes from <c>AtomUtility</c> rather than being
+///     built here.
+///     </para>
+///     <para>
+///     A category document is the one resource in this library that appears in two positions. Stand-alone,
+///     it is a document whose root is <c>app:categories</c>. Nested, it is an <c>app:categories</c> element
+///     inside a collection in a service document, and <see cref="AtomMemberResources"/> hands this adapter a
+///     navigator already positioned on it — where a child selector finds nothing. Hence the second arm in
+///     <see cref="Fill(AtomCategoryDocument)"/>, which accepts the navigator itself.
+///     </para>
+///     <para>
+///     RFC 5023 §7.2.1 also allows an out-of-line category document: an <c>app:categories</c> element with
+///     an <c>href</c> and no children, naming where the real list lives. Fetching it is the caller's
+///     business; this adapter's job is to not lose the <c>href</c> while reading a childless element.
+///     </para>
+/// </remarks>
+public sealed class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAdapterBase
 {
     /// <summary>
-    /// Represents a <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/> that are used to fill a <see cref="AtomServiceDocument"/> or <see cref="AtomCategoryDocument"/>.
+    /// Initializes a new instance of the <see cref="AtomPublishing10SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
+    /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the syndication document information.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="AtomServiceDocument"/>.</param>
+    /// <remarks>
+    ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="AtomServiceDocument"/>.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is <see langword="null"/>.</exception>
+    public AtomPublishing10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+    {
+    }
+
+    /// <summary>
+    /// Reads an <c>app:categories</c> element — its <c>fixed</c>, <c>scheme</c> and <c>href</c> attributes, its <c>atom:category</c> children, and its syndication extensions — whether it is the document root or the navigator's own position.
+    /// </summary>
+    /// <param name="resource">The <see cref="AtomCategoryDocument"/> to be filled.</param>
     /// <remarks>
     ///     <para>
-    ///         The <see cref="AtomPublishing10SyndicationResourceAdapter"/> serves as a bridge between a <see cref="AtomServiceDocument"/> and an XML data source.
-    ///         The <see cref="AtomPublishing10SyndicationResourceAdapter"/> provides this bridge by mapping <see cref="Fill(AtomServiceDocument)"/> or <see cref="Fill(AtomCategoryDocument)"/>, which changes the data
-    ///         in the <see cref="AtomServiceDocument"/> or <see cref="AtomCategoryDocument"/> to match the data in the data source.
+    ///     <c>fixed</c> is read as the literal <c>yes</c> or <c>no</c> RFC 5023 specifies, case-insensitively;
+    ///     any other value leaves <see cref="AtomCategoryDocument.IsFixed"/> alone rather than guessing. Since
+    ///     that property is a plain <see cref="bool"/> defaulting to <see langword="false"/>, an absent or
+    ///     unreadable attribute is indistinguishable from <c>fixed="no"</c> once the load has finished.
     ///     </para>
-    ///     <para>This syndication resource adapter is designed to fill <see cref="AtomServiceDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the Atom Publishing Protocol 1.0 specification.</para>
+    ///     <para>
+    ///     <c>scheme</c> is inherited, as RFC 5023 §7.2.1 requires: a child that declares none is given the
+    ///     parent's. The inheritance is materialised onto each <see cref="AtomCategory"/> rather than left
+    ///     implicit, so it survives into anything the document is later saved as — at the cost of the saved
+    ///     document restating the scheme on every child. That is the same trade the <c>xml:base</c> handling
+    ///     makes, and it says the same thing the source document said.
+    ///     </para>
     /// </remarks>
-    public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAdapter
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    public void Fill(AtomCategoryDocument resource)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AtomPublishing10SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
-        /// </summary>
-        /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the syndication document information.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="AtomServiceDocument"/>.</param>
-        /// <remarks>
-        ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="AtomServiceDocument"/>.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        public AtomPublishing10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
+
+        // The second arm is the nested case: AtomMemberResources hands AtomCategoryDocument.Load a
+        // navigator positioned ON the app:categories element, where there is no child of that name.
+        XPathNavigator? documentNavigator = this.Navigator.SelectChildElement("app", "categories", manager)
+            ?? AtomPublishing10SyndicationResourceAdapter.SelfIfCategories(this.Navigator);
+
+        if (documentNavigator is not null)
         {
-        }
+            AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);
 
-        /// <summary>
-        /// Modifies the <see cref="AtomCategoryDocument"/> to match the data source.
-        /// </summary>
-        /// <param name="resource">The <see cref="AtomCategoryDocument"/> to be filled.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void Fill(AtomCategoryDocument resource)
-        {
-            Guard.ArgumentNotNull(resource, "resource");
-
-            XmlNamespaceManager manager     = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
-
-            XPathNavigator documentNavigator    = this.Navigator.SelectSingleNode("app:categories", manager);
-            if (documentNavigator != null)
+            // Deliberately NOT inside a HasChildren guard. An out-of-line categories element is by
+            // definition childless -- its whole purpose is the href saying where the real list lives --
+            // so guarding the attribute read on children dropped fixed, scheme and href from precisely
+            // the document whose attributes are the only thing it carries.
+            if (documentNavigator.HasAttributes)
             {
-                AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);
+                string fixedAttribute = documentNavigator.GetAttribute("fixed", string.Empty);
+                string schemeAttribute = documentNavigator.GetAttribute("scheme", string.Empty);
+                string hrefAttribute = documentNavigator.GetAttribute("href", string.Empty);
 
-                if (documentNavigator.HasChildren)
+                if (!string.IsNullOrEmpty(fixedAttribute))
                 {
-                    if (documentNavigator.HasAttributes)
+                    if (string.Equals(fixedAttribute, "yes", StringComparison.OrdinalIgnoreCase))
                     {
-                        string fixedAttribute   = documentNavigator.GetAttribute("fixed", String.Empty);
-                        string schemeAttribute  = documentNavigator.GetAttribute("scheme", String.Empty);
-                        string hrefAttribute    = documentNavigator.GetAttribute("href", String.Empty);
-
-                        if (!String.IsNullOrEmpty(fixedAttribute))
-                        {
-                            if (String.Compare(fixedAttribute, "yes", StringComparison.OrdinalIgnoreCase) == 0)
-                            {
-                                resource.IsFixed    = true;
-                            }
-                            else if (String.Compare(fixedAttribute, "no", StringComparison.OrdinalIgnoreCase) == 0)
-                            {
-                                resource.IsFixed    = false;
-                            }
-                        }
-
-                        if (!String.IsNullOrEmpty(schemeAttribute))
-                        {
-                            Uri scheme;
-                            if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out scheme))
-                            {
-                                resource.Scheme     = scheme;
-                            }
-                        }
-
-                        if (!String.IsNullOrEmpty(hrefAttribute))
-                        {
-                            Uri href;
-                            if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out href))
-                            {
-                                resource.Uri        = href;
-                            }
-                        }
+                        resource.IsFixed = true;
                     }
-
-                    if (documentNavigator.HasChildren)
+                    else if (string.Equals(fixedAttribute, "no", StringComparison.OrdinalIgnoreCase))
                     {
-                        XPathNodeIterator categoryIterator = documentNavigator.Select("atom:category", manager);
-
-                        if (categoryIterator != null && categoryIterator.Count > 0)
-                        {
-                            while (categoryIterator.MoveNext())
-                            {
-                                AtomCategory category   = new AtomCategory();
-                                if (category.Load(categoryIterator.Current, this.Settings))
-                                {
-                                    resource.AddCategory(category);
-                                }
-                            }
-                        }
+                        resource.IsFixed = false;
                     }
                 }
 
-                SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(documentNavigator, this.Settings);
-                adapter.Fill(resource, manager);
-            }
-        }
-
-        /// <summary>
-        /// Modifies the <see cref="AtomServiceDocument"/> to match the data source.
-        /// </summary>
-        /// <param name="resource">The <see cref="AtomServiceDocument"/> to be filled.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        public void Fill(AtomServiceDocument resource)
-        {
-            Guard.ArgumentNotNull(resource, "resource");
-
-            XmlNamespaceManager manager     = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
-
-            XPathNavigator documentNavigator    = this.Navigator.SelectSingleNode("app:service", manager);
-            if (documentNavigator != null)
-            {
-                AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);
-
-                if (documentNavigator.HasChildren)
+                if (!string.IsNullOrEmpty(schemeAttribute))
                 {
-                    XPathNodeIterator workspaceIterator = documentNavigator.Select("app:workspace", manager);
-
-                    if (workspaceIterator != null && workspaceIterator.Count > 0)
+                    if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri? scheme))
                     {
-                        while (workspaceIterator.MoveNext())
-                        {
-                            AtomWorkspace workspace = new AtomWorkspace();
-                            if (workspace.Load(workspaceIterator.Current, this.Settings))
-                            {
-                                resource.AddWorkspace(workspace);
-                            }
-                        }
+                        resource.Scheme = scheme;
                     }
                 }
 
-                SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(documentNavigator, this.Settings);
-                adapter.Fill(resource, manager);
+                if (!string.IsNullOrEmpty(hrefAttribute))
+                {
+                    if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri? href))
+                    {
+                        resource.Uri = href;
+                    }
+                }
             }
+
+            if (documentNavigator.HasChildren)
+            {
+                XPathNodeIterator categoryIterator = documentNavigator.SelectChildElements("atom", "category", manager);
+
+                if (categoryIterator is { Count: > 0 })
+                {
+                    while (categoryIterator.MoveNext())
+                    {
+                        XPathNavigator? categoryNode = categoryIterator.Current;
+                        if (categoryNode is null)
+                        {
+                            continue;
+                        }
+
+                        AtomCategory category = new();
+                        if (category.Load(categoryNode, this.Settings))
+                        {
+                            // RFC 5023 section 7.2.1: an atom:category child with no scheme attribute
+                            // inherits its app:categories parent's. AtomCategory.Load reads only the
+                            // attribute in front of it, so the inheritance has to be applied here -- and
+                            // without it a bare term arrives with no vocabulary to be a term in.
+                            category.Scheme ??= resource.Scheme;
+
+                            resource.Categories.Add(category);
+                        }
+                    }
+                }
+            }
+
+            SyndicationExtensionAdapter adapter = new(documentNavigator, this.Settings);
+            adapter.Fill(resource, manager);
+        }
+    }
+
+    /// <summary>
+    /// Returns the supplied navigator when it is itself positioned on an <c>app:categories</c> element.
+    /// </summary>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> to test.</param>
+    /// <returns>The <paramref name="navigator"/> if it is an <c>app:categories</c> element; otherwise <see langword="null"/>.</returns>
+    /// <remarks>
+    ///     Restricted to <see cref="XPathNodeType.Element"/>, so a stand-alone category document — which
+    ///     arrives here as a <see cref="XPathNodeType.Root"/> and is found by the child selector — takes
+    ///     the same path it always did.
+    /// </remarks>
+    private static XPathNavigator? SelfIfCategories(XPathNavigator navigator) =>
+        navigator.NodeType == XPathNodeType.Element
+        && string.Equals(navigator.LocalName, "categories", StringComparison.Ordinal)
+        && string.Equals(navigator.NamespaceURI, "http://www.w3.org/2007/app", StringComparison.Ordinal)
+            ? navigator
+            : null;
+
+    /// <summary>
+    /// Reads the <c>app:workspace</c> children of <c>app:service</c>, and the service document's own syndication extensions.
+    /// </summary>
+    /// <param name="resource">The <see cref="AtomServiceDocument"/> to be filled.</param>
+    /// <remarks>
+    ///     The walk below this point re-enters this adapter: a workspace holds collections, a collection may
+    ///     hold an <c>app:categories</c> element, and that element comes back through
+    ///     <see cref="Fill(AtomCategoryDocument)"/> by its second arm.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    public void Fill(AtomServiceDocument resource)
+    {
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
+
+        XPathNavigator? documentNavigator = this.Navigator.SelectChildElement("app", "service", manager);
+        if (documentNavigator is not null)
+        {
+            AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);
+
+            if (documentNavigator.HasChildren)
+            {
+                XPathNodeIterator workspaceIterator = documentNavigator.SelectChildElements("app", "workspace", manager);
+
+                if (workspaceIterator is { Count: > 0 })
+                {
+                    while (workspaceIterator.MoveNext())
+                    {
+                        XPathNavigator? workspaceNode = workspaceIterator.Current;
+                        if (workspaceNode is null)
+                        {
+                            continue;
+                        }
+
+                        AtomWorkspace workspace = new();
+                        if (workspace.Load(workspaceNode, this.Settings))
+                        {
+                            resource.Workspaces.Add(workspace);
+                        }
+                    }
+                }
+            }
+
+            SyndicationExtensionAdapter adapter = new(documentNavigator, this.Settings);
+            adapter.Fill(resource, manager);
         }
     }
 }

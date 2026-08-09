@@ -1,23 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0;</TargetFrameworks>
-    <Authors>Brian William Kuhn, endjin</Authors>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Argotic.Examples</RootNamespace>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageDescription></PackageDescription>
-    <PackageTags></PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
-    <IncludeSymbols>true</IncludeSymbols> 
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" />
+    <PackageReference Include="Spectre.Console.Cli" />
+    <PackageReference Include="Spectre.IO" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
     <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
     <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="SampleData\**\*" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

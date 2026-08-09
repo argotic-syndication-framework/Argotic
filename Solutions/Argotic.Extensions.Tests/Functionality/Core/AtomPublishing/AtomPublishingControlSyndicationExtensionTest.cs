@@ -1,283 +1,244 @@
-﻿namespace Argotic.Extensions.Tests
+using System.Globalization;
+using static Argotic.Common.ComparisonOperatorExtensions;
+namespace Argotic.Extensions.Tests.Functionality.Core.AtomPublishing;
+
+/// <summary>
+/// Covers the Atom Publishing Protocol <c>app:control</c> extension: what a new instance holds, the
+/// <c>xml:base</c>, <c>xml:lang</c> and draft flag its context carries, how those reach XML through
+/// <c>WriteTo</c> and <c>ToString</c>, and its comparison, equality and ordering contracts.
+/// </summary>
+[TestClass]
+public class AtomPublishingControlSyndicationExtensionTest
 {
-	using Argotic.Extensions.Core;
-	using Argotic.Syndication;
-	using Microsoft.VisualStudio.TestTools.UnitTesting;
-	using System;
-	using System.IO;
-	using System.Linq;
-	using System.Xml;
-	using System.Globalization;
+    private readonly string namespc = """
+        xmlns:app="http://www.w3.org/2007/app"
+        """;
+    private readonly string nycText = """
+        <control xml:base="http://www.example.com/control.html" xml:lang="en-US" xmlns="http://www.w3.org/2007/app">
+          <draft>yes</draft>
+        </control>
+        """.ReplaceLineEndings();
+    private readonly string strExtXml = """<app:control xml:base="http://www.example.com/control.html" xml:lang="en-US"><app:draft>yes</app:draft></app:control>""";
 
-	/// <summary>
-	///This is a test class for AtomPublishingControlSyndicationExtensionTest and is intended
-	///to contain all AtomPublishingControlSyndicationExtensionTest Unit Tests
-	///</summary>
-	[TestClass()]
-	public class AtomPublishingControlSyndicationExtensionTest
-	{
-		private string namespc = @"xmlns:app=""http://www.w3.org/2007/app""";
-		private string nycText = $@"<control xml:base=""http://www.example.com/control.html"" xml:lang=""en-US"" xmlns=""http://www.w3.org/2007/app"">{Environment.NewLine}  <draft>yes</draft>{Environment.NewLine}</control>";
-		private string strExtXml = @"<app:control xml:base=""http://www.example.com/control.html"" xml:lang=""en-US""><app:draft>yes</app:draft></app:control>";
+    public TestContext? TestContext { get; set; }
+    /// <summary>
+    /// Two extensions holding identical context compare equal.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlCompareToTest()
+    {
+        AtomPublishingControlSyndicationExtension target = CreateExtension1();
+        AtomPublishingControlSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
+        actual.ShouldBe(0);
+    }
 
-		private TestContext testContextInstance;
+    /// <summary>
+    /// An extension is equal to a separately constructed extension holding the same context.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlEqualsTest()
+    {
+        AtomPublishingControlSyndicationExtension target = CreateExtension1();
+        object obj = CreateExtension1();
+        bool actual = target.Equals(obj);
+        actual.ShouldBeTrue();
+    }
 
-		/// <summary>
-		///Gets or sets the test context which provides
-		///information about and functionality for the current test run.
-		///</summary>
-		public TestContext TestContext
-		{
-			get
-			{
-				return testContextInstance;
-			}
-			set
-			{
-				testContextInstance = value;
-			}
-		}
+    /// <summary>
+    /// A hash code is stable across calls, and equal extensions hash equally.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlGetHashCodeTest()
+    {
+        // Consistency: same object returns same hash
+        AtomPublishingControlSyndicationExtension target = CreateExtension1();
+        target.GetHashCode().ShouldBe(target.GetHashCode());
 
-	    /// <summary>
-		///A test for AtomPublishingControlSyndicationExtension Constructor
-		///</summary>
-		[TestMethod()]
-		public void AtomPublishingControlSyndicationExtensionConstructorTest()
-		{
-			AtomPublishingControlSyndicationExtension target = new AtomPublishingControlSyndicationExtension();
-			Assert.IsNotNull(target);
-			Assert.IsInstanceOfType(target, typeof(AtomPublishingControlSyndicationExtension));
-		}
+        // Equality contract: equal objects have equal hashes
+        AtomPublishingControlSyndicationExtension other = CreateExtension1();
+        target.Equals(other).ShouldBeTrue();
+        target.GetHashCode().ShouldBe(other.GetHashCode());
+    }
 
-		/// <summary>
-		///A test for CompareTo
-		///</summary>
-		[TestMethod()]
-		public void AtomPublishingControl_CompareToTest()
-		{
-			AtomPublishingControlSyndicationExtension target = CreateExtension1();
-			object obj = CreateExtension1();
-			int expected = 0;
-			int actual = target.CompareTo(obj);
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// An RSS 2.0 feed carrying an <c>app:control</c> element yields an extension holding the base URI,
+    /// the language and the draft flag the document declared.
+    /// </summary>
+    /// <remarks>
+    ///     This is the only test that exercises the <c>app:control</c> parse path. It used to assert that
+    ///     the channel was non-null and held one item — neither of which touches the extension — so until
+    ///     now nothing in the suite had ever read a value back off a parsed <c>app:control</c>.
+    /// </remarks>
+    [TestMethod]
+    public void AtomPublishingControlLoadTest()
+    {
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
 
-		/// <summary>
-		///A test for Equals
-		///</summary>
-		[TestMethod()]
-		public void AtomPublishingControl_EqualsTest()
-		{
-			AtomPublishingControlSyndicationExtension target = CreateExtension1();
-			object obj = CreateExtension1();
-			bool expected = true;
-			bool actual = target.Equals(obj);
-			Assert.AreEqual(expected, actual);
-		}
+        RssItem item = feed.Channel.Items.Single();
+        AtomPublishingControlSyndicationExtension extension = item.FindExtension<AtomPublishingControlSyndicationExtension>().ShouldNotBeNull();
+        extension.Context.BaseUri.ShouldBe(new Uri("http://www.example.com/control.html"));
+        extension.Context.Language!.Name.ShouldBe("en-US");
+        extension.Context.IsDraft.ShouldBeTrue();
+    }
 
-		/// <summary>
-		///A test for GetHashCode
-		///</summary>
-		[TestMethod, Ignore]
-		public void AtomPublishingControl_GetHashCodeTest()
-		{
-			AtomPublishingControlSyndicationExtension target = CreateExtension1();
-			int expected = -1862124151;
-			int actual = target.GetHashCode();
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// Attaching the extension to an RSS item emits <c>app:control</c> with its <c>xml:base</c> and <c>xml:lang</c> attributes and an <c>app:draft</c> child.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlCreateXmlTest()
+    {
+        AtomPublishingControlSyndicationExtension itunes = CreateExtension1();
+        string actual = ExtensionTestUtil.AddExtensionToXml(itunes).Trim();
+        string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml).Trim();
+        actual.ShouldBe(expected);
+    }
 
-		/// <summary>
-		///A test for Load
-		///</summary>
-		[TestMethod]
-		public void AtomPublishingControl_LoadTest()
-		{
-			AtomPublishingControlSyndicationExtension target = new AtomPublishingControlSyndicationExtension(); // TODO: Initialize to an appropriate value
-			var nt = new NameTable();
-			var ns = new XmlNamespaceManager(nt);
-			var xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Preserve);
-			var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+    /// <summary>
+    /// <c>MatchByType</c> accepts an instance of its own extension type.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlMatchByTypeTest()
+    {
+        ISyndicationExtension extension = CreateExtension1();
+        bool actual = AtomPublishingControlSyndicationExtension.MatchByType(extension);
+        actual.ShouldBeTrue();
+    }
 
-			using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
-			{
-				RssFeed feed = new RssFeed();
-				feed.Load(reader);
-			}
-		}
+    /// <summary>
+    /// <c>ToString</c> renders <c>control</c> in the app namespace with the draft flag spelled <c>yes</c> on its own indented line.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlToStringTest()
+    {
+        AtomPublishingControlSyndicationExtension target = CreateExtension1();
+        string actual = target.ToString();
+        actual.ShouldBe(nycText);
+    }
 
-	    [TestMethod]
-	    public void AtomPublishingControl_CreateXmlTest()
-	    {
-	        var itunes = CreateExtension1();
-	        var actual = ExtensionTestUtil.AddExtensionToXml(itunes).Trim();
-	        string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml).Trim();
-	        Assert.AreEqual(expected, actual);
-	    }
+    /// <summary>
+    /// Writing to an <see cref="XmlWriter"/> emits the same control element as <c>ToString</c>, once indentation is discounted.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlWriteToTest()
+    {
+        using StringWriter sw = new();
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        AtomPublishingControlSyndicationExtension target = CreateExtension1();
+        target.WriteTo(writer);
+        writer.Flush();
+        string output = sw.ToString();
+        output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(nycText.Replace(Environment.NewLine + "  ", "", StringComparison.Ordinal).Replace(Environment.NewLine, "", StringComparison.Ordinal));
+    }
 
-	    [TestMethod, Ignore]
-	    public void AtomPublishingControl_FullTest()
-		{
-			var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+    /// <summary>
+    /// Extensions differing in base URI, draft flag and language are not equal under <c>==</c>.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlOpEqualityTestFailure()
+    {
+        AtomPublishingControlSyndicationExtension first = CreateExtension1();
+        AtomPublishingControlSyndicationExtension second = CreateExtension2();
+        bool actual = first == second;
+        actual.ShouldBeFalse();
+    }
 
-			 using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
-			 {
-				 RssFeed feed = new RssFeed();
-				 feed.Load(reader);
-				 Assert.AreEqual(1, feed.Channel.Items.Count());
-				 var item = feed.Channel.Items.Single();
-				 var ext = item.HasExtensions;
-				 Assert.IsTrue(item.HasExtensions);
-				 var itemExtension = item.FindExtension<AtomPublishingControlSyndicationExtension>();
-				 Assert.IsNotNull(itemExtension);
-				 Assert.IsInstanceOfType(item.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension,
-				  typeof(AtomPublishingControlSyndicationExtension));
-			 }
-		}
+    /// <summary>
+    /// Extensions holding identical context are equal under <c>==</c>.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlOpEqualityTestSuccess()
+    {
+        AtomPublishingControlSyndicationExtension first = CreateExtension1();
+        AtomPublishingControlSyndicationExtension second = CreateExtension1();
+        bool actual = first == second;
+        actual.ShouldBeTrue();
+    }
 
-		/// <summary>
-		///A test for MatchByType
-		///</summary>
-		[TestMethod()]
-		public void AtomPublishingControl_MatchByTypeTest()
-		{
-			ISyndicationExtension extension = CreateExtension1();
-			bool expected = true;
-			bool actual = AtomPublishingControlSyndicationExtension.MatchByType(extension);
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// An extension whose base URI sorts earlier is not greater than one whose base URI sorts later.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlOpGreaterThanTest()
+    {
+        AtomPublishingControlSyndicationExtension first = CreateExtension1();
+        AtomPublishingControlSyndicationExtension second = CreateExtension2();
+        bool actual = first > second;
+        actual.ShouldBeFalse();
+    }
 
-		/// <summary>
-		///A test for ToString
-		///</summary>
-		[TestMethod()]
-		public void AtomPublishingControl_ToStringTest()
-		{
-			AtomPublishingControlSyndicationExtension target = CreateExtension1();
-			string expected = nycText;
-			string actual = target.ToString();
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// Extensions holding different context are unequal under <c>!=</c>.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlOpInequalityTest()
+    {
+        AtomPublishingControlSyndicationExtension first = CreateExtension1();
+        AtomPublishingControlSyndicationExtension second = CreateExtension2();
+        bool actual = first != second;
+        actual.ShouldBeTrue();
+    }
 
-		/// <summary>
-		///A test for WriteTo
-		///</summary>
-		[TestMethod()]
-		public void AtomPublishingControl_WriteToTest()
-		{
-			using(var sw = new StringWriter())
-			using (XmlWriter writer = new XmlTextWriter(sw))
-			{
-				var target = CreateExtension1();
-				target.WriteTo(writer);
-				var output = sw.ToString();
-				Assert.AreEqual(nycText.Replace(Environment.NewLine+"  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
-			}
-		}
+    /// <summary>
+    /// An extension whose base URI sorts earlier — <c>example.com</c> ahead of <c>example.net</c> — is less than the other.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlOpLessThanTest()
+    {
+        AtomPublishingControlSyndicationExtension first = CreateExtension1();
+        AtomPublishingControlSyndicationExtension second = CreateExtension2();
+        bool actual = first < second;
+        actual.ShouldBeTrue();
+    }
 
-		/// <summary>
-		///A test for op_Equality
-		///</summary>
-		[TestMethod()]
-		public void AtomPublishingControl_op_EqualityTest_Failure()
-		{
-			AtomPublishingControlSyndicationExtension first = CreateExtension1();
-			AtomPublishingControlSyndicationExtension second = CreateExtension2();
-			bool expected = false; 
-			bool actual = first == second;
-			Assert.AreEqual(expected, actual);
-		}
+    /// <summary>
+    /// The context reports the base URI, draft flag and language it was given.
+    /// </summary>
+    [TestMethod]
+    public void AtomPublishingControlContextTest()
+    {
+        AtomPublishingControlSyndicationExtension target = CreateExtension1();
+        AtomPublishingControlSyndicationExtensionContext context = target.Context;
 
-		public void AtomPublishingControl_op_EqualityTest_Success()
-		{
-			AtomPublishingControlSyndicationExtension first = CreateExtension1();
-			AtomPublishingControlSyndicationExtension second = CreateExtension1();
-			bool expected = true;
-			bool actual = first == second;
-			Assert.AreEqual(expected, actual);
-		}
+        context.ShouldNotBeNull();
+        context.BaseUri.ShouldBe(new Uri("http://www.example.com/control.html"));
+        context.IsDraft.ShouldBeTrue();
+        context.Language!.Name.ShouldBe("en-US");
+    }
 
-		/// <summary>
-		///A test for op_GreaterThan
-		///</summary>
-		[TestMethod()]
-		public void AtomPublishingControl_op_GreaterThanTest()
-		{
-			AtomPublishingControlSyndicationExtension first = CreateExtension1();
-			AtomPublishingControlSyndicationExtension second = CreateExtension2();
-			bool expected = false; 
-			bool actual = first > second;
-			Assert.AreEqual(expected, actual);
-		}
-
-		/// <summary>
-		///A test for op_Inequality
-		///</summary>
-		[TestMethod()]
-		public void AtomPublishingControl_op_InequalityTest()
-		{
-			AtomPublishingControlSyndicationExtension first = CreateExtension1();
-			AtomPublishingControlSyndicationExtension second = CreateExtension2();
-			bool expected = true;
-			bool actual = first != second;
-			Assert.AreEqual(expected, actual);
-		}
-
-		/// <summary>
-		///A test for op_LessThan
-		///</summary>
-		[TestMethod()]
-		public void AtomPublishingControl_op_LessThanTest()
-		{
-			AtomPublishingControlSyndicationExtension first = CreateExtension1();
-			AtomPublishingControlSyndicationExtension second = CreateExtension2();
-			bool expected = true;
-			bool actual = first < second;
-			Assert.AreEqual(expected, actual);
-		}
-
-		/// <summary>
-		///A test for Context
-		///</summary>
-		[TestMethod(), Ignore]
-		public void AtomPublishingControl_ContextTest()
-		{
-			AtomPublishingControlSyndicationExtension target = CreateExtension1();
-			AtomPublishingControlSyndicationExtensionContext expected = CreateContext1();
-			AtomPublishingControlSyndicationExtensionContext actual = target.Context;
-			Assert.AreEqual(expected, actual);
-			Assert.Inconclusive("Verify the correctness of this test method.");
-		}
-
-		private AtomPublishingControlSyndicationExtension CreateExtension1()
-		{
-		    var nyc = new AtomPublishingControlSyndicationExtension
+    private static AtomPublishingControlSyndicationExtension CreateExtension1()
+    {
+        AtomPublishingControlSyndicationExtension nyc = new()
+        {
+            Context =
             {
-              Context =
-              {
-	              BaseUri = new Uri("http://www.example.com/control.html"),
-	              IsDraft = true,
-	              Language = new CultureInfo("en-US")
-              }
-            };
+                BaseUri = new Uri("http://www.example.com/control.html"),
+                IsDraft = true,
+                Language = new CultureInfo("en-US")
+            }
+        };
 
-			return nyc;
-		}
+        return nyc;
+    }
 
-		private AtomPublishingControlSyndicationExtension CreateExtension2()
-		{
-			var nyc = new AtomPublishingControlSyndicationExtension();
-			nyc.Context.BaseUri = new Uri("http://www.example.net/control.html");
-			nyc.Context.IsDraft = false;
-			nyc.Context.Language = new CultureInfo("fr-CA");
+    private static AtomPublishingControlSyndicationExtension CreateExtension2()
+    {
+        AtomPublishingControlSyndicationExtension nyc = new()
+        {
+            Context =
+            {
+                BaseUri = new Uri("http://www.example.net/control.html"),
+                IsDraft = false,
+                Language = new CultureInfo("fr-CA")
+            }
+        };
 
-			return nyc;
-		}
+        return nyc;
+    }
 
-		public static AtomPublishingControlSyndicationExtensionContext CreateContext1()
-		{
-			return new AtomPublishingControlSyndicationExtensionContext();
-		}
-	}
+    public static AtomPublishingControlSyndicationExtensionContext CreateContext1() => new();
 }

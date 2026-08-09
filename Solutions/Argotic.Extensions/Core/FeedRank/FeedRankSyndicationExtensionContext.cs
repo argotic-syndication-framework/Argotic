@@ -1,227 +1,193 @@
-﻿using System;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
 
-namespace Argotic.Extensions.Core
+namespace Argotic.Extensions.Core;
+
+/// <summary>
+/// Encapsulates specific information about an individual <see cref="FeedRankSyndicationExtension"/>.
+/// </summary>
+public class FeedRankSyndicationExtensionContext
 {
+
     /// <summary>
-    /// Encapsulates specific information about an individual <see cref="FeedRankSyndicationExtension"/>.
+    /// Initializes a new instance of the <see cref="FeedRankSyndicationExtensionContext"/> class.
     /// </summary>
-    [Serializable()]
-    public class FeedRankSyndicationExtensionContext
+    public FeedRankSyndicationExtensionContext()
     {
+    }
 
-        /// <summary>
-        /// Private member to hold the permanent, universally unique identifier for the ranking scheme.
-        /// </summary>
-        private Uri extensionScheme;
-        /// <summary>
-        /// Private member to hold the permanent, universally unique identifier for the ranking domain.
-        /// </summary>
-        private Uri extensionDomain;
-        /// <summary>
-        /// Private member to hold the language sensitive, human-readable label for the rank.
-        /// </summary>
-        private string extensionLabel   = String.Empty;
-        /// <summary>
-        /// Private member to hold the decimal value of the rank.
-        /// </summary>
-        private decimal extensionValue  = Decimal.MinValue;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FeedRankSyndicationExtensionContext"/> class.
-        /// </summary>
-        public FeedRankSyndicationExtensionContext()
-        {
-        }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FeedRankSyndicationExtensionContext"/> class using the supplied scheme and value.
+    /// </summary>
+    /// <param name="scheme">The <see cref="Uri"/> that describes the permanent, universally unique identifier for the ranking scheme.</param>
+    /// <param name="value">The <see cref="Decimal"/> value of the rank.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="scheme"/> is <see langword="null"/>.</exception>
+    public FeedRankSyndicationExtensionContext(Uri scheme, decimal value)
+    {
+        this.Scheme = scheme;
+        this.Value = value;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FeedRankSyndicationExtensionContext"/> class using the supplied schem and value.
-        /// </summary>
-        /// <param name="scheme">The <see cref="Uri"/> that describes the permanent, universally unique identifier for the ranking scheme.</param>
-        /// <param name="value">The <see cref="Decimal"/> value of the rank.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="scheme"/> is a null reference (Nothing in Visual Basic).</exception>
-        public FeedRankSyndicationExtensionContext(Uri scheme, decimal value)
+    /// <summary>
+    /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking domain.
+    /// </summary>
+    /// <value>The domain, or <see langword="null"/> if none was specified.</value>
+    public Uri? Domain { get; set; }
+
+    /// <summary>
+    /// Gets or sets the language sensitive, human-readable label for this rank.
+    /// </summary>
+    /// <value>The label. The default value is an <i>empty</i> string.</value>
+    public string Label
+    {
+        get;
+
+        set
         {
-            this.Scheme = scheme;
-            this.Value  = value;
-        }
-        /// <summary>
-        /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking domain.
-        /// </summary>
-        /// <value>The <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking domain.</value>
-        public Uri Domain
-        {
-            get
+            if (string.IsNullOrEmpty(value))
             {
-                return extensionDomain;
+                field = string.Empty;
             }
-
-            set
+            else
             {
-                extensionDomain = value;
+                field = value.Trim();
             }
         }
+    } = string.Empty;
 
-        /// <summary>
-        /// Gets or sets the language sensitive, human-readable label for this rank.
-        /// </summary>
-        /// <value>The language sensitive, human-readable label for this rank.</value>
-        public string Label
+    /// <summary>
+    /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking scheme.
+    /// </summary>
+    /// <value>The scheme, or <see langword="null"/> if none was specified. The setter rejects <see langword="null"/>, so the absent case is only reachable by never setting it.</value>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    public Uri? Scheme
+    {
+        get;
+
+        set
         {
-            get
-            {
-                return extensionLabel;
-            }
+            ArgumentNullException.ThrowIfNull(value);
+            field = value;
+        }
+    }
 
-            set
+    /// <summary>
+    /// Gets or sets the value of this rank.
+    /// </summary>
+    /// <value>The <see cref="Decimal"/> value of this rank. The default value is <see cref="Decimal.MinValue"/>, which indicates that no ranking value was specified.</value>
+    public decimal Value { get; set; } = decimal.MinValue;
+
+    /// <summary>
+    /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="FeedRankSyndicationExtensionContext"/>.</param>
+    /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
+    /// <returns><see langword="true"/> if the <see cref="FeedRankSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is <see langword="null"/>.</exception>
+    public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    {
+        bool wasLoaded = false;
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        if (source.HasChildren)
+        {
+            XPathNavigator? rankNavigator = source.SelectChildElement("re", "rank", manager);
+            if (rankNavigator is not null)
             {
-                if (String.IsNullOrEmpty(value))
+                if (rankNavigator.HasAttributes)
                 {
-                    extensionLabel = String.Empty;
-                }
-                else
-                {
-                    extensionLabel = value.Trim();
-                }
-            }
-        }
+                    string schemeAttribute = rankNavigator.GetAttribute("scheme", string.Empty);
+                    string domainAttribute = rankNavigator.GetAttribute("domain", string.Empty);
+                    string labelAttribute = rankNavigator.GetAttribute("label", string.Empty);
 
-        /// <summary>
-        /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking scheme.
-        /// </summary>
-        /// <value>The <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking scheme.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-        public Uri Scheme
-        {
-            get
-            {
-                return extensionScheme;
-            }
-
-            set
-            {
-                Guard.ArgumentNotNull(value, "value");
-                extensionScheme = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the value of this rank.
-        /// </summary>
-        /// <value>The <see cref="Decimal"/> value of this rank. The default value is <see cref="Decimal.MinValue"/>, which indicates that no ranking value was specified.</value>
-        public decimal Value
-        {
-            get
-            {
-                return extensionValue;
-            }
-
-            set
-            {
-                extensionValue = value;
-            }
-        }
-        /// <summary>
-        /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="FeedRankSyndicationExtensionContext"/>.</param>
-        /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="FeedRankSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
-        public bool Load(XPathNavigator source, XmlNamespaceManager manager)
-        {
-            bool wasLoaded  = false;
-            Guard.ArgumentNotNull(source, "source");
-            Guard.ArgumentNotNull(manager, "manager");
-            if (source.HasChildren)
-            {
-                XPathNavigator rankNavigator    = source.SelectSingleNode("re:rank", manager);
-                if (rankNavigator != null)
-                {
-                    if (rankNavigator.HasAttributes)
+                    if (!string.IsNullOrEmpty(schemeAttribute))
                     {
-                        string schemeAttribute  = rankNavigator.GetAttribute("scheme", String.Empty);
-                        string domainAttribute  = rankNavigator.GetAttribute("domain", String.Empty);
-                        string labelAttribute   = rankNavigator.GetAttribute("label", String.Empty);
-
-                        if (!String.IsNullOrEmpty(schemeAttribute))
+                        if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri? scheme))
                         {
-                            Uri scheme;
-                            if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out scheme))
-                            {
-                                this.Scheme = scheme;
-                                wasLoaded   = true;
-                            }
-                        }
-
-                        if (!String.IsNullOrEmpty(domainAttribute))
-                        {
-                            Uri domain;
-                            if (Uri.TryCreate(domainAttribute, UriKind.RelativeOrAbsolute, out domain))
-                            {
-                                this.Domain = domain;
-                                wasLoaded   = true;
-                            }
-                        }
-
-                        if (!String.IsNullOrEmpty(labelAttribute))
-                        {
-                            this.Label  = labelAttribute;
-                            wasLoaded   = true;
+                            this.Scheme = scheme;
+                            wasLoaded = true;
                         }
                     }
 
-                    if (!String.IsNullOrEmpty(rankNavigator.Value))
+                    if (!string.IsNullOrEmpty(domainAttribute))
                     {
-                        decimal value;
-                        if (Decimal.TryParse(rankNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out value))
+                        if (Uri.TryCreate(domainAttribute, UriKind.RelativeOrAbsolute, out Uri? domain))
                         {
-                            this.Value  = value;
-                            wasLoaded   = true;
+                            this.Domain = domain;
+                            wasLoaded = true;
                         }
+                    }
+
+                    if (!string.IsNullOrEmpty(labelAttribute))
+                    {
+                        this.Label = labelAttribute;
+                        wasLoaded = true;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(rankNavigator.Value))
+                {
+                    if (decimal.TryParse(rankNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal value))
+                    {
+                        this.Value = value;
+                        wasLoaded = true;
                     }
                 }
             }
-
-            return wasLoaded;
         }
 
-        /// <summary>
-        /// Writes the current context to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
-        /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
-        public void WriteTo(XmlWriter writer, string xmlNamespace)
+        return wasLoaded;
+    }
+
+    /// <summary>
+    /// Writes the current context to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the current context.</param>
+    /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
+    /// <remarks>
+    ///     The element is qualified and its attributes are not. An unprefixed attribute is in no
+    ///     namespace whatever namespace its element is in — attributes do not inherit a default
+    ///     declaration — so the extension namespace is the one partition <c>scheme</c> and
+    ///     <c>domain</c> cannot be written into and still be found by <see cref="Load"/>, which reads
+    ///     them, and every other attribute in this assembly, out of the no-namespace partition.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    public void WriteTo(XmlWriter writer, string xmlNamespace)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
+        writer.WriteStartElement("rank", xmlNamespace);
+
+        // An absent scheme is written as an absent attribute, not as scheme="". The empty string is a
+        // valid attribute value and a same-document reference as a URI, so it validates while asserting
+        // something the publisher never said -- and Load rejects it, so it could not survive a round
+        // trip either. This is the shape the AtomLink href="" fix established; domain below already had
+        // it.
+        if (this.Scheme is not null)
         {
-            Guard.ArgumentNotNull(writer, "writer");
-            Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            writer.WriteStartElement("rank", xmlNamespace);
-
-            writer.WriteAttributeString("scheme", xmlNamespace, this.Scheme != null ? this.Scheme.ToString() : String.Empty);
-
-            if(this.Domain != null)
-            {
-                writer.WriteAttributeString("domain", xmlNamespace, this.Domain.ToString());
-            }
-
-            if (!String.IsNullOrEmpty(this.Label))
-            {
-                writer.WriteAttributeString("label", this.Label);
-            }
-
-            if (this.Value != Decimal.MinValue)
-            {
-                writer.WriteString(this.Value.ToString(NumberFormatInfo.InvariantInfo));
-            }
-
-            writer.WriteEndElement();
+            writer.WriteAttributeString("scheme", this.Scheme.ToString());
         }
+
+        if (this.Domain is not null)
+        {
+            writer.WriteAttributeString("domain", this.Domain.ToString());
+        }
+
+        if (!string.IsNullOrEmpty(this.Label))
+        {
+            writer.WriteAttributeString("label", this.Label);
+        }
+
+        if (this.Value != decimal.MinValue)
+        {
+            writer.WriteString(this.Value.ToString(NumberFormatInfo.InvariantInfo));
+        }
+
+        writer.WriteEndElement();
     }
 }

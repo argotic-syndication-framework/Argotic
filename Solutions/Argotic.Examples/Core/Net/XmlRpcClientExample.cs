@@ -1,59 +1,52 @@
-﻿using System;
 using System.Text;
-
 using Argotic.Net;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core.Net;
+
+/// <summary>
+/// Configures an <see cref="XmlRpcClient"/> and builds the <c>pingback.ping</c> notification it would post.
+/// </summary>
+/// <remarks>
+///     Nothing is sent. The endpoint is a placeholder, so the example stops at a configured client and a
+///     well-formed message; the <c>SendAsync</c> call is left commented out beside them.
+/// </remarks>
+internal static class XmlRpcClientExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="XmlRpcClient"/> class.
+    /// Configures an <see cref="XmlRpcClient"/> and the <c>pingback.ping</c> <see cref="XmlRpcMessage"/> it would post.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="XmlRpcClient"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    public static class XmlRpcClientExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the XmlRpcClient class.
-        /// </summary>
-        public static void ClassExample()
+        // Initialize the XML-RPC client
+        XmlRpcClient client = new()
         {
-            // Initialize the XML-RPC client
-            XmlRpcClient client = new XmlRpcClient();
-            client.Host         = new Uri("http://bob.example.net/xmlrpcserver");
+            Host = new Uri("http://bob.example.net/xmlrpcserver")
+        };
 
-            // Construct a Pingback peer-to-peer notification XML-RPC message
-            XmlRpcMessage message   = new XmlRpcMessage("pingback.ping");
-            message.Encoding        = Encoding.UTF8;
-            message.Parameters.Add(new XmlRpcScalarValue("http://alice.example.org/#p123"));    // sourceURI
-            message.Parameters.Add(new XmlRpcScalarValue("http://bob.example.net/#foo"));       // targetURI
+        // Construct a Pingback peer-to-peer notification XML-RPC message
+        XmlRpcMessage message = new("pingback.ping")
+        {
+            Encoding = Encoding.UTF8
+        };
+        message.Parameters.Add(new XmlRpcScalarValue("https://endjin.com/who-we-are/#barry-smart"));    // sourceURI
+        message.Parameters.Add(new XmlRpcScalarValue("http://bob.example.net/#foo"));       // targetURI
 
-            // Send a synchronous pingback ping
-            XmlRpcResponse response = client.Send(message);
+        // Note: In a real application, you would send the message:
+        // XmlRpcResponse response = await client.SendAsync(message).ConfigureAwait(false);
 
-            // Verify response to the trackback ping
-            if (response != null)
-            {
-                if (response.Fault != null)
-                {
-                    XmlRpcStructureMember faultCode     = response.Fault["faultCode"];
-                    XmlRpcStructureMember faultMessage  = response.Fault["faultString"];
-
-                    if (faultCode != null && faultMessage != null)
-                    {
-                        // Handle the pingback ping error condition that occurred
-                    }
-                }
-                else
-                {
-                    XmlRpcScalarValue successInformation    = response.Parameter as XmlRpcScalarValue;
-                    if (successInformation != null)
-                    {
-                        // Pingback request was successful, return should be a string containing information the server deems useful.
-                    }
-                }
-            }
+        // For demonstration, we just verify the client and message are configured correctly
+        if (client.Host is not null && message.MethodName is not null)
+        {
+            // Client is configured and ready to send
+            // Verify response to the XML-RPC call
+            // if (response?.Fault != null)
+            // {
+            //     XmlRpcStructureMember faultCode = response.Fault["faultCode"];
+            //     XmlRpcStructureMember faultMessage = response.Fault["faultString"];
+            //     // Handle the fault condition
+            // }
         }
+
+        ExampleOutput.ShowXmlRpcClient(client.Host!, message.MethodName!);
     }
 }

@@ -1,27 +1,77 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="MSTest.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <IsPackable>false</IsPackable>
     <Product>Argotic Syndication Framework</Product>
-    <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
-    <Authors>Brian William Kuhn, endjin</Authors>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TestingExtensionsProfile>Default</TestingExtensionsProfile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.6.4" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.6.4" />
-    <PackageReference Include="coverlet.msbuild" Version="6.0.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Shouldly" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Global usings for the namespaces a test file almost always needs. MSTest.Sdk already supplies
+      System, System.Collections.Generic, System.IO, System.Linq, System.Net.Http, System.Threading,
+      System.Threading.Tasks and the MSTest attributes; these are the rest.
+
+      The threshold is deliberate: a namespace is here only if a quarter or more of the 204 test files
+      already imported it. Shouldly was in 188 of them. Below that line a using earns its place at the
+      top of the file, because it says something about what the test touches - Argotic.Net,
+      Argotic.Publishing, System.Reflection and the rest stay local for exactly that reason.
+
+      Verified before adding: no type name collides between Argotic.Syndication, Argotic.Common,
+      Argotic.Extensions.Core, Argotic.Publishing and Argotic.Net.
+    -->
+    <Using Include="Shouldly" />
+    <Using Include="System.Text" />
+    <Using Include="System.Xml" />
+    <Using Include="System.Xml.XPath" />
+    <Using Include="Argotic.Common" />
+    <Using Include="Argotic.Syndication" />
+    <Using Include="Argotic.Extensions.Core" />
+    <Using Include="Argotic.Extensions.Tests.TestDoubles" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
     <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
     <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Real sample documents, linked from the Examples project rather than copied, on the same terms
+      as Argotic.Benchmarks: one source of truth for what a real Argotic input looks like.
+
+      Until this was added the project had no Content or None items at all, so no test could read a
+      file fixture even if it wanted to. Every sample document lived as a C# string literal in
+      TestDoubles/FeedTestData.cs, averaging 10 elements against 56 for these files, and carrying
+      none of the itunes:, media:, sx: or content: namespaces a real feed declares.
+    -->
+    <None Include="..\Argotic.Examples\SampleData\*.xml"
+          Link="SampleData\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Schemas the conformance tests validate against, compiled into the assembly rather than copied
+      beside it, so ConformanceSchemas reads them through GetManifestResourceStream and the tests touch
+      the file system for nothing.
+
+      Only the schemas that may be redistributed are here. Google's three sitemap extension schemas are
+      marked "All Rights Reserved" and are fetched in-process by the integration tier instead - see
+      Schemas/NOTICE.md, which explains what each file is and why one of them is missing.
+    -->
+    <EmbeddedResource Include="Schemas\*.xsd" />
+    <None Include="Schemas\NOTICE.md" />
   </ItemGroup>
 
 </Project>

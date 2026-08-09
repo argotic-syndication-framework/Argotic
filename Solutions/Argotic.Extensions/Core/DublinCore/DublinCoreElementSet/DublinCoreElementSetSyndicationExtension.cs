@@ -1,385 +1,267 @@
-﻿using System;
-using System.IO;
+using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
 
-namespace Argotic.Extensions.Core
+namespace Argotic.Extensions.Core;
+
+/// <summary>
+/// Extends syndication specifications to provide a meta-data element resource description vocabulary.
+/// </summary>
+/// <remarks>
+///     <para>
+///         The Dublin Core Metadata Element Set 1.1 — the original fifteen properties, in the
+///         <c>http://purl.org/dc/elements/1.1/</c> namespace under the prefix <c>dc</c>. The
+///         specification is at
+///         <a href="https://www.dublincore.org/specifications/dublin-core/dces/">https://www.dublincore.org/specifications/dublin-core/dces/</a>.
+///     </para>
+///     <para>
+///         This is the Dublin Core that syndication actually uses. <c>dc:creator</c>, <c>dc:date</c>
+///         and <c>dc:subject</c> appear routinely in RSS 1.0 and RSS 2.0 feeds, where they carry
+///         information RSS itself has no element for. Reach for
+///         <see cref="DublinCoreMetadataTermsSyndicationExtension"/> only when you need the wider
+///         vocabulary; the two namespaces are distinct and a feed may declare both, in which case both
+///         extensions are attached.
+///     </para>
+///     <para>
+///         Two things this implementation does not preserve, both silent. Dublin Core permits an
+///         element to repeat — three <c>dc:subject</c> elements are legal and common — but the context
+///         holds one value per element and keeps the first; the rest are dropped on load and gone on
+///         save. And <see cref="DublinCoreElementSetSyndicationExtensionContext.TypeVocabulary"/> maps
+///         <c>dc:type</c> onto the DCMI Type Vocabulary rather than storing the text, so a value
+///         outside that vocabulary becomes <see cref="DublinCoreTypeVocabularies.None"/> and is not
+///         written back.
+///     </para>
+/// </remarks>
+/// <example>
+///     <code source="..\..\Argotic.Examples\Extensions\Core\DublinCoreElementSetSyndicationExtensionExample.cs" language="cs" title="The following code example demonstrates the usage of the DublinCoreElementSetSyndicationExtension class." />
+/// </example>
+public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IComparable<DublinCoreElementSetSyndicationExtension>, IEquatable<DublinCoreElementSetSyndicationExtension>, IComparisonOperators
 {
-	/// <summary>
-	/// Extends syndication specifications to provide a meta-data element resource description vocabulary.
-	/// </summary>
-	/// <remarks>
-	///     <para>
-	///         The <see cref="DublinCoreElementSetSyndicationExtension"/> extends syndicated content to specify a vocabulary of fifteen properties for use in resource description. 
-	///         This syndication extension conforms to the <b>Dublin Core Metadata Element Set</b> 1.1 specification, which can be found 
-	///         at <a href="http://dublincore.org/documents/dces/">http://dublincore.org/documents/dces/</a>.
-	///     </para>
-	/// </remarks>
-	/// <example>
-	///     <code lang="cs" title="The following code example demonstrates the usage of the DublinCoreElementSetSyndicationExtension class.">
-	///         <code 
-	///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\Core\DublinCoreElementSetSyndicationExtensionExample.cs" 
-	///             region="DublinCoreElementSetSyndicationExtension"
-	///         />
-	///     </code>
-	/// </example>
-	[Serializable()]
-	public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IComparable
-	{
-	    /// <summary>
-		/// Private member to hold specific information about the extension.
-		/// </summary>
-		private DublinCoreElementSetSyndicationExtensionContext extensionContext = new DublinCoreElementSetSyndicationExtensionContext();
-	    /// <summary>
-		/// Initializes a new instance of the <see cref="DublinCoreElementSetSyndicationExtension"/> class.
-		/// </summary>
-		public DublinCoreElementSetSyndicationExtension()
-			: base("dc", "http://purl.org/dc/elements/1.1/", new Version("1.1"), new Uri("http://dublincore.org/documents/dces/"), "Dublin Core Metadata Element Set", "Extends syndication feeds to provide a meta-data element resource description vocabulary.")
-		{
-		}
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DublinCoreElementSetSyndicationExtension"/> class.
+    /// </summary>
+    public DublinCoreElementSetSyndicationExtension()
+        : base("dc", "http://purl.org/dc/elements/1.1/", new Version("1.1"), new Uri("https://www.dublincore.org/specifications/dublin-core/dces/"), "Dublin Core Metadata Element Set", "Extends syndication feeds to provide a meta-data element resource description vocabulary.")
+    {
+    }
 
-	    /// <summary>
-		/// Gets or sets the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> object associated with this extension.
-		/// </summary>
-		/// <value>A <see cref="DublinCoreElementSetSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
-		/// <remarks>
-		///     The <b>Context</b> encapsulates all of the syndication extension information that can be retrieved or written to an extended syndication entity. 
-		///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
-		///     are defined for the custom syndication extension.
-		/// </remarks>
-		/// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
-		public DublinCoreElementSetSyndicationExtensionContext Context
-		{
-			get
-			{
-				return extensionContext;
-			}
+    /// <summary>
+    /// Gets or sets the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> object associated with this extension.
+    /// </summary>
+    /// <value>The context. Never <see langword="null"/>: one is created with the extension, and the setter rejects <see langword="null"/>.</value>
+    /// <remarks>
+    ///     The <c>Context</c> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity.
+    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that
+    ///     are defined for the custom syndication extension.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The value specified for a set operation is <see langword="null"/>.</exception>
+    public DublinCoreElementSetSyndicationExtensionContext Context
+    {
+        get;
+        set
+        {
+            ArgumentNullException.ThrowIfNull(value);
+            field = value;
+        }
+    } = new();
 
-			set
-			{
-				Guard.ArgumentNotNull(value, "value");
-				extensionContext = value;
-			}
-		}
+    /// <summary>
+    /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
+    /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
+    /// </summary>
+    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
+    /// <returns><see langword="true"/> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is <see langword="null"/>.</exception>
+    public static bool MatchByType(ISyndicationExtension extension)
+    {
+        ArgumentNullException.ThrowIfNull(extension);
+        return extension is DublinCoreElementSetSyndicationExtension;
+    }
 
-	    /// <summary>
-		/// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
-		/// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
-		/// </summary>
-		/// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
-		/// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
-		public static bool MatchByType(ISyndicationExtension extension)
-		{
-			Guard.ArgumentNotNull(extension, "extension");
-			if (extension.GetType() == typeof(DublinCoreElementSetSyndicationExtension))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
+    /// <summary>
+    /// Returns the type vocabulary identifier for the supplied <see cref="DublinCoreTypeVocabularies"/>.
+    /// </summary>
+    /// <param name="vocabulary">The <see cref="DublinCoreTypeVocabularies"/> to get the type vocabulary identifier for.</param>
+    /// <returns>The type vocabulary identifier for the supplied <paramref name="vocabulary"/>; otherwise, an empty string.</returns>
+    public static string TypeVocabularyAsString(DublinCoreTypeVocabularies vocabulary) =>
+        EnumerationMetadataAttribute.GetAlternateValue(vocabulary);
 
-	    /// <summary>
-		/// Returns the type vocabulary identifier for the supplied <see cref="DublinCoreTypeVocabularies"/>.
-		/// </summary>
-		/// <param name="vocabulary">The <see cref="DublinCoreTypeVocabularies"/> to get the type vocabulary identifier for.</param>
-		/// <returns>The type vocabulary identifier for the supplied <paramref name="vocabulary"/>, otherwise returns an empty string.</returns>
-		public static string TypeVocabularyAsString(DublinCoreTypeVocabularies vocabulary)
-		{
-			string name = String.Empty;
-			foreach (System.Reflection.FieldInfo fieldInfo in typeof(DublinCoreTypeVocabularies).GetFields())
-			{
-				if (fieldInfo.FieldType == typeof(DublinCoreTypeVocabularies))
-				{
-					DublinCoreTypeVocabularies typeVocabulary = (DublinCoreTypeVocabularies)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+    /// <summary>
+    /// Returns the <see cref="DublinCoreTypeVocabularies"/> enumeration value that corresponds to the specified type vocabulary name.
+    /// </summary>
+    /// <param name="name">The name of the type vocabulary.</param>
+    /// <returns>A <see cref="DublinCoreTypeVocabularies"/> enumeration value that corresponds to the specified string; otherwise, <see cref="DublinCoreTypeVocabularies.None"/>.</returns>
+    /// <remarks>This method disregards case of specified type vocabulary name.</remarks>
+    public static DublinCoreTypeVocabularies TypeVocabularyByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, DublinCoreTypeVocabularies.None);
 
-					if (typeVocabulary == vocabulary)
-					{
-						object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+    /// <summary>
+    /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="IXPathNavigable"/> used to load this <see cref="DublinCoreElementSetSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="DublinCoreElementSetSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is <see langword="null"/>.</exception>
+    public override bool Load(IXPathNavigable source)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        XPathNavigator navigator = source.CreateNavigator()
+            ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
+        bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
+        this.OnExtensionLoaded(args);
 
-						if (customAttributes != null && customAttributes.Length > 0)
-						{
-							EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
+        return wasLoaded;
+    }
 
-							name    = enumerationMetadata.AlternateValue;
-							break;
-						}
-					}
-				}
-			}
+    /// <summary>
+    /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
+    /// </summary>
+    /// <param name="reader">The <see cref="XmlReader"/> used to load this <see cref="DublinCoreElementSetSyndicationExtension"/>.</param>
+    /// <returns><see langword="true"/> if the <see cref="DublinCoreElementSetSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is <see langword="null"/>.</exception>
+    public override bool Load(XmlReader reader)
+    {
+        ArgumentNullException.ThrowIfNull(reader);
+        XPathDocument document = new(reader);
 
-			return name;
-		}
+        return this.Load(document.CreateNavigator());
+    }
 
-	    /// <summary>
-		/// Returns the <see cref="DublinCoreTypeVocabularies"/> enumeration value that corresponds to the specified type vocabulary name.
-		/// </summary>
-		/// <param name="name">The name of the type vocabulary.</param>
-		/// <returns>A <see cref="DublinCoreTypeVocabularies"/> enumeration value that corresponds to the specified string, otherwise returns <b>DublinCoreTypeVocabularies.None</b>.</returns>
-		/// <remarks>This method disregards case of specified type vocabulary name.</remarks>
-		/// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
-		/// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-		public static DublinCoreTypeVocabularies TypeVocabularyByName(string name)
-		{
-			DublinCoreTypeVocabularies typeVocabulary = DublinCoreTypeVocabularies.None;
-			Guard.ArgumentNotNullOrEmptyString(name, "name");
-			foreach (System.Reflection.FieldInfo fieldInfo in typeof(DublinCoreTypeVocabularies).GetFields())
-			{
-				if (fieldInfo.FieldType == typeof(DublinCoreTypeVocabularies))
-				{
-					DublinCoreTypeVocabularies vocabulary = (DublinCoreTypeVocabularies)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-					object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+    /// <summary>
+    /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is <see langword="null"/>.</exception>
+    public override void WriteTo(XmlWriter writer)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+        this.Context.WriteTo(writer, this.XmlNamespace);
+    }
 
-					if (customAttributes != null && customAttributes.Length > 0)
-					{
-						EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
+    /// <summary>
+    /// Returns a <see cref="string"/> that represents the current <see cref="DublinCoreElementSetSyndicationExtension"/>.
+    /// </summary>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="DublinCoreElementSetSyndicationExtension"/>.</returns>
+    /// <remarks>
+    ///     This method returns the XML representation for the current instance.
+    /// </remarks>
+    public override string ToString()
+    {
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = SyndicationEncodingUtility.CreateFragmentXmlWriterSettings();
 
-						if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
-						{
-							typeVocabulary  = vocabulary;
-							break;
-						}
-					}
-				}
-			}
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
+        {
+            this.WriteTo(writer);
+        }
 
-			return typeVocabulary;
-		}
+        stream.Seek(0, SeekOrigin.Begin);
 
-	    /// <summary>
-		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
-		/// </summary>
-		/// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="DublinCoreElementSetSyndicationExtension"/>.</param>
-		/// <returns><b>true</b> if the <see cref="DublinCoreElementSetSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-		public override bool Load(IXPathNavigable source)
-		{
-			bool wasLoaded  = false;
-			Guard.ArgumentNotNull(source, "source");
-			XPathNavigator navigator    = source.CreateNavigator();
-			wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-			SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
-			this.OnExtensionLoaded(args);
+        using StreamReader reader = new(stream);
+        return reader.ReadToEnd();
+    }
 
-			return wasLoaded;
-		}
+    /// <summary>
+    /// Compares the current instance with another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this instance.</param>
+    /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+    public int CompareTo(DublinCoreElementSetSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return 1;
+        }
 
-	    /// <summary>
-		/// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
-		/// </summary>
-		/// <param name="reader">The <b>XmlReader</b> used to load this <see cref="DublinCoreElementSetSyndicationExtension"/>.</param>
-		/// <returns><b>true</b> if the <see cref="DublinCoreElementSetSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
-		public override bool Load(XmlReader reader)
-		{
-			Guard.ArgumentNotNull(reader, "reader");
-			XPathDocument document  = new XPathDocument(reader);
+        int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Comparer<Version>.Default.Compare(this.Version, other.Version);
+        if (result == 0) result = string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 
-			return this.Load(document.CreateNavigator());
-		}
+        if (result == 0) result = string.Compare(this.Context.Contributor, other.Context.Contributor, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Coverage, other.Context.Coverage, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Creator, other.Context.Creator, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Context.Date.CompareTo(other.Context.Date);
+        if (result == 0) result = string.Compare(this.Context.Description, other.Context.Description, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Format, other.Context.Format, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Identifier, other.Context.Identifier, StringComparison.Ordinal);
 
-	    /// <summary>
-		/// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
-		/// </summary>
-		/// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-		public override void WriteTo(XmlWriter writer)
-		{
-			Guard.ArgumentNotNull(writer, "writer");
-			this.Context.WriteTo(writer, this.XmlNamespace);
-		}
+        if (result == 0) result = (this.Context.Language, other.Context.Language) switch
+        {
+            (CultureInfo language, CultureInfo otherLanguage) => string.Compare(language.Name, otherLanguage.Name, StringComparison.OrdinalIgnoreCase),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
-	    /// <summary>
-		/// Returns a <see cref="String"/> that represents the current <see cref="DublinCoreElementSetSyndicationExtension"/>.
-		/// </summary>
-		/// <returns>A <see cref="String"/> that represents the current <see cref="DublinCoreElementSetSyndicationExtension"/>.</returns>
-		/// <remarks>
-		///     This method returns the XML representation for the current instance.
-		/// </remarks>
-		public override string ToString()
-		{
-			using(MemoryStream stream = new MemoryStream())
-			{
-				XmlWriterSettings settings  = new XmlWriterSettings();
-				settings.ConformanceLevel   = ConformanceLevel.Fragment;
-				settings.Indent             = true;
-				settings.OmitXmlDeclaration = true;
+        if (result == 0) result = string.Compare(this.Context.Publisher, other.Context.Publisher, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Relation, other.Context.Relation, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Rights, other.Context.Rights, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Source, other.Context.Source, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Subject, other.Context.Subject, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Title, other.Context.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Context.TypeVocabulary.CompareTo(other.Context.TypeVocabulary);
 
-				using(XmlWriter writer = XmlWriter.Create(stream, settings))
-				{
-					this.WriteTo(writer);
-				}
+        return result;
+    }
 
-				stream.Seek(0, SeekOrigin.Begin);
+    /// <summary>
+    /// Determines whether the specified <see cref="DublinCoreElementSetSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="DublinCoreElementSetSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="DublinCoreElementSetSyndicationExtension"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public bool Equals(DublinCoreElementSetSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
 
-				using (StreamReader reader = new StreamReader(stream))
-				{
-					return reader.ReadToEnd();
-				}
-			}
-		}
+        return this.CompareTo(other) == 0;
+    }
 
-	    /// <summary>
-		/// Compares the current instance with another object of the same type.
-		/// </summary>
-		/// <param name="obj">An object to compare with this instance.</param>
-		/// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-		/// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-		public int CompareTo(object obj)
-		{
-			if (obj == null)
-			{
-				return 1;
-			}
-			DublinCoreElementSetSyndicationExtension value  = obj as DublinCoreElementSetSyndicationExtension;
+    /// <summary>
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public override bool Equals(object? obj) => obj is DublinCoreElementSetSyndicationExtension other && this.Equals(other);
 
-			if (value != null)
-			{
-				int result  = String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-				result      = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-				result      = result | this.Version.CompareTo(value.Version);
-				result      = result | String.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-				result      = result | String.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+    /// <summary>
+    /// Returns a hash code for the current instance.
+    /// </summary>
+    /// <returns>A 32-bit signed integer hash code.</returns>
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix))),
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Contributor), HashCodeUtility.Component(this.Context.Coverage), HashCodeUtility.Component(this.Context.Creator), HashCodeUtility.Component(this.Context.Date), HashCodeUtility.Component(this.Context.Description), HashCodeUtility.Component(this.Context.Format))),
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Identifier), HashCodeUtility.Component(this.Context.Language), HashCodeUtility.Component(this.Context.Publisher), HashCodeUtility.Component(this.Context.Relation), HashCodeUtility.Component(this.Context.Rights))),
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Source), HashCodeUtility.Component(this.Context.Subject), HashCodeUtility.Component(this.Context.Title), HashCodeUtility.Component(this.Context.TypeVocabulary))));
+    }
 
-				result      = result | String.Compare(this.Context.Contributor, value.Context.Contributor, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Context.Coverage, value.Context.Coverage, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Context.Creator, value.Context.Creator, StringComparison.OrdinalIgnoreCase);
-				result      = result | this.Context.Date.CompareTo(value.Context.Date);
-				result      = result | String.Compare(this.Context.Description, value.Context.Description, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Context.Format, value.Context.Format, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Context.Identifier, value.Context.Identifier, StringComparison.Ordinal);
+    /// <summary>
+    /// Determines if operands are equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="true"/> if the values of its operands are equal, otherwise; <see langword="false"/>.</returns>
+    public static bool operator ==(DublinCoreElementSetSyndicationExtension? first, DublinCoreElementSetSyndicationExtension? second)
+    {
+        if (first is null) return second is null;
+        return first.Equals(second);
+    }
 
-				if (this.Context.Language != null)
-				{
-					if (value.Context.Language != null)
-					{
-						result  = result | String.Compare(this.Context.Language.Name, value.Context.Language.Name, StringComparison.OrdinalIgnoreCase);
-					}
-					else
-					{
-						result  = result | 1;
-					}
-				}
-				else if (this.Context.Language == null && value.Context.Language != null)
-				{
-					result      = result | -1;
-				}
+    /// <summary>
+    /// Determines if operands are not equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="false"/> if its operands are equal, otherwise; <see langword="true"/>.</returns>
+    public static bool operator !=(DublinCoreElementSetSyndicationExtension? first, DublinCoreElementSetSyndicationExtension? second) => !(first == second);
 
-				result      = result | String.Compare(this.Context.Publisher, value.Context.Publisher, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Context.Relation, value.Context.Relation, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Context.Rights, value.Context.Rights, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Context.Source, value.Context.Source, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Context.Subject, value.Context.Subject, StringComparison.OrdinalIgnoreCase);
-				result      = result | String.Compare(this.Context.Title, value.Context.Title, StringComparison.OrdinalIgnoreCase);
-				result      = result | this.Context.TypeVocabulary.CompareTo(value.Context.TypeVocabulary);
-
-				return result;
-			}
-			else
-			{
-				throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
-			}
-		}
-
-	    /// <summary>
-		/// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-		/// </summary>
-		/// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-		/// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-		public override bool Equals(Object obj)
-		{
-			if (!(obj is DublinCoreElementSetSyndicationExtension))
-			{
-				return false;
-			}
-
-			return (this.CompareTo(obj) == 0);
-		}
-
-	    /// <summary>
-		/// Returns a hash code for the current instance.
-		/// </summary>
-		/// <returns>A 32-bit signed integer hash code.</returns>
-		public override int GetHashCode()
-		{
-			return this.ToString().GetHashCode();
-		}
-
-	    /// <summary>
-		/// Determines if operands are equal.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-		public static bool operator ==(DublinCoreElementSetSyndicationExtension first, DublinCoreElementSetSyndicationExtension second)
-		{
-			if (object.Equals(first, null) && object.Equals(second, null))
-			{
-				return true;
-			}
-			else if (object.Equals(first, null) && !object.Equals(second, null))
-			{
-				return false;
-			}
-
-			return first.Equals(second);
-		}
-
-	    /// <summary>
-		/// Determines if operands are not equal.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-		public static bool operator !=(DublinCoreElementSetSyndicationExtension first, DublinCoreElementSetSyndicationExtension second)
-		{
-			return !(first == second);
-		}
-
-	    /// <summary>
-		/// Determines if first operand is less than second operand.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-		public static bool operator <(DublinCoreElementSetSyndicationExtension first, DublinCoreElementSetSyndicationExtension second)
-		{
-			if (object.Equals(first, null) && object.Equals(second, null))
-			{
-				return false;
-			}
-			else if (object.Equals(first, null) && !object.Equals(second, null))
-			{
-				return true;
-			}
-
-			return (first.CompareTo(second) < 0);
-		}
-
-	    /// <summary>
-		/// Determines if first operand is greater than second operand.
-		/// </summary>
-		/// <param name="first">Operand to be compared.</param>
-		/// <param name="second">Operand to compare to.</param>
-		/// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-		public static bool operator >(DublinCoreElementSetSyndicationExtension first, DublinCoreElementSetSyndicationExtension second)
-		{
-			if (object.Equals(first, null) && object.Equals(second, null))
-			{
-				return false;
-			}
-			else if (object.Equals(first, null) && !object.Equals(second, null))
-			{
-				return false;
-			}
-
-			return (first.CompareTo(second) > 0);
-		}
-	}
 }

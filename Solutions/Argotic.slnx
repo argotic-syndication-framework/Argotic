@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="Argotic.Benchmarks/Argotic.Benchmarks.csproj" />
+  <Project Path="Argotic.Common/Argotic.Common.csproj" />
+  <Project Path="Argotic.Core/Argotic.Core.csproj" />
+  <Project Path="Argotic.Examples/Argotic.Examples.csproj" />
+  <Project Path="Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj" />
+  <Project Path="Argotic.Extensions/Argotic.Extensions.csproj" />
+</Solution>

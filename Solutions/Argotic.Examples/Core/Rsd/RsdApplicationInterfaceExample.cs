@@ -1,43 +1,39 @@
-﻿using System;
+using Argotic.Syndication;
 
-using Argotic.Common;
-using Argotic.Syndication.Specialized;
+namespace Argotic.Examples.Core.Rsd;
 
-namespace Argotic.Examples
+/// <summary>
+/// Advertises a blogging API endpoint with <see cref="RsdApplicationInterface"/>.
+/// </summary>
+internal static class RsdApplicationInterfaceExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="RsdApplicationInterface"/> class.
+    /// Builds the containing <see cref="RsdDocument"/> and prints the <see cref="RsdApplicationInterface"/> it holds.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="RsdApplicationInterface"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
-    public static class RsdApplicationInterfaceExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the RsdApplicationInterface class.
-        /// </summary>
-        public static void ClassExample()
+        RsdDocument document = new()
         {
-            RsdDocument document    = new RsdDocument();
+            EngineName = "endjin publishing",
+            EngineLink = new Uri("https://endjin.com/"),
+            Homepage = new Uri("http://www.userdomain.com/")
+        };
 
-            document.EngineName     = "Blog Munging CMS";
-            document.EngineLink     = new Uri("http://www.blogmunging.com/");
-            document.Homepage       = new Uri("http://www.userdomain.com/");
+        //  Identify supported services using well known names
+        document.Interfaces.Add(new RsdApplicationInterface("MetaWeblog", new Uri("https://endjin.com/xmlrpc"), true, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("Blogger", new Uri("https://endjin.com/xmlrpc"), false, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("MetaWiki", new Uri("https://endjin.com/blog/trying-out-wsl-containers"), false, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("Antville", new Uri("https://endjin.com/blog/cloud-ai-slas-are-not-what-you-think"), false, "123abc"));
 
-            //  Identify supported services using well known names
-            document.AddInterface(new RsdApplicationInterface("MetaWeblog", new Uri("http://example.com/xml/rpc/url"), true, "123abc"));
-            document.AddInterface(new RsdApplicationInterface("Blogger", new Uri("http://example.com/xml/rpc/url"), false, "123abc"));
-            document.AddInterface(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));
-            document.AddInterface(new RsdApplicationInterface("Antville", new Uri("http://example.com/yet/another/url"), false, "123abc"));
+        RsdApplicationInterface conversantApi = new("Conversant", new Uri("https://endjin.com/xmlrpc"), false, string.Empty)
+        {
+            Documentation = new Uri("http://www.conversant.com/docs/api/"),
+            Notes = "Additional explanation here."
+        };
+        conversantApi.Settings.Add("service-specific-setting", "a value");
+        conversantApi.Settings.Add("another-setting", "another value");
+        document.Interfaces.Add(conversantApi);
 
-            RsdApplicationInterface conversantApi   = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, String.Empty);
-            conversantApi.Documentation             = new Uri("http://www.conversant.com/docs/api/");
-            conversantApi.Notes                     = "Additional explanation here.";
-            conversantApi.Settings.Add("service-specific-setting", "a value");
-            conversantApi.Settings.Add("another-setting", "another value");
-            document.AddInterface(conversantApi);
-        }
+        ExampleOutput.ShowRsdApplicationInterface(conversantApi);
     }
 }

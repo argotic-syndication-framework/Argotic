@@ -1,219 +1,218 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Net;
-
 using Argotic.Common;
 using Argotic.Syndication;
+using Spectre.Console;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Common;
+
+/// <summary>
+/// Demonstrates <see cref="SyndicationDiscoveryUtility"/>: what format a URL serves, whether one page links to another, whether a URL exists, conditional GET, and locating syndication, Pingback and Trackback endpoints.
+/// </summary>
+/// <remarks>
+///     Every method here fetches from a live origin, so all of them are marked
+///     <see cref="RequiresNetworkAttribute"/> and are skipped by the offline gate.
+/// </remarks>
+internal static class SyndicationDiscoveryUtilityExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="SyndicationDiscoveryUtility"/> class.
+    /// Determines which syndication format a URL serves, without parsing it fully.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="SyndicationDiscoveryUtility"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    public static class SyndicationDiscoveryUtilityExample
+    [RequiresNetwork]
+    public static async Task SyndicationContentFormatGetExampleAsync()
     {
-        /// <summary>
-        /// Provides example code for the SyndicationDiscoveryUtility.SyndicationContentFormatGet(Uri) method
-        /// </summary>
-        public static void SyndicationContentFormatGetExample()
+        Uri url = new("https://endjin.com/rss.xml");
+
+        SyndicationContentFormat format = await SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(url).ConfigureAwait(false);
+
+        if (format != SyndicationContentFormat.None)
         {
-            SyndicationContentFormat format = SyndicationContentFormat.None;
-            Uri url                         = new Uri("http://feeds.feedburner.com/HanselminutesCompleteMP3?format=xml");
-
-            format                          = SyndicationDiscoveryUtility.SyndicationContentFormatGet(url);
-
-            if (format != SyndicationContentFormat.None)
-            {
-                // Do something based on the determined content format
-            }
+            // Do something based on the determined content format
         }
 
-        /// <summary>
-        /// Provides example code for the SyndicationDiscoveryUtility.SourceReferencesTarget(Uri, Uri) method
-        /// </summary>
-        public static void SourceReferencesTargetExample()
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {url}");
+        AnsiConsole.MarkupLine($"  [dim]Format:[/] {format}");
+    }
+
+    /// <summary>
+    /// Determines whether one web resource links to another — the check behind Pingback and Trackback validation.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task SourceReferencesTargetExampleAsync()
+    {
+        //  Certain syndication scenarios involve verifying that one web resource references or 'links' to another web resource.
+
+        Uri source = new("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases");
+        Uri target = new("https://endjin.com");
+
+        bool references = await SyndicationDiscoveryUtility.SourceReferencesTargetAsync(source, target).ConfigureAwait(false);
+        if (references)
         {
-            //  Certain syndication scenarios involve verifying that one web resource references or 'links' to another web resource.
-
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
-            Uri target  = new Uri("http://www.wikimindmap.org/");
-
-            if (SyndicationDiscoveryUtility.SourceReferencesTarget(source, target))
-            {
-                // Perform some action based on source referencing the target.
-            }
+            // Perform some action based on source referencing the target.
         }
 
-        /// <summary>
-        /// Provides example code for the SyndicationDiscoveryUtility.UriExists(Uri) method
-        /// </summary>
-        public static void UriExistsExample()
-        {
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/");
+        AnsiConsole.MarkupLine($"  [dim]Source:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Target:[/] {target}");
+        AnsiConsole.MarkupLine($"  [dim]References:[/] {references}");
+    }
 
-            if (SyndicationDiscoveryUtility.UriExists(source))
-            {
-                // Perform some action based on source existing.
-            }
+    /// <summary>
+    /// Determines whether a URL resolves, without downloading its body.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task UriExistsExampleAsync()
+    {
+        Uri source = new("https://endjin.com/blog/");
+
+        bool exists = await SyndicationDiscoveryUtility.UriExistsAsync(source).ConfigureAwait(false);
+        if (exists)
+        {
+            // Perform some action based on source existing.
         }
 
-        /// <summary>
-        /// Provides example code for the SyndicationDiscoveryUtility.ConditionalGet(Uri, DateTime, string) method
-        /// </summary>
-        public static void ConditionalGetExample()
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Exists:[/] {exists}");
+    }
+
+    /// <summary>
+    /// Re-fetches a feed only if it changed, using the modification date and entity tag from the previous response.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task ConditionalGetExampleAsync()
+    {
+        Uri source = new("https://endjin.com/rss.xml");
+
+        using HttpClient client = new();
+        using HttpRequestMessage request = new(HttpMethod.Get, source);
+        request.Headers.UserAgent.ParseAdd("Some User Agent 1.0.0.0");
+
+        using HttpResponseMessage httpResponse = await client.SendAsync(request).ConfigureAwait(false);
+
+        DateTime lastModified = httpResponse.Content.Headers.LastModified?.DateTime ?? DateTime.MinValue;
+        string? entityTag = httpResponse.Headers.ETag?.Tag;
+
+        /*
+            Typically the consumer would store the modification date and entity tag information for the resource,
+            and some amount of time passes. Consumer can now use a conditional GET operation to determine if
+            the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
+        */
+        using ConditionalGetResult conditionalResponse = await SyndicationDiscoveryUtility.ConditionalGetAsync(source, lastModified, entityTag!).ConfigureAwait(false);
+        if (conditionalResponse.WasModified)
         {
-            Uri source                      = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
-            DateTime lastModified;
-            string entityTag;
-
-            HttpWebRequest httpRequest      = (HttpWebRequest)HttpWebRequest.Create(source);
-            httpRequest.AllowAutoRedirect   = true;
-            httpRequest.KeepAlive           = true;
-            httpRequest.UserAgent           = "Some User Agent 1.0.0.0";
-
-            HttpWebResponse httpResponse    = (HttpWebResponse)httpRequest.GetResponse();
-
-            lastModified    = httpResponse.LastModified;
-            entityTag       = httpResponse.Headers[HttpResponseHeader.ETag];
-
-            /*
-                Typically the consumer would store the modification date and entity tag information for the resource,
-                and some amount of time passes. Consumer can now use a conditional GET operation to determine if 
-                the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
-            */
-
-            WebResponse conditionalResponse = SyndicationDiscoveryUtility.ConditionalGet(source, lastModified, entityTag);
-            if (conditionalResponse != null)
-            {
-                // Web resource has been modified since last retrieval, consumer would process the new data.
-            }
+            // Web resource has been modified since last retrieval, consumer would process the new data.
+            using Stream stream = await conditionalResponse.GetResponseStreamAsync().ConfigureAwait(false);
+            // Process the stream...
         }
 
-        /// <summary>
-        /// Provides example code for the SyndicationDiscoveryUtility.TryConditionalGetExample(Uri, DateTime, string, out WebResponse) method
-        /// </summary>
-        public static void TryConditionalGetExample()
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Was Modified:[/] {conditionalResponse.WasModified}");
+    }
+
+
+    /// <summary>
+    /// Finds the feeds an HTML page advertises through its <c>link</c> elements.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task LocateDiscoverableSyndicationEndpointsExampleAsync()
+    {
+        Uri source = new("https://endjin.com/what-we-think/talks/");
+
+        IList<DiscoverableSyndicationEndpoint> endpoints = await SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(source).ConfigureAwait(false);
+
+        foreach (DiscoverableSyndicationEndpoint endpoint in endpoints)
         {
-            Uri source                      = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
-            DateTime lastModified;
-            string entityTag;
-            HttpWebRequest httpRequest      = (HttpWebRequest)HttpWebRequest.Create(source);
-            httpRequest.AllowAutoRedirect   = true;
-            httpRequest.KeepAlive           = true;
-            httpRequest.UserAgent           = "Some User Agent 1.0.0.0";
-
-            HttpWebResponse httpResponse    = (HttpWebResponse)httpRequest.GetResponse();
-
-            lastModified    = httpResponse.LastModified;
-            entityTag       = httpResponse.Headers[HttpResponseHeader.ETag];
-
-            /*
-                Typically the consumer would store the modification date and entity tag information for the resource,
-                and some amount of time passes. Consumer can now use a conditional GET operation to determine if 
-                the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
-            */
-
-
-            HttpWebResponse conditionalResponse = null;
-            if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, out conditionalResponse))
+            if (endpoint.ContentFormat == SyndicationContentFormat.Rss)
             {
-                // Web resource has been modified since last retrieval, consumer would process the new data.
-            }
-        }
-
-        /// <summary>
-        /// Provides example code for the SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(Uri) method
-        /// </summary>
-        public static void LocateDiscoverableSyndicationEndpointsExample()
-        {
-            Uri source  = new Uri("http://www.dotnetrocks.com/");
-            Collection<DiscoverableSyndicationEndpoint> endpoints;
-
-            endpoints   = SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(source);
-
-            foreach(DiscoverableSyndicationEndpoint endpoint in endpoints)
-            {
-                if (endpoint.ContentFormat == SyndicationContentFormat.Rss)
+                RssFeed feed = new();
+                await feed.LoadAsync(endpoint.Source!).ConfigureAwait(false);
+                if (feed.Channel.HasExtensions)
                 {
-                    RssFeed feed    = RssFeed.Create(endpoint.Source);
-                    if(feed.Channel.HasExtensions)
-                    {
-                        // Process feed extensions
-                    }
+                    // Process feed extensions
                 }
             }
         }
 
-        /// <summary>
-        /// Provides example code for the SyndicationDiscoveryUtility.IsPingbackEnabled(Uri) method
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
-        public static void IsPingbackEnabledExample()
-        {
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Endpoints found:[/] {endpoints.Count}");
+    }
 
-            if (SyndicationDiscoveryUtility.IsPingbackEnabled(source))
-            {
-                //  Parse source for Pingback information
-            }
+    /// <summary>
+    /// Determines whether a page accepts Pingback notifications.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task IsPingbackEnabledExampleAsync()
+    {
+        Uri source = new("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases");
+
+        bool isPingbackEnabled = await SyndicationDiscoveryUtility.IsPingbackEnabledAsync(source).ConfigureAwait(false);
+        if (isPingbackEnabled)
+        {
+            //  Parse source for Pingback information
         }
 
-        /// <summary>
-        /// Provides example code for the SyndicationDiscoveryUtility.LocatePingbackNotificationServer(Uri)  method
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
-        public static void LocatePingbackNotificationServerExample()
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Pingback Enabled:[/] {isPingbackEnabled}");
+    }
+
+    /// <summary>
+    /// Finds a page's Pingback server and sends it an XML-RPC notification.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task LocatePingbackNotificationServerExampleAsync()
+    {
+        Uri source = new("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases");
+
+        Uri? pingbackServer = await SyndicationDiscoveryUtility.LocatePingbackNotificationServerAsync(source).ConfigureAwait(false);
+        if (pingbackServer is not null)
         {
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+            Argotic.Net.XmlRpcClient client = new(pingbackServer);
+            Argotic.Net.XmlRpcMessage message = new();
 
-            Uri pingbackServer  = SyndicationDiscoveryUtility.LocatePingbackNotificationServer(source);
-            if (pingbackServer != null)
-            {
-                Argotic.Net.XmlRpcClient client     = new Argotic.Net.XmlRpcClient(pingbackServer);
-                Argotic.Net.XmlRpcMessage message   = new Argotic.Net.XmlRpcMessage();
+            // Build the Pingback XML-RPC message to be sent
 
-                // Build the Pingback XML-RPC message to be sent
-
-                client.Send(message);
-            }
+            await client.SendAsync(message).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Provides example code for the SyndicationDiscoveryUtility.IsTrackbackEnabled(Uri) method
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
-        public static void IsTrackbackEnabledExample()
-        {
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Pingback Server:[/] {pingbackServer?.ToString() ?? "Not found"}");
+    }
 
-            if (SyndicationDiscoveryUtility.IsTrackbackEnabled(source))
-            {
-                // Parse source for Trackback information
-            }
+    /// <summary>
+    /// Determines whether a page accepts Trackback notifications.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task IsTrackbackEnabledExampleAsync()
+    {
+        Uri source = new("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases");
+
+        bool isTrackbackEnabled = await SyndicationDiscoveryUtility.IsTrackbackEnabledAsync(source).ConfigureAwait(false);
+        if (isTrackbackEnabled)
+        {
+            // Parse source for Trackback information
         }
 
-        /// <summary>
-        /// Provides example code for the SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(Uri) method
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
-        public static void LocateTrackbackNotificationServersExample()
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Trackback Enabled:[/] {isTrackbackEnabled}");
+    }
+
+    /// <summary>
+    /// Finds a page's Trackback servers and sends each one a notification.
+    /// </summary>
+    [RequiresNetwork]
+    public static async Task LocateTrackbackNotificationServersExampleAsync()
+    {
+        Uri source = new("https://endjin.com/blog/writing-effective-copilot-instructions-for-complex-codebases");
+
+        IList<TrackbackDiscoveryMetadata> endpoints = await SyndicationDiscoveryUtility.LocateTrackbackNotificationServersAsync(source).ConfigureAwait(false);
+        foreach (TrackbackDiscoveryMetadata endpoint in endpoints)
         {
-            Uri source  = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+            Argotic.Net.TrackbackClient client = new(endpoint.PingUrl!);
+            Argotic.Net.TrackbackMessage message = new();
 
-            Collection<TrackbackDiscoveryMetadata> endpoints    = SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(source);
-            foreach(TrackbackDiscoveryMetadata endpoint in endpoints)
-            {
-                Argotic.Net.TrackbackClient client = new Argotic.Net.TrackbackClient(endpoint.PingUrl);
-                Argotic.Net.TrackbackMessage message    = new Argotic.Net.TrackbackMessage();
+            //  Build Trackback url-encoded message to be sent
 
-                //  Build Trackback url-encoded message to be sent
-
-                client.Send(message);
-            }
+            await client.SendAsync(message).ConfigureAwait(false);
         }
+
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Trackback Servers:[/] {endpoints.Count}");
     }
 }

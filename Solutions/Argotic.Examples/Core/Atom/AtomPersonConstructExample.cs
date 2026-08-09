@@ -1,57 +1,54 @@
-﻿using System;
-
-using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core.Atom;
+
+/// <summary>
+/// Names the people behind a feed and its entries with <see cref="AtomPersonConstruct"/>.
+/// </summary>
+internal static class AtomPersonConstructExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="AtomPersonConstruct"/> class.
+    /// Builds the containing <see cref="AtomFeed"/> and prints the <see cref="AtomPersonConstruct"/> it holds.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="AtomPersonConstruct"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    public static class AtomPersonConstructExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the AtomPersonConstruct class.
-        /// </summary>
-        public static void ClassExample()
+        AtomFeed feed = new()
         {
-            AtomFeed feed   = new AtomFeed();
+            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new AtomTextConstruct("Example Feed"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
+        };
 
-            feed.Id         = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
-            feed.Title      = new AtomTextConstruct("Example Feed");
-            feed.UpdatedOn  = new DateTime(2003, 12, 13, 18, 30, 2);
+        feed.Links.Add(new AtomLink(new Uri("https://endjin.com/")));
+        feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
-            feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
-            feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
+        //  Identify the author of the feed
+        feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
-            //  Identify the author of the feed
-            feed.Authors.Add(new AtomPersonConstruct("John Doe"));
+        //  Identify the contributors to the feed
+        feed.Contributors.Add(new AtomPersonConstruct("Jane Doe"));
 
-            //  Identify the contributors to the feed
-            feed.Contributors.Add(new AtomPersonConstruct("Jane Doe"));
+        AtomPersonConstruct contributor = new()
+        {
+            EmailAddress = "hello@endjin.com",
+            Name = "Some Person",
+            Uri = new Uri("https://endjin.com/who-we-are/")
+        };
+        feed.Contributors.Add(contributor);
 
-            AtomPersonConstruct contributor = new AtomPersonConstruct();
-            contributor.EmailAddress        = "some.person@example.org";
-            contributor.Name                = "Some Person";
-            contributor.Uri                 = new Uri("http://example.org/somePerson");
-            feed.Contributors.Add(contributor);
+        AtomEntry entry = new()
+        {
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
+            Summary = new AtomTextConstruct("Some text.")
+        };
 
-            AtomEntry entry = new AtomEntry();
+        //  Identify the author of the entry
+        entry.Authors.Add(new AtomPersonConstruct("Jane Doe"));
 
-            entry.Id        = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
-            entry.Title     = new AtomTextConstruct("Atom-Powered Robots Run Amok");
-            entry.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
+        feed.Entries.Add(entry);
 
-            entry.Summary   = new AtomTextConstruct("Some text.");
-
-            //  Identify the author of the entry
-            entry.Authors.Add(new AtomPersonConstruct("Jane Doe"));
-
-            feed.AddEntry(entry);
-        }
+        ExampleOutput.ShowAtomPersonConstruct(contributor);
     }
 }

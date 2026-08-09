@@ -1,36 +1,35 @@
-﻿using System;
-
-using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core.Rss;
+
+/// <summary>
+/// Points a channel at its logo with <see cref="RssImage"/>.
+/// </summary>
+internal static class RssImageExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="RssImage"/> class.
+    /// Builds the containing <see cref="RssFeed"/> and prints the <see cref="RssImage"/> it holds.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="RssImage"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-    public static class RssImageExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the RssImage class.
-        /// </summary>
-        public static void ClassExample()
+        RssFeed feed = new()
         {
-            RssFeed feed    = new RssFeed();
+            Channel =
+            {
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI"
+            }
+        };
 
-            feed.Channel.Title          = "Dallas Times-Herald";
-            feed.Channel.Link           = new Uri("http://dallas.example.com");
-            feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
+        RssImage image = new(new Uri("https://endjin.com"), "endjin blog", new Uri("https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/open-graph/og-endjin.png"))
+        {
+            Description = "Read the endjin blog",
+            Height = 32,
+            Width = 96
+        };
+        feed.Channel.Image = image;
 
-            RssImage image              = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"));
-            image.Description           = "Read the Dallas Times-Herald";
-            image.Height                = 32;
-            image.Width                 = 96;
-            feed.Channel.Image          = image;
-        }
+        ExampleOutput.ShowRssImage(image);
     }
 }

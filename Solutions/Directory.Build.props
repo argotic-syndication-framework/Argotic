@@ -1,0 +1,51 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <!-- Nullable warnings are errors. The solution is at zero of them, and the annotations are part
+         of the shipped public API - a CS86xx regression silently changes the contract consumers
+         compile against. Scoped to nullable rather than all warnings, which remains a separate
+         decision (see .endjin/build-warnings.md section 5). -->
+    <WarningsAsErrors>nullable</WarningsAsErrors>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>14.0</LangVersion>
+
+    <!-- Package metadata -->
+    <Authors>Brian William Kuhn, endjin</Authors>
+    <Copyright>Copyright © Brian William Kuhn 2008-2026</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/argotic-syndication-framework/Argotic</PackageProjectUrl>
+    <PackageTags>syndication rss atom opml rsd blogml sitemap feed xml .net</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+
+    <!-- Repository info -->
+    <RepositoryUrl>https://github.com/argotic-syndication-framework/Argotic</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <!-- Symbol packages -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- SourceLink -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <!-- Build settings -->
+    <Deterministic>true</Deterministic>
+
+    <!-- Analyzers -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <!-- CI build setting -->
+  <PropertyGroup Condition="'$(CI)' == 'true' OR '$(TF_BUILD)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+</Project>

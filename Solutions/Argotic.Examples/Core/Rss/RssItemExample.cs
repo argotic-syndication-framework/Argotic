@@ -1,47 +1,46 @@
-﻿using System;
-
-using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples
+namespace Argotic.Examples.Core.Rss;
+
+/// <summary>
+/// Builds an <see cref="RssItem"/> carrying every optional element RSS 2.0 defines for one, and adds it to a channel.
+/// </summary>
+internal static class RssItemExample
 {
     /// <summary>
-    /// Contains the code examples for the <see cref="RssItem"/> class.
+    /// Builds the containing <see cref="RssFeed"/> and prints the <see cref="RssItem"/> it holds.
     /// </summary>
-    /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="RssItem"/> class. 
-    ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
-    /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-    public static class RssItemExample
+    public static void ClassExample()
     {
-        /// <summary>
-        /// Provides example code for the RssItem class.
-        /// </summary>
-        public static void ClassExample()
+        RssFeed feed = new()
         {
-            RssFeed feed    = new RssFeed();
+            Channel =
+            {
+                Title = "endjin blog",
+                Link = new Uri("https://endjin.com"),
+                Description = "Technical writing from endjin on .NET, data, analytics and AI"
+            }
+        };
 
-            feed.Channel.Title          = "Dallas Times-Herald";
-            feed.Channel.Link           = new Uri("http://dallas.example.com");
-            feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
+        RssItem item = new()
+        {
+            Title = "Rx.NET v7.0 Released - it could save you 95MB!",
+            Link = new Uri("https://endjin.com/blog/optimising-dax-formula-engine-and-storage-engine"),
+            Description = "Moving UI framework support out of System.Reactive into separate packages cuts up to 95MB from a self-contained deployment.",
+            Author = "hello@endjin.com (Barry Smart)"
+        };
 
-            RssItem item        = new RssItem();
-            item.Title          = "Seventh Heaven! Ryan Hurls Another No Hitter";
-            item.Link           = new Uri("http://dallas.example.com/1991/05/02/nolan.htm");
-            item.Description    = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.";
-            item.Author         = "jbb@dallas.example.com (Joe Bob Briggs)";
+        item.Categories.Add(new RssCategory("sports"));
+        item.Categories.Add(new RssCategory("2026/Rx.NET", "rec.sports.baseball"));
 
-            item.Categories.Add(new RssCategory("sports"));
-            item.Categories.Add(new RssCategory("1991/Texas Rangers", "rec.sports.baseball"));
+        item.Comments = new Uri("https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra#comments");
+        item.Enclosures.Add(new RssEnclosure(24_986_239L, "audio/mpeg", new Uri("https://endjincdn.blob.core.windows.net/assets/podcast/2026-05-14-the-genai-reality-check-new-Instrument-same-orchestra.mp3")));
+        item.Guid = new RssGuid("https://endjin.com/blog/genai-reality-check-new-instrument-same-orchestra");
+        item.PublicationDate = new DateTime(2007, 10, 5, 9, 0, 0);
+        item.Source = new RssSource(new Uri("https://endjin.com/rss.xml"), "Los Angeles Herald-Examiner");
 
-            item.Comments           = new Uri("http://dallas.example.com/feedback/1983/06/joebob.htm");
-            item.Enclosures.Add(new RssEnclosure(24986239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
-            item.Guid               = new RssGuid("http://dallas.example.com/1983/05/06/joebob.htm");
-            item.PublicationDate    = new DateTime(2007, 10, 5, 9, 0, 0);
-            item.Source             = new RssSource(new Uri("http://la.example.com/rss.xml"), "Los Angeles Herald-Examiner");
+        feed.Channel.Items.Add(item);
 
-            feed.Channel.AddItem(item);
-        }
+        ExampleOutput.ShowRssItem(item);
     }
 }

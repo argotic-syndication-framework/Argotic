@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Two talks from https://endjin.com/sitemap-video.xml. The loc, title, player_loc, duration and
+  publication_date are exactly what endjin serves; endjin's talks are published to YouTube, so
+  player_loc is an embed URL and there is no content_loc to give.
+
+  The tag, uploader, platform and restriction elements are added on top of what endjin publishes,
+  because between them the two urls have to cover the optional surface SitemapVideoExtension models.
+  A video sitemap using only the six elements every entry carries would leave SitemapVideoPlatform,
+  SitemapVideoRelationship and the uploader attribute unexercised.
+
+  Element order follows the xsd:sequence in sitemap-video-1.1.xsd, which is stricter than it looks:
+  tag comes directly after publication_date, restriction after family_friendly, and platform and live
+  near the end. The file this replaced put tag last and was rejected by Google's own schema.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://endjin.com/what-we-think/talks/rxdotnet-v7-0-released</loc>
+    <video:video>
+      <video:thumbnail_loc>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/talks/rx-dotnet-v7-0-released.jpg</video:thumbnail_loc>
+      <video:title>Rx.NET v7.0 Released - it could save you 95MB!</video:title>
+      <video:description>Ian Griffiths announces Rx.NET 7.0, and how moving UI framework support out of System.Reactive into separate packages can cut 95MB from a self-contained deployment.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/gJlP1vcrxD8</video:player_loc>
+      <video:duration>1612</video:duration>
+      <video:publication_date>2026-07-29T09:00:00Z</video:publication_date>
+      <video:tag>Rx.NET</video:tag>
+      <video:tag>.NET</video:tag>
+      <video:tag>Reactive Extensions</video:tag>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:uploader info="https://www.youtube.com/endjin">endjin</video:uploader>
+      <video:platform relationship="allow">web mobile tv</video:platform>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://endjin.com/what-we-think/talks/auditing-uk-energy-policy-without-a-cluster</loc>
+    <video:video>
+      <video:thumbnail_loc>https://res.cloudinary.com/endjin/image/upload/f_auto/q_80/assets/images/talks/duckcon-07-2026-auditing-uk-energy-policy-without-a-cluster.jpg</video:thumbnail_loc>
+      <video:title>Auditing UK energy policy without a cluster: a laptop, a duck, and twenty years of wind</video:title>
+      <video:description>Barry Smart audits twenty years of fragmented UK government energy data on a single laptop, using data contracts, Parquet and a DuckDB medallion model where PySpark had failed to scale.</video:description>
+      <video:player_loc>https://www.youtube.com/embed/Ub7Zuf_lLms</video:player_loc>
+      <video:duration>313</video:duration>
+      <video:publication_date>2026-06-29T05:30:00Z</video:publication_date>
+      <video:tag>DuckDB</video:tag>
+      <video:tag>Data Engineering</video:tag>
+      <video:tag>Python</video:tag>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:restriction relationship="allow">GB IE</video:restriction>
+      <video:uploader info="https://www.youtube.com/endjin">endjin</video:uploader>
+      <video:platform relationship="allow">web mobile</video:platform>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+</urlset>

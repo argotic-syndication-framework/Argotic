@@ -1,876 +1,788 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace Argotic.Common
+namespace Argotic.Common;
+
+/// <summary>
+/// Represents metadata associated with a <see cref="ISyndicationResource">syndication resource</see>.
+/// </summary>
+/// <remarks>
+///     What a document turns out to be, as opposed to <see cref="ISyndicationResource.Format"/>, which is
+///     what a type <i>is</i>. Constructing this sniffs the document: the formats are tried in the order
+///     the <c>TryParse</c> members appear below, first match wins, and a document matching none reports
+///     <see cref="SyndicationContentFormat.None"/> with a <see langword="null"/> <see cref="Resource"/>
+///     and <see cref="Version"/>.
+///     <para>
+///     Most formats are recognised by root element <i>and</i> namespace, so a document borrowing a root
+///     element name without the namespace is not recognised as that format. RSS 2.0 and RSD are the
+///     deliberate exceptions — a bare <c>&lt;rss&gt;</c> is accepted as RSS 2.0, and RSD is accepted
+///     without its namespace because most publishing software omits it.
+///     </para>
+/// </remarks>
+public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetadata>, IEquatable<SyndicationResourceMetadata>, IComparisonOperators
 {
+
     /// <summary>
-    /// Represents metadata associated with a <see cref="ISyndicationResource">syndication resource</see>.
+    /// Initializes a new instance of the <see cref="SyndicationResourceMetadata"/> class using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
-    [Serializable()]
-    public class SyndicationResourceMetadata : IComparable
+    /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the syndication resource meta-data from.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    public SyndicationResourceMetadata(XPathNavigator navigator)
     {
-        /// <summary>
-        /// Private member to hold the syndication content format that the syndication resource conforms to.
-        /// </summary>
-        private SyndicationContentFormat resourceFormat         = SyndicationContentFormat.None;
-        /// <summary>
-        /// Private member to hold the XML namespaces declared in the syndication resource's root element.
-        /// </summary>
-        private Dictionary<string, string> resourceNamespaces   = new Dictionary<string,string>();
-        /// <summary>
-        /// Private member to hold the version of the syndication specification that the resource conforms to.
-        /// </summary>
-        private Version resourceVersion;
-        /// <summary>
-        /// Private member to hold a XPath navigator that can be used to navigate the root element of the syndication resource.
-        /// </summary>
-        [NonSerialized()]
-        private XPathNavigator resourceRootNode;
+        ArgumentNullException.ThrowIfNull(navigator);
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SyndicationResourceMetadata"/> class using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the syndication resource meta-data from.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        public SyndicationResourceMetadata(XPathNavigator navigator)
+        this.Load(navigator);
+    }
+
+    /// <summary>
+    /// Gets the <see cref="SyndicationContentFormat"/> that the syndication resource conforms to.
+    /// </summary>
+    /// <value>
+    ///     A <see cref="SyndicationContentFormat"/> enumeration value that indicates the syndication specification the resource conforms to.
+    ///     If the syndication content format is unable to be determined, returns <see cref="SyndicationContentFormat.None"/>.
+    /// </value>
+    public SyndicationContentFormat Format { get; protected set; } = SyndicationContentFormat.None;
+
+    /// <summary>
+    /// Gets a dictionary of the XML namespaces declared in the syndication resource.
+    /// </summary>
+    /// <value>A dictionary of the resource's XML namespaces, keyed off of the namespace prefix. If no XML namespaces are declared on the root element of the resource, returns an empty dictionary.</value>
+    public Dictionary<string, string> Namespaces { get; } = [];
+
+    /// <summary>
+    /// Gets a read-only <see cref="XPathNavigator"/> object that can be used to navigate the root element of the syndication resource.
+    /// </summary>
+    /// <value>
+    ///     A navigator positioned on the document element of the recognised format, or
+    ///     <see langword="null"/> when <see cref="Format"/> is <see cref="SyndicationContentFormat.None"/>.
+    /// </value>
+    public XPathNavigator? Resource { get; private set; }
+
+    /// <summary>
+    /// Gets the <see cref="Version"/> of the syndication specification that the resource conforms to.
+    /// </summary>
+    /// <value>
+    ///     The version from the document element's <c>version</c> attribute, or the version the
+    ///     recognised namespace implies when the document declared none — <c>1.0</c> for the Atom 1.0
+    ///     namespace, for example. <see langword="null"/> when no format was recognised.
+    /// </value>
+    public Version? Version { get; private set; }
+
+    /// <summary>
+    /// Returns a <see cref="Version"/> object for the value of the XML attribute in <paramref name="navigator"/> with a local name specified by <paramref name="name"/>.
+    /// </summary>
+    /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the XML attribute value from.</param>
+    /// <param name="name">The name of the attribute to parse in the <paramref name="navigator"/>.</param>
+    /// <returns>The <see cref="Version"/> represented by the value of the specified XML attribute. If unable to determine version, returns <see langword="null"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
+    protected static Version? GetVersionFromAttribute(XPathNavigator navigator, string name)
+    {
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentException.ThrowIfNullOrEmpty(name);
+
+        string value = navigator.GetAttribute(name, string.Empty);
+
+        return Version.TryParse(value, out var version) ? version : null;
+    }
+
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an Attention Profiling Markup Language (APML) formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an Attention Profiling Markup Language (APML) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseApmlResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("apml", "http://www.apml.org/apml-0.6");
+
+        version = null;
+        if ((navigator = resource.SelectChildElement("APML")) is not null || (navigator = resource.SelectChildElement("apml", "APML", manager)) is not null)
         {
-            Guard.ArgumentNotNull(navigator, "navigator");
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
-            this.Load(navigator);
-        }
-
-        /// <summary>
-        /// Gets the <see cref="SyndicationContentFormat"/> that the syndication resource conforms to.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="SyndicationContentFormat"/> enumeration value that indicates the syndication specification the resource conforms to.
-        ///     If the syndication content format is unable to be determined, returns <see cref="SyndicationContentFormat.None"/>.
-        /// </value>
-        public SyndicationContentFormat Format
-        {
-            get
+            if (namespaces.ContainsValue("http://www.apml.org/apml-0.6"))
             {
-                return resourceFormat;
-            }
-
-            protected set
-            {
-                resourceFormat = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets a dictionary of the XML namespaces declared in the syndication resource.
-        /// </summary>
-        /// <value>A dictionary of the resource's XML namespaces, keyed off of the namespace prefix. If no XML namespaces are declared on the root element of the resource, returns an empty dictionary.</value>
-        public Dictionary<string, string> Namespaces
-        {
-            get
-            {
-                return resourceNamespaces;
-            }
-        }
-
-        /// <summary>
-        /// Gets a read-only <see cref="XPathNavigator"/> object that can be used to navigate the root element of the syndication resource.
-        /// </summary>
-        /// <value>A read-only <see cref="XPathNavigator"/> object that can be used to navigate the root element of the syndication resource.</value>
-        public XPathNavigator Resource
-        {
-            get
-            {
-                return resourceRootNode;
-            }
-        }
-
-        /// <summary>
-        /// Gets the <see cref="Version"/> of the syndication specification that the resource conforms to.
-        /// </summary>
-        /// <value>The version number of the syndication specification that the resource conforms to. If format version is unable to be determined, returns <b>null</b>.</value>
-        public Version Version
-        {
-            get
-            {
-                return resourceVersion;
-            }
-        }
-
-        /// <summary>
-        /// Returns a <see cref="Version"/> object for the value of the XML attribute in <paramref name="navigator"/> with a local name specified by <paramref name="name"/>.
-        /// </summary>
-        /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the XML attribute value from.</param>
-        /// <param name="name">The name of the attribute to parse in the <paramref name="navigator"/>.</param>
-        /// <returns>The <see cref="Version"/> represented by the value of the specified XML attribute. If unable to determine version, returns <b>null</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-        protected static Version GetVersionFromAttribute(XPathNavigator navigator, string name)
-        {
-            Version version = null;
-
-            Guard.ArgumentNotNull(navigator, "navigator");
-            Guard.ArgumentNotNullOrEmptyString(name, "name");
-
-            string value    = navigator.GetAttribute(name, String.Empty);
-
-            if (!String.IsNullOrEmpty(value))
-            {
-                try
-                {
-                    version = new Version(value);
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    return null;
-                }
-                catch (ArgumentException)
-                {
-                    return null;
-                }
-                catch(FormatException)
-                {
-                    return null;
-                }
-                catch (OverflowException)
-                {
-                    return null;
-                }
-            }
-
-            return version;
-        }
-
-        /// <summary>
-        /// Determines if the specified <see cref="XPathNavigator"/> represents a Attention Profiling Markup Language (APML) formatted syndication resource.
-        /// </summary>
-        /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
-        /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
-        /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-        /// <returns><b>true</b> if <paramref name="resource"/> represents a Attention Profiling Markup Language (APML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseApmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
-        {
-            bool resourceConformsToFormat   = false;
-            XmlNamespaceManager manager     = null;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            manager = new XmlNamespaceManager(resource.NameTable);
-            manager.AddNamespace("apml", "http://www.apml.org/apml-0.6");
-
-            version = null;
-            if ((navigator = resource.SelectSingleNode("APML", manager)) != null || (navigator = resource.SelectSingleNode("apml:APML", manager)) != null)
-            {
-                version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-                Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-
-                if (namespaces.ContainsValue("http://www.apml.org/apml-0.6"))
-                {
-                    resourceConformsToFormat    = true;
-                    if (version == null)
-                    {
-                        version = new Version(0, 6);
-                    }
-                }
-            }
-
-            return resourceConformsToFormat;
-        }
-
-        /// <summary>
-        /// Determines if the specified <see cref="XPathNavigator"/> represents a Atom formatted syndication resource.
-        /// </summary>
-        /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
-        /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
-        /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-        /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseAtomResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
-        {
-            bool resourceConformsToFormat   = false;
-            XmlNamespaceManager manager     = null;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            manager = new XmlNamespaceManager(resource.NameTable);
-            manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
-            manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
-
-            version = null;
-            if ((navigator = resource.SelectSingleNode("feed", manager)) != null || (navigator = resource.SelectSingleNode("atom:feed", manager)) != null || (navigator = resource.SelectSingleNode("atom03:feed", manager)) != null)
-            {
-                version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-                Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-
-                if (namespaces.ContainsValue("http://www.w3.org/2005/Atom"))
-                {
-                    resourceConformsToFormat    = true;
-                    if (version == null)
-                    {
-                        version = new Version(1, 0);
-                    }
-                }
-                else if (namespaces.ContainsValue("http://purl.org/atom/ns#"))
-                {
-                    resourceConformsToFormat    = true;
-                    if (version == null)
-                    {
-                        version = new Version(0, 3);
-                    }
-                }
-            }
-            else if ((navigator = resource.SelectSingleNode("entry", manager)) != null || (navigator = resource.SelectSingleNode("atom:entry", manager)) != null || (navigator = resource.SelectSingleNode("atom03:entry", manager)) != null)
-            {
-                version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-                Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-
-                if (namespaces.ContainsValue("http://www.w3.org/2005/Atom"))
-                {
-                    resourceConformsToFormat    = true;
-                    if (version == null)
-                    {
-                        version = new Version(1, 0);
-                    }
-                }
-                else if (namespaces.ContainsValue("http://purl.org/atom/ns#"))
-                {
-                    resourceConformsToFormat    = true;
-                    if (version == null)
-                    {
-                        version = new Version(0, 3);
-                    }
-                }
-            }
-
-            return resourceConformsToFormat;
-        }
-
-        /// <summary>
-        /// Determines if the specified <see cref="XPathNavigator"/> represents a Atom Publishing Protocol category document formatted syndication resource.
-        /// </summary>
-        /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
-        /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
-        /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-        /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseAtomPublishingCategoriesResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
-        {
-            bool resourceConformsToFormat   = false;
-            XmlNamespaceManager manager     = null;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            manager = new XmlNamespaceManager(resource.NameTable);
-            manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
-            manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
-            manager.AddNamespace("app", "http://www.w3.org/2007/app");
-
-            version = null;
-            if ((navigator = resource.SelectSingleNode("categories", manager)) != null || (navigator = resource.SelectSingleNode("app:categories", manager)) != null)
-            {
-                version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-                Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-
-                if (namespaces.ContainsValue("http://www.w3.org/2007/app"))
-                {
-                    resourceConformsToFormat    = true;
-                    if (version == null)
-                    {
-                        version = new Version(1, 0);
-                    }
-                }
-            }
-
-            return resourceConformsToFormat;
-        }
-
-        /// <summary>
-        /// Determines if the specified <see cref="XPathNavigator"/> represents a Atom Publishing Protocol service document formatted syndication resource.
-        /// </summary>
-        /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
-        /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
-        /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-        /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseAtomPublishingServiceResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
-        {
-            bool resourceConformsToFormat   = false;
-            XmlNamespaceManager manager     = null;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            manager = new XmlNamespaceManager(resource.NameTable);
-            manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
-            manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
-            manager.AddNamespace("app", "http://www.w3.org/2007/app");
-
-            version = null;
-            if ((navigator = resource.SelectSingleNode("service", manager)) != null || (navigator = resource.SelectSingleNode("app:service", manager)) != null)
-            {
-                version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-                Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-
-                if (namespaces.ContainsValue("http://www.w3.org/2007/app"))
-                {
-                    resourceConformsToFormat    = true;
-                    if (version == null)
-                    {
-                        version = new Version(1, 0);
-                    }
-                }
-            }
-
-            return resourceConformsToFormat;
-        }
-
-        /// <summary>
-        /// Determines if the specified <see cref="XPathNavigator"/> represents a  Web Log Markup Language (BlogML) formatted syndication resource.
-        /// </summary>
-        /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
-        /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
-        /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-        /// <returns><b>true</b> if <paramref name="resource"/> represents a  Web Log Markup Language (BlogML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseBlogMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
-        {
-            bool resourceConformsToFormat   = false;
-            XmlNamespaceManager manager     = null;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            manager = new XmlNamespaceManager(resource.NameTable);
-            manager.AddNamespace("blogML", "http://www.blogml.com/2006/09/BlogML");
-
-            version = null;
-            if ((navigator = resource.SelectSingleNode("blog", manager)) != null || (navigator = resource.SelectSingleNode("blogML:blog", manager)) != null)
-            {
-                version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-                Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-
-                if (namespaces.ContainsValue("http://www.blogml.com/2006/09/BlogML"))
-                {
-                    resourceConformsToFormat = true;
-                    if (version == null)
-                    {
-                        version = new Version(2, 0);
-                    }
-                }
-            }
-
-            return resourceConformsToFormat;
-        }
-
-        /// <summary>
-        /// Determines if the specified <see cref="XPathNavigator"/> represents a Microsummary Generator formatted syndication resource.
-        /// </summary>
-        /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
-        /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
-        /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-        /// <returns><b>true</b> if <paramref name="resource"/> represents a Microsummary Generator formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseMicroSummaryGeneratorResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
-        {
-            bool resourceConformsToFormat   = false;
-            XmlNamespaceManager manager     = null;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            manager = new XmlNamespaceManager(resource.NameTable);
-            manager.AddNamespace("micro", "http://www.mozilla.org/microsummaries/0.1");
-
-            version = null;
-            if ((navigator = resource.SelectSingleNode("generator", manager)) != null || (navigator = resource.SelectSingleNode("micro:generator", manager)) != null)
-            {
-                version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-                Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-
-                if (namespaces.ContainsValue("http://www.mozilla.org/microsummaries/0.1"))
-                {
-                    resourceConformsToFormat = true;
-                    if (version == null)
-                    {
-                        version = new Version(0, 1);
-                    }
-                }
-            }
-
-            return resourceConformsToFormat;
-        }
-
-        /// <summary>
-        /// Determines if the specified <see cref="XPathNavigator"/> represents a News Markup Language (NewsML) formatted syndication resource.
-        /// </summary>
-        /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
-        /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
-        /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-        /// <returns><b>true</b> if <paramref name="resource"/> represents a News Markup Language (NewsML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseNewsMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
-        {
-            bool resourceConformsToFormat   = false;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            version = null;
-            if ((navigator = resource.SelectSingleNode("NewsML")) != null)
-            {
-                version     = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-
-                resourceConformsToFormat    = true;
-                if (version == null)
-                {
-                    version = new Version(2, 0);
-                }
-            }
-
-            return resourceConformsToFormat;
-        }
-
-        /// <summary>
-        /// Determines if the specified <see cref="XPathNavigator"/> represents a OpenSearch Description formatted syndication resource.
-        /// </summary>
-        /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
-        /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
-        /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-        /// <returns><b>true</b> if <paramref name="resource"/> represents a OpenSearch Description formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseOpenSearchDescriptionResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
-        {
-            bool resourceConformsToFormat   = false;
-            XmlNamespaceManager manager     = null;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            manager = new XmlNamespaceManager(resource.NameTable);
-            manager.AddNamespace("search", "http://a9.com/-/spec/opensearch/1.1/");
-
-            version = null;
-            if ((navigator = resource.SelectSingleNode("OpenSearchDescription", manager)) != null || (navigator = resource.SelectSingleNode("search:OpenSearchDescription", manager)) != null)
-            {
-                version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-                Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-
-                if (namespaces.ContainsValue("http://a9.com/-/spec/opensearch/1.1/"))
-                {
-                    resourceConformsToFormat = true;
-                    if (version == null)
-                    {
-                        version = new Version(1, 1);
-                    }
-                }
-            }
-
-            return resourceConformsToFormat;
-        }
-
-        /// <summary>
-        /// Determines if the specified <see cref="XPathNavigator"/> represents a  Outline Processor Markup Language (OPML) formatted syndication resource.
-        /// </summary>
-        /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
-        /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
-        /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-        /// <returns><b>true</b> if <paramref name="resource"/> represents a  Outline Processor Markup Language (OPML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseOpmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
-        {
-            bool resourceConformsToFormat   = false;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            version = null;
-            if ((navigator = resource.SelectSingleNode("opml")) != null)
-            {
-                version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-
-                resourceConformsToFormat    = true;
-                if (version == null)
-                {
-                    version = new Version(2, 0);
-                }
-            }
-
-            return resourceConformsToFormat;
-        }
-
-        /// <summary>
-        /// Determines if the specified <see cref="XPathNavigator"/> represents a Really Simple Discovery (RSD) formatted syndication resource.
-        /// </summary>
-        /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
-        /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
-        /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-        /// <returns><b>true</b> if <paramref name="resource"/> represents a Really Simple Discovery (RSD) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseRsdResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
-        {
-            bool resourceConformsToFormat   = false;
-            XmlNamespaceManager manager     = null;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            manager = new XmlNamespaceManager(resource.NameTable);
-            manager.AddNamespace("rsd", "http://archipelago.phrasewise.com/rsd");
-
-            version = null;
-            if ((navigator = resource.SelectSingleNode("rsd", manager)) != null || (navigator = resource.SelectSingleNode("rsd:rsd", manager)) != null)
-            {
-                version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-                Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-
-                if (namespaces.ContainsValue("http://archipelago.phrasewise.com/rsd"))
-                {
-                    resourceConformsToFormat = true;
-                    if (version == null)
-                    {
-                        version = new Version(1, 0);
-                    }
-                }
-                else if (String.Compare(navigator.Name, "rsd", StringComparison.OrdinalIgnoreCase) == 0 && version != null)
-                {
-                    //  Most web log software actually fails to provide the default XML namespace per RSD spec, so this is a hack/compromise
-                    resourceConformsToFormat    = true;
-                }
-            }
-
-            return resourceConformsToFormat;
-        }
-
-        /// <summary>
-        /// Determines if the specified <see cref="XPathNavigator"/> represents a Really Simple Syndication (RSS) formatted syndication resource.
-        /// </summary>
-        /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
-        /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
-        /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
-        /// <returns><b>true</b> if <paramref name="resource"/> represents a Really Simple Syndication (RSS) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
-        protected static bool TryParseRssResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
-        {
-            bool resourceConformsToFormat   = false;
-            XmlNamespaceManager manager     = null;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            manager = new XmlNamespaceManager(resource.NameTable);
-            manager.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-            manager.AddNamespace("rss09", "http://my.netscape.com/rdf/simple/0.9/");
-            manager.AddNamespace("rss10", "http://purl.org/rss/1.0/");
-
-            version = null;
-            if ((navigator = resource.SelectSingleNode("rss", manager)) != null)
-            {
-                version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-                Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-
-                resourceConformsToFormat    = true;
-                if (version == null)
-                {
-                    version = new Version(2, 0);
-                }
-            }
-            else if ((navigator = resource.SelectSingleNode("rdf:RDF", manager)) != null)
-            {
-                version                                 = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-                Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-
-                if (namespaces.ContainsValue("http://purl.org/rss/1.0/"))
-                {
-                    resourceConformsToFormat    = true;
-                    version                     = new Version(1, 0);
-                }
-                else if (namespaces.ContainsValue("http://my.netscape.com/rdf/simple/0.9/"))
-                {
-                    resourceConformsToFormat    = true;
-                    version                     = new Version(0, 9);
-                }
-            }
-
-            return resourceConformsToFormat;
-        }
-
-        /// <summary>
-        /// Extracts the content format, version, and XML namespaces for a syndication resource from the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="resource">The <see cref="XPathNavigator"/> to extract the syndication resource meta-data from.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        private void Load(XPathNavigator resource)
-        {
-            XPathNavigator navigator    = null;
-            Version version             = null;
-
-            Guard.ArgumentNotNull(resource, "resource");
-
-            Dictionary<string, string> namespaces   = (Dictionary<string, string>)resource.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-            foreach (string prefix in namespaces.Keys)
-            {
-                resourceNamespaces.Add(prefix, namespaces[prefix]);
-            }
-
-            resourceVersion     = SyndicationResourceMetadata.GetVersionFromAttribute(resource, "version");
-
-            if (SyndicationResourceMetadata.TryParseApmlResource(resource, out navigator, out version))
-            {
-                resourceFormat      = SyndicationContentFormat.Apml;
-                resourceRootNode    = navigator;
-                resourceVersion     = version;
-            }
-            else if (SyndicationResourceMetadata.TryParseAtomResource(resource, out navigator, out version))
-            {
-                resourceFormat      = SyndicationContentFormat.Atom;
-                resourceRootNode    = navigator;
-                resourceVersion     = version;
-            }
-            else if (SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(resource, out navigator, out version))
-            {
-                resourceFormat      = SyndicationContentFormat.AtomCategoryDocument;
-                resourceRootNode    = navigator;
-                resourceVersion     = version;
-            }
-            else if (SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(resource, out navigator, out version))
-            {
-                resourceFormat      = SyndicationContentFormat.AtomServiceDocument;
-                resourceRootNode    = navigator;
-                resourceVersion     = version;
-            }
-            else if (SyndicationResourceMetadata.TryParseBlogMLResource(resource, out navigator, out version))
-            {
-                resourceFormat      = SyndicationContentFormat.BlogML;
-                resourceRootNode    = navigator;
-                resourceVersion     = version;
-            }
-            else if (SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(resource, out navigator, out version))
-            {
-                resourceFormat      = SyndicationContentFormat.MicroSummaryGenerator;
-                resourceRootNode    = navigator;
-                resourceVersion     = version;
-            }
-            else if (SyndicationResourceMetadata.TryParseNewsMLResource(resource, out navigator, out version))
-            {
-                resourceFormat      = SyndicationContentFormat.NewsML;
-                resourceRootNode    = navigator;
-                resourceVersion     = version;
-            }
-            else if (SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(resource, out navigator, out version))
-            {
-                resourceFormat      = SyndicationContentFormat.OpenSearchDescription;
-                resourceRootNode    = navigator;
-                resourceVersion     = version;
-            }
-            else if (SyndicationResourceMetadata.TryParseOpmlResource(resource, out navigator, out version))
-            {
-                resourceFormat      = SyndicationContentFormat.Opml;
-                resourceRootNode    = navigator;
-                resourceVersion     = version;
-            }
-            else if (SyndicationResourceMetadata.TryParseRsdResource(resource, out navigator, out version))
-            {
-                resourceFormat      = SyndicationContentFormat.Rsd;
-                resourceRootNode    = navigator;
-                resourceVersion     = version;
-            }
-            else if (SyndicationResourceMetadata.TryParseRssResource(resource, out navigator, out version))
-            {
-                resourceFormat      = SyndicationContentFormat.Rss;
-                resourceRootNode    = navigator;
-                resourceVersion     = version;
-            }
-            else
-            {
-                resourceFormat      = SyndicationContentFormat.None;
-                resourceRootNode    = null;
-                resourceVersion     = null;
+                resourceConformsToFormat = true;
+                version ??= new Version(0, 6);
             }
         }
 
-        /// <summary>
-        /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceMetadata"/>.
-        /// </summary>
-        /// <returns>A <see cref="String"/> that represents the current <see cref="SyndicationResourceMetadata"/>.</returns>
-        /// <remarks>
-        ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
-        /// </remarks>
-        public override string ToString()
-        {
-            string format       = this.Format.ToString();
-            string version      = this.Version != null ? this.Version.ToString() : String.Empty;
-            string namespaces   = this.Namespaces != null ? this.Namespaces.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-            string resource     = this.Resource != null ? this.Resource.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
+        return resourceConformsToFormat;
+    }
 
-            return String.Format(null, "[SyndicationResourceMetadata(Format = \"{0}\", Version = \"{1}\", Namespaces = \"{2}\", Resource = \"{3}\")]", format, version, namespaces, resource);
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an Atom formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <param name="isEntryDocument">When this method returns, <see langword="true"/> if the document element is <c>&lt;entry&gt;</c> rather than <c>&lt;feed&gt;</c>. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an Atom formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseAtomResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version, out bool isEntryDocument)
+    {
+        bool resourceConformsToFormat = false;
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
+        manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
+
+        version = null;
+        isEntryDocument = false;
+        if ((navigator = resource.SelectChildElement("feed")) is not null || (navigator = resource.SelectChildElement("atom", "feed", manager)) is not null || (navigator = resource.SelectChildElement("atom03", "feed", manager)) is not null)
+        {
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://www.w3.org/2005/Atom"))
+            {
+                resourceConformsToFormat = true;
+                version ??= new Version(1, 0);
+            }
+            else if (namespaces.ContainsValue("http://purl.org/atom/ns#"))
+            {
+                resourceConformsToFormat = true;
+                version ??= new Version(0, 3);
+            }
         }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-        public int CompareTo(object obj)
+        else if ((navigator = resource.SelectChildElement("entry")) is not null || (navigator = resource.SelectChildElement("atom", "entry", manager)) is not null || (navigator = resource.SelectChildElement("atom03", "entry", manager)) is not null)
         {
-            if (obj == null)
+            // The arm already existed and its answer was already discarded: both roots assigned
+            // SyndicationContentFormat.Atom, so nothing downstream could tell a feed document from a
+            // stand-alone entry document.
+            isEntryDocument = true;
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://www.w3.org/2005/Atom"))
             {
-                return 1;
+                resourceConformsToFormat = true;
+                version ??= new Version(1, 0);
             }
-
-            SyndicationResourceMetadata value  = obj as SyndicationResourceMetadata;
-
-            if (value != null)
+            else if (namespaces.ContainsValue("http://purl.org/atom/ns#"))
             {
-                int result  = this.Format.CompareTo(value.Format);
-
-                if (this.Version != null)
-                {
-                    result  = result | this.Version.CompareTo(value.Version);
-                }
-                else if (value.Version != null)
-                {
-                    result  = result | -1;
-                }
-
-                if (this.Namespaces != null && value.Namespaces != null)
-                {
-                    result  = result | ComparisonUtility.CompareSequence(this.Namespaces, value.Namespaces, StringComparison.Ordinal);
-                }
-                else if (this.Namespaces != null && value.Namespaces == null)
-                {
-                    result  = result | 1;
-                }
-                else if (this.Namespaces == null && value.Namespaces != null)
-                {
-                    result  = result | -1;
-                }
-
-                if (this.Resource != null && value.Resource != null)
-                {
-                    result  = result | String.Compare(this.Resource.OuterXml, value.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
-                }
-                else if (this.Resource != null && value.Resource == null)
-                {
-                    result  = result | 1;
-                }
-                else if (this.Resource == null && value.Resource != null)
-                {
-                    result  = result | -1;
-                }
-
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+                resourceConformsToFormat = true;
+                version ??= new Version(0, 3);
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-        /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-        public override bool Equals(Object obj)
-        {
-            if (!(obj is SyndicationResourceMetadata))
-            {
-                return false;
-            }
+        return resourceConformsToFormat;
+    }
 
-            return (this.CompareTo(obj) == 0);
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an Atom Publishing Protocol category document formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an Atom Publishing Protocol category document; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseAtomPublishingCategoriesResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
+        manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
+        manager.AddNamespace("app", "http://www.w3.org/2007/app");
+
+        version = null;
+
+        // The third arm is the nested case. A stand-alone category document is sniffed from the
+        // document root, whose child is the categories element -- but AtomMemberResources hands this a
+        // navigator positioned ON an app:categories element inside a service document, where there is
+        // no child of that name. Without it, every service document declaring categories -- including
+        // the example RFC 5023 prints in section 8.3.3 -- was reported as None and rejected.
+        if ((navigator = resource.SelectChildElement("categories")) is not null
+            || (navigator = resource.SelectChildElement("app", "categories", manager)) is not null
+            || (navigator = SyndicationResourceMetadata.SelfIfAtomPublishingCategories(resource)) is not null)
+        {
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://www.w3.org/2007/app"))
+            {
+                resourceConformsToFormat = true;
+                version ??= new Version(1, 0);
+            }
         }
 
-        /// <summary>
-        /// Returns a hash code for the current instance.
-        /// </summary>
-        /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode()
-        {
-            char[] charArray    = this.ToString().ToCharArray();
+        return resourceConformsToFormat;
+    }
 
-            return charArray.GetHashCode();
+    /// <summary>
+    /// Returns the supplied navigator when it is itself positioned on an Atom Publishing Protocol <c>categories</c> element.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> to test.</param>
+    /// <returns>The <paramref name="resource"/> if it is an <c>app:categories</c> element; otherwise <see langword="null"/>.</returns>
+    /// <remarks>
+    ///     Deliberately restricted to <see cref="XPathNodeType.Element"/>. A document being sniffed from
+    ///     its root is a <see cref="XPathNodeType.Root"/>, so this cannot change how any stand-alone
+    ///     document is classified — it only answers the case where a caller has already navigated onto
+    ///     the element.
+    /// </remarks>
+    private static XPathNavigator? SelfIfAtomPublishingCategories(XPathNavigator resource) =>
+        resource.NodeType == XPathNodeType.Element
+        && string.Equals(resource.LocalName, "categories", StringComparison.Ordinal)
+        && string.Equals(resource.NamespaceURI, "http://www.w3.org/2007/app", StringComparison.Ordinal)
+            ? resource
+            : null;
+
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an Atom Publishing Protocol service document formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an Atom Publishing Protocol service document; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseAtomPublishingServiceResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
+        manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
+        manager.AddNamespace("app", "http://www.w3.org/2007/app");
+
+        version = null;
+        if ((navigator = resource.SelectChildElement("service")) is not null || (navigator = resource.SelectChildElement("app", "service", manager)) is not null)
+        {
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://www.w3.org/2007/app"))
+            {
+                resourceConformsToFormat = true;
+                version ??= new Version(1, 0);
+            }
         }
 
-        /// <summary>
-        /// Determines if operands are equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-        public static bool operator ==(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return true;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
+        return resourceConformsToFormat;
+    }
 
-            return first.Equals(second);
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents a Web Log Markup Language (BlogML) formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Web Log Markup Language (BlogML) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseBlogMLResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("blogML", "http://www.blogml.com/2006/09/BlogML");
+
+        version = null;
+        if ((navigator = resource.SelectChildElement("blog")) is not null || (navigator = resource.SelectChildElement("blogML", "blog", manager)) is not null)
+        {
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://www.blogml.com/2006/09/BlogML"))
+            {
+                resourceConformsToFormat = true;
+                version ??= new Version(2, 0);
+            }
         }
 
-        /// <summary>
-        /// Determines if operands are not equal.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-        public static bool operator !=(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
+        return resourceConformsToFormat;
+    }
+
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents a Microsummary Generator formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Microsummary Generator formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseMicroSummaryGeneratorResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("micro", "http://www.mozilla.org/microsummaries/0.1");
+
+        version = null;
+        if ((navigator = resource.SelectChildElement("generator")) is not null || (navigator = resource.SelectChildElement("micro", "generator", manager)) is not null)
         {
-            return !(first == second);
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://www.mozilla.org/microsummaries/0.1"))
+            {
+                resourceConformsToFormat = true;
+                version ??= new Version(0, 1);
+            }
         }
 
-        /// <summary>
-        /// Determines if first operand is less than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return true;
-            }
+        return resourceConformsToFormat;
+    }
 
-            return (first.CompareTo(second) < 0);
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents a News Markup Language (NewsML) formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a News Markup Language (NewsML) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseNewsMLResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        version = null;
+        if ((navigator = resource.SelectChildElement("NewsML")) is not null)
+        {
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+
+            resourceConformsToFormat = true;
+            version ??= new Version(2, 0);
         }
 
-        /// <summary>
-        /// Determines if first operand is greater than second operand.
-        /// </summary>
-        /// <param name="first">Operand to be compared.</param>
-        /// <param name="second">Operand to compare to.</param>
-        /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
-        {
-            if (object.Equals(first, null) && object.Equals(second, null))
-            {
-                return false;
-            }
-            else if (object.Equals(first, null) && !object.Equals(second, null))
-            {
-                return false;
-            }
+        return resourceConformsToFormat;
+    }
 
-            return (first.CompareTo(second) > 0);
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an OpenSearch Description formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an OpenSearch Description formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseOpenSearchDescriptionResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("search", "http://a9.com/-/spec/opensearch/1.1/");
+
+        version = null;
+        if ((navigator = resource.SelectChildElement("OpenSearchDescription")) is not null || (navigator = resource.SelectChildElement("search", "OpenSearchDescription", manager)) is not null)
+        {
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://a9.com/-/spec/opensearch/1.1/"))
+            {
+                resourceConformsToFormat = true;
+                version ??= new Version(1, 1);
+            }
+        }
+
+        return resourceConformsToFormat;
+    }
+
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents an Outline Processor Markup Language (OPML) formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents an Outline Processor Markup Language (OPML) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseOpmlResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        version = null;
+        if ((navigator = resource.SelectChildElement("opml")) is not null)
+        {
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+
+            resourceConformsToFormat = true;
+            version ??= new Version(2, 0);
+        }
+
+        return resourceConformsToFormat;
+    }
+
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents a Really Simple Discovery (RSD) formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Really Simple Discovery (RSD) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseRsdResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("rsd", "http://archipelago.phrasewise.com/rsd");
+
+        version = null;
+        if ((navigator = resource.SelectChildElement("rsd")) is not null || (navigator = resource.SelectChildElement("rsd", "rsd", manager)) is not null)
+        {
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://archipelago.phrasewise.com/rsd"))
+            {
+                resourceConformsToFormat = true;
+                version ??= new Version(1, 0);
+            }
+            else if (string.Equals(navigator.Name, "rsd", StringComparison.OrdinalIgnoreCase) && version is not null)
+            {
+                //  Most web log software actually fails to provide the default XML namespace per RSD spec, so this is a hack/compromise
+                resourceConformsToFormat = true;
+            }
+        }
+
+        return resourceConformsToFormat;
+    }
+
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents a Really Simple Syndication (RSS) formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Really Simple Syndication (RSS) formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseRssResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+        manager.AddNamespace("rss09", "http://my.netscape.com/rdf/simple/0.9/");
+        manager.AddNamespace("rss10", "http://purl.org/rss/1.0/");
+
+        version = null;
+        if ((navigator = resource.SelectChildElement("rss")) is not null)
+        {
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+
+            resourceConformsToFormat = true;
+            version ??= new Version(2, 0);
+        }
+        else if ((navigator = resource.SelectChildElement("rdf", "RDF", manager)) is not null)
+        {
+            version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://purl.org/rss/1.0/"))
+            {
+                resourceConformsToFormat = true;
+                version = new Version(1, 0);
+            }
+            else if (namespaces.ContainsValue("http://my.netscape.com/rdf/simple/0.9/"))
+            {
+                resourceConformsToFormat = true;
+                version = new Version(0, 9);
+            }
+        }
+
+        return resourceConformsToFormat;
+    }
+
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents a Sitemap 0.9 formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Sitemap 0.9 formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseSitemapResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("sm", "http://www.sitemaps.org/schemas/sitemap/0.9");
+
+        version = null;
+        if ((navigator = resource.SelectChildElement("urlset")) is not null || (navigator = resource.SelectChildElement("sm", "urlset", manager)) is not null)
+        {
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://www.sitemaps.org/schemas/sitemap/0.9"))
+            {
+                resourceConformsToFormat = true;
+                version = new Version(0, 9);
+            }
+        }
+
+        return resourceConformsToFormat;
+    }
+
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents a Sitemap Index 0.9 formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><see langword="true"/> if <paramref name="resource"/> represents a Sitemap Index 0.9 formatted syndication resource; otherwise, <see langword="false"/>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    protected static bool TryParseSitemapIndexResource(XPathNavigator resource, out XPathNavigator? navigator, out Version? version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("sm", "http://www.sitemaps.org/schemas/sitemap/0.9");
+
+        version = null;
+        if ((navigator = resource.SelectChildElement("sitemapindex")) is not null || (navigator = resource.SelectChildElement("sm", "sitemapindex", manager)) is not null)
+        {
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://www.sitemaps.org/schemas/sitemap/0.9"))
+            {
+                resourceConformsToFormat = true;
+                version = new Version(0, 9);
+            }
+        }
+
+        return resourceConformsToFormat;
+    }
+
+    /// <summary>
+    /// Extracts the content format, version, and XML namespaces for a syndication resource from the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="resource">The <see cref="XPathNavigator"/> to extract the syndication resource meta-data from.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is <see langword="null"/>.</exception>
+    private void Load(XPathNavigator resource)
+    {
+        ArgumentNullException.ThrowIfNull(resource);
+
+        Dictionary<string, string> namespaces = (Dictionary<string, string>)resource.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+        foreach (string prefix in namespaces.Keys)
+        {
+            Namespaces.Add(prefix, namespaces[prefix]);
+        }
+
+        Version = SyndicationResourceMetadata.GetVersionFromAttribute(resource, "version");
+
+        if (SyndicationResourceMetadata.TryParseApmlResource(resource, out XPathNavigator? navigator, out Version? version))
+        {
+            Format = SyndicationContentFormat.Apml;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseAtomResource(resource, out navigator, out version, out bool isEntryDocument))
+        {
+            Format = isEntryDocument ? SyndicationContentFormat.AtomEntryDocument : SyndicationContentFormat.Atom;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseAtomPublishingCategoriesResource(resource, out navigator, out version))
+        {
+            Format = SyndicationContentFormat.AtomCategoryDocument;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseAtomPublishingServiceResource(resource, out navigator, out version))
+        {
+            Format = SyndicationContentFormat.AtomServiceDocument;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseBlogMLResource(resource, out navigator, out version))
+        {
+            Format = SyndicationContentFormat.BlogML;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseMicroSummaryGeneratorResource(resource, out navigator, out version))
+        {
+            Format = SyndicationContentFormat.MicroSummaryGenerator;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseNewsMLResource(resource, out navigator, out version))
+        {
+            Format = SyndicationContentFormat.NewsML;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseOpenSearchDescriptionResource(resource, out navigator, out version))
+        {
+            Format = SyndicationContentFormat.OpenSearchDescription;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseOpmlResource(resource, out navigator, out version))
+        {
+            Format = SyndicationContentFormat.Opml;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseRsdResource(resource, out navigator, out version))
+        {
+            Format = SyndicationContentFormat.Rsd;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseRssResource(resource, out navigator, out version))
+        {
+            Format = SyndicationContentFormat.Rss;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseSitemapResource(resource, out navigator, out version))
+        {
+            Format = SyndicationContentFormat.Sitemap;
+            Resource = navigator;
+            Version = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseSitemapIndexResource(resource, out navigator, out version))
+        {
+            Format = SyndicationContentFormat.SitemapIndex;
+            Resource = navigator;
+            Version = version;
+        }
+        else
+        {
+            Format = SyndicationContentFormat.None;
+            Resource = null;
+            Version = null;
         }
     }
+
+    /// <summary>
+    /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceMetadata"/>.
+    /// </summary>
+    /// <returns>The format and version in full, with <see cref="Namespaces"/> and <see cref="Resource"/> reduced to their hash codes rather than serialized.</returns>
+    public override string ToString()
+    {
+        string format = this.Format.ToString();
+        string version = this.Version?.ToString() ?? string.Empty;
+        string namespaces = this.Namespaces?.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? string.Empty;
+        string resource = this.Resource?.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? string.Empty;
+
+        return $"""[SyndicationResourceMetadata(Format = "{format}", Version = "{version}", Namespaces = "{namespaces}", Resource = "{resource}")]""";
+    }
+
+    /// <summary>
+    /// Compares the current instance with another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this instance.</param>
+    /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+    public int CompareTo(SyndicationResourceMetadata? other)
+    {
+        if (other is null)
+        {
+            return 1;
+        }
+
+        int result = this.Format.CompareTo(other.Format);
+
+        if (this.Version is not null)
+        {
+            if (result == 0) result = Comparer<Version>.Default.Compare(this.Version, other.Version);
+        }
+        else if (other.Version is not null)
+        {
+            if (result == 0) result = -1;
+        }
+
+        if (this.Namespaces is not null && other.Namespaces is not null)
+        {
+            if (result == 0) result = ComparisonUtility.CompareSequence(this.Namespaces, other.Namespaces, StringComparison.Ordinal);
+        }
+        else if (this.Namespaces is not null && other.Namespaces is null)
+        {
+            if (result == 0) result = 1;
+        }
+        else if (this.Namespaces is null && other.Namespaces is not null)
+        {
+            if (result == 0) result = -1;
+        }
+
+        if (result == 0) result = (this.Resource, other.Resource) switch
+        {
+            (XPathNavigator source, XPathNavigator target) => string.Compare(source.OuterXml, target.OuterXml, StringComparison.OrdinalIgnoreCase),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
+
+        return result;
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="SyndicationResourceMetadata"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="SyndicationResourceMetadata"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="SyndicationResourceMetadata"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public bool Equals(SyndicationResourceMetadata? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current instance; otherwise, <see langword="false"/>.</returns>
+    public override bool Equals(object? obj) => obj is SyndicationResourceMetadata other && this.Equals(other);
+
+    /// <summary>
+    /// Returns a hash code for the current instance.
+    /// </summary>
+    /// <returns>A 32-bit signed integer hash code.</returns>
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Format), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.Resource?.OuterXml));
+
+    /// <summary>
+    /// Determines if operands are equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="true"/> if the values of its operands are equal; otherwise, <see langword="false"/>.</returns>
+    public static bool operator ==(SyndicationResourceMetadata? first, SyndicationResourceMetadata? second)
+    {
+        if (first is null) return second is null;
+        return first.Equals(second);
+    }
+
+    /// <summary>
+    /// Determines if operands are not equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><see langword="false"/> if its operands are equal; otherwise, <see langword="true"/>.</returns>
+    public static bool operator !=(SyndicationResourceMetadata? first, SyndicationResourceMetadata? second) => !(first == second);
 }

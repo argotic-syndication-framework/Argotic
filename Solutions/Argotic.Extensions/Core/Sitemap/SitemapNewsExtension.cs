@@ -59,7 +59,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     /// </value>
     /// <remarks>
     ///     Loading normalises to UTC, so the offset the publisher wrote is lost on a round-trip:
-    ///     <c>2024-01-15T10:00:00-05:00</c> is written back as <c>2024-01-15T15:00:00+00:00</c>. Same
+    ///     <c>2024-01-15T10:00:00-05:00</c> is written back as <c>2024-01-15T15:00:00Z</c>. Same
     ///     instant, different text, and Google accepts either.
     /// </remarks>
     public DateTime PublicationDate { get; set; } = DateTime.MinValue;
@@ -189,7 +189,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
 
         if (this.PublicationDate != DateTime.MinValue)
         {
-            writer.WriteElementString("publication_date", this.XmlNamespace, this.PublicationDate.ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture));
+            writer.WriteElementString("publication_date", this.XmlNamespace, SitemapExtensionUtility.ToSitemapDateTime(this.PublicationDate));
         }
 
         if (!string.IsNullOrEmpty(this.Title))

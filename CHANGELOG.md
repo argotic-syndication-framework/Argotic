@@ -9,7 +9,34 @@ Entries that start with **BREAKING** change behaviour or an API that callers use
 
 ## [Unreleased]
 
-The .NET 10 release. The version changes from 3001.0.0 to 4000.0.0.
+The next release is 4000.0.2.
+
+### Added
+
+- **`SyndicationResourceSaveSettings.WriteXsiSchemaLocation`.** This opt-in setting makes `Sitemap.Save`
+  and `SitemapIndex.Save` write the `xmlns:xsi` declaration and the `xsi:schemaLocation` attribute on
+  the root element. The default value is `false`, and the default output does not change. A `urlset`
+  root pairs the core namespace with `sitemap.xsd`. A `sitemapindex` root pairs the same namespace with
+  `siteindex.xsd`. One more pair follows for each declared extension namespace with a published schema:
+  news, image and video. A namespace with no known schema location is skipped, such as the `xhtml`
+  namespace of the hreflang extension. Consumers that validate a sitemap use the attribute as a
+  validation hint. (Issue 177.)
+
+### Fixed
+
+- **Sitemap extension dates write in UTC, with the `Z` designator.** `news:publication_date`,
+  `video:publication_date` and `video:expiration_date` normalise their value to UTC before the format
+  step. A `Local` kind converts to the same instant. An `Unspecified` kind is a claim of UTC and keeps
+  its wall clock. Before, the format specifier `zzz` stamped the offset of the host machine on a `Local`
+  or `Unspecified` wall clock. The load path assumes UTC, and thus an `Unspecified` value written on a
+  non-UTC host came back as a different instant. A `Utc` kind was safe on each host, but it wrote the
+  non-canonical form `+00:00`. The output is now identical on every machine. (Issue 177.)
+
+## [4000.0.1] - 2026-08-10
+
+The .NET 10 release. The version changes from 3001.0.0 to 4000.0.1. The tag `4000.0.0` exists, but its
+NuGet publication failed in CI. `4000.0.1` is the shipped package, and it has no library change on top
+of `4000.0.0`.
 
 ### Added
 
@@ -82,14 +109,6 @@ The .NET 10 release. The version changes from 3001.0.0 to 4000.0.0.
   use the API.
 - **`HashCodeUtility`.** This helper makes hash code components that agree with the case-insensitive
   comparison rules of the framework.
-- **`SyndicationResourceSaveSettings.WriteXsiSchemaLocation`.** This opt-in setting makes `Sitemap.Save`
-  and `SitemapIndex.Save` write the `xmlns:xsi` declaration and the `xsi:schemaLocation` attribute on
-  the root element. The default value is `false`, and the default output does not change. A `urlset`
-  root pairs the core namespace with `sitemap.xsd`. A `sitemapindex` root pairs the same namespace with
-  `siteindex.xsd`. One more pair follows for each declared extension namespace with a published schema:
-  news, image and video. A namespace with no known schema location is skipped, such as the `xhtml`
-  namespace of the hreflang extension. Consumers that validate a sitemap use the attribute as a
-  validation hint. (Issue 177.)
 
 ### Changed
 
@@ -378,13 +397,6 @@ The changes in this group fix no defect and break no documented contract. A call
 - **`RetrievalLimit`.** `Sitemap` and `SitemapIndex` obey
   `SyndicationResourceLoadSettings.RetrievalLimit` on their public load paths. Before, they read each
   entry and ignored the limit.
-- **Extension dates write in UTC, with the `Z` designator.** `news:publication_date`,
-  `video:publication_date` and `video:expiration_date` normalise their value to UTC before the format
-  step. A `Local` kind converts to the same instant. An `Unspecified` kind is a claim of UTC and keeps
-  its wall clock. Before, the format specifier `zzz` stamped the offset of the host machine on a `Local`
-  or `Unspecified` wall clock. The load path assumes UTC, and thus an `Unspecified` value written on a
-  non-UTC host came back as a different instant. A `Utc` kind was safe on each host, but it wrote the
-  non-canonical form `+00:00`. The output is now identical on every machine. (Issue 177.)
 
 #### Atom Publishing
 
@@ -442,5 +454,6 @@ The changes in this group fix no defect and break no documented contract. A call
   parser reads the internal DTD subset, and does not ignore it. Thus a feed that declares its own
   entities loads correctly, and the external-entity vector stays closed.
 
-[Unreleased]: https://github.com/argotic-syndication-framework/Argotic/compare/3001.0.0...HEAD
+[Unreleased]: https://github.com/argotic-syndication-framework/Argotic/compare/4000.0.1...HEAD
+[4000.0.1]: https://github.com/argotic-syndication-framework/Argotic/compare/3001.0.0...4000.0.1
 [3001.0.0]: https://github.com/argotic-syndication-framework/Argotic/releases/tag/3001.0.0

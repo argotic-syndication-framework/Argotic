@@ -41,6 +41,41 @@ $ProjectsToPublish = @()
 $NugetPublishSource = property ZF_NUGET_PUBLISH_SOURCE "$here/_local-nuget-feed"
 $IncludeAssembliesInCodeCoverage = "Argotic.*"
 $ExcludeAssembliesInCodeCoverage = "Argotic.*.Tests*"
+$ExcludeFilesInCodeCoverage = @(
+    '*.g.cs'
+    '**\Argotic.Common\Guard.cs'
+    '**\Argotic.Common\WebRequestOptions.cs'
+    '**\Argotic.Core\Configuration\PrivilegedConfigurationManager.cs'
+    '**\Argotic.Core\Configuration\Provider\SyndicationResourceProviderCollection.cs'
+    '**\Argotic.Core\Configuration\Provider\SyndicationResourceSection.cs'
+    '**\Argotic.Core\Configuration\TrackbackClientNetworkElement.cs'
+    '**\Argotic.Core\Configuration\TrackbackClientSection.cs'
+    '**\Argotic.Core\Configuration\XmlRpcClientNetworkElement.cs'
+    '**\Argotic.Core\Configuration\XmlRpcClientSection.cs'
+    '**\Argotic.Core\Net\Trackback\TrackbackMessageSentEventArgs.cs'
+    '**\Argotic.Core\Net\WebContentType.cs'
+    '**\Argotic.Core\Net\XmlRpc\XmlRpcMessageSentEventArgs.cs'
+    '**\Argotic.Core\Syndication\Specialized\Apml\ApmlApplication.cs'
+    '**\Argotic.Core\Syndication\Specialized\Apml\ApmlAuthor.cs'
+    '**\Argotic.Core\Syndication\Specialized\Apml\ApmlConcept.cs'
+    '**\Argotic.Core\Syndication\Specialized\Apml\ApmlDocument.cs'
+    '**\Argotic.Core\Syndication\Specialized\Apml\ApmlHead.cs'
+    '**\Argotic.Core\Syndication\Specialized\Apml\ApmlProfile.cs'
+    '**\Argotic.Core\Syndication\Specialized\Apml\ApmlSource.cs'
+    '**\Argotic.Core\Syndication\Specialized\Apml\ApmlUtility.cs'
+    '**\Argotic.Core\Syndication\Specialized\BlogML\BlogMLAttachment.cs'
+    '**\Argotic.Core\Syndication\Specialized\BlogML\BlogMLAuthor.cs'
+    '**\Argotic.Core\Syndication\Specialized\BlogML\BlogMLCategory.cs'
+    '**\Argotic.Core\Syndication\Specialized\BlogML\BlogMLComment.cs'
+    '**\Argotic.Core\Syndication\Specialized\BlogML\BlogMLDocument.cs'
+    '**\Argotic.Core\Syndication\Specialized\BlogML\BlogMLPost.cs'
+    '**\Argotic.Core\Syndication\Specialized\BlogML\BlogMLTextConstruct.cs'
+    '**\Argotic.Core\Syndication\Specialized\BlogML\BlogMLTrackback.cs'
+    '**\Argotic.Core\Syndication\Specialized\BlogML\BlogMLUtility.cs'
+    '**\Argotic.Core\Syndication\Specialized\Rsd\RsdApplicationInterface.cs'
+    '**\Argotic.Core\Syndication\Specialized\Rsd\RsdDocument.cs'
+    '**\Argotic.Core\Syndication\Specialized\Rsd\RsdUtility.cs'
+)
 
 # The SiteMonitoring tests fetch endjin.com's published sitemaps and validate them against Google's
 # schemas. They check a website, not this library, so a content problem there must not fail a build

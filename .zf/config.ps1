@@ -10,6 +10,11 @@ $zerofailedExtensions = @(
         GitRepository = "https://github.com/zerofailed/ZeroFailed.Build.DotNet"
         GitRef = "main"
     }
+    @{
+        Name = "ZeroFailed.Build.GitHub"
+        GitRepository = "https://github.com/zerofailed/ZeroFailed.Build.GitHub"
+        GitRef = "main"
+    }
 )
 
 # Load the tasks and process

@@ -42,7 +42,7 @@ $NugetPublishSource = property ZF_NUGET_PUBLISH_SOURCE "$here/_local-nuget-feed"
 $IncludeAssembliesInCodeCoverage = "Argotic.*"
 $ExcludeAssembliesInCodeCoverage = "Argotic.*.Tests*"
 $ExcludeFilesInCodeCoverage = @(
-    '*.g.cs'
+    '**\*.g.cs'
     '**\Argotic.Common\Guard.cs'
     '**\Argotic.Common\WebRequestOptions.cs'
     '**\Argotic.Core\Configuration\PrivilegedConfigurationManager.cs'

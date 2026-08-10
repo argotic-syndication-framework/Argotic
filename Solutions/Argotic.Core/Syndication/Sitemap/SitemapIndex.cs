@@ -373,6 +373,12 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
         }
 
         SyndicationExtensionAdapter.WriteXmlNamespaceDeclarations(settings.SupportedExtensions, writer);
+
+        if (settings.WriteXsiSchemaLocation)
+        {
+            SitemapSchemaLocations.WriteXsiSchemaLocation(writer, SitemapSchemaLocations.SiteindexXsd, settings.SupportedExtensions);
+        }
+
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
         foreach (SitemapIndexEntry entry in this.Sitemaps)

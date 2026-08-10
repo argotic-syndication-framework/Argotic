@@ -83,10 +83,37 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     public IList<Type> SupportedExtensions => supportedSyndicationExtensions ??= [];
 
     /// <summary>
+    /// Gets or sets a value indicating if the save operation writes an <c>xsi:schemaLocation</c> attribute on the root element.
+    /// </summary>
+    /// <value>
+    ///     <see langword="true"/> to write the <c>xmlns:xsi</c> declaration and the <c>xsi:schemaLocation</c> attribute; otherwise, <see langword="false"/>.
+    ///     The default value is <see langword="false"/>.
+    /// </value>
+    /// <remarks>
+    ///     <para>
+    ///     Only the sitemap resource types honour this option. A <c>urlset</c> root pairs the core
+    ///     namespace with <c>sitemap.xsd</c>; a <c>sitemapindex</c> root pairs the same namespace with
+    ///     <c>siteindex.xsd</c>. One more pair is written for each declared extension namespace with a
+    ///     known schema location: the Google news, image and video extensions. A namespace with no
+    ///     known schema location is skipped — the hreflang extension's <c>xhtml</c> namespace, and any
+    ///     consumer-supplied extension. Every other resource type ignores the option, as
+    ///     <see cref="AutoDetectExtensions"/> is likewise meaningful only where extensions exist.
+    ///     </para>
+    ///     <para>
+    ///     The attribute is a validation hint, nothing more. A consumer that validates supplies its
+    ///     own schema set; this library's own conformance checks never read the attribute. An
+    ///     extension that claims the <c>xsi</c> prefix for another namespace makes the save throw
+    ///     <see cref="System.Xml.XmlException"/> on the duplicate declaration, exactly as two
+    ///     extensions sharing a prefix across different namespaces already do.
+    ///     </para>
+    /// </remarks>
+    public bool WriteXsiSchemaLocation { get; set; }
+
+    /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.
     /// </summary>
     /// <returns>The settings, with <see cref="SupportedExtensions"/> reduced to its hash code rather than enumerated.</returns>
-    public override string ToString() => $"[SyndicationResourceSaveSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", MinimizeOutputSize = \"{this.MinimizeOutputSize}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
+    public override string ToString() => $"[SyndicationResourceSaveSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", MinimizeOutputSize = \"{this.MinimizeOutputSize}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\", WriteXsiSchemaLocation = \"{this.WriteXsiSchemaLocation}\")]";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -104,6 +131,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
         if (result == 0) result = this.MinimizeOutputSize.CompareTo(other.MinimizeOutputSize);
         if (result == 0) result = ComparisonUtility.CompareSequence(this.SupportedExtensions, other.SupportedExtensions);
         if (result == 0) result = this.AutoDetectExtensions.CompareTo(other.AutoDetectExtensions);
+        if (result == 0) result = this.WriteXsiSchemaLocation.CompareTo(other.WriteXsiSchemaLocation);
 
         return result;
     }
@@ -140,6 +168,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
         hash.Add(HashCodeUtility.Component(this.CharacterEncoding?.WebName));
         hash.Add(HashCodeUtility.Component(this.MinimizeOutputSize));
         hash.Add(HashCodeUtility.Component(this.AutoDetectExtensions));
+        hash.Add(HashCodeUtility.Component(this.WriteXsiSchemaLocation));
         var extensions = this.supportedSyndicationExtensions;
         if (extensions is not null)
         {

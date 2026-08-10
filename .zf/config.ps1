@@ -10,6 +10,11 @@ $zerofailedExtensions = @(
         GitRepository = "https://github.com/zerofailed/ZeroFailed.Build.DotNet"
         GitRef = "main"
     }
+    @{
+        Name = "ZeroFailed.Build.GitHub"
+        GitRepository = "https://github.com/zerofailed/ZeroFailed.Build.GitHub"
+        GitRef = "main"
+    }
 )
 
 # Load the tasks and process
@@ -36,6 +41,10 @@ $ProjectsToPublish = @()
 $NugetPublishSource = property ZF_NUGET_PUBLISH_SOURCE "$here/_local-nuget-feed"
 $IncludeAssembliesInCodeCoverage = "Argotic.*"
 $ExcludeAssembliesInCodeCoverage = "Argotic.*.Tests*"
+$ExcludeFilesInCodeCoverage = @(
+    '*.g.cs'
+    '_\**'  # required for CI build where sourcelink is enabled
+)
 
 # The SiteMonitoring tests fetch endjin.com's published sitemaps and validate them against Google's
 # schemas. They check a website, not this library, so a content problem there must not fail a build

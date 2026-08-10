@@ -385,6 +385,12 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
         }
 
         SyndicationExtensionAdapter.WriteXmlNamespaceDeclarations(settings.SupportedExtensions, writer);
+
+        if (settings.WriteXsiSchemaLocation)
+        {
+            SitemapSchemaLocations.WriteXsiSchemaLocation(writer, SitemapSchemaLocations.SitemapXsd, settings.SupportedExtensions);
+        }
+
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
         foreach (SitemapUrl url in this.Urls)

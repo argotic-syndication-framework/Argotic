@@ -307,7 +307,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <value>The expiry instant, or <see langword="null"/> if the video does not expire.</value>
     /// <remarks>
     ///     Loading converts to UTC, so the offset a publisher wrote is not what a round-trip writes back —
-    ///     <c>2024-01-15T10:00:00-05:00</c> returns as <c>2024-01-15T15:00:00+00:00</c>. The instant is
+    ///     <c>2024-01-15T10:00:00-05:00</c> returns as <c>2024-01-15T15:00:00Z</c>. The instant is
     ///     preserved; the wall-clock text is not.
     /// </remarks>
     public DateTime? ExpirationDate { get; set; }
@@ -864,7 +864,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
 
         if (this.ExpirationDate.HasValue)
         {
-            writer.WriteElementString("expiration_date", xmlNamespace, this.ExpirationDate.Value.ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture));
+            writer.WriteElementString("expiration_date", xmlNamespace, SitemapExtensionUtility.ToSitemapDateTime(this.ExpirationDate.Value));
         }
 
         if (this.Rating.HasValue)
@@ -881,7 +881,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
 
         if (this.PublicationDate.HasValue)
         {
-            writer.WriteElementString("publication_date", xmlNamespace, this.PublicationDate.Value.ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture));
+            writer.WriteElementString("publication_date", xmlNamespace, SitemapExtensionUtility.ToSitemapDateTime(this.PublicationDate.Value));
         }
 
         // The remaining order is not a matter of taste: sitemap-video-1.1.xsd declares an xsd:sequence,

@@ -66,7 +66,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// </summary>
     /// <value>The <c>Generator</c> element. It defaults to this framework's name and project URL, so a document saved without touching it credits Argotic.</value>
     /// <remarks>
-    ///     Deliberately version-free, for the same reason as <see cref="Syndication.RssChannel.Generator"/>:
+    ///     Deliberately version-free, for the same reason as <see cref="RssChannel.Generator"/>:
     ///     a version stamp in the default makes identical content serialize to different bytes across
     ///     package upgrades.
     /// </remarks>

@@ -127,12 +127,18 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Gets or sets a value that credits the software that created this feed.
     /// </summary>
-    /// <value>The default value names this framework and its assembly version.</value>
+    /// <value>The default value names this framework and its project URL, and nothing else.</value>
+    /// <remarks>
+    ///     Deliberately version-free. The default used to embed the assembly version, which made
+    ///     <c>Save</c> produce different bytes for identical feed content on every package upgrade —
+    ///     invalidating any checksum a consumer stored over serialized output. A version is data about
+    ///     the software, not the feed; callers who want one can set this property themselves.
+    /// </remarks>
     public string Generator
     {
         get;
         set => field = value?.Trim() ?? string.Empty;
-    } = $"Argotic Syndication Framework {System.Reflection.Assembly.GetAssembly(typeof(RssChannel))?.GetName().Version?.ToString(4) ?? "unknown"}, https://github.com/argotic-syndication-framework/argotic/";
+    } = "Argotic Syndication Framework, https://github.com/argotic-syndication-framework/argotic/";
 
     /// <summary>
     /// Gets or sets the graphical logo for this feed.

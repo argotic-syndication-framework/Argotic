@@ -300,11 +300,15 @@ public sealed class SanitiserCharacterisationTests
         string run = string.Concat(Enumerable.Repeat("\U0001F600", 20_000));
         string[] alignments = ["", "x"];
 
+        // The shared list plus the explicit-encoding stream overload, so every public
+        // CreateSafeNavigator shape faces the boundary.
+        string[] entryPoints = [.. EntryPoints, "stream+encoding"];
+
         foreach (string prefix in alignments)
         {
             string document = string.Concat("<r>", prefix, run, "</r>");
 
-            foreach (string entryPoint in EntryPoints)
+            foreach (string entryPoint in entryPoints)
             {
                 RootOf(Parse(entryPoint, document))
                     .ShouldBe(document, $"{entryPoint}, run at offset {prefix.Length}");
@@ -349,6 +353,12 @@ public sealed class SanitiserCharacterisationTests
                     XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(reader);
                     reader.DisposeCount.ShouldBe(0, "nothing should dispose a reader it did not open");
                     return navigator;
+                }
+
+            case "stream+encoding":
+                using (MemoryStream stream = new(Encoding.UTF8.GetBytes(document), writable: false))
+                {
+                    return SyndicationEncodingUtility.CreateSafeNavigator(stream, Encoding.UTF8);
                 }
 
             default:

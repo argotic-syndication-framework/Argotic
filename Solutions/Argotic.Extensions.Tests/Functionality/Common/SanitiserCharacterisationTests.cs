@@ -269,6 +269,49 @@ public sealed class SanitiserCharacterisationTests
         }
     }
 
+    /// <summary>
+    /// Row 26 — a read-block boundary that divides a surrogate pair does not divide the character.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     The sanitising reader classifies a pair when it sees the high half, and when the caller's
+    ///     buffer fills between the halves the approved low half is held to the next call and emitted
+    ///     <i>verbatim</i>. Sending it through classification again would find a low surrogate with no
+    ///     high before it, drop it as unpaired, and hand the parser a lone high surrogate — a parse
+    ///     error manufactured out of a valid emoji.
+    ///     </para>
+    ///     <para>
+    ///     Rows 24 and 25 already catch this, but only because their offset brackets happen to
+    ///     straddle today's block size — measured by perturbing the reader to reclassify a held low
+    ///     half at the start of each read call, which turned exactly the four astral sweep cases red
+    ///     (issue #176 records the experiment). This row removes the dependency on any particular
+    ///     block size: the run is longer than any plausible read block, so every block length puts
+    ///     boundaries inside it, and of two runs that start one position apart, one must place a
+    ///     boundary between the halves of some pair whatever that length is.
+    ///     </para>
+    ///     <para>
+    ///     Full string equality, not length: equality also finds a dropped half, a substituted
+    ///     replacement character, and a reordering.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    public void ASurrogatePairDividedByAReadBlockBoundary_SurvivesIntact()
+    {
+        string run = string.Concat(Enumerable.Repeat("\U0001F600", 20_000));
+        string[] alignments = ["", "x"];
+
+        foreach (string prefix in alignments)
+        {
+            string document = string.Concat("<r>", prefix, run, "</r>");
+
+            foreach (string entryPoint in EntryPoints)
+            {
+                RootOf(Parse(entryPoint, document))
+                    .ShouldBe(document, $"{entryPoint}, run at offset {prefix.Length}");
+            }
+        }
+    }
+
     private static IEnumerable<int> Offsets()
     {
         for (int n = 1_000; n <= 1_050; n++)

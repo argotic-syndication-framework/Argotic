@@ -14,7 +14,8 @@ Argotic is a .NET library that reads and writes web content syndication formats.
 [Sitemap protocol](https://www.sitemaps.org/protocol.html). It also implements the
 [Atom Publishing Protocol](https://www.rfc-editor.org/rfc/rfc5023), Trackback and XML-RPC. The
 library includes **27 syndication extensions in 22 families**: GeoRSS, Podcasting 2.0, iTunes,
-Dublin Core, Yahoo Media, Creative Commons, Google's Sitemap News/Image/Video/Hreflang, and more.
+Dublin Core, Yahoo Media, Creative Commons, Google's sitemap extensions (News, Image, Video,
+Hreflang) and 15 more.
 
 Brian William Kuhn created Argotic in **2007**, and the project later became dormant.
 [endjin](https://endjin.com) now maintains it, and uses it in production to produce the
@@ -34,8 +35,8 @@ group of people.
 
 - The [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0). The packages target
   `net10.0` and no other framework.
-- C# 14, if you build from source. `LangVersion` is pinned to `14.0`, and the implementation uses
-  `extension` blocks and the `field` keyword.
+- C# 14, if you build from source. The solution pins `LangVersion` to `14.0`, and the
+  implementation uses `extension` blocks and the `field` keyword.
 
 > This release does not support .NET Standard 2.0/2.1, .NET 8 or .NET 9. To target those
 > frameworks, use an earlier package version.
@@ -99,7 +100,7 @@ foreach (RssItem item in feed.Channel.Items)
 ```
 
 `Link`, `Guid` and `Source` are nullable — `Uri? Link`, `RssGuid? Guid`. RSS makes almost every
-element optional, and live feeds frequently omit these elements.
+element optional, and live feeds often omit these elements.
 
 ### Create a feed and save it
 
@@ -135,11 +136,11 @@ throw on `null` or an empty string, so you cannot save a document that does not 
 
 ### Use a syndication extension
 
-Argotic discovers extensions by reflection over `Argotic.Extensions`; there is no registration
-step. On load, Argotic reads the XML namespaces that the document declares, creates the applicable
-extensions, and attaches each one to the entity that carried its elements. On save, Argotic
-derives the `xmlns:` declarations from the extensions that are attached, so you do not declare a
-namespace by hand.
+Argotic discovers extensions by reflection over `Argotic.Extensions`. There is no registration
+step. On load, Argotic reads the XML namespaces that the document declares. It then creates each
+matching extension and attaches it to the entity that carried its elements. On save, Argotic
+derives the `xmlns:` declarations from the attached extensions, so you do not declare a namespace
+by hand.
 
 To read an extension, call `FindExtension` with the extension's static `MatchByType` predicate. To
 write one, add a populated extension to an extensible entity, then save. In this snippet, `feed`
@@ -167,7 +168,7 @@ using FileStream output = File.Create("podcast.xml");
 feed.Save(output);   // Argotic writes xmlns:itunes for you
 ```
 
-`FindExtension` does a linear scan of `Extensions`. Hold the result; do not call `FindExtension`
+`FindExtension` does a linear scan of `Extensions`. Hold the result. Do not call `FindExtension`
 once for each property.
 
 The other 26 extensions attach in the same way: `PodcastSyndicationExtension`,
@@ -193,9 +194,9 @@ services.AddTrackbackClient();            // typed TrackbackClient
 services.AddXmlRpcClient();               // typed XmlRpcClient
 ```
 
-A syndication resource is constructed, not resolved: you write `new RssFeed()`, and you do not ask
-the container for one. The syndication client is therefore registered by *name*. Get the client
-from the factory and give it to `LoadAsync`:
+You construct a syndication resource with `new RssFeed()`. You do not resolve it from the
+container. `AddArgoticSyndicationClient` therefore registers the syndication client by *name*.
+Get the client from the factory and give it to `LoadAsync`:
 
 ```csharp
 IHttpClientFactory factory = provider.GetRequiredService<IHttpClientFactory>();
@@ -208,9 +209,10 @@ RssFeed feed = new();
 await feed.LoadAsync(new Uri("https://endjin.com/rss.xml"), httpClient, cancellationToken: cancellationToken);
 ```
 
-`TrackbackClient` and `XmlRpcClient` *are* services. They are registered as typed clients, and you
-resolve them directly. `AddTrackbackClient` and `AddXmlRpcClient` also take an `Action<TOptions>`,
-or an `IConfiguration` plus a section name (`Argotic:Trackback` and `Argotic:XmlRpc` by default).
+`TrackbackClient` and `XmlRpcClient` *are* services: `AddTrackbackClient` and `AddXmlRpcClient`
+register them as typed clients, and you resolve them directly. Both methods also take an
+`Action<TOptions>`, or an `IConfiguration` plus a section name (`Argotic:Trackback` and
+`Argotic:XmlRpc` by default).
 
 Each client that these methods register gets `Timeout.InfiniteTimeSpan`. This is not an absence of
 a deadline. Argotic applies each deadline with `CancellationTokenSource.CancelAfter`, on a token
@@ -228,7 +230,7 @@ runnable, commented program there:
 - Podcast feeds with iTunes and Podcasting 2.0 metadata (sample 11).
 - Your own custom extension (sample 13).
 
-See [Samples](#samples) for how the directory is organised.
+See [Samples](#samples) for the directory layout.
 
 ## What's in the box
 
@@ -260,7 +262,7 @@ All 27 extensions are in the `Argotic.Extensions.Core` namespace.
 | DublinCore             | `DublinCoreElementSetSyndicationExtension`, `DublinCoreMetadataTermsSyndicationExtension`            |
 | FeedHistory            | Feed paging and archiving (RFC 5005)                                                                 |
 | FeedRank               | Feed ranking                                                                                         |
-| FeedSync               | Feed synchronization                                                                                 |
+| FeedSync               | Feed synchronisation                                                                                 |
 | **GeoRSS**             | Geographic location, Simple and GML (OGC 17-002r1)                                                   |
 | iTunes                 | Apple Podcasts metadata                                                                              |
 | LiveJournal            | LiveJournal-specific elements                                                                        |
@@ -292,8 +294,8 @@ The samples are .NET 10
 [file-based apps](https://learn.microsoft.com/dotnet/core/whats-new/dotnet-10/sdk). They form a
 course in five parts: documents, persistence, extensions, the network, and beyond the feed. Each
 file explains why before how, and prints its own evidence, so you can compare the prose with the
-output. Read the files in order, or use the "start here" table in
-[the index](Solutions/Samples/README.md) to find the file that matches your problem.
+output. Read the files in order, or find your problem in the "start here" table in
+[the index](Solutions/Samples/README.md).
 
 No sample touches the network. Samples 01–13 open no sockets. Samples 14–21 serve themselves over
 an `HttpListener` on 127.0.0.1. The full set therefore runs in CI at every commit:
@@ -306,8 +308,8 @@ an `HttpListener` on 127.0.0.1. The full set therefore runs in CI at every commi
 
 [`Solutions/Argotic.Examples`](Solutions/Argotic.Examples) is an interactive
 [Spectre.Console](https://spectreconsole.net/) CLI that contains 223 runnable examples in 77
-classes, and it mirrors the Core and Extensions structure. The samples are a course that you read;
-the examples are a reference that you query. The examples cover every format, all 27 extensions,
+classes, and it mirrors the Core and Extensions structure. The samples are a course that you read.
+The examples are a reference that you query. The examples cover every format, all 27 extensions,
 and every overload. Each example compiles against the current API and runs end-to-end in CI.
 
 ```bash
@@ -389,14 +391,14 @@ dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --list flat
 dotnet run -c Release --project Solutions/Argotic.Benchmarks -- --filter '*ParsePipeline*' --job Short
 ```
 
-The default test run is offline. The tests mock HTTP, and for the two seams that a mock handler
+The default test run is offline. The tests mock HTTP. For the two seams that a mock handler
 cannot reach, an `HttpListener` on 127.0.0.1 serves the responses from an OS-assigned port.
 Nothing leaves the machine. The fixtures are C# string literals, plus the sample documents linked
 in from `Argotic.Examples/SampleData`.
 
 ### Conformance testing
 
-Tests with `[TestCategory("Integration")]` do reach the network; the filter above excludes them
+Tests with `[TestCategory("Integration")]` do reach the network. The filter above excludes them
 from the default run. These tests validate the library's output against the schemas and
 validators that the publishers serve:
 
@@ -407,13 +409,13 @@ validators that the publishers serve:
   has a schema that .NET can validate against.
 - **endjin's published feeds**, so that the tests notice a change at the publisher.
 
-Offline, the sitemaps.org and APML schemas are embedded in the test assembly. They validate the
+Offline, the test assembly embeds the sitemaps.org and APML schemas. The schemas validate the
 documents that the library writes, and also the sample corpus. This tier caught the
-`SitemapVideo` writer: it wrote its elements in an order that Google's schema rejects, and every
-round-trip test agreed with it, because the reader accepts children in any order.
+`SitemapVideo` writer, which wrote its elements in an order that Google's schema rejects. Every
+round-trip test agreed with the writer, because the reader accepts children in any order.
 
-An integration test never passes without a connection to its service. An unreachable service is
-reported as inconclusive. Only a rejected document is a failure.
+An integration test never passes without a connection to its service. If the service is
+unreachable, the test reports an inconclusive result. Only a rejected document is a failure.
 
 Build output goes to `_packages/` (NuGet packages), `_codeCoverage/` (coverage reports) and
 `Solutions/Argotic.Extensions.Tests/TestResults/`.
@@ -434,7 +436,7 @@ Solutions/
 
 `Solutions/Directory.Packages.props` holds all package versions
 ([Central Package Management](https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management)),
-so `PackageReference` items carry no `Version` attribute. `MSTest.Sdk` is pinned in `global.json`.
+so `PackageReference` items carry no `Version` attribute. `global.json` pins `MSTest.Sdk`.
 
 ## Documentation
 
@@ -474,8 +476,8 @@ For licensing questions, email [&#108;&#105;&#99;&#101;&#110;&#115;&#105;&#110;&
 
 This project uses a code of conduct adapted from the
 [Contributor Covenant](http://contributor-covenant.org/). The code of conduct states the
-behaviour that we expect in our community, and
-[many other projects](http://contributor-covenant.org/adopters/) have adopted it. For more
+behaviour that we expect in our community.
+[Many other projects](http://contributor-covenant.org/adopters/) also use it. For more
 information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
 or contact [&#104;&#101;&#108;&#108;&#111;&#064;&#101;&#110;&#100;&#106;&#105;&#110;&#046;&#099;&#111;&#109;](&#109;&#097;&#105;&#108;&#116;&#111;:&#104;&#101;&#108;&#108;&#111;&#064;&#101;&#110;&#100;&#106;&#105;&#110;&#046;&#099;&#111;&#109;)
 with questions or comments.
@@ -483,7 +485,7 @@ with questions or comments.
 ## Project sponsor
 
 [endjin](https://endjin.com) sponsors this project. We are a UK-based, fully-remote consultancy
-that specializes in Data & Analytics, AI, and Cloud Native App Dev.
+that specialises in Data & Analytics, AI, and Cloud Native App Dev.
 
 We help small teams achieve big things.
 
@@ -499,18 +501,18 @@ Follow endjin on our [blog](https://blogs.endjin.com/), our
 [Bluesky](https://bsky.app/profile/endjin.com) and
 [LinkedIn](https://www.linkedin.com/company/1671851/).
 
-Our other open-source projects are listed on [our website](https://endjin.com/open-source).
+[Our website](https://endjin.com/open-source) lists our other open-source projects.
 
 ## IP Maturity Model (IMM)
 
 The [IP Maturity Model](https://github.com/endjin/Endjin.Ip.Maturity.Matrix) is endjin's IP
 quality framework. It defines a
-[configurable set of rules](https://github.com/endjin/Endjin.Ip.Maturity.Matrix.RuleDefinitions),
-which are committed into the [root of a repo](imm.yaml). An
+[configurable set of rules](https://github.com/endjin/Endjin.Ip.Maturity.Matrix.RuleDefinitions).
+Each repo commits its ruleset at the [repository root](imm.yaml). An
 [Azure Function](https://github.com/endjin/Endjin.Ip.Maturity.Matrix/tree/master/Solutions/Endjin.Ip.Maturity.Matrix.Host)
 evaluates the ruleset and renders an SVG badge for display in the repo's README.
 
-The approach comes from more than 15 years of delivery of complex, high-performance projects, and
+The approach comes from more than 15 years of delivering complex, high-performance projects, and
 from due-diligence assessments of third-party systems. For detailed information about the
 ruleset, see the [IP Maturity Model repo](https://github.com/endjin/Endjin.Ip.Maturity.Matrix).
 

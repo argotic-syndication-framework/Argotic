@@ -5,7 +5,15 @@ on:
     - main
     tags:
     - '*'
+    paths-ignore:
+    - README.md
+    - CHANGELOG.md
+    - ARCHITECTURE.md
   pull_request:
+    paths-ignore:
+    - README.md
+    - CHANGELOG.md
+    - ARCHITECTURE.md
   workflow_dispatch:
     inputs:
       forcePublish:

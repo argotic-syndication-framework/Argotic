@@ -7,9 +7,30 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 Entries that start with **BREAKING** change behaviour or an API that callers use. Read those first.
 
-## [Unreleased]
+## [4000.0.4] - 2026-08-12
 
-The next release is 4000.0.2.
+### Changed
+
+#### Dependencies
+
+- The Microsoft.Extensions packages move from 10.0.10 to 10.0.11.
+- `Argotic.Core` now declares direct references to `Microsoft.Extensions.Configuration` and
+  `Microsoft.Extensions.DependencyInjection`. The NuGet package lists both as dependencies.
+
+## [4000.0.3] - 2026-08-12
+
+### Changed
+
+- **The default `<generator>` no longer carries the assembly version.** `RssChannel.Generator` and
+  `ApmlHead.Generator` now default to the fixed string
+  `Argotic Syndication Framework, https://github.com/argotic-syndication-framework/argotic/`. Before,
+  the default embedded the assembly version. Thus `Save` wrote different bytes for identical content
+  after every package upgrade, and a stored checksum over serialized output failed on each patch-level
+  bump. A generator value that the caller sets still round-trips without a change. The versioned
+  `User-Agent` strings of `TrackbackClient` and `XmlRpcClient` do not change, because they are HTTP
+  headers and not serialized output. (Issue 179.)
+
+## [4000.0.2] - 2026-08-10
 
 ### Added
 
@@ -454,6 +475,8 @@ The changes in this group fix no defect and break no documented contract. A call
   parser reads the internal DTD subset, and does not ignore it. Thus a feed that declares its own
   entities loads correctly, and the external-entity vector stays closed.
 
-[Unreleased]: https://github.com/argotic-syndication-framework/Argotic/compare/4000.0.1...HEAD
+[4000.0.4]: https://github.com/argotic-syndication-framework/Argotic/compare/4000.0.3...4000.0.4
+[4000.0.3]: https://github.com/argotic-syndication-framework/Argotic/compare/4000.0.2...4000.0.3
+[4000.0.2]: https://github.com/argotic-syndication-framework/Argotic/compare/4000.0.1...4000.0.2
 [4000.0.1]: https://github.com/argotic-syndication-framework/Argotic/compare/3001.0.0...4000.0.1
 [3001.0.0]: https://github.com/argotic-syndication-framework/Argotic/releases/tag/3001.0.0

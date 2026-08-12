@@ -64,16 +64,17 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// <summary>
     /// Gets or sets a value that credits the software that created this document.
     /// </summary>
-    /// <value>The <c>Generator</c> element. It defaults to this framework's name, version and project URL, so a document saved without touching it credits Argotic.</value>
-    // Both null-forgiving operators in the default value are provable. Assembly.GetAssembly returns
-    // null only for a type with no backing assembly, which a typeof() of a type declared here cannot
-    // be, and AssemblyName.Version is always populated because the SDK emits an assembly version
-    // whether or not one is set explicitly.
+    /// <value>The <c>Generator</c> element. It defaults to this framework's name and project URL, so a document saved without touching it credits Argotic.</value>
+    /// <remarks>
+    ///     Deliberately version-free, for the same reason as <see cref="RssChannel.Generator"/>:
+    ///     a version stamp in the default makes identical content serialize to different bytes across
+    ///     package upgrades.
+    /// </remarks>
     public string Generator
     {
         get;
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
-    } = $"Argotic Syndication Framework {System.Reflection.Assembly.GetAssembly(typeof(ApmlHead))!.GetName().Version!.ToString(4)}, https://github.com/argotic-syndication-framework/argotic/";
+    } = "Argotic Syndication Framework, https://github.com/argotic-syndication-framework/argotic/";
 
     /// <summary>
     /// Gets or sets the title of this document.

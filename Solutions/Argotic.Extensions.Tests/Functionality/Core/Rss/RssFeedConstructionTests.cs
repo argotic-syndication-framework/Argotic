@@ -228,6 +228,46 @@ public class RssFeedConstructionTests
         xml.ShouldContain("<item>");
     }
 
+    /// <summary>
+    /// The default generator credits the framework and nothing that changes between releases.
+    /// </summary>
+    /// <remarks>
+    ///     Pinned as the exact string, not a pattern, because the defect this guards against (issue
+    ///     #179) was a version stamp inside the default: identical feed content serialized to
+    ///     different bytes on every package upgrade, invalidating any checksum a consumer stored over
+    ///     saved output. Any reintroduced stamp — version, date, build metadata — fails this pin.
+    /// </remarks>
+    [TestMethod]
+    public void DefaultGenerator_CarriesNoAssemblyVersion()
+        => new RssChannel().Generator.ShouldBe(
+            "Argotic Syndication Framework, https://github.com/argotic-syndication-framework/argotic/");
+
+    /// <summary>
+    /// A feed saved without touching the generator writes the version-free default to the wire.
+    /// </summary>
+    [TestMethod]
+    public void Save_WithUntouchedGenerator_WritesTheVersionFreeDefault()
+    {
+        RssFeed feed = new()
+        {
+            Channel =
+            {
+                Title = "Test Feed",
+                Link = new Uri("http://example.com"),
+                Description = "Test feed description"
+            }
+        };
+
+        using MemoryStream stream = new();
+        feed.Save(stream);
+
+        stream.Position = 0;
+        using StreamReader reader = new(stream);
+        string xml = reader.ReadToEnd();
+
+        xml.ShouldContain("<generator>Argotic Syndication Framework, https://github.com/argotic-syndication-framework/argotic/</generator>");
+    }
+
     private static RssFeed CreateCompleteFeed()
     {
         RssFeed feed = new()

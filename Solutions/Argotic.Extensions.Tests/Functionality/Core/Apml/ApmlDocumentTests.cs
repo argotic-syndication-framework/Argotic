@@ -46,6 +46,18 @@ public class ApmlDocumentTests
     }
 
     /// <summary>
+    /// The default generator credits the framework and nothing that changes between releases.
+    /// </summary>
+    /// <remarks>
+    ///     The same pin as the RSS channel's (issue #179): the default used to embed the assembly
+    ///     version, so a document saved with defaults changed bytes on every package upgrade.
+    /// </remarks>
+    [TestMethod]
+    public void Head_DefaultGenerator_CarriesNoAssemblyVersion()
+        => new ApmlHead().Generator.ShouldBe(
+            "Argotic Syndication Framework, https://github.com/argotic-syndication-framework/argotic/");
+
+    /// <summary>
     /// The name of the default profile is read back exactly as assigned.
     /// </summary>
     [TestMethod]

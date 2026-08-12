@@ -15,10 +15,10 @@ namespace Argotic.Extensions.Tests;
 ///     phrased, across 76 call sites.
 ///     </para>
 ///     <para>
-///     The wrapper interpolates the running assembly's version into the <c>generator</c> element rather
-///     than hard-coding one, because the library writes its own version there. A literal would make
-///     every one of those tests fail on the next version bump, for no reason connected to the extension
-///     under test.
+///     The <c>generator</c> element is a literal, because the library's default is now a fixed,
+///     version-free string (issue #179). It used to be interpolated from the running assembly's
+///     version to track the version the library stamped there — and only ever matched because the
+///     test and product assemblies happened to share a version number.
 ///     </para>
 /// </remarks>
 internal static class ExtensionTestUtil
@@ -71,7 +71,7 @@ internal static class ExtensionTestUtil
         return sw.ToString();
     }
 
-    private const string strFullXml1 = """<rss version="2.0" {0}><channel><title>Argotic - Extension Test</title><link>http://www.example.com/</link><description>Test of an extension</description><docs>https://www.rssboard.org/rss-specification</docs><generator>Argotic Syndication Framework {1}, https://github.com/argotic-syndication-framework/argotic/</generator><language>en-US</language><managingEditor>editor@example.com</managingEditor><webMaster>webmaster@example.com</webMaster><item><title>Item #1</title><description>text for First Item</description><link>http://www.example.com/item1.htm</link><pubDate>Sun, 01 Aug 2010 00:00:01 GMT</pubDate>{2}</item></channel></rss>""";
+    private const string strFullXml1 = """<rss version="2.0" {0}><channel><title>Argotic - Extension Test</title><link>http://www.example.com/</link><description>Test of an extension</description><docs>https://www.rssboard.org/rss-specification</docs><generator>Argotic Syndication Framework, https://github.com/argotic-syndication-framework/argotic/</generator><language>en-US</language><managingEditor>editor@example.com</managingEditor><webMaster>webmaster@example.com</webMaster><item><title>Item #1</title><description>text for First Item</description><link>http://www.example.com/item1.htm</link><pubDate>Sun, 01 Aug 2010 00:00:01 GMT</pubDate>{1}</item></channel></rss>""";
 
     private static readonly CompositeFormat FullXmlFormat = CompositeFormat.Parse(strFullXml1);
 
@@ -89,7 +89,7 @@ internal static class ExtensionTestUtil
     ///     <see cref="AddExtensionToXml"/>; as an input it is the document a load test parses, which is
     ///     why the extension elements are a parameter rather than a fixture.
     /// </remarks>
-    internal static string GetWrappedXml(string namespc, string strExt) => string.Format(CultureInfo.InvariantCulture, FullXmlFormat, namespc, typeof(ExtensionTestUtil).Assembly.GetName().Version?.ToString() ?? "0.0.0.0", strExt);
+    internal static string GetWrappedXml(string namespc, string strExt) => string.Format(CultureInfo.InvariantCulture, FullXmlFormat, namespc, strExt);
 
     private const string strFullAtomXml = """<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" {0}><id>urn:example:feed</id><title>Argotic - Extension Test</title><updated>2010-08-01T00:00:01Z</updated><entry><id>urn:example:entry:1</id><title>Item #1</title><updated>2010-08-01T00:00:01Z</updated><summary>text for First Item</summary>{1}</entry></feed>""";
 

@@ -37,10 +37,20 @@ namespace Argotic.Extensions.Core;
 public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable<LiveJournalSyndicationExtension>, IEquatable<LiveJournalSyndicationExtension>, IComparisonOperators
 {
     /// <summary>
+    /// The XML namespace this extension qualifies its elements with.
+    /// </summary>
+    /// <remarks>
+    ///     Exposed as a constant because every element type in this family needs it in order to
+    ///     write itself; constructing an extension instance purely to read its namespace back
+    ///     allocates an object per element written.
+    /// </remarks>
+    public const string NamespaceUri = "http://livejournal.org/rss/lj/2.0/";
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalSyndicationExtension"/> class.
     /// </summary>
     public LiveJournalSyndicationExtension()
-        : base("lj", "http://livejournal.org/rss/lj/2.0/", new Version("2.0"), new Uri("https://web.archive.org/web/20080710121013/http://neugierig.org/drop/lj/rss/"), "LiveJournal", "Extends syndication feeds to provide LiveJournal specific meta-data.")
+        : base("lj", NamespaceUri, new Version("2.0"), new Uri("https://web.archive.org/web/20080710121013/http://neugierig.org/drop/lj/rss/"), "LiveJournal", "Extends syndication feeds to provide LiveJournal specific meta-data.")
     {
     }
 

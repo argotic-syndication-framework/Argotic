@@ -216,8 +216,7 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
-        writer.WriteStartElement("text", extension.XmlNamespace);
+        writer.WriteStartElement("text", YahooMediaSyndicationExtension.NamespaceUri);
 
         if (this.TextType != YahooMediaTextConstructType.None)
         {

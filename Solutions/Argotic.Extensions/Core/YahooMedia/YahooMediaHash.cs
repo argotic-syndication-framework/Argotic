@@ -199,8 +199,7 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
-        writer.WriteStartElement("hash", extension.XmlNamespace);
+        writer.WriteStartElement("hash", YahooMediaSyndicationExtension.NamespaceUri);
 
         if (this.Algorithm != YahooMediaHashAlgorithm.None)
         {

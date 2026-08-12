@@ -330,8 +330,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        FeedSynchronizationSyndicationExtension extension = new();
-        writer.WriteStartElement("sync", extension.XmlNamespace);
+        writer.WriteStartElement("sync", FeedSynchronizationSyndicationExtension.NamespaceUri);
 
         writer.WriteAttributeString("id", this.Id);
         writer.WriteAttributeString("updates", this.Updates.ToString(NumberFormatInfo.InvariantInfo));
@@ -353,7 +352,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
 
         if (this.Conflicts.Count > 0)
         {
-            writer.WriteStartElement("conflicts", extension.XmlNamespace);
+            writer.WriteStartElement("conflicts", FeedSynchronizationSyndicationExtension.NamespaceUri);
             foreach (XPathNavigator conflict in this.Conflicts)
             {
                 conflict.WriteSubtree(writer);

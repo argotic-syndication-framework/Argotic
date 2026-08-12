@@ -136,8 +136,7 @@ public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooM
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
-        writer.WriteStartElement("credit", extension.XmlNamespace);
+        writer.WriteStartElement("credit", YahooMediaSyndicationExtension.NamespaceUri);
 
         if (!string.IsNullOrEmpty(this.Role))
         {

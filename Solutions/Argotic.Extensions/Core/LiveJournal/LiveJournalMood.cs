@@ -93,8 +93,7 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        LiveJournalSyndicationExtension extension = new();
-        writer.WriteStartElement("mood", extension.XmlNamespace);
+        writer.WriteStartElement("mood", LiveJournalSyndicationExtension.NamespaceUri);
 
         if (this.Id != int.MinValue)
         {

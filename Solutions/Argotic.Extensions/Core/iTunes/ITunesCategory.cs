@@ -144,8 +144,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        ITunesSyndicationExtension extension = new();
-        writer.WriteStartElement("category", extension.XmlNamespace);
+        writer.WriteStartElement("category", ITunesSyndicationExtension.NamespaceUri);
 
         writer.WriteAttributeString("text", this.Text);
 

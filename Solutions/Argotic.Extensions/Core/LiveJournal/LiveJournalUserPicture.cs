@@ -198,13 +198,12 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        LiveJournalSyndicationExtension extension = new();
-        writer.WriteStartElement("userpic", extension.XmlNamespace);
+        writer.WriteStartElement("userpic", LiveJournalSyndicationExtension.NamespaceUri);
 
-        writer.WriteElementString("url", extension.XmlNamespace, this.Url?.ToString() ?? string.Empty);
-        writer.WriteElementString("keyword", extension.XmlNamespace, this.Keyword);
-        writer.WriteElementString("width", extension.XmlNamespace, this.Width != int.MinValue ? this.Width.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : "0");
-        writer.WriteElementString("height", extension.XmlNamespace, this.Height != int.MinValue ? this.Height.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : "0");
+        writer.WriteElementString("url", LiveJournalSyndicationExtension.NamespaceUri, this.Url?.ToString() ?? string.Empty);
+        writer.WriteElementString("keyword", LiveJournalSyndicationExtension.NamespaceUri, this.Keyword);
+        writer.WriteElementString("width", LiveJournalSyndicationExtension.NamespaceUri, this.Width != int.MinValue ? this.Width.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : "0");
+        writer.WriteElementString("height", LiveJournalSyndicationExtension.NamespaceUri, this.Height != int.MinValue ? this.Height.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : "0");
 
         writer.WriteEndElement();
     }

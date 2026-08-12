@@ -41,10 +41,20 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
 {
 
     /// <summary>
+    /// The XML namespace this extension qualifies its elements with.
+    /// </summary>
+    /// <remarks>
+    ///     Exposed as a constant because every element type in this family needs it in order to
+    ///     write itself; constructing an extension instance purely to read its namespace back
+    ///     allocates an object per element written.
+    /// </remarks>
+    public const string NamespaceUri = "http://www.microsoft.com/schemas/rss/core/2005";
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="SimpleListSyndicationExtension"/> class.
     /// </summary>
     public SimpleListSyndicationExtension()
-        : base("cf", "http://www.microsoft.com/schemas/rss/core/2005", new Version("1.0"), new Uri("https://learn.microsoft.com/en-us/previous-versions/bb190612(v=msdn.10)"), "Simple List", "Extends syndication feeds to provide a means of exposing ordered lists of items easier and more accessible to users.")
+        : base("cf", NamespaceUri, new Version("1.0"), new Uri("https://learn.microsoft.com/en-us/previous-versions/bb190612(v=msdn.10)"), "Simple List", "Extends syndication feeds to provide a means of exposing ordered lists of items easier and more accessible to users.")
     {
     }
 

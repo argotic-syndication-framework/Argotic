@@ -110,17 +110,16 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        ITunesSyndicationExtension extension = new();
-        writer.WriteStartElement("owner", extension.XmlNamespace);
+        writer.WriteStartElement("owner", ITunesSyndicationExtension.NamespaceUri);
 
         if (!string.IsNullOrEmpty(this.EmailAddress))
         {
-            writer.WriteElementString("email", extension.XmlNamespace, this.EmailAddress);
+            writer.WriteElementString("email", ITunesSyndicationExtension.NamespaceUri, this.EmailAddress);
         }
 
         if (!string.IsNullOrEmpty(this.Name))
         {
-            writer.WriteElementString("name", extension.XmlNamespace, this.Name);
+            writer.WriteElementString("name", ITunesSyndicationExtension.NamespaceUri, this.Name);
         }
 
         writer.WriteEndElement();

@@ -134,8 +134,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
-        writer.WriteStartElement("player", extension.XmlNamespace);
+        writer.WriteStartElement("player", YahooMediaSyndicationExtension.NamespaceUri);
 
         writer.WriteAttributeString("url", this.Url?.ToString() ?? string.Empty);
 

@@ -34,10 +34,20 @@ namespace Argotic.Extensions.Core;
 public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITunesSyndicationExtension>, IEquatable<ITunesSyndicationExtension>, IComparisonOperators
 {
     /// <summary>
+    /// The XML namespace this extension qualifies its elements with.
+    /// </summary>
+    /// <remarks>
+    ///     Exposed as a constant because every element type in this family needs it in order to
+    ///     write itself; constructing an extension instance purely to read its namespace back
+    ///     allocates an object per element written.
+    /// </remarks>
+    public const string NamespaceUri = "http://www.itunes.com/dtds/podcast-1.0.dtd";
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="ITunesSyndicationExtension"/> class.
     /// </summary>
     public ITunesSyndicationExtension()
-        : base("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd", new Version("1.0"), new Uri("https://podcasters.apple.com/support/823-podcast-requirements"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
+        : base("itunes", NamespaceUri, new Version("1.0"), new Uri("https://podcasters.apple.com/support/823-podcast-requirements"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
     {
     }
 

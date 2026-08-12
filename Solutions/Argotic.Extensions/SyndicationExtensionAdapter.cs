@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Immutable;
 using System.Reflection;
 using System.Xml;
@@ -95,6 +96,20 @@ public class SyndicationExtensionAdapter
     ///     </para>
     /// </remarks>
     private static readonly Lazy<ImmutableArray<ISyndicationExtension>> FrameworkProbes = new(CreateFrameworkProbes);
+
+    /// <summary>
+    /// The probes of <see cref="FrameworkProbes"/>, keyed by their concrete type.
+    /// </summary>
+    /// <remarks>
+    ///     Exists for <see cref="WriteXmlNamespaceDeclarations(IList{Type}, XmlWriter)"/>, which
+    ///     otherwise runs <see cref="Activator.CreateInstance(Type)"/> on every supported extension
+    ///     type on every save purely to read its prefix and namespace back. Reuse is safe on the
+    ///     same argument the probes themselves rest on: <see cref="SyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)"/>
+    ///     is not virtual and reads only <c>XmlPrefix</c> and <c>XmlNamespace</c>, both fixed by
+    ///     each extension's constructor.
+    /// </remarks>
+    private static readonly Lazy<FrozenDictionary<Type, ISyndicationExtension>> FrameworkProbesByType =
+        new(static () => FrameworkProbes.Value.ToFrozenDictionary(static probe => probe.GetType()));
 
     /// <summary>
     /// Gets the collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
@@ -349,7 +364,13 @@ public class SyndicationExtensionAdapter
         {
             if (type is not null)
             {
-                if (Activator.CreateInstance(type) is ISyndicationExtension extension)
+                // Framework types reuse the cached probe; only consumer-defined types pay for a
+                // fresh instance, because their constructors are not this assembly's to vouch for.
+                ISyndicationExtension? extension = FrameworkProbesByType.Value.TryGetValue(type, out ISyndicationExtension? probe)
+                    ? probe
+                    : Activator.CreateInstance(type) as ISyndicationExtension;
+
+                if (extension is not null)
                 {
                     // Extensions can share a prefix - the Atom Publishing control and edited extensions
                     // both use "app" - and repeating a declaration is not well-formed XML.

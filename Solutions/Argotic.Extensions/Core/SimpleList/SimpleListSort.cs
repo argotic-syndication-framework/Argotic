@@ -229,8 +229,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        SimpleListSyndicationExtension extension = new();
-        writer.WriteStartElement("sort", extension.XmlNamespace);
+        writer.WriteStartElement("sort", SimpleListSyndicationExtension.NamespaceUri);
 
         if (this.Namespace is not null)
         {

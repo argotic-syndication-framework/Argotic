@@ -178,15 +178,14 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        FeedSynchronizationSyndicationExtension extension = new();
-        writer.WriteStartElement("related", extension.XmlNamespace);
+        writer.WriteStartElement("related", FeedSynchronizationSyndicationExtension.NamespaceUri);
 
-        writer.WriteAttributeString("link", extension.XmlNamespace, this.Link?.ToString() ?? string.Empty);
+        writer.WriteAttributeString("link", FeedSynchronizationSyndicationExtension.NamespaceUri, this.Link?.ToString() ?? string.Empty);
         if (!string.IsNullOrEmpty(this.Title))
         {
-            writer.WriteAttributeString("title", extension.XmlNamespace, this.Title);
+            writer.WriteAttributeString("title", FeedSynchronizationSyndicationExtension.NamespaceUri, this.Title);
         }
-        writer.WriteAttributeString("type", extension.XmlNamespace, FeedSynchronizationRelatedInformation.RelationTypeAsString(this.RelationType));
+        writer.WriteAttributeString("type", FeedSynchronizationSyndicationExtension.NamespaceUri, FeedSynchronizationRelatedInformation.RelationTypeAsString(this.RelationType));
 
         writer.WriteEndElement();
     }

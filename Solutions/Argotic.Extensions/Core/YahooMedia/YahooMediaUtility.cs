@@ -224,7 +224,6 @@ internal static class YahooMediaUtility
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
         source.Title?.WriteTo(writer, "title");
 
         source.Description?.WriteTo(writer, "description");
@@ -235,7 +234,7 @@ internal static class YahooMediaUtility
 
         if (source.Keywords.Count > 0)
         {
-            writer.WriteElementString("keywords", extension.XmlNamespace, string.Join(",", source.Keywords));
+            writer.WriteElementString("keywords", YahooMediaSyndicationExtension.NamespaceUri, string.Join(",", source.Keywords));
         }
 
         foreach (YahooMediaCategory category in source.Categories)

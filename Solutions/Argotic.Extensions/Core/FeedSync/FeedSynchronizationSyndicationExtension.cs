@@ -45,10 +45,20 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
 {
 
     /// <summary>
+    /// The XML namespace this extension qualifies its elements with.
+    /// </summary>
+    /// <remarks>
+    ///     Exposed as a constant because every element type in this family needs it in order to
+    ///     write itself; constructing an extension instance purely to read its namespace back
+    ///     allocates an object per element written.
+    /// </remarks>
+    public const string NamespaceUri = "http://feedsync.org/2007/feedsync";
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationSyndicationExtension"/> class.
     /// </summary>
     public FeedSynchronizationSyndicationExtension()
-        : base("sx", "http://feedsync.org/2007/feedsync", new Version("1.0"), new Uri("https://web.archive.org/web/20080705204645/http://dev.live.com/feedsync/spec/"), "FeedSync", "Extends syndication feeds to enable loosely-cooperating applications to use feeds as the basis for item sharing amongst two or more cross-subscribed feeds.")
+        : base("sx", NamespaceUri, new Version("1.0"), new Uri("https://web.archive.org/web/20080705204645/http://dev.live.com/feedsync/spec/"), "FeedSync", "Extends syndication feeds to enable loosely-cooperating applications to use feeds as the basis for item sharing amongst two or more cross-subscribed feeds.")
     {
     }
 

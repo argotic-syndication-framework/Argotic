@@ -32,6 +32,7 @@ namespace Argotic.Benchmarks.Saving;
 public class FeedSaveBenchmarks
 {
     private RssFeed rssFeed = new();
+    private RssFeed rssFeedWithExtensions = new();
     private AtomFeed atomFeed = new();
 
     /// <summary>
@@ -49,6 +50,15 @@ public class FeedSaveBenchmarks
         using MemoryStream rssStream = new(FeedCorpus.GenerateRssUtf8(this.ItemCount), writable: false);
         this.rssFeed = new RssFeed();
         this.rssFeed.Load(rssStream);
+
+        using MemoryStream rssExtensionsStream = new(FeedCorpus.GenerateRssWithExtensionsUtf8(this.ItemCount), writable: false);
+        this.rssFeedWithExtensions = new RssFeed();
+        this.rssFeedWithExtensions.Load(rssExtensionsStream);
+
+        if (!this.rssFeedWithExtensions.Channel.Items.First().HasExtensions)
+        {
+            throw new InvalidOperationException("The extension-bearing corpus parsed without extensions; the benchmark below would measure the extension-free path twice.");
+        }
 
         using MemoryStream atomStream = new(FeedCorpus.GenerateAtomUtf8(this.ItemCount), writable: false);
         this.atomFeed = new AtomFeed();
@@ -80,6 +90,25 @@ public class FeedSaveBenchmarks
             this.rssFeed.Save(writer);
         }
 
+        return stream.Length;
+    }
+
+    /// <summary>
+    /// Serialises an extension-bearing RSS feed to a stream.
+    /// </summary>
+    /// <returns>The byte length written, so the work cannot be elided.</returns>
+    /// <remarks>
+    ///     The extension-free arms above let <c>FillExtensionTypes</c> return immediately and write
+    ///     no extension elements at all, so they cannot price the write path this class's own
+    ///     remarks make a prediction about. This arm saves the corpus whose every item carries six
+    ///     extension instances — the scenario the v3001↔v4000 package comparison measured as the
+    ///     one save regression.
+    /// </remarks>
+    [Benchmark(Description = "RSS+ext Save(Stream)")]
+    public long SaveRssWithExtensionsToStream()
+    {
+        using MemoryStream stream = new();
+        this.rssFeedWithExtensions.Save(stream);
         return stream.Length;
     }
 

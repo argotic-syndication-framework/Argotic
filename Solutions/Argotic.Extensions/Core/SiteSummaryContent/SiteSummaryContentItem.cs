@@ -147,14 +147,13 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        SiteSummaryContentSyndicationExtension extension = new();
-        writer.WriteStartElement("item", extension.XmlNamespace);
+        writer.WriteStartElement("item", SiteSummaryContentSyndicationExtension.NamespaceUri);
 
-        writer.WriteElementString("format", extension.XmlNamespace, this.Format?.ToString() ?? string.Empty);
+        writer.WriteElementString("format", SiteSummaryContentSyndicationExtension.NamespaceUri, this.Format?.ToString() ?? string.Empty);
 
         if (this.Encoding is not null)
         {
-            writer.WriteElementString("encoding", extension.XmlNamespace, this.Encoding.ToString());
+            writer.WriteElementString("encoding", SiteSummaryContentSyndicationExtension.NamespaceUri, this.Encoding.ToString());
         }
 
         writer.WriteCData(this.Content);

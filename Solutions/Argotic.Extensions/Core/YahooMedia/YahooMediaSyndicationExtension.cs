@@ -41,10 +41,20 @@ namespace Argotic.Extensions.Core;
 public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<YahooMediaSyndicationExtension>, IEquatable<YahooMediaSyndicationExtension>, IComparisonOperators
 {
     /// <summary>
+    /// The XML namespace this extension qualifies its elements with.
+    /// </summary>
+    /// <remarks>
+    ///     Exposed as a constant because every element type in this family needs it in order to
+    ///     write itself; constructing an extension instance purely to read its namespace back
+    ///     allocates an object per element written.
+    /// </remarks>
+    public const string NamespaceUri = "http://search.yahoo.com/mrss/";
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaSyndicationExtension"/> class.
     /// </summary>
     public YahooMediaSyndicationExtension()
-        : base("media", "http://search.yahoo.com/mrss/", new Version("1.1.1"), new Uri("https://www.rssboard.org/media-rss"), "Yahoo! Media", "Extends syndication feeds to provide a means of supplementing the enclosure capabilities of feeds.")
+        : base("media", NamespaceUri, new Version("1.1.1"), new Uri("https://www.rssboard.org/media-rss"), "Yahoo! Media", "Extends syndication feeds to provide a means of supplementing the enclosure capabilities of feeds.")
     {
     }
 

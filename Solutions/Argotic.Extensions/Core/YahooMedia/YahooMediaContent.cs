@@ -430,8 +430,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
-        writer.WriteStartElement("content", extension.XmlNamespace);
+        writer.WriteStartElement("content", YahooMediaSyndicationExtension.NamespaceUri);
 
         if (this.Url is not null)
         {

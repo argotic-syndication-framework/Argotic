@@ -218,8 +218,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        FeedSynchronizationSyndicationExtension extension = new();
-        writer.WriteStartElement("sharing", extension.XmlNamespace);
+        writer.WriteStartElement("sharing", FeedSynchronizationSyndicationExtension.NamespaceUri);
 
         if (!string.IsNullOrEmpty(this.Since))
         {

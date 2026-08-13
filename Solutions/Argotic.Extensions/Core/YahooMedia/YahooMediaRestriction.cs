@@ -191,8 +191,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
-        writer.WriteStartElement("restriction", extension.XmlNamespace);
+        writer.WriteStartElement("restriction", YahooMediaSyndicationExtension.NamespaceUri);
 
         if (this.Relationship != YahooMediaRestrictionRelationship.None)
         {

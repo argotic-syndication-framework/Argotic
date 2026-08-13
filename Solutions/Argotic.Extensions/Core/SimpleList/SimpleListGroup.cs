@@ -135,8 +135,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        SimpleListSyndicationExtension extension = new();
-        writer.WriteStartElement("group", extension.XmlNamespace);
+        writer.WriteStartElement("group", SimpleListSyndicationExtension.NamespaceUri);
 
         if (this.Namespace is not null)
         {

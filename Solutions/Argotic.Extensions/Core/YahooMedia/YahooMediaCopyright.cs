@@ -93,8 +93,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
-        writer.WriteStartElement("copyright", extension.XmlNamespace);
+        writer.WriteStartElement("copyright", YahooMediaSyndicationExtension.NamespaceUri);
 
         if (this.Url is not null)
         {

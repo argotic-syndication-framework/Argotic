@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Collections.Immutable;
 using System.Reflection;
 using System.Xml;
@@ -58,6 +59,7 @@ namespace Argotic.Extensions;
 /// </remarks>
 public class SyndicationExtensionAdapter
 {
+    private const int MaxTrackedNamespaces = 16;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtensionAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -95,6 +97,45 @@ public class SyndicationExtensionAdapter
     ///     </para>
     /// </remarks>
     private static readonly Lazy<ImmutableArray<ISyndicationExtension>> FrameworkProbes = new(CreateFrameworkProbes);
+
+    /// <summary>
+    /// The probes of <see cref="FrameworkProbes"/>, keyed by their concrete type.
+    /// </summary>
+    /// <remarks>
+    ///     Exists for <see cref="WriteXmlNamespaceDeclarations(IList{Type}, XmlWriter)"/>, which
+    ///     otherwise runs <see cref="Activator.CreateInstance(Type)"/> on every supported extension
+    ///     type on every save purely to read its prefix and namespace back. Reuse is safe on the
+    ///     same argument the probes themselves rest on: <see cref="SyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)"/>
+    ///     is not virtual and reads only <c>XmlPrefix</c> and <c>XmlNamespace</c>, both fixed by
+    ///     each extension's constructor.
+    /// </remarks>
+    private static readonly Lazy<FrozenDictionary<Type, ISyndicationExtension>> FrameworkProbesByType =
+        new(static () => FrameworkProbes.Value.ToFrozenDictionary(static probe => probe.GetType()));
+
+    /// <summary>
+    /// For each namespace URI and each conventional prefix, the set of framework probes it
+    /// implicates, as a bitmask over <see cref="FrameworkProbes"/> indices.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         This exists because auto-detection runs once per entity, and the candidate-selection
+    ///         cost used to be paid in full even when the answer was "none": a
+    ///         <c>GetNamespacesInScope</c> dictionary built per entity, a candidate list allocated
+    ///         per entity, and a scan of every framework probe against both — 26% of the whole load
+    ///         of a 50,000-URL sitemap that declares no extension namespace at all
+    ///         (<c>.endjin/build-warnings.md</c> §2.40). Walking the entity's namespace axis and
+    ///         OR-ing per-key masks answers the same question with no allocation.
+    ///     </para>
+    ///     <para>
+    ///         A mask, not a list, for two reasons: several probes can share a key (the Atom
+    ///         Publishing pair shares both its prefix and its namespace), and emitting matches by
+    ///         ascending bit index preserves <see cref="FrameworkProbes"/> order — which is
+    ///         attachment order, which is the order extensions later save in. A <see cref="ulong"/>
+    ///         holds 64 probes; <see cref="CreateProbeMasks"/> refuses loudly rather than truncating
+    ///         if the framework ever exceeds that.
+    ///     </para>
+    /// </remarks>
+    private static readonly Lazy<(FrozenDictionary<string, ulong> ByNamespace, FrozenDictionary<string, ulong> ByPrefix, FrozenDictionary<string, ulong> ByContentNamespace)> ProbeMasks = new(CreateProbeMasks);
 
     /// <summary>
     /// Gets the collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
@@ -277,40 +318,247 @@ public class SyndicationExtensionAdapter
     }
 
     /// <summary>
-    /// Returns the extensions worth probing this document for, without instantiating the framework ones.
+    /// Builds the per-key probe masks over <see cref="FrameworkProbes"/>.
     /// </summary>
-    /// <param name="types">User-defined syndication extension types to include.</param>
-    /// <param name="namespaces">The XML namespaces in scope, used to filter the framework extensions.</param>
-    /// <returns>The candidate extensions. These instances are shared and must be treated as read-only.</returns>
+    /// <returns>The framework probes implicated by each namespace URI and each prefix.</returns>
+    /// <exception cref="InvalidOperationException">The framework has more probes than the mask can hold.</exception>
     /// <remarks>
-    ///     Mirrors <see cref="GetExtensions(IList{Type}, IDictionary{string, string})"/>, but reuses the cached
-    ///     probes rather than constructing a fresh set. The public overload keeps allocating, because what it
-    ///     returns escapes to a caller who may do anything with it.
+    ///     The content map is the declaration map plus one override: the Atom namespace also
+    ///     implicates FeedHistory, because RFC 5005 Appendix B expresses archive relationships as
+    ///     <c>atom:link</c> elements borrowed into RSS — the one framework family whose content
+    ///     can sit entirely outside its own namespace
+    ///     (<c>FeedHistorySyndicationExtensionContext</c> reads them). The override lives ONLY in
+    ///     the content map: putting it in the declaration map would make FeedHistory a candidate
+    ///     on every Atom document — whose default namespace is Atom — and its
+    ///     <c>ExistsInSource</c> would then rebuild, per entity, the namespace dictionary this
+    ///     type exists to avoid (measured: +90 KB on a 100-entry Atom load). An audit of every
+    ///     other context found only family-local child elements: the GML profile is read beneath
+    ///     <c>georss:where</c>, and no context reads namespaced attributes of the entity itself.
     /// </remarks>
-    private static List<ISyndicationExtension> GetExtensionProbes(IList<Type> types, IDictionary<string, string> namespaces)
+    private static (FrozenDictionary<string, ulong> ByNamespace, FrozenDictionary<string, ulong> ByPrefix, FrozenDictionary<string, ulong> ByContentNamespace) CreateProbeMasks()
     {
-        List<ISyndicationExtension> supportedExtensions = [];
-
-        foreach (ISyndicationExtension extension in SyndicationExtensionAdapter.FrameworkProbes.Value)
+        ImmutableArray<ISyndicationExtension> probes = FrameworkProbes.Value;
+        if (probes.Length > 64)
         {
-            // Values.Contains rather than Dictionary.ContainsValue: the latter is not on IDictionary.
-            // Both are a linear scan over the values using the default equality comparer.
-            if ((namespaces.Values.Contains(extension.XmlNamespace) || namespaces.ContainsKey(extension.XmlPrefix))
-                && !supportedExtensions.Contains(extension))
+            throw new InvalidOperationException($"{probes.Length} framework extensions exceed the 64 the probe bitmask holds; widen the mask in {nameof(SyndicationExtensionAdapter)}.");
+        }
+
+        Dictionary<string, ulong> byNamespace = new(StringComparer.Ordinal);
+        Dictionary<string, ulong> byPrefix = new(StringComparer.Ordinal);
+        Dictionary<string, ulong> byContentNamespace = new(StringComparer.Ordinal);
+
+        for (int i = 0; i < probes.Length; i++)
+        {
+            ulong bit = 1UL << i;
+            byNamespace[probes[i].XmlNamespace] = byNamespace.GetValueOrDefault(probes[i].XmlNamespace) | bit;
+            byPrefix[probes[i].XmlPrefix] = byPrefix.GetValueOrDefault(probes[i].XmlPrefix) | bit;
+            byContentNamespace[probes[i].XmlNamespace] = byContentNamespace.GetValueOrDefault(probes[i].XmlNamespace) | bit;
+
+            if (probes[i] is Core.FeedHistorySyndicationExtension)
             {
-                supportedExtensions.Add(extension);
+                const string AtomNamespace = "http://www.w3.org/2005/Atom";
+                byContentNamespace[AtomNamespace] = byContentNamespace.GetValueOrDefault(AtomNamespace) | bit;
             }
         }
 
-        foreach (ISyndicationExtension extension in SyndicationExtensionAdapter.GetExtensions(types))
+        return (
+            byNamespace.ToFrozenDictionary(StringComparer.Ordinal),
+            byPrefix.ToFrozenDictionary(StringComparer.Ordinal),
+            byContentNamespace.ToFrozenDictionary(StringComparer.Ordinal));
+    }
+
+    /// <summary>
+    /// Narrows candidate framework probes to those whose namespaces actually occur among the
+    /// entity's child elements.
+    /// </summary>
+    /// <param name="candidates">The declaration-matched candidate mask.</param>
+    /// <param name="tracker">The document namespace bindings the declaration walk recorded.</param>
+    /// <returns>The candidates with at least one in-namespace child element on this entity.</returns>
+    /// <remarks>
+    ///     <para>
+    ///         This is the layer below §2.40's fix. Declaration matching answers "could this
+    ///         family appear anywhere in the document"; on the shape most production feeds take —
+    ///         namespaces stamped into the root and never used, declared-vs-used gaps of 96% in
+    ///         the live census — every declaration-matched family still constructed a fresh
+    ///         extension and ran a full context <c>Load</c> per entity to discover there was
+    ///         nothing to read. One walk over the entity's child elements answers presence for
+    ///         every family at once, and the measured price of not asking was larger than parsing
+    ///         six families' actual payloads (§21).
+    ///     </para>
+    ///     <para>
+    ///         Skipping a family this way is observationally identical to running its
+    ///         <c>Load</c> and having it return <see langword="false"/>: the instance was fresh,
+    ///         so nothing could have subscribed to its <c>Loaded</c> event, and a
+    ///         <see langword="false"/> return was never attached. The walk mutates
+    ///         <see cref="Navigator"/> and restores it via <see cref="XPathNavigator.MoveToParent"/>,
+    ///         like <see cref="MatchFrameworkProbes"/>.
+    ///     </para>
+    /// </remarks>
+    private ulong FilterByPresentContent(ulong candidates, ref ContentTracker tracker)
+    {
+        if (tracker.Overflowed)
         {
-            if (!supportedExtensions.Contains(extension))
-            {
-                supportedExtensions.Add(extension);
-            }
+            // More matched namespaces than the buffer holds: skip filtering rather than filter
+            // with an incomplete map. Correct, merely not optimised, and effectively unreachable
+            // for real documents.
+            return candidates;
         }
 
-        return supportedExtensions;
+        // Resolved before the navigator moves, for the same reason as MatchFrameworkProbes: the
+        // lazy initializer must not be able to strand the navigator mid-walk.
+        FrozenDictionary<string, ulong> byContentNamespace = ProbeMasks.Value.ByContentNamespace;
+
+        XPathNavigator navigator = this.Navigator;
+        if (!navigator.MoveToChild(XPathNodeType.Element))
+        {
+            return 0;
+        }
+
+        ulong present = 0;
+
+        do
+        {
+            string childNamespace = navigator.NamespaceURI;
+
+            // The canonical map covers content under a probe's own URI (and the Atom->FeedHistory
+            // override) even when that URI is declared locally on the child; the tracked entries
+            // cover content under whatever URI the document bound a conventional prefix to.
+            if (byContentNamespace.TryGetValue(childNamespace, out ulong namespaceBits))
+            {
+                present |= namespaceBits;
+            }
+
+            for (int i = 0; i < tracker.Count; i++)
+            {
+                if (string.Equals(tracker.Uris[i], childNamespace, StringComparison.Ordinal))
+                {
+                    present |= tracker.Bits[i];
+                }
+            }
+
+            if ((candidates & ~present) == 0)
+            {
+                break;
+            }
+        }
+        while (navigator.MoveToNext(XPathNodeType.Element));
+
+        navigator.MoveToParent();
+        return candidates & present;
+    }
+
+    /// <summary>
+    /// Stack-resident record of which document namespace URIs implicated probes at the current
+    /// entity, so content presence can be answered against the document's own bindings.
+    /// </summary>
+    private struct ContentTracker
+    {
+        public NamespaceUriBuffer Uris;
+        public NamespaceBitsBuffer Bits;
+        public int Count;
+        public bool Overflowed;
+    }
+
+    /// <summary>
+    /// Inline storage for the namespace URIs the current entity's scope matched probes under.
+    /// </summary>
+    [System.Runtime.CompilerServices.InlineArray(MaxTrackedNamespaces)]
+    private struct NamespaceUriBuffer
+    {
+        private string? element0;
+    }
+
+    /// <summary>
+    /// Inline storage for the probe bits each tracked namespace URI implicates.
+    /// </summary>
+    [System.Runtime.CompilerServices.InlineArray(MaxTrackedNamespaces)]
+    private struct NamespaceBitsBuffer
+    {
+        private ulong element0;
+    }
+
+    /// <summary>
+    /// Walks the namespace axis of <see cref="Navigator"/>'s current node and returns the mask of
+    /// framework probes its in-scope namespaces implicate.
+    /// </summary>
+    /// <param name="tracker">Receives the document namespace bindings that implicated probes.</param>
+    /// <returns>A bitmask over <see cref="FrameworkProbes"/> indices; zero when nothing matches.</returns>
+    /// <remarks>
+    ///     <para>
+    ///         The walk mutates <see cref="Navigator"/> and restores it: from a namespace node,
+    ///         <see cref="XPathNavigator.MoveToParent"/> returns to the owning element — namespace
+    ///         axis behaviour the XPath data model guarantees. Nothing that can throw runs between
+    ///         the first move and the restore. The axis yields one node per in-scope prefix with
+    ///         the nearest binding winning, exactly the set <c>GetNamespacesInScope(ExcludeXml)</c>
+    ///         used to build a dictionary from — at 152 B per walk instead of 368 B, both measured
+    ///         on the §2.40 document's entities.
+    ///     </para>
+    ///     <para>
+    ///         The residual 152 B is the axis synthesising its namespace nodes, and it is priced
+    ///         per walk that <i>returns</i> anything, not per scope: a
+    ///         <see cref="XPathNamespaceScope.Local"/> walk on the declaring element costs the same
+    ///         152 B (measured), so a walk-local-declarations-up-the-ancestor-chain tier was built,
+    ///         measured slower than this (65.78 MB vs 63.49 MB on the 50,000-URL load — it pays the
+    ///         same synthesis at the declaring ancestor plus a clone), and removed. Getting under
+    ///         the residual means computing each declaring element's mask once per document, which
+    ///         is caching machinery with thread-safety questions — recorded as the §2.40 remainder,
+    ///         ceiling ~5.7 MB on that load.
+    ///     </para>
+    /// </remarks>
+    private ulong MatchFrameworkProbes(ref ContentTracker tracker)
+    {
+        // Resolved before the navigator moves: the lazy initializer is the one thing on this path
+        // that can throw (the >64-probe guard), and evaluating it mid-walk would strand the
+        // navigator on a namespace node - the review finding on the first version of this method.
+        (FrozenDictionary<string, ulong> byNamespace, FrozenDictionary<string, ulong> byPrefix, _) = ProbeMasks.Value;
+
+        XPathNavigator navigator = this.Navigator;
+        if (!navigator.MoveToFirstNamespace(XPathNamespaceScope.ExcludeXml))
+        {
+            return 0;
+        }
+
+        ulong matched = 0;
+
+        do
+        {
+            ulong entryBits = 0;
+
+            if (byNamespace.TryGetValue(navigator.Value, out ulong namespaceBits))
+            {
+                entryBits |= namespaceBits;
+            }
+
+            if (byPrefix.TryGetValue(navigator.LocalName, out ulong prefixBits))
+            {
+                entryBits |= prefixBits;
+            }
+
+            if (entryBits != 0)
+            {
+                matched |= entryBits;
+
+                // Remember which DOCUMENT namespace URI implicated these probes. A probe matched
+                // by its conventional prefix may be bound to a variant URI here - real feeds bind
+                // "media" to at least three different URIs, and CreateNamespaceManager honours the
+                // document's binding when the extension loads - so content presence must be
+                // answered against the document's URI, not only the canonical one.
+                if (tracker.Count < MaxTrackedNamespaces)
+                {
+                    tracker.Uris[tracker.Count] = navigator.Value;
+                    tracker.Bits[tracker.Count] = entryBits;
+                    tracker.Count++;
+                }
+                else
+                {
+                    tracker.Overflowed = true;
+                }
+            }
+        }
+        while (navigator.MoveToNextNamespace(XPathNamespaceScope.ExcludeXml));
+
+        navigator.MoveToParent();
+        return matched;
     }
 
     /// <summary>
@@ -349,7 +597,13 @@ public class SyndicationExtensionAdapter
         {
             if (type is not null)
             {
-                if (Activator.CreateInstance(type) is ISyndicationExtension extension)
+                // Framework types reuse the cached probe; only consumer-defined types pay for a
+                // fresh instance, because their constructors are not this assembly's to vouch for.
+                ISyndicationExtension? extension = FrameworkProbesByType.Value.TryGetValue(type, out ISyndicationExtension? probe)
+                    ? probe
+                    : Activator.CreateInstance(type) as ISyndicationExtension;
+
+                if (extension is not null)
                 {
                     // Extensions can share a prefix - the Atom Publishing control and edited extensions
                     // both use "app" - and repeating a declaration is not well-formed XML.
@@ -417,26 +671,69 @@ public class SyndicationExtensionAdapter
     /// Adds a loaded instance of every extension the data source declares.
     /// </summary>
     /// <param name="entity">The <see cref="IExtensibleSyndicationObject"/> to be filled.</param>
+    /// <remarks>
+    ///     The candidate set is never materialised as a list. Framework candidates come from
+    ///     <see cref="MatchFrameworkProbes"/> as a bitmask consumed in ascending index order —
+    ///     <see cref="FrameworkProbes"/> order, as before — and user types follow, as before. On a
+    ///     document whose scope implicates nothing, an entity costs one namespace-axis walk and
+    ///     nothing else; it used to cost a namespace dictionary, a candidate list and a scan of
+    ///     every framework probe, per entity (§2.40: 26% of a 50,000-URL sitemap load).
+    /// </remarks>
     private void FillCore(IExtensibleSyndicationObject entity)
     {
-        IList<ISyndicationExtension> extensions = this.Settings.AutoDetectExtensions
-            ? SyndicationExtensionAdapter.GetExtensionProbes(this.Settings.SupportedExtensions, this.Navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml))
-            : SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions);
-
         Type entityType = entity.GetType();
 
-        foreach (ISyndicationExtension extension in extensions)
+        if (this.Settings.AutoDetectExtensions)
         {
-            // The type test comes first because it is free, where ExistsInSource evaluates namespaces
-            // against the document. Both are side-effect free, so the order is not observable.
-            Type extensionType = extension.GetType();
-            if (extensionType != entityType
-                && extension.ExistsInSource(this.Navigator)
-                && Activator.CreateInstance(extensionType) is ISyndicationExtension instance
-                && instance.Load(this.Navigator))
+            // Stack-resident: sized for the widest realistic declaration set, and costing nothing
+            // on the entities (most of them, in most documents) that match no probe at all.
+            ContentTracker tracker = default;
+
+            ulong matched = this.MatchFrameworkProbes(ref tracker);
+            if (matched != 0)
             {
-                entity.Extensions.Add(instance);
+                matched = this.FilterByPresentContent(matched, ref tracker);
             }
+
+            if (matched != 0)
+            {
+                ImmutableArray<ISyndicationExtension> probes = FrameworkProbes.Value;
+                for (int i = 0; i < probes.Length; i++)
+                {
+                    if ((matched & (1UL << i)) != 0)
+                    {
+                        this.TryAttach(entity, entityType, probes[i]);
+                    }
+                }
+            }
+        }
+
+        if (this.Settings.SupportedExtensions.Count > 0)
+        {
+            foreach (ISyndicationExtension extension in SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions))
+            {
+                this.TryAttach(entity, entityType, extension);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Probes the source for one candidate and attaches a freshly loaded instance on a hit.
+    /// </summary>
+    /// <param name="entity">The <see cref="IExtensibleSyndicationObject"/> being filled.</param>
+    /// <param name="entityType">The entity's type, hoisted by the caller across candidates.</param>
+    /// <param name="candidate">The candidate extension; shared probes are only read.</param>
+    private void TryAttach(IExtensibleSyndicationObject entity, Type entityType, ISyndicationExtension candidate)
+    {
+        // The type test comes first because it is free, where ExistsInSource evaluates namespaces
+        // against the document. Both are side-effect free, so the order is not observable.
+        Type extensionType = candidate.GetType();
+        if (extensionType != entityType
+            && candidate.ExistsInSource(this.Navigator)
+            && Activator.CreateInstance(extensionType) is ISyndicationExtension instance
+            && instance.Load(this.Navigator))
+        {
+            entity.Extensions.Add(instance);
         }
     }
 }

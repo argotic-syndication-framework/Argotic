@@ -126,8 +126,7 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
-        writer.WriteStartElement("rating", extension.XmlNamespace);
+        writer.WriteStartElement("rating", YahooMediaSyndicationExtension.NamespaceUri);
 
         if (this.Scheme is not null)
         {

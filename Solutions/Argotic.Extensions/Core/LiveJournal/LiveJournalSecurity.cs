@@ -124,8 +124,7 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        LiveJournalSyndicationExtension extension = new();
-        writer.WriteStartElement("security", extension.XmlNamespace);
+        writer.WriteStartElement("security", LiveJournalSyndicationExtension.NamespaceUri);
 
         writer.WriteAttributeString("type", LiveJournalSecurity.AccessibilityAsString(this.Accessibility));
 

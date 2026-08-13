@@ -37,10 +37,20 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
 {
 
     /// <summary>
+    /// The XML namespace this extension qualifies its elements with.
+    /// </summary>
+    /// <remarks>
+    ///     Exposed as a constant because every element type in this family needs it in order to
+    ///     write itself; constructing an extension instance purely to read its namespace back
+    ///     allocates an object per element written.
+    /// </remarks>
+    public const string NamespaceUri = "http://purl.org/rss/1.0/modules/content/";
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummaryContentSyndicationExtension"/> class.
     /// </summary>
     public SiteSummaryContentSyndicationExtension()
-        : base("content", "http://purl.org/rss/1.0/modules/content/", new Version("1.0"), new Uri("https://web.resource.org/rss/1.0/modules/content/"), "RDF Site Summary (Content)", "Extends syndication feeds to provide a means of describing content, including its format and encoding.")
+        : base("content", NamespaceUri, new Version("1.0"), new Uri("https://web.resource.org/rss/1.0/modules/content/"), "RDF Site Summary (Content)", "Extends syndication feeds to provide a means of describing content, including its format and encoding.")
     {
     }
 

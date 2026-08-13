@@ -130,8 +130,7 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
-        writer.WriteStartElement("category", extension.XmlNamespace);
+        writer.WriteStartElement("category", YahooMediaSyndicationExtension.NamespaceUri);
 
         if (this.Scheme is not null)
         {

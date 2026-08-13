@@ -155,9 +155,8 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        FeedSynchronizationSyndicationExtension extension = new();
 
-        writer.WriteStartElement("history", extension.XmlNamespace);
+        writer.WriteStartElement("history", FeedSynchronizationSyndicationExtension.NamespaceUri);
         writer.WriteAttributeString("sequence", this.Sequence.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
         if (this.When != DateTime.MinValue)

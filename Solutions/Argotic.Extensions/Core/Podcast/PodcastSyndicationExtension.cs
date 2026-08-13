@@ -36,10 +36,9 @@ public class PodcastSyndicationExtension : SyndicationExtension, IComparable<Pod
     /// The XML namespace this extension qualifies its elements with.
     /// </summary>
     /// <remarks>
-    ///     Exposed as a constant because every element type in this family needs it in order to write
-    ///     itself, and the alternative pattern used elsewhere in this library — constructing an
-    ///     extension instance purely to read its namespace back — allocates an object per element
-    ///     written.
+    ///     Exposed as a constant because every element type in this family needs it in order to
+    ///     write itself; constructing an extension instance purely to read its namespace back
+    ///     allocates an object per element written.
     /// </remarks>
     public const string NamespaceUri = "https://podcastindex.org/namespace/1.0";
 

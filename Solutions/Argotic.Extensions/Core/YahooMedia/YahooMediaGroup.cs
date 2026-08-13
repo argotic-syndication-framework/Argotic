@@ -305,8 +305,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
-        writer.WriteStartElement("group", extension.XmlNamespace);
+        writer.WriteStartElement("group", YahooMediaSyndicationExtension.NamespaceUri);
 
         foreach (YahooMediaContent content in this.Contents)
         {

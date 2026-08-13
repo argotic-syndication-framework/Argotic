@@ -161,8 +161,7 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new();
-        writer.WriteStartElement("thumbnail", extension.XmlNamespace);
+        writer.WriteStartElement("thumbnail", YahooMediaSyndicationExtension.NamespaceUri);
 
         writer.WriteAttributeString("url", this.Url?.ToString() ?? string.Empty);
 

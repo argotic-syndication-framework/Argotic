@@ -61,6 +61,10 @@ public class AsyncLoadBenchmarks : IDisposable
     [GlobalSetup]
     public void Setup()
     {
+        // The field initializers exist only to satisfy non-nullable fields; dispose those
+        // placeholder instances before replacing them, so nothing leaks for the process lifetime.
+        this.client.Dispose();
+        this.handler.Dispose();
         this.handler = new SampleServingHandler();
         this.client = new HttpClient(this.handler, disposeHandler: false);
         this.atomFeedBytes = FeedCorpus.ReadRealSample("AtomFeed.xml");

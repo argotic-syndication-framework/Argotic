@@ -404,13 +404,16 @@ public class SyndicationExtensionAdapter
             return candidates;
         }
 
+        // Resolved before the navigator moves, for the same reason as MatchFrameworkProbes: the
+        // lazy initializer must not be able to strand the navigator mid-walk.
+        FrozenDictionary<string, ulong> byContentNamespace = ProbeMasks.Value.ByContentNamespace;
+
         XPathNavigator navigator = this.Navigator;
         if (!navigator.MoveToChild(XPathNodeType.Element))
         {
             return 0;
         }
 
-        FrozenDictionary<string, ulong> byContentNamespace = ProbeMasks.Value.ByContentNamespace;
         ulong present = 0;
 
         do
@@ -504,13 +507,17 @@ public class SyndicationExtensionAdapter
     /// </remarks>
     private ulong MatchFrameworkProbes(ref ContentTracker tracker)
     {
+        // Resolved before the navigator moves: the lazy initializer is the one thing on this path
+        // that can throw (the >64-probe guard), and evaluating it mid-walk would strand the
+        // navigator on a namespace node - the review finding on the first version of this method.
+        (FrozenDictionary<string, ulong> byNamespace, FrozenDictionary<string, ulong> byPrefix, _) = ProbeMasks.Value;
+
         XPathNavigator navigator = this.Navigator;
         if (!navigator.MoveToFirstNamespace(XPathNamespaceScope.ExcludeXml))
         {
             return 0;
         }
 
-        (FrozenDictionary<string, ulong> byNamespace, FrozenDictionary<string, ulong> byPrefix, _) = ProbeMasks.Value;
         ulong matched = 0;
 
         do

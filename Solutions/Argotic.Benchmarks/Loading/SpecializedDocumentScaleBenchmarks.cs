@@ -49,6 +49,8 @@ public class SpecializedDocumentScaleBenchmarks
 
         ApmlDocument profile = LoadApml(this.apml);
         Verify(profile.Profiles.Count == 2, "APML profile count");
+        Verify(profile.Applications.Count == 1, "APML application parsed");
+        Verify(profile.Profiles.First().ImplicitSources.FirstOrDefault()?.Authors.Count == 1, "APML source author parsed");
     }
 
     /// <summary>

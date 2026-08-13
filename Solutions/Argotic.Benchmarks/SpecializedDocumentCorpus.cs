@@ -168,7 +168,10 @@ internal static class SpecializedDocumentCorpus
             string ordinal = i.ToString(CultureInfo.InvariantCulture);
             builder.Append("          <Source key=\"https://example.com/feeds/").Append(ordinal)
                    .Append("\" value=\"0.90\" name=\"Feed ").Append(ordinal)
-                   .Append("\" type=\"application/rss+xml\" from=\"https://example.com\" updated=\"2026-08-07T12:00:00Z\"/>\n");
+                   .Append("\" type=\"application/rss+xml\" from=\"https://example.com\" updated=\"2026-08-07T12:00:00Z\">\n");
+            builder.Append("            <Author key=\"author-").Append(ordinal)
+                   .Append("\" value=\"0.85\" from=\"https://example.com\" updated=\"2026-08-07T12:00:00Z\"/>\n");
+            builder.Append("          </Source>\n");
         }
 
         builder.Append("        </Sources>\n");
@@ -191,6 +194,11 @@ internal static class SpecializedDocumentCorpus
         builder.Append("        </Concepts>\n");
         builder.Append("      </ImplicitData>\n");
         builder.Append("    </Profile>\n");
+        builder.Append("    <Applications>\n");
+        builder.Append("      <Application name=\"example-reader\">\n");
+        builder.Append("        <ReaderSettings theme=\"dark\" refresh=\"hourly\"/>\n");
+        builder.Append("      </Application>\n");
+        builder.Append("    </Applications>\n");
         builder.Append("  </Body>\n");
         builder.Append("</APML>\n");
 

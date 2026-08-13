@@ -89,6 +89,7 @@ public class ExtensionElementMixBenchmarks
         Verify(maximalItem.Extensions.OfType<GeoRssSyndicationExtension>().Any(), "maximal: GeoRSS attached to the first item");
         Verify(maximalItem.Extensions.OfType<LiveJournalSyndicationExtension>().Any(), "maximal: LiveJournal attached to the first item");
         Verify(max.Channel.Extensions.OfType<SimpleListSyndicationExtension>().Any(), "maximal: SimpleList attached to the channel");
+        Verify(max.Channel.Extensions.OfType<FeedHistorySyndicationExtension>().SingleOrDefault()?.Context.Relations.Count == 2, "maximal: FeedHistory archive links parsed from atom:link");
     }
 
     /// <summary>

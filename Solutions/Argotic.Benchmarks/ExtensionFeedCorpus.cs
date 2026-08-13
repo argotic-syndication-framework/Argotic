@@ -250,7 +250,8 @@ internal static class ExtensionFeedCorpus
         builder.Append("     xmlns:cf=\"http://www.microsoft.com/schemas/rss/core/2005\"\n");
         builder.Append("     xmlns:fh=\"http://purl.org/syndication/history/1.0\"\n");
         builder.Append("     xmlns:re=\"http://purl.org/atompub/rank/1.0\"\n");
-        builder.Append("     xmlns:photo=\"http://www.pheed.com/pheed/\">\n");
+        builder.Append("     xmlns:photo=\"http://www.pheed.com/pheed/\"\n");
+        builder.Append("     xmlns:atom=\"http://www.w3.org/2005/Atom\">\n");
         builder.Append("  <channel>\n");
         builder.Append("    <title>Maximal Extension Feed</title>\n");
         builder.Append("    <link>https://example.com/</link>\n");
@@ -263,6 +264,8 @@ internal static class ExtensionFeedCorpus
         builder.Append("    <blogChannel:blink>https://example.com/recommended</blogChannel:blink>\n");
         builder.Append("    <creativeCommons:license>https://creativecommons.org/licenses/by/4.0/</creativeCommons:license>\n");
         builder.Append("    <fh:archive/>\n");
+        builder.Append("    <atom:link rel=\"current\" href=\"https://example.com/feed.xml\"/>\n");
+        builder.Append("    <atom:link rel=\"prev-archive\" href=\"https://example.com/archive/2023-12.xml\"/>\n");
         builder.Append("    <cf:treatAs>list</cf:treatAs>\n");
         builder.Append("    <cf:listinfo>\n");
         builder.Append("      <cf:sort ns=\"\" element=\"pubDate\" label=\"Date\" data-type=\"date\" default=\"true\"/>\n");
